@@ -1,3 +1,5 @@
+@import 'vars';
+
 .body-wrapper {
     width: 100%;
     height: 100vh;
@@ -15,10 +17,8 @@
     scrollbar-width: none;
 
     /* 视差滚动 */
-    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-perspective: 10px;
-    perspective: 10px;
+    perspective: $perspective-dist;
 
     /* TODO 给所有使用transform的子元素加上webkit兼容 */
 }

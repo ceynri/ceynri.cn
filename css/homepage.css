@@ -48,9 +48,9 @@ h1 {
   scrollbar-width: none;
   /* 视差滚动 */
   -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
+          transform-style: preserve-3d;
   -webkit-perspective: 10px;
-  perspective: 10px;
+          perspective: 10px;
   /* TODO 给所有使用transform的子元素加上webkit兼容 */
 }
 
@@ -90,23 +90,19 @@ h1 {
   width: 100%;
   height: 120vh;
   position: absolute;
-  /* background-color: #163e34; */
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.4))), url(../assets/imgs/72235081_p0.jpg);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(../assets/imgs/72235081_p0.jpg);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.4))), url("../assets/imgs/72235081_p0.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("../assets/imgs/72235081_p0.jpg");
   background-position: center;
-  /* background-repeat: repeat; */
   background-size: cover;
   -webkit-transform: translateZ(-160px) scale(17);
-  transform: translateZ(-160px) scale(17);
-  z-index: -1;
+          transform: translateZ(-160px) scale(17);
+  z-index: -99;
 }
 
 .title-block {
   width: 100%;
   height: 260px;
   position: relative;
-  /* display: flex;
-    justify-content: space-between; */
 }
 
 /* title */
@@ -139,8 +135,7 @@ h1 {
 }
 
 .title h2 {
-  font-family: 'PingFang SC';
-  font-size: 32px;
+  font: 32px 'PingFang SC';
   position: absolute;
   right: 80px;
   bottom: 30px;
@@ -152,10 +147,10 @@ h1 {
 .date {
   font-family: 'Circular Bold';
   font-size: 128px;
+  line-height: 100%;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   width: 150px;
   height: 270px;
-  line-height: 100%;
   position: relative;
 }
 
@@ -176,7 +171,7 @@ h1 {
 }
 
 /* line */
-.line {
+.line, .line-date-1, .line-title-1, .line-title-2, .line-title-3, .line-guide {
   position: absolute;
   width: 20px;
   height: 140px;
@@ -188,32 +183,43 @@ h1 {
 .line-date-1 {
   top: 60px;
   left: 230px;
-  -webkit-transform: rotate(60deg) translateZ(4px) scale(0.6);
-          transform: rotate(60deg) translateZ(4px) scale(0.6);
+  -webkit-transform: translateZ(4px) rotate(60deg) scale(0.6);
+          transform: translateZ(4px) rotate(60deg) scale(0.6);
   z-index: 1;
 }
 
 .line-title-1 {
   top: -15px;
   right: 300px;
-  -webkit-transform: rotate(60deg) translateZ(3px) scale(0.7);
-          transform: rotate(60deg) translateZ(3px) scale(0.7);
+  -webkit-transform: translateZ(3px) rotate(60deg) scale(0.7);
+          transform: translateZ(3px) rotate(60deg) scale(0.7);
 }
 
 .line-title-2 {
   top: 55px;
   right: 515px;
-  -webkit-transform: rotate(60deg) translateZ(4px) scale(0.6);
-          transform: rotate(60deg) translateZ(4px) scale(0.6);
+  -webkit-transform: translateZ(4px) rotate(60deg) scale(0.6);
+          transform: translateZ(4px) rotate(60deg) scale(0.6);
   z-index: -1;
 }
 
 .line-title-3 {
   bottom: -5px;
   right: 315px;
-  -webkit-transform: rotate(60deg) translateZ(5px) scale(0.5);
-          transform: rotate(60deg) translateZ(5px) scale(0.5);
+  -webkit-transform: translateZ(5px) rotate(60deg) scale(0.5);
+          transform: translateZ(5px) rotate(60deg) scale(0.5);
   z-index: 1;
+}
+
+.line-guide {
+  padding-top: 8px;
+  text-align: center;
+  font-family: 'Circular Bold';
+  position: fixed;
+  bottom: -100px;
+  right: 50%;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
 }
 
 /* content */
@@ -261,24 +267,11 @@ h1 {
 }
 
 .about-me-header h1 {
-  /* text-align: end; */
   font-size: 48px;
 }
 
 .about-me .intro {
   font-size: 24px;
-}
-
-/* guide-line */
-.line.guide-line {
-  padding-top: 8px;
-  text-align: center;
-  font-family: 'Circular Bold';
-  position: fixed;
-  bottom: -100px;
-  right: 50%;
-  -webkit-transform: translateX(50%);
-          transform: translateX(50%);
 }
 
 /* footer */
