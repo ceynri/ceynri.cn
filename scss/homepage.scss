@@ -1,100 +1,23 @@
-@font-face {
-    font-family: 'Circular Bold';
-    src: url('../assets/fonts/Circular-Bold.woff2.ttf');
-}
-
-@font-face {
-    font-family: 'Circular';
-    src: url('../assets/fonts/Circular-Book.woff.ttf');
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-
-    font-family: 'PingFang SC';
-    color: #ccc;
-}
-
-h1 {
-    font-family: 'Circular Bold';
-}
-
-.body-wrapper {
-    width: 100%;
-    height: 100vh;
-
-    border: #eee 8px solid;
-
-    background-color: #000;
-
-    overflow: scroll;
-    /* IE10/Edge 去除滚动条 */
-    -ms-overflow-style: none;
-    /* firefox 64 隐藏滚动条 */
-    scrollbar-color: transparent transparent;
-    /* firefox 64 去除滚动条 */
-    scrollbar-width: none;
-
-    /* 视差滚动 */
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-perspective: 10px;
-    perspective: 10px;
-}
-
-/* Chrome 去除滚动条 */
-.body-wrapper::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
+@import 'fonts';
+@import 'globals';
+@import 'page-frame';
 
 .background {
     width: 100%;
-    height: 125vh;
+    height: 120vh;
     position: absolute;
 
     /* background-color: #163e34; */
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
         url(../assets/imgs/72235081_p0.jpg);
     background-position: center;
-    background-repeat: no-repeat;
+    /* background-repeat: repeat; */
     background-size: cover;
 
-    -webkit-transform: translateZ(-80px) scale(9);
-    transform: translateZ(-80px) scale(9);
+    -webkit-transform: translateZ(-160px) scale(17);
+    transform: translateZ(-160px) scale(17);
 
     z-index: -1;
-}
-
-.homepage-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    width: 100%;
-    max-width: 1080px;
-    margin: 0 auto;
-
-    position: relative;
-}
-
-/* one-page */
-
-.one-page-wrapper {
-    height: 100vh;
-    margin: 0 40px;
-
-    display: flex;
-}
-
-.flex-vertically-center {
-    align-items: center;
-}
-
-.flex-horizontal-center {
-    justify-content: center;
 }
 
 .title-block {
@@ -110,39 +33,41 @@ h1 {
 .title {
     width: 500px;
     height: 250px;
-}
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 
-.title h1 {
-    font-size: 96px;
-    max-width: 600px;
-    line-height: 100%;
-}
+    h1 {
+        font-size: 96px;
+        max-width: 600px;
+        line-height: 100%;
 
-.title h1 span {
-    font-family: 'Circular Bold';
-    position: absolute;
-}
+        span {
+            font-family: 'Circular Bold';
+            position: absolute;
 
-.title h1 span:nth-child(1) {
-    right: 0;
-    top: 0;
-}
+            &:nth-child(1) {
+                right: 0;
+                top: 0;
+            }
 
-.title h1 span:nth-child(2) {
-    right: 0;
-    top: 96px;
-    z-index: 2;
-}
+            &:nth-child(2) {
+                right: 0;
+                top: 96px;
+                z-index: 2;
+            }
+        }
+    }
 
-.title h2 {
-    font-family: 'PingFang SC';
-    font-size: 32px;
+    h2 {
+        font-family: 'PingFang SC';
+        font-size: 32px;
 
-    position: absolute;
-    right: 40px;
-    bottom: 10px;
+        position: absolute;
+        right: 80px;
+        bottom: 30px;
 
-    transform: translateZ(1px) scale(0.9);
+        transform: translateZ(2px) scale(0.8);
+    }
+
 }
 
 /* date */
@@ -150,12 +75,13 @@ h1 {
 .date {
     font-family: 'Circular Bold';
     font-size: 128px;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 
     width: 150px;
     height: 270px;
 
     line-height: 100%;
-    
+
     position: relative;
 }
 
@@ -186,13 +112,13 @@ h1 {
     height: 140px;
     background-color: #823;
 
-    box-shadow: 0 0 10px -2px #000;
+    box-shadow: 0 0 8px #000;
 }
 
 .line-date-1 {
     top: 60px;
     left: 230px;
-    
+
     transform: rotate(60deg) translateZ(4px) scale(0.6);
     z-index: 1;
 }
@@ -200,14 +126,14 @@ h1 {
 .line-title-1 {
     top: -15px;
     right: 300px;
-    
+
     transform: rotate(60deg) translateZ(3px) scale(0.7);
 }
 
 .line-title-2 {
     top: 55px;
     right: 515px;
-    
+
     transform: rotate(60deg) translateZ(4px) scale(0.6);
     z-index: -1;
 }
@@ -215,17 +141,29 @@ h1 {
 .line-title-3 {
     bottom: -5px;
     right: 315px;
-    
+
     transform: rotate(60deg) translateZ(5px) scale(0.5);
     z-index: 1;
 }
 
 /* content */
 
+$bg-mask: rgba(14, 12, 12, 0.9);
+
 .content {
-    margin-top: 150px;
-    background-color: rgba(36, 30, 30, .98);
-    box-shadow: 0px 0px 200px 200px rgba(36, 30, 30, .98);
+    $height: 200px;
+    margin-top: $height * 2.0;
+    background-color: $bg-mask;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: $height * 4;
+        position: absolute;
+        box-shadow: 0px -1.5 * $height $height $height / 3 $bg-mask;
+
+    }
 }
 
 /* about-me */
@@ -236,7 +174,7 @@ h1 {
     padding: 24px;
 
     border: 12px #823 solid;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -265,7 +203,7 @@ h1 {
 
     position: fixed;
     bottom: -100px;
-    right: 66.7%;
+    right: 50%;
     transform: translateX(50%);
 }
 

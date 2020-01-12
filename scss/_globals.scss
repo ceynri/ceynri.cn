@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'PingFang SC';
+    color: #ccc;
+}
+
+h1 {
+    font-family: 'Circular Bold';
+}
+
+.flex-vertically-center {
+    align-items: center;
+}
+
+.flex-horizontal-center {
+    justify-content: center;
+}
