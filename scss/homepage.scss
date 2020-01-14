@@ -1,15 +1,10 @@
-@import 'fonts';
-@import 'globals';
-@import 'page-frame';
+@import 'common/fonts';
+@import 'common/globals';
+@import 'common/vars';
 
-// 用于设置视差滚动时，不改变大小的情况下改变元素的z轴高度
-@mixin perspective-level($level: 0, $z: false) {
-    transform: translateZ(1px * $level) scale(1 - 1px / $perspective-dist * $level);
+@import 'common/page-frame';
 
-    @if $z {
-        z-index: $z;
-    }
-}
+@import 'homepage/banner';
 
 .background {
     width: 100%;
@@ -26,151 +21,19 @@
     @include perspective-level(-160, -99);
 }
 
-.title-block {
-    width: 100%;
-    height: 260px;
-    position: relative;
-}
+// guide line
 
-/* title */
-
-.title {
-    width: 500px;
-    height: 250px;
-    text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-
-    h1 {
-        font-size: 96px;
-        max-width: 600px;
-        line-height: 100%;
-
-        span {
-            font-family: 'Circular Bold';
-            position: absolute;
-
-            &:nth-child(1) {
-                right: 0;
-                top: 0;
-            }
-
-            &:nth-child(2) {
-                right: 0;
-                top: 96px;
-                z-index: 2;
-            }
-        }
-    }
-
-    h2 {
-        font: 32px 'PingFang SC';
-
-        position: absolute;
-        right: 80px;
-        bottom: 30px;
-
-        @include perspective-level(2);
-    }
-
-}
-
-/* date */
-
-.date {
-    font: {
-        family: 'Circular Bold';
-        size: 128px;
-    }
-
-    line-height: 100%;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-
-    width: 150px;
-    height: 270px;
-    position: relative;
-
-    .month {
-        font-family: 'Circular Bold';
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    .day {
-        font-family: 'Circular Bold';
-
-        position: absolute;
-        left: 85px;
-        bottom: 20px;
-        @include perspective-level(2);
-    }
-
-}
-
-/* line */
-
-.line {
-    position: absolute;
-
+.line-guide {
+    @extend .line;
     width: 20px;
-    height: 140px;
+    padding-top: 8px;
+    text-align: center;
+    font-family: 'Circular Bold';
 
-    background-color: #823;
-    box-shadow: 0 0 8px #000;
-
-    // 透视投影再加上旋转
-    @mixin perspective-after-rotate($level: 0, $z: false, $deg: 0) {
-        transform: translateZ(1px * $level) rotate($deg * 1deg) scale(1 - 0.1 * $level);
-
-        @if $z {
-            z-index: $z;
-        }
-    }
-
-    // date line
-
-    &-date-1 {
-        @extend .line;
-        top: 60px;
-        left: 230px;
-        @include perspective-after-rotate(4, 1, 60);
-    }
-
-    // title line
-
-    &-title-1 {
-        @extend .line;
-        top: -15px;
-        right: 300px;
-        @include perspective-after-rotate(3, null, 60);
-    }
-
-    &-title-2 {
-        @extend .line;
-        top: 55px;
-        right: 515px;
-        @include perspective-after-rotate(4, -1, 60);
-    }
-
-    &-title-3 {
-        @extend .line;
-        bottom: -5px;
-        right: 315px;
-        @include perspective-after-rotate(5, 1, 60);
-    }
-
-    // guide line
-
-    &-guide {
-        @extend .line;
-        padding-top: 8px;
-        text-align: center;
-        font-family: 'Circular Bold';
-
-        position: fixed;
-        bottom: -100px;
-        right: 50%;
-        transform: translateX(50%);
-    }
+    position: fixed;
+    bottom: -100px;
+    right: 50%;
+    transform: translateX(50%);
 }
 
 /* content */
@@ -190,35 +53,89 @@
         box-shadow: 0px (-1.5 * $height) $height ($height / 3) $bg-mask-color;
 
     }
-}
 
-/* about-me */
+    // about-me
+    .about-me {
+        width: 400px;
+        height: 400px;
+        padding: 24px;
 
-.about-me {
-    width: 400px;
-    height: 400px;
-    padding: 24px;
+        border: 12px #823 solid;
 
-    border: 12px #823 solid;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    &-header {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
 
-        h1 {
-            font-size: 48px;
+        position: relative;
+
+        &-header {
+            display: flex;
+            flex-direction: column;
+
+            h1 {
+                font-size: 48px;
+            }
+        }
+
+        .intro {
+            font-size: 24px;
+        }
+
+        .icon {
+            // $size: 20px;
+            $size: 1.25em;
+
+            &-social {
+                position: absolute;
+                bottom: -3.6em;
+                left: 0;
+                line-height: 0;
+
+                i {
+                    font-size: $size;
+                    cursor: pointer;
+                    transition: opacity .5s ease;
+
+                    &.icon-hovered {
+                        opacity: 0;
+                        position: absolute;
+                        left: 0;
+                        // bottom: 0;
+                        pointer-events: none;
+                    }
+                }
+
+                .interval {
+                    display: inline-block;
+                    width: $size;
+                    height: $size;
+                }
+            }
+
+            &-svg {
+                width: $size;
+                height: $size;
+                fill: currentColor;
+                overflow: hidden;
+
+                opacity: 0;
+                position: absolute;
+                left: 0;
+                top: -0.5 * $size;
+                pointer-events: none;
+
+                transition: opacity .5s ease;
+            }
+
+            &-wrapper {
+                display: inline-block;
+                height: $size;
+                position: relative;
+            }
         }
     }
-
-
-    .intro {
-        font-size: 24px;
-    }
 }
+
 
 /* footer */
 

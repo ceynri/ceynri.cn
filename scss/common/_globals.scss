@@ -1,5 +1,3 @@
-@import 'vars';
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,6 +9,10 @@
 
 h1 {
     font-family: 'Circular Bold';
+}
+
+a {
+    text-decoration: none;
 }
 
 .flex-vertically-center {

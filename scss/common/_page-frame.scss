@@ -1,5 +1,3 @@
-@import 'vars';
-
 .body-wrapper {
     width: 100%;
     height: 100vh;
@@ -8,7 +6,8 @@
 
     background-color: #170f11;
 
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     /* IE10/Edge 去除滚动条 */
     -ms-overflow-style: none;
     /* firefox 64 隐藏滚动条 */

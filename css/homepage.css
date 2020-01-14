@@ -22,6 +22,10 @@ h1 {
   font-family: 'Circular Bold';
 }
 
+a {
+  text-decoration: none;
+}
+
 .flex-vertically-center {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -39,7 +43,8 @@ h1 {
   height: 100vh;
   border: #eee 8px solid;
   background-color: #170f11;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   /* IE10/Edge 去除滚动条 */
   -ms-overflow-style: none;
   /* firefox 64 隐藏滚动条 */
@@ -86,26 +91,12 @@ h1 {
   display: flex;
 }
 
-.background {
-  width: 100%;
-  height: 120vh;
-  position: absolute;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.4))), url("../assets/imgs/72235081_p0.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("../assets/imgs/72235081_p0.jpg");
-  background-position: center;
-  background-size: cover;
-  -webkit-transform: translateZ(-160px) scale(17);
-          transform: translateZ(-160px) scale(17);
-  z-index: -99;
-}
-
 .title-block {
   width: 100%;
   height: 260px;
   position: relative;
 }
 
-/* title */
 .title {
   width: 500px;
   height: 250px;
@@ -164,14 +155,15 @@ h1 {
 .date .day {
   font-family: 'Circular Bold';
   position: absolute;
-  left: 85px;
-  bottom: 20px;
-  -webkit-transform: translateZ(2px) scale(0.8);
-          transform: translateZ(2px) scale(0.8);
+  left: 174px;
+  bottom: 45px;
+  -webkit-transform: translateZ(4px) scale(0.6);
+          transform: translateZ(4px) scale(0.6);
+  z-index: 1;
 }
 
 /* line */
-.line, .line-date-1, .line-title-1, .line-title-2, .line-title-3, .line-guide {
+.line, .line-date-1, .line-title-1, .line-title-2, .line-title-3, .line-bottom, .line-guide {
   position: absolute;
   width: 20px;
   height: 140px;
@@ -181,11 +173,11 @@ h1 {
 }
 
 .line-date-1 {
-  top: 60px;
-  left: 230px;
-  -webkit-transform: translateZ(4px) rotate(60deg) scale(0.6);
-          transform: translateZ(4px) rotate(60deg) scale(0.6);
-  z-index: 1;
+  top: 55px;
+  left: 146px;
+  -webkit-transform: translateZ(2px) rotate(60deg) scale(0.8);
+          transform: translateZ(2px) rotate(60deg) scale(0.8);
+  z-index: 2;
 }
 
 .line-title-1 {
@@ -211,7 +203,43 @@ h1 {
   z-index: 1;
 }
 
+.line-bottom {
+  width: 168px;
+  height: 16px;
+  bottom: 25%;
+  left: 50%;
+  -webkit-transform: translateZ(6px) translateX(-50%) rotate(-30deg) scale(0.4);
+          transform: translateZ(6px) translateX(-50%) rotate(-30deg) scale(0.4);
+  z-index: 10;
+}
+
+.line-bottom .text {
+  position: absolute;
+  bottom: 50%;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  font: 24px 'Circular Bold';
+}
+
+.background {
+  width: 100%;
+  height: 120vh;
+  position: absolute;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.4))), url("../assets/imgs/72235081_p0.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("../assets/imgs/72235081_p0.jpg");
+  background-position: center;
+  background-size: cover;
+  -webkit-transform: translateZ(-160px) scale(17);
+          transform: translateZ(-160px) scale(17);
+  z-index: -99;
+}
+
 .line-guide {
+  width: 20px;
   padding-top: 8px;
   text-align: center;
   font-family: 'Circular Bold';
@@ -238,8 +266,7 @@ h1 {
           box-shadow: 0px -300px 200px 66.66667px rgba(14, 12, 12, 0.9);
 }
 
-/* about-me */
-.about-me {
+.content .about-me {
   width: 400px;
   height: 400px;
   padding: 24px;
@@ -254,9 +281,10 @@ h1 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  position: relative;
 }
 
-.about-me-header {
+.content .about-me-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -266,12 +294,59 @@ h1 {
           flex-direction: column;
 }
 
-.about-me-header h1 {
+.content .about-me-header h1 {
   font-size: 48px;
 }
 
-.about-me .intro {
+.content .about-me .intro {
   font-size: 24px;
+}
+
+.content .about-me .icon-social {
+  position: absolute;
+  bottom: -3.6em;
+  left: 0;
+  line-height: 0;
+}
+
+.content .about-me .icon-social i {
+  font-size: 1.25em;
+  cursor: pointer;
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+}
+
+.content .about-me .icon-social i.icon-hovered {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+}
+
+.content .about-me .icon-social .interval {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.content .about-me .icon-svg {
+  width: 1.25em;
+  height: 1.25em;
+  fill: currentColor;
+  overflow: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: -0.625em;
+  pointer-events: none;
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
+}
+
+.content .about-me .icon-wrapper {
+  display: inline-block;
+  height: 1.25em;
+  position: relative;
 }
 
 /* footer */

@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <link href="css/homepage.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/homepage.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1611839_xb40by9bt98.css">
+  <script src="//at.alicdn.com/t/font_1611839_xb40by9bt98.js"></script>
   <title>山风的小角落</title>
 </head>
 
@@ -15,9 +17,7 @@
     <div class="banner">
       <div class="background"></div>
       <div class="margin-wrapper">
-        <!-- TODO 底线marigin提取为新的div -->
         <div class="one-page-wrapper flex-vertically-center">
-
           <section class="title-block">
             <div class="date">
               <time class="month">27</time><br>
@@ -38,7 +38,9 @@
             </header>
           </section>
           <!-- END title-block -->
-
+          <div class="line-bottom">
+            <div class="text">Welcome</div>
+          </div>
         </div>
         <!-- END one-page-wrapper -->
       </div>
@@ -60,7 +62,36 @@
               <p>一个大三在读学生</p>
               <p>喜欢任何具有设计感的事物</p>
             </div>
-            <!-- 一些icon -->
+            <div class="icon-social" id="socialIcon">
+              <!-- <a href="https://github.com/ceynri"></a> -->
+              <div class="icon-wrapper">
+                <i class="iconfont icon-github"></i>
+                <svg class="icon-svg" aria-hidden="true">
+                  <use xlink:href="#icon-github-hovered"></use>
+                </svg>
+              </div>
+              <span class="interval"></span>
+              <div class="icon-wrapper">
+                <i class="iconfont icon-wechat"></i>
+                <svg class="icon-svg" aria-hidden="true">
+                  <use xlink:href="#icon-wechat-hovered"></use>
+                </svg>
+              </div>
+              <span class="interval"></span>
+              <div class="icon-wrapper">
+                <i class="iconfont icon-qq"></i>
+                <svg class="icon-svg" aria-hidden="true">
+                  <use xlink:href="#icon-qq-hovered"></use>
+                </svg>
+              </div>
+              <span class="interval"></span>
+              <div class="icon-wrapper">
+                <i class="iconfont icon-mail"></i>
+                <svg class="icon-svg" aria-hidden="true">
+                  <use xlink:href="#icon-gmail-hovered"></use>
+                </svg>
+              </div>
+            </div>
           </section>
         </div>
         <div class="one-page-wrapper">
@@ -77,6 +108,27 @@
   <!-- END body-wrapper -->
 
   <div class="line-guide">^</div>
+  <script>
+    'use strict';
+    // icons
+
+    let iconWrappers = document.getElementsByClassName('icon-wrapper');
+
+    for (let i = 0; i < iconWrappers.length; i++) {
+      let wrapper = iconWrappers[i];
+      wrapper.children[0].addEventListener('mouseover', function () {
+        this.style.opacity = 0.0;
+        wrapper.children[1].style.opacity = 1.0;
+      });
+
+      wrapper.children[0].addEventListener('mouseout', function () {
+        this.style.opacity = 1.0;
+        wrapper.children[1].style.opacity = 0.0;
+      });
+    }
+
+  </script>
+
 </body>
 
 </html>
