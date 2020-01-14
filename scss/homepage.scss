@@ -21,19 +21,20 @@
     @include perspective-level(-160, -99);
 }
 
-// guide line
+/* guide line */
 
 .line-guide {
     @extend .line;
     width: 20px;
     padding-top: 8px;
     text-align: center;
-    font-family: 'Circular Bold';
 
     position: fixed;
     bottom: -100px;
     right: 50%;
     transform: translateX(50%);
+
+    cursor: pointer;
 }
 
 /* content */
@@ -97,7 +98,7 @@
 
         .intro {
             font-size: 24px;
-            transition: all .5s ease;
+            transition: opacity .5s ease;
 
             &-github,
             &-wechat,
@@ -109,6 +110,7 @@
             &-wechat,
             &-qq {
                 @extend %qr-code-basic;
+
                 img {
                     width: 100%;
                     height: 100%;
@@ -137,6 +139,8 @@
                 .info {
                     height: $icon-size;
                     flex: auto;
+                    opacity: 0;
+                    transition: opacity .5s .2s ease;
                 }
             }
 

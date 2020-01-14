@@ -238,16 +238,17 @@ a {
   z-index: -99;
 }
 
+/* guide line */
 .line-guide {
   width: 20px;
   padding-top: 8px;
   text-align: center;
-  font-family: 'Circular Bold';
   position: fixed;
   bottom: -100px;
   right: 50%;
   -webkit-transform: translateX(50%);
           transform: translateX(50%);
+  cursor: pointer;
 }
 
 /* content */
@@ -312,8 +313,8 @@ a {
 
 .content .about-me .intro, .content .about-me .intro-github, .content .about-me .intro-wechat, .content .about-me .intro-qq, .content .about-me .intro-mail {
   font-size: 24px;
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease;
+  -webkit-transition: opacity .5s ease;
+  transition: opacity .5s ease;
 }
 
 .content .about-me .intro-wechat img, .content .about-me .intro-qq img {
@@ -346,6 +347,9 @@ a {
   -webkit-box-flex: 1;
       -ms-flex: auto;
           flex: auto;
+  opacity: 0;
+  -webkit-transition: opacity .5s .2s ease;
+  transition: opacity .5s .2s ease;
 }
 
 .content .about-me .icon-svg {
