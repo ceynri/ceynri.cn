@@ -56,11 +56,14 @@
 
     // about-me
     .about-me {
-        width: 400px;
-        height: 400px;
-        padding: 24px;
+        $main-size: 400px;
+        $padding-width: 24px;
+        $border-width: 12px;
 
-        border: 12px #823 solid;
+        width: $main-size;
+        height: $main-size;
+        padding: $padding-width;
+        border: $border-width #823 solid;
 
         display: flex;
         flex-direction: column;
@@ -77,51 +80,76 @@
             }
         }
 
+        %intro-basic {
+            @extend .intro;
+            opacity: 0;
+
+            position: absolute;
+            bottom: $padding-width;
+            left: $padding-width;
+        }
+
+        %qr-code-basic {
+            $qr-size: $main-size - ($border-width + $padding-width) * 2;
+            width: $qr-size;
+            height: $qr-size;
+        }
+
         .intro {
             font-size: 24px;
+            transition: all .5s ease;
+
+            &-github,
+            &-wechat,
+            &-qq,
+            &-mail {
+                @extend %intro-basic;
+            }
+
+            &-wechat,
+            &-qq {
+                @extend %qr-code-basic;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
 
         .icon {
-            // $size: 20px;
-            $size: 1.25em;
+            $icon-size: 1.25em;
 
             &-social {
                 position: absolute;
                 bottom: -3.6em;
                 left: 0;
-                line-height: 0;
+
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
 
                 i {
-                    font-size: $size;
+                    font-size: $icon-size;
                     cursor: pointer;
                     transition: opacity .5s ease;
-
-                    &.icon-hovered {
-                        opacity: 0;
-                        position: absolute;
-                        left: 0;
-                        // bottom: 0;
-                        pointer-events: none;
-                    }
                 }
 
-                .interval {
-                    display: inline-block;
-                    width: $size;
-                    height: $size;
+                .info {
+                    height: $icon-size;
+                    flex: auto;
                 }
             }
 
             &-svg {
-                width: $size;
-                height: $size;
+                width: $icon-size;
+                height: $icon-size;
                 fill: currentColor;
                 overflow: hidden;
 
                 opacity: 0;
                 position: absolute;
                 left: 0;
-                top: -0.5 * $size;
+                top: 0;
                 pointer-events: none;
 
                 transition: opacity .5s ease;
@@ -129,7 +157,8 @@
 
             &-wrapper {
                 display: inline-block;
-                height: $size;
+                height: $icon-size;
+                margin-right: $icon-size;
                 position: relative;
             }
         }

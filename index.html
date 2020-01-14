@@ -58,11 +58,25 @@
                 关于我
               </h1>
             </header>
-            <div class="intro">
+            <div class="intro" id="intro">
               <p>一个大三在读学生</p>
               <p>喜欢任何具有设计感的事物</p>
             </div>
-            <div class="icon-social" id="socialIcon">
+            <div class="intro-github" id="githubIntro">
+              <p>https://github.com/ceynri</p>
+              <p>点击按钮跳转</p>
+            </div>
+            <div class="intro-wechat" id="wechatIntro">
+              <img src="/assets/imgs/qrcode/wechat-qrcode.png" alt="ID: sakuramemory">
+            </div>
+            <div class="intro-qq" id="qqIntro">
+              <img src="/assets/imgs/qrcode/qq-qrcode.png" alt="account: 347670115">
+            </div>
+            <div class="intro-mail" id="mailIntro">
+              <p>ceynri@gmail.com</p>
+              <p>点击按钮复制</p>
+            </div>
+            <div class="icon-social">
               <!-- <a href="https://github.com/ceynri"></a> -->
               <div class="icon-wrapper">
                 <i class="iconfont icon-github"></i>
@@ -70,27 +84,25 @@
                   <use xlink:href="#icon-github-hovered"></use>
                 </svg>
               </div>
-              <span class="interval"></span>
               <div class="icon-wrapper">
                 <i class="iconfont icon-wechat"></i>
                 <svg class="icon-svg" aria-hidden="true">
                   <use xlink:href="#icon-wechat-hovered"></use>
                 </svg>
               </div>
-              <span class="interval"></span>
               <div class="icon-wrapper">
                 <i class="iconfont icon-qq"></i>
                 <svg class="icon-svg" aria-hidden="true">
                   <use xlink:href="#icon-qq-hovered"></use>
                 </svg>
               </div>
-              <span class="interval"></span>
               <div class="icon-wrapper">
                 <i class="iconfont icon-mail"></i>
                 <svg class="icon-svg" aria-hidden="true">
                   <use xlink:href="#icon-gmail-hovered"></use>
                 </svg>
               </div>
+              <div class="info" id="introInfo"></div>
             </div>
           </section>
         </div>
@@ -108,27 +120,8 @@
   <!-- END body-wrapper -->
 
   <div class="line-guide">^</div>
-  <script>
-    'use strict';
-    // icons
 
-    let iconWrappers = document.getElementsByClassName('icon-wrapper');
-
-    for (let i = 0; i < iconWrappers.length; i++) {
-      let wrapper = iconWrappers[i];
-      wrapper.children[0].addEventListener('mouseover', function () {
-        this.style.opacity = 0.0;
-        wrapper.children[1].style.opacity = 1.0;
-      });
-
-      wrapper.children[0].addEventListener('mouseout', function () {
-        this.style.opacity = 1.0;
-        wrapper.children[1].style.opacity = 0.0;
-      });
-    }
-
-  </script>
-
+  <script src="js/homepage.js"></script>
 </body>
 
 </html>
