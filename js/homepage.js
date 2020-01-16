@@ -17,7 +17,7 @@ let _copyToCilpboard = (str) => {
     document.body.removeChild(strWrapper);
 };
 
-// icons
+// 图标与鼠标交互效果
 (() => {
 
     let intro = document.getElementById('intro');
@@ -57,7 +57,6 @@ let _copyToCilpboard = (str) => {
     let wechatIcon = document.getElementsByClassName('icon-wechat')[0];
     let qqIcon = document.getElementsByClassName('icon-qq')[0];
     let mailIcon = document.getElementsByClassName('icon-mail')[0];
-
 
     // over
     githubIcon.addEventListener('mouseover', () => {

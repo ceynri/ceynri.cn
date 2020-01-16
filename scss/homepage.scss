@@ -2,10 +2,63 @@
 @import 'common/fonts';
 @import 'common/globals';
 
-@import 'common/page-frame';
-
 @import 'homepage/banner';
 @import 'homepage/about-me';
+
+.body {
+    &-border {
+        width: 100%;
+        height: 100vh;
+        border: #eee 8px solid;
+        overflow: hidden;
+    }
+
+    &-wrapper {
+        width: 100%;
+        height: calc(100vh - #{$body-border-width} * 2);
+
+        background-color: #170f11;
+
+        // 隐藏滚动条
+        overflow-x: hidden;
+        overflow-y: scroll;
+        /* IE10/Edge 去除滚动条 */
+        -ms-overflow-style: none;
+        /* firefox 64 隐藏滚动条 */
+        scrollbar-color: transparent transparent;
+        /* firefox 64 去除滚动条 */
+        scrollbar-width: none;
+
+        // Chrome 去除滚动条
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        /* 视差滚动 */
+        transform-style: preserve-3d;
+        perspective: $perspective-dist;
+    }
+}
+
+.margin-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+
+    position: relative;
+}
+
+.one-page-wrapper {
+    height: 100vh;
+    margin: 0 $lowest-limit-margin;
+
+    display: flex;
+}
 
 .background {
     width: 100%;
@@ -92,7 +145,6 @@
     .copyright {
         font: {
             size: 12px;
-            weight: 900;
         }
 
         color: #333;

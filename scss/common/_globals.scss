@@ -16,6 +16,8 @@ a {
 body {
     font-family: $default-font-family;
     color: $text-color;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .flex-vertically-center {
