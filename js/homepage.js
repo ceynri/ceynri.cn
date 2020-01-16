@@ -21,17 +21,10 @@ let _copyToCilpboard = (str) => {
 (() => {
 
     let intro = document.getElementById('intro');
-    let githubIntro = document.getElementById('githubIntro');
-    let wechatIntro = document.getElementById('wechatIntro');
-    let qqIntro = document.getElementById('qqIntro');
-    let mailIntro = document.getElementById('mailIntro');
-
-    let githubIcon = document.getElementsByClassName('icon-github')[0];
-    let wechatIcon = document.getElementsByClassName('icon-wechat')[0];
-    let qqIcon = document.getElementsByClassName('icon-qq')[0];
-    let mailIcon = document.getElementsByClassName('icon-mail')[0];
+    let info = document.getElementById('introInfo');
 
     let iconWrappers = document.getElementsByClassName('icon-wrapper');
+    let introContainer = document.getElementById('introContainer');
 
     for (let i = 0; i < iconWrappers.length; i++) {
         let wrapper = iconWrappers[i];
@@ -42,6 +35,9 @@ let _copyToCilpboard = (str) => {
             // text
             intro.style.opacity = 0.0;
             info.style.opacity = 1.0;
+            // section
+            introContainer.children[i + 1].style.opacity = 1.0;
+            introContainer.children[i + 1].style.pointerEvents = 'auto';
         });
 
         wrapper.children[0].addEventListener('mouseout', () => {
@@ -51,41 +47,32 @@ let _copyToCilpboard = (str) => {
             // text
             intro.style.opacity = 1.0;
             info.style.opacity = 0.0;
+            // section
+            introContainer.children[i + 1].style.opacity = 0.0;
+            introContainer.children[i + 1].style.pointerEvents = 'none';
         });
     }
 
-    let info = document.getElementById('introInfo');
+    let githubIcon = document.getElementsByClassName('icon-github')[0];
+    let wechatIcon = document.getElementsByClassName('icon-wechat')[0];
+    let qqIcon = document.getElementsByClassName('icon-qq')[0];
+    let mailIcon = document.getElementsByClassName('icon-mail')[0];
+
 
     // over
     githubIcon.addEventListener('mouseover', () => {
-        githubIntro.style.opacity = 1.0;
         info.innerHTML = 'GitHub';
     })
     wechatIcon.addEventListener('mouseover', () => {
-        wechatIntro.style.opacity = 1.0;
         info.innerHTML = 'WeChat 点击复制';
     })
     qqIcon.addEventListener('mouseover', () => {
-        qqIntro.style.opacity = 1.0;
         info.innerHTML = 'QQ 点击复制';
     })
     mailIcon.addEventListener('mouseover', () => {
-        mailIntro.style.opacity = 1.0;
         info.innerHTML = 'Mail';
     })
-    // out
-    githubIcon.addEventListener('mouseout', () => {
-        githubIntro.style.opacity = 0.0;
-    })
-    wechatIcon.addEventListener('mouseout', () => {
-        wechatIntro.style.opacity = 0.0;
-    })
-    qqIcon.addEventListener('mouseout', () => {
-        qqIntro.style.opacity = 0.0;
-    })
-    mailIcon.addEventListener('mouseout', () => {
-        mailIntro.style.opacity = 0.0;
-    })
+
     // click
     wechatIcon.addEventListener('click', () => {
         _copyToCilpboard('WeChat: sakuramemory');
@@ -107,3 +94,10 @@ let _copyToCilpboard = (str) => {
         aTags[i].target = '_blank';
     }
 })();
+
+(() => {
+    let guideLine = document.getElementById('guideLine');
+    guideLine.addEventListener('click', () => {
+        // TODO
+    })
+})

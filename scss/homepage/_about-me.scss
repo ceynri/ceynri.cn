@@ -1,0 +1,148 @@
+// about-me
+.about-me {
+    // 主体到页面边界的距离
+    $frame-marign: $outermost-border-width + $lowest-limit-margin;
+    // 主体宽度
+    $frame-width: calc(100vw - #{$frame-marign} * 2);
+    $frame-max-width: 400px;
+    // 内容边距
+    $padding-width: 24px;
+    // 主题边框宽度
+    $border-width: 12px;
+    // 主体外边界与内容之间的宽度
+    $frame-padding: $border-width + $padding-width;
+    // 内容宽度
+    $content-width: calc(100vw - (#{$frame-marign + $frame-padding}) * 2);
+    $content-max-width: $frame-max-width - $frame-padding;
+
+    // 自适应页面，页面宽度较小时也能保持正方形边框
+    width: $frame-width;
+    max-width: $frame-max-width;
+    height: $frame-width;
+    max-height: $frame-max-width;
+
+    padding: $padding-width;
+    border: $border-width #823 solid;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    // 用于为子元素提供参考字体大小
+    font-size: 24px;
+
+    position: relative;
+
+    &-header {
+        display: flex;
+        flex-direction: column;
+
+        h1 {
+            font-size: 2em;
+        }
+    }
+
+
+    %intro-basic {
+        opacity: 0;
+        transition: all .5s ease;
+
+        position: absolute;
+        bottom: $padding-width;
+        left: $padding-width;
+
+        width: $content-width;
+        max-width: $content-max-width;
+
+        p {
+            font-size: 1em;
+            // 宽度过小时，仍然支持换行
+            overflow-wrap: break-word;
+        }
+    }
+
+    %qr-code-basic {
+        // 二维码大小
+        $qr-size: $frame-max-width - $frame-padding * 2;
+
+        width: $content-width;
+        height: $content-width;
+        max-width: $qr-size;
+        max-height: $qr-size;
+    }
+
+    .intro {
+        @extend %intro-basic;
+        opacity: 1;
+
+        &-github,
+        &-wechat,
+        &-qq,
+        &-mail {
+            @extend %intro-basic;
+            pointer-events: none;
+        }
+
+        &-wechat,
+        &-qq {
+            @extend %qr-code-basic;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    .icon {
+        // 图标大小
+        $icon-size: 20px;
+
+        &-social {
+            position: absolute;
+            bottom: -57px; // todo calc
+            left: 0;
+
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            i {
+                display: inline;
+                font-size: $icon-size;
+                cursor: pointer;
+                transition: opacity .5s ease;
+            }
+
+            .info {
+                height: $icon-size;
+                font-size: $icon-size;
+                flex: auto;
+                opacity: 0;
+                transition: opacity .5s .2s ease;
+            }
+        }
+
+        &-svg {
+            width: $icon-size;
+            height: $icon-size;
+            fill: currentColor;
+            overflow: hidden;
+
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+
+            transition: opacity .5s ease;
+        }
+
+        &-wrapper {
+            display: inline-block;
+            margin-right: $icon-size;
+            font-size: $icon-size;
+            line-height: 1;
+            position: relative;
+        }
+    }
+}

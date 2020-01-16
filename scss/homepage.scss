@@ -1,10 +1,11 @@
+@import 'common/vars';
 @import 'common/fonts';
 @import 'common/globals';
-@import 'common/vars';
 
 @import 'common/page-frame';
 
 @import 'homepage/banner';
+@import 'homepage/about-me';
 
 .background {
     width: 100%;
@@ -23,6 +24,20 @@
 
 /* guide line */
 
+@keyframes floating {
+    from {
+        top: -5px;
+    }
+
+    50% {
+        top: 10px;
+    }
+
+    to {
+        top: -5px;
+    }
+}
+
 .line-guide {
     @extend .line;
     width: 20px;
@@ -35,6 +50,11 @@
     transform: translateX(50%);
 
     cursor: pointer;
+
+    i {
+        position: relative;
+        animation: floating 1.7s ease-in-out infinite;
+    }
 }
 
 /* content */
@@ -54,119 +74,6 @@
         box-shadow: 0px (-1.5 * $height) $height ($height / 3) $bg-mask-color;
 
     }
-
-    // about-me
-    .about-me {
-        $main-size: 400px;
-        $padding-width: 24px;
-        $border-width: 12px;
-
-        width: $main-size;
-        height: $main-size;
-        padding: $padding-width;
-        border: $border-width #823 solid;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        position: relative;
-
-        &-header {
-            display: flex;
-            flex-direction: column;
-
-            h1 {
-                font-size: 48px;
-            }
-        }
-
-        %intro-basic {
-            @extend .intro;
-            opacity: 0;
-
-            position: absolute;
-            bottom: $padding-width;
-            left: $padding-width;
-        }
-
-        %qr-code-basic {
-            $qr-size: $main-size - ($border-width + $padding-width) * 2;
-            width: $qr-size;
-            height: $qr-size;
-        }
-
-        .intro {
-            font-size: 24px;
-            transition: opacity .5s ease;
-
-            &-github,
-            &-wechat,
-            &-qq,
-            &-mail {
-                @extend %intro-basic;
-            }
-
-            &-wechat,
-            &-qq {
-                @extend %qr-code-basic;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-        }
-
-        .icon {
-            $icon-size: 1.25em;
-
-            &-social {
-                position: absolute;
-                bottom: -3.6em;
-                left: 0;
-
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-
-                i {
-                    font-size: $icon-size;
-                    cursor: pointer;
-                    transition: opacity .5s ease;
-                }
-
-                .info {
-                    height: $icon-size;
-                    flex: auto;
-                    opacity: 0;
-                    transition: opacity .5s .2s ease;
-                }
-            }
-
-            &-svg {
-                width: $icon-size;
-                height: $icon-size;
-                fill: currentColor;
-                overflow: hidden;
-
-                opacity: 0;
-                position: absolute;
-                left: 0;
-                top: 0;
-                pointer-events: none;
-
-                transition: opacity .5s ease;
-            }
-
-            &-wrapper {
-                display: inline-block;
-                height: $icon-size;
-                margin-right: $icon-size;
-                position: relative;
-            }
-        }
-    }
 }
 
 
@@ -184,7 +91,6 @@
 
     .copyright {
         font: {
-            family: 'Circular Bold';
             size: 12px;
             weight: 900;
         }

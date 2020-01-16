@@ -19,11 +19,11 @@
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 
     h1 {
-        font-size: 96px;
         max-width: 600px;
-        line-height: 100%;
 
         span {
+            font-size: 96px;
+            line-height: 100%;
             font-family: 'Circular Bold';
             position: absolute;
 
@@ -36,12 +36,13 @@
                 right: 0;
                 top: 96px;
                 z-index: 2;
+                text-align: right;
             }
         }
     }
 
     h2 {
-        font: 32px 'PingFang SC';
+        font: 32px 'PingFang SC Bold';
 
         position: absolute;
         right: 80px;
@@ -55,27 +56,26 @@
 /* date */
 
 .date {
-    font: {
-        family: 'Circular Bold';
-        size: 128px;
-    }
-
-    line-height: 100%;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-
     width: 150px;
     height: 270px;
     position: relative;
 
+    %date {
+        font: 128px 'Circular Bold';
+        line-height: 100%;
+        text-shadow: 0 0 8px rgba(0, 0, 0, .6);
+    }
+
     .month {
-        font-family: 'Circular Bold';
+        @extend %date;
+
         position: absolute;
         top: 0;
         left: 0;
     }
 
     .day {
-        font-family: 'Circular Bold';
+        @extend %date;
 
         position: absolute;
         left: 174px;
@@ -142,7 +142,7 @@
     &-bottom {
         @extend .line;
         width: $height * 1.2;
-        height: $width * .8;
+        height: $width * 0.8;
         bottom: 25%;
         left: 50%;
         transform: translateZ(6px) translateX(-50%) rotate(-30deg) scale(.4);

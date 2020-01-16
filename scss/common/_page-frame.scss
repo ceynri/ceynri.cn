@@ -6,6 +6,7 @@
 
     background-color: #170f11;
 
+    // 隐藏滚动条
     overflow-x: hidden;
     overflow-y: scroll;
     /* IE10/Edge 去除滚动条 */
@@ -18,8 +19,6 @@
     /* 视差滚动 */
     transform-style: preserve-3d;
     perspective: $perspective-dist;
-
-    /* TODO 给所有使用transform的子元素加上webkit兼容 */
 }
 
 /* Chrome 去除滚动条 */
@@ -44,7 +43,7 @@
 
 .one-page-wrapper {
     height: 100vh;
-    margin: 0 40px;
+    margin: 0 $lowest-limit-margin;
 
     display: flex;
 }
