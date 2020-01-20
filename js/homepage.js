@@ -1,10 +1,23 @@
 'use strict';
 
+// banner 日期
+(() => {
+    let date = document.getElementById('date');
+    let month = date.getElementsByClassName('month')[0];
+    let day = date.getElementsByClassName('day')[0];
+
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth() + 1;
+    let currentDay = currentDate.getDate();
+    currentMonth = (currentMonth > 9) ? currentMonth : ('0' + currentMonth);
+    currentDay = (currentDay > 9) ? currentDay : ('0' + currentDay);
+    console.log(currentDay);
+    month.innerHTML = currentMonth;
+    day.innerHTML = currentDay;
+})()
+
 window.onload = () => {
 
-    (() => {
-        
-    })()
 
     // 将字符串复制到剪贴板
     let _copyToCilpboard = (str) => {
