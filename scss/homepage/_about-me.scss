@@ -1,7 +1,7 @@
 // about-me
 .about-me {
     // 主体到页面边界的距离
-    $frame-marign: $body-border-width + $lowest-limit-margin;
+    $frame-marign: $bodyBorderWidth + $minimumMargin;
     // 主体宽度
     $frame-width: calc(100vw - #{$frame-marign} * 2);
     $frame-max-width: 400px;
@@ -116,7 +116,7 @@
             .info {
                 height: $icon-size;
                 font-size: $icon-size * 0.75;
-                color: $text-color * 0.75;
+                color: $textColor * 0.75;
                 flex: auto;
                 opacity: 0;
                 transition: opacity .5s .2s ease;

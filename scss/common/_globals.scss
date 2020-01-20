@@ -10,14 +10,25 @@ h1 {
 
 a {
     text-decoration: none;
-    color: $text-color;
+    color: $textColor;
 }
 
 body {
-    font-family: $default-font-family;
-    color: $text-color;
+    font-size: 14px;
+    font-family: $defaultFont;
+    color: $textColor;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+%line-basic {
+    position: absolute;
+
+    width: $lineWidth;
+    height: $lineHeight;
+
+    background-color: #823;
+    box-shadow: 0 0 8px #000;
 }
 
 .flex-vertically-center {

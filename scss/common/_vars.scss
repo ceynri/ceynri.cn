@@ -1,13 +1,29 @@
 @import 'colors';
 
-$bg-img: '/assets/imgs/background/72235081_p0.jpg';
+// 背景图片
+//TODO 使用CSS变量，以便于js替换背景图片
+$backGroundImage: '/assets/imgs/background/72235081_p0.jpg';
 
-$wechat-qrcode: '/assets/imgs/qrcode/wechat-qrcode.jpg';
-$qq-qrcode: '/assets/imgs/qrcode/qq-qrcode.jpg';
+// 文本大小
+$titleFontSize: 96px;
 
-$default-font-family: 'PingFang SC', 'Circular', 'MircoSoft YaHei', Sans-serif;
+// 字体
+$defaultFont: 'PingFang SC',
+'Circular',
+'MircoSoft YaHei',
+Sans-serif;
 
-$body-border-width: 8px;
-$lowest-limit-margin: 32px;
+$titleFont: 'Circular Bold',
+'PingFang SC Bold';
 
-$perspective-dist: 10px;
+// 装饰粗线的尺寸
+$lineWidth: 20px;
+$lineHeight: 140px;
+
+
+// 边框与边距
+$bodyBorderWidth: 8px;
+$minimumMargin: 32px;
+
+// 投影距离
+$perspectiveDistance: 10px;
