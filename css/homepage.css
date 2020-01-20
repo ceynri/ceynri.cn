@@ -24,6 +24,8 @@
           box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -39,8 +41,6 @@ body {
   font-size: 14px;
   font-family: "PingFang SC", "Circular", "MircoSoft YaHei", Sans-serif;
   color: #ccc;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .title h1 span:nth-child(1)::after, .title h1 span:nth-child(2)::after, .title h2::after, .date .date-line, .bottom-line, .line-guide {
@@ -85,6 +85,7 @@ body {
 .title h1 {
   font-size: 96px;
   font-family: "Circular Bold", "PingFang SC Bold";
+  font-weight: normal;
   line-height: 1;
   text-align: right;
   max-width: 600px;
@@ -92,6 +93,7 @@ body {
 
 .title h1 span {
   position: relative;
+  font-weight: normal;
 }
 
 .title h1 span:nth-child(1)::after {
@@ -115,6 +117,7 @@ body {
   text-align: right;
   font-size: 32px;
   font-family: "Circular Bold", "PingFang SC Bold";
+  font-weight: normal;
   position: relative;
 }
 

@@ -22,6 +22,8 @@
         font: {
             size: $titleFontSize;
             family: $titleFont;
+            // 取消firefox浏览器自作聪明的 bold
+            weight: normal;
         }
 
         line-height: 1;
@@ -30,7 +32,10 @@
 
         span {
             position: relative;
+            // 取消firefox浏览器自作聪明的 bold
+            font-weight: normal;
 
+            // 装饰线
             &:nth-child(1)::after {
                 content: '';
                 @extend %line-basic;
@@ -39,6 +44,7 @@
                 transform: rotate(60deg);
             }
 
+            // 装饰线
             &:nth-child(2)::after {
                 content: '';
                 @extend %line-basic;
@@ -56,6 +62,8 @@
         font: {
             size: $titleFontSize / 3;
             family: $titleFont;
+            // 取消firefox浏览器自作聪明的 bold
+            weight: normal;
         }
 
         position: relative;
