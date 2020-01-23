@@ -1,127 +1,123 @@
-// 用于设置视差滚动时，不改变大小的情况下改变元素的z轴高度
-@mixin perspective-level($level: 0, $z: false) {
-    transform: translateZ(1px * $level) scale(1 - 1px / $perspectiveDistance * $level);
+.banner {
+    position: relative;
+    top: 0;
+    
+    .title-block {
+        width: 100%;
 
-    @if $z {
-        z-index: $z;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
     }
-}
 
-.title-block {
-    width: 100%;
+    .title {
+        text-shadow: 0 0 12px rgba(0, 0, 0, .6);
 
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
+        h1 {
+            font: {
+                size: $titleFontSize;
+                family: $titleFont;
+                // 取消firefox浏览器自作聪明的 bold
+                weight: normal;
+            }
 
-.title {
-    text-shadow: 0 0 12px rgba(0, 0, 0, .6);
+            line-height: 1;
+            text-align: right;
+            max-width: 600px;
 
-    h1 {
-        font: {
-            size: $titleFontSize;
-            family: $titleFont;
-            // 取消firefox浏览器自作聪明的 bold
-            weight: normal;
+            span {
+                position: relative;
+                // 取消firefox浏览器自作聪明的 bold
+                font-weight: normal;
+
+                // 装饰线
+                &:nth-child(1)::after {
+                    content: '';
+                    @extend %line-basic;
+                    top: -.6em;
+                    left: 1em;
+                    transform: rotate(60deg);
+                }
+
+                // 装饰线
+                &:nth-child(2)::after {
+                    content: '';
+                    @extend %line-basic;
+                    bottom: -.4em;
+                    right: 1.4em;
+                    transform: rotate(60deg);
+                }
+            }
         }
 
-        line-height: 1;
-        text-align: right;
-        max-width: 600px;
+        h2 {
+            margin-top: .5em;
+            text-align: right;
 
-        span {
+            font: {
+                size: $titleFontSize / 3;
+                family: $titleFont;
+                // 取消firefox浏览器自作聪明的 bold
+                weight: normal;
+            }
+
             position: relative;
-            // 取消firefox浏览器自作聪明的 bold
-            font-weight: normal;
 
-            // 装饰线
-            &:nth-child(1)::after {
+            &::after {
                 content: '';
                 @extend %line-basic;
-                top: -.6em;
-                left: 1em;
-                transform: rotate(60deg);
-            }
-
-            // 装饰线
-            &:nth-child(2)::after {
-                content: '';
-                @extend %line-basic;
-                bottom: -.4em;
-                right: 1.4em;
+                bottom: -3em;
+                right: 6em;
                 transform: rotate(60deg);
             }
         }
     }
 
-    h2 {
-        margin-top: .5em;
-        text-align: right;
-
-        font: {
-            size: $titleFontSize / 3;
-            family: $titleFont;
-            // 取消firefox浏览器自作聪明的 bold
-            weight: normal;
-        }
-
+    .date {
+        margin-right: .5em;
         position: relative;
 
-        &::after {
-            content: '';
+        font: {
+            size: $titleFontSize * 4/3;
+            family: $titleFont;
+        }
+
+        line-height: 100%;
+        text-shadow: 0 0 8px rgba(0, 0, 0, .6);
+
+        .date-line {
             @extend %line-basic;
-            bottom: -3em;
-            right: 6em;
+            top: 64px;
+            left: ($lineHeight - $lineWidth) / 2;
             transform: rotate(60deg);
         }
     }
-}
 
-.date {
-    margin-right: .5em;
-    position: relative;
 
-    font: {
-        size: $titleFontSize * 4/3;
-        family: $titleFont;
-    }
-
-    line-height: 100%;
-    text-shadow: 0 0 8px rgba(0, 0, 0, .6);
-
-    .date-line {
+    .bottom-line {
         @extend %line-basic;
-        top: 64px;
-        left: ($lineHeight - $lineWidth) / 2;
-        transform: rotate(60deg);
-    }
-}
+        width: $lineHeight * 1.2;
+        height: $lineWidth * .8;
+        bottom: -10%;
+        left: 50%;
+        transform: translateX(-50%) rotate(-30deg);
+        z-index: 10;
 
+        .text {
+            position: absolute;
+            // 垂直居中
+            bottom: 50%;
+            transform: translateY(50%);
 
-.bottom-line {
-    @extend %line-basic;
-    width: $lineHeight * 1.2;
-    height: $lineWidth * .8;
-    bottom: -10%;
-    left: 50%;
-    transform: translateX(-50%) rotate(-30deg);
-    z-index: 10;
+            width: 100%;
 
-    .text {
-        position: absolute;
-        // 垂直居中
-        bottom: 50%;
-        transform: translateY(50%);
+            text: {
+                align: center;
+                transform: uppercase;
+                shadow: 0 0 8px rgba(0, 0, 0, .6);
+            }
 
-        width: 100%;
-
-        text: {
-            align: center;
-            transform: uppercase;
-            shadow: 0 0 8px rgba(0, 0, 0, .6);
+            font: 24px $titleFont;
         }
-
-        font: 24px $titleFont;
     }
 }

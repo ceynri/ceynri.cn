@@ -2,8 +2,20 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
+}
+
+:root {
+    font: {
+        size: 14px;
+        family: $defaultFont;
+    }
+
+    color: $textColor;
+}
+
+body {
     // 抗锯齿
+    // ? 没什么用
     // chrome、safari
     -webkit-font-smoothing: antialiased;
     // firefox
@@ -19,12 +31,15 @@ a {
     color: $textColor;
 }
 
-body {
-    font-size: 14px;
-    font-family: $defaultFont;
-    color: $textColor;
+.flex-vertically-center {
+    align-items: center;
 }
 
+.flex-horizontal-center {
+    justify-content: center;
+}
+
+// 装饰线的基础样式规则
 %line-basic {
     position: absolute;
 
@@ -35,10 +50,11 @@ body {
     box-shadow: 0 0 8px #000;
 }
 
-.flex-vertically-center {
-    align-items: center;
-}
+// 用于设置视差滚动时，不改变大小的情况下改变元素的z轴高度
+@mixin perspective-level($level: 0, $z: false) {
+    transform: translateZ(1px * $level) scale(1 - 1px / $parallax * $level);
 
-.flex-horizontal-center {
-    justify-content: center;
+    @if $z {
+        z-index: $z;
+    }
 }
