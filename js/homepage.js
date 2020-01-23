@@ -1,8 +1,17 @@
+/**
+ * @author ceynri
+ */
+
 'use strict';
 
-// banner 日期
+/* TODO LIST
+ * title 渐入动画
+ * let -> const
+ */
+
 (() => {
-    let date = document.getElementById('date');
+    // * 设置banner日期
+    const date = document.getElementById('date');
     let month = date.getElementsByClassName('month')[0];
     let day = date.getElementsByClassName('day')[0];
 
@@ -11,33 +20,70 @@
     let currentDay = currentDate.getDate();
     currentMonth = (currentMonth > 9) ? currentMonth : ('0' + currentMonth);
     currentDay = (currentDay > 9) ? currentDay : ('0' + currentDay);
-    console.log(currentDay);
     month.innerHTML = currentMonth;
     day.innerHTML = currentDay;
-})()
+})();
 
-window.onload = () => {
-
-
-    // 将字符串复制到剪贴板
-    let _copyToCilpboard = (str) => {
-        const strWrapper = document.createElement('input');
-        strWrapper.setAttribute('readonly', 'readonly');
-        strWrapper.setAttribute('value', str);
-        document.body.appendChild(strWrapper);
-        strWrapper.select();
-        if (document.execCommand('copy')) {
-            if (document.execCommand('copy')) {
-                console.log('复制内容：' + str);
-            } else {
-                console.error('复制失败');
-            }
+(() => {
+    // * 设置bodyBorder宽度
+    function getScrollbarWidth() {
+        // * 获得滚动条宽度
+        let elem = document.createElement('div'),
+            styles = {
+                width: '100px',
+                height: '100px',
+                overflowY: 'scroll', // 使其有滚动条
+                position: 'absolute', // 移出文档流避免重绘
+            },
+            scrollbarWidth;
+        for (let i in styles) {
+            elem.style[i] = styles[i];
         }
-        document.body.removeChild(strWrapper);
-    };
+        document.body.appendChild(elem);
+        scrollbarWidth = elem.offsetWidth - elem.clientWidth;
+        elem.remove();
+        return scrollbarWidth;
+    }
 
-    // 图标与鼠标交互效果
+    let bodyBorder = document.getElementsByClassName('body-border')[0];
+    bodyBorder.style.border = `#eee ${getScrollbarWidth()} solid`;
+})();
+
+window.addEventListener('load', () => {
+
+    // ? (()=>{})()写法和{}写法的区别
+    {
+        // * 监听滚动，实现视差滚动
+        const bodyWindow = document.getElementById('bodyWindow');
+        let titleBlock = bodyWindow.getElementsByClassName('title-block')[0];
+        let banner = bodyWindow.getElementsByClassName('banner')[0];
+
+        bodyWindow.addEventListener('scroll', () => {
+            let bannerBound = banner.getBoundingClientRect();
+            let transStr = 'translateY(' + bannerBound.top + 'px)';
+            // console.log(transStr);
+            titleBlock.style.transform = transStr;
+        })
+    }
+
     (() => {
+        // * 图标与鼠标交互效果
+        function copyToCilpboard(str) {
+            // * 将字符串复制到剪贴板
+            const strWrapper = document.createElement('input');
+            strWrapper.setAttribute('readonly', 'readonly');
+            strWrapper.setAttribute('value', str);
+            document.body.appendChild(strWrapper);
+            strWrapper.select();
+            if (document.execCommand('copy')) {
+                if (document.execCommand('copy')) {
+                    console.log('复制内容：' + str);
+                } else {
+                    console.error('复制失败');
+                }
+            }
+            document.body.removeChild(strWrapper);
+        };
 
         let intro = document.getElementById('intro');
         let info = document.getElementById('introInfo');
@@ -56,7 +102,7 @@ window.onload = () => {
                 info.style.opacity = 1.0;
                 // section
                 introContainer.children[i + 1].style.opacity = 1.0;
-                introContainer.children[i + 1].style.pointerEvents = 'auto';
+                introContainer.children[i + 1].style.visibility = 'inherit';
             });
 
             wrapper.children[0].addEventListener('mouseout', () => {
@@ -68,7 +114,7 @@ window.onload = () => {
                 info.style.opacity = 0.0;
                 // section
                 introContainer.children[i + 1].style.opacity = 0.0;
-                introContainer.children[i + 1].style.pointerEvents = 'none';
+                introContainer.children[i + 1].style.visibility = 'hidden';
             });
         }
 
@@ -93,19 +139,19 @@ window.onload = () => {
 
         // click
         wechatIcon.addEventListener('click', () => {
-            _copyToCilpboard('WeChat: sakuramemory');
+            copyToCilpboard('WeChat: sakuramemory');
         })
         qqIcon.addEventListener('click', () => {
-            _copyToCilpboard('QQ: 347670115');
+            copyToCilpboard('QQ: 347670115');
         })
         mailIcon.addEventListener('click', () => {
-            _copyToCilpboard('ceynri@gmail.com');
+            copyToCilpboard('ceynri@gmail.com');
         })
 
     })();
 
-    // 新页面从新标签页打开
     (() => {
+        // * 新页面从新标签页打开
         let socIcons = document.getElementById('socialIcons');
         let aTags = socIcons.getElementsByTagName('a');
         for (let i = 0; i < aTags.length; i++) {
@@ -114,9 +160,11 @@ window.onload = () => {
     })();
 
     (() => {
+        // * 点击guideLine滚动页面
         let guideLine = document.getElementById('guideLine');
         guideLine.addEventListener('click', () => {
-            // TODO
+            // pass
         })
-    })
-}
+    });
+
+})
