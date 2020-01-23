@@ -5,7 +5,7 @@
 
 body {
     // TODO 滚动条不滚动
-    height: 5000px;
+    // height: 5000px;
     /* IE10/Edge 去除滚动条 */
     -ms-overflow-style: none;
     /* firefox 64 滚动条透明化 */
@@ -22,7 +22,7 @@ body {
 
 .body {
     &-border {
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         // TODO 使用js设置css变量给bodyBorder而非sass变量
         border: #eee $bodyBorderWidth solid;
@@ -36,25 +36,25 @@ body {
         height: calc(100vh - #{$bodyBorderWidth} * 2);
         position: fixed;
 
-        background-color: #170f11;
+        // background-color: #170f11;
 
         // 滚动
-        // overflow: hidden;
+        overflow: hidden;
 
-        overflow-x: hidden;
-        overflow-y: scroll;
-        /* IE10/Edge 去除滚动条 */
-        -ms-overflow-style: none;
-        /* firefox 64 滚动条透明化 */
-        scrollbar-color: transparent transparent;
-        /* firefox 64 去除滚动条 */
-        scrollbar-width: none;
+        // overflow-x: hidden;
+        // overflow-y: scroll;
+        // /* IE10/Edge 去除滚动条 */
+        // -ms-overflow-style: none;
+        // /* firefox 64 滚动条透明化 */
+        // scrollbar-color: transparent transparent;
+        // /* firefox 64 去除滚动条 */
+        // scrollbar-width: none;
 
-        // Chrome 去除滚动条
-        &::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-        }
+        // // Chrome 去除滚动条
+        // &::-webkit-scrollbar {
+        //     width: 0;
+        //     height: 0;
+        // }
 
         /* 视差滚动 */
         transform-style: preserve-3d;
@@ -87,7 +87,7 @@ body {
 .background {
     width: 100%;
     height: 120vh;
-    position: absolute;
+    position: fixed;
 
     background: {
         image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
@@ -95,9 +95,7 @@ body {
         position: center;
         size: cover;
     }
-
-    // ? 可能只有这里在用这个混合宏了
-    @include perspective-level(-160, -99);
+    z-index: -999;
 }
 
 /*
