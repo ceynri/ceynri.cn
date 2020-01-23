@@ -7,7 +7,7 @@
         lerp: (a, b, n) => (1 - n) * a + n * b
     };
 
-    // ? class写法好还是函数式写法更好
+    // todo ? class写法好还是函数式写法更好
     // * 平滑滚动
     class SmoothScroll {
         constructor() {
@@ -43,8 +43,9 @@
         init() {
             // * 获得borderWidth
             const bodyBorder = document.getElementsByClassName('body-border')[0];
-            this.borderWidth = getComputedStyle(bodyBorder, null).getPropertyValue('border-width');
+            this.borderWidth = getComputedStyle(bodyBorder, null).getPropertyValue('border-top-width'); // 这里如果使用border-width，会产生在firefox里没有值的bug
             this.borderWidth = parseInt(this.borderWidth.split('px')[0]);
+            console.log(this.borderWidth);
         }
 
         setSize() {
@@ -75,6 +76,7 @@
             return window.pageYOffset || document.documentElement.scrollTop;
         }
 
+        // todo 添加至监听器，当有滚动事件时才执行，target=current时结束
         render() {
             // * 渲染，更新当前值和目标值
             // 目标值更新

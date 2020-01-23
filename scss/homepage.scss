@@ -41,21 +41,6 @@ body {
         // 滚动
         overflow: hidden;
 
-        // overflow-x: hidden;
-        // overflow-y: scroll;
-        // /* IE10/Edge 去除滚动条 */
-        // -ms-overflow-style: none;
-        // /* firefox 64 滚动条透明化 */
-        // scrollbar-color: transparent transparent;
-        // /* firefox 64 去除滚动条 */
-        // scrollbar-width: none;
-
-        // // Chrome 去除滚动条
-        // &::-webkit-scrollbar {
-        //     width: 0;
-        //     height: 0;
-        // }
-
         /* 视差滚动 */
         transform-style: preserve-3d;
         perspective: $parallax;

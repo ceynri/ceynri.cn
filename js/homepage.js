@@ -33,7 +33,7 @@
                 width: '100px',
                 height: '100px',
                 overflowY: 'scroll', // 使其有滚动条
-                position: 'absolute', // 移出文档流避免重绘
+                position: 'absolute' // 移出文档流避免重绘
             },
             scrollbarWidth;
         for (let i in styles) {
