@@ -13,7 +13,7 @@
     $frame-padding: $border-width + $padding-width;
     // 内容宽度
     $content-width: calc(100vw - (#{$frame-marign + $frame-padding}) * 2);
-    $content-max-width: $frame-max-width - $frame-padding;
+    $content-max-width: $frame-max-width - $frame-padding * 2;
 
     // 自适应页面，页面宽度较小时也能保持正方形边框
     width: $frame-width;
@@ -36,6 +36,7 @@
     &-header {
         display: flex;
         flex-direction: column;
+        text-shadow: $textShadow;
 
         h1 {
             font-size: 2em;
@@ -52,7 +53,15 @@
         left: $padding-width;
 
         width: $content-width;
-        max-width: $content-max-width;
+
+        max: {
+            width: $content-max-width;
+            height: $content-max-width;
+        }
+
+        text-shadow: $textShadow;
+
+        pointer-events: none;
 
         p {
             font-size: 1em;
@@ -67,30 +76,27 @@
 
         width: $content-width;
         height: $content-width;
-        max-width: $qr-size;
-        max-height: $qr-size;
+
+        max: {
+            width: $qr-size;
+            height: $qr-size;
+        }
     }
 
     .intro {
-        @extend %intro-basic;
-        opacity: 1;
-
-        &-github,
-        &-wechat,
-        &-qq,
-        &-mail {
+        &-container>* {
             @extend %intro-basic;
-            pointer-events: none;
-        }
-
-        &-wechat,
-        &-qq {
-            @extend %qr-code-basic;
 
             img {
-                width: 100%;
+                @extend %qr-code-basic;
             }
         }
+
+        &-myself {
+            pointer-events: initial;
+            opacity: 1;
+        }
+
     }
 
     .icon {

@@ -1,7 +1,7 @@
 .banner {
     position: relative;
     top: 0;
-    
+
     .title-block {
         width: 100%;
 
@@ -11,7 +11,7 @@
     }
 
     .title {
-        text-shadow: 0 0 12px rgba(0, 0, 0, .6);
+        text-shadow: $textShadow;
 
         h1 {
             font: {
@@ -83,7 +83,7 @@
         }
 
         line-height: 100%;
-        text-shadow: 0 0 8px rgba(0, 0, 0, .6);
+        text-shadow: $textShadow;
 
         .date-line {
             @extend %line-basic;
@@ -114,7 +114,7 @@
             text: {
                 align: center;
                 transform: uppercase;
-                shadow: 0 0 8px rgba(0, 0, 0, .6);
+                shadow: $textShadow;
             }
 
             font: 24px $titleFont;

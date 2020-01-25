@@ -52,7 +52,7 @@
 window.addEventListener('load', () => {
 
     // ? (()=>{})()写法和{}写法的区别
-    {
+    (() => {
         // * 监听滚动，实现视差滚动
         const bodyWindow = document.getElementById('bodyWindow');
         let titleBlock = bodyWindow.getElementsByClassName('title-block')[0];
@@ -64,7 +64,7 @@ window.addEventListener('load', () => {
             // console.log(transStr);
             titleBlock.style.transform = transStr;
         })
-    }
+    })();
 
     (() => {
         // * 图标与鼠标交互效果
@@ -85,7 +85,7 @@ window.addEventListener('load', () => {
             document.body.removeChild(strWrapper);
         };
 
-        let intro = document.getElementById('intro');
+        let intro = document.getElementById('introMyself');
         let info = document.getElementById('introInfo');
 
         let iconWrappers = document.getElementsByClassName('icon-wrapper');
@@ -118,26 +118,32 @@ window.addEventListener('load', () => {
             });
         }
 
-        let githubIcon = document.getElementsByClassName('icon-github')[0];
-        let wechatIcon = document.getElementsByClassName('icon-wechat')[0];
-        let qqIcon = document.getElementsByClassName('icon-qq')[0];
-        let mailIcon = document.getElementsByClassName('icon-mail')[0];
+        let githubIcon = document.getElementsByClassName('icon-github-line')[0];
+        let wechatIcon = document.getElementsByClassName('icon-wechat-line')[0];
+        let qqIcon = document.getElementsByClassName('icon-qq-line')[0];
+        let bilibiliIcon = document.getElementsByClassName('icon-bilibili-line')[0];
+        let mailIcon = document.getElementsByClassName('icon-mail-line')[0];
 
         // over
+        // TODO 改为大字背景
         githubIcon.addEventListener('mouseover', () => {
             info.innerHTML = 'GitHub';
         })
         wechatIcon.addEventListener('mouseover', () => {
-            info.innerHTML = 'WeChat 点击复制';
+            info.innerHTML = 'WeChat | 点击复制微信号';
         })
         qqIcon.addEventListener('mouseover', () => {
-            info.innerHTML = 'QQ 点击复制';
+            info.innerHTML = 'QQ | 点击复制qq号';
+        })
+        bilibiliIcon.addEventListener('mouseover', () => {
+            info.innerHTML = 'bilibili';
         })
         mailIcon.addEventListener('mouseover', () => {
             info.innerHTML = 'Mail';
         })
 
         // click
+        // TODO 复制成功的反馈
         wechatIcon.addEventListener('click', () => {
             copyToCilpboard('WeChat: sakuramemory');
         })

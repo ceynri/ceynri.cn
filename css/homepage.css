@@ -216,7 +216,7 @@ body::-webkit-scrollbar {
   font-size: 128px;
   font-family: "Circular Bold", "PingFang SC Bold";
   line-height: 100%;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 .banner .date .date-line {
@@ -244,7 +244,7 @@ body::-webkit-scrollbar {
   width: 100%;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
   font: 24px "Circular Bold", "PingFang SC Bold";
 }
 
@@ -295,13 +295,14 @@ body::-webkit-scrollbar {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 .about-me-header h1 {
   font-size: 2em;
 }
 
-.about-me .intro, .about-me .intro-github, .about-me .intro-wechat, .about-me .intro-qq, .about-me .intro-mail {
+.about-me .intro-container > * {
   opacity: 0;
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
@@ -309,32 +310,28 @@ body::-webkit-scrollbar {
   bottom: 24px;
   left: 24px;
   width: calc(100vw - (76px) * 2);
-  max-width: 364px;
+  max-width: 328px;
+  max-height: 328px;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
 }
 
-.about-me .intro p, .about-me .intro-github p, .about-me .intro-wechat p, .about-me .intro-qq p, .about-me .intro-mail p {
+.about-me .intro-container > * p {
   font-size: 1em;
   /* 宽度过小时，仍然支持换行 */
   overflow-wrap: break-word;
 }
 
-.about-me .intro-wechat, .about-me .intro-qq {
+.about-me .intro-container > * img {
   width: calc(100vw - (76px) * 2);
   height: calc(100vw - (76px) * 2);
   max-width: 328px;
   max-height: 328px;
 }
 
-.about-me .intro {
+.about-me .intro-myself {
+  pointer-events: initial;
   opacity: 1;
-}
-
-.about-me .intro-github, .about-me .intro-wechat, .about-me .intro-qq, .about-me .intro-mail {
-  pointer-events: none;
-}
-
-.about-me .intro-wechat img, .about-me .intro-qq img {
-  width: 100%;
 }
 
 .about-me .icon-social {
