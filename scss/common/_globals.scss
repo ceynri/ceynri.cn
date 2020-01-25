@@ -31,14 +31,6 @@ a {
     color: $textColor;
 }
 
-.flex-vertically-center {
-    align-items: center;
-}
-
-.flex-horizontal-center {
-    justify-content: center;
-}
-
 // 装饰线的基础样式规则
 %line-basic {
     position: absolute;
@@ -48,13 +40,4 @@ a {
 
     background-color: $themeColor;
     box-shadow: 0 0 8px #000;
-}
-
-// 用于设置视差滚动时，不改变大小的情况下改变元素的z轴高度
-@mixin perspective-level($level: 0, $z: false) {
-    transform: translateZ(1px * $level) scale(1 - 1px / $parallax * $level);
-
-    @if $z {
-        z-index: $z;
-    }
 }

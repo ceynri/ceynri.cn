@@ -36,18 +36,16 @@ body {
         height: calc(100vh - #{$bodyBorderWidth} * 2);
         position: fixed;
 
-        // background-color: #170f11;
-
         // 滚动
         overflow: hidden;
 
-        /* 视差滚动 */
-        transform-style: preserve-3d;
-        perspective: $parallax;
+        [data-scroll] {
+            overflow: hidden;
+        }
     }
 }
 
-.margin-wrapper {
+.center-wrapper {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -59,11 +57,8 @@ body {
     position: relative;
 }
 
-.one-page-wrapper {
-    height: 100vh;
+.margin-wrapper {
     margin: 0 $minimumMargin;
-
-    display: flex;
 }
 
 .background {
@@ -77,6 +72,7 @@ body {
         position: center;
         size: cover;
     }
+
     z-index: -999;
 }
 
@@ -86,19 +82,20 @@ body {
 @import 'homepage/banner';
 
 .content {
-    $height: 200px;
+    // 遮罩过渡区域的高度
+    $height: $maskTransitionWidth;
 
-    margin-top: $height * 2.0;
+    margin-top: $height * 2;
     background-color: $backGroundMaskColor;
 
     &::before {
         content: '';
         display: block;
         width: 100%;
-        height: $height * 4;
+        height: $height * 3; // 防止阴影衔接不流畅
         position: absolute;
-        box-shadow: 0px (-1.5 * $height) $height ($height / 3) $backGroundMaskColor;
-
+        box-shadow: 0 (-$height * 2.4) ($height) ($height * 1.4) $backGroundMaskColor;
+        z-index: -99;
     }
 }
 
@@ -107,6 +104,10 @@ body {
  */
 @import 'homepage/about-me';
 
+.one-page-wrapper {
+    height: 100vh;
+    width: 100vw;
+}
 
 .line-guide {
     @extend %line-basic;

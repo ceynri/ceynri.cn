@@ -46,18 +46,6 @@ a {
   color: #ccc;
 }
 
-.flex-vertically-center {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.flex-horizontal-center {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
 .banner .title h1 span:nth-child(1)::after, .banner .title h1 span:nth-child(2)::after, .banner .title h2::after, .banner .date .date-line, .banner .bottom-line, .line-guide {
   position: absolute;
   width: 20px;
@@ -94,14 +82,13 @@ body::-webkit-scrollbar {
   height: calc(100vh - 8px * 2);
   position: fixed;
   overflow: hidden;
-  /* 视差滚动 */
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-perspective: 10px;
-          perspective: 10px;
 }
 
-.margin-wrapper {
+.body-window [data-scroll] {
+  overflow: hidden;
+}
+
+.center-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -118,12 +105,8 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
-.one-page-wrapper {
-  height: 100vh;
-  margin: 0 32px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.margin-wrapper {
+  margin: 0 64px;
 }
 
 .background {
@@ -143,6 +126,17 @@ body::-webkit-scrollbar {
 .banner {
   position: relative;
   top: 0;
+}
+
+.banner-wrapper {
+  height: calc(100vh - 16px);
+  min-height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .banner .title-block {
@@ -231,8 +225,8 @@ body::-webkit-scrollbar {
   height: 16px;
   bottom: -10%;
   left: 50%;
-  -webkit-transform: translateX(-50%) rotate(-30deg);
-          transform: translateX(-50%) rotate(-30deg);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   z-index: 10;
 }
 
@@ -249,7 +243,7 @@ body::-webkit-scrollbar {
 }
 
 .content {
-  margin-top: 400px;
+  margin-top: 300px;
   background-color: rgba(14, 12, 12, 0.9);
 }
 
@@ -257,18 +251,19 @@ body::-webkit-scrollbar {
   content: '';
   display: block;
   width: 100%;
-  height: 800px;
+  height: 450px;
   position: absolute;
-  -webkit-box-shadow: 0px -300px 200px 66.66667px rgba(14, 12, 12, 0.9);
-          box-shadow: 0px -300px 200px 66.66667px rgba(14, 12, 12, 0.9);
+  -webkit-box-shadow: 0 -360px 150px 210px rgba(14, 12, 12, 0.9);
+          box-shadow: 0 -360px 150px 210px rgba(14, 12, 12, 0.9);
+  z-index: -99;
 }
 
 /*
  * about me
  */
 .about-me {
-  width: calc(100vw - 40px * 2);
-  height: calc(100vw - 40px * 2);
+  width: calc(100vw - 72px * 2);
+  height: calc(100vw - 72px * 2);
   max-width: 400px;
   max-height: 400px;
   padding: 24px;
@@ -287,6 +282,21 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+.about-me-wrapper {
+  height: calc(100vh - 150px);
+  min-height: 600px;
+  padding-bottom: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .about-me-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -300,6 +310,7 @@ body::-webkit-scrollbar {
 
 .about-me-header h1 {
   font-size: 2em;
+  margin-bottom: .5em;
 }
 
 .about-me .intro-container > * {
@@ -309,7 +320,7 @@ body::-webkit-scrollbar {
   position: absolute;
   bottom: 24px;
   left: 24px;
-  width: calc(100vw - (76px) * 2);
+  width: calc(100vw - (108px) * 2);
   max-width: 328px;
   max-height: 328px;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
@@ -323,8 +334,8 @@ body::-webkit-scrollbar {
 }
 
 .about-me .intro-container .qrcode-wrapper {
-  width: calc(100vw - (76px) * 2);
-  height: calc(100vw - (76px) * 2);
+  width: calc(100vw - (108px) * 2);
+  height: calc(100vw - (108px) * 2);
   max-width: 328px;
   max-height: 328px;
 }
@@ -340,7 +351,7 @@ body::-webkit-scrollbar {
 
 .about-me .icon-social {
   position: absolute;
-  bottom: -57px;
+  bottom: -60.28px;
   left: 0;
   width: 100%;
   display: -webkit-box;
@@ -393,6 +404,11 @@ body::-webkit-scrollbar {
   font-size: 20px;
   line-height: 1;
   position: relative;
+}
+
+.one-page-wrapper {
+  height: 100vh;
+  width: 100vw;
 }
 
 .line-guide {

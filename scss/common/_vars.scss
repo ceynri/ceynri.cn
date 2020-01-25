@@ -23,10 +23,10 @@ $lineHeight: 140px;
 
 // 边框与边距
 $bodyBorderWidth: 8px;
-$minimumMargin: 32px;
+$minimumMargin: 64px;
 
-// 视差（投影距离）
-$parallax: 10px;
+// 遮罩过渡区域的宽度
+$maskTransitionWidth: 150px;
 
 // 自我介绍部分的最大尺寸
 $aboutMeSize: 400px;

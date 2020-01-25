@@ -1,7 +1,17 @@
 // about-me
 .about-me {
+    &-wrapper {
+        height: calc(100vh - #{$maskTransitionWidth});
+        min-height: $aboutMeSize * 1.5;
+        padding-bottom: $maskTransitionWidth;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     // 主体到页面边界的距离
-    $frame-marign: $bodyBorderWidth + $minimumMargin;
+    $frame-marign: $bodyBorderWidth+$minimumMargin;
     // 主体宽度
     $frame-width: calc(100vw - #{$frame-marign} * 2);
     $frame-max-width: $aboutMeSize;
@@ -10,7 +20,7 @@
     // 主题边框宽度
     $border-width: 12px;
     // 主体外边界与内容之间的宽度
-    $frame-padding: $border-width + $padding-width;
+    $frame-padding: $border-width+$padding-width;
     // 内容宽度
     $content-width: calc(100vw - (#{$frame-marign + $frame-padding}) * 2);
     $content-max-width: $frame-max-width - $frame-padding * 2;
@@ -23,6 +33,8 @@
         width: $frame-max-width;
         height: $frame-max-width;
     }
+
+    // TODO 媒体查询，当宽度过小时，不再保持方形边框以满足内容的添加
 
     padding: $padding-width;
     border: $border-width $themeColor solid;
@@ -43,6 +55,7 @@
 
         h1 {
             font-size: 2em;
+            margin-bottom: .5em;
         }
     }
 
@@ -113,7 +126,7 @@
 
         &-social {
             position: absolute;
-            bottom: -57px; // todo calc
+            bottom: -($border-width + $icon-size * (1 + 1.414));
             left: 0;
 
             width: 100%;

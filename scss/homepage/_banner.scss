@@ -2,6 +2,13 @@
     position: relative;
     top: 0;
 
+    &-wrapper {
+        height: calc(100vh - #{$bodyBorderWidth * 2});
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+    }
+
     .title-block {
         width: 100%;
 
@@ -100,7 +107,7 @@
         height: $lineWidth * .8;
         bottom: -10%;
         left: 50%;
-        transform: translateX(-50%) rotate(-30deg);
+        transform: translateX(-50%);
         z-index: 10;
 
         .text {
