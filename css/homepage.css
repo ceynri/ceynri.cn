@@ -268,8 +268,8 @@ body::-webkit-scrollbar {
  */
 .about-me {
   width: calc(100vw - 40px * 2);
-  max-width: 400px;
   height: calc(100vw - 40px * 2);
+  max-width: 400px;
   max-height: 400px;
   padding: 24px;
   border: 12px #823 solid;
@@ -322,11 +322,15 @@ body::-webkit-scrollbar {
   overflow-wrap: break-word;
 }
 
-.about-me .intro-container > * img {
+.about-me .intro-container .qrcode-wrapper {
   width: calc(100vw - (76px) * 2);
   height: calc(100vw - (76px) * 2);
   max-width: 328px;
   max-height: 328px;
+}
+
+.about-me .intro-container .qrcode-wrapper img {
+  width: 100%;
 }
 
 .about-me .intro-myself {
@@ -365,6 +369,8 @@ body::-webkit-scrollbar {
   opacity: 0;
   -webkit-transition: opacity .5s .2s ease;
   transition: opacity .5s .2s ease;
+  -webkit-transition: color .5s ease;
+  transition: color .5s ease;
 }
 
 .about-me .icon-svg {
@@ -383,7 +389,7 @@ body::-webkit-scrollbar {
 
 .about-me .icon-wrapper {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 14.14427px;
   font-size: 20px;
   line-height: 1;
   position: relative;

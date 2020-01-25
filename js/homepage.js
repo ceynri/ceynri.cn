@@ -68,6 +68,7 @@ window.addEventListener('load', () => {
 
     (() => {
         // * 图标与鼠标交互效果
+
         function copyToCilpboard(str) {
             // * 将字符串复制到剪贴板
             const strWrapper = document.createElement('input');
@@ -87,6 +88,8 @@ window.addEventListener('load', () => {
 
         let intro = document.getElementById('introMyself');
         let info = document.getElementById('introInfo');
+        let infoColor = getComputedStyle(info, null).getPropertyValue('color');
+        let infoClickedColor = '#ffc83d';
 
         let iconWrappers = document.getElementsByClassName('icon-wrapper');
         let introContainer = document.getElementById('introContainer');
@@ -105,6 +108,18 @@ window.addEventListener('load', () => {
                 introContainer.children[i + 1].style.visibility = 'inherit';
             });
 
+            wrapper.children[0].addEventListener('mousedown', () => {
+                // 按下时icon变透明
+                wrapper.children[1].style.opacity = 0.25;
+            });
+            wrapper.children[0].addEventListener('click', () => {
+                // info文字变色特效
+                info.style.color = infoClickedColor;
+            });
+            wrapper.children[0].addEventListener('mouseup', () => {
+                wrapper.children[1].style.opacity = 1.0;
+            });
+
             wrapper.children[0].addEventListener('mouseout', () => {
                 // icon
                 wrapper.children[0].style.opacity = 1.0;
@@ -112,6 +127,7 @@ window.addEventListener('load', () => {
                 // text
                 intro.style.opacity = 1.0;
                 info.style.opacity = 0.0;
+                info.style.color = infoColor;
                 // section
                 introContainer.children[i + 1].style.opacity = 0.0;
                 introContainer.children[i + 1].style.visibility = 'hidden';
@@ -133,7 +149,7 @@ window.addEventListener('load', () => {
             info.innerHTML = 'WeChat | 点击复制微信号';
         })
         qqIcon.addEventListener('mouseover', () => {
-            info.innerHTML = 'QQ | 点击复制qq号';
+            info.innerHTML = 'QQ | 点击复制QQ号';
         })
         bilibiliIcon.addEventListener('mouseover', () => {
             info.innerHTML = 'bilibili';
@@ -146,12 +162,15 @@ window.addEventListener('load', () => {
         // TODO 复制成功的反馈
         wechatIcon.addEventListener('click', () => {
             copyToCilpboard('WeChat: sakuramemory');
+            info.innerHTML = '已复制微信号😊';
         })
         qqIcon.addEventListener('click', () => {
             copyToCilpboard('QQ: 347670115');
+            info.innerHTML = '已复制QQ号😊';
         })
         mailIcon.addEventListener('click', () => {
             copyToCilpboard('ceynri@gmail.com');
+            info.innerHTML = '已复制😊';
         })
 
     })();

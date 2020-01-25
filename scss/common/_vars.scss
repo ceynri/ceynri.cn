@@ -21,10 +21,12 @@ $textShadow: 0 0 12px rgba(0, 0, 0, .6);
 $lineWidth: 20px;
 $lineHeight: 140px;
 
-
 // 边框与边距
 $bodyBorderWidth: 8px;
 $minimumMargin: 32px;
 
 // 视差（投影距离）
 $parallax: 10px;
+
+// 自我介绍部分的最大尺寸
+$aboutMeSize: 400px;

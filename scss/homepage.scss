@@ -44,9 +44,6 @@ body {
         /* 视差滚动 */
         transform-style: preserve-3d;
         perspective: $parallax;
-
-        [data-scroll] {
-        }
     }
 }
 

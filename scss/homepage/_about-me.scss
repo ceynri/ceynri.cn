@@ -4,7 +4,7 @@
     $frame-marign: $bodyBorderWidth + $minimumMargin;
     // 主体宽度
     $frame-width: calc(100vw - #{$frame-marign} * 2);
-    $frame-max-width: 400px;
+    $frame-max-width: $aboutMeSize;
     // 内容边距
     $padding-width: 24px;
     // 主题边框宽度
@@ -17,12 +17,15 @@
 
     // 自适应页面，页面宽度较小时也能保持正方形边框
     width: $frame-width;
-    max-width: $frame-max-width;
     height: $frame-width;
-    max-height: $frame-max-width;
+
+    max: {
+        width: $frame-max-width;
+        height: $frame-max-width;
+    }
 
     padding: $padding-width;
-    border: $border-width #823 solid;
+    border: $border-width $themeColor solid;
 
     display: flex;
     flex-direction: column;
@@ -44,7 +47,7 @@
     }
 
 
-    %intro-basic {
+    %intro {
         opacity: 0;
         transition: all .5s ease;
 
@@ -70,7 +73,7 @@
         }
     }
 
-    %qr-code-basic {
+    %qrcode {
         // 二维码大小
         $qr-size: $frame-max-width - $frame-padding * 2;
 
@@ -84,11 +87,17 @@
     }
 
     .intro {
-        &-container>* {
-            @extend %intro-basic;
+        &-container {
+            &>* {
+                @extend %intro;
+            }
 
-            img {
-                @extend %qr-code-basic;
+            .qrcode-wrapper {
+                @extend %qrcode;
+
+                img {
+                    width: 100%;
+                }
             }
         }
 
@@ -96,7 +105,6 @@
             pointer-events: initial;
             opacity: 1;
         }
-
     }
 
     .icon {
@@ -126,6 +134,7 @@
                 flex: auto;
                 opacity: 0;
                 transition: opacity .5s .2s ease;
+                transition: color .5s ease;
             }
         }
 
@@ -146,7 +155,7 @@
 
         &-wrapper {
             display: inline-block;
-            margin-right: $icon-size;
+            margin-right: $icon-size / 1.414;
             font-size: $icon-size;
             line-height: 1;
             position: relative;
