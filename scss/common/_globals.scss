@@ -41,3 +41,10 @@ a {
     background-color: $themeColor;
     box-shadow: 0 0 8px #000;
 }
+
+.margin-wrapper {
+    margin: {
+        left: $minimumMargin;
+        right: $minimumMargin;
+    }
+}

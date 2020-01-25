@@ -55,6 +55,11 @@ a {
           box-shadow: 0 0 8px #000;
 }
 
+.margin-wrapper {
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
 body {
   /* IE10/Edge 去除滚动条 */
   -ms-overflow-style: none;
@@ -105,10 +110,6 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
-.margin-wrapper {
-  margin: 0 64px;
-}
-
 .background {
   width: 100%;
   height: 120vh;
@@ -123,11 +124,6 @@ body::-webkit-scrollbar {
 /*
  * banner
  */
-.banner {
-  position: relative;
-  top: 0;
-}
-
 .banner-wrapper {
   height: calc(100vh - 16px);
   min-height: 300px;
@@ -137,6 +133,9 @@ body::-webkit-scrollbar {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .banner .title-block {
@@ -242,12 +241,12 @@ body::-webkit-scrollbar {
   font: 24px "Circular Bold", "PingFang SC Bold";
 }
 
-.content {
+.content-wrapper {
   margin-top: 300px;
   background-color: rgba(14, 12, 12, 0.9);
 }
 
-.content::before {
+.content-wrapper::before {
   content: '';
   display: block;
   width: 100%;
@@ -262,8 +261,8 @@ body::-webkit-scrollbar {
  * about me
  */
 .about-me {
-  width: calc(100vw - 72px * 2);
-  height: calc(100vw - 72px * 2);
+  width: calc(100vw - 40px * 2);
+  height: calc(100vw - 40px * 2);
   max-width: 400px;
   max-height: 400px;
   padding: 24px;
@@ -320,7 +319,7 @@ body::-webkit-scrollbar {
   position: absolute;
   bottom: 24px;
   left: 24px;
-  width: calc(100vw - (108px) * 2);
+  width: calc(100vw - (76px) * 2);
   max-width: 328px;
   max-height: 328px;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
@@ -334,8 +333,8 @@ body::-webkit-scrollbar {
 }
 
 .about-me .intro-container .qrcode-wrapper {
-  width: calc(100vw - (108px) * 2);
-  height: calc(100vw - (108px) * 2);
+  width: calc(100vw - (76px) * 2);
+  height: calc(100vw - (76px) * 2);
   max-width: 328px;
   max-height: 328px;
 }

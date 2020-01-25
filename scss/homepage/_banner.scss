@@ -1,12 +1,10 @@
 .banner {
-    position: relative;
-    top: 0;
-
     &-wrapper {
         height: calc(100vh - #{$bodyBorderWidth * 2});
         min-height: 300px;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .title-block {

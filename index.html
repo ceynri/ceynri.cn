@@ -16,119 +16,123 @@
   <div class="body-border">
     <main class="body-window" id="bodyWindow">
       <div data-scroll>
-        <div class="banner">
-          <div class="center-wrapper">
-            <div class="banner-wrapper margin-wrapper">
-              <section class="title-block">
-                <header class="title">
-                  <h1>
-                    <span>Ceynri's</span>
-                    <span>Little</span>
-                    <span>Corner</span>
-                  </h1>
-                  <h2>山风的小角落</h2>
-                </header>
 
-                <div class="date" id="date">
-                  <time class="month">27</time><br>
-                  <div class="date-line"></div>
-                  <time class="day">27</time>
-                </div>
-              </section>
-              <!-- END title-block -->
-              <!-- <div class="bottom-line">
+        <!-- banner -->
+        <div class="banner-wrapper margin-wrapper">
+          <div class="banner">
+            <section class="title-block">
+              <header class="title">
+                <h1>
+                  <span>Ceynri's</span>
+                  <span>Little</span>
+                  <span>Corner</span>
+                </h1>
+                <h2>山风的小角落</h2>
+              </header>
+
+              <div class="date" id="date">
+                <time class="month">27</time><br>
+                <div class="date-line"></div>
+                <time class="day">27</time>
+              </div>
+            </section>
+            <!-- <div class="bottom-line">
                 <div class="text">Welcome</div>
               </div> -->
-            </div>
-            <!-- END one-page-wrapper -->
           </div>
-          <!-- END center-wrapper -->
         </div>
-        <!-- END banner -->
 
-        <div class="content">
+        <!-- content -->
+        <div class="content-wrapper">
 
-          <div class="center-wrapper">
-            <div class="about-me-wrapper margin-wrapper">
-              <section class="about-me">
-                <header class="about-me-header">
-                  <h1>
-                    About Me<br>
-                    关于我
-                  </h1>
-                </header>
-                <div id="introContainer" class="intro-container">
-                  <div class="intro-myself" id="introMyself">
-                    <p>一个大三在读学生</p>
-                    <p>喜欢任何具有设计感的事物</p>
-                  </div>
-                  <div class="intro-github" id="githubIntro">
-                    <p>https://github.com/ceynri</p>
-                    <p>点击按钮跳转</p>
-                  </div>
-                  <div class="intro-wechat qrcode-wrapper" id="wechatIntro">
-                    <img src="/assets/imgs/qrcode/wechat-qrcode.png" alt="ID: sakuramemory">
-                  </div>
-                  <div class="intro-qq qrcode-wrapper" id="qqIntro">
-                    <img src="/assets/imgs/qrcode/qq-qrcode.png" alt="account: 347670115">
-                  </div>
-                  <div class="intro-bilibili" id="bilibiliIntro">
-                    <p>@云岚P</p>
-                    <p>点击按钮访问个人空间</p>
-                  </div>
-                  <div class="intro-mail" id="mailIntro">
-                    <p>ceynri@gmail.com</p>
-                    <p>点击按钮复制</p>
-                  </div>
+          <!-- about-me -->
+          <div class="about-me-wrapper">
+            <section class="about-me">
+              <header class="about-me-header">
+                <h1>
+                  About Me<br>
+                  关于我
+                </h1>
+              </header>
+              <div id="introContainer" class="intro-container">
+                <div class="intro-myself" id="introMyself">
+                  <p>一个大三在读学生</p>
+                  <p>喜欢任何具有设计感的事物</p>
+                  <!-- TODO 向上滚动一定距离后改变文字内容 -->
                 </div>
-                <div class="icon-social" id='socialIcons'>
-                  <div class="icon-wrapper">
-                    <a href="https://github.com/ceynri"><i class="iconfont icon-github-line"></i></a>
-                    <svg class="icon-svg" aria-hidden="true">
-                      <use xlink:href="#icon-github"></use>
-                    </svg>
-                  </div>
-                  <div class="icon-wrapper">
-                    <i class="iconfont icon-wechat-line"></i>
-                    <svg class="icon-svg" aria-hidden="true">
-                      <use xlink:href="#icon-wechat"></use>
-                    </svg>
-                  </div>
-                  <div class="icon-wrapper">
-                    <i class="iconfont icon-qq-line"></i>
-                    <svg class="icon-svg" aria-hidden="true">
-                      <use xlink:href="#icon-qq"></use>
-                    </svg>
-                  </div>
-                  <div class="icon-wrapper">
-                    <a href="https://space.bilibili.com/937275"><i class="iconfont icon-bilibili-line"></i></a>
-                    <svg class="icon-svg" aria-hidden="true">
-                      <use xlink:href="#icon-bilibili"></use>
-                    </svg>
-                  </div>
-                  <div class="icon-wrapper">
-                    <i class="iconfont icon-mail-line"></i>
-                    <svg class="icon-svg" aria-hidden="true">
-                      <use xlink:href="#icon-gmail"></use>
-                    </svg>
-                  </div>
-                  <div class="info" id="introInfo"></div>
+                <div class="intro-github" id="githubIntro">
+                  <p>https://github.com/ceynri</p>
+                  <p>点击按钮跳转</p>
                 </div>
-              </section>
-            </div>
-            <!-- <div class="one-page-wrapper">
-            </div>
-            <div class="one-page-wrapper">
-            </div> -->
+                <div class="intro-wechat qrcode-wrapper" id="wechatIntro">
+                  <img src="/assets/imgs/qrcode/wechat-qrcode.png" alt="ID: sakuramemory">
+                </div>
+                <div class="intro-qq qrcode-wrapper" id="qqIntro">
+                  <img src="/assets/imgs/qrcode/qq-qrcode.png" alt="account: 347670115">
+                </div>
+                <div class="intro-bilibili" id="bilibiliIntro">
+                  <p>@云岚P</p>
+                  <p>点击按钮访问个人空间</p>
+                </div>
+                <div class="intro-mail" id="mailIntro">
+                  <p>ceynri@gmail.com</p>
+                  <p>点击按钮复制</p>
+                </div>
+              </div>
+              <div class="icon-social" id='socialIcons'>
+                <div class="icon-wrapper">
+                  <a href="https://github.com/ceynri"><i class="iconfont icon-github-line"></i></a>
+                  <svg class="icon-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                  </svg>
+                </div>
+                <div class="icon-wrapper">
+                  <i class="iconfont icon-wechat-line"></i>
+                  <svg class="icon-svg" aria-hidden="true">
+                    <use xlink:href="#icon-wechat"></use>
+                  </svg>
+                </div>
+                <div class="icon-wrapper">
+                  <i class="iconfont icon-qq-line"></i>
+                  <svg class="icon-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                  </svg>
+                </div>
+                <div class="icon-wrapper">
+                  <a href="https://space.bilibili.com/937275"><i class="iconfont icon-bilibili-line"></i></a>
+                  <svg class="icon-svg" aria-hidden="true">
+                    <use xlink:href="#icon-bilibili"></use>
+                  </svg>
+                </div>
+                <div class="icon-wrapper">
+                  <i class="iconfont icon-mail-line"></i>
+                  <svg class="icon-svg" aria-hidden="true">
+                    <use xlink:href="#icon-gmail"></use>
+                  </svg>
+                </div>
+                <div class="info" id="introInfo"></div>
+              </div>
+            </section>
           </div>
-          <!-- END homeone-page-wrapper -->
+
+          <!-- TODO fixed布局，横向刷出新的卡片（动效参考index6） -->
+          <!-- notes -->
+          <!-- articles -->
+          <!-- photos -->
+          <!-- works -->
+          <div class="one-page-wrapper">
+          </div>
+
+          <!-- TODO 结尾总结，接受改进建议的提醒 -->
         </div>
         <!-- END content -->
 
         <footer class="homepage-footer">
           <div class="copyright">2020 COPYRIGHT INC. ALL RIGHTS RESERVED.</div>
         </footer>
+
       </div>
+    </main>
 
     </main>
     <!-- END body-window -->

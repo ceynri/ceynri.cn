@@ -11,7 +11,7 @@
     }
 
     // 主体到页面边界的距离
-    $frame-marign: $bodyBorderWidth+$minimumMargin;
+    $frame-marign: $bodyBorderWidth + ($minimumMargin / 2);
     // 主体宽度
     $frame-width: calc(100vw - #{$frame-marign} * 2);
     $frame-max-width: $aboutMeSize;
