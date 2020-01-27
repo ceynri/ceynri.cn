@@ -72,19 +72,17 @@ body {
     z-index: -999;
 }
 
-/*
- * banner
- */
+// * banner
 @import 'homepage/banner';
 
 .content-wrapper {
-    // 遮罩过渡区域的高度
-    $height: $maskTransitionWidth;
-
-    margin-top: $height * 2;
+    margin-top: $gapWidth;
     background-color: $backGroundMaskColor;
 
     &::before {
+        // 遮罩过渡区域的高度
+        $height: $maskTransitionWidth;
+
         content: '';
         display: block;
         width: 100%;
@@ -95,10 +93,12 @@ body {
     }
 }
 
-/*
- * about me
- */
+// * about me
 @import 'homepage/about-me';
+
+// * works
+@import 'homepage/works';
+
 
 .one-page-wrapper {
     height: 100vh;

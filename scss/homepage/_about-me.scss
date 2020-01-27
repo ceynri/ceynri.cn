@@ -1,8 +1,8 @@
 // about-me
 .about-me {
     &-wrapper {
-        height: calc(100vh - #{$maskTransitionWidth});
-        min-height: $aboutMeSize * 1.5;
+        height: calc(100vmin - #{$maskTransitionWidth + $bodyBorderWidth * 2});
+        min-height: $aboutMeSize;
         padding-bottom: $maskTransitionWidth;
 
         display: flex;
@@ -11,19 +11,21 @@
     }
 
     // 主体到页面边界的距离
-    $frame-marign: $bodyBorderWidth + ($minimumMargin / 2);
+    $frame-marign: $bodyBorderWidth+($minimumMargin / 2);
     // 主体宽度
-    $frame-width: calc(100vw - #{$frame-marign} * 2);
+    $frame-width: calc(100vmin - #{$frame-marign} * 2);
     $frame-max-width: $aboutMeSize;
+
     // 内容边距
     $padding-width: 24px;
     // 主题边框宽度
     $border-width: 12px;
+
     // 主体外边界与内容之间的宽度
     $frame-padding: $border-width+$padding-width;
     // 内容宽度
-    $content-width: calc(100vw - (#{$frame-marign + $frame-padding}) * 2);
-    $content-max-width: $frame-max-width - $frame-padding * 2;
+    $content-width: calc(100vmin - (#{$frame-marign + $frame-padding}) * 2);
+    $content-max-width: calc(#{$frame-max-width} - #{$frame-padding * 2});
 
     // 自适应页面，页面宽度较小时也能保持正方形边框
     width: $frame-width;
@@ -44,7 +46,7 @@
     justify-content: space-between;
 
     // 用于为子元素提供参考字体大小
-    font-size: 24px;
+    font-size: $aboutMeFontSize;
 
     position: relative;
 
@@ -53,9 +55,9 @@
         flex-direction: column;
         text-shadow: $textShadow;
 
-        h1 {
+        h1,
+        h2 {
             font-size: 2em;
-            margin-bottom: .5em;
         }
     }
 
@@ -88,7 +90,7 @@
 
     %qrcode {
         // 二维码大小
-        $qr-size: $frame-max-width - $frame-padding * 2;
+        $qr-size: calc(#{$frame-max-width} - #{$frame-padding * 2});
 
         width: $content-width;
         height: $content-width;
@@ -121,12 +123,9 @@
     }
 
     .icon {
-        // 图标大小
-        $icon-size: 20px;
-
         &-social {
             position: absolute;
-            bottom: -($border-width + $icon-size * (1 + 1.414));
+            bottom: -($border-width + $iconSize * (1 + 1.414));
             left: 0;
 
             width: 100%;
@@ -135,14 +134,14 @@
 
             i {
                 display: inline;
-                font-size: $icon-size;
+                font-size: $iconSize;
                 cursor: pointer;
                 transition: opacity .5s ease;
             }
 
             .info {
-                height: $icon-size;
-                font-size: $icon-size * 0.75;
+                height: $iconSize;
+                font-size: $iconSize * 0.75;
                 color: $textColor * 0.75;
                 flex: auto;
                 opacity: 0;
@@ -152,8 +151,8 @@
         }
 
         &-svg {
-            width: $icon-size;
-            height: $icon-size;
+            width: $iconSize;
+            height: $iconSize;
             fill: currentColor;
             overflow: hidden;
 
@@ -168,8 +167,8 @@
 
         &-wrapper {
             display: inline-block;
-            margin-right: $icon-size / 1.414;
-            font-size: $icon-size;
+            margin-right: $iconSize / 1.414;
+            font-size: $iconSize;
             line-height: 1;
             position: relative;
         }

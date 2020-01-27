@@ -1,18 +1,17 @@
 .banner {
+    width: 100%;
+    max-width: $bannerWidth;
+
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
     &-wrapper {
         height: calc(100vh - #{$bodyBorderWidth * 2});
-        min-height: 300px;
+        min-height: $titleFontSize * 4;
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .title-block {
-        width: 100%;
-
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
     }
 
     .title {
@@ -28,7 +27,7 @@
 
             line-height: 1;
             text-align: right;
-            max-width: 600px;
+            max-width: 800px;
 
             span {
                 position: relative;

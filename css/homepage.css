@@ -37,7 +37,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
+h1, h2 {
   font-family: 'Circular Bold';
 }
 
@@ -77,14 +77,14 @@ body::-webkit-scrollbar {
 .body-border {
   width: 100vw;
   height: 100vh;
-  border: #eee 8px solid;
+  border: #eee 12px solid;
   overflow: hidden;
   position: fixed;
 }
 
 .body-window {
-  width: calc(100vw - 8px * 2);
-  height: calc(100vh - 8px * 2);
+  width: calc(100vw - 12px * 2);
+  height: calc(100vh - 12px * 2);
   position: fixed;
   overflow: hidden;
 }
@@ -121,25 +121,9 @@ body::-webkit-scrollbar {
   z-index: -999;
 }
 
-/*
- * banner
- */
-.banner-wrapper {
-  height: calc(100vh - 16px);
-  min-height: 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.banner .title-block {
+.banner {
   width: 100%;
+  max-width: 70vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -152,17 +136,31 @@ body::-webkit-scrollbar {
           justify-content: space-between;
 }
 
+.banner-wrapper {
+  height: calc(100vh - 24px);
+  min-height: 512px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .banner .title {
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
 .banner .title h1 {
-  font-size: 96px;
+  font-size: 128px;
   font-family: "Circular Bold", "PingFang SC Bold";
   font-weight: normal;
   line-height: 1;
   text-align: right;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .banner .title h1 span {
@@ -189,7 +187,7 @@ body::-webkit-scrollbar {
 .banner .title h2 {
   margin-top: .5em;
   text-align: right;
-  font-size: 32px;
+  font-size: 42.66667px;
   font-family: "Circular Bold", "PingFang SC Bold";
   font-weight: normal;
   position: relative;
@@ -206,7 +204,7 @@ body::-webkit-scrollbar {
 .banner .date {
   margin-right: .5em;
   position: relative;
-  font-size: 128px;
+  font-size: 170.66667px;
   font-family: "Circular Bold", "PingFang SC Bold";
   line-height: 100%;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
@@ -257,14 +255,11 @@ body::-webkit-scrollbar {
   z-index: -99;
 }
 
-/*
- * about me
- */
 .about-me {
-  width: calc(100vw - 40px * 2);
-  height: calc(100vw - 40px * 2);
-  max-width: 400px;
-  max-height: 400px;
+  width: calc(100vmin - 44px * 2);
+  height: calc(100vmin - 44px * 2);
+  max-width: 60vmin;
+  max-height: 60vmin;
   padding: 24px;
   border: 12px #823 solid;
   display: -webkit-box;
@@ -277,13 +272,13 @@ body::-webkit-scrollbar {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  font-size: 24px;
+  font-size: 28px;
   position: relative;
 }
 
 .about-me-wrapper {
-  height: calc(100vh - 150px);
-  min-height: 600px;
+  height: calc(100vmin - 174px);
+  min-height: 60vmin;
   padding-bottom: 150px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -307,9 +302,9 @@ body::-webkit-scrollbar {
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
-.about-me-header h1 {
+.about-me-header h1,
+.about-me-header h2 {
   font-size: 2em;
-  margin-bottom: .5em;
 }
 
 .about-me .intro-container > * {
@@ -319,9 +314,9 @@ body::-webkit-scrollbar {
   position: absolute;
   bottom: 24px;
   left: 24px;
-  width: calc(100vw - (76px) * 2);
-  max-width: 328px;
-  max-height: 328px;
+  width: calc(100vmin - (80px) * 2);
+  max-width: calc(60vmin - 72px);
+  max-height: calc(60vmin - 72px);
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
   pointer-events: none;
 }
@@ -333,10 +328,10 @@ body::-webkit-scrollbar {
 }
 
 .about-me .intro-container .qrcode-wrapper {
-  width: calc(100vw - (76px) * 2);
-  height: calc(100vw - (76px) * 2);
-  max-width: 328px;
-  max-height: 328px;
+  width: calc(100vmin - (80px) * 2);
+  height: calc(100vmin - (80px) * 2);
+  max-width: calc(60vmin - 72px);
+  max-height: calc(60vmin - 72px);
 }
 
 .about-me .intro-container .qrcode-wrapper img {
@@ -350,7 +345,7 @@ body::-webkit-scrollbar {
 
 .about-me .icon-social {
   position: absolute;
-  bottom: -60.28px;
+  bottom: -69.936px;
   left: 0;
   width: 100%;
   display: -webkit-box;
@@ -363,15 +358,15 @@ body::-webkit-scrollbar {
 
 .about-me .icon-social i {
   display: inline;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   -webkit-transition: opacity .5s ease;
   transition: opacity .5s ease;
 }
 
 .about-me .icon-social .info {
-  height: 20px;
-  font-size: 15px;
+  height: 24px;
+  font-size: 18px;
   color: #999999;
   -webkit-box-flex: 1;
       -ms-flex: auto;
@@ -384,8 +379,8 @@ body::-webkit-scrollbar {
 }
 
 .about-me .icon-svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   fill: currentColor;
   overflow: hidden;
   opacity: 0;
@@ -399,10 +394,93 @@ body::-webkit-scrollbar {
 
 .about-me .icon-wrapper {
   display: inline-block;
-  margin-right: 14.14427px;
-  font-size: 20px;
+  margin-right: 16.97313px;
+  font-size: 24px;
   line-height: 1;
   position: relative;
+}
+
+.works {
+  height: 60vh;
+  width: 100%;
+  padding-left: 5vw;
+  padding-right: 10vw;
+  line-height: 60vh;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.works-wrapper {
+  height: calc(100vh - 24px);
+  min-height: 53.33333vmin;
+  margin-top: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.works .work {
+  width: 40vmin;
+  height: 53.33333vmin;
+  max-width: 300px;
+  max-height: 400px;
+  line-height: initial;
+  margin-left: 15vw;
+  display: inline-block;
+  position: relative;
+}
+
+.works .work:nth-of-type(odd) {
+  vertical-align: top;
+}
+
+.works .work:nth-of-type(even) {
+  vertical-align: bottom;
+}
+
+.works .work-text {
+  display: block;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 99;
+}
+
+.works .work-title {
+  margin-left: -10%;
+  width: 100%;
+}
+
+.works .work-title h1, .works .work-title h2 {
+  font-size: 36px;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.works .work-tile {
+  width: 100%;
+  height: 100%;
+  background-color: #324;
+}
+
+.works .work.case-1 .work-tile {
+  background-color: #d8ad87;
+  border-radius: 1% 8% 8% 1%;
+  position: relative;
+}
+
+.works .work.case-1 .work-tile .bangage {
+  height: 100%;
+  width: 8%;
+  position: absolute;
+  top: 0;
+  right: 25%;
+  background-color: #009a61;
+  z-index: 1;
 }
 
 .one-page-wrapper {

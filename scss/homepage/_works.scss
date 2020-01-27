@@ -1,0 +1,106 @@
+.works {
+    &-wrapper {
+        height: calc(100vh - #{$bodyBorderWidth * 2});
+        min-height: $workHeight;
+        margin-top: $gapWidth;
+
+        display: flex;
+        align-items: center;
+    }
+
+    height: $worksHeight;
+    width: 100%;
+
+    padding: {
+        left: 5vw;
+        right: 10vw;
+    }
+
+    line-height: $worksHeight;
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    white-space: nowrap;
+
+    .work {
+        width: $workWidth;
+        height: $workHeight;
+
+        max: {
+            width: $workMaxWidth;
+            height: $workMaxHeight;
+        }
+
+        // 取消works的行高继承
+        line-height: initial;
+        // 取消匿名盒子
+
+        margin-left: 15vw;
+
+        display: inline-block;
+        position: relative;
+
+        &:nth-of-type(odd) {
+            vertical-align: top;
+        }
+
+        &:nth-of-type(even) {
+            vertical-align: bottom;
+        }
+
+        &-text {
+            display: block;
+            width: 100%;
+
+            position: absolute;
+            left: 0;
+            top: 50%;
+            z-index: 99;
+        }
+
+        &-title {
+            margin-left: -10%;
+            width: 100%;
+
+            %title {
+                font: {
+                    size: $workFontSize;
+                }
+
+                text-shadow: $textShadow;
+            }
+
+            h1 {
+                @extend %title;
+            }
+
+            h2 {
+                @extend %title;
+            }
+        }
+
+        &-tile {
+            width: 100%;
+            height: 100%;
+            background-color: #324;
+        }
+
+        &.case-1 .work-tile {
+            background-color: #d8ad87;
+            border-radius: 1% 8% 8% 1%;
+
+            position: relative;
+
+            .bangage {
+                height: 100%;
+                width: 8%;
+                position: absolute;
+                top: 0;
+                right: 25%;
+                background-color: #009a61;
+                z-index: 1;
+            }
+        }
+    }
+}

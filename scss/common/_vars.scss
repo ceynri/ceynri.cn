@@ -1,32 +1,65 @@
+// * globals
+
 // 背景图片
 //TODO 使用CSS变量，以便于js替换背景图片
 $backGroundImage: '/assets/imgs/background/72235081_p0.jpg';
 
-// 文本大小
-$titleFontSize: 96px;
+// 边框宽度
+$bodyBorderWidth: 12px;
 
-// 字体
+// 最小边距
+$minimumMargin: 64px;
+
+// * fonts
+
+// 文本阴影
+$textShadow: 0 0 12px rgba(0, 0, 0, .6);
+
+// 默认字体
 $defaultFont: 'PingFang SC',
 'Circular',
 'MircoSoft YaHei',
 Sans-serif;
 
+// banner字体
 $titleFont: 'Circular Bold',
 'PingFang SC Bold';
 
-// 文本阴影
-$textShadow: 0 0 12px rgba(0, 0, 0, .6);
+// banner文本大小
+$titleFontSize: 128px;
+
+// about me文本大小
+$aboutMeFontSize: 28px;
+
+// 图标大小
+$iconSize: 24px;
+
+// works文本大小
+$workFontSize: 36px;
+
+// * size
+
+// 每个部分之间的间隔宽度
+$gapWidth: 300px;
 
 // 装饰粗线的尺寸
 $lineWidth: 20px;
 $lineHeight: 140px;
 
-// 边框与边距
-$bodyBorderWidth: 8px;
-$minimumMargin: 64px;
+// banner最小宽度
+$bannerWidth: 70vw;
 
 // 遮罩过渡区域的宽度
 $maskTransitionWidth: 150px;
 
 // 自我介绍部分的最大尺寸
-$aboutMeSize: 400px;
+$aboutMeSize: 60vmin;
+
+// works尺寸
+$worksHeight: 60vh;
+
+// work尺寸
+$workWidth: 40vmin;
+$workMaxWidth: 300px;
+$workHeight: $workWidth * 4 / 3;
+$workMaxHeight: 400px;
