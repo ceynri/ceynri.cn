@@ -175,8 +175,8 @@
                 color: $textColor * 0.75;
                 flex: auto;
                 opacity: 0;
-                transition: opacity .5s .2s ease;
-                transition: color .5s ease;
+                transition: opacity .5s .2s,
+                    color .5s;
             }
         }
     }
