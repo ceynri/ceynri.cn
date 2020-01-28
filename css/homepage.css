@@ -398,10 +398,8 @@ body::-webkit-scrollbar {
       -ms-flex: auto;
           flex: auto;
   opacity: 0;
-  -webkit-transition: opacity .5s .2s ease;
-  transition: opacity .5s .2s ease;
-  -webkit-transition: color .5s ease;
-  transition: color .5s ease;
+  -webkit-transition: opacity .5s .2s, color .5s;
+  transition: opacity .5s .2s, color .5s;
 }
 
 .works {
