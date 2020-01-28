@@ -1,13 +1,13 @@
-.banner {
+.hero {
     width: 100%;
-    max-width: $bannerWidth;
+    max-width: $heroWidth;
 
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
 
     &-wrapper {
-        height: calc(100vh - #{$bodyBorderWidth * 2});
+        height: 100vh;
         min-height: $titleFontSize * 4;
         display: flex;
         align-items: center;

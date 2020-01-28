@@ -46,7 +46,7 @@ a {
   color: #ccc;
 }
 
-.banner .title h1 span:nth-child(1)::after, .banner .title h1 span:nth-child(2)::after, .banner .title h2::after, .banner .date .date-line, .banner .bottom-line, .line-guide {
+.hero .title h1 span:nth-child(1)::after, .hero .title h1 span:nth-child(2)::after, .hero .title h2::after, .hero .date .date-line, .hero .bottom-line, .line-guide {
   position: absolute;
   width: 20px;
   height: 140px;
@@ -74,17 +74,9 @@ body::-webkit-scrollbar {
   height: 0;
 }
 
-.body-border {
+.body-window {
   width: 100vw;
   height: 100vh;
-  border: #eee 12px solid;
-  overflow: hidden;
-  position: fixed;
-}
-
-.body-window {
-  width: calc(100vw - 12px * 2);
-  height: calc(100vh - 12px * 2);
   position: fixed;
   overflow: hidden;
 }
@@ -121,7 +113,7 @@ body::-webkit-scrollbar {
   z-index: -999;
 }
 
-.banner {
+.hero {
   width: 100%;
   max-width: 900px;
   display: -webkit-box;
@@ -136,8 +128,8 @@ body::-webkit-scrollbar {
           justify-content: space-between;
 }
 
-.banner-wrapper {
-  height: calc(100vh - 24px);
+.hero-wrapper {
+  height: 100vh;
   min-height: 384px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -150,11 +142,11 @@ body::-webkit-scrollbar {
           justify-content: center;
 }
 
-.banner .title {
+.hero .title {
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
-.banner .title h1 {
+.hero .title h1 {
   font-size: 96px;
   font-family: "Circular Bold", "PingFang SC";
   font-weight: normal;
@@ -163,12 +155,12 @@ body::-webkit-scrollbar {
   max-width: 6em;
 }
 
-.banner .title h1 span {
+.hero .title h1 span {
   position: relative;
   font-weight: normal;
 }
 
-.banner .title h1 span:nth-child(1)::after {
+.hero .title h1 span:nth-child(1)::after {
   content: '';
   top: -.6em;
   left: 1em;
@@ -176,7 +168,7 @@ body::-webkit-scrollbar {
           transform: rotate(60deg);
 }
 
-.banner .title h1 span:nth-child(2)::after {
+.hero .title h1 span:nth-child(2)::after {
   content: '';
   bottom: -.4em;
   right: 1.4em;
@@ -184,7 +176,7 @@ body::-webkit-scrollbar {
           transform: rotate(60deg);
 }
 
-.banner .title h2 {
+.hero .title h2 {
   margin-top: .5em;
   text-align: right;
   font-size: 32px;
@@ -193,7 +185,7 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
-.banner .title h2::after {
+.hero .title h2::after {
   content: '';
   bottom: -3em;
   right: 6em;
@@ -201,7 +193,7 @@ body::-webkit-scrollbar {
           transform: rotate(60deg);
 }
 
-.banner .date {
+.hero .date {
   margin-right: .5em;
   position: relative;
   font-size: 128px;
@@ -210,14 +202,14 @@ body::-webkit-scrollbar {
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
-.banner .date .date-line {
+.hero .date .date-line {
   top: 64px;
   left: 60px;
   -webkit-transform: rotate(60deg);
           transform: rotate(60deg);
 }
 
-.banner .bottom-line {
+.hero .bottom-line {
   width: 168px;
   height: 16px;
   bottom: -10%;
@@ -227,7 +219,7 @@ body::-webkit-scrollbar {
   z-index: 10;
 }
 
-.banner .bottom-line .text {
+.hero .bottom-line .text {
   position: absolute;
   bottom: 50%;
   -webkit-transform: translateY(50%);
@@ -256,8 +248,8 @@ body::-webkit-scrollbar {
 }
 
 .about-me {
-  width: calc(100vmin - 44px * 2);
-  height: calc(100vmin - 44px * 2);
+  width: calc(100vmin - 32px * 2);
+  height: calc(100vmin - 32px * 2);
   max-width: 60vmin;
   max-height: 60vmin;
   padding: 24px;
@@ -277,7 +269,7 @@ body::-webkit-scrollbar {
 }
 
 .about-me-wrapper {
-  height: calc(100vmin - 174px);
+  height: calc(100vmin - 150px);
   min-height: 60vmin;
   padding-bottom: 150px;
   display: -webkit-box;
@@ -314,7 +306,7 @@ body::-webkit-scrollbar {
   position: absolute;
   bottom: 24px;
   left: 24px;
-  width: calc(100vmin - (80px) * 2);
+  width: calc(100vmin - (68px) * 2);
   max-width: calc(60vmin - 72px);
   max-height: calc(60vmin - 72px);
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
@@ -328,8 +320,8 @@ body::-webkit-scrollbar {
 }
 
 .about-me .intro-container .qrcode-wrapper {
-  width: calc(100vmin - (80px) * 2);
-  height: calc(100vmin - (80px) * 2);
+  width: calc(100vmin - (68px) * 2);
+  height: calc(100vmin - (68px) * 2);
   max-width: calc(60vmin - 72px);
   max-height: calc(60vmin - 72px);
 }
@@ -415,7 +407,7 @@ body::-webkit-scrollbar {
 }
 
 .works-wrapper {
-  height: calc(100vh - 24px);
+  height: 100vh;
   min-height: 53.33333vmin;
   margin-top: 300px;
   display: -webkit-box;

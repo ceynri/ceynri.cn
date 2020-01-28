@@ -4,9 +4,6 @@
 //TODO 使用CSS变量，以便于js替换背景图片
 $backGroundImage: '/assets/imgs/background/72235081_p0.jpg';
 
-// 边框宽度
-$bodyBorderWidth: 12px;
-
 // 最小边距
 $minimumMargin: 64px;
 
@@ -21,11 +18,11 @@ $defaultFont: 'PingFang SC',
 'MircoSoft YaHei',
 Sans-serif;
 
-// banner字体
+// hero字体
 $titleFont: 'Circular Bold',
 'PingFang SC';
 
-// banner文本大小
+// hero文本大小
 $titleFontSize: 96px;
 
 // about me文本大小
@@ -46,8 +43,8 @@ $gapWidth: 300px;
 $lineWidth: 20px;
 $lineHeight: 140px;
 
-// banner最大宽度
-$bannerWidth: 900px;
+// hero最大宽度
+$heroWidth: 900px;
 
 // 遮罩过渡区域的宽度
 $maskTransitionWidth: 150px;

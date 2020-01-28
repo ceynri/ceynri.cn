@@ -21,19 +21,9 @@ body {
 }
 
 .body {
-    &-border {
+    &-window {
         width: 100vw;
         height: 100vh;
-        // TODO 使用js设置css变量给bodyBorder而非sass变量
-        border: #eee $bodyBorderWidth solid;
-        overflow: hidden;
-
-        position: fixed;
-    }
-
-    &-window {
-        width: calc(100vw - #{$bodyBorderWidth} * 2);
-        height: calc(100vh - #{$bodyBorderWidth} * 2);
         position: fixed;
 
         // 滚动
@@ -72,8 +62,8 @@ body {
     z-index: -999;
 }
 
-// * banner
-@import 'homepage/banner';
+// * hero
+@import 'homepage/hero';
 
 .content-wrapper {
     margin-top: $gapWidth;

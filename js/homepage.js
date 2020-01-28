@@ -12,7 +12,7 @@
 // ? (()=>{})()写法和{}写法的区别
 
 {
-    // * 设置banner日期
+    // * 设置hero日期
     const month = document.querySelector('.date .month');
     const day = document.querySelector('.date .day');
 

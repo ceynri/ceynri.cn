@@ -1,6 +1,6 @@
 .works {
     &-wrapper {
-        height: calc(100vh - #{$bodyBorderWidth * 2});
+        height: 100vh;
         min-height: $workHeight;
         margin-top: $gapWidth;
 

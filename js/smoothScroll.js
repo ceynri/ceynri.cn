@@ -17,8 +17,6 @@
             this.body = document.body;
             // 可滚动元素
             this.scrollElem = document.querySelector('div[data-scroll]');
-            // bodyBorder的边框宽度
-            this.borderWidth;
             // 滚动时要改变的属性
             this.renderedVal = {
                 // 现值与目标值
@@ -41,15 +39,11 @@
         }
 
         init() {
-            // * 获得borderWidth
-            const bodyBorder = document.getElementsByClassName('body-border')[0];
-            this.borderWidth = getComputedStyle(bodyBorder, null).getPropertyValue('border-top-width'); // 这里如果使用border-width，会产生在firefox里没有值的bug
-            this.borderWidth = parseInt(this.borderWidth.split('px')[0]);
         }
 
         setSize() {
             // * 设置主体的高度
-            this.body.style.height = `${this.scrollElem.scrollHeight + this.borderWidth * 2 - 1}px`;
+            this.body.style.height = `${this.scrollElem.scrollHeight}px`;
             // 减1是为了保证浏览器放缩带来的误差的安全
         }
 

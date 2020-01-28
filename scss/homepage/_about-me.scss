@@ -1,7 +1,7 @@
 // about-me
 .about-me {
     &-wrapper {
-        height: calc(100vmin - #{$maskTransitionWidth + $bodyBorderWidth * 2});
+        height: calc(100vmin - #{$maskTransitionWidth});
         min-height: $aboutMeSize;
         padding-bottom: $maskTransitionWidth;
 
@@ -11,7 +11,7 @@
     }
 
     // 主体到页面边界的距离
-    $frame-marign: $bodyBorderWidth+($minimumMargin / 2);
+    $frame-marign: $minimumMargin / 2;
     // 主体宽度
     $frame-width: calc(100vmin - #{$frame-marign} * 2);
     $frame-max-width: $aboutMeSize;
