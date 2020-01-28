@@ -23,10 +23,10 @@ Sans-serif;
 
 // banner字体
 $titleFont: 'Circular Bold',
-'PingFang SC Bold';
+'PingFang SC';
 
 // banner文本大小
-$titleFontSize: 128px;
+$titleFontSize: 96px;
 
 // about me文本大小
 $aboutMeFontSize: 28px;
@@ -46,8 +46,8 @@ $gapWidth: 300px;
 $lineWidth: 20px;
 $lineHeight: 140px;
 
-// banner最小宽度
-$bannerWidth: 70vw;
+// banner最大宽度
+$bannerWidth: 900px;
 
 // 遮罩过渡区域的宽度
 $maskTransitionWidth: 150px;

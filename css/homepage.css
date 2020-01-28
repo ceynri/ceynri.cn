@@ -123,7 +123,7 @@ body::-webkit-scrollbar {
 
 .banner {
   width: 100%;
-  max-width: 70vw;
+  max-width: 900px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -138,7 +138,7 @@ body::-webkit-scrollbar {
 
 .banner-wrapper {
   height: calc(100vh - 24px);
-  min-height: 512px;
+  min-height: 384px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -155,12 +155,12 @@ body::-webkit-scrollbar {
 }
 
 .banner .title h1 {
-  font-size: 128px;
-  font-family: "Circular Bold", "PingFang SC Bold";
+  font-size: 96px;
+  font-family: "Circular Bold", "PingFang SC";
   font-weight: normal;
   line-height: 1;
   text-align: right;
-  max-width: 800px;
+  max-width: 6em;
 }
 
 .banner .title h1 span {
@@ -187,8 +187,8 @@ body::-webkit-scrollbar {
 .banner .title h2 {
   margin-top: .5em;
   text-align: right;
-  font-size: 42.66667px;
-  font-family: "Circular Bold", "PingFang SC Bold";
+  font-size: 32px;
+  font-family: "Circular Bold", "PingFang SC";
   font-weight: normal;
   position: relative;
 }
@@ -204,8 +204,8 @@ body::-webkit-scrollbar {
 .banner .date {
   margin-right: .5em;
   position: relative;
-  font-size: 170.66667px;
-  font-family: "Circular Bold", "PingFang SC Bold";
+  font-size: 128px;
+  font-family: "Circular Bold", "PingFang SC";
   line-height: 100%;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
@@ -236,7 +236,7 @@ body::-webkit-scrollbar {
   text-align: center;
   text-transform: uppercase;
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-  font: 24px "Circular Bold", "PingFang SC Bold";
+  font: 24px "Circular Bold", "PingFang SC";
 }
 
 .content-wrapper {
