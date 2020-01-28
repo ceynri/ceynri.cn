@@ -21,7 +21,10 @@
     overflow-x: scroll;
     overflow-y: hidden;
 
+    // 禁止换行
     white-space: nowrap;
+    // 取消后面跟随的空格
+    word-spacing: -4px;
 
     .work {
         width: $workWidth;
@@ -34,7 +37,9 @@
 
         // 取消works的行高继承
         line-height: initial;
-        // 取消匿名盒子
+        // 取消父元素word-spacing
+        word-spacing: initial;
+
 
         margin-left: 15vw;
 

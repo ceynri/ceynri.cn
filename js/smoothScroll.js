@@ -45,7 +45,6 @@
             const bodyBorder = document.getElementsByClassName('body-border')[0];
             this.borderWidth = getComputedStyle(bodyBorder, null).getPropertyValue('border-top-width'); // 这里如果使用border-width，会产生在firefox里没有值的bug
             this.borderWidth = parseInt(this.borderWidth.split('px')[0]);
-            console.log(this.borderWidth);
         }
 
         setSize() {

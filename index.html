@@ -7,14 +7,18 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href="css/homepage.css">
+  <!-- Iconfont 字体 -->
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1611839_m36ved8vkoc.css">
   <script src="//at.alicdn.com/t/font_1611839_m36ved8vkoc.js"></script>
+  <!-- TweenLite.js -->
+  <script src="/js/TweenLite.js"></script>
+  <script src="/js/CSSPlugin.js"></script>
   <title>山风的小角落</title>
 </head>
 
 <body>
   <div class="body-border">
-    <main class="body-window" id="bodyWindow">
+    <main class="body-window">
       <div data-scroll>
 
         <!-- TODO 改名为hero -->
@@ -30,7 +34,7 @@
               <h2>山风的小角落</h2>
             </header>
 
-            <div class="date" id="date">
+            <div class="date">
               <time class="month">27</time><br>
               <div class="date-line"></div>
               <time class="day">27</time>
@@ -51,63 +55,65 @@
                 <h1>About Me</h1>
                 <h2>关于我</h2>
               </header>
-              <div id="introContainer" class="intro-container">
-                <div class="intro-myself" id="introMyself">
+              <div class="intro-container">
+                <div class="intro-myself">
                   <p>一个大三在读学生</p>
                   <p>喜欢任何具有设计感的事物</p>
                   <!-- TODO 向上滚动一定距离后改变文字内容 -->
                 </div>
-                <div class="intro-github" id="githubIntro">
+                <div class="intro-github">
                   <p>https://github.com/ceynri</p>
                   <p>点击按钮跳转</p>
                 </div>
-                <div class="intro-wechat qrcode-wrapper" id="wechatIntro">
+                <div class="intro-wechat qrcode-wrapper">
                   <img src="/assets/imgs/qrcode/wechat-qrcode.png" alt="ID: sakuramemory">
                 </div>
-                <div class="intro-qq qrcode-wrapper" id="qqIntro">
+                <div class="intro-qq qrcode-wrapper">
                   <img src="/assets/imgs/qrcode/qq-qrcode.png" alt="account: 347670115">
                 </div>
-                <div class="intro-bilibili" id="bilibiliIntro">
+                <div class="intro-bilibili">
                   <p>@云岚P</p>
                   <p>点击按钮访问个人空间</p>
                 </div>
-                <div class="intro-mail" id="mailIntro">
+                <div class="intro-mail">
                   <p>ceynri@gmail.com</p>
                   <p>点击按钮复制</p>
                 </div>
               </div>
-              <div class="icon-social" id='socialIcons'>
-                <div class="icon-wrapper">
-                  <a href="https://github.com/ceynri"><i class="iconfont icon-github-line"></i></a>
-                  <svg class="icon-svg" aria-hidden="true">
-                    <use xlink:href="#icon-github"></use>
-                  </svg>
+              <div class="switch-bar">
+                <div class="social-icons">
+                  <div class="icon-wrapper">
+                    <a href="https://github.com/ceynri"><i class="iconfont icon-github-line"></i></a>
+                    <svg class="icon-svg" aria-hidden="true">
+                      <use xlink:href="#icon-github"></use>
+                    </svg>
+                  </div>
+                  <div class="icon-wrapper">
+                    <i class="iconfont icon-wechat-line"></i>
+                    <svg class="icon-svg" aria-hidden="true">
+                      <use xlink:href="#icon-wechat"></use>
+                    </svg>
+                  </div>
+                  <div class="icon-wrapper">
+                    <i class="iconfont icon-qq-line"></i>
+                    <svg class="icon-svg" aria-hidden="true">
+                      <use xlink:href="#icon-qq"></use>
+                    </svg>
+                  </div>
+                  <div class="icon-wrapper">
+                    <a href="https://space.bilibili.com/937275"><i class="iconfont icon-bilibili-line"></i></a>
+                    <svg class="icon-svg" aria-hidden="true">
+                      <use xlink:href="#icon-bilibili"></use>
+                    </svg>
+                  </div>
+                  <div class="icon-wrapper">
+                    <i class="iconfont icon-mail-line"></i>
+                    <svg class="icon-svg" aria-hidden="true">
+                      <use xlink:href="#icon-gmail"></use>
+                    </svg>
+                  </div>
                 </div>
-                <div class="icon-wrapper">
-                  <i class="iconfont icon-wechat-line"></i>
-                  <svg class="icon-svg" aria-hidden="true">
-                    <use xlink:href="#icon-wechat"></use>
-                  </svg>
-                </div>
-                <div class="icon-wrapper">
-                  <i class="iconfont icon-qq-line"></i>
-                  <svg class="icon-svg" aria-hidden="true">
-                    <use xlink:href="#icon-qq"></use>
-                  </svg>
-                </div>
-                <div class="icon-wrapper">
-                  <a href="https://space.bilibili.com/937275"><i class="iconfont icon-bilibili-line"></i></a>
-                  <svg class="icon-svg" aria-hidden="true">
-                    <use xlink:href="#icon-bilibili"></use>
-                  </svg>
-                </div>
-                <div class="icon-wrapper">
-                  <i class="iconfont icon-mail-line"></i>
-                  <svg class="icon-svg" aria-hidden="true">
-                    <use xlink:href="#icon-gmail"></use>
-                  </svg>
-                </div>
-                <div class="info" id="introInfo"></div>
+                <div class="icon-info"></div>
               </div>
             </section>
           </div>
@@ -127,7 +133,8 @@
                 <figure class="work-tile">
                   <div class="bangage"></div>
                 </figure>
-              </article><article class="work case-2">
+              </article>
+              <article class="work case-2">
                 <div class="work-text">
                   <header class="work-title">
                     <h2>Demos</h2>
@@ -136,7 +143,8 @@
                 </div>
                 <figure class="work-tile">
                 </figure>
-              </article><article class="work case-more">
+              </article>
+              <article class="work case-more">
                 <div class="work-text">
                   <header class="work-title">
                     <h2>more...</h2>
@@ -171,11 +179,14 @@
     <!-- END body-window -->
   </div>
 
-  <div class="line-guide" id="guideLine"><i class="iconfont icon-down-arrow"></i></div>
+  <div class="line-guide"><i class="iconfont icon-down-arrow"></i></div>
   <div class="background"></div>
+  <div class="cursor"></div>
 
   <script src="js/homepage.js"></script>
   <script src="js/smoothScroll.js"></script>
+  <script src="/js/cursor.js"></script>
+
 </body>
 
 </html>

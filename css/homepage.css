@@ -343,7 +343,7 @@ body::-webkit-scrollbar {
   opacity: 1;
 }
 
-.about-me .icon-social {
+.about-me .switch-bar {
   position: absolute;
   bottom: -69.936px;
   left: 0;
@@ -351,12 +351,24 @@ body::-webkit-scrollbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
-.about-me .icon-social i {
+.about-me .switch-bar .social-icons {
+  display: inline-block;
+  height: 24px;
+  font-size: 0;
+  white-space: nowrap;
+}
+
+.about-me .switch-bar .icon-wrapper {
+  display: inline-block;
+  margin-right: 16.97313px;
+  font-size: 24px;
+  line-height: 1;
+  position: relative;
+}
+
+.about-me .switch-bar .icon-wrapper i {
   display: inline;
   font-size: 24px;
   cursor: pointer;
@@ -364,21 +376,7 @@ body::-webkit-scrollbar {
   transition: opacity .5s ease;
 }
 
-.about-me .icon-social .info {
-  height: 24px;
-  font-size: 18px;
-  color: #999999;
-  -webkit-box-flex: 1;
-      -ms-flex: auto;
-          flex: auto;
-  opacity: 0;
-  -webkit-transition: opacity .5s .2s ease;
-  transition: opacity .5s .2s ease;
-  -webkit-transition: color .5s ease;
-  transition: color .5s ease;
-}
-
-.about-me .icon-svg {
+.about-me .switch-bar .icon-svg {
   width: 24px;
   height: 24px;
   fill: currentColor;
@@ -392,12 +390,18 @@ body::-webkit-scrollbar {
   transition: opacity .5s ease;
 }
 
-.about-me .icon-wrapper {
-  display: inline-block;
-  margin-right: 16.97313px;
-  font-size: 24px;
-  line-height: 1;
-  position: relative;
+.about-me .switch-bar .icon-info {
+  height: 24px;
+  font-size: 18px;
+  color: #999999;
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+  opacity: 0;
+  -webkit-transition: opacity .5s .2s ease;
+  transition: opacity .5s .2s ease;
+  -webkit-transition: color .5s ease;
+  transition: color .5s ease;
 }
 
 .works {
@@ -409,6 +413,7 @@ body::-webkit-scrollbar {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  word-spacing: -4px;
 }
 
 .works-wrapper {
@@ -429,6 +434,7 @@ body::-webkit-scrollbar {
   max-width: 300px;
   max-height: 400px;
   line-height: initial;
+  word-spacing: initial;
   margin-left: 15vw;
   display: inline-block;
   position: relative;
@@ -551,5 +557,18 @@ body::-webkit-scrollbar {
   font-size: 12px;
   color: #333;
   text-align: center;
+}
+
+.cursor {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px black solid;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
 }
 /*# sourceMappingURL=homepage.css.map */

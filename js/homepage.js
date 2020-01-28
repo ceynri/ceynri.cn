@@ -11,9 +11,8 @@
 
 (() => {
     // * 设置banner日期
-    const date = document.getElementById('date');
-    let month = date.getElementsByClassName('month')[0];
-    let day = date.getElementsByClassName('day')[0];
+    let month = document.querySelector('.date .month');
+    let day = document.querySelector('.date .day');
 
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth() + 1;
@@ -45,7 +44,7 @@
         return scrollbarWidth;
     }
 
-    let bodyBorder = document.getElementsByClassName('body-border')[0];
+    let bodyBorder = document.querySelector('.body-border');
     bodyBorder.style.border = `#eee ${getScrollbarWidth()} solid`;
 })();
 
@@ -54,9 +53,9 @@ window.addEventListener('load', () => {
     // ? (()=>{})()写法和{}写法的区别
     (() => {
         // * 监听滚动，实现视差滚动
-        const bodyWindow = document.getElementById('bodyWindow');
-        let titleBlock = bodyWindow.getElementsByClassName('title-block')[0];
-        let banner = bodyWindow.getElementsByClassName('banner')[0];
+        const bodyWindow = document.querySelector('.body-window');
+        let titleBlock = bodyWindow.querySelector('.title-block');
+        let banner = bodyWindow.querySelector('.banner');
 
         bodyWindow.addEventListener('scroll', () => {
             let bannerBound = banner.getBoundingClientRect();
@@ -86,13 +85,14 @@ window.addEventListener('load', () => {
             document.body.removeChild(strWrapper);
         };
 
-        let intro = document.getElementById('introMyself');
-        let info = document.getElementById('introInfo');
+        let intro = document.querySelector('.intro-myself');
+        // TODO social-icon包裹 info改名
+        let info = document.querySelector('.icon-info');
         let infoColor = getComputedStyle(info, null).getPropertyValue('color');
         let infoClickedColor = '#ffc83d';
 
-        let iconWrappers = document.getElementsByClassName('icon-wrapper');
-        let introContainer = document.getElementById('introContainer');
+        let iconWrappers = document.querySelectorAll('.icon-wrapper');
+        let introContainer = document.querySelector('.intro-container');
 
         for (let i = 0; i < iconWrappers.length; i++) {
             let wrapper = iconWrappers[i];
@@ -134,11 +134,11 @@ window.addEventListener('load', () => {
             });
         }
 
-        let githubIcon = document.getElementsByClassName('icon-github-line')[0];
-        let wechatIcon = document.getElementsByClassName('icon-wechat-line')[0];
-        let qqIcon = document.getElementsByClassName('icon-qq-line')[0];
-        let bilibiliIcon = document.getElementsByClassName('icon-bilibili-line')[0];
-        let mailIcon = document.getElementsByClassName('icon-mail-line')[0];
+        let githubIcon = document.querySelector('.icon-github-line');
+        let wechatIcon = document.querySelector('.icon-wechat-line');
+        let qqIcon = document.querySelector('.icon-qq-line');
+        let bilibiliIcon = document.querySelector('.icon-bilibili-line');
+        let mailIcon = document.querySelector('.icon-mail-line');
 
         // over
         // TODO 改为大字背景
@@ -177,8 +177,8 @@ window.addEventListener('load', () => {
 
     (() => {
         // * 新页面从新标签页打开
-        let socIcons = document.getElementById('socialIcons');
-        let aTags = socIcons.getElementsByTagName('a');
+        let socIcons = document.querySelector('.social-icons');
+        let aTags = socIcons.querySelectorAll('a');
         for (let i = 0; i < aTags.length; i++) {
             aTags[i].target = '_blank';
         }
@@ -186,7 +186,7 @@ window.addEventListener('load', () => {
 
     (() => {
         // * 点击guideLine滚动页面
-        let guideLine = document.getElementById('guideLine');
+        let guideLine = document.querySelector('.guide-line');
         guideLine.addEventListener('click', () => {
             // pass
         })

@@ -122,24 +122,54 @@
         }
     }
 
-    .icon {
-        &-social {
-            position: absolute;
-            bottom: -($border-width + $iconSize * (1 + 1.414));
-            left: 0;
+    .switch-bar {
+        position: absolute;
+        bottom: -($border-width + $iconSize * (1 + 1.414));
+        left: 0;
 
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
+        width: 100%;
+        display: flex;
 
-            i {
-                display: inline;
+        .social-icons {
+            display: inline-block;
+            height: $iconSize;
+
+            font-size: 0;
+            white-space: nowrap;
+        }
+
+        .icon {
+            &-wrapper {
+                display: inline-block;
+                margin-right: $iconSize / 1.414;
                 font-size: $iconSize;
-                cursor: pointer;
+                line-height: 1;
+                position: relative;
+
+                i {
+                    display: inline;
+                    font-size: $iconSize;
+                    cursor: pointer;
+                    transition: opacity .5s ease;
+                }
+            }
+
+            &-svg {
+                width: $iconSize;
+                height: $iconSize;
+                fill: currentColor;
+                overflow: hidden;
+
+                opacity: 0;
+                position: absolute;
+                left: 0;
+                top: 0;
+                pointer-events: none;
+
                 transition: opacity .5s ease;
             }
 
-            .info {
+            &-info {
                 height: $iconSize;
                 font-size: $iconSize * 0.75;
                 color: $textColor * 0.75;
@@ -148,29 +178,6 @@
                 transition: opacity .5s .2s ease;
                 transition: color .5s ease;
             }
-        }
-
-        &-svg {
-            width: $iconSize;
-            height: $iconSize;
-            fill: currentColor;
-            overflow: hidden;
-
-            opacity: 0;
-            position: absolute;
-            left: 0;
-            top: 0;
-            pointer-events: none;
-
-            transition: opacity .5s ease;
-        }
-
-        &-wrapper {
-            display: inline-block;
-            margin-right: $iconSize / 1.414;
-            font-size: $iconSize;
-            line-height: 1;
-            position: relative;
         }
     }
 }
