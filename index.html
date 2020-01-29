@@ -12,6 +12,7 @@
   <script src="//at.alicdn.com/t/font_1611839_m36ved8vkoc.js"></script>
   <!-- TweenLite.js -->
   <script src="/js/lib/TweenLite.js"></script>
+  <script src="/js/lib/EasePack.js"></script>
   <script src="/js/lib/CSSPlugin.js"></script>
   <title>山风的小角落</title>
 </head>
@@ -189,9 +190,24 @@
   <div class="line-guide"><i class="iconfont icon-down-arrow"></i></div>
   <div class="background"></div>
 
-  <div class="cursor cursor-inner"></div>
-  <div class="cursor cursor-outer"></div>
+  <div class="cursor-inner-box">
+    <div class="cursor-wrapper">
+      <div class="cursor point"></div>
+    </div>
+    <div class="cursor-wrapper">
+      <div class="cursor link-icon"></div>
+    </div>
+    <div class="cursor-wrapper">
+      <div class="cursor zoom-in"></div>
+    </div>
+  </div>
+  <div class="cursor-outer-box">
+    <div class="cursor-wrapper">
+      <div class="cursor normal"></div>
+    </div>
+  </div>
 
+  <!-- SCRIPT -->
   <script src="/js/homepage.js"></script>
   <script src="/js/aboutMe.js"></script>
   <script src="/js/smoothScroll.js"></script>

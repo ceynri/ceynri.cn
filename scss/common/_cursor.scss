@@ -1,22 +1,75 @@
 .cursor {
-    position: fixed;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-    border-radius: 50%;
+    &-wrapper {
+        // wrapper只负责居中布局
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
 
-    &-outer {
-        width: 30px;
-        height: 30px;
-        border: 1px solid var(--cursorColor);
-        z-index: 12000;
-        opacity: 0.75;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    &-inner {
-        width: 10px;
-        height: 10px;
-        z-index: 11000;
-        background: var(--cursorColor);
+    &-outer-box {
+        width: 150px;
+        height: 150px;
+
+        position: fixed;
+        pointer-events: none;
+        z-index: 15000;
+
+        .normal {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--cursorColor);
+            border-radius: 50%;
+            opacity: 0.75;
+            // 注：在CSS中不能使用transform属性，因为TweenLite的动画会把它覆盖掉
+        }
+    }
+
+    &-inner-box {
+        width: 30px;
+        height: 30px;
+
+        position: fixed;
+        pointer-events: none;
+        z-index: 16000;
+
+        .point {
+            width: 10px;
+            height: 10px;
+
+            background: var(--cursorColor);
+            border-radius: 50%;
+        }
+
+        // TODO 箭头
+
+        .zoom-in {
+            width: 20px;
+            height: 20px;
+            position: relative;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                left: 10px;
+                height: 20px;
+                width: 1px;
+                background: var(--cursorColor);
+            }
+
+            &::before {
+                transform: rotate(-45deg);
+            }
+
+            &::after {
+                transform: rotate(45deg);
+            }
+        }
     }
 }
