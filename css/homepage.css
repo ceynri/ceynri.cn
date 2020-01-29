@@ -1,4 +1,8 @@
 @charset "UTF-8";
+:root {
+  --color-cursor: white;
+}
+
 @font-face {
   font-family: 'Circular Bold';
   src: url("/assets/fonts/Circular-Bold.woff2.ttf");
@@ -35,9 +39,18 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: none;
 }
 
-h1, h2 {
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+h1,
+h2 {
   font-family: 'Circular Bold';
 }
 
@@ -58,20 +71,6 @@ a {
 .margin-wrapper {
   margin-left: 64px;
   margin-right: 64px;
-}
-
-body {
-  /* IE10/Edge 去除滚动条 */
-  -ms-overflow-style: none;
-  /* firefox 64 滚动条透明化 */
-  scrollbar-color: transparent transparent;
-  /* firefox 64 去除滚动条 */
-  scrollbar-width: none;
-}
-
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 .body-window {
@@ -337,7 +336,7 @@ body::-webkit-scrollbar {
 
 .about-me .switch-bar {
   position: absolute;
-  bottom: -69.936px;
+  bottom: -72px;
   left: 0;
   width: 100%;
   display: -webkit-box;
@@ -347,28 +346,34 @@ body::-webkit-scrollbar {
 
 .about-me .switch-bar .social-icons {
   display: inline-block;
-  height: 24px;
+  height: 100%;
   font-size: 0;
   white-space: nowrap;
 }
 
-.about-me .switch-bar .icon-wrapper {
+.about-me .switch-bar .social-icons .icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 24px;
+  width: 24px;
+}
+
+.about-me .switch-bar .social-icons .icon-wrapper {
   display: inline-block;
-  margin-right: 16.97313px;
-  font-size: 24px;
-  line-height: 1;
+  height: 48px;
+  width: 48px;
   position: relative;
 }
 
-.about-me .switch-bar .icon-wrapper i {
+.about-me .switch-bar .social-icons .icon i {
   display: inline;
   font-size: 24px;
-  cursor: pointer;
   -webkit-transition: opacity .5s ease;
   transition: opacity .5s ease;
 }
 
-.about-me .switch-bar .icon-svg {
+.about-me .switch-bar .social-icons .icon-svg {
   width: 24px;
   height: 24px;
   fill: currentColor;
@@ -383,9 +388,12 @@ body::-webkit-scrollbar {
 }
 
 .about-me .switch-bar .icon-info {
-  height: 24px;
   font-size: 18px;
   color: #999999;
+  padding-left: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  white-space: nowrap;
   -webkit-box-flex: 1;
       -ms-flex: auto;
           flex: auto;
@@ -493,7 +501,6 @@ body::-webkit-scrollbar {
   right: 50%;
   -webkit-transform: translateX(50%);
           transform: translateX(50%);
-  cursor: pointer;
 }
 
 .line-guide i {
@@ -550,15 +557,25 @@ body::-webkit-scrollbar {
 }
 
 .cursor {
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px black solid;
-  border-radius: 50%;
   position: fixed;
-  top: 0;
   left: 0;
-  z-index: 100;
+  top: 0;
   pointer-events: none;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  border-radius: 50%;
+}
+
+.cursor-outer {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--color-cursor);
+  z-index: 12000;
+  opacity: 0.75;
+}
+
+.cursor-inner {
+  width: 10px;
+  height: 10px;
+  z-index: 11000;
+  background: var(--color-cursor);
 }
 /*# sourceMappingURL=homepage.css.map */

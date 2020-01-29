@@ -24,7 +24,7 @@
     const infoColor = getComputedStyle(info, null).getPropertyValue('color');
     const infoClickedColor = '#ffc83d';
 
-    const iconWrappers = document.querySelectorAll('.icon-wrapper');
+    const iconWrappers = document.querySelectorAll('.icon');
     const introContainer = document.querySelector('.intro-container');
 
     for (let i = 0; i < iconWrappers.length; i++) {
@@ -79,10 +79,10 @@
         info.innerHTML = 'GitHub';
     })
     wechatIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'WeChat | 点击复制微信号';
+        info.innerHTML = 'WeChat';
     })
     qqIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'QQ | 点击复制QQ号';
+        info.innerHTML = 'QQ';
     })
     bilibiliIcon.addEventListener('mouseover', () => {
         info.innerHTML = 'bilibili';
@@ -92,7 +92,6 @@
     })
 
     // click
-    // TODO 复制成功的反馈
     wechatIcon.addEventListener('click', () => {
         copyToCilpboard('WeChat: sakuramemory');
         info.innerHTML = '已复制微信号😊';
@@ -103,6 +102,6 @@
     })
     mailIcon.addEventListener('click', () => {
         copyToCilpboard('ceynri@gmail.com');
-        info.innerHTML = '已复制😊';
+        info.innerHTML = '已复制邮箱😊';
     })
 }

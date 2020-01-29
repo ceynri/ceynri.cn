@@ -124,7 +124,7 @@
 
     .switch-bar {
         position: absolute;
-        bottom: -($border-width + $iconSize * (1 + 1.414));
+        bottom: -($border-width + $iconSize * 2.5);
         left: 0;
 
         width: 100%;
@@ -132,52 +132,67 @@
 
         .social-icons {
             display: inline-block;
-            height: $iconSize;
+            height: 100%;
 
             font-size: 0;
             white-space: nowrap;
-        }
 
-        .icon {
-            &-wrapper {
-                display: inline-block;
-                margin-right: $iconSize / 1.414;
-                font-size: $iconSize;
-                line-height: 1;
-                position: relative;
+            .icon {
+                &-wrapper {
+                    display: inline-block;
+                    height: $iconSize * 2;
+                    width: $iconSize * 2;
+                    position: relative;
+                }
+
+                position: absolute;
+                top: $iconSize / 2;
+                left: $iconSize / 2;
+
+                height: $iconSize;
+                width: $iconSize;
 
                 i {
                     display: inline;
                     font-size: $iconSize;
-                    cursor: pointer;
+                    transition: opacity .5s ease;
+                }
+
+                &-svg {
+                    width: $iconSize;
+                    height: $iconSize;
+                    fill: currentColor;
+                    overflow: hidden;
+
+                    opacity: 0;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    pointer-events: none;
+
                     transition: opacity .5s ease;
                 }
             }
+        }
 
-            &-svg {
-                width: $iconSize;
-                height: $iconSize;
-                fill: currentColor;
-                overflow: hidden;
 
-                opacity: 0;
-                position: absolute;
-                left: 0;
-                top: 0;
-                pointer-events: none;
+        .icon-info {
+            font-size: $iconSize * 0.75;
+            color: $textColor * 0.75;
 
-                transition: opacity .5s ease;
+            padding: {
+                left: $iconSize;
+                top: $iconSize / 2;
+                bottom: $iconSize / 2;
             }
 
-            &-info {
-                height: $iconSize;
-                font-size: $iconSize * 0.75;
-                color: $textColor * 0.75;
-                flex: auto;
-                opacity: 0;
-                transition: opacity .5s .2s,
-                    color .5s;
-            }
+            // 禁止换行
+            white-space: nowrap;
+
+            flex: auto;
+            opacity: 0;
+            transition: opacity .5s .2s,
+            color .5s;
         }
     }
 }

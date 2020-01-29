@@ -20,9 +20,30 @@ body {
     -webkit-font-smoothing: antialiased;
     // firefox
     -moz-osx-font-smoothing: grayscale;
+
+    // IE10/Edge 去除滚动条
+    -ms-overflow-style: none;
+    // firefox 64 滚动条透明化
+    scrollbar-color: transparent transparent;
+    // firefox 64 去除滚动条
+    scrollbar-width: none;
+
+    // Chrome 去除滚动条
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
 }
 
-h1, h2 {
+body,
+a {
+    // 隐藏光标
+    // cursor: none;
+}
+
+h1,
+h2 {
     font-family: 'Circular Bold';
 }
 

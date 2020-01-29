@@ -3,23 +3,6 @@
 @import 'common/fonts';
 @import 'common/globals';
 
-body {
-    // TODO 滚动条不滚动
-    // height: 5000px;
-    /* IE10/Edge 去除滚动条 */
-    -ms-overflow-style: none;
-    /* firefox 64 滚动条透明化 */
-    scrollbar-color: transparent transparent;
-    /* firefox 64 去除滚动条 */
-    scrollbar-width: none;
-
-    // Chrome 去除滚动条
-    &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-}
-
 .body {
     &-window {
         width: 100vw;
@@ -106,8 +89,6 @@ body {
     right: 50%;
     transform: translateX(50%);
 
-    cursor: pointer;
-
     i {
         @keyframes floating {
             from {
@@ -147,17 +128,19 @@ body {
     }
 }
 
-.cursor {
-    // mix-blend-mode: difference;
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px black solid;
-    border-radius: 50%;
+@import "./common/cursor"
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
+// .cursor {
+//     // mix-blend-mode: difference;
+//     background: rgba(255, 255, 255, 0.3);
+//     border: 1px black solid;
+//     border-radius: 50%;
+
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     z-index: 100;
     
-    pointer-events: none;
-    transform-origin: 0 0;
-}
+//     pointer-events: none;
+//     transform-origin: 0 0;
+// }

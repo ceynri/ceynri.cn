@@ -1,0 +1,22 @@
+.cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+
+    &-outer {
+        width: 30px;
+        height: 30px;
+        border: 1px solid var(--color-cursor);
+        z-index: 12000;
+        opacity: 0.75;
+    }
+
+    &-inner {
+        width: 10px;
+        height: 10px;
+        z-index: 11000;
+        background: var(--color-cursor);
+    }
+}
