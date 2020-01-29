@@ -1,30 +1,35 @@
 {
-    const MOVE_SPEED = 0.15;
-    const ANIMATION_SPPED = 0.3;
     class Cursor {
         // * 光标类
 
         constructor() {
+            this.initConst();
             this.initCursor();
             this.initHovers();
+            this.initProp();
         }
-
+        initConst() {
+            this.MOVE_SPEED = 0.15;
+            this.ANIMATION_SPEED = 0.3;
+        }
+        initProp() {
+            this.cursorColor = '#fff';
+            const root = document.querySelector('html');
+            this.cursorColor = getComputedStyle(root).getPropertyValue('--cursorColor');
+            this.outerCursorOpacity = getComputedStyle(this.outerCursor).getPropertyValue('opacity');
+        }
         initCursor() {
             // * 光标初始化
-
-            // ?
-            // const {
-            // Back
-            // } = window;
+            // ? const {Back} = window;
             // 光标元素
             this.innerCursor = document.querySelector('.cursor-inner');
             this.outerCursor = document.querySelector('.cursor-outer');
             // 光标盒
-            this.innerCursorBox = this.innerCursor.getBoundingClientRect();
-            this.outerCursorBox = this.outerCursor.getBoundingClientRect();
+            this.innerCursorSize = this.innerCursor.getBoundingClientRect().width;
+            this.outerCursorSize = this.outerCursor.getBoundingClientRect().width;
             // 光标相关属性
             this.outerCursorSpeed = 0;
-            // this.easing = Back.easeOut.config(1.7); // ?
+            // ? this.easing = Back.easeOut.config(1.7);
             // 一开始先将光标置于屏幕外
             this.clientX = -100;
             this.clientY = -100;
@@ -33,15 +38,15 @@
             // 自定义光标还没有显示时，监听鼠标第一次的移动，设置自定义光标到光标坐标处
             const unveilCursor = () => {
                 TweenLite.set(this.innerCursor, {
-                    x: this.clientX - this.innerCursorBox.width / 2,
-                    y: this.clientY - this.innerCursorBox.height / 2
+                    x: this.clientX - this.innerCursorSize / 2,
+                    y: this.clientY - this.innerCursorSize / 2
                 });
                 TweenLite.set(this.outerCursor, {
-                    x: this.clientX - this.outerCursorBox.width / 2,
-                    y: this.clientY - this.outerCursorBox.height / 2
+                    x: this.clientX - this.outerCursorSize / 2,
+                    y: this.clientY - this.outerCursorSize / 2
                 });
                 setTimeout(() => {
-                    this.outerCursorSpeed = MOVE_SPEED;
+                    this.outerCursorSpeed = this.MOVE_SPEED;
                 }, 100);
                 this.showCursor = true;
             };
@@ -56,15 +61,15 @@
             const render = () => {
                 // 内部光标实时改变
                 TweenLite.set(this.innerCursor, {
-                    x: this.clientX - this.innerCursorBox.width / 2,
-                    y: this.clientY - this.innerCursorBox.height / 2
+                    x: this.clientX - this.innerCursorSize / 2,
+                    y: this.clientY - this.innerCursorSize / 2
                 });
 
                 if (!this.isStuck) {
                     // 内部光标平滑延迟移动
                     TweenLite.to(this.outerCursor, this.outerCursorSpeed, {
-                        x: this.clientX - this.outerCursorBox.width / 2,
-                        y: this.clientY - this.outerCursorBox.height / 2
+                        x: this.clientX - this.outerCursorSize / 2,
+                        y: this.clientY - this.outerCursorSize / 2
                     });
                 }
                 if (this.showCursor) {
@@ -83,44 +88,40 @@
 
             // icon-btn
 
-            const handleMouseEnter = e => {
+            const iconMouseOver = e => {
+                // 不再随鼠标移动改变坐标
                 this.isStuck = true;
+                // 获得当前对象的盒子
                 const target = e.currentTarget;
                 const box = target.getBoundingClientRect();
-                this.outerCursorOriginals = {
-                    width: this.outerCursorBox.width,
-                    height: this.outerCursorBox.height
-                };
-                TweenLite.to(this.outerCursor, 0.2, {
+                TweenLite.to(this.outerCursor, this.MOVE_SPEED, {
                     x: box.left,
                     y: box.top,
                     width: box.width,
                     height: box.height,
                     opacity: 1,
-                    // borderColor: "#ff0000"
                 });
             };
 
-            const handleMouseLeave = () => {
+            const iconMouseLeave = () => {
                 this.isStuck = false;
-                TweenLite.to(this.outerCursor, 0.2, {
-                    width: this.outerCursorOriginals.width,
-                    height: this.outerCursorOriginals.height,
-                    opacity: 0.2,
-                    // borderColor: "#ffffff"
+                TweenLite.to(this.outerCursor, this.MOVE_SPEED, {
+                    width: this.outerCursorSize,
+                    height: this.outerCursorSize,
+                    opacity: this.outerCursorOpacity,
                 });
             };
 
             // TODO .icon-link
             const linkItems = document.querySelectorAll(".icon-btn");
             linkItems.forEach(item => {
-                item.addEventListener("mouseenter", handleMouseEnter);
-                item.addEventListener("mouseleave", handleMouseLeave);
+                item.addEventListener("mouseover", iconMouseOver);
+                item.addEventListener("mouseleave", iconMouseLeave);
             });
 
             // btn
 
-            const btnHoverTween = TweenLite.to(this.outerCursor, ANIMATION_SPPED, {
+            const btnHoverTween = TweenLite.to(this.outerCursor, this.ANIMATION_SPEED, {
                 backgroundColor: "#ffffff",
                 opacity: 0.2,
                 paused: true
@@ -128,15 +129,15 @@
 
             const btnMouseEnter = () => {
                 this.outerCursorSpeed = 0;
-                TweenLite.to(this.innerCursor, ANIMATION_SPPED, {
+                TweenLite.to(this.innerCursor, this.ANIMATION_SPEED, {
                     opacity: 0
                 });
                 btnHoverTween.play();
             };
 
             const btnMouseLeave = () => {
-                this.outerCursorSpeed = MOVE_SPEED;
-                TweenLite.to(this.innerCursor, ANIMATION_SPPED, {
+                this.outerCursorSpeed = this.MOVE_SPEED;
+                TweenLite.to(this.innerCursor, this.ANIMATION_SPEED, {
                     opacity: 1
                 });
                 btnHoverTween.reverse();

@@ -24,15 +24,16 @@
     const infoColor = getComputedStyle(info, null).getPropertyValue('color');
     const infoClickedColor = '#ffc83d';
 
-    const iconWrappers = document.querySelectorAll('.icon');
+    const iconWrappers = document.querySelectorAll('.icon-wrapper');
     const introContainer = document.querySelector('.intro-container');
 
     for (let i = 0; i < iconWrappers.length; i++) {
         const wrapper = iconWrappers[i];
-        wrapper.children[0].addEventListener('mouseover', () => {
+        const icon = wrapper.children[0];
+        wrapper.addEventListener('mouseover', () => {
             // icon
-            wrapper.children[0].style.opacity = 0.0;
-            wrapper.children[1].style.opacity = 1.0;
+            icon.children[0].style.opacity = 0.0;
+            icon.children[1].style.opacity = 1.0;
             // text
             intro.style.opacity = 0.0;
             info.style.opacity = 1.0;
@@ -41,22 +42,22 @@
             introContainer.children[i + 1].style.visibility = 'inherit';
         });
 
-        wrapper.children[0].addEventListener('mousedown', () => {
+        wrapper.addEventListener('mousedown', () => {
             // 按下时icon变透明
-            wrapper.children[1].style.opacity = 0.25;
+            icon.children[1].style.opacity = 0.25;
         });
-        wrapper.children[0].addEventListener('click', () => {
+        wrapper.addEventListener('click', () => {
             // info文字变色特效
             info.style.color = infoClickedColor;
         });
-        wrapper.children[0].addEventListener('mouseup', () => {
-            wrapper.children[1].style.opacity = 1.0;
+        wrapper.addEventListener('mouseup', () => {
+            icon.children[1].style.opacity = 1.0;
         });
 
-        wrapper.children[0].addEventListener('mouseout', () => {
+        wrapper.addEventListener('mouseout', () => {
             // icon
-            wrapper.children[0].style.opacity = 1.0;
-            wrapper.children[1].style.opacity = 0.0;
+            icon.children[0].style.opacity = 1.0;
+            icon.children[1].style.opacity = 0.0;
             // text
             intro.style.opacity = 1.0;
             info.style.opacity = 0.0;
@@ -67,11 +68,12 @@
         });
     }
 
-    const githubIcon = document.querySelector('.icon-github-line');
-    const wechatIcon = document.querySelector('.icon-wechat-line');
-    const qqIcon = document.querySelector('.icon-qq-line');
-    const bilibiliIcon = document.querySelector('.icon-bilibili-line');
-    const mailIcon = document.querySelector('.icon-mail-line');
+    // ! 改为有该子元素的父元素
+    const githubIcon = document.querySelector('.icon-github');
+    const wechatIcon = document.querySelector('.icon-wechat');
+    const qqIcon = document.querySelector('.icon-qq');
+    const bilibiliIcon = document.querySelector('.icon-bilibili');
+    const mailIcon = document.querySelector('.icon-mail');
 
     // over
     // TODO 改为大字背景

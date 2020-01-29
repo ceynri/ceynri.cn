@@ -8,7 +8,7 @@
     &-outer {
         width: 30px;
         height: 30px;
-        border: 1px solid var(--color-cursor);
+        border: 1px solid var(--cursorColor);
         z-index: 12000;
         opacity: 0.75;
     }
@@ -17,6 +17,6 @@
         width: 10px;
         height: 10px;
         z-index: 11000;
-        background: var(--color-cursor);
+        background: var(--cursorColor);
     }
 }

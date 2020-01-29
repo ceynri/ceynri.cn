@@ -7,9 +7,9 @@ $backGroundMaskColor: rgba(14, 12, 12, 0.9);
 // 文本默认颜色
 $textColor: #ccc;
 
-// 主题色
-$themeColor: #823;
-
 :root {
-    --color-cursor: white;
+    // 主题色
+    --themeColor: #823;
+    // 光标色
+    --cursorColor: white;
 }

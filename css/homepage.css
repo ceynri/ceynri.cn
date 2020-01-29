@@ -1,6 +1,7 @@
 @charset "UTF-8";
 :root {
-  --color-cursor: white;
+  --themeColor: #823;
+  --cursorColor: white;
 }
 
 @font-face {
@@ -63,7 +64,7 @@ a {
   position: absolute;
   width: 20px;
   height: 140px;
-  background-color: #823;
+  background-color: var(--themeColor);
   -webkit-box-shadow: 0 0 8px #000;
           box-shadow: 0 0 8px #000;
 }
@@ -252,7 +253,7 @@ a {
   max-width: 60vmin;
   max-height: 60vmin;
   padding: 24px;
-  border: 12px #823 solid;
+  border: 12px var(--themeColor) solid;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -394,9 +395,6 @@ a {
   padding-top: 12px;
   padding-bottom: 12px;
   white-space: nowrap;
-  -webkit-box-flex: 1;
-      -ms-flex: auto;
-          flex: auto;
   opacity: 0;
   -webkit-transition: opacity .5s .2s, color .5s;
   transition: opacity .5s .2s, color .5s;
@@ -411,7 +409,7 @@ a {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  word-spacing: -4px;
+  word-spacing: -10px;
 }
 
 .works-wrapper {
@@ -567,7 +565,7 @@ a {
 .cursor-outer {
   width: 30px;
   height: 30px;
-  border: 1px solid var(--color-cursor);
+  border: 1px solid var(--cursorColor);
   z-index: 12000;
   opacity: 0.75;
 }
@@ -576,6 +574,6 @@ a {
   width: 10px;
   height: 10px;
   z-index: 11000;
-  background: var(--color-cursor);
+  background: var(--cursorColor);
 }
 /*# sourceMappingURL=homepage.css.map */

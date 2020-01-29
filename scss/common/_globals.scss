@@ -59,7 +59,7 @@ a {
     width: $lineWidth;
     height: $lineHeight;
 
-    background-color: $themeColor;
+    background-color: var(--themeColor);
     box-shadow: 0 0 8px #000;
 }
 

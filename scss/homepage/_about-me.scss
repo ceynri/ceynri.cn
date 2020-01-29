@@ -39,7 +39,7 @@
     // TODO 媒体查询，当宽度过小时，不再保持方形边框以满足内容的添加
 
     padding: $padding-width;
-    border: $border-width $themeColor solid;
+    border: $border-width var(--themeColor) solid;
 
     display: flex;
     flex-direction: column;
@@ -189,7 +189,6 @@
             // 禁止换行
             white-space: nowrap;
 
-            flex: auto;
             opacity: 0;
             transition: opacity .5s .2s,
             color .5s;
