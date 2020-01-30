@@ -48,7 +48,6 @@ class Cursor {
         // 一开始先将光标置于屏幕外
         this.clientX = -200;
         this.clientY = -200;
-        this.showCursor = false;
     }
 
     initCursor() {
@@ -78,7 +77,8 @@ class Cursor {
                 y: this.clientY - this.outerCursor.box.size / 2
             });
             this.outerCursorSpeed = this.MOVE_SPEED;
-            this.showCursor = true;
+            // 完成任务后把自己移除
+            document.removeEventListener("mousemove", unveilCursor);
         };
         document.addEventListener("mousemove", unveilCursor);
 
@@ -96,10 +96,6 @@ class Cursor {
                     y: this.clientY - this.outerCursor.box.size / 2,
                     ease: Quart.ease
                 });
-            }
-            if (this.showCursor) {
-                // 光标已经显示，不再需要unveilCursor监听
-                document.removeEventListener("mousemove", unveilCursor);
             }
             // 循环调用以不断循环下去
             requestAnimationFrame(frame);
