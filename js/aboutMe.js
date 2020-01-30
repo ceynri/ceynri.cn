@@ -68,7 +68,6 @@
         });
     }
 
-    // ! 改为有该子元素的父元素
     const githubIcon = document.querySelector('.icon-github');
     const wechatIcon = document.querySelector('.icon-wechat');
     const qqIcon = document.querySelector('.icon-qq');

@@ -81,10 +81,6 @@ a {
   overflow: hidden;
 }
 
-.body-window [data-scroll] {
-  overflow: hidden;
-}
-
 .center-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -1,89 +1,101 @@
 {
-    // 一些自定义的数学函数
-    const MathUtils = {
-        // 将x从[a, b]映射到对应的[c, d]上
-        map: (x, a, b, c, d) => (x - a) * (d - c) / (b - a) + c,
-        // 线性插值
-        lerp: (a, b, n) => (1 - n) * a + n * b
-    };
-
-    // todo ? class写法好还是函数式写法更好
     // * 平滑滚动
     class SmoothScroll {
         constructor() {
-            // * 构造器
-
-            // body元素
-            this.body = document.body;
-            // 可滚动元素
-            this.scrollElem = document.querySelector('div[data-scroll]');
-            // 滚动时要改变的属性
-            this.renderedVal = {
-                // 现值与目标值
-                currentVal: 0,
-                targetVal: 0,
-                // 插值的增量系数
-                ease: 0.1,
-            };
-
             // 一些初始化
             this.init();
-            // 设置body的大小
-            this.setSize();
-            // 设置初始值
-            this.update();
+            // 设置body高度
+            this.setBodySize();
+            // 初始化文档滚动高度
+            this.setPageScroll();
             // 初始化并绑定事件
             this.initEvents();
             // 开始循环渲染
-            requestAnimationFrame(() => this.render());
+            this.render();
         }
 
         init() {
+            // * 属性初始化
+            // 可滚动元素
+            this.page = document.querySelector('div[data-scroll]');
+            this.works = document.querySelector('.works');
+            // 获得当前的页面滚动高度
+            this.getPageScroll = () => {
+                return window.pageYOffset || document.documentElement.scrollTop;
+            };
+            // 获得works的横向滚动距离
+            this.getWorksScroll = () => {
+                return this.works.getBoundingClientRect().left;
+            };
+            // 鼠标状态
+            // this.mouse = {down: {x: 0,y: 0},up: {x: 0,y: 0}};
+            this.mouseDownX = 0;
+            // 缓动类型
+            this.easing = Power0.easeOut;
+            // 缓动速度
+            this.EASE_SPEED = .5;
+            // 滚动效率（每移动1px相当于移动`SCROLL_RATE`px）
+            this.SCROLL_RATE = 2;
         }
 
-        setSize() {
+        setBodySize() {
             // * 设置主体的高度
-            this.body.style.height = `${this.scrollElem.scrollHeight}px`;
-            // 减1是为了保证浏览器放缩带来的误差的安全
+            document.body.style.height = `${this.page.scrollHeight}px`;
         }
 
-        update() {
-            // * 设置初始值
-            this.renderedVal.targetVal = this.renderedVal.currentVal = this.getDocScroll();
-            this.scroll();
-        }
-
-        scroll() {
-            // * 设置可滚动元素的translate属性
-            const y = -1 * this.renderedVal.currentVal;
-            this.scrollElem.style.transform = `translate3d(0, ${y}px, 0)`;
+        setPageScroll() {
+            // * 设置初始滚动值（浏览器对滚动高度会有缓存）
+            TweenLite.set(this.page, {
+                y: -this.getPageScroll()
+            });
         }
 
         initEvents() {
-            // * 调整大小时重新设置body的高度
-            window.addEventListener('resize', () => this.setSize());
+            // 调整大小时重新设置body的高度
+            window.addEventListener('resize', () => this.setBodySize());
+
+            // 拖动works的动画 
+            const dragWorksAnimation = e => {
+                TweenLite.to(this.works, 1, {
+                    x: this.dragOffset + e.clientX * this.SCROLL_RATE,
+                    ease: Power4.easeOut
+                });
+            };
+
+            // 监听works上的mousedown事件
+            this.works.addEventListener('mousedown', e => {
+                this.mouseDownX = e.clientX;
+                this.dragOffset = this.getWorksScroll() - this.mouseDownX * this.SCROLL_RATE;
+                // 鼠标移动转化为拖拽works的监听
+                // 因为拖拽过程中可能会离开works范围，所以将事件绑定在document上
+                document.addEventListener('mousemove', dragWorksAnimation);
+            });
+
+            // mouseup时删除works拖拽事件监听（如果有的话）
+            document.addEventListener('mouseup', () => {
+                document.removeEventListener('mousemove', dragWorksAnimation);
+            });
         }
 
-        getDocScroll() {
-            // * 获得当前的滚动高度
-            return window.pageYOffset || document.documentElement.scrollTop;
-        }
-
-        // todo 添加至监听器，当有滚动事件时才执行，target=current时结束
         render() {
             // * 渲染，更新当前值和目标值
-            // 目标值更新
-            const targetVal = this.getDocScroll();
-            this.renderedVal.targetVal = targetVal;
-            // 当前值更新
-            let currentVal = MathUtils.lerp(this.renderedVal.currentVal, targetVal, this.renderedVal.ease);
-            // targetVal和currentVal足够小时取等
-            this.renderedVal.currentVal = Math.abs(currentVal - targetVal) < 1e-3 ? targetVal : currentVal;
-            // 使内容滚动
-            this.scroll();
-            // 循环下去
-            requestAnimationFrame(() => this.render());
+            const frame = () => {
+                // 使内容滚动
+                this.scrollPage();
+                // 循环下去
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
         }
+
+        scrollPage() {
+            // * 滚动元素
+            TweenLite.to(this.page, this.EASE_SPEED, {
+                y: -this.getPageScroll(),
+                ease: this.easing
+            });
+        }
+
     }
 
     // 开启SmoothScroll

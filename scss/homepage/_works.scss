@@ -58,11 +58,16 @@
             left: 0;
             top: 50%;
             z-index: 99;
+
+            // TODO 使无法选择
+            // user-select: none;
+            // pointer-events: none;
         }
 
         &-title {
             margin-left: -10%;
             width: 100%;
+
 
             %title {
                 font: {
@@ -70,6 +75,7 @@
                 }
 
                 text-shadow: $textShadow;
+
             }
 
             h1 {
