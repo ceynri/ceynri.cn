@@ -9,7 +9,6 @@
     }
 
     height: $worksHeight;
-    width: 100%;
 
     padding: {
         left: 5vw;
@@ -17,9 +16,6 @@
     }
 
     line-height: $worksHeight;
-
-    overflow-x: scroll;
-    overflow-y: hidden;
 
     // 禁止换行
     white-space: nowrap;

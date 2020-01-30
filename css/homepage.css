@@ -402,12 +402,9 @@ a {
 
 .works {
   height: 60vh;
-  width: 100%;
   padding-left: 5vw;
   padding-right: 10vw;
   line-height: 60vh;
-  overflow-x: scroll;
-  overflow-y: hidden;
   white-space: nowrap;
   word-spacing: -10px;
 }
@@ -576,7 +573,7 @@ a {
   height: 150px;
   position: fixed;
   pointer-events: none;
-  z-index: 15000;
+  z-index: 11000;
 }
 
 .cursor-outer-box .normal {
@@ -588,11 +585,11 @@ a {
 }
 
 .cursor-inner-box {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   position: fixed;
   pointer-events: none;
-  z-index: 16000;
+  z-index: 12000;
 }
 
 .cursor-inner-box .point {

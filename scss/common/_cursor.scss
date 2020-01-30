@@ -18,7 +18,7 @@
 
         position: fixed;
         pointer-events: none;
-        z-index: 15000;
+        z-index: 11000;
 
         .normal {
             width: 30px;
@@ -31,12 +31,12 @@
     }
 
     &-inner-box {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
 
         position: fixed;
         pointer-events: none;
-        z-index: 16000;
+        z-index: 12000;
 
         .point {
             width: 10px;
