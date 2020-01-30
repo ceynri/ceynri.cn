@@ -1,6 +1,8 @@
+/* 
+ * @title 光标类
+ * @author ceynri
+ */
 class Cursor {
-    // * 光标类
-
     constructor() {
         this.initConst();
         this.initElem();
@@ -15,27 +17,30 @@ class Cursor {
     }
     initElem() {
         // 光标内部元素
-        this.innerCursorBox = document.querySelector('.cursor-inner-box');
-        this.pointedInnerCursor = this.innerCursorBox.querySelector('.point');
-        this.zoomInInnerCursor = this.innerCursorBox.querySelector('.zoom-in');
+        this.innerCursor = {};
+        this.innerCursor.box = document.querySelector('.cursor-inner-box');
+        this.innerCursor.point = this.innerCursor.box.querySelector('.point');
+        this.innerCursor.zoomIn = this.innerCursor.box.querySelector('.zoom-in');
+
         // 光标外部元素
-        this.outerCursorBox = document.querySelector('.cursor-outer-box');
-        this.normalOuterCursor = this.outerCursorBox.querySelector('.normal');
+        this.outerCursor = {};
+        this.outerCursor.box = document.querySelector('.cursor-outer-box');
+        this.outerCursor.normal = this.outerCursor.box.querySelector('.normal');
     }
     initProp() {
         // 内部光标大小
-        this.innerCursorBox.size = this.innerCursorBox.getBoundingClientRect().width;
-        this.pointedInnerCursor.size = this.pointedInnerCursor.getBoundingClientRect().width;
-        this.zoomInInnerCursor.size = this.zoomInInnerCursor.getBoundingClientRect().width;
+        this.innerCursor.box.size = this.innerCursor.box.getBoundingClientRect().width;
+        this.innerCursor.point.size = this.innerCursor.point.getBoundingClientRect().width;
+        this.innerCursor.zoomIn.size = this.innerCursor.zoomIn.getBoundingClientRect().width;
         // 外部光标大小
-        this.outerCursorBox.size = this.outerCursorBox.getBoundingClientRect().width;
-        this.normalOuterCursor.size = this.normalOuterCursor.getBoundingClientRect().width;
+        this.outerCursor.box.size = this.outerCursor.box.getBoundingClientRect().width;
+        this.outerCursor.normal.size = this.outerCursor.normal.getBoundingClientRect().width;
 
         // 光标默认颜色
         const root = document.querySelector('html');
         this.cursorColor = getComputedStyle(root).getPropertyValue('--cursorColor') || '#fff';
         // 外部光标默认透明度
-        this.outerCursorOpacity = getComputedStyle(this.outerCursorBox).getPropertyValue('opacity');
+        this.outerCursorOpacity = getComputedStyle(this.outerCursor.box).getPropertyValue('opacity');
 
         // 外部光标相关属性
         this.outerCursorSpeed = 0;
@@ -49,7 +54,7 @@ class Cursor {
     initCursor() {
         // * 光标初始化
         // 需要缩小为0的光标
-        TweenLite.set(this.zoomInInnerCursor, {
+        TweenLite.set(this.innerCursor.zoomIn, {
             scale: 0
         });
 
@@ -68,9 +73,9 @@ class Cursor {
     render() {
         // 自定义光标还没有显示时，监听鼠标第一次的移动，设置自定义光标到光标坐标处
         const unveilCursor = () => {
-            TweenLite.set(this.outerCursorBox, {
-                x: this.clientX - this.outerCursorBox.size / 2,
-                y: this.clientY - this.outerCursorBox.size / 2
+            TweenLite.set(this.outerCursor.box, {
+                x: this.clientX - this.outerCursor.box.size / 2,
+                y: this.clientY - this.outerCursor.box.size / 2
             });
             this.outerCursorSpeed = this.MOVE_SPEED;
             this.showCursor = true;
@@ -79,16 +84,16 @@ class Cursor {
 
         const frame = () => {
             // 内部光标实时改变
-            TweenLite.set(this.innerCursorBox, {
-                x: this.clientX - this.innerCursorBox.size / 2,
-                y: this.clientY - this.innerCursorBox.size / 2
+            TweenLite.set(this.innerCursor.box, {
+                x: this.clientX - this.innerCursor.box.size / 2,
+                y: this.clientY - this.innerCursor.box.size / 2
             });
 
             if (!this.isStuck) {
                 // 内部光标平滑延迟移动
-                TweenLite.to(this.outerCursorBox, this.outerCursorSpeed, {
-                    x: this.clientX - this.outerCursorBox.size / 2,
-                    y: this.clientY - this.outerCursorBox.size / 2,
+                TweenLite.to(this.outerCursor.box, this.outerCursorSpeed, {
+                    x: this.clientX - this.outerCursor.box.size / 2,
+                    y: this.clientY - this.outerCursor.box.size / 2,
                     ease: Quart.ease
                 });
             }
@@ -119,7 +124,7 @@ class Cursor {
 
         // enter
         const iconBtnMouseEnter = () => {
-            TweenLite.to(this.pointedInnerCursor, this.ANIMATION_SPEED, {
+            TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                 scale: 3,
                 opacity: 0.25,
                 ease: Back.easeOut.config(1.5)
@@ -132,14 +137,14 @@ class Cursor {
             // 获得当前对象的盒子
             const target = e.currentTarget;
             const box = target.getBoundingClientRect();
-            const offset = (box.width - this.outerCursorBox.size) / 2;
-            TweenLite.to(this.outerCursorBox, this.ANIMATION_SPEED, {
+            const offset = (box.width - this.outerCursor.box.size) / 2;
+            TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
                 x: box.left + offset,
                 y: box.top + offset,
                 ease: Back.easeOut.config(1.5),
                 opacity: 1,
             });
-            TweenLite.to(this.normalOuterCursor, this.ANIMATION_SPEED, {
+            TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
                 width: box.width,
                 height: box.height,
                 ease: Back.easeOut.config(1.5),
@@ -148,15 +153,15 @@ class Cursor {
         // leave
         const iconBtnMouseLeave = () => {
             this.isStuck = false;
-            TweenLite.to(this.outerCursorBox, this.ANIMATION_SPEED, {
+            TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
                 opacity: this.outerCursorOpacity,
             });
-            TweenLite.to(this.normalOuterCursor, this.ANIMATION_SPEED, {
-                width: this.normalOuterCursor.size,
-                height: this.normalOuterCursor.size,
+            TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                width: this.outerCursor.normal.size,
+                height: this.outerCursor.normal.size,
                 ease: Back.easeOut.config(1.5),
             });
-            TweenLite.to(this.pointedInnerCursor, this.ANIMATION_SPEED, {
+            TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                 scale: 1,
                 opacity: 1,
                 ease: Back.easeOut.config(1.5)
@@ -171,30 +176,30 @@ class Cursor {
         });
     }
     addIconLinkAnimation() {
-        // const pointedInnerCursorShrinkTween = TweenLite.to(this.pointedInnerCursor, this.ANIMATION_SPEED, {
+        // const pointShrinkTween = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
         //     scale: 0,
         //     ease: Elastic.easeInOut.config(2),
         //     paused: true
         // });
-        const zoomInInnerCursorShowTween = TweenLite.to(this.zoomInInnerCursor, this.ANIMATION_SPEED, {
+        const zoomInShowTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
             scale: 1,
             paused: true
         });
-        const zoomInInnerCursorRotateTween = TweenLite.to(this.zoomInInnerCursor, this.ANIMATION_SPEED, {
+        const zoomInRotateTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
             rotation: 45,
             paused: true
         });
 
         const iconLinkMouseEnter = () => {
-            zoomInInnerCursorShowTween.play();
+            zoomInShowTween.play();
             setTimeout(() => {
-                zoomInInnerCursorRotateTween.play();
+                zoomInRotateTween.play();
             }, 1000 * this.ANIMATION_SPEED / 2);
         }
 
         const iconLinkMouseLeave = () => {
-            zoomInInnerCursorShowTween.reverse();
-            zoomInInnerCursorRotateTween.reverse();
+            zoomInShowTween.reverse();
+            zoomInRotateTween.reverse();
         }
 
         const iconLink = document.querySelectorAll(".icon-link");
