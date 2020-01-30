@@ -10,8 +10,8 @@
             this.setPageScroll();
             // 初始化并绑定事件
             this.initEvents();
-            // 开始循环渲染
-            this.render();
+            // 开始循环渲染滚动页面
+            this.renderScrollPage();
         }
 
         init() {
@@ -19,45 +19,38 @@
             // 可滚动元素
             this.page = document.querySelector('div[data-scroll]');
             this.works = document.querySelector('.works');
-            // 获得当前的页面滚动高度
-            this.getPageScroll = () => {
-                return window.pageYOffset || document.documentElement.scrollTop;
-            };
-            // 获得works的横向滚动距离
-            this.getWorksScroll = () => {
-                return this.works.getBoundingClientRect().left;
-            };
+            // 设置works最大滚动边界
+            this.worksRightBound = 0;
+            this.setWorksRightBound();
             // 鼠标状态
-            // this.mouse = {down: {x: 0,y: 0},up: {x: 0,y: 0}};
             this.mouseDownX = 0;
             // 缓动类型
             this.easing = Power0.easeOut;
             // 缓动速度
             this.EASE_SPEED = .5;
             // 滚动效率（每移动1px相当于移动`SCROLL_RATE`px）
-            this.SCROLL_RATE = 2;
-        }
-
-        setBodySize() {
-            // * 设置主体的高度
-            document.body.style.height = `${this.page.scrollHeight}px`;
-        }
-
-        setPageScroll() {
-            // * 设置初始滚动值（浏览器对滚动高度会有缓存）
-            TweenLite.set(this.page, {
-                y: -this.getPageScroll()
-            });
+            this.SCROLL_RATE = 1.5;
         }
 
         initEvents() {
-            // 调整大小时重新设置body的高度
-            window.addEventListener('resize', () => this.setBodySize());
-
-            // 拖动works的动画 
+            // * 事件监听初始化
+            this.listenWindowResizeEvent();
+            this.listenWorksDragEvent();
+        }
+        listenWindowResizeEvent() {
+            // * resize窗口大小时重新设置body的高度
+            window.addEventListener('resize', () => {
+                this.setBodySize();
+                this.setWorksRightBound();
+            });
+        }
+        listenWorksDragEvent() {
+            // * 拖动works事件
+            // drag动画
             const dragWorksAnimation = e => {
+                const x = this.dragOffset + e.clientX * this.SCROLL_RATE;
                 TweenLite.to(this.works, 1, {
-                    x: this.dragOffset + e.clientX * this.SCROLL_RATE,
+                    x: Math.max(Math.min(x, 0), -this.worksRightBound),
                     ease: Power4.easeOut
                 });
             };
@@ -77,23 +70,44 @@
             });
         }
 
-        render() {
-            // * 渲染，更新当前值和目标值
+        renderScrollPage() {
+            // * 渲染滚动页面
             const frame = () => {
                 // 使内容滚动
-                this.scrollPage();
+                TweenLite.to(this.page, this.EASE_SPEED, {
+                    y: -this.getPageScroll(),
+                    ease: this.easing
+                });
                 // 循环下去
                 requestAnimationFrame(frame);
             }
             requestAnimationFrame(frame);
         }
 
-        scrollPage() {
-            // * 滚动元素
-            TweenLite.to(this.page, this.EASE_SPEED, {
-                y: -this.getPageScroll(),
-                ease: this.easing
+        // setter
+        setBodySize() {
+            // * 设置主体的高度
+            document.body.style.height = `${this.page.scrollHeight}px`;
+        }
+        setWorksRightBound() {
+            // * 设置works的右边界（即向左最多可以位移的距离，是个负值）
+            this.worksRightBound = this.works.getBoundingClientRect().width - window.innerWidth;
+        }
+        setPageScroll() {
+            // * 设置初始滚动值（浏览器对滚动高度会有缓存）
+            TweenLite.set(this.page, {
+                y: -this.getPageScroll()
             });
+        }
+
+        // getter
+        getWorksScroll() {
+            // * 获得works的横向滚动距离
+            return this.works.getBoundingClientRect().left;
+        }
+        getPageScroll() {
+            // * 获得当前的页面滚动高度
+            return window.pageYOffset || document.documentElement.scrollTop;
         }
 
     }
