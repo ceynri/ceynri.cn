@@ -2,7 +2,7 @@
     // 自定义的一些数学计算工具
     const MathUtils = {
         // 将x使用tanh函数归一化到(-scale, scale)区间中
-        normallize: (x, scale) => scale * Math.tanh(x / scale)
+        normallize: (x, scale = 1) => scale * Math.tanh(x / scale)
     }
 
     // * 平滑滚动
@@ -59,7 +59,7 @@
                 // 获得works应该需要移动到的坐标位置
                 let worksTargetX = this.dragOffset + e.clientX * this.SCROLL_RATE;
                 // 将worksTargetX限制到works应该处于的安全坐标范围内
-                const safedX = Math.max(Math.min(worksTargetX, 0), -this.worksRightBound);
+                const safedX = this.convertToWorksSafedX(worksTargetX);
                 // 如果worksTargetX已经移出了安全范围，bias将不为零（表示与最近的安全范围的距离）
                 const bias = worksTargetX - safedX;
                 // worksTargetX等于safedX加上归一化后的bias，随着bias的增大，斜率趋近于0
@@ -86,7 +86,7 @@
                 document.removeEventListener('mousemove', dragWorksAnimation);
                 // 检测是否超出边界，如果超出则移动回安全范围
                 const currentX = this.getWorksScroll();
-                const safedX = Math.max(Math.min(currentX, 0), -this.worksRightBound);
+                const safedX = this.convertToWorksSafedX(currentX);
                 if (currentX != safedX) {
                     TweenLite.to(this.works, 1, {
                         x: safedX,
@@ -136,6 +136,10 @@
             return window.pageYOffset || document.documentElement.scrollTop;
         }
 
+        // calc
+        convertToWorksSafedX(x) {
+            return Math.max(Math.min(x, 0), -this.worksRightBound);
+        }
     }
 
     // 开启SmoothScroll

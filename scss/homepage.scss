@@ -46,7 +46,7 @@
 
 .content-wrapper {
     margin-top: $gapWidth;
-    background-color: $backGroundMaskColor;
+    background-color: var(--themeMaskColor);
 
     &::before {
         // 遮罩过渡区域的高度
@@ -57,7 +57,7 @@
         width: 100%;
         height: $height * 3; // 防止阴影衔接不流畅
         position: absolute;
-        box-shadow: 0 (-$height * 2.4) ($height) ($height * 1.4) $backGroundMaskColor;
+        box-shadow: 0 (-$height * 2.4) ($height) ($height * 1.4) var(--themeMaskColor);
         z-index: -99;
     }
 }

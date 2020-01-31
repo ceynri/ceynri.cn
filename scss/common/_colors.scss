@@ -1,15 +1,25 @@
 // 调色盘
 $darkGreen: #163e34;
 
+$themeColor: #823;
+
 // 背景的遮罩颜色
-$backGroundMaskColor: rgba(14, 12, 12, 0.9);
+// TODO 应该使用js来计算颜色
+$desaturateThemeColor: desaturate($themeColor, 50%);
+$darkThemeColor: scale-color($desaturateThemeColor, $lightness: -90%);
 
 // 文本默认颜色
 $textColor: #ccc;
 
 :root {
     // 主题色
-    --themeColor: #823;
+    --themeColor: #{$themeColor};
+    // 主题色的压暗减淡版
+    --darkenThemeColor: #{$darkThemeColor};
+    // 背景的蒙版色
+    --themeMaskColor: #{rgba($darkThemeColor, 0.8)};
+    // 默认阴影色
+    --themeShadowColor: #{rgba($darkThemeColor, 0.4)};
     // 光标色
     --cursorColor: white;
 }

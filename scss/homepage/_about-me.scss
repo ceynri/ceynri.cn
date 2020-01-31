@@ -11,7 +11,7 @@
     }
 
     // 主体到页面边界的距离
-    $frame-marign: $minimumMargin / 2;
+    $frame-marign: $miniMargin / 2;
     // 主体宽度
     $frame-width: calc(100vmin - #{$frame-marign} * 2);
     $frame-max-width: $aboutMeSize;
@@ -55,7 +55,9 @@
         flex-direction: column;
         text-shadow: $textShadow;
 
-        h1,
+        h1 {
+            font-size: 1.75em;
+        }
         h2 {
             font-size: 2em;
         }

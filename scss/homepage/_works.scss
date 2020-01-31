@@ -6,16 +6,39 @@
 
         display: flex;
         align-items: center;
+
+        // 禁止用户选择文本，避免拖拽works时误选文字
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+
+        position: relative;
+
+        .works-header {
+            position: absolute;
+            left: 10vw;
+            bottom: 15vh;
+
+            height: calc(#{$workHeight} + #{$workFontSize});
+
+            h1,
+            h2 {
+                font-family: $titleFont;
+            }
+
+            h1 {
+                font-size: $workFontSize * 0.75;
+            }
+
+            h2 {
+                font-size: $workFontSize;
+            }
+        }
     }
 
     height: $worksHeight;
-
-    padding: 5vh 15vw;
-
+    padding: $worksPadding;
     display: flex;
 
     .work {
@@ -31,11 +54,19 @@
         position: relative;
 
         &:nth-of-type(odd) {
-            align-self: flex-start;
+            align-self: flex-end;
         }
 
         &:nth-of-type(even) {
-            align-self: flex-end;
+            align-self: flex-start;
+        }
+
+        &-tile {
+            width: 100%;
+            height: 100%;
+            background-color: #324;
+
+            box-shadow: $workShadow;
         }
 
         &-text {
@@ -47,10 +78,6 @@
             top: 50%;
             z-index: 99;
 
-            // -webkit-user-select: none;
-            // -moz-user-select: none;
-            // -ms-user-select: none;
-            // user-select: none;
             pointer-events: none;
         }
 
@@ -58,10 +85,10 @@
             margin-left: -10%;
             width: 100%;
 
-
             %title {
                 font: {
                     size: $workFontSize;
+                    family: $boldFont;
                 }
 
                 text-shadow: $textShadow;
@@ -75,12 +102,6 @@
             h2 {
                 @extend %title;
             }
-        }
-
-        &-tile {
-            width: 100%;
-            height: 100%;
-            background-color: #324;
         }
 
         &.case-1 .work-tile {

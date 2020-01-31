@@ -45,6 +45,8 @@ a {
 h1,
 h2 {
     font-family: 'Circular Bold';
+    // 取消firefox浏览器自作聪明的 bold
+    font-weight: normal;
 }
 
 a {
@@ -60,12 +62,12 @@ a {
     height: $lineHeight;
 
     background-color: var(--themeColor);
-    box-shadow: 0 0 8px #000;
+    box-shadow: 0 0 8px var(--themeColor);
 }
 
 .margin-wrapper {
     margin: {
-        left: $minimumMargin;
-        right: $minimumMargin;
+        left: $miniMargin;
+        right: $miniMargin;
     }
 }

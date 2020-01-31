@@ -4,13 +4,10 @@
 //TODO 使用CSS变量，以便于js替换背景图片
 $backGroundImage: '/assets/imgs/background/72235081_p0.jpg';
 
-// 最小边距
-$minimumMargin: 64px;
+// 页面左右最小边距
+$miniMargin: 64px;
 
 // * fonts
-
-// 文本阴影
-$textShadow: 0 0 12px rgba(0, 0, 0, .6);
 
 // 默认字体
 $defaultFont: 'PingFang SC',
@@ -21,6 +18,10 @@ Sans-serif;
 // hero字体
 $titleFont: 'Circular Bold',
 'PingFang SC';
+
+// 加粗字体
+$boldFont: 'Circular Bold',
+'PingFang SC Bold';
 
 // hero文本大小
 $titleFontSize: 96px;
@@ -53,11 +54,19 @@ $maskTransitionWidth: 150px;
 $aboutMeSize: 60vmin;
 
 // works尺寸
-$worksHeight: 70vh;
-$worksTopBottomPadding: 10vh;
+$worksHeight: 100vh;
+$worksPadding: 15vh 20vw;
 
 // work尺寸
 $workWidth: 40vmin;
 $workMaxWidth: 300px;
 $workHeight: $workWidth * 4 / 3;
 $workMaxHeight: $workMaxWidth * 4 / 3;
+
+// * shadow
+
+// 文本阴影
+$textShadow: 0 0 12px var(--themeShadowColor);
+
+// works阴影
+$workShadow: 0 0 24px 8px var(--themeShadowColor);
