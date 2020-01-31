@@ -10,7 +10,7 @@
         family: $defaultFont;
     }
 
-    color: $textColor;
+    color: var(--textColor);
 }
 
 body {
@@ -51,7 +51,7 @@ h2 {
 
 a {
     text-decoration: none;
-    color: $textColor;
+    color: var(--textColor);
 }
 
 // 装饰线的基础样式规则

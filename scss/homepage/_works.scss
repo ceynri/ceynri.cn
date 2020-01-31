@@ -18,21 +18,26 @@
         .works-header {
             position: absolute;
             left: 10vw;
-            bottom: 15vh;
+            bottom: calc(20vh + #{$workHeight} - #{$workFontSize});
 
-            height: calc(#{$workHeight} + #{$workFontSize});
+            line-height: 1;
+            padding-left: 2%;
+            border-left: 4px solid var(--textColor);
 
-            h1,
-            h2 {
+            font-size: $workFontSize;
+
+            h2,
+            h1 {
                 font-family: $titleFont;
             }
 
-            h1 {
-                font-size: $workFontSize * 0.75;
+            h2 {
+                font-size: 1em;
             }
 
-            h2 {
-                font-size: $workFontSize;
+            h1 {
+                font-size: 0.75em;
+                margin-top: 0.5em;
             }
         }
     }
@@ -92,7 +97,6 @@
                 }
 
                 text-shadow: $textShadow;
-
             }
 
             h1 {

@@ -4,6 +4,7 @@
   --darkenThemeColor: #090808;
   --themeMaskColor: rgba(9, 8, 8, 0.8);
   --themeShadowColor: rgba(9, 8, 8, 0.4);
+  --textColor: #ccc;
   --cursorColor: white;
 }
 
@@ -37,7 +38,7 @@
 :root {
   font-size: 14px;
   font-family: "PingFang SC", "Circular", "MircoSoft YaHei", Sans-serif;
-  color: #ccc;
+  color: var(--textColor);
 }
 
 body {
@@ -61,7 +62,7 @@ h2 {
 
 a {
   text-decoration: none;
-  color: #ccc;
+  color: var(--textColor);
 }
 
 .hero .title h1 span:nth-child(1)::after, .hero .title h1 span:nth-child(2)::after, .hero .title h2::after, .hero .date .date-line, .hero .bottom-line, .line-guide {
@@ -392,7 +393,7 @@ a {
 
 .about-me .switch-bar .icon-info {
   font-size: 18px;
-  color: #999999;
+  color: #999;
   padding-left: 24px;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -404,7 +405,7 @@ a {
 
 .works {
   height: 100vh;
-  padding: 15vh 20vw;
+  padding: 20vh 20vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -412,7 +413,7 @@ a {
 
 .works-wrapper {
   height: 100vh;
-  min-height: 53.33333vmin;
+  min-height: 46.66667vmin;
   margin-top: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -430,26 +431,30 @@ a {
 .works-wrapper .works-header {
   position: absolute;
   left: 10vw;
-  bottom: 15vh;
-  height: calc(53.33333vmin + 36px);
-}
-
-.works-wrapper .works-header h1,
-.works-wrapper .works-header h2 {
-  font-family: "Circular Bold", "PingFang SC";
-}
-
-.works-wrapper .works-header h1 {
-  font-size: 27px;
-}
-
-.works-wrapper .works-header h2 {
+  bottom: calc(20vh + 46.66667vmin - 36px);
+  line-height: 1;
+  padding-left: 2%;
+  border-left: 4px solid var(--textColor);
   font-size: 36px;
 }
 
+.works-wrapper .works-header h2,
+.works-wrapper .works-header h1 {
+  font-family: "Circular Bold", "PingFang SC";
+}
+
+.works-wrapper .works-header h2 {
+  font-size: 1em;
+}
+
+.works-wrapper .works-header h1 {
+  font-size: 0.75em;
+  margin-top: 0.5em;
+}
+
 .works .work {
-  width: 40vmin;
-  height: 53.33333vmin;
+  width: 35vmin;
+  height: 46.66667vmin;
   max-width: 300px;
   max-height: 400px;
   margin-left: 15vw;

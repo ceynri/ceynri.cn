@@ -4,17 +4,13 @@
  */
 class Cursor {
     constructor() {
-        this.initConst();
         this.initElem();
         this.initProp();
+        this.initConst();
         this.initCursor();
-        this.initHovers();
+        this.initEvents();
     }
 
-    initConst() {
-        this.MOVE_SPEED = 0.15;
-        this.ANIMATION_SPEED = 0.3;
-    }
     initElem() {
         // 光标内部元素
         this.innerCursor = {};
@@ -49,6 +45,10 @@ class Cursor {
         this.clientX = -200;
         this.clientY = -200;
     }
+    initConst() {
+        this.MOVE_SPEED = 0.15;
+        this.ANIMATION_SPEED = 0.3;
+    }
 
     initCursor() {
         // * 光标初始化
@@ -60,7 +60,7 @@ class Cursor {
         // 初始化鼠标位置
         this.initCursorPos();
         // 开始渲染
-        this.render();
+        this.renderCursorMove();
     }
     initCursorPos() {
         // 自定义光标还没有显示时，监听鼠标第一次的移动，设置自定义光标到光标坐标处
@@ -81,7 +81,7 @@ class Cursor {
             this.clientY = e.clientY;
         });
     }
-    render() {
+    renderCursorMove() {
         const frame = () => {
             // 内部光标实时改变
             TweenLite.set(this.innerCursor.box, {
@@ -104,20 +104,18 @@ class Cursor {
         requestAnimationFrame(frame);
     }
 
-    initHovers() {
+    initEvents() {
         // * 链接元素的hover效果初始化
-
         // icon-btn
         this.addIconBtnAnimation();
-
         // icon-link
         this.addIconLinkAnimation();
-
+        // srcollable-element
+        this.addScrollableElemAnimation();
         // link
         // this.addLinkAnimation();
     }
     addIconBtnAnimation() {
-
         // enter
         const iconBtnMouseEnter = () => {
             TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
@@ -172,17 +170,12 @@ class Cursor {
         });
     }
     addIconLinkAnimation() {
-        // const pointShrinkTween = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
-        //     scale: 0,
-        //     ease: Elastic.easeInOut.config(2),
-        //     paused: true
-        // });
         const zoomInShowTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
             scale: 1,
             paused: true
         });
         const zoomInRotateTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
-            rotation: 45,
+            rotation: 135,
             paused: true
         });
 
@@ -204,35 +197,45 @@ class Cursor {
             item.addEventListener("mouseleave", iconLinkMouseLeave);
         });
     }
-    addLinkAnimation() {
-        // const iconLinkHoverTween = TweenLite.to(this.outerCursor, 0.3, {
-        //     backgroundColor: "#ffffff",
-        //     opacity: 0.2,
-        //     paused: true
-        // });
-
-        // const iconLinkMouseEnter = () => {
-        //     this.outerCursorSpeed = 0;
-        //     TweenLite.to(this.innerCursor, 0.3, {
-        //         opacity: 0
-        //     });
-        //     iconLinkHoverTween.play();
-        // };
-
-        // const iconLinkMouseLeave = () => {
-        //     this.outerCursorSpeed = this.MOVE_SPEED;
-        //     TweenLite.to(this.innerCursor, 0.3, {
-        //         opacity: 1
-        //     });
-        //     iconLinkHoverTween.reverse();
-        // };
-
-        // const iconLink = document.querySelectorAll(".iconLink");
-        // iconLink.forEach(item => {
-        //     item.addEventListener("mouseenter", iconLinkMouseEnter);
-        //     item.addEventListener("mouseleave", iconLinkMouseLeave);
-        // });
+    addScrollableElemAnimation() {
+        
     }
+    // * 暂时不用的代码
+    // const pointShrinkTween = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
+    //     scale: 0,
+    //     ease: Elastic.easeInOut.config(2),
+    //     paused: true
+    // });
+
+    // addLinkAnimation() {
+    //     const iconLinkHoverTween = TweenLite.to(this.outerCursor, 0.3, {
+    //         backgroundColor: "#ffffff",
+    //         opacity: 0.2,
+    //         paused: true
+    //     });
+
+    //     const iconLinkMouseEnter = () => {
+    //         this.outerCursorSpeed = 0;
+    //         TweenLite.to(this.innerCursor, 0.3, {
+    //             opacity: 0
+    //         });
+    //         iconLinkHoverTween.play();
+    //     };
+
+    //     const iconLinkMouseLeave = () => {
+    //         this.outerCursorSpeed = this.MOVE_SPEED;
+    //         TweenLite.to(this.innerCursor, 0.3, {
+    //             opacity: 1
+    //         });
+    //         iconLinkHoverTween.reverse();
+    //     };
+
+    //     const iconLink = document.querySelectorAll(".iconLink");
+    //     iconLink.forEach(item => {
+    //         item.addEventListener("mouseenter", iconLinkMouseEnter);
+    //         item.addEventListener("mouseleave", iconLinkMouseLeave);
+    //     });
+    // }
 }
 // Debug用
 const _cursor = new Cursor();

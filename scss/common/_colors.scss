@@ -8,9 +8,6 @@ $themeColor: #823;
 $desaturateThemeColor: desaturate($themeColor, 50%);
 $darkThemeColor: scale-color($desaturateThemeColor, $lightness: -90%);
 
-// 文本默认颜色
-$textColor: #ccc;
-
 :root {
     // 主题色
     --themeColor: #{$themeColor};
@@ -20,6 +17,8 @@ $textColor: #ccc;
     --themeMaskColor: #{rgba($darkThemeColor, 0.8)};
     // 默认阴影色
     --themeShadowColor: #{rgba($darkThemeColor, 0.4)};
+    // 文本默认颜色
+    --textColor: #ccc;
     // 光标色
     --cursorColor: white;
 }
