@@ -6,21 +6,17 @@
 
         display: flex;
         align-items: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     height: $worksHeight;
 
-    padding: {
-        left: 5vw;
-        right: 10vw;
-    }
+    padding: 5vh 15vw;
 
-    line-height: $worksHeight;
-
-    // 禁止换行
-    white-space: nowrap;
-    // 取消后面跟随的空格
-    word-spacing: -10px;
+    display: flex;
 
     .work {
         width: $workWidth;
@@ -31,23 +27,15 @@
             height: $workMaxHeight;
         }
 
-        // 取消works的行高继承
-        line-height: initial;
-        // 取消父元素word-spacing
-        word-spacing: initial;
-
-
         margin-left: 15vw;
-
-        display: inline-block;
         position: relative;
 
         &:nth-of-type(odd) {
-            vertical-align: top;
+            align-self: flex-start;
         }
 
         &:nth-of-type(even) {
-            vertical-align: bottom;
+            align-self: flex-end;
         }
 
         &-text {
@@ -59,9 +47,11 @@
             top: 50%;
             z-index: 99;
 
-            // TODO 使无法选择
+            // -webkit-user-select: none;
+            // -moz-user-select: none;
+            // -ms-user-select: none;
             // user-select: none;
-            // pointer-events: none;
+            pointer-events: none;
         }
 
         &-title {

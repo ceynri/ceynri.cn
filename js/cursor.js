@@ -63,13 +63,6 @@ class Cursor {
         this.render();
     }
     initCursorPos() {
-        // 监听鼠标移动
-        document.addEventListener("mousemove", e => {
-            this.clientX = e.clientX;
-            this.clientY = e.clientY;
-        });
-    }
-    render() {
         // 自定义光标还没有显示时，监听鼠标第一次的移动，设置自定义光标到光标坐标处
         const unveilCursor = () => {
             TweenLite.set(this.outerCursor.box, {
@@ -82,6 +75,13 @@ class Cursor {
         };
         document.addEventListener("mousemove", unveilCursor);
 
+        // 监听鼠标移动
+        document.addEventListener("mousemove", e => {
+            this.clientX = e.clientX;
+            this.clientY = e.clientY;
+        });
+    }
+    render() {
         const frame = () => {
             // 内部光标实时改变
             TweenLite.set(this.innerCursor.box, {

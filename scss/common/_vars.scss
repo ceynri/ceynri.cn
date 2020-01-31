@@ -53,10 +53,11 @@ $maskTransitionWidth: 150px;
 $aboutMeSize: 60vmin;
 
 // works尺寸
-$worksHeight: 60vh;
+$worksHeight: 70vh;
+$worksTopBottomPadding: 10vh;
 
 // work尺寸
 $workWidth: 40vmin;
 $workMaxWidth: 300px;
 $workHeight: $workWidth * 4 / 3;
-$workMaxHeight: 400px;
+$workMaxHeight: $workMaxWidth * 4 / 3;

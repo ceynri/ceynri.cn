@@ -1,4 +1,10 @@
 {
+    // 自定义的一些数学计算工具
+    const MathUtils = {
+        // 将x使用tanh函数归一化到(-scale, scale)区间中
+        normallize: (x, scale) => scale * Math.tanh(x / scale)
+    }
+
     // * 平滑滚动
     class SmoothScroll {
         constructor() {
@@ -28,8 +34,10 @@
             this.easing = Power0.easeOut;
             // 缓动速度
             this.EASE_SPEED = .5;
-            // 滚动效率（每移动1px相当于移动`SCROLL_RATE`px）
-            this.SCROLL_RATE = 1.5;
+            // 滚动效率（鼠标每移动1px，元素移动的px值）
+            this.SCROLL_RATE = 1;
+            // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
+            this.ELASTIC_RANGE = 200;
         }
 
         initEvents() {
@@ -48,9 +56,17 @@
             // * 拖动works事件
             // drag动画
             const dragWorksAnimation = e => {
-                const x = this.dragOffset + e.clientX * this.SCROLL_RATE;
+                // 获得works应该需要移动到的坐标位置
+                let worksTargetX = this.dragOffset + e.clientX * this.SCROLL_RATE;
+                // 将worksTargetX限制到works应该处于的安全坐标范围内
+                const safedX = Math.max(Math.min(worksTargetX, 0), -this.worksRightBound);
+                // 如果worksTargetX已经移出了安全范围，bias将不为零（表示与最近的安全范围的距离）
+                const bias = worksTargetX - safedX;
+                // worksTargetX等于safedX加上归一化后的bias，随着bias的增大，斜率趋近于0
+                worksTargetX = safedX + MathUtils.normallize(bias, this.ELASTIC_RANGE);
+                // 执行drag动画
                 TweenLite.to(this.works, 1, {
-                    x: Math.max(Math.min(x, 0), -this.worksRightBound),
+                    x: worksTargetX,
                     ease: Power4.easeOut
                 });
             };
@@ -64,9 +80,19 @@
                 document.addEventListener('mousemove', dragWorksAnimation);
             });
 
-            // mouseup时删除works拖拽事件监听（如果有的话）
+            // mouseup事件
             document.addEventListener('mouseup', () => {
+                // mouseup时删除works拖拽事件监听（如果有的话）
                 document.removeEventListener('mousemove', dragWorksAnimation);
+                // 检测是否超出边界，如果超出则移动回安全范围
+                const currentX = this.getWorksScroll();
+                const safedX = Math.max(Math.min(currentX, 0), -this.worksRightBound);
+                if (currentX != safedX) {
+                    TweenLite.to(this.works, 1, {
+                        x: safedX,
+                        ease: Power4.easeOut
+                    });
+                }
             });
         }
 
@@ -90,7 +116,7 @@
             document.body.style.height = `${this.page.scrollHeight}px`;
         }
         setWorksRightBound() {
-            // * 设置works的右边界（即向左最多可以位移的距离，是个负值）
+            // * 设置works的右边界（即向左最多可以位移的距离）
             this.worksRightBound = this.works.getBoundingClientRect().width - window.innerWidth;
         }
         setPageScroll() {

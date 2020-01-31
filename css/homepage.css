@@ -397,12 +397,11 @@ a {
 }
 
 .works {
-  height: 60vh;
-  padding-left: 5vw;
-  padding-right: 10vw;
-  line-height: 60vh;
-  white-space: nowrap;
-  word-spacing: -10px;
+  height: 70vh;
+  padding: 5vh 15vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .works-wrapper {
@@ -415,6 +414,10 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .works .work {
@@ -422,19 +425,18 @@ a {
   height: 53.33333vmin;
   max-width: 300px;
   max-height: 400px;
-  line-height: initial;
-  word-spacing: initial;
   margin-left: 15vw;
-  display: inline-block;
   position: relative;
 }
 
 .works .work:nth-of-type(odd) {
-  vertical-align: top;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .works .work:nth-of-type(even) {
-  vertical-align: bottom;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .works .work-text {
@@ -444,6 +446,7 @@ a {
   left: 0;
   top: 50%;
   z-index: 99;
+  pointer-events: none;
 }
 
 .works .work-title {
