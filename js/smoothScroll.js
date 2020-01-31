@@ -8,30 +8,37 @@
     // * 平滑滚动
     class SmoothScroll {
         constructor() {
-            // 一些初始化
-            this.init();
-            // 设置body高度
-            this.setBodySize();
-            // 初始化文档滚动高度
-            this.setPageScroll();
+            // 元素初始化
+            this.initElem();
+            // 属性初始化
+            this.initProp();
+            // 常量初始化
+            this.initConst();
             // 初始化并绑定事件
             this.initEvents();
             // 开始循环渲染滚动页面
             this.renderScrollPage();
         }
-
-        init() {
-            // * 属性初始化
+        initElem() {
             // 可滚动元素
             this.page = document.querySelector('div[data-scroll]');
             this.works = document.querySelector('.works');
+        }
+        initProp() {
+            // * 属性初始化
             // 设置works最大滚动边界
             this.worksRightBound = 0;
             this.setWorksRightBound();
             // 鼠标状态
             this.mouseDownX = 0;
-            // 缓动类型
+            // 页面滚动的缓动类型
             this.easing = Power0.easeOut;
+            // 设置body高度
+            this.setBodySize();
+            // 初始化文档滚动高度
+            this.setPageScroll();
+        }
+        initConst() {
             // 缓动速度
             this.EASE_SPEED = .5;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
@@ -39,7 +46,6 @@
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
             this.ELASTIC_RANGE = 200;
         }
-
         initEvents() {
             // * 事件监听初始化
             this.listenWindowResizeEvent();
@@ -84,15 +90,16 @@
             document.addEventListener('mouseup', () => {
                 // mouseup时删除works拖拽事件监听（如果有的话）
                 document.removeEventListener('mousemove', dragWorksAnimation);
-                // 检测是否超出边界，如果超出则移动回安全范围
-                const currentX = this.getWorksScroll();
-                const safedX = this.convertToWorksSafedX(currentX);
-                if (currentX != safedX) {
-                    TweenLite.to(this.works, 1, {
-                        x: safedX,
-                        ease: Power4.easeOut
-                    });
-                }
+                // 设置循环检测是否超出边界，避免出现鼠标抬起后因为works缓动惯性导致超过安全区域
+                let times = 5;
+                const checkLoop = setInterval(() => {
+                    // 检测是否超出边界，如果超出则移动回安全范围
+                    if (times-- == 0 || !this.checkWorksXSafe()) {
+                        // 循环次数到了或者检测到不安全已经执行了回弹，则结束检测
+                        clearInterval(checkLoop);
+                    }
+                }, 200);
+
             });
         }
 
@@ -139,6 +146,20 @@
         // calc
         convertToWorksSafedX(x) {
             return Math.max(Math.min(x, 0), -this.worksRightBound);
+        }
+
+        // check
+        checkWorksXSafe() {
+            const currentX = this.getWorksScroll();
+            const safedX = this.convertToWorksSafedX(currentX);
+            if (currentX != safedX) {
+                TweenLite.to(this.works, 1, {
+                    x: safedX,
+                    ease: Power4.easeOut
+                });
+                return false;
+            }
+            return true;
         }
     }
 
