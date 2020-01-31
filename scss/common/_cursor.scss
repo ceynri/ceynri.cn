@@ -10,56 +10,39 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: nowrap;
+        overflow: visible;
     }
 
-    &-outer-box {
-        width: 150px;
-        height: 150px;
-
-        position: fixed;
-        pointer-events: none;
-        z-index: 11000;
-
-        .normal {
-            box-sizing: content-box;
-            width: 30px;
-            height: 30px;
-            border: 1px solid var(--cursorColor);
-            border-radius: 50%;
-            opacity: 0.75;
-            // 注：在CSS中不能使用transform属性，因为TweenLite的动画会把它覆盖掉
-        }
-    }
+    flex: none;
 
     &-inner-box {
-        width: 40px;
-        height: 40px;
+        width: $innerBoxSize;
+        height: $innerBoxSize;
 
         position: fixed;
         pointer-events: none;
         z-index: 12000;
 
         .point {
-            width: 10px;
-            height: 10px;
+            width: $normalInnerCursorSize / 2;
+            height: $normalInnerCursorSize / 2;
 
             background: var(--cursorColor);
             border-radius: 50%;
         }
 
-        // TODO 箭头
-
         .zoom-in {
-            width: 20px;
-            height: 20px;
+            width: $normalInnerCursorSize;
+            height: $normalInnerCursorSize;
             position: relative;
 
             &::before,
             &::after {
                 content: '';
                 position: absolute;
-                left: 10px;
-                height: 20px;
+                left: $normalInnerCursorSize / 2;
+                height: $normalInnerCursorSize;
                 width: 1px;
                 background: var(--cursorColor);
             }
@@ -70,6 +53,56 @@
 
             &::after {
                 transform: rotate(45deg);
+            }
+        }
+
+        .hand i {
+            color: var(--cursorColor);
+            font-size: $normalInnerCursorSize;
+        }
+    }
+
+    &-outer-box {
+        width: $outerBoxSize;
+        height: $outerBoxSize;
+
+        position: fixed;
+        pointer-events: none;
+        z-index: 11000;
+
+        .normal {
+            box-sizing: content-box;
+            width: $normalOuterCursorSize;
+            height: $normalOuterCursorSize;
+            border: 1px solid var(--cursorColor);
+            border-radius: 50%;
+            opacity: 0.75;
+            // 注：在CSS中不能使用transform属性，因为TweenLite的动画会把它覆盖掉
+        }
+
+        .arrow {
+            width: $normalOuterCursorSize;
+            height: $normalOuterCursorSize;
+            position: relative;
+
+            .icon {
+                i {
+                    font-size: $normalInnerCursorSize;
+                }
+
+                &-left-arrow {
+                    position: absolute;
+                    right: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &-right-arrow {
+                    position: absolute;
+                    left: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
             }
         }
     }

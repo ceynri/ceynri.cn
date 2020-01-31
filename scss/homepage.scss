@@ -86,6 +86,7 @@
     transform: translateX(50%);
 
     i {
+        font-size: 12px;
         @keyframes floating {
             from {
                 top: -5px;
