@@ -669,6 +669,11 @@ a {
   font-size: 20px;
 }
 
+.cursor-inner-box .detail i {
+  color: var(--cursorColor);
+  font-size: 24px;
+}
+
 .cursor-outer-box {
   width: 160px;
   height: 160px;

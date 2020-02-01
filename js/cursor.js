@@ -8,6 +8,7 @@ class Cursor {
         this.initProp();
         this.initConst();
         this.initCursor();
+        this.initTweens();
         this.initEvents();
     }
 
@@ -18,6 +19,7 @@ class Cursor {
         this.innerCursor.point = this.innerCursor.box.querySelector('.point');
         this.innerCursor.zoomIn = this.innerCursor.box.querySelector('.zoom-in');
         this.innerCursor.hand = this.innerCursor.box.querySelector('.hand');
+        this.innerCursor.detail = this.innerCursor.box.querySelector('.detail');
 
         // 光标外部元素
         this.outerCursor = {};
@@ -31,6 +33,7 @@ class Cursor {
         // this.innerCursor.point.size = this.innerCursor.point.getBoundingClientRect().width;
         // this.innerCursor.zoomIn.size = this.innerCursor.zoomIn.getBoundingClientRect().width;
         // this.innerCursor.hand.size = this.innerCursor.hand.getBoundingClientRect().width;
+        // this.innerCursor.detail.size = this.innerCursor.detail.getBoundingClientRect().width;
         // 外部光标大小
         this.outerCursor.box.size = this.outerCursor.box.getBoundingClientRect().width;
         this.outerCursor.normal.size = this.outerCursor.normal.getBoundingClientRect().width;
@@ -41,17 +44,23 @@ class Cursor {
         this.cursorColor = getComputedStyle(root).getPropertyValue('--cursorColor') || '#fff';
         // 外部光标默认透明度
         this.outerCursorOpacity = getComputedStyle(this.outerCursor.box).getPropertyValue('opacity');
-
         // 外部光标相关属性
         this.outerCursorSpeed = 0;
 
         // 一开始先将光标置于屏幕外
         this.clientX = -1000;
         this.clientY = -1000;
+
+        // 是否在work区域
+        this.isInWork = false;
     }
     initConst() {
+        // 外光标移动速度
         this.MOVE_SPEED = 0.15;
+        // 缓动动画播放速度
         this.ANIMATION_SPEED = 0.3;
+        // works元素区域的鼠标缩放比例
+        this.WORKS_SCALE_RATE = 3;
     }
 
     initCursor() {
@@ -60,7 +69,8 @@ class Cursor {
         const hiddenList = [
             this.innerCursor.zoomIn,
             this.innerCursor.hand,
-            this.outerCursor.arrow
+            this.innerCursor.detail,
+            this.outerCursor.arrow,
         ];
         hiddenList.forEach(cursor => {
             TweenLite.set(cursor, {
@@ -119,17 +129,39 @@ class Cursor {
         // 为了高性能所以使用单独的frame函数调用requestAnimationFrame函数来提高性能
         requestAnimationFrame(frame);
     }
-
+    initTweens() {
+        this.tween = {};
+        this.tween.shrinkOuterCursor = TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
+            scale: 0.8,
+            ease: Back.ease,
+            paused: true
+        })
+    }
     initEvents() {
-        // * 链接元素的hover效果初始化
+        // * 各种事件监听的初始化
+        // global
+        this.addGlobalAnimation();
         // icon-btn
         this.addIconBtnAnimation();
         // icon-link
         this.addIconLinkAnimation();
-        // srcollable-element
-        this.addScrollableElemAnimation();
+        // works
+        this.addWorksAnimation();
+        // work
+        this.addWorkAnimation();
         // link
         // this.addLinkAnimation();
+    }
+    addGlobalAnimation() {
+        const globalMouseDown = () => {
+            this.tween.shrinkOuterCursor.play();
+        }
+        const globalMouseUp = () => {
+            this.tween.shrinkOuterCursor.reverse();
+        }
+
+        document.addEventListener('mousedown', globalMouseDown);
+        document.addEventListener('mouseup', globalMouseUp);
     }
     addIconBtnAnimation() {
         // enter
@@ -190,14 +222,13 @@ class Cursor {
         });
         const zoomInRotateTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
             rotation: 135,
+            delay: this.ANIMATION_SPEED / 2,
             paused: true
         });
 
         const iconLinkMouseEnter = () => {
             zoomInShowTween.play();
-            setTimeout(() => {
-                zoomInRotateTween.play();
-            }, 1000 * this.ANIMATION_SPEED / 2);
+            zoomInRotateTween.play();
         }
 
         const iconLinkMouseLeave = () => {
@@ -211,15 +242,14 @@ class Cursor {
             item.addEventListener('mouseleave', iconLinkMouseLeave);
         });
     }
-    addScrollableElemAnimation() {
-        const SCALE_RATE = 3;
+    addWorksAnimation() {
         const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-            scale: SCALE_RATE,
+            scale: this.WORKS_SCALE_RATE,
             ease: Back.easeOut.config(1.5),
             paused: true
         });
         const arrowShowTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED, {
-            scale: SCALE_RATE,
+            scale: this.WORKS_SCALE_RATE,
             ease: Back.easeOut.config(1.5),
             paused: true
         });
@@ -230,29 +260,29 @@ class Cursor {
             paused: true
         });
         const handShowTween = TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
-            scale: SCALE_RATE,
+            scale: this.WORKS_SCALE_RATE,
             ease: Back.easeOut.config(1.5),
             paused: true
         });
 
+        // 使用mouseMove而不是mouseEnter，可以解决一些bug
         const worksMouseMove = () => {
-            // 使用mouseMove而不是mouseEnter，可以解决一些bug
             outerCursorExpandTween.play();
-            arrowShowTween.play();
             pointShrinkTween.play();
-            handShowTween.play();
+            if (!this.isInWork) {
+                handShowTween.play();
+                arrowShowTween.play();
+            }
         }
 
         const worksMouseDown = () => {
             this.innerCursor.hand.children[0].classList.remove('icon-hand');
             this.innerCursor.hand.children[0].classList.add('icon-drag-hand');
         }
-
         const worksMouseUp = () => {
             this.innerCursor.hand.children[0].classList.remove('icon-drag-hand');
             this.innerCursor.hand.children[0].classList.add('icon-hand');
         }
-
         const worksMouseLeave = e => {
             const reverseAnimation = () => {
                 outerCursorExpandTween.reverse();
@@ -280,6 +310,46 @@ class Cursor {
         works.addEventListener('mouseleave', worksMouseLeave);
 
     }
+    addWorkAnimation() {
+        const workDetailShowTween = TweenLite.to(this.innerCursor.detail, this.ANIMATION_SPEED, {
+            scale: this.WORKS_SCALE_RATE,
+            ease: Back.easeOut.config(1.5),
+            paused: true
+        });
+        const handShrinkTween = TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
+            scale: 0,
+            ease: Back.easeOut.config(1.5),
+            paused: true
+        });
+        const arrowFadeOutTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED / 2, {
+            opacity: 0,
+            ease: Back.easeOut.config(1.5),
+            paused: true
+        })
+
+        const workMouseMove = () => {
+            this.isInWork = true;
+            handShrinkTween.play();
+            workDetailShowTween.play();
+            arrowFadeOutTween.play();
+        }
+        const workMouseLeave = () => {
+            arrowFadeOutTween.reverse();
+            workDetailShowTween.reverse();
+            // !bug 当鼠标一开始就在work上时，出去再进来无法隐藏hand（目前暂时无法解决）
+            handShrinkTween.reverse();
+            setTimeout(() => {
+                this.isInWork = false;
+            }, this.ANIMATION_SPEED * 1000);
+        }
+
+        const works = document.querySelectorAll('.work');
+        works.forEach(work => {
+            work.addEventListener('mousemove', workMouseMove);
+            work.addEventListener('mouseleave', workMouseLeave);
+        })
+    }
+
     // * 暂时不用的代码
 
     // addLinkAnimation() {

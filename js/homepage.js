@@ -27,8 +27,7 @@
 
 {
     // * 新页面从新标签页打开
-    const socIcons = document.querySelector('.social-icons');
-    const aTags = socIcons.querySelectorAll('a');
+    const aTags = document.querySelectorAll('a');
     for (let i = 0; i < aTags.length; i++) {
         aTags[i].target = '_blank';
     }

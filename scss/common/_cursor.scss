@@ -60,6 +60,11 @@
             color: var(--cursorColor);
             font-size: $normalInnerCursorSize;
         }
+
+        .detail i {
+            color: var(--cursorColor);
+            font-size: $normalInnerCursorSize * 1.2;
+        }
     }
 
     &-outer-box {
