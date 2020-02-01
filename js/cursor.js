@@ -9,7 +9,7 @@ class Cursor {
         this.initConst();
         this.initCursor();
         this.initTweens();
-        this.initAnimations();
+        this.initEvents();
     }
 
     initElem() {
@@ -147,7 +147,7 @@ class Cursor {
             paused: true
         })
     }
-    initAnimations() {
+    initEvents() {
         // * 各种事件监听的初始化
         // global
         this.addGlobalAnimation();
@@ -161,6 +161,8 @@ class Cursor {
         this.addWorkAnimation();
         // link
         // this.addLinkAnimation();
+        // work的a标签
+        this.listenWorkLinkEvent();
     }
     addGlobalAnimation() {
         // * 全局动画
@@ -373,19 +375,36 @@ class Cursor {
             // 恢复hand型
             this.isInWork = false;
         }
-        const workMouseDown = () => {
-
-        };
-        const workMouseUp = () => {
-
-        };
 
         const works = document.querySelectorAll('.work');
         works.forEach(work => {
             work.addEventListener('mousemove', workMouseMove);
-            work.addEventListener('mousedown', workMouseDown);
-            work.addEventListener('mouseUp', workMouseUp);
             work.addEventListener('mouseleave', workMouseLeave);
+        });
+    }
+    listenWorkLinkEvent() {
+        // 监听鼠标点击，允许用户可以在work上仍然执行拖动的操作
+        let mouseDownX = 0,
+            mouseDownY = 0;
+        const linkMouseDown = e => {
+            mouseDownX = e.clientX;
+            mouseDownY = e.clientY;
+        };
+        const linkClick = e => {
+            // 计算鼠标点下再抬起所移动的曼哈顿距离（没有使用欧式距离是因为这个计算简单）
+            const dist = Math.abs(mouseDownX - e.clientX) + Math.abs(mouseDownY - e.clientY);
+            // 如果距离大于20，则判断此次行为为拖动works而不是打开链接
+            if (dist > 20) {
+                // 阻止默认事件（a标签的href链接跳转）
+                e.preventDefault();
+                return false;
+            }
+        };
+        // work a事件监听
+        const workLinks = document.querySelectorAll('.work a');
+        workLinks.forEach(link => {
+            link.addEventListener('mousedown', linkMouseDown);
+            link.addEventListener('click', linkClick);
         })
     }
 
