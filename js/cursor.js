@@ -9,10 +9,11 @@ class Cursor {
         this.initConst();
         this.initCursor();
         this.initTweens();
-        this.initEvents();
+        this.initAnimations();
     }
 
     initElem() {
+        // * 初始化元素
         // 光标内部元素
         this.innerCursor = {};
         this.innerCursor.box = document.querySelector('.cursor-inner-box');
@@ -28,6 +29,7 @@ class Cursor {
         this.outerCursor.arrow = this.outerCursor.box.querySelector('.arrow');
     }
     initProp() {
+        // * 初始化属性
         // 内部光标大小
         this.innerCursor.box.size = this.innerCursor.box.getBoundingClientRect().width;
         // this.innerCursor.point.size = this.innerCursor.point.getBoundingClientRect().width;
@@ -55,6 +57,7 @@ class Cursor {
         this.isInWork = false;
     }
     initConst() {
+        // * 初始化常量
         // 外光标移动速度
         this.MOVE_SPEED = 0.15;
         // 缓动动画播放速度
@@ -64,26 +67,31 @@ class Cursor {
     }
 
     initCursor() {
-        // * 光标初始化
+        // * 初始化光标
+        // 初始化光标与动画相关的样式
+        this.initCursorCss();
+        // 初始化光标位置
+        this.initCursorPos();
+        // 开始渲染光标的移动
+        this.renderCursorMove();
+    }
+    initCursorCss() {
+        // * 初始化光标与动画相关的样式
         // 需要缩小为0的光标
-        const hiddenList = [
+        const scale0List = [
             this.innerCursor.zoomIn,
             this.innerCursor.hand,
             this.innerCursor.detail,
             this.outerCursor.arrow,
         ];
-        hiddenList.forEach(cursor => {
+        scale0List.forEach(cursor => {
             TweenLite.set(cursor, {
                 scale: 0
             });
         });
-
-        // 初始化鼠标位置
-        this.initCursorPos();
-        // 开始渲染
-        this.renderCursorMove();
     }
     initCursorPos() {
+        // * 初始化光标位置
         // 自定义光标还没有显示时，监听鼠标第一次的移动，设置自定义光标到光标坐标处
         const unveilCursor = () => {
             TweenLite.set(this.outerCursor.box, {
@@ -108,6 +116,7 @@ class Cursor {
         });
     }
     renderCursorMove() {
+        // * 开始渲染光标移动
         const frame = () => {
             // 内部光标实时改变
             TweenLite.set(this.innerCursor.box, {
@@ -130,6 +139,7 @@ class Cursor {
         requestAnimationFrame(frame);
     }
     initTweens() {
+        // * 全局Tween
         this.tween = {};
         this.tween.shrinkOuterCursor = TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
             scale: 0.8,
@@ -137,7 +147,7 @@ class Cursor {
             paused: true
         })
     }
-    initEvents() {
+    initAnimations() {
         // * 各种事件监听的初始化
         // global
         this.addGlobalAnimation();
@@ -153,6 +163,7 @@ class Cursor {
         // this.addLinkAnimation();
     }
     addGlobalAnimation() {
+        // * 全局动画
         const globalMouseDown = () => {
             this.tween.shrinkOuterCursor.play();
         }
@@ -164,7 +175,7 @@ class Cursor {
         document.addEventListener('mouseup', globalMouseUp);
     }
     addIconBtnAnimation() {
-        // enter
+        // * icon-btn动画
         const iconBtnMouseEnter = () => {
             TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                 scale: 3,
@@ -172,7 +183,6 @@ class Cursor {
                 ease: Back.easeOut.config(1.5)
             });
         }
-        // hover
         const iconBtnMouseOver = e => {
             // 鼠标外盒不再随鼠标移动改变坐标
             this.isStuck = true;
@@ -192,7 +202,6 @@ class Cursor {
                 ease: Back.easeOut.config(1.5),
             });
         };
-        // leave
         const iconBtnMouseLeave = () => {
             this.isStuck = false;
             TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
@@ -208,6 +217,7 @@ class Cursor {
             })
         };
 
+        // 应用icon-btn相关监听器
         const iconBtns = document.querySelectorAll('.icon-btn');
         iconBtns.forEach(item => {
             item.addEventListener('mouseenter', iconBtnMouseEnter);
@@ -216,6 +226,7 @@ class Cursor {
         });
     }
     addIconLinkAnimation() {
+        // * icon-link动画
         const zoomInShowTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
             scale: 1,
             paused: true
@@ -230,12 +241,12 @@ class Cursor {
             zoomInShowTween.play();
             zoomInRotateTween.play();
         }
-
         const iconLinkMouseLeave = () => {
             zoomInShowTween.reverse();
             zoomInRotateTween.reverse();
         }
 
+        // 应用icon-link相关监听器
         const iconLink = document.querySelectorAll('.icon-link');
         iconLink.forEach(item => {
             item.addEventListener('mouseenter', iconLinkMouseEnter);
@@ -243,6 +254,7 @@ class Cursor {
         });
     }
     addWorksAnimation() {
+        // * works动画
         const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
             scale: this.WORKS_SCALE_RATE,
             ease: Back.easeOut.config(1.5),
@@ -269,29 +281,46 @@ class Cursor {
         const worksMouseMove = () => {
             outerCursorExpandTween.play();
             pointShrinkTween.play();
+            // 判断是否在work内
             if (!this.isInWork) {
+                // 在works内而不在work内，显示hand和arrow
                 handShowTween.play();
+                // 因为opacity一开始就是1，想要实现进入works是缩放而work中退出是渐变则不能合并入handShowTween
+                TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
+                    opacity: 1
+                })
                 arrowShowTween.play();
+            } else {
+                // 在work内，隐藏hand和arrow，其中hand应用透明度渐变动画
+                handShowTween.reverse();
+                TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
+                    opacity: 0
+                });
+                arrowShowTween.reverse();
             }
         }
 
         const worksMouseDown = () => {
+            // hand变为drag-hand
             this.innerCursor.hand.children[0].classList.remove('icon-hand');
             this.innerCursor.hand.children[0].classList.add('icon-drag-hand');
         }
         const worksMouseUp = () => {
+            // 换回去
             this.innerCursor.hand.children[0].classList.remove('icon-drag-hand');
             this.innerCursor.hand.children[0].classList.add('icon-hand');
         }
         const worksMouseLeave = e => {
+            // 保存一下需要执行的动画
             const reverseAnimation = () => {
                 outerCursorExpandTween.reverse();
                 arrowShowTween.reverse();
                 pointShrinkTween.reverse();
                 handShowTween.reverse();
             }
-            // 如果鼠标是拖拽着超出了works边缘，则持续监听直到松开鼠标
+            // 如果鼠标是拖拽着超出了works边缘
             if (e.buttons) {
+                // 持续监听直到松开鼠标再执行动画
                 const delayReverseAnimation = () => {
                     reverseAnimation();
                     worksMouseUp();
@@ -299,25 +328,21 @@ class Cursor {
                 }
                 document.addEventListener('mouseup', delayReverseAnimation);
             } else {
+                // 直接执行动画
                 reverseAnimation();
             }
         }
-
+        // 应用works相关监听器
         const works = document.querySelector('.works');
         works.addEventListener('mousemove', worksMouseMove);
         works.addEventListener('mousedown', worksMouseDown);
         works.addEventListener('mouseup', worksMouseUp);
         works.addEventListener('mouseleave', worksMouseLeave);
-
     }
     addWorkAnimation() {
+        // * work动画
         const workDetailShowTween = TweenLite.to(this.innerCursor.detail, this.ANIMATION_SPEED, {
             scale: this.WORKS_SCALE_RATE,
-            ease: Back.easeOut.config(1.5),
-            paused: true
-        });
-        const handShrinkTween = TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
-            scale: 0,
             ease: Back.easeOut.config(1.5),
             paused: true
         });
@@ -325,27 +350,41 @@ class Cursor {
             opacity: 0,
             ease: Back.easeOut.config(1.5),
             paused: true
-        })
+        });
 
         const workMouseMove = () => {
-            this.isInWork = true;
-            handShrinkTween.play();
-            workDetailShowTween.play();
             arrowFadeOutTween.play();
+            workDetailShowTween.play();
+            // 外光标改为实时移动
+            this.outerCursorSpeed = 0;
+            TweenLite.set(this.outerCursor.box, {
+                x: this.clientX - this.outerCursor.box.size / 2,
+                y: this.clientY - this.outerCursor.box.size / 2,
+            });
+            // 处于work中,works中监听的mousemove改为隐藏hand和arrow
+            this.isInWork = true;
         }
         const workMouseLeave = () => {
+            // 反向播放动画
             arrowFadeOutTween.reverse();
             workDetailShowTween.reverse();
-            // !bug 当鼠标一开始就在work上时，出去再进来无法隐藏hand（目前暂时无法解决）
-            handShrinkTween.reverse();
-            setTimeout(() => {
-                this.isInWork = false;
-            }, this.ANIMATION_SPEED * 1000);
+            // 恢复缓动移动
+            this.outerCursorSpeed = this.MOVE_SPEED;
+            // 恢复hand型
+            this.isInWork = false;
         }
+        const workMouseDown = () => {
+
+        };
+        const workMouseUp = () => {
+
+        };
 
         const works = document.querySelectorAll('.work');
         works.forEach(work => {
             work.addEventListener('mousemove', workMouseMove);
+            work.addEventListener('mousedown', workMouseDown);
+            work.addEventListener('mouseUp', workMouseUp);
             work.addEventListener('mouseleave', workMouseLeave);
         })
     }

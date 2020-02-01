@@ -404,8 +404,8 @@ a {
 }
 
 .works {
-  height: 100vh;
-  padding: 20vh 20vw;
+  height: 70vh;
+  padding: 5vh 20vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
