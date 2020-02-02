@@ -3,6 +3,9 @@
 @import 'common/fonts';
 @import 'common/globals';
 
+@import 'common/cursor';
+@import 'common/scrollbar';
+
 .body {
     &-window {
         width: 100vw;
@@ -87,6 +90,7 @@
 
     i {
         font-size: 12px;
+
         @keyframes floating {
             from {
                 top: -5px;
@@ -110,7 +114,7 @@
 
 .homepage-footer {
     width: 100%;
-    height: 54px;
+    height: $footerHeight;
 
     display: flex;
     flex-direction: column;
@@ -124,20 +128,3 @@
         text-align: center;
     }
 }
-
-@import "./common/cursor"
-
-// .cursor {
-//     // mix-blend-mode: difference;
-//     background: rgba(255, 255, 255, 0.3);
-//     border: 1px black solid;
-//     border-radius: 50%;
-
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     z-index: 100;
-    
-//     pointer-events: none;
-//     transform-origin: 0 0;
-// }

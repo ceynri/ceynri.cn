@@ -20,6 +20,8 @@ $darkThemeColor: scale-color($desaturateThemeColor, $lightness: -90%);
     --themeShadowColor: #{rgba($darkThemeColor, 0.4)};
     // 文本默认颜色
     --textColor: #ccc;
+    // 滚动条背景色
+    --scrollbarColor: #232628;
     // 光标色
     --cursorColor: white;
 }
