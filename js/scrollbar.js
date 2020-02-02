@@ -19,6 +19,8 @@ class Scrollbar {
         this.setWindowHeight();
         // 缓动速度（初始为0以禁止动画，便于优先应用set动画）
         this.speed = 0;
+        // 记录是否产生了拖动行为
+        this.isDragged = false;
     }
     initScroll() {
         TweenLite.set(this.bar, {
@@ -35,13 +37,67 @@ class Scrollbar {
             this.setPageHeight();
             this.setWindowHeight();
         });
-        window.addEventListener('scroll', () => this.renderScroll());
+        window.addEventListener('scroll', () => {
+            this.renderScroll()
+        });
+
+        this.scrollbar.addEventListener('mousedown', e => {
+            this.scrollByScrollbar(e);
+        });
     }
     renderScroll() {
         TweenLite.to(this.bar, this.speed, {
             height: this.getScrollbarHeight(),
             ease: Back.easeOut
         });
+    }
+    scrollByScrollbar(e) {
+        // 禁止默认行为，避免拖动鼠标的时候把页面中的文本也选中了
+        e.preventDefault();
+        // 以滚动条高度与页面高度比例映射拖动的距离值
+        const mapFromBarToPage = y => y / this.windowHeight * this.pageHeight;
+        const scrollPageByClickScrollbar = clickY => {
+            // 令鼠标点击的位置对应滚动后的页面的窗口底端位置
+            const bottomY = mapFromBarToPage(clickY);
+            // 底端位置减去窗口高度得到顶端y坐标值
+            const targetY = bottomY - this.windowHeight;
+            window.scrollTo(0, targetY);
+            // targetY小于0时会自动取0
+        }
+
+        // 记录鼠标落下的位置
+        const mouseDownClientY = e.clientY;
+        // 判断鼠标落下的位置是否在滚动条未滚动到的位置
+        if (mouseDownClientY > this.getScrollbarHeight()) {
+            scrollPageByClickScrollbar(mouseDownClientY);
+        }
+
+        // 记录拖动前的窗口顶端坐标值
+        const beforeDragScrollTop = this.getScrollTop();
+        // 记录是否产生了拖动行为
+        this.isDragged = false;
+
+        // 响应接下来的产生的拖动滚动条的行为
+        const dragEvent = e => {
+            console.log(this.isDragged);
+            this.isDragged = true;
+            const dragDist = mapFromBarToPage(e.clientY - mouseDownClientY);
+            const targetY = dragDist + beforeDragScrollTop;
+            window.scrollTo(0, targetY);
+        };
+        const mouseUpEvent = () => {
+            if (!this.isDragged) {
+                console.log(this.isDragged);
+                // 如果没有拖动过，则行为变成滚动到所点击的位置
+                scrollPageByClickScrollbar(mouseDownClientY);
+            }
+            // 移除监听
+            document.removeEventListener('mousemove', dragEvent);
+            document.removeEventListener('mouseup', mouseUpEvent);
+        }
+        // 因为用户拖动滚动条时可能会移出滚动条的边界，所以把事件绑定到document上
+        document.addEventListener('mousemove', dragEvent);
+        document.addEventListener('mouseup', mouseUpEvent);
     }
 
     // setter 保存以不必重复从DOM中获取

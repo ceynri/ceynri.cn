@@ -2,7 +2,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    width: 4px;
+    width: $scrollbarWidth;
     height: 100vh;
     background-color: var(--scrollbarColor);
     z-index: 10000;
@@ -15,5 +15,22 @@
         // 高度由js计算
         height: 0;
         background-color: var(--themeColor);
+        filter: drop-shadow(0 4px 4px $themeColor);
+
+        // 在底端加一个三角形
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 0;
+
+            // 三角形trick
+            border: {
+                top: $scrollbarWidth / 2 solid var(--themeColor);
+                right: $scrollbarWidth / 2 solid transparent;
+                bottom: $scrollbarWidth / 2 solid transparent;
+                left: $scrollbarWidth / 2 solid var(--themeColor);
+            }
+        }
     }
 }

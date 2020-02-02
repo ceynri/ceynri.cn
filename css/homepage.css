@@ -204,7 +204,7 @@ a {
   position: fixed;
   right: 0;
   top: 0;
-  width: 4px;
+  width: 6px;
   height: 100vh;
   background-color: var(--scrollbarColor);
   z-index: 10000;
@@ -217,6 +217,19 @@ a {
   width: 100%;
   height: 0;
   background-color: var(--themeColor);
+  -webkit-filter: drop-shadow(0 4px 4px #823);
+          filter: drop-shadow(0 4px 4px #823);
+}
+
+.scrollbar .bar::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-top: 3px solid var(--themeColor);
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid var(--themeColor);
 }
 
 .body-window {
