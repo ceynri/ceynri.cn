@@ -120,7 +120,8 @@
         // setter
         setBodySize() {
             // * 设置主体的高度
-            document.body.style.height = `${this.page.scrollHeight}px`;
+            document.body.style.height = `${this.page.scrollHeight - 1}px`;
+            // “-1”是为了由于比例缩放带来的像素误差安全，尽量不露底
         }
         setWorksRightBound() {
             // * 设置works的右边界（即向左最多可以位移的距离）
@@ -140,7 +141,7 @@
         }
         getPageScroll() {
             // * 获得当前的页面滚动高度
-            return window.pageYOffset || document.documentElement.scrollTop;
+            return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
         }
 
         // calc
