@@ -4,23 +4,14 @@
     padding: 0;
 }
 
-:root {
-    font: {
-        size: 14px;
-        family: $defaultFont;
-    }
-
-    color: var(--textColor);
-}
-
-body {
+html {
     // 抗锯齿
     // ? 没什么用
     // chrome、safari
     -webkit-font-smoothing: antialiased;
     // firefox
     -moz-osx-font-smoothing: grayscale;
-
+    
     // IE10/Edge 去除滚动条
     -ms-overflow-style: none;
     // firefox 64 滚动条透明化
@@ -33,7 +24,15 @@ body {
         width: 0;
         height: 0;
     }
+}
 
+body {
+    font: {
+        size: 14px;
+        family: $defaultFont;
+    }
+
+    color: var(--textColor);
 }
 
 body,

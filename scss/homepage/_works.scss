@@ -25,6 +25,7 @@
             border-left: 4px solid var(--textColor);
 
             font-size: $workFontSize;
+            color: snow;
 
             h2,
             h1 {
@@ -89,6 +90,7 @@
         &-title {
             margin-left: -10%;
             width: 100%;
+            color: snow;
 
             %title {
                 font: {
@@ -137,5 +139,12 @@
 
             }
         }
+
+        &.case-2 {
+            .work-tile {
+                background-color: #ddae21;
+            }
+        }
+
     }
 }

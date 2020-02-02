@@ -35,13 +35,7 @@
   padding: 0;
 }
 
-:root {
-  font-size: 14px;
-  font-family: "PingFang SC", "Circular", "MircoSoft YaHei", Sans-serif;
-  color: var(--textColor);
-}
-
-body {
+html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none;
@@ -49,9 +43,15 @@ body {
   scrollbar-width: none;
 }
 
-body::-webkit-scrollbar {
+html::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+body {
+  font-size: 14px;
+  font-family: "PingFang SC", "Circular", "MircoSoft YaHei", Sans-serif;
+  color: var(--textColor);
 }
 
 h1,
@@ -404,8 +404,8 @@ a {
 }
 
 .works {
-  height: 70vh;
-  padding: 5vh 20vw;
+  height: 80vh;
+  padding: 10vh 20vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -436,6 +436,7 @@ a {
   padding-left: 2%;
   border-left: 4px solid var(--textColor);
   font-size: 36px;
+  color: snow;
 }
 
 .works-wrapper .works-header h2,
@@ -492,6 +493,7 @@ a {
 .works .work-title {
   margin-left: -10%;
   width: 100%;
+  color: snow;
 }
 
 .works .work-title h1, .works .work-title h2 {
@@ -526,6 +528,10 @@ a {
   position: absolute;
   top: 100%;
   left: 8%;
+}
+
+.works .work.case-2 .work-tile {
+  background-color: #ddae21;
 }
 
 .one-page-wrapper {

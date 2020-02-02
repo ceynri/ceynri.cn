@@ -389,6 +389,8 @@ class Cursor {
         const linkMouseDown = e => {
             mouseDownX = e.clientX;
             mouseDownY = e.clientY;
+            // 有些浏览器（如firefox）有手势插件（如拖拽链接从后台新标签页打开），禁用事件默认操作可以解决该问题
+            e.preventDefault();
         };
         const linkClick = e => {
             // 计算鼠标点下再抬起所移动的曼哈顿距离（没有使用欧式距离是因为这个计算简单）

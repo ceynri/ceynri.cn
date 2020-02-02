@@ -42,7 +42,7 @@
             // 缓动速度
             this.EASE_SPEED = .5;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
-            this.SCROLL_RATE = 1;
+            this.SCROLL_RATE = 1.2;
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
             this.ELASTIC_RANGE = 200;
         }
