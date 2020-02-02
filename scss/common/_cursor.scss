@@ -23,6 +23,8 @@
         position: fixed;
         pointer-events: none;
         z-index: 12000;
+        // 一开始先让鼠标处于屏幕外
+        transform: translate(-200px, -200px);
 
         .point {
             width: $normalInnerCursorSize / 2;
@@ -74,6 +76,8 @@
         position: fixed;
         pointer-events: none;
         z-index: 11000;
+        // 一开始先让鼠标处于屏幕外
+        transform: translate(-200px, -200px);
 
         .normal {
             box-sizing: content-box;

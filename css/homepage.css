@@ -112,6 +112,8 @@ a {
   position: fixed;
   pointer-events: none;
   z-index: 12000;
+  -webkit-transform: translate(-200px, -200px);
+          transform: translate(-200px, -200px);
 }
 
 .cursor-inner-box .point {
@@ -162,6 +164,8 @@ a {
   position: fixed;
   pointer-events: none;
   z-index: 11000;
+  -webkit-transform: translate(-200px, -200px);
+          transform: translate(-200px, -200px);
 }
 
 .cursor-outer-box .normal {

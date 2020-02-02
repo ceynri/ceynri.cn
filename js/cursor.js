@@ -42,7 +42,7 @@ class Cursor {
         // this.outerCursor.arrow.size = this.outerCursor.box.size;
 
         // 光标默认颜色
-        const root = document.querySelector('html');
+        const root = document.documentElement;
         this.cursorColor = getComputedStyle(root).getPropertyValue('--cursorColor') || '#fff';
         // 外部光标默认透明度
         this.outerCursorOpacity = getComputedStyle(this.outerCursor.box).getPropertyValue('opacity');
@@ -69,13 +69,13 @@ class Cursor {
     initCursor() {
         // * 初始化光标
         // 初始化光标与动画相关的样式
-        this.initCursorCss();
+        this.initCursorStyle();
         // 初始化光标位置
         this.initCursorPos();
         // 开始渲染光标的移动
         this.renderCursorMove();
     }
-    initCursorCss() {
+    initCursorStyle() {
         // * 初始化光标与动画相关的样式
         // 需要缩小为0的光标
         const scale0List = [
