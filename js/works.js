@@ -21,7 +21,8 @@
             this.work = work;
             this.panel = this.work.querySelector('.work-panel');
             this.card = this.panel.querySelector('.work-card');
-            this.text = this.panel.querySelector('.work-text');
+            this.title = this.panel.querySelector('.work-title');
+            this.seeMore = this.panel.querySelector('.see-more');
         }
 
         initPerspective() {
@@ -29,8 +30,13 @@
                 z: -80,
                 paused: true
             });
-            const textZoomInTween = TweenLite.to(this.text, this.LAYERED_SPEED, {
+            const textZoomInTween = TweenLite.to(this.title, this.LAYERED_SPEED, {
                 z: 40,
+                paused: true
+            });
+            const seeMoreShowTween = TweenLite.to(this.seeMore, this.LAYERED_SPEED, {
+                opacity: 1,
+                ease: Strong.easeOut,
                 paused: true
             });
 
@@ -44,6 +50,7 @@
                 });
                 cardZoomOutTween.play();
                 textZoomInTween.play();
+                seeMoreShowTween.play();
             });
             this.work.addEventListener('mouseout', () => {
                 TweenLite.to(this.panel, this.ROTATE_SPEED, {
@@ -53,6 +60,7 @@
                 });
                 cardZoomOutTween.reverse();
                 textZoomInTween.reverse();
+                seeMoreShowTween.reverse();
             });
         }
     }

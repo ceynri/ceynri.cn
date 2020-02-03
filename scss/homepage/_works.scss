@@ -25,7 +25,7 @@
             border-left: 4px solid var(--textColor);
 
             font-size: $workFontSize;
-            color: snow;
+            color: var(--lightTextColor);
 
             h2,
             h1 {
@@ -91,19 +91,26 @@
         &-text {
             display: block;
             width: 100%;
+            color: var(--lightTextColor);
 
             position: absolute;
-            left: 0;
+            right: 10%;
             top: 50%;
             z-index: 99;
 
             pointer-events: none;
+
+            .see-more {
+                display: inline-block;
+                margin-top: 1em;
+                border-bottom: 1px solid var(--lightTextColor);
+                opacity: 0;
+            }
         }
 
         &-title {
-            margin-left: -10%;
             width: 100%;
-            color: snow;
+            color: var(--lightTextColor);
 
             h1,
             h2 {
@@ -119,8 +126,6 @@
         &-card {
             width: 100%;
             height: 100%;
-
-            box-shadow: $workShadow;
         }
 
         &.case {
@@ -139,6 +144,7 @@
                     width: 100%;
                     background-color: $vueColor2;
                     border-radius: 1% 8% 8% 1%;
+                    box-shadow: $workShadow;
                 }
 
                 .bangage {
@@ -170,12 +176,14 @@
                 .background {
                     width: 100%;
                     height: 100%;
-                    background-color: #fc2;
+                    background-color: $yellow;
+                    box-shadow: $workShadow;
                 }
             }
 
             &-more .work-card {
                 background-color: $purple;
+                box-shadow: $workShadow;
             }
         }
     }

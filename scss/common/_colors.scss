@@ -4,6 +4,7 @@ $vueColor: #41b883;
 $vueColor2: #35495e;
 $themeColor: #823;
 $purple: #563d7c;
+$yellow: #fc2;
 
 // 背景的遮罩颜色
 // TODO 应该使用js来计算颜色
@@ -21,6 +22,8 @@ $darkThemeColor: scale-color($desaturateThemeColor, $lightness: -90%);
     --themeShadowColor: #{rgba($darkThemeColor, 0.4)};
     // 文本默认颜色
     --textColor: #ccc;
+    // 文本亮色
+    --lightTextColor: snow;
     // 滚动条背景色
     --scrollbarColor: #232628;
     // 光标色
