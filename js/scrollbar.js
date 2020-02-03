@@ -79,7 +79,6 @@ class Scrollbar {
 
         // 响应接下来的产生的拖动滚动条的行为
         const dragEvent = e => {
-            console.log(this.isDragged);
             this.isDragged = true;
             const dragDist = mapFromBarToPage(e.clientY - mouseDownClientY);
             const targetY = dragDist + beforeDragScrollTop;
@@ -87,7 +86,6 @@ class Scrollbar {
         };
         const mouseUpEvent = () => {
             if (!this.isDragged) {
-                console.log(this.isDragged);
                 // 如果没有拖动过，则行为变成滚动到所点击的位置
                 scrollPageByClickScrollbar(mouseDownClientY);
             }
