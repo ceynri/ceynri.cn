@@ -1,150 +1,175 @@
 .works {
-    &-wrapper {
-        height: 100vh;
-        min-height: $workHeight;
-        margin-top: $gapWidth;
+  &-wrapper {
+    height: 100vh;
+    min-height: $workHeight;
+    margin-top: $gapWidth;
 
-        display: flex;
-        align-items: center;
+    display: flex;
+    align-items: center;
 
-        // 禁止用户选择文本，避免拖拽works时误选文字
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+    // 禁止用户选择文本，避免拖拽works时误选文字
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
-        position: relative;
+    position: relative;
 
-        .works-header {
-            position: absolute;
-            left: 10vw;
-            bottom: calc(20vh + #{$workHeight} - #{$workFontSize} * 0.8);
+    .works-header {
+      position: absolute;
+      left: 10vw;
+      bottom: calc(20vh + #{$workHeight} - #{$workFontSize} * 0.8);
 
-            line-height: 1;
-            padding-left: 2%;
-            border-left: 4px solid var(--textColor);
+      line-height: 1;
+      padding-left: 2%;
+      border-left: 4px solid var(--textColor);
 
-            font-size: $workFontSize;
-            color: snow;
+      font-size: $workFontSize;
+      color: snow;
 
-            h2,
-            h1 {
-                font-family: $titleFont;
-            }
+      h2,
+      h1 {
+        font-family: $titleFont;
+      }
 
-            h2 {
-                font-size: 1em;
-            }
+      h2 {
+        font-size: 1em;
+      }
 
-            h1 {
-                font-size: 0.75em;
-                margin-top: 0.5em;
-            }
-        }
+      h1 {
+        font-size: 0.75em;
+        margin-top: 0.5em;
+      }
+    }
+  }
+
+  height: $worksHeight;
+  padding: $worksVertPadding $worksHorizPadding;
+  display: flex;
+
+  &-background {
+    width: 100vw;
+    height: $worksHeight;
+    position: absolute;
+    top: $worksVertPadding;
+    left: 0;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 0 64px 4px rgba(255, 255, 255, .2);
+  }
+
+  .work {
+    width: $workWidth;
+    height: $workHeight;
+
+    max: {
+      width: $workMaxWidth;
+      height: $workMaxHeight;
     }
 
-    height: $worksHeight;
-    padding: $worksPadding;
-    display: flex;
+    margin-left: 16vw;
 
-    .work {
-        width: $workWidth;
-        height: $workHeight;
+    // 定义视距
+    perspective: $workPerspective;
 
-        max: {
-            width: $workMaxWidth;
-            height: $workMaxHeight;
+    position: relative;
+
+    &:nth-of-type(odd) {
+      align-self: flex-end;
+    }
+
+    &:nth-of-type(even) {
+      align-self: flex-start;
+    }
+
+    &-panel {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    &-text {
+      display: block;
+      width: 100%;
+
+      position: absolute;
+      left: 0;
+      top: 50%;
+      z-index: 99;
+
+      pointer-events: none;
+    }
+
+    &-title {
+      margin-left: -10%;
+      width: 100%;
+      color: snow;
+
+      h1,
+      h2 {
+        font: {
+          size: $workFontSize;
+          family: $boldFont;
         }
 
-        margin-left: 15vw;
-        position: relative;
+        text-shadow: $textShadow;
+      }
+    }
 
-        &:nth-of-type(odd) {
-            align-self: flex-end;
-        }
+    &-card {
+      width: 100%;
+      height: 100%;
 
-        &:nth-of-type(even) {
-            align-self: flex-start;
-        }
+      box-shadow: $workShadow;
 
-        &-tile {
-            width: 100%;
-            height: 100%;
-            background-color: #563d7c;
+      &.case {
+        &-note {
+          position: relative;
 
-            box-shadow: $workShadow;
-        }
-
-        &-text {
-            display: block;
-            width: 100%;
-
-            position: absolute;
-            left: 0;
-            top: 50%;
-            z-index: 99;
-
+          &>* {
             pointer-events: none;
-        }
+          }
 
-        &-title {
-            margin-left: -10%;
+          .cover {
+            height: 100%;
             width: 100%;
-            color: snow;
-
-            %title {
-                font: {
-                    size: $workFontSize;
-                    family: $boldFont;
-                }
-
-                text-shadow: $textShadow;
-            }
-
-            h1 {
-                @extend %title;
-            }
-
-            h2 {
-                @extend %title;
-            }
-        }
-
-        &.case-1 .work-tile {
             background-color: $vueColor2;
             border-radius: 1% 8% 8% 1%;
+          }
 
-            position: relative;
+          .bangage {
+            height: 100%;
+            width: 8%;
+            position: absolute;
+            top: 0;
+            right: 27%;
+            background-color: $vueColor;
+            box-shadow: 0 0 6px -2px var(--themeShadowColor);
+            // z-index: 0;
+          }
 
-            .bangage {
-                height: 100%;
-                width: 8%;
-                position: absolute;
-                top: 0;
-                right: 27%;
-                background-color: $vueColor;
-                box-shadow: 0 0 6px -2px var(--themeShadowColor);
-                z-index: 1;
-            }
-
-            .bookmark {
-                width: 0;
-                height: 10%;
-                border: 12px solid #823;
-                border-bottom: 12px solid transparent;
-                position: absolute;
-                top: 100%;
-                left: 8%;
-                // background-color: #823;
-
-            }
+          .bookmark {
+            width: 0;
+            height: 10%;
+            border: 12px solid #823;
+            border-bottom: 12px solid transparent;
+            position: absolute;
+            top: 100%;
+            left: 8%;
+          }
         }
 
-        &.case-2 {
-            .work-tile {
-                background-color: #ddae21;
-            }
-        }
+        &-demo-collection {
+          overflow: hidden;
 
+          
+          .background {
+            width: 100%;
+            height: 100%;
+            background-color: #fc2;
+          }
+        }
+      }
     }
+  }
 }
