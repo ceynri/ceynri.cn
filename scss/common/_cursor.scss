@@ -58,13 +58,7 @@
             }
         }
 
-        .hand i {
-            color: var(--cursorColor);
-            font-size: $normalInnerCursorSize;
-        }
-
         .detail i {
-            color: var(--cursorColor);
             font-size: $normalInnerCursorSize * 1.2;
         }
     }
@@ -85,7 +79,6 @@
             height: $normalOuterCursorSize;
             border: 1px solid var(--cursorColor);
             border-radius: 50%;
-            opacity: 0.75;
             // 注：在CSS中不能使用transform属性，因为TweenLite的动画会把它覆盖掉
         }
 
@@ -95,10 +88,6 @@
             position: relative;
 
             .icon {
-                i {
-                    font-size: $normalInnerCursorSize;
-                }
-
                 &-left-arrow {
                     position: absolute;
                     right: 100%;
@@ -114,5 +103,10 @@
                 }
             }
         }
+    }
+
+    i {
+        color: var(--cursorColor);
+        font-size: $normalInnerCursorSize;
     }
 }

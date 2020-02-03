@@ -1,14 +1,14 @@
-{
     class Work {
         constructor(work) {
             this.initElem(work);
             this.initConst();
             this.initProp();
-            this.addStereoParallax();
+            this.initPerspective();
         }
         initConst() {
             this.ANGLE = 30;
-            this.ANIMATION_SPEED = 0.2;
+            this.ROTATE_SPEED = 0.2;
+            this.LAYERED_SPEED = 0.4;
         }
         initProp() {
             this.workWidth = this.work.clientWidth;
@@ -24,20 +24,20 @@
             this.text = this.panel.querySelector('.work-text');
         }
 
-        addStereoParallax() {
-            const cardZoomOutTween = TweenLite.to(this.card, this.ANIMATION_SPEED * 2, {
-                z: -72,
+        initPerspective() {
+            const cardZoomOutTween = TweenLite.to(this.card, this.LAYERED_SPEED, {
+                z: -80,
                 paused: true
             });
-            const textZoomInTween = TweenLite.to(this.text, this.ANIMATION_SPEED * 2, {
-                z: 36,
+            const textZoomInTween = TweenLite.to(this.text, this.LAYERED_SPEED, {
+                z: 40,
                 paused: true
             });
 
             this.work.addEventListener('mousemove', e => {
                 this.mouseX = e.offsetX - this.workWidth / 2;
                 this.mouseY = e.offsetY - this.workHeight / 2;
-                TweenLite.to(this.panel, this.ANIMATION_SPEED, {
+                TweenLite.to(this.panel, this.ROTATE_SPEED, {
                     rotationX: -this.mouseY / this.workHeight * this.ANGLE,
                     rotationY: this.mouseX / this.workWidth * this.ANGLE,
                     ease: Power0.easeOut,
@@ -46,7 +46,7 @@
                 textZoomInTween.play();
             });
             this.work.addEventListener('mouseout', () => {
-                TweenLite.to(this.panel, this.ANIMATION_SPEED, {
+                TweenLite.to(this.panel, this.ROTATE_SPEED, {
                     rotationX: 0,
                     rotationY: 0,
                     ease: Power0.easeIn
@@ -57,9 +57,92 @@
         }
     }
 
-    const works = document.querySelectorAll('.work');
-    works.forEach(work => {
-        new Work(work);
-    });
+    class Note extends Work {
+        constructor(work) {
+            super(work);
+            this.addElem();
+            this.initParallax();
+        }
+        addElem() {
+            this.bangage = this.card.querySelector('.bangage');
+            this.bookmark = this.card.querySelector('.bookmark');
+        }
+        initParallax() {
+            const bangageZoomInTween = TweenLite.to(this.bangage, this.LAYERED_SPEED, {
+                z: 30,
+                paused: true
+            });
+            const bookmarkZoomInTween = TweenLite.to(this.bookmark, this.LAYERED_SPEED, {
+                z: -20,
+                paused: true
+            });
+            this.work.addEventListener('mousemove', () => {
+                bangageZoomInTween.play();
+                bookmarkZoomInTween.play();
+            });
+            this.work.addEventListener('mouseout', () => {
+                bangageZoomInTween.reverse();
+                bookmarkZoomInTween.reverse();
+            });
+        }
+    }
 
-}
+    class DemoCollection extends Work {
+        constructor(work) {
+            super(work);
+            this.addElem();
+            this.initParallax();
+            this.initCursorAttachment();
+        }
+        addElem() {
+            this.man = this.card.querySelector('.man-wrapper');
+            this.speedLines = this.card.querySelector('.speed-lines');
+            this.cursors = document.querySelector('.cursors');
+        }
+        initParallax() {
+            const manZoomInTween = TweenLite.to(this.man, this.LAYERED_SPEED, {
+                z: 80,
+                paused: true
+            });
+
+            const speedLinesZoomInTween = TweenLite.to(this.speedLines, this.LAYERED_SPEED, {
+                z: 10,
+                paused: true
+            })
+
+            this.work.addEventListener('mousemove', () => {
+                manZoomInTween.play();
+                speedLinesZoomInTween.play();
+            });
+            this.work.addEventListener('mouseout', () => {
+                manZoomInTween.reverse();
+                speedLinesZoomInTween.reverse();
+            });
+        }
+        initCursorAttachment() {
+            const cursorsFadedTween = TweenLite.to(this.cursors, this.ROTATE_SPEED, {
+                opacity: 0,
+                paused: true
+            });
+            this.work.addEventListener('mousemove', () => {
+                cursorsFadedTween.play();
+                TweenLite.to(this.man, this.ROTATE_SPEED, {
+                    x: this.mouseX,
+                    y: this.mouseY,
+                    ease: Power0.easeOut,
+                });
+            });
+            this.work.addEventListener('mouseout', () => {
+                cursorsFadedTween.reverse();
+                TweenLite.to(this.man, this.ROTATE_SPEED, {
+                    x: 0,
+                    y: 0,
+                    ease: Power0.easeOut
+                });
+            });
+        }
+    }
+
+    const note = new Note(document.querySelector('.work.case-note'));
+    const demoCollection = new DemoCollection(document.querySelector('.work.case-demo-collection'));
+    const more = new Work(document.querySelector('.work.case-more'));
