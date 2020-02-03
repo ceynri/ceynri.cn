@@ -114,7 +114,7 @@
             });
 
             const speedLinesZoomInTween = TweenLite.to(this.speedLines, this.LAYERED_SPEED, {
-                z: 10,
+                z: 200,
                 paused: true
             })
 
