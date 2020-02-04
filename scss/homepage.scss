@@ -65,11 +65,14 @@ body>.background {
     }
 }
 
-// * about me
-@import 'homepage/about-me';
+// * about-me
+@import 'homepage/about';
 
 // * works
 @import 'homepage/works';
+
+// * contact
+@import 'homepage/contact';
 
 
 .one-page-wrapper {

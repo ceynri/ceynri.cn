@@ -1,0 +1,12 @@
+.about {
+    &-wrapper {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .tmp {
+        width: 60vw;
+    }
+}

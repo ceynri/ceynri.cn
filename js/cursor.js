@@ -409,38 +409,6 @@ class Cursor {
             link.addEventListener('click', linkClick);
         })
     }
-
-    // * 暂时不用的代码
-
-    // addLinkAnimation() {
-    //     const iconLinkHoverTween = TweenLite.to(this.outerCursor, 0.3, {
-    //         backgroundColor: '#ffffff',
-    //         opacity: 0.2,
-    //         paused: true
-    //     });
-
-    //     const iconLinkMouseEnter = () => {
-    //         this.outerCursorSpeed = 0;
-    //         TweenLite.to(this.innerCursor, 0.3, {
-    //             opacity: 0
-    //         });
-    //         iconLinkHoverTween.play();
-    //     };
-
-    //     const iconLinkMouseLeave = () => {
-    //         this.outerCursorSpeed = this.MOVE_SPEED;
-    //         TweenLite.to(this.innerCursor, 0.3, {
-    //             opacity: 1
-    //         });
-    //         iconLinkHoverTween.reverse();
-    //     };
-
-    //     const iconLink = document.querySelectorAll('.iconLink');
-    //     iconLink.forEach(item => {
-    //         item.addEventListener('mouseenter', iconLinkMouseEnter);
-    //         item.addEventListener('mouseleave', iconLinkMouseLeave);
-    //     });
-    // }
 }
 // Debug用
 const _cursor = new Cursor();

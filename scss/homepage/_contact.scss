@@ -1,9 +1,8 @@
-// about-me
-.about-me {
+// contact
+.contact {
     &-wrapper {
-        height: calc(100vmin - #{$maskTransitionWidth});
-        min-height: $aboutMeSize;
-        padding-bottom: $maskTransitionWidth;
+        height: 100vh;
+        min-height: $contactSize;
 
         display: flex;
         align-items: center;
@@ -14,7 +13,7 @@
     $frame-marign: $miniMargin / 2;
     // 主体宽度
     $frame-width: calc(100vmin - #{$frame-marign} * 2);
-    $frame-max-width: $aboutMeSize;
+    $frame-max-width: $contactSize;
 
     // 内容边距
     $padding-width: 24px;
@@ -46,7 +45,7 @@
     justify-content: space-between;
 
     // 用于为子元素提供参考字体大小
-    font-size: $aboutMeFontSize;
+    font-size: $contactFontSize;
 
     position: relative;
 
