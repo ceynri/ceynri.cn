@@ -1,12 +1,48 @@
 .about {
     &-wrapper {
         height: 100vh;
-        width: 100%;
         display: flex;
         justify-content: center;
-        align-items: center;
+        // align-items: center;
+
+        position: relative;
     }
-    .tmp {
-        width: 60vw;
+
+    width: 100%;
+    max-width: $heroWidth;
+
+    &-header {
+        $aboutHeaderFontSize: 96px;
+
+        display: inline-flex;
+        flex-direction: column;
+        height: $aboutHeaderFontSize * 6;
+        margin-right: $aboutHeaderFontSize;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        
+        h1 {
+            font-size: $aboutHeaderFontSize;
+            font-family: 'Tondu Beta', 'Circular Bold';
+            line-height: .75;
+            color: #ccc;
+            width: fit-content;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .full-text {
+            flex: none;
+        }
+    }
+
+    &-text {
+        width: 500px;
+        font-size: 24px;
+        .text {
+            &-1 {}
+        }
     }
 }

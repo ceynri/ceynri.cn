@@ -1,25 +1,21 @@
 // 调色盘
+$dark: #101010;
 $darkGreen: #163e34;
-$vueColor: #41b883;
-$vueColor2: #35495e;
-$themeColor: #823;
 $purple: #563d7c;
 $yellow: #fc2;
+$vueColor: #41b883;
+$vueColor2: #35495e;
+
+$themeColor: #823;
+
+$shadowColor: rgba($dark, .4);
 
 // 背景的遮罩颜色
 // TODO 应该使用js来计算颜色
-$desaturateThemeColor: desaturate($themeColor, 50%);
-$darkThemeColor: scale-color($desaturateThemeColor, $lightness: -90%);
 
 :root {
     // 主题色
     --themeColor: #{$themeColor};
-    // 主题色的压暗减淡版
-    --darkenThemeColor: #{$darkThemeColor};
-    // 背景的蒙版色
-    --themeMaskColor: #{rgba($darkThemeColor, 0.8)};
-    // 默认阴影色
-    --themeShadowColor: #{rgba($darkThemeColor, 0.4)};
     // 文本默认颜色
     --textColor: #ccc;
     // 文本亮色

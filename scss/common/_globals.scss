@@ -28,7 +28,7 @@ html {
 
 body {
     font: {
-        size: 14px;
+        size: 16px;
         family: $defaultFont;
     }
 
@@ -43,7 +43,7 @@ a {
 
 h1,
 h2 {
-    font-family: 'Circular Bold';
+    // font-family: 'Circular Bold';
     // 取消firefox浏览器自作聪明的 bold
     font-weight: normal;
 }

@@ -41,27 +41,41 @@ body>.background {
         size: cover;
     }
 
-    z-index: -999;
+    z-index: -10000;
 }
 
 // * hero
 @import 'homepage/hero';
 
 .content-wrapper {
-    margin-top: $gapWidth;
-    background-color: var(--themeMaskColor);
+    margin-top: $gapWidth * 2;
+    background-color: rgba($dark, .8);
+    position: relative;
 
+    // 阴影过渡
     &::before {
-        // 遮罩过渡区域的高度
-        $height: $maskTransitionWidth;
-
+        $height: $gapWidth * 8;
         content: '';
-        display: block;
         width: 100%;
-        height: $height * 3; // 防止阴影衔接不流畅
+        height: $height;
+
         position: absolute;
-        box-shadow: 0 (-$height * 2.4) ($height) ($height * 1.4) var(--themeMaskColor);
-        z-index: -99;
+        left: 0;
+        bottom: 100%;
+        z-index: -1000;
+
+        // 手动非线性渐变
+        background: linear-gradient(rgba($dark, 0),
+                rgba($dark, .125) 20%,
+                rgba($dark, .35) 40%,
+                rgba($dark, .55) 60%,
+                rgba($dark, .64) 70%,
+                rgba($dark, .71) 80%,
+                rgba($dark, .76) 90%,
+                rgba($dark, .77) 92%,
+                rgba($dark, .78) 95%,
+                rgba($dark, .79) 98%,
+                rgba($dark, .8) 100%);
     }
 }
 

@@ -52,6 +52,7 @@
     &-header {
         display: flex;
         flex-direction: column;
+        font-family: $boldFont;
         text-shadow: $textShadow;
 
         h1 {

@@ -38,7 +38,7 @@ $workFontSize: 36px;
 // * size
 
 // 每个部分之间的间隔宽度
-$gapWidth: 300px;
+$gapWidth: 10vh;
 
 // 装饰粗线的尺寸
 $lineWidth: 20px;
@@ -46,9 +46,6 @@ $lineHeight: 140px;
 
 // hero最大宽度
 $heroWidth: 900px;
-
-// 遮罩过渡区域的宽度
-$maskTransitionWidth: 150px;
 
 // contact部分的最大尺寸
 $contactSize: 60vmin;
@@ -79,10 +76,10 @@ $footerHeight: 64px;
 // * shadow
 
 // 文本阴影
-$textShadow: 0 0 12px var(--themeShadowColor);
+$textShadow: 0 0 12px $shadowColor;
 
 // works阴影
-$workShadow: 0 0 24px 8px var(--themeShadowColor);
+$workShadow: 0 0 24px 8px $shadowColor;
 
 // * parallax
 
