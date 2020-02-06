@@ -289,7 +289,7 @@ a {
           justify-content: center;
 }
 
-.hero .title h2 span:nth-child(1) .decoration-line, .hero .title h2 span:nth-child(2) .decoration-line, .hero .title h1 .decoration-line, .hero .date .decoration-line, .hero .bottom-line, .hero .line-guide {
+.hero .title h2 span:nth-child(1) .decoration-line, .hero .title h2 span:nth-child(2) .decoration-line, .hero .title h1 .decoration-line, .hero .date .decoration-line, .hero .bottom-line {
   position: absolute;
   width: 20px;
   height: 140px;
@@ -1209,48 +1209,6 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.line-guide {
-  width: 20px;
-  padding-top: 8px;
-  text-align: center;
-  position: fixed;
-  bottom: -100px;
-  right: 50%;
-  -webkit-transform: translateX(50%);
-          transform: translateX(50%);
-}
-
-.line-guide i {
-  font-size: 12px;
-  position: relative;
-  -webkit-animation: floating 1.7s ease-in-out infinite;
-          animation: floating 1.7s ease-in-out infinite;
-}
-
-@-webkit-keyframes floating {
-  from {
-    top: -5px;
-  }
-  50% {
-    top: 10px;
-  }
-  to {
-    top: -5px;
-  }
-}
-
-@keyframes floating {
-  from {
-    top: -5px;
-  }
-  50% {
-    top: 10px;
-  }
-  to {
-    top: -5px;
-  }
 }
 
 /* footer */

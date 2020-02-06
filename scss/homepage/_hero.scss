@@ -15,11 +15,11 @@
     }
 
     // 装饰线的基础样式规则
-    %line-basic {
+    .decoration-line {
         position: absolute;
-
         width: $lineWidth;
         height: $lineHeight;
+        transform: rotate(60deg);
 
         background-color: var(--themeColor);
         box-shadow: 0 0 8px var(--themeColor);
@@ -48,7 +48,6 @@
                     @extend %line-basic;
                     top: -.6em;
                     left: 1em;
-                    transform: rotate(60deg);
                 }
 
                 // 装饰线
@@ -56,7 +55,6 @@
                     @extend %line-basic;
                     bottom: -.4em;
                     right: 1.4em;
-                    transform: rotate(60deg);
                 }
             }
         }
@@ -75,11 +73,9 @@
             position: relative;
 
             .decoration-line {
-                content: '';
                 @extend %line-basic;
                 bottom: -3em;
                 right: 6em;
-                transform: rotate(60deg);
             }
         }
     }

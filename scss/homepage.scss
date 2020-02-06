@@ -98,39 +98,6 @@
     align-items: center;
 }
 
-.line-guide {
-    @extend %line-basic;
-    width: 20px;
-    padding-top: 8px;
-    text-align: center;
-
-    position: fixed;
-    bottom: -100px;
-    right: 50%;
-    transform: translateX(50%);
-
-    i {
-        font-size: 12px;
-
-        @keyframes floating {
-            from {
-                top: -5px;
-            }
-
-            50% {
-                top: 10px;
-            }
-
-            to {
-                top: -5px;
-            }
-        }
-
-        position: relative;
-        animation: floating 1.7s ease-in-out infinite;
-    }
-}
-
 /* footer */
 
 .homepage-footer {
