@@ -44,6 +44,13 @@ class Scrollbar {
         this.scrollbar.addEventListener('mousedown', e => {
             this.scrollByScrollbar(e);
         });
+        document.addEventListener('keydown', e => {
+            // 禁用Tab键，避免出现一些错位bug
+            if (e.keyCode == 9) {
+                console.log('Tab键已被站长禁用了哦🤭');
+                e.preventDefault();
+            }
+        });
     }
     renderScroll() {
         TweenLite.to(this.bar, this.speed, {
