@@ -408,7 +408,6 @@ body > .background {
 }
 
 .about-wrapper {
-  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -426,18 +425,22 @@ body > .background {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 576px;
+  height: 2304px;
   margin-right: 96px;
   position: absolute;
   top: 0;
   right: 0;
 }
 
-.about-header h1 {
+.about-header span {
   font-size: 96px;
   font-family: 'Tondu Beta', 'Circular Bold';
-  line-height: .75;
-  color: #ccc;
+  line-height: .8;
+  color: var(--textColor);
+  -webkit-text-stroke: 2px var(--textColor);
+  text-stroke: 2px var(--textColor);
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -456,6 +459,10 @@ body > .background {
 .about-text {
   width: 500px;
   font-size: 24px;
+}
+
+.about-text > * {
+  margin-bottom: 50vh;
 }
 
 .works {
@@ -546,47 +553,55 @@ body > .background {
   height: 100%;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+  -webkit-perspective: 800px;
+          perspective: 800px;
+}
+
+.works .work .work-text .work-title, .works .work-text .work .work-title, .works .work .work-text .see-more, .works .work-text .work .see-more {
+  position: absolute;
+  left: -10%;
+  top: 50%;
+  color: var(--lightTextColor);
 }
 
 .works .work-text {
-  display: block;
   width: 100%;
-  color: var(--lightTextColor);
+  height: 100%;
+  font-size: 36px;
   position: absolute;
-  right: 10%;
-  top: 50%;
+  left: 0;
+  top: 0;
   z-index: 99;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-perspective: 800px;
+          perspective: 800px;
   pointer-events: none;
 }
 
-.works .work-text .see-more {
-  display: inline-block;
-  margin-top: 1em;
-  border-bottom: 1px solid var(--lightTextColor);
-  opacity: 0;
-}
-
-.works .work-title {
-  width: 100%;
-  color: var(--lightTextColor);
-}
-
-.works .work-title h1,
-.works .work-title h2 {
-  font-size: 36px;
+.works .work-text .work-title h1,
+.works .work-text .work-title h2 {
+  font-size: 1em;
   font-family: "Circular Bold", "PingFang SC Bold";
   text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+}
+
+.works .work-text .see-more {
+  font-size: 0.4em;
+  display: inline-block;
+  margin-top: 7.5em;
+  border-bottom: 1px solid var(--lightTextColor);
+  opacity: 0;
 }
 
 .works .work-card {
   width: 100%;
   height: 100%;
-}
-
-.works .work.case-note .work-card {
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
-  position: relative;
+  -webkit-perspective: 800px;
+          perspective: 800px;
+  position: absolute;
 }
 
 .works .work.case-note .work-card > * {
@@ -596,6 +611,7 @@ body > .background {
 .works .work.case-note .work-card .cover {
   height: 100%;
   width: 100%;
+  position: absolute;
   background-color: #35495e;
   border-radius: 1% 8% 8% 1%;
   -webkit-box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
@@ -623,11 +639,6 @@ body > .background {
   left: 8%;
 }
 
-.works .work.case-demo-collection .work-card {
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-}
-
 .works .work.case-demo-collection .work-card .man-wrapper {
   width: 100%;
   height: 100%;
@@ -647,8 +658,6 @@ body > .background {
 }
 
 .works .work.case-demo-collection .work-card .flying-man .jet-propeller {
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
   height: 5px;
   width: 35px;
   background: #234;

@@ -1,6 +1,6 @@
 .about {
     &-wrapper {
-        height: 100vh;
+        // height: 100vh;
         display: flex;
         justify-content: center;
         // align-items: center;
@@ -16,18 +16,25 @@
 
         display: inline-flex;
         flex-direction: column;
-        height: $aboutHeaderFontSize * 6;
+        height: $aboutHeaderFontSize * 24;
         margin-right: $aboutHeaderFontSize;
 
         position: absolute;
         top: 0;
         right: 0;
-        
-        h1 {
+
+        span {
             font-size: $aboutHeaderFontSize;
             font-family: 'Tondu Beta', 'Circular Bold';
-            line-height: .75;
-            color: #ccc;
+            line-height: .8;
+            color: var(--textColor);
+            
+            // 将字变为描边文字
+            -webkit-text-stroke: 2px var(--textColor);
+            text-stroke: 2px var(--textColor);
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+
             width: fit-content;
             flex: 1;
             overflow: hidden;
@@ -41,6 +48,11 @@
     &-text {
         width: 500px;
         font-size: 24px;
+
+        &>* {
+            margin-bottom: 50vh;
+        }
+
         .text {
             &-1 {}
         }

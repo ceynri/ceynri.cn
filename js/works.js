@@ -31,7 +31,7 @@
                 paused: true
             });
             const textZoomInTween = TweenLite.to(this.title, this.LAYERED_SPEED, {
-                z: 40,
+                z: 20,
                 paused: true
             });
             const seeMoreShowTween = TweenLite.to(this.seeMore, this.LAYERED_SPEED, {
@@ -114,7 +114,7 @@
             });
 
             const speedLinesZoomInTween = TweenLite.to(this.speedLines, this.LAYERED_SPEED, {
-                z: 200,
+                z: 100,
                 paused: true
             })
 
