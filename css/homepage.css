@@ -405,6 +405,11 @@ body > .background {
 .about {
   width: 100%;
   max-width: 900px;
+  height: 2500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
 }
 
 .about-wrapper {
@@ -414,7 +419,6 @@ body > .background {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  position: relative;
 }
 
 .about-header {
@@ -425,20 +429,16 @@ body > .background {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 2304px;
-  margin-right: 96px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  height: 2800px;
 }
 
 .about-header span {
-  font-size: 96px;
+  font-size: 100px;
   font-family: 'Tondu Beta', 'Circular Bold';
   line-height: .8;
   color: var(--textColor);
-  -webkit-text-stroke: 2px var(--textColor);
-  text-stroke: 2px var(--textColor);
+  -webkit-text-stroke: 1px var(--textColor);
+  text-stroke: 1px var(--textColor);
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
   width: -webkit-fit-content;
@@ -459,10 +459,11 @@ body > .background {
 .about-text {
   width: 500px;
   font-size: 24px;
+  margin-left: 3em;
 }
 
 .about-text > * {
-  margin-bottom: 50vh;
+  margin-bottom: 30vh;
 }
 
 .works {

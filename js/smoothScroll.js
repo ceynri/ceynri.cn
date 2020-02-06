@@ -32,7 +32,7 @@
             // 鼠标状态
             this.mouseDownX = 0;
             // 页面滚动的缓动类型
-            this.easing = Power0.easeOut;
+            this.easing = Power1.easeOut;
             // 设置body高度
             this.setBodySize();
             // 初始化文档滚动高度
@@ -40,9 +40,9 @@
         }
         initConst() {
             // 缓动速度
-            this.EASE_SPEED = .5;
+            this.EASE_SPEED = .75;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
-            this.SCROLL_RATE = 1.2;
+            this.SCROLL_RATE = 1.5;
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
             this.ELASTIC_RANGE = 200;
         }
@@ -125,7 +125,7 @@
         }
         setWorksRightBound() {
             // * 设置works的右边界（即向左最多可以位移的距离）
-            this.worksRightBound = this.works.getBoundingClientRect().width - window.innerWidth;
+            this.worksRightBound = this.works.getBoundingClientRect().width - document.documentElement.clientWidth;
         }
         setPageScroll() {
             // * 设置初始滚动值（浏览器对滚动高度会有缓存）
