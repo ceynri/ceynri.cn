@@ -28,7 +28,7 @@
     .title {
         text-shadow: $textShadow;
 
-        h1 {
+        h2 {
             font: {
                 size: $titleFontSize;
                 family: $titleFont;
@@ -44,7 +44,7 @@
                 font-weight: normal;
 
                 // 装饰线
-                &:nth-child(1) .title-line {
+                &:nth-child(1) .decoration-line {
                     @extend %line-basic;
                     top: -.6em;
                     left: 1em;
@@ -52,7 +52,7 @@
                 }
 
                 // 装饰线
-                &:nth-child(2) .title-line {
+                &:nth-child(2) .decoration-line {
                     @extend %line-basic;
                     bottom: -.4em;
                     right: 1.4em;
@@ -61,7 +61,7 @@
             }
         }
 
-        h2 {
+        h1 {
             margin-top: .5em;
             text-align: right;
 
@@ -74,7 +74,7 @@
 
             position: relative;
 
-            .title-line {
+            .decoration-line {
                 content: '';
                 @extend %line-basic;
                 bottom: -3em;
@@ -96,7 +96,7 @@
         line-height: 100%;
         text-shadow: $textShadow;
 
-        .date-line {
+        .decoration-line {
             @extend %line-basic;
             top: $titleFontSize * 1.1 - $lineHeight / 4;
             left: ($titleFontSize * .8 - $lineWidth / 2);

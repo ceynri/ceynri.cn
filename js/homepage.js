@@ -32,11 +32,3 @@
         aTags[i].target = '_blank';
     }
 }
-
-{
-    // * 点击guideLine滚动页面
-    // let guideLine = document.querySelector('.guide-line');
-    // guideLine.addEventListener('click', () => {
-    //     // pass
-    // })
-}
