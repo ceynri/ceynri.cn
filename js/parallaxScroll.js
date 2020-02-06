@@ -2,7 +2,7 @@ const TOP = 0;
 const CENTER = 1;
 const BOTTOM = 2;
 
-class Parallax {
+class ParallaxScroll {
     constructor() {
         this.items = [];
     }
@@ -59,7 +59,7 @@ lines.push(document.querySelector('.hero .title h1 span:nth-child(2) *:last-chil
 lines.push(document.querySelector('.hero .title h2 *:last-child'));
 lines.push(document.querySelector('.date-line'));
 
-const parallax = new Parallax();
+const parallax = new ParallaxScroll();
 parallax.addParallax(aboutHeader, 1.2, BOTTOM)
     .addParallax(aboutText, .5, BOTTOM)
     .addParallax(lines, 1.2, CENTER);
