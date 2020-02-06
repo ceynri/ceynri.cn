@@ -53,17 +53,6 @@ a {
     color: var(--textColor);
 }
 
-// 装饰线的基础样式规则
-%line-basic {
-    position: absolute;
-
-    width: $lineWidth;
-    height: $lineHeight;
-
-    background-color: var(--themeColor);
-    box-shadow: 0 0 8px var(--themeColor);
-}
-
 .margin-wrapper {
     margin: {
         left: $miniMargin;

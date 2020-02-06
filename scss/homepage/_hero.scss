@@ -14,6 +14,17 @@
         justify-content: center;
     }
 
+    // 装饰线的基础样式规则
+    %line-basic {
+        position: absolute;
+
+        width: $lineWidth;
+        height: $lineHeight;
+
+        background-color: var(--themeColor);
+        box-shadow: 0 0 8px var(--themeColor);
+    }
+
     .title {
         text-shadow: $textShadow;
 
@@ -33,8 +44,7 @@
                 font-weight: normal;
 
                 // 装饰线
-                &:nth-child(1)::after {
-                    content: '';
+                &:nth-child(1) .title-line {
                     @extend %line-basic;
                     top: -.6em;
                     left: 1em;
@@ -42,8 +52,7 @@
                 }
 
                 // 装饰线
-                &:nth-child(2)::after {
-                    content: '';
+                &:nth-child(2) .title-line {
                     @extend %line-basic;
                     bottom: -.4em;
                     right: 1.4em;
@@ -65,7 +74,7 @@
 
             position: relative;
 
-            &::after {
+            .title-line {
                 content: '';
                 @extend %line-basic;
                 bottom: -3em;
@@ -89,8 +98,8 @@
 
         .date-line {
             @extend %line-basic;
-            top: 64px;
-            left: ($lineHeight - $lineWidth) / 2;
+            top: $titleFontSize * 1.1 - $lineHeight / 4;
+            left: ($titleFontSize * .8 - $lineWidth / 2);
             transform: rotate(60deg);
         }
     }
