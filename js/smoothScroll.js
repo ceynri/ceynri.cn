@@ -31,8 +31,6 @@
             this.setWorksRightBound();
             // 鼠标状态
             this.mouseDownX = 0;
-            // 页面滚动的缓动类型
-            this.easing = Power1.easeOut;
             // 设置body高度
             this.setBodySize();
             // 初始化文档滚动高度
@@ -40,7 +38,9 @@
         }
         initConst() {
             // 缓动速度
-            this.EASE_SPEED = .75;
+            this.EASE_SPEED = 1.5;
+            // 页面滚动的缓动类型
+            this.EASE = Power4.easeOut;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
             this.SCROLL_RATE = 1.5;
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
@@ -109,7 +109,7 @@
                 // 使内容滚动
                 TweenLite.to(this.page, this.EASE_SPEED, {
                     y: -this.getPageScroll(),
-                    ease: this.easing
+                    ease: this.EASE
                 });
                 // 循环下去
                 requestAnimationFrame(frame);

@@ -16,7 +16,7 @@
     $frame-max-width: $contactSize;
 
     // 内容边距
-    $padding-width: 24px;
+    $padding-width: $contactFontSize;
     // 主题边框宽度
     $border-width: 16px;
 
@@ -54,12 +54,16 @@
         flex-direction: column;
         font-family: $boldFont;
         text-shadow: $textShadow;
+        line-height: 1;
 
         h1 {
-            font-size: 1.75em;
+            font-size: 1.5em;
+            margin-left: 0.1em; // 微调因字体大小导致视觉不对齐
         }
+
         h2 {
-            font-size: 2em;
+            font-size: 2.6em;
+            margin-bottom: .2em;
         }
     }
 

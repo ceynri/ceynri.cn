@@ -56,8 +56,8 @@
     const lines = ceynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
 
     const parallax = new ParallaxScroll();
-    parallax.addParallax(aboutHeader, 1.2, BOTTOM)
-        .addParallax(aboutText, .5, BOTTOM)
+    parallax.addParallax(aboutText, .5, BOTTOM)
+        // .addParallax(aboutHeader, 1.0, BOTTOM)
         .addParallax(lines, 1.2, CENTER);
     parallax.renderScrollParallax();
 }

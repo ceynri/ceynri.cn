@@ -402,7 +402,7 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 2800px;
+  height: 2300px;
 }
 
 .about-header span {
@@ -431,7 +431,7 @@ a {
 
 .about-text {
   width: 500px;
-  font-size: 24px;
+  font-size: 22px;
   margin-left: 3em;
 }
 
@@ -1021,7 +1021,7 @@ a {
   height: calc(100vmin - 32px * 2);
   max-width: 60vmin;
   max-height: 60vmin;
-  padding: 24px;
+  padding: 26px;
   border: 16px var(--themeColor) solid;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1033,7 +1033,7 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  font-size: 28px;
+  font-size: 26px;
   position: relative;
 }
 
@@ -1061,14 +1061,17 @@ a {
           flex-direction: column;
   font-family: "Circular Bold", "PingFang SC Bold";
   text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+  line-height: 1;
 }
 
 .contact-header h1 {
-  font-size: 1.75em;
+  font-size: 1.5em;
+  margin-left: 0.1em;
 }
 
 .contact-header h2 {
-  font-size: 2em;
+  font-size: 2.6em;
+  margin-bottom: .2em;
 }
 
 .contact .intro-container > * {
@@ -1076,11 +1079,11 @@ a {
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
   position: absolute;
-  bottom: 24px;
-  left: 24px;
-  width: calc(100vmin - (72px) * 2);
-  max-width: calc(60vmin - 80px);
-  max-height: calc(60vmin - 80px);
+  bottom: 26px;
+  left: 26px;
+  width: calc(100vmin - (74px) * 2);
+  max-width: calc(60vmin - 84px);
+  max-height: calc(60vmin - 84px);
   text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
   pointer-events: none;
 }
@@ -1092,10 +1095,10 @@ a {
 }
 
 .contact .intro-container .qrcode-wrapper {
-  width: calc(100vmin - (72px) * 2);
-  height: calc(100vmin - (72px) * 2);
-  max-width: calc(60vmin - 80px);
-  max-height: calc(60vmin - 80px);
+  width: calc(100vmin - (74px) * 2);
+  height: calc(100vmin - (74px) * 2);
+  max-width: calc(60vmin - 84px);
+  max-height: calc(60vmin - 84px);
 }
 
 .contact .intro-container .qrcode-wrapper img {
