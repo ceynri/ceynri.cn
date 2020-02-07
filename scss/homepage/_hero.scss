@@ -45,14 +45,12 @@
 
                 // 装饰线
                 &:nth-child(1) .decoration-line {
-                    @extend %line-basic;
                     top: -.6em;
                     left: 1em;
                 }
 
                 // 装饰线
                 &:nth-child(2) .decoration-line {
-                    @extend %line-basic;
                     bottom: -.4em;
                     right: 1.4em;
                 }
@@ -73,7 +71,6 @@
             position: relative;
 
             .decoration-line {
-                @extend %line-basic;
                 bottom: -3em;
                 right: 6em;
             }
@@ -93,38 +90,9 @@
         text-shadow: $textShadow;
 
         .decoration-line {
-            @extend %line-basic;
             top: $titleFontSize * 1.1 - $lineHeight / 4;
             left: ($titleFontSize * .8 - $lineWidth / 2);
             transform: rotate(60deg);
-        }
-    }
-
-
-    .bottom-line {
-        @extend %line-basic;
-        width: $lineHeight * 1.2;
-        height: $lineWidth * .8;
-        bottom: -10%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-
-        .text {
-            position: absolute;
-            // 垂直居中
-            bottom: 50%;
-            transform: translateY(50%);
-
-            width: 100%;
-
-            text: {
-                align: center;
-                transform: uppercase;
-                shadow: $textShadow;
-            }
-
-            font: 24px $titleFont;
         }
     }
 }

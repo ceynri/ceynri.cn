@@ -53,7 +53,7 @@
         position: absolute;
         top: $worksVertPadding;
         left: 0;
-        z-index: -1;
+        z-index: -100;
         background-color: rgba(255, 255, 255, .2);
         box-shadow: 0 0 64px 4px rgba(255, 255, 255, .2);
     }
@@ -162,6 +162,7 @@
                     position: absolute;
                     top: 0;
                     right: 27%;
+                    z-index: 1;
                     background-color: $vueColor;
                     box-shadow: 0 0 6px -2px $shadowColor;
                 }
@@ -172,6 +173,7 @@
                     border: 12px solid #823;
                     border-bottom: 12px solid transparent;
                     position: absolute;
+                    z-index: -1;
                     top: 100%;
                     left: 8%;
                 }
