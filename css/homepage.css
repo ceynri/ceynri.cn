@@ -378,7 +378,7 @@ a {
 .about {
   width: 100%;
   max-width: 900px;
-  height: 2500px;
+  height: 330vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -395,6 +395,8 @@ a {
 }
 
 .about-header {
+  height: calc(330vh - 30vh);
+  opacity: .75;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -402,7 +404,6 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 2300px;
 }
 
 .about-header span {
@@ -437,6 +438,7 @@ a {
 
 .about-text > * {
   margin-bottom: 30vh;
+  opacity: 0;
 }
 
 .works {

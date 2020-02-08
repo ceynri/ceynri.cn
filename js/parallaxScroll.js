@@ -6,6 +6,10 @@
     class ParallaxScroll {
         constructor() {
             this.items = [];
+            this.clientHeight = document.documentElement.clientHeight;
+            window.addEventListener('resize', () => {
+                this.clientHeight = document.documentElement.clientHeight;
+            });
         }
         addParallax(elem, parallaxRate, positionRatio) {
             // 检查输入是否有值，避免误操作
@@ -29,7 +33,7 @@
             return this;
         }
 
-        renderScrollParallax() {
+        render() {
             // * 渲染滚动页面
             const frame = () => {
                 this.items.forEach((item) => {
@@ -47,17 +51,18 @@
             return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
         }
         getScroll(elem, rate) {
-            return elem.getBoundingClientRect().top - rate * (document.documentElement.clientHeight / 2);
+            return elem.getBoundingClientRect().top - rate * (this.clientHeight / 2);
         }
     }
 
-    const aboutHeader = document.querySelector('.about-header');
+    // const aboutHeader = document.querySelector('.about-header');
     const aboutText = document.querySelector('.about-text');
     const lines = ceynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
 
     const parallax = new ParallaxScroll();
-    parallax.addParallax(aboutText, .5, BOTTOM)
+    parallax
+        .addParallax(aboutText, .4, BOTTOM)
         // .addParallax(aboutHeader, 1.0, BOTTOM)
         .addParallax(lines, 1.2, CENTER);
-    parallax.renderScrollParallax();
+    parallax.render();
 }

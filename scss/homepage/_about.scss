@@ -4,9 +4,12 @@
         justify-content: center;
     }
 
+    $aboutWidth: $heroWidth;
+    $aboutHeight: 330vh;
+
     width: 100%;
-    max-width: $heroWidth;
-    height: 2500px;
+    max-width: $aboutWidth;
+    height: $aboutHeight;
 
     display: flex;
 
@@ -14,14 +17,11 @@
 
     &-header {
         $aboutHeaderFontSize: 100px;
-
-        // position: absolute;
-        // left: 0;
-        // top: 0;
-
+        
+        height: calc(#{$aboutHeight} - 30vh);
+        opacity: .75;
         display: inline-flex;
         flex-direction: column;
-        height: $aboutHeaderFontSize * 23;
 
         span {
             font-size: $aboutHeaderFontSize;
@@ -39,7 +39,7 @@
             flex: 1;
             overflow: hidden;
         }
-        
+
         .full-text {
             flex: none;
         }
@@ -53,6 +53,7 @@
 
         &>* {
             margin-bottom: 30vh;
+            opacity: 0;
         }
     }
 }

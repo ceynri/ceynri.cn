@@ -80,7 +80,7 @@
             // 监听works上的mousedown事件
             this.works.addEventListener('mousedown', e => {
                 this.mouseDownX = e.clientX;
-                this.dragOffset = this.getWorksScroll() - this.mouseDownX * this.SCROLL_RATE;
+                this.dragOffset = this.getWorksScrollLeft() - this.mouseDownX * this.SCROLL_RATE;
                 // 鼠标移动转化为拖拽works的监听
                 // 因为拖拽过程中可能会离开works范围，所以将事件绑定在document上
                 document.addEventListener('mousemove', dragWorksAnimation);
@@ -108,7 +108,7 @@
             const frame = () => {
                 // 使内容滚动
                 TweenLite.to(this.page, this.EASE_SPEED, {
-                    y: -this.getPageScroll(),
+                    y: -this.getPageScrollTop(),
                     ease: this.EASE
                 });
                 // 循环下去
@@ -130,16 +130,16 @@
         setPageScroll() {
             // * 设置初始滚动值（浏览器对滚动高度会有缓存）
             TweenLite.set(this.page, {
-                y: -this.getPageScroll()
+                y: -this.getPageScrollTop()
             });
         }
 
         // getter
-        getWorksScroll() {
+        getWorksScrollLeft() {
             // * 获得works的横向滚动距离
             return this.works.getBoundingClientRect().left;
         }
-        getPageScroll() {
+        getPageScrollTop() {
             // * 获得当前的页面滚动高度
             return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
         }
@@ -151,7 +151,7 @@
 
         // check
         checkWorksXSafe() {
-            const currentX = this.getWorksScroll();
+            const currentX = this.getWorksScrollLeft();
             const safedX = this.convertToWorksSafedX(currentX);
             if (currentX != safedX) {
                 TweenLite.to(this.works, 1, {
