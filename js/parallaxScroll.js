@@ -57,7 +57,7 @@
 
     // const aboutHeader = document.querySelector('.about-header');
     const aboutText = document.querySelector('.about-text');
-    const lines = ceynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
+    const lines = CeynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
 
     const parallax = new ParallaxScroll();
     parallax

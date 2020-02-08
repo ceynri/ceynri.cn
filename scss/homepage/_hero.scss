@@ -94,5 +94,9 @@
             left: ($titleFontSize * .8 - $lineWidth / 2);
             transform: rotate(60deg);
         }
+
+        @media screen and (max-width: 720px) {
+            display: none;
+        }
     }
 }

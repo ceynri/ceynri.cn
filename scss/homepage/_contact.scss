@@ -1,4 +1,11 @@
 .contact {
+    // contact部分的最大尺寸
+    $contactSize: 60vmin;
+    // contact文本大小
+    $contactFontSize: 26px;
+    // 主题边框宽度
+    $borderWidth: 16px;
+
     &-wrapper {
         height: 100vh;
         min-height: $contactSize;
@@ -13,26 +20,21 @@
     $frameMarign: $miniMargin / 2;
     // 主体宽度
     $frameWidth: calc(100vmin - #{$frameMarign} * 2);
-    $frameMaxWidth: $contactSize;
-
     // 内容边距
     $paddingWidth: $contactFontSize;
-    // 主题边框宽度
-    $borderWidth: 16px;
-
     // 主体外边界与内容之间的宽度
     $framePadding: $borderWidth+$paddingWidth;
     // 内容宽度
     $contentWidth: calc(100vmin - (#{$frameMarign + $framePadding}) * 2);
-    $contentMaxWidth: calc(#{$frameMaxWidth} - #{$framePadding * 2});
+    $contentMaxWidth: calc(#{$contactSize} - #{$framePadding * 2});
 
     // 自适应页面，页面宽度较小时也能保持正方形边框
     width: $frameWidth;
     height: $frameWidth;
 
     max: {
-        width: $frameMaxWidth;
-        height: $frameMaxWidth;
+        width: $contactSize;
+        height: $contactSize;
     }
 
     // TODO 媒体查询，当宽度过小时，不再保持方形边框以满足内容的添加
@@ -46,6 +48,10 @@
 
     // 用于为子元素提供参考字体大小
     font-size: $contactFontSize;
+
+    @media screen and (max-width: 660px) {
+        font-size: $contactFontSize * .8;
+    }
 
     position: relative;
 
@@ -67,35 +73,9 @@
         }
     }
 
-    %intro {
-        opacity: 0;
-        transition: all .5s ease;
-
-        position: absolute;
-        bottom: $paddingWidth;
-        left: $paddingWidth;
-
-        width: $contentWidth;
-
-        max: {
-            width: $contentMaxWidth;
-            height: $contentMaxWidth;
-        }
-
-        text-shadow: $textShadow;
-
-        pointer-events: none;
-
-        p {
-            font-size: 1em;
-            /* 宽度过小时，仍然支持换行 */
-            overflow-wrap: break-word;
-        }
-    }
-
     %qrcode {
         // 二维码大小
-        $qrSize: calc(#{$frameMaxWidth} - #{$framePadding * 2});
+        $qrSize: calc(#{$contactSize} - #{$framePadding * 2});
 
         width: $contentWidth;
         height: $contentWidth;
@@ -106,10 +86,32 @@
         }
     }
 
-    .intro {
+    .info {
         &-container {
             &>* {
-                @extend %intro;
+                opacity: 0;
+                transition: all .5s ease;
+
+                position: absolute;
+                bottom: $paddingWidth;
+                left: $paddingWidth;
+
+                width: $contentWidth;
+
+                max: {
+                    width: $contentMaxWidth;
+                    height: $contentMaxWidth;
+                }
+
+                text-shadow: $textShadow;
+
+                pointer-events: none;
+
+                p {
+                    font-size: 1em;
+                    /* 宽度过小时，仍然支持换行 */
+                    overflow-wrap: break-word;
+                }
             }
 
             .qrcode-wrapper {
@@ -121,7 +123,7 @@
             }
         }
 
-        &-myself {
+        &-default {
             pointer-events: initial;
             opacity: 1;
         }

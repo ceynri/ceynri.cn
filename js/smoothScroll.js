@@ -106,7 +106,6 @@
         }
         footerScroll() {
             const bottom = document.querySelector('.content-wrapper').getBoundingClientRect().bottom;
-            const footerBox = this.footer.getBoundingClientRect();
             const footerHasShownTop = document.documentElement.clientHeight - bottom;
             if (footerHasShownTop > 0) {
                 TweenLite.set(this.footer, {

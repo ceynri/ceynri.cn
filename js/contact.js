@@ -19,13 +19,13 @@
         document.body.removeChild(strWrapper);
     };
 
-    const intro = document.querySelector('.intro-myself');
-    const info = document.querySelector('.icon-info');
-    const infoColor = getComputedStyle(info, null).getPropertyValue('color');
-    const infoClickedColor = '#ffc83d';
+    const defaultInfo = document.querySelector('.info-default');
+    const iconInfo = document.querySelector('.icon-info');
+    const iconInfoColor = getComputedStyle(iconInfo, null).getPropertyValue('color');
+    const iconInfoClickedColor = '#ffc83d';
 
     const iconWrappers = document.querySelectorAll('.icon-wrapper');
-    const introContainer = document.querySelector('.intro-container');
+    const infoContainer = document.querySelector('.info-container');
 
     iconWrappers.forEach((wrapper, i) => {
         const icon = wrapper.children[0];
@@ -34,11 +34,11 @@
             icon.children[0].style.opacity = 0.0;
             icon.children[1].style.opacity = 1.0;
             // text
-            intro.style.opacity = 0.0;
-            info.style.opacity = 1.0;
+            defaultInfo.style.opacity = 0.0;
+            iconInfo.style.opacity = 1.0;
             // section
-            introContainer.children[i + 1].style.opacity = 1.0;
-            introContainer.children[i + 1].style.visibility = 'inherit';
+            infoContainer.children[i + 1].style.opacity = 1.0;
+            infoContainer.children[i + 1].style.visibility = 'inherit';
         });
 
         wrapper.addEventListener('mousedown', () => {
@@ -46,8 +46,8 @@
             icon.children[1].style.opacity = 0.25;
         });
         wrapper.addEventListener('click', () => {
-            // info文字变色特效
-            info.style.color = infoClickedColor;
+            // iconInfo文字变色特效
+            iconInfo.style.color = iconInfoClickedColor;
         });
         wrapper.addEventListener('mouseup', () => {
             icon.children[1].style.opacity = 1.0;
@@ -58,12 +58,12 @@
             icon.children[0].style.opacity = 1.0;
             icon.children[1].style.opacity = 0.0;
             // text
-            intro.style.opacity = 1.0;
-            info.style.opacity = 0.0;
-            info.style.color = infoColor;
+            defaultInfo.style.opacity = 1.0;
+            iconInfo.style.opacity = 0.0;
+            iconInfo.style.color = iconInfoColor;
             // section
-            introContainer.children[i + 1].style.opacity = 0.0;
-            introContainer.children[i + 1].style.visibility = 'hidden';
+            infoContainer.children[i + 1].style.opacity = 0.0;
+            infoContainer.children[i + 1].style.visibility = 'hidden';
         });
     });
 
@@ -76,32 +76,32 @@
     // over
     // TODO 改为大字背景
     githubIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'GitHub';
+        iconInfo.innerHTML = 'GitHub';
     })
     wechatIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'WeChat';
+        iconInfo.innerHTML = 'WeChat';
     })
     qqIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'QQ';
+        iconInfo.innerHTML = 'QQ';
     })
     bilibiliIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'bilibili';
+        iconInfo.innerHTML = 'bilibili';
     })
     mailIcon.addEventListener('mouseover', () => {
-        info.innerHTML = 'Mail';
+        iconInfo.innerHTML = 'Mail';
     })
 
     // click
     wechatIcon.addEventListener('click', () => {
         copyToCilpboard('sakuramemory');
-        info.innerHTML = '已复制微信号😊';
+        iconInfo.innerHTML = '已复制微信号😊';
     })
     qqIcon.addEventListener('click', () => {
         copyToCilpboard('347670115');
-        info.innerHTML = '已复制QQ号😊';
+        iconInfo.innerHTML = '已复制QQ号😊';
     })
     mailIcon.addEventListener('click', () => {
         copyToCilpboard('ceynri@gmail.com');
-        info.innerHTML = '已复制邮箱😊';
+        iconInfo.innerHTML = '已复制邮箱😊';
     })
 }

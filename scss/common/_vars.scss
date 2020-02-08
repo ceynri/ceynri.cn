@@ -26,9 +26,6 @@ $boldFont: 'Circular Bold',
 // hero文本大小
 $titleFontSize: 96px;
 
-// contact文本大小
-$contactFontSize: 26px;
-
 // 图标大小
 $iconSize: 24px;
 
@@ -47,17 +44,14 @@ $lineHeight: 140px;
 // hero最大宽度
 $heroWidth: 900px;
 
-// contact部分的最大尺寸
-$contactSize: 60vmin;
-
 // works尺寸
 $worksHeight: 80vh;
 $worksVertPadding: 10vh;
 $worksHorizPadding: 20vw;
 
 // work尺寸
-$workWidth: 35vmin;
-$workMaxWidth: 300px;
+$workWidth: 35vh;
+$workMaxWidth: 400px;
 $workHeight: $workWidth * 4 / 3;
 $workMaxHeight: $workMaxWidth * 4 / 3;
 

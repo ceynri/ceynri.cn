@@ -17,8 +17,9 @@
 
     &-header {
         $aboutHeaderFontSize: 100px;
-        
+
         height: calc(#{$aboutHeight} - 30vh);
+        margin-right: 3em;
         display: inline-flex;
         flex-direction: column;
 
@@ -33,28 +34,29 @@
             -webkit-text-fill-color: transparent;
 
             width: fit-content;
-            flex: 1;
+            flex: auto;
             overflow: hidden;
         }
 
         .full-text {
-            flex: none;
+            flex-shrink: 0;
+        }
+
+        @media screen and (max-width: 900px) {
+            display: none;
         }
     }
 
     &-text {
-        width: 500px;
         height: calc(#{$aboutHeight * .4} + 100vh);
         font-size: 22px;
-        margin-left: 3em;
 
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
 
         &>* {
-            // margin-bottom: 30vh;
-            // opacity: 0;
+            opacity: 0;
         }
     }
 }

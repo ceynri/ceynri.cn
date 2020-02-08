@@ -1,4 +1,4 @@
-const ceynriUtils = {
+const CeynriUtils = {
     nodeListToArray: (nodes) => {
         let array = null;
         try {
@@ -12,4 +12,12 @@ const ceynriUtils = {
         }
         return array;
     }
+}
+
+const MediaMatcher = {
+    isMobileDevice: () => {
+        const landscapeLimit = window.matchMedia("screen and (max-device-width: 1366px) and (orientation: landscape)").matches;
+        const portraitLimit = window.matchMedia("screen and (max-device-width: 1024px) and (orientation: portrait)").matches;
+        return landscapeLimit || portraitLimit;
+    },
 }
