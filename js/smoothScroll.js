@@ -1,4 +1,3 @@
-{
     // 自定义的一些数学计算工具
     const MathUtils = {
         // 将x使用tanh函数归一化到(-scale, scale)区间中
@@ -23,18 +22,21 @@
             // 可滚动元素
             this.page = document.querySelector('div[data-scroll]');
             this.works = document.querySelector('.works');
+            this.footer = document.querySelector('.homepage-footer');
         }
         initProp() {
             // * 属性初始化
+            // footer最大高度
+            this.footerHeight = 72;
+            // 设置body高度
+            this.setBodySize();
+            // 初始化文档滚动高度
+            this.setPageScroll();
             // 设置works最大滚动边界
             this.worksRightBound = 0;
             this.setWorksRightBound();
             // 鼠标状态
             this.mouseDownX = 0;
-            // 设置body高度
-            this.setBodySize();
-            // 初始化文档滚动高度
-            this.setPageScroll();
         }
         initConst() {
             // 缓动速度
@@ -42,9 +44,9 @@
             // 页面滚动的缓动类型
             this.EASE = Power4.easeOut;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
-            this.SCROLL_RATE = 1.5;
+            this.WORK_SCROLL_RATIO = 1.2;
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
-            this.ELASTIC_RANGE = 200;
+            this.WORK_ELASTIC_RANGE = 200;
         }
         initEvents() {
             // * 事件监听初始化
@@ -63,13 +65,13 @@
             // drag动画
             const dragWorksAnimation = e => {
                 // 获得works应该需要移动到的坐标位置
-                let worksTargetX = this.dragOffset + e.clientX * this.SCROLL_RATE;
+                let worksTargetX = this.dragOffset + e.clientX * this.WORK_SCROLL_RATIO;
                 // 将worksTargetX限制到works应该处于的安全坐标范围内
                 const safedX = this.convertToWorksSafedX(worksTargetX);
                 // 如果worksTargetX已经移出了安全范围，bias将不为零（表示与最近的安全范围的距离）
                 const bias = worksTargetX - safedX;
                 // worksTargetX等于safedX加上归一化后的bias，随着bias的增大，斜率趋近于0
-                worksTargetX = safedX + MathUtils.normallize(bias, this.ELASTIC_RANGE);
+                worksTargetX = safedX + MathUtils.normallize(bias, this.WORK_ELASTIC_RANGE);
                 // 执行drag动画
                 TweenLite.to(this.works, 1, {
                     x: worksTargetX,
@@ -80,7 +82,7 @@
             // 监听works上的mousedown事件
             this.works.addEventListener('mousedown', e => {
                 this.mouseDownX = e.clientX;
-                this.dragOffset = this.getWorksScrollLeft() - this.mouseDownX * this.SCROLL_RATE;
+                this.dragOffset = this.getWorksScrollLeft() - this.mouseDownX * this.WORK_SCROLL_RATIO;
                 // 鼠标移动转化为拖拽works的监听
                 // 因为拖拽过程中可能会离开works范围，所以将事件绑定在document上
                 document.addEventListener('mousemove', dragWorksAnimation);
@@ -102,7 +104,16 @@
 
             });
         }
-
+        footerScroll() {
+            const bottom = document.querySelector('.content-wrapper').getBoundingClientRect().bottom;
+            const footerBox = this.footer.getBoundingClientRect();
+            const footerHasShownTop = document.documentElement.clientHeight - bottom;
+            if (footerHasShownTop > 0) {
+                TweenLite.set(this.footer, {
+                    height: footerHasShownTop
+                })
+            }
+        }
         renderScrollPage() {
             // * 渲染滚动页面
             const frame = () => {
@@ -111,6 +122,7 @@
                     y: -this.getPageScrollTop(),
                     ease: this.EASE
                 });
+                this.footerScroll();
                 // 循环下去
                 requestAnimationFrame(frame);
             }
@@ -120,8 +132,7 @@
         // setter
         setBodySize() {
             // * 设置主体的高度
-            document.body.style.height = `${this.page.scrollHeight - 1}px`;
-            // “-1”是为了由于比例缩放带来的像素误差安全，尽量不露底
+            document.body.style.height = `${this.page.scrollHeight - this.footer.scrollHeight + this.footerHeight}px`;
         }
         setWorksRightBound() {
             // * 设置works的右边界（即向左最多可以位移的距离）
@@ -165,5 +176,4 @@
     }
 
     // 开启SmoothScroll
-    new SmoothScroll();
-}
+    const smoothScroll = new SmoothScroll();

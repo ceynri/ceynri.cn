@@ -61,7 +61,7 @@
 
     const parallax = new ParallaxScroll();
     parallax
-        .addParallax(aboutText, .4, BOTTOM)
+        .addParallax(aboutText, .4, TOP)
         // .addParallax(aboutHeader, 1.0, BOTTOM)
         .addParallax(lines, 1.2, CENTER);
     parallax.render();

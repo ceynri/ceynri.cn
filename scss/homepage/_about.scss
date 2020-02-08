@@ -19,7 +19,6 @@
         $aboutHeaderFontSize: 100px;
         
         height: calc(#{$aboutHeight} - 30vh);
-        opacity: .75;
         display: inline-flex;
         flex-direction: column;
 
@@ -30,10 +29,8 @@
             color: var(--textColor);
 
             // 将字变为描边文字
-            -webkit-text-stroke: 1px var(--textColor);
-            text-stroke: 1px var(--textColor);
+            -webkit-text-stroke: 1.5px var(--textColor);
             -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
 
             width: fit-content;
             flex: 1;
@@ -47,13 +44,17 @@
 
     &-text {
         width: 500px;
+        height: calc(#{$aboutHeight * .4} + 100vh);
         font-size: 22px;
-
         margin-left: 3em;
 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
         &>* {
-            margin-bottom: 30vh;
-            opacity: 0;
+            // margin-bottom: 30vh;
+            // opacity: 0;
         }
     }
 }

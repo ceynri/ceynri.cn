@@ -59,7 +59,7 @@
     }
 
     .man {
-        .body {
+        &-body {
             position: absolute;
             width: 0;
             height: 0;
@@ -92,7 +92,7 @@
             }
         }
 
-        .head {
+        &-head {
             position: absolute;
             height: 12px;
             width: 20px;

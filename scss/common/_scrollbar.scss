@@ -15,7 +15,7 @@
         // 高度由js计算
         height: 0;
         background-color: var(--themeColor);
-        filter: drop-shadow(0 4px 4px $themeColor);
+        box-shadow:0 4px 8px var(--themeColor);
 
         // 在底端加一个三角形
         &::after {
