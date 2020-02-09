@@ -15,9 +15,14 @@ const CeynriUtils = {
 }
 
 const MediaMatcher = {
-    isMobileDevice: () => {
-        const landscapeLimit = window.matchMedia("screen and (max-device-width: 1366px) and (orientation: landscape)").matches;
+    isTouchScreenDevice: () => {
         const portraitLimit = window.matchMedia("screen and (max-device-width: 1024px) and (orientation: portrait)").matches;
-        return landscapeLimit || portraitLimit;
+        const landscapeLimit = window.matchMedia("screen and (max-device-width: 1366px) and (orientation: landscape)").matches;
+        return portraitLimit || landscapeLimit;
+    },
+    isTabletDevice: () => {
+        const portraitLimit = window.matchMedia("screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait)").matches;
+        const landscapeLimit = window.matchMedia("screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape)").matches;
+        return portraitLimit || landscapeLimit;
     },
 }

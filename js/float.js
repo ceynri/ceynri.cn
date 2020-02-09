@@ -1,4 +1,4 @@
-if (!MediaMatcher.isMobileDevice()){
+if (!MediaMatcher.isTouchScreenDevice()){
     class Float {
         constructor() {
             this.initProp();

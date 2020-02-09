@@ -35,8 +35,6 @@
             // 设置works最大滚动边界
             this.worksRightBound = 0;
             this.setWorksRightBound();
-            // 鼠标状态
-            this.mouseDownX = 0;
         }
         initConst() {
             // 缓动速度
@@ -78,20 +76,34 @@
                     ease: Power4.easeOut
                 });
             };
+            const touchDragWorksMoveEvent = e => {
+                if (e.targetTouches.length > 1 || e.scale && e.scale !== 1) {
+                    return;
+                }
+                const touch = e.targetTouches[0];
+                dragWorksAnimation(touch);
+            }
 
-            // 监听works上的mousedown事件
-            this.works.addEventListener('mousedown', e => {
-                this.mouseDownX = e.clientX;
-                this.dragOffset = this.getWorksScrollLeft() - this.mouseDownX * this.WORK_SCROLL_RATIO;
+            // start
+            const mouseDragWorksStartEvent = e => {
+                this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
                 // 鼠标移动转化为拖拽works的监听
                 // 因为拖拽过程中可能会离开works范围，所以将事件绑定在document上
                 document.addEventListener('mousemove', dragWorksAnimation);
-            });
+                document.addEventListener('mouseup', mouseDragWorksEndEvent);
+            };
+            const touchDragWorksStartEvent = event => {
+                const e = event.targetTouches[0];
+                this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
+                document.addEventListener('touchmove', touchDragWorksMoveEvent);
+                document.addEventListener('touchend', touchDragWorksEndEvent);
+            };
 
-            // mouseup事件
-            document.addEventListener('mouseup', () => {
+            // end
+            const mouseDragWorksEndEvent = () => {
                 // mouseup时删除works拖拽事件监听（如果有的话）
                 document.removeEventListener('mousemove', dragWorksAnimation);
+                document.removeEventListener('mouseup', mouseDragWorksEndEvent);
                 // 设置循环检测是否超出边界，避免出现鼠标抬起后因为works缓动惯性导致超过安全区域
                 let times = 5;
                 const checkLoop = setInterval(() => {
@@ -101,8 +113,29 @@
                         clearInterval(checkLoop);
                     }
                 }, 200);
+            };
+            const touchDragWorksEndEvent = () => {
+                document.removeEventListener('touchmove', touchDragWorksMoveEvent);
+                document.removeEventListener('touchend', touchDragWorksEndEvent);
+                let times = 5;
+                const checkLoop = setInterval(() => {
+                    if (times-- == 0 || !this.checkWorksXSafe()) {
+                        clearInterval(checkLoop);
+                    }
+                }, 200);
+            };
 
-            });
+            // 判断是否是移动设备
+            if (!MediaMatcher.isTouchScreenDevice()) {
+                // 电脑设备
+                // 监听works上的mousedown/mouseup事件
+                this.works.addEventListener('mousedown', mouseDragWorksStartEvent);
+            } else if (MediaMatcher.isTabletDevice()) {
+                // 平板设备
+                // 手指拖动事件
+                this.works.addEventListener('touchstart', touchDragWorksStartEvent);
+            }
+            // 手机设备改变works样式为竖向排列，不再需要横向滚动
         }
         footerScroll() {
             const bottom = document.querySelector('.content-wrapper').getBoundingClientRect().bottom;

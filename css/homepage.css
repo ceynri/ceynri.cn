@@ -491,6 +491,12 @@ a {
   margin-top: 0.5em;
 }
 
+@media screen and (max-width: 600px) {
+  .works-header {
+    top: 20vh;
+  }
+}
+
 .works-background {
   width: 100vw;
   height: 80vh;

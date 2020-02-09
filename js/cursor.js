@@ -1,4 +1,4 @@
-if (!MediaMatcher.isMobileDevice()) {
+if (!MediaMatcher.isTouchScreenDevice()) {
     /*
      * @title 光标类
      * @author ceynri

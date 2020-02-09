@@ -1,4 +1,15 @@
 .works {
+    // works尺寸
+    $worksHeight: 80vh;
+    $worksVertPadding: 10vh;
+    $worksHorizPadding: 20vw;
+
+    // work尺寸
+    $workWidth: 35vh;
+    $workMaxWidth: 400px;
+    $workHeight: $workWidth * 4 / 3;
+    $workMaxHeight: $workMaxWidth * 4 / 3;
+
     &-wrapper {
         height: 100vh;
         min-height: $workHeight;
@@ -45,6 +56,10 @@
         h1 {
             font-size: 0.75em;
             margin-top: 0.5em;
+        }
+
+        @media screen and (max-width: 600px) {
+            top: 20vh;
         }
     }
 
