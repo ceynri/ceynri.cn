@@ -71,17 +71,43 @@
             };
 
             this.iconBtn.addEventListener('mouseover', mouseOverAnimation);
-            this.iconBtn.addEventListener('click', () => {
-                TweenLite.to(this.info, this.FADE_SPEED, {
-                    color: this.ICON_INFO_CLICK_COLOR,
+            if (!MediaMatcher.isTouchScreenDevice()) {
+                this.iconBtn.addEventListener('click', () => {
+                    TweenLite.to(this.info, this.FADE_SPEED, {
+                        color: this.ICON_INFO_CLICK_COLOR,
+                    });
                 });
-            });
+            }
             this.iconBtn.addEventListener('mouseout', mouseOutAnimation);
         }
-        addClickCopyString(str, infoText = '已复制😊') {
+        addClickCopyString(str, copyedInfoText = '已复制😊', isResetInfoText = false) {
+            if (isResetInfoText) {
+                this.infoText = `点击复制${copyedInfoText}`;
+            }
             this.iconBtn.addEventListener('click', () => {
                 this.copyToClipboard(str);
-                this.info.innerHTML = infoText;
+                this.info.innerHTML = `已复制${copyedInfoText}😊`;
+            });
+        }
+        addTouchCopyString(str, copyedInfoText = '已复制😊', isResetInfoText = false) {
+            // 禁止弹出菜单，避免长按导致浏览器菜单弹出
+            // this.iconBtn.oncontextmenu = e => {
+            //     e.preventDefault();
+            // };
+            if (isResetInfoText) {
+                this.infoText = `长按复制${copyedInfoText}`;
+            }
+
+            let longPressTimer;
+            this.iconBtn.addEventListener('touchstart', e => {
+                longPressTimer = setTimeout(() => {
+                    e.preventDefault();
+                    this.copyToClipboard(str);
+                    this.info.innerHTML = `已复制${copyedInfoText}😊`;
+                }, 1000);
+            });
+            this.iconBtn.addEventListener('touchend', () => {
+                clearTimeout(longPressTimer);
             });
         }
         copyToClipboard(str) {
@@ -125,7 +151,13 @@
     const wechat = new Contact(wechatText, defaultText, wechatBtn, btnInfo, 'WeChat');
     const qq = new Contact(qqText, defaultText, qqBtn, btnInfo, 'QQ');
 
-    wechat.addClickCopyString('sakuramemory', '已复制微信号😊');
-    qq.addClickCopyString('347670115', '已复制QQ号😊');
-    mail.addClickCopyString('ceynri@gmail.com', '已复制邮箱😊');
+    if (!MediaMatcher.isTouchScreenDevice()) {
+        wechat.addClickCopyString('sakuramemory', '微信号', true);
+        qq.addClickCopyString('347670115', 'QQ号', true);
+        mail.addClickCopyString('ceynri@gmail.com', 'Mail');
+    } else {
+        wechat.addTouchCopyString('sakuramemory', '微信号', true);
+        qq.addTouchCopyString('347670115', 'QQ号', true);
+        mail.addTouchCopyString('ceynri@gmail.com', '邮箱');
+    }
 }

@@ -1070,8 +1070,8 @@ a {
   height: calc(100vmin - 64px * 2);
   max-width: 500px;
   max-height: 500px;
-  padding: 26px;
-  border: 16px var(--themeColor) solid;
+  padding: 1em;
+  border: 0.75em var(--themeColor) solid;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1082,6 +1082,8 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-shadow: 0 0 6px var(--themeColor), inset 0 0 6px var(--themeColor);
+          box-shadow: 0 0 6px var(--themeColor), inset 0 0 6px var(--themeColor);
   font-size: 26px;
   position: relative;
 }
@@ -1124,21 +1126,14 @@ a {
   margin-bottom: .2em;
 }
 
-.contact .contact-texts .qrcode-wrapper, .contact-texts .contact .qrcode-wrapper {
-  width: calc(100vmin - (106px) * 2);
-  height: calc(100vmin - (106px) * 2);
-  max-width: calc(500px - 84px);
-  max-height: calc(500px - 84px);
-}
-
 .contact-texts > * {
   opacity: 0;
   position: absolute;
-  bottom: 26px;
-  left: 26px;
-  width: calc(100vmin - (106px) * 2);
-  max-width: calc(500px - 84px);
-  max-height: calc(500px - 84px);
+  bottom: 1em;
+  left: 1em;
+  width: calc(100vmin - (64px + 1.75em) * 2);
+  max-width: calc(500px - 3.5em);
+  max-height: calc(500px - 3.5em);
   text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
   pointer-events: none;
 }
@@ -1154,13 +1149,17 @@ a {
   opacity: 1;
 }
 
+.contact-texts .qrcode-wrapper {
+  height: calc(100vmin - (64px + 1.75em) * 2);
+}
+
 .contact-texts .qrcode-wrapper img {
   width: 100%;
 }
 
 .contact .switch-bar {
   position: absolute;
-  bottom: calc(-1 * (16px + 2.5em));
+  bottom: calc(-1 * (0.75em + 2.5em));
   left: 0;
   width: 100%;
   display: -webkit-box;
@@ -1221,15 +1220,53 @@ a {
   opacity: 0;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (min-device-width: 1024px) {
+  .contact .contact-default::after {
+    content: '移动鼠标至下面的图标查看更多';
+  }
+  .contact .contact-mail::after {
+    content: '点击按钮复制邮箱';
+  }
+}
+
+@media screen and (max-device-width: 1024px) {
+  .contact .contact-default::after {
+    content: '点击以下图标查看更多';
+  }
+  .contact .contact-mail::after {
+    content: '长按按钮复制邮箱';
+  }
+}
+
+@media screen and (max-width: 570px) {
   .contact {
     font-size: 20.8px;
   }
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 500px) {
   .contact {
     font-size: 18.2px;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .contact {
+    font-size: 16.9px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .contact {
+    width: 80vw;
+    height: 104vw;
+  }
+  .contact-texts > * {
+    width: calc(80vw - 1.75em * 2);
+  }
+  .contact .qrcode-wrapper {
+    width: calc(80vw - 1.75em * 2);
+    height: calc(80vw - 1.75em * 2);
   }
 }
 
