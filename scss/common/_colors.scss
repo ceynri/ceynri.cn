@@ -3,11 +3,11 @@ $dark: #101010;
 $darkGrey: #333333;
 $darkGreen: #163e34;
 $purple: #563d7c;
-$yellow: #fc2;
+$yellow: #ffcc22;
 $vueColor: #41b883;
 $vueColor2: #35495e;
 
-$themeColor: #823;
+$themeColor: #882233;
 
 $shadowColor: rgba($dark, .4);
 
@@ -18,7 +18,7 @@ $shadowColor: rgba($dark, .4);
     // 主题色
     --themeColor: #{$themeColor};
     // 文本默认颜色
-    --textColor: #ccc;
+    --textColor: #cccccc;
     // 文本亮色
     --lightTextColor: snow;
     // 滚动条背景色

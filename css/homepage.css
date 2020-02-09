@@ -1,7 +1,7 @@
 @charset "UTF-8";
 :root {
-  --themeColor: #823;
-  --textColor: #ccc;
+  --themeColor: #882233;
+  --textColor: #cccccc;
   --lightTextColor: snow;
   --scrollbarColor: #232628;
   --cursorColor: white;
@@ -1015,7 +1015,7 @@ a {
 .works .work.case-demo-collection .work-card .background {
   width: 100%;
   height: 100%;
-  background-color: #fc2;
+  background-color: #ffcc22;
   -webkit-box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
           box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
 }
@@ -1169,13 +1169,12 @@ a {
 }
 
 .contact .switch-bar .contact-btns {
-  display: inline-block;
-  height: 100%;
-  white-space: nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .contact .switch-bar .contact-btns .icon-btn {
-  display: inline-block;
   height: 2em;
   width: 2em;
   position: relative;
@@ -1185,8 +1184,8 @@ a {
   position: absolute;
   top: .5em;
   left: .5em;
-  height: 1em;
   width: 1em;
+  height: 1em;
 }
 
 .contact .switch-bar .contact-btns .icon-btn .icons i {
@@ -1212,8 +1211,12 @@ a {
   font-size: .75em;
   color: var(--textColor);
   padding-left: 1em;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   white-space: nowrap;
   opacity: 0;
 }

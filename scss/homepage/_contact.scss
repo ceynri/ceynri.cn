@@ -131,14 +131,9 @@
         display: flex;
 
         .contact-btns {
-            display: inline-block;
-            height: 100%;
-
-            // font-size: 0;
-            white-space: nowrap;
+            display: flex;
 
             .icon-btn {
-                display: inline-block;
                 height: 2em;
                 width: 2em;
                 position: relative;
@@ -148,8 +143,8 @@
                     top: .5em;
                     left: .5em;
 
-                    height: 1em;
                     width: 1em;
+                    height: 1em;
 
                     i {
                         position: absolute;
@@ -178,12 +173,10 @@
         .btn-info {
             font-size: .75em;
             color: var(--textColor);
-
-            padding: {
-                left: 1em;
-                top: .5em;
-                bottom: .5em;
-            }
+            
+            padding-left: 1em;
+            display: flex;
+            align-items: center;
 
             // 禁止换行
             white-space: nowrap;

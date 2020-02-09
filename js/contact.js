@@ -14,7 +14,7 @@
             this.infoText = infoText;
         }
         initConst() {
-            this.ICON_INFO_COLOR = getComputedStyle(document.documentElement, null).getPropertyValue('--textColor');
+            this.ICON_INFO_COLOR = getComputedStyle(document.documentElement, null).getPropertyValue('--textColor').trim();
             this.ICON_INFO_CLICK_COLOR = '#ffc83d';
             this.OPACITY = .8;
             this.FADE_SPEED = .3;
@@ -46,11 +46,6 @@
                 });
                 this.info.innerHTML = this.infoText;
             };
-            // iconInfo文字变色特效
-            const infoHighLightTween = TweenLite.to(this.info, this.FADE_SPEED, {
-                color: this.ICON_INFO_CLICK_COLOR,
-                paused: true
-            });
             const mouseOutAnimation = () => {
                 TweenLite.to(this.icons.children[0], this.FADE_SPEED, {
                     opacity: 1,
@@ -70,14 +65,16 @@
                 });
                 TweenLite.to(this.info, this.FADE_SPEED, {
                     opacity: 0,
+                    color: this.ICON_INFO_COLOR,
                     ease: Power3.ease
                 });
-                infoHighLightTween.reverse();
             };
 
             this.iconBtn.addEventListener('mouseover', mouseOverAnimation);
             this.iconBtn.addEventListener('click', () => {
-                infoHighLightTween.play();
+                TweenLite.to(this.info, this.FADE_SPEED, {
+                    color: this.ICON_INFO_CLICK_COLOR,
+                });
             });
             this.iconBtn.addEventListener('mouseout', mouseOutAnimation);
         }
