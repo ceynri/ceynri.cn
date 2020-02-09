@@ -160,8 +160,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.addWorksAnimation();
             // work
             this.addWorkAnimation();
-            // link
-            // this.addLinkAnimation();
             // work的a标签
             this.listenWorkLinkEvent();
         }
@@ -285,15 +283,15 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 outerCursorExpandTween.play();
                 pointShrinkTween.play();
                 // 判断是否在work内
-                if (!this.isInWork) {
-                    // 在works内而不在work内，显示hand和arrow
+                if (!this.isInWork && MediaMatcher.widthMoreThan(540)) {
+                    // 在works内而不在work内，且浏览器宽度大于540px，则显示hand和arrow
                     handShowTween.play();
                     // 因为opacity一开始就是1，想要实现进入works是缩放而work中退出是渐变则不能合并入handShowTween
                     TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
                         opacity: 1
                     })
                     arrowShowTween.play();
-                } else {
+                } else if (this.isInWork) {
                     // 在work内，隐藏hand和arrow，其中hand应用透明度渐变动画
                     handShowTween.reverse();
                     TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
@@ -400,7 +398,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 if (dist > 20) {
                     // 阻止默认事件（a标签的href链接跳转）
                     e.preventDefault();
-                    return false;
                 }
             };
             // work a事件监听

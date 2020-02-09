@@ -1,9 +1,4 @@
-    // 自定义的一些数学计算工具
-    const MathUtils = {
-        // 将x使用tanh函数归一化到(-scale, scale)区间中
-        normallize: (x, scale = 1) => scale * Math.tanh(x / scale)
-    }
-
+{
     // * 平滑滚动
     class SmoothScroll {
         constructor() {
@@ -32,6 +27,7 @@
             this.setBodySize();
             // 初始化文档滚动高度
             this.setPageScroll();
+
             // 设置works最大滚动边界
             this.worksRightBound = 0;
             this.setWorksRightBound();
@@ -56,6 +52,7 @@
             window.addEventListener('resize', () => {
                 this.setBodySize();
                 this.setWorksRightBound();
+                this.checkWidth();
             });
         }
         listenWorksDragEvent() {
@@ -69,7 +66,7 @@
                 // 如果worksTargetX已经移出了安全范围，bias将不为零（表示与最近的安全范围的距离）
                 const bias = worksTargetX - safedX;
                 // worksTargetX等于safedX加上归一化后的bias，随着bias的增大，斜率趋近于0
-                worksTargetX = safedX + MathUtils.normallize(bias, this.WORK_ELASTIC_RANGE);
+                worksTargetX = safedX + CeynriUtils.normallize(bias, this.WORK_ELASTIC_RANGE);
                 // 执行drag动画
                 TweenLite.to(this.works, 1, {
                     x: worksTargetX,
@@ -86,11 +83,14 @@
 
             // start
             const mouseDragWorksStartEvent = e => {
-                this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
-                // 鼠标移动转化为拖拽works的监听
-                // 因为拖拽过程中可能会离开works范围，所以将事件绑定在document上
-                document.addEventListener('mousemove', dragWorksAnimation);
-                document.addEventListener('mouseup', mouseDragWorksEndEvent);
+                // 仅当屏幕宽度大于540px时，才允许拖动works
+                if (MediaMatcher.widthMoreThan(540)) {
+                    this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
+                    // 鼠标移动转化为拖拽works的监听
+                    // 因为拖拽过程中可能会离开works范围，所以将事件绑定在document上
+                    document.addEventListener('mousemove', dragWorksAnimation);
+                    document.addEventListener('mouseup', mouseDragWorksEndEvent);
+                }
             };
             const touchDragWorksStartEvent = event => {
                 const e = event.targetTouches[0];
@@ -205,7 +205,16 @@
             }
             return true;
         }
+        checkWidth() {
+            if (MediaMatcher.widthLessThan(540)) {
+                // 如果浏览器宽度小于540px，复原拖动的位置
+                TweenLite.set(this.works, {
+                    x: 0
+                });
+            }
+        }
     }
 
     // 开启SmoothScroll
-    const smoothScroll = new SmoothScroll();
+    new SmoothScroll();
+}

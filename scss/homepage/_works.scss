@@ -35,7 +35,6 @@
         position: absolute;
         left: 10vw;
         top: 25vh;
-        // bottom: calc(20vh + #{$workHeight} - #{$workFontSize} * 0.8);
 
         line-height: 1;
         padding-left: 2%;
@@ -209,7 +208,8 @@
         }
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-device-width: 767px),
+    screen and (max-width: 540px) {
         &-wrapper {
             height: auto;
             margin-top: $gapWidth;
@@ -219,11 +219,10 @@
         }
 
         height: auto;
-        width: 100%;
+        width: 100vw;
         padding: 30vh 0 0 0;
         flex-direction: column;
         align-items: center;
-        
 
         &-header {
             top: 10vh;
@@ -232,7 +231,7 @@
         .work {
             margin-left: 0;
             margin-bottom: 20vh;
-            
+
             align-self: initial !important;
         }
 

@@ -49,10 +49,6 @@
     // 用于为子元素提供参考字体大小
     font-size: $contactFontSize;
 
-    @media screen and (max-width: 660px) {
-        font-size: $contactFontSize * .8;
-    }
-
     position: relative;
 
     &-header {
@@ -200,5 +196,9 @@
             transition: opacity .5s .2s,
             color .5s;
         }
+    }
+    
+    @media screen and (max-width: 660px) {
+        font-size: $contactFontSize * .8;
     }
 }

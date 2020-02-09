@@ -11,7 +11,9 @@ const CeynriUtils = {
             }
         }
         return array;
-    }
+    }, 
+    // 将x使用tanh函数归一化到(-scale, scale)区间中
+    normallize: (x, scale = 1) => scale * Math.tanh(x / scale),
 }
 
 const MediaMatcher = {
@@ -32,5 +34,11 @@ const MediaMatcher = {
         const portraitLimit = window.matchMedia("screen and (min-device-width: 320px) and (max-device-width: 767px) and (orientation: portrait)").matches;
         const landscapeLimit = window.matchMedia("screen and (min-device-width: 480px) and (max-device-width: 1023px) and (orientation: landscape)").matches;
         return portraitLimit || landscapeLimit;
-    }
+    },
+    widthMoreThan: width => {
+        return window.matchMedia(`screen and (min-width: ${width}px)`).matches;
+    },
+    widthLessThan: width => {
+        return window.matchMedia(`screen and (max-width: ${width}px)`).matches;
+    },
 }

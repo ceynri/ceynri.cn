@@ -1019,10 +1019,10 @@ a {
           box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-device-width: 767px), screen and (max-width: 540px) {
   .works {
     height: auto;
-    width: 100%;
+    width: 100vw;
     padding: 30vh 0 0 0;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -1092,12 +1092,6 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-
-@media screen and (max-width: 660px) {
-  .contact {
-    font-size: 20.8px;
-  }
 }
 
 .contact-header {
@@ -1222,6 +1216,12 @@ a {
   opacity: 0;
   -webkit-transition: opacity .5s .2s, color .5s;
   transition: opacity .5s .2s, color .5s;
+}
+
+@media screen and (max-width: 660px) {
+  .contact {
+    font-size: 20.8px;
+  }
 }
 
 .one-page-wrapper {
