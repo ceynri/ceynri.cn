@@ -491,14 +491,8 @@ a {
   margin-top: 0.5em;
 }
 
-@media screen and (max-width: 600px) {
-  .works-header {
-    top: 20vh;
-  }
-}
-
 .works-background {
-  width: 100vw;
+  width: 100%;
   height: 80vh;
   position: absolute;
   top: 10vh;
@@ -1023,6 +1017,45 @@ a {
   background-color: #563d7c;
   -webkit-box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
           box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
+}
+
+@media screen and (max-width: 767px) {
+  .works {
+    height: auto;
+    width: 100%;
+    padding: 30vh 0 0 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .works-wrapper {
+    height: auto;
+    margin-top: 20vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .works-header {
+    top: 10vh;
+  }
+  .works .work {
+    margin-left: 0;
+    margin-bottom: 20vh;
+    -ms-flex-item-align: initial !important;
+        -ms-grid-row-align: initial !important;
+        align-self: initial !important;
+  }
+  .works-background {
+    height: 100%;
+    top: 0;
+  }
 }
 
 .contact {

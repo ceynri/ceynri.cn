@@ -57,14 +57,10 @@
             font-size: 0.75em;
             margin-top: 0.5em;
         }
-
-        @media screen and (max-width: 600px) {
-            top: 20vh;
-        }
     }
 
     &-background {
-        width: 100vw;
+        width: 100%;
         height: $worksHeight;
         position: absolute;
         top: $worksVertPadding;
@@ -210,6 +206,39 @@
                 background-color: $purple;
                 box-shadow: $workShadow;
             }
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        &-wrapper {
+            height: auto;
+            margin-top: $gapWidth;
+
+            display: flex;
+            align-items: center;
+        }
+
+        height: auto;
+        width: 100%;
+        padding: 30vh 0 0 0;
+        flex-direction: column;
+        align-items: center;
+        
+
+        &-header {
+            top: 10vh;
+        }
+
+        .work {
+            margin-left: 0;
+            margin-bottom: 20vh;
+            
+            align-self: initial !important;
+        }
+
+        &-background {
+            height: 100%;
+            top: 0;
         }
     }
 }
