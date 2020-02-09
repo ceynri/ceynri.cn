@@ -35,10 +35,6 @@ const MediaMatcher = {
         const landscapeLimit = window.matchMedia("screen and (min-device-width: 480px) and (max-device-width: 1023px) and (orientation: landscape)").matches;
         return portraitLimit || landscapeLimit;
     },
-    widthMoreThan: width => {
-        return window.matchMedia(`screen and (min-width: ${width}px)`).matches;
-    },
-    widthLessThan: width => {
-        return window.matchMedia(`screen and (max-width: ${width}px)`).matches;
-    },
+    widthMoreThan: width => window.matchMedia(`screen and (min-width: ${width}px)`).matches,
+    widthLessThan: width => window.matchMedia(`screen and (max-width: ${width}px)`).matches,
 }

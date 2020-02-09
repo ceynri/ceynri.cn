@@ -11,7 +11,7 @@ html {
     -webkit-font-smoothing: antialiased;
     // firefox
     -moz-osx-font-smoothing: grayscale;
-    
+
     // IE10/Edge 去除滚动条
     -ms-overflow-style: none;
     // firefox 64 滚动条透明化
@@ -57,5 +57,12 @@ a {
     margin: {
         left: $miniMargin;
         right: $miniMargin;
+    }
+
+    @media screen and (max-width: 440px) {
+        margin: {
+            left: $miniMargin / 2;
+            right: $miniMargin / 2;
+        }
     }
 }

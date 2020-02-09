@@ -73,6 +73,13 @@ a {
   margin-right: 64px;
 }
 
+@media screen and (max-width: 440px) {
+  .margin-wrapper {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+}
+
 .cursor {
   -webkit-box-flex: 0;
       -ms-flex: none;
@@ -416,12 +423,6 @@ a {
       flex-shrink: 0;
 }
 
-@media screen and (max-width: 900px) {
-  .about-header {
-    display: none;
-  }
-}
-
 .about-text {
   height: calc(132vh + 100vh);
   font-size: 22px;
@@ -439,6 +440,12 @@ a {
 
 .about-text > * {
   opacity: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .about-header {
+    display: none;
+  }
 }
 
 .works {
