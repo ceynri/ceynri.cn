@@ -1,6 +1,6 @@
 .contact {
     // contact部分的最大尺寸
-    $contactSize: 60vmin;
+    $contactSize: 500px;
     // contact文本大小
     $contactFontSize: 26px;
     // 主题边框宽度
@@ -17,7 +17,7 @@
     }
 
     // 主体到页面边界的距离
-    $frameMarign: $miniMargin / 2;
+    $frameMarign: $miniMargin;
     // 主体宽度
     $frameWidth: calc(100vmin - #{$frameMarign} * 2);
     // 内容边距
@@ -82,123 +82,122 @@
         }
     }
 
-    .info {
-        &-container {
-            &>* {
-                opacity: 0;
-                transition: all .5s ease;
+    &-texts {
+        &>* {
+            opacity: 0;
 
-                position: absolute;
-                bottom: $paddingWidth;
-                left: $paddingWidth;
+            position: absolute;
+            bottom: $paddingWidth;
+            left: $paddingWidth;
 
-                width: $contentWidth;
+            width: $contentWidth;
 
-                max: {
-                    width: $contentMaxWidth;
-                    height: $contentMaxWidth;
-                }
-
-                text-shadow: $textShadow;
-
-                pointer-events: none;
-
-                p {
-                    font-size: 1em;
-                    /* 宽度过小时，仍然支持换行 */
-                    overflow-wrap: break-word;
-                }
+            max: {
+                width: $contentMaxWidth;
+                height: $contentMaxWidth;
             }
 
-            .qrcode-wrapper {
-                @extend %qrcode;
+            text-shadow: $textShadow;
 
-                img {
-                    width: 100%;
-                }
+            pointer-events: none;
+
+            p {
+                font-size: 1em;
+                /* 宽度过小时，仍然支持换行 */
+                overflow-wrap: break-word;
             }
         }
 
-        &-default {
+        .contact-default {
             pointer-events: initial;
             opacity: 1;
+        }
+
+        .qrcode-wrapper {
+            @extend %qrcode;
+
+            img {
+                width: 100%;
+            }
         }
     }
 
     .switch-bar {
         position: absolute;
-        bottom: -($borderWidth + $iconSize * 2.5);
+        bottom: calc(-1 * (#{$borderWidth} + 2.5em));
         left: 0;
 
         width: 100%;
         display: flex;
 
-        .social-icons {
+        .contact-btns {
             display: inline-block;
             height: 100%;
 
-            font-size: 0;
+            // font-size: 0;
             white-space: nowrap;
 
-            .icon {
-                &-wrapper {
-                    display: inline-block;
-                    height: $iconSize * 2;
-                    width: $iconSize * 2;
-                    position: relative;
-                }
+            .icon-btn {
+                display: inline-block;
+                height: 2em;
+                width: 2em;
+                position: relative;
 
-                position: absolute;
-                top: $iconSize / 2;
-                left: $iconSize / 2;
-
-                height: $iconSize;
-                width: $iconSize;
-
-                i {
-                    display: inline;
-                    font-size: $iconSize;
-                    transition: opacity .5s ease;
-                }
-
-                &-svg {
-                    width: $iconSize;
-                    height: $iconSize;
-                    fill: currentColor;
-                    overflow: hidden;
-
-                    opacity: 0;
+                .icons {
                     position: absolute;
-                    left: 0;
-                    top: 0;
-                    pointer-events: none;
+                    top: .5em;
+                    left: .5em;
 
-                    transition: opacity .5s ease;
+                    height: 1em;
+                    width: 1em;
+
+                    i {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        font-size: 1em;
+                    }
+
+                    .icon-svg {
+                        width: 1em;
+                        height: 1em;
+                        fill: currentColor;
+                        overflow: hidden;
+
+                        opacity: 0;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        pointer-events: none;
+                    }
                 }
             }
         }
 
 
-        .icon-info {
-            font-size: $iconSize * 0.75;
-            color: #999;
+        .btn-info {
+            font-size: .75em;
+            color: var(--textColor);
 
             padding: {
-                left: $iconSize;
-                top: $iconSize / 2;
-                bottom: $iconSize / 2;
+                left: 1em;
+                top: .5em;
+                bottom: .5em;
             }
 
             // 禁止换行
             white-space: nowrap;
 
             opacity: 0;
-            transition: opacity .5s .2s,
-            color .5s;
         }
     }
-    
-    @media screen and (max-width: 660px) {
+
+    @media screen and (max-width: 540px) {
         font-size: $contactFontSize * .8;
+    }
+
+    @media screen and (max-width: 440px) {
+        font-size: $contactFontSize * .7;
+
     }
 }
