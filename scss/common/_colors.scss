@@ -1,15 +1,24 @@
 // 调色盘
 $dark: #101010;
 $darkGrey: #333333;
+$lightWhite: #cccccc;
+
 $darkGreen: #163e34;
 $purple: #563d7c;
+$cyan: #12e4fb;
 $yellow: #ffcc22;
+$pink: #ffb6c7;
+$darkRed: #882233;
+$orangeRed: #fb060f;
+
 $vueColor: #41b883;
 $vueColor2: #35495e;
 
-$themeColor: #882233;
+$themeColor: $darkRed;
+$embelliColor: $cyan;
 
 $shadowColor: rgba($dark, .4);
+$haloColor: rgba($lightWhite, .4);
 
 // 背景的遮罩颜色
 // TODO 应该使用js来计算颜色
@@ -17,8 +26,10 @@ $shadowColor: rgba($dark, .4);
 :root {
     // 主题色
     --themeColor: #{$themeColor};
+    // 点缀色
+    --embelliColor: #{$embelliColor};
     // 文本默认颜色
-    --textColor: #cccccc;
+    --textColor: #{$lightWhite};
     // 文本亮色
     --lightTextColor: snow;
     // 滚动条背景色

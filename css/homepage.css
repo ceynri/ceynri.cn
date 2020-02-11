@@ -1,6 +1,7 @@
 @charset "UTF-8";
 :root {
   --themeColor: #882233;
+  --embelliColor: #12e4fb;
   --textColor: #cccccc;
   --lightTextColor: snow;
   --scrollbarColor: #232628;
@@ -206,6 +207,11 @@ a {
   height: 100vh;
   background-color: var(--scrollbarColor);
   z-index: 10000;
+  --barColor: var(--themeColor);
+}
+
+.scrollbar:hover {
+  --barColor: var(--embelliColor);
 }
 
 .scrollbar .bar {
@@ -214,9 +220,13 @@ a {
   right: 0;
   width: 100%;
   height: 0;
-  background-color: var(--themeColor);
-  -webkit-box-shadow: 0 4px 8px var(--themeColor);
-          box-shadow: 0 4px 8px var(--themeColor);
+  background-color: var(--barColor);
+  -webkit-box-shadow: 0 4px 8px var(--barColor);
+          box-shadow: 0 4px 8px var(--barColor);
+  -webkit-transition: background-color .5s ease, -webkit-box-shadow .5s ease;
+  transition: background-color .5s ease, -webkit-box-shadow .5s ease;
+  transition: background-color .5s ease, box-shadow .5s ease;
+  transition: background-color .5s ease, box-shadow .5s ease, -webkit-box-shadow .5s ease;
 }
 
 .scrollbar .bar::after {
@@ -224,10 +234,12 @@ a {
   position: absolute;
   top: 100%;
   right: 0;
-  border-top: 3px solid var(--themeColor);
+  border-top: 3px solid var(--barColor);
   border-right: 3px solid transparent;
   border-bottom: 3px solid transparent;
-  border-left: 3px solid var(--themeColor);
+  border-left: 3px solid var(--barColor);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
 
 .body-window {
@@ -243,8 +255,8 @@ a {
   position: fixed;
   top: -1%;
   left: -1%;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0.4))), url("/assets/imgs/background/72235081_p0.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("/assets/imgs/background/72235081_p0.jpg");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.3))), url("/assets/imgs/background/72235081_p0.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/assets/imgs/background/72235081_p0.jpg");
   background-position: center;
   background-size: cover;
   z-index: -10000;
@@ -263,6 +275,10 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+  -webkit-transition: text-shadow .5s;
+  transition: text-shadow .5s;
+  --lineColor: var(--themeColor);
 }
 
 .hero-wrapper {
@@ -285,13 +301,25 @@ a {
   height: 140px;
   -webkit-transform: rotate(60deg);
           transform: rotate(60deg);
-  background-color: var(--themeColor);
-  -webkit-box-shadow: 0 0 12px var(--themeColor);
-          box-shadow: 0 0 12px var(--themeColor);
+  background-color: var(--lineColor);
+  -webkit-box-shadow: 0 0 12px var(--lineColor);
+          box-shadow: 0 0 12px var(--lineColor);
+  -webkit-transition: background-color 1s ease-in, -webkit-box-shadow 1s ease-in;
+  transition: background-color 1s ease-in, -webkit-box-shadow 1s ease-in;
+  transition: background-color 1s ease-in, box-shadow 1s ease-in;
+  transition: background-color 1s ease-in, box-shadow 1s ease-in, -webkit-box-shadow 1s ease-in;
 }
 
-.hero .title {
-  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+.hero:hover {
+  text-shadow: 0 0 12px rgba(204, 204, 204, 0.4);
+}
+
+.hero:hover .decoration-line {
+  --lineColor: var(--embelliColor);
+  -webkit-transition: background-color 5s ease-in, -webkit-box-shadow 5s ease-in;
+  transition: background-color 5s ease-in, -webkit-box-shadow 5s ease-in;
+  transition: background-color 5s ease-in, box-shadow 5s ease-in;
+  transition: background-color 5s ease-in, box-shadow 5s ease-in, -webkit-box-shadow 5s ease-in;
 }
 
 .hero .title h2 {
@@ -337,7 +365,6 @@ a {
   font-size: 128px;
   font-family: "Circular Bold", "PingFang SC";
   line-height: 100%;
-  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
 }
 
 .hero .date .decoration-line {
@@ -403,12 +430,10 @@ a {
 }
 
 .about-header span {
+  --textColor: var(--themeColor);
   font-size: 100px;
   font-family: 'Tondu Beta', 'Circular Bold';
   line-height: .8;
-  color: var(--textColor);
-  -webkit-text-stroke: 1.5px var(--textColor);
-  -webkit-text-fill-color: transparent;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -416,6 +441,25 @@ a {
       -ms-flex: auto;
           flex: auto;
   overflow: hidden;
+  color: var(--textColor);
+  -webkit-filter: drop-shadow(0 0 2px var(--textColor));
+          filter: drop-shadow(0 0 2px var(--textColor));
+  -webkit-text-stroke: 2px var(--textColor);
+  -webkit-text-fill-color: transparent;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.about-header span:nth-child(2), .about-header span:nth-child(3), .about-header span:nth-child(5), .about-header span:nth-child(7), .about-header span:nth-child(11), .about-header span:nth-child(13), .about-header span:nth-child(15), .about-header span:nth-child(17), .about-header span:nth-child(23), .about-header span:nth-child(29), .about-header span:nth-child(31), .about-header span:nth-child(37) {
+  -webkit-text-stroke: initial;
+  -webkit-text-fill-color: initial;
+  color: var(--textColor);
+}
+
+.about-header span:hover {
+  --textColor: var(--embelliColor);
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 .about-header .full-text {
@@ -436,6 +480,7 @@ a {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  color: #fff;
 }
 
 .about-text > * {
@@ -471,15 +516,23 @@ a {
   -ms-user-select: none;
   user-select: none;
   position: relative;
+  --lineColor: var(--themeColor);
+}
+
+.works-wrapper:hover {
+  --lineColor: var(--embelliColor);
 }
 
 .works-header {
   position: absolute;
   left: 10vw;
   top: 25vh;
+  pointer-events: none;
   line-height: 1;
   padding-left: 2%;
-  border-left: 4px solid var(--textColor);
+  border-left: 6px solid var(--lineColor);
+  -webkit-transition: border-left .5s;
+  transition: border-left .5s;
   font-size: 36px;
   color: var(--lightTextColor);
 }
@@ -1066,12 +1119,13 @@ a {
 }
 
 .contact {
+  --borderColor: var(--themeColor);
   width: calc(100vmin - 64px * 2);
   height: calc(100vmin - 64px * 2);
   max-width: 500px;
   max-height: 500px;
   padding: 1em;
-  border: 0.75em var(--themeColor) solid;
+  border: 0.75em var(--borderColor) solid;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1082,8 +1136,12 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-shadow: 0 0 6px var(--themeColor), inset 0 0 6px var(--themeColor);
-          box-shadow: 0 0 6px var(--themeColor), inset 0 0 6px var(--themeColor);
+  -webkit-box-shadow: 0 0 6px var(--borderColor), inset 0 0 6px var(--borderColor);
+          box-shadow: 0 0 6px var(--borderColor), inset 0 0 6px var(--borderColor);
+  -webkit-transition: border .5s, -webkit-box-shadow .5s;
+  transition: border .5s, -webkit-box-shadow .5s;
+  transition: border .5s, box-shadow .5s;
+  transition: border .5s, box-shadow .5s, -webkit-box-shadow .5s;
   font-size: 26px;
   position: relative;
 }
@@ -1101,6 +1159,10 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.contact:hover {
+  --borderColor: var(--embelliColor);
 }
 
 .contact-header {

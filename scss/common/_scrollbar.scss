@@ -6,16 +6,26 @@
     height: 100vh;
     background-color: var(--scrollbarColor);
     z-index: 10000;
+    
+    // hover变色动画
+    --barColor: var(--themeColor);
+    &:hover {
+        --barColor: var(--embelliColor);
+    }
 
     .bar {
+
         position: absolute;
         top: 0;
         right: 0;
         width: 100%;
         // 高度由js计算
         height: 0;
-        background-color: var(--themeColor);
-        box-shadow:0 4px 8px var(--themeColor);
+        background-color: var(--barColor);
+        box-shadow: 0 4px 8px var(--barColor);
+
+        transition: background-color .5s ease,
+            box-shadow .5s ease;
 
         // 在底端加一个三角形
         &::after {
@@ -26,11 +36,13 @@
 
             // 三角形trick
             border: {
-                top: $scrollbarWidth / 2 solid var(--themeColor);
+                top: $scrollbarWidth / 2 solid var(--barColor);
                 right: $scrollbarWidth / 2 solid transparent;
                 bottom: $scrollbarWidth / 2 solid transparent;
-                left: $scrollbarWidth / 2 solid var(--themeColor);
+                left: $scrollbarWidth / 2 solid var(--barColor);
             }
+
+            transition: all .5s ease;
         }
     }
 }

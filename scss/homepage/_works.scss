@@ -25,6 +25,11 @@
         user-select: none;
 
         position: relative;
+
+        --lineColor: var(--themeColor);
+        &:hover {
+            --lineColor: var(--embelliColor);
+        }
     }
 
     height: $worksHeight;
@@ -35,10 +40,12 @@
         position: absolute;
         left: 10vw;
         top: 25vh;
+        pointer-events: none;
 
         line-height: 1;
         padding-left: 2%;
-        border-left: 4px solid var(--textColor);
+        border-left: 6px solid var(--lineColor);
+        transition: border-left .5s;
 
         font-size: $workFontSize;
         color: var(--lightTextColor);

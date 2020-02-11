@@ -24,18 +24,47 @@
         flex-direction: column;
 
         span {
+            --textColor: var(--themeColor);
+
             font-size: $aboutHeaderFontSize;
             font-family: 'Tondu Beta', 'Circular Bold';
             line-height: .8;
-            color: var(--textColor);
-
-            // 将字变为描边文字
-            -webkit-text-stroke: 1.5px var(--textColor);
-            -webkit-text-fill-color: transparent;
 
             width: fit-content;
             flex: auto;
             overflow: hidden;
+
+            color: var(--textColor);
+            filter: drop-shadow(0 0 2px var(--textColor));
+            // 将字变为描边文字
+            -webkit-text-stroke: 2px var(--textColor);
+            -webkit-text-fill-color: transparent;
+
+            // 质数数列，为实心
+            &:nth-child(2),
+            &:nth-child(3),
+            &:nth-child(5),
+            &:nth-child(7),
+            &:nth-child(11),
+            &:nth-child(13),
+            &:nth-child(15),
+            &:nth-child(17),
+            &:nth-child(23),
+            &:nth-child(29),
+            &:nth-child(31),
+            &:nth-child(37) {
+                // 将字变为描边文字
+                -webkit-text-stroke: initial;
+                -webkit-text-fill-color: initial;
+                color: var(--textColor);
+            }
+
+            &:hover {
+                --textColor: var(--embelliColor);
+                transition: all .2s;
+            }
+
+            transition: all 1s;
         }
 
         .full-text {
@@ -50,6 +79,8 @@
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+
+        color: #fff;
 
         &>* {
             opacity: 0;

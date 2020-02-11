@@ -1,11 +1,4 @@
 .hero {
-    width: 100%;
-    max-width: $heroWidth;
-
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-
     &-wrapper {
         height: 100vh;
         min-height: $titleFontSize * 4;
@@ -14,6 +7,18 @@
         justify-content: center;
     }
 
+    width: 100%;
+    max-width: $heroWidth;
+
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    text-shadow: $textShadow;
+    transition: text-shadow .5s;
+
+    --lineColor: var(--themeColor);
+
     // 装饰线的基础样式规则
     .decoration-line {
         position: absolute;
@@ -21,12 +26,23 @@
         height: $lineHeight;
         transform: rotate(60deg);
 
-        background-color: var(--themeColor);
-        box-shadow: 0 0 12px var(--themeColor);
+        background-color: var(--lineColor);
+        box-shadow: 0 0 12px var(--lineColor);
+        transition: background-color 1s ease-in, box-shadow 1s ease-in;
+    }
+
+
+    &:hover {
+        text-shadow: 0 0 12px $haloColor;
+
+        .decoration-line {
+            --lineColor: var(--embelliColor);
+            // 使得鼠标移入时动画很慢才完成，移出时一下就复原
+            transition: background-color 5s ease-in, box-shadow 5s ease-in;
+        }
     }
 
     .title {
-        text-shadow: $textShadow;
 
         h2 {
             font: {
@@ -49,7 +65,6 @@
                     left: 1em;
                 }
 
-                // 装饰线
                 &:nth-child(2) .decoration-line {
                     bottom: -.4em;
                     right: 1.4em;
@@ -87,7 +102,6 @@
         }
 
         line-height: 100%;
-        text-shadow: $textShadow;
 
         .decoration-line {
             top: $titleFontSize * 1.1 - $lineHeight / 4;

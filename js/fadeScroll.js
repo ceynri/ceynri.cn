@@ -48,5 +48,5 @@ class FadeScroll {
 const aboutTexts = CeynriUtils.nodeListToArray(document.querySelectorAll('.about-text div'));
 
 const fadeScroll = new FadeScroll();
-fadeScroll.addElems(aboutTexts, 30, 30, 10);
+fadeScroll.addElems(aboutTexts, 15, 15, 30);
 fadeScroll.render();

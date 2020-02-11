@@ -8,6 +8,9 @@
     // 内容到内边框之间的距离
     $innerPadding: 1em;
 
+    // 边框颜色
+    --borderColor: var(--themeColor);
+
     &-wrapper {
         height: 100vh;
         min-height: $contactSize;
@@ -35,21 +38,27 @@
         width: $contactSize;
         height: $contactSize;
     }
-
+    
     padding: $innerPadding;
-    border: 0.75em var(--themeColor) solid;
+    border: 0.75em var(--borderColor) solid;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    box-shadow: 0 0 6px var(--themeColor),
-        inset 0 0 6px var(--themeColor);
+    box-shadow: 0 0 6px var(--borderColor),
+        inset 0 0 6px var(--borderColor);
+
+    transition: border .5s, box-shadow .5s;
 
     // 用于为子元素提供参考字体大小
     font-size: $contactFontSize;
 
     position: relative;
+
+    &:hover {
+        --borderColor: var(--embelliColor);
+    }
 
     &-header {
         display: flex;
