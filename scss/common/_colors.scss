@@ -20,9 +20,6 @@ $embelliColor: $cyan;
 $shadowColor: rgba($dark, .4);
 $haloColor: rgba($lightWhite, .4);
 
-// 背景的遮罩颜色
-// TODO 应该使用js来计算颜色
-
 :root {
     // 主题色
     --themeColor: #{$themeColor};

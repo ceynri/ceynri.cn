@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- <meta name="format-detection" content="telephone=no"/> -->
   <!-- <meta name="format-detection" content="email=no"/> -->
@@ -23,10 +23,12 @@
 </head>
 
 <body>
+  <!-- TODO 全屏加载动画 -->
   <main class="body-window">
     <div data-scroll>
 
       <!-- hero -->
+      <!-- TODO mouseover时cursor样式变为指向下的按钮 -->
       <div class="hero-wrapper margin-wrapper">
         <section class="hero">
           <header class="title">
@@ -51,6 +53,7 @@
       <div class="content-wrapper">
         <!-- about -->
         <div class="about-wrapper margin-wrapper">
+          <!-- TODO mouseover时超大的实心反色cursor -->
           <section class="about">
             <header class="about-header">
               <span>ABOUT</span>
@@ -201,7 +204,6 @@
             <div class="contact-texts">
               <div class="contact-default">
                 <p>欢迎在其他平台上关注我😋</p>
-                <!-- TODO 向上滚动一定距离后改变文字内容 -->
               </div>
               <div class="contact-github">
                 <p>https://github.com/ceynri</p>
@@ -215,10 +217,10 @@
                 <p>ceynri@gmail.com</p>
               </div>
               <div class="contact-wechat qrcode-wrapper">
-                <img src="/assets/imgs/qrcode/wechat-qrcode.png" alt="ID: sakuramemory">
+                <img src="/assets/imgs/qrcode/wechat-qrcode.png" alt="WeChatID: sakuramemory">
               </div>
               <div class="contact-qq qrcode-wrapper">
-                <img src="/assets/imgs/qrcode/qq-qrcode.png" alt="account: 347670115">
+                <img src="/assets/imgs/qrcode/qq-qrcode.png" alt="QQ: 347670115">
               </div>
             </div>
             <nav class="switch-bar">
@@ -278,25 +280,25 @@
         <!-- <div class="one-page-wrapper">
           下面的内容仍在施工中🛠
         </div> -->
-        <div class="page-bottom"></div>
-
         <!-- TODO 结尾总结，接受改进建议的提醒 -->
+        <div class="page-bottom"></div>
       </div>
       <!-- END content -->
+
       <footer class="homepage-footer">
         <div class="copyright">Copyright © 2020 Ceynri. All rights reserved.</div>
       </footer>
     </div>
     <!-- END scroll-elem -->
-    <div class="body-background"></div>
 
+    <div class="body-background"></div>
     <div class="scrollbar">
       <div class="bar"></div>
     </div>
   </main>
   <!-- END body-window -->
 
-
+  <!-- cursor -->
   <div class="cursors">
     <div class="cursor-inner-box">
       <div class="cursor-wrapper">
@@ -332,14 +334,13 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
+  <!-- script import -->
   <script src="/js/homepage.js"></script>
   <script src="/js/contact.js"></script>
   <script src="/js/smoothScroll.js"></script>
   <script src="/js/parallaxScroll.js"></script>
   <script src="/js/fadeScroll.js"></script>
   <script src="/js/scrollbar.js"></script>
-  <!-- only computer device -->
   <script src="/js/work.js"></script>
   <script src="/js/float.js"></script>
   <script src="/js/cursor.js"></script>

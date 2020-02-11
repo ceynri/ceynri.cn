@@ -4,11 +4,6 @@
 
 'use strict';
 
-/* TODO LIST
- * title 渐入动画
- * let -> const
- */
-
 // ? (()=>{})()写法和{}写法的区别
 
 {
