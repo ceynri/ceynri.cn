@@ -275,7 +275,7 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+  text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
   -webkit-transition: text-shadow .5s;
   transition: text-shadow .5s;
   --lineColor: var(--themeColor);
@@ -316,10 +316,10 @@ a {
 
 .hero:hover .decoration-line {
   --lineColor: var(--embelliColor);
-  -webkit-transition: background-color 5s ease-in, -webkit-box-shadow 5s ease-in;
-  transition: background-color 5s ease-in, -webkit-box-shadow 5s ease-in;
-  transition: background-color 5s ease-in, box-shadow 5s ease-in;
-  transition: background-color 5s ease-in, box-shadow 5s ease-in, -webkit-box-shadow 5s ease-in;
+  -webkit-transition: background-color 5s cubic-bezier(0.895, 0.03, 0.685, 0.22), -webkit-box-shadow 5s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transition: background-color 5s cubic-bezier(0.895, 0.03, 0.685, 0.22), -webkit-box-shadow 5s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transition: background-color 5s cubic-bezier(0.895, 0.03, 0.685, 0.22), box-shadow 5s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transition: background-color 5s cubic-bezier(0.895, 0.03, 0.685, 0.22), box-shadow 5s cubic-bezier(0.895, 0.03, 0.685, 0.22), -webkit-box-shadow 5s cubic-bezier(0.895, 0.03, 0.685, 0.22);
 }
 
 .hero .title h2 {
@@ -469,7 +469,6 @@ a {
 
 .about-text {
   height: calc(132vh + 100vh);
-  font-size: 22px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -480,7 +479,9 @@ a {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  font-size: 22px;
   color: #fff;
+  text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
 }
 
 .about-text > * {
@@ -516,11 +517,12 @@ a {
   -ms-user-select: none;
   user-select: none;
   position: relative;
-  --lineColor: var(--themeColor);
 }
 
-.works-wrapper:hover {
-  --lineColor: var(--embelliColor);
+.works-wrapper:hover .works-header::after {
+  height: 100%;
+  -webkit-transition: height .5s ease-in .5s;
+  transition: height .5s ease-in .5s;
 }
 
 .works-header {
@@ -530,11 +532,9 @@ a {
   pointer-events: none;
   line-height: 1;
   padding-left: 2%;
-  border-left: 6px solid var(--lineColor);
-  -webkit-transition: border-left .5s;
-  transition: border-left .5s;
   font-size: 36px;
   color: var(--lightTextColor);
+  text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
 }
 
 .works-header h2,
@@ -549,6 +549,26 @@ a {
 .works-header h1 {
   font-size: 0.75em;
   margin-top: 0.5em;
+}
+
+.works-header::before, .works-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -6px;
+  width: 6px;
+}
+
+.works-header::before {
+  height: 100%;
+  background-color: var(--themeColor);
+}
+
+.works-header::after {
+  height: 0;
+  background-color: var(--embelliColor);
+  -webkit-transition: height .5s ease-out;
+  transition: height .5s ease-out;
 }
 
 .works-background {
@@ -620,7 +640,7 @@ a {
 .works .work-text .work-title h2 {
   font-size: 1em;
   font-family: "Circular Bold", "PingFang SC Bold";
-  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+  text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
 }
 
 .works .work-text .see-more {
@@ -1124,6 +1144,8 @@ a {
   height: calc(100vmin - 64px * 2);
   max-width: 500px;
   max-height: 500px;
+  min-width: 250px;
+  min-height: 250px;
   padding: 1em;
   border: 0.75em var(--borderColor) solid;
   display: -webkit-box;
@@ -1174,7 +1196,7 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   font-family: "Circular Bold", "PingFang SC Bold";
-  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+  text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
   line-height: 1;
 }
 
@@ -1194,9 +1216,10 @@ a {
   bottom: 1em;
   left: 1em;
   width: calc(100vmin - (64px + 1.75em) * 2);
+  min-width: calc(250px - 3.5em);
   max-width: calc(500px - 3.5em);
   max-height: calc(500px - 3.5em);
-  text-shadow: 0 0 12px rgba(16, 16, 16, 0.4);
+  text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
   pointer-events: none;
 }
 
@@ -1213,6 +1236,7 @@ a {
 
 .contact-texts .qrcode-wrapper {
   height: calc(100vmin - (64px + 1.75em) * 2);
+  min-height: calc(250px - 3.5em);
 }
 
 .contact-texts .qrcode-wrapper img {
@@ -1300,19 +1324,19 @@ a {
   }
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 570px), screen and (max-height: 570px) {
   .contact {
     font-size: 20.8px;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 500px), screen and (max-height: 550px) {
   .contact {
     font-size: 18.2px;
   }
 }
 
-@media screen and (max-width: 424px) {
+@media screen and (max-width: 424px), screen and (max-height: 424px) {
   .contact {
     font-size: 16.9px;
   }
@@ -1347,7 +1371,7 @@ a {
 }
 
 .page-bottom {
-  height: 50vh;
+  height: 35vh;
   width: 100%;
 }
 
@@ -1370,5 +1394,11 @@ a {
   overflow: hidden;
   font-size: 14px;
   color: #333333;
+}
+
+@media screen and (max-aspect-ratio: 1 / 1) {
+  .page-bottom {
+    height: 10vh;
+  }
 }
 /*# sourceMappingURL=homepage.css.map */

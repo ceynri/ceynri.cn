@@ -87,7 +87,7 @@
 }
 
 .page-bottom {
-    height: 50vh;
+    height: 35vh;
     width: 100%;
 }
 
@@ -108,4 +108,11 @@
 
     font-size: $footerFontSize;
     color: $darkGrey;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    // 宽高比在1：1以下的屏幕，缩减底部边距
+    .page-bottom {
+        height: 10vh;
+    }
 }

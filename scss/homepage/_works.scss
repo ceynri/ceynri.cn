@@ -26,9 +26,9 @@
 
         position: relative;
 
-        --lineColor: var(--themeColor);
-        &:hover {
-            --lineColor: var(--embelliColor);
+        &:hover .works-header::after {
+            height: 100%;
+            transition: height .5s ease-in .5s;
         }
     }
 
@@ -44,11 +44,10 @@
 
         line-height: 1;
         padding-left: 2%;
-        border-left: 6px solid var(--lineColor);
-        transition: border-left .5s;
 
         font-size: $workFontSize;
         color: var(--lightTextColor);
+        text-shadow: $textShadow;
 
         h2,
         h1 {
@@ -62,6 +61,26 @@
         h1 {
             font-size: 0.75em;
             margin-top: 0.5em;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -6px;
+            width: 6px;
+        }
+
+        &::before {
+            height: 100%;
+            background-color: var(--themeColor);
+        }
+
+        &::after {
+            height: 0;
+            background-color: var(--embelliColor);
+            transition: height .5s ease-out;
         }
     }
 

@@ -38,7 +38,7 @@
         .decoration-line {
             --lineColor: var(--embelliColor);
             // 使得鼠标移入时动画很慢才完成，移出时一下就复原
-            transition: background-color 5s ease-in, box-shadow 5s ease-in;
+            transition: background-color 5s cubic-bezier(0.895, 0.03, 0.685, 0.22), box-shadow 5s cubic-bezier(0.895, 0.03, 0.685, 0.22);
         }
     }
 

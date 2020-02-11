@@ -74,13 +74,14 @@
 
     &-text {
         height: calc(#{$aboutHeight * .4} + 100vh);
-        font-size: 22px;
 
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-
+        
+        font-size: 22px;
         color: #fff;
+        text-shadow: $textShadow;
 
         &>* {
             opacity: 0;

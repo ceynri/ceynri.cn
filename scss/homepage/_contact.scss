@@ -1,6 +1,8 @@
 .contact {
     // 主体最大的尺寸
     $contactSize: 500px;
+    // 最小尺寸
+    $contactMinSize: 250px;
     // 文本大小
     $contactFontSize: 26px;
     // 主体的边框宽度
@@ -29,6 +31,7 @@
     // 内容宽度
     $contentWidth: calc(100vmin - (#{$miniMargin} + #{$outerPadding}) * 2);
     $contentMaxWidth: calc(#{$contactSize} - #{$outerPadding * 2});
+    $contentMinWidth: calc(#{$contactMinSize} - #{$outerPadding * 2});
 
     // 自适应页面，页面宽度较小时也能保持正方形边框
     width: $outerWidth;
@@ -38,7 +41,12 @@
         width: $contactSize;
         height: $contactSize;
     }
-    
+
+    min: {
+        width: $contactMinSize;
+        height: $contactMinSize;
+    }
+
     padding: $innerPadding;
     border: 0.75em var(--borderColor) solid;
 
@@ -87,6 +95,7 @@
             left: $innerPadding;
 
             width: $contentWidth;
+            min-width: $contentMinWidth;
 
             max: {
                 width: $contentMaxWidth;
@@ -111,6 +120,7 @@
 
         .qrcode-wrapper {
             height: $contentWidth;
+            min-height: $contentMinWidth;
 
             img {
                 width: 100%;
@@ -199,15 +209,18 @@
         }
     }
 
-    @media screen and (max-width: 570px) {
+    @media screen and (max-width: 570px),
+    screen and (max-height: 570px) {
         font-size: $contactFontSize * .8;
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 500px),
+    screen and (max-height: 550px) {
         font-size: $contactFontSize * .7;
     }
 
-    @media screen and (max-width: 424px) {
+    @media screen and (max-width: 424px),
+    screen and (max-height: 424px) {
         font-size: $contactFontSize * .65;
     }
 
