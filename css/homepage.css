@@ -9,23 +9,8 @@
 }
 
 @font-face {
-  font-family: 'Circular Bold';
-  src: url("/assets/fonts/Circular-Bold.woff2.ttf");
-}
-
-@font-face {
-  font-family: 'Circular';
-  src: url("/assets/fonts/Circular-Book.woff.ttf");
-}
-
-@font-face {
-  font-family: 'PingFang SC';
+  font-family: '.PingFang SC';
   src: url("/assets/fonts/PingFang-SC.ttf");
-}
-
-@font-face {
-  font-family: 'PingFang SC Bold';
-  src: url("/assets/fonts/PingFang-SC-Bold.ttf");
 }
 
 @font-face {
@@ -55,12 +40,8 @@ html::-webkit-scrollbar {
 
 body {
   font-size: 16px;
-  font-family: "PingFang SC", "Circular", "MircoSoft YaHei", Sans-serif;
+  font-family: ".PingFang SC", "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif;
   color: var(--textColor);
-}
-
-h1,
-h2 {
   font-weight: normal;
 }
 
@@ -255,8 +236,8 @@ a {
   position: fixed;
   top: -1%;
   left: -1%;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.3))), url("/assets/imgs/background/72235081_p0.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/assets/imgs/background/72235081_p0.jpg");
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.3))), url("https://i.loli.net/2020/02/20/B793gFK156XqtvY.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://i.loli.net/2020/02/20/B793gFK156XqtvY.jpg");
   background-position: center;
   background-size: cover;
   z-index: -10000;
@@ -324,15 +305,15 @@ a {
 
 .hero .title h2 {
   font-size: 96px;
-  font-family: "Circular Bold", "PingFang SC";
+  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
   line-height: 1;
   text-align: right;
-  max-width: 6em;
+  max-width: 6.4em;
 }
 
 .hero .title h2 span {
   position: relative;
-  font-weight: normal;
+  font-weight: 900;
 }
 
 .hero .title h2 span:nth-child(1) .decoration-line {
@@ -349,8 +330,7 @@ a {
   margin-top: .5em;
   text-align: right;
   font-size: 32px;
-  font-family: "Circular Bold", "PingFang SC";
-  font-weight: normal;
+  font-weight: 100;
   position: relative;
 }
 
@@ -363,7 +343,8 @@ a {
   margin-right: .5em;
   position: relative;
   font-size: 128px;
-  font-family: "Circular Bold", "PingFang SC";
+  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-weight: 900;
   line-height: 100%;
 }
 
@@ -431,8 +412,8 @@ a {
 
 .about-header span {
   --textColor: var(--themeColor);
-  font-size: 100px;
-  font-family: 'Tondu Beta', 'Circular Bold';
+  font: 100 100px "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font: 400 100px "Tondu Beta";
   line-height: .8;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -446,6 +427,7 @@ a {
           filter: drop-shadow(0 0 2px var(--textColor));
   -webkit-text-stroke: 2px var(--textColor);
   -webkit-text-fill-color: transparent;
+  opacity: 0.25;
   -webkit-transition: all 1s;
   transition: all 1s;
 }
@@ -458,6 +440,7 @@ a {
 
 .about-header span:hover {
   --textColor: var(--embelliColor);
+  opacity: 1;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
@@ -539,15 +522,17 @@ a {
 
 .works-header h2,
 .works-header h1 {
-  font-family: "Circular Bold", "PingFang SC";
+  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
 }
 
 .works-header h2 {
   font-size: 1em;
+  font-weight: 700;
 }
 
 .works-header h1 {
   font-size: 0.75em;
+  font-weight: 100;
   margin-top: 0.5em;
 }
 
@@ -639,7 +624,8 @@ a {
 .works .work-text .work-title h1,
 .works .work-text .work-title h2 {
   font-size: 1em;
-  font-family: "Circular Bold", "PingFang SC Bold";
+  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-weight: 700;
   text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
 }
 
@@ -1160,10 +1146,10 @@ a {
           justify-content: space-between;
   -webkit-box-shadow: 0 0 6px var(--borderColor), inset 0 0 6px var(--borderColor);
           box-shadow: 0 0 6px var(--borderColor), inset 0 0 6px var(--borderColor);
-  -webkit-transition: border .5s, -webkit-box-shadow .5s;
-  transition: border .5s, -webkit-box-shadow .5s;
-  transition: border .5s, box-shadow .5s;
-  transition: border .5s, box-shadow .5s, -webkit-box-shadow .5s;
+  -webkit-transition: border .5s, -webkit-box-shadow .5s;
+  transition: border .5s, -webkit-box-shadow .5s;
+  transition: border .5s, box-shadow .5s;
+  transition: border .5s, box-shadow .5s, -webkit-box-shadow .5s;
   font-size: 26px;
   position: relative;
 }
@@ -1195,19 +1181,20 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-family: "Circular Bold", "PingFang SC Bold";
+  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
   text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
   line-height: 1;
-}
-
-.contact-header h1 {
-  font-size: 1.25em;
-  margin-left: 0.1em;
 }
 
 .contact-header h2 {
   font-size: 2.6em;
   margin-bottom: .2em;
+  font-weight: 700;
+}
+
+.contact-header h1 {
+  font-size: 1.25em;
+  margin-left: 0.1em;
 }
 
 .contact-texts > * {

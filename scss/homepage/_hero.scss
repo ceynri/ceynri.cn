@@ -1,7 +1,7 @@
 .hero {
     &-wrapper {
         height: 100vh;
-        min-height: $titleFontSize * 4;
+        min-height: $heroFontSize * 4;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -46,18 +46,17 @@
 
         h2 {
             font: {
-                size: $titleFontSize;
-                family: $titleFont;
+                size: $heroFontSize;
+                family: $headerFont;
             }
 
             line-height: 1;
             text-align: right;
-            max-width: 6em;
+            max-width: 6.4em;
 
             span {
                 position: relative;
-                // 取消firefox浏览器自作聪明的 bold
-                font-weight: normal;
+                font-weight: 900;
 
                 // 装饰线
                 &:nth-child(1) .decoration-line {
@@ -77,10 +76,8 @@
             text-align: right;
 
             font: {
-                size: $titleFontSize / 3;
-                family: $titleFont;
-                // 取消firefox浏览器自作聪明的 bold
-                weight: normal;
+                size: $heroFontSize / 3;
+                weight: 100;
             }
 
             position: relative;
@@ -97,15 +94,16 @@
         position: relative;
 
         font: {
-            size: $titleFontSize * 4/3;
-            family: $titleFont;
+            size: $heroFontSize * 4/3;
+            family: $headerFont;
+            weight: 900;
         }
 
         line-height: 100%;
 
         .decoration-line {
-            top: $titleFontSize * 1.1 - $lineHeight / 4;
-            left: ($titleFontSize * .8 - $lineWidth / 2);
+            top: $heroFontSize * 1.1 - $lineHeight / 4;
+            left: ($heroFontSize * .8 - $lineWidth / 2);
             transform: rotate(60deg);
         }
     }

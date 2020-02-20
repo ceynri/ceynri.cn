@@ -33,19 +33,13 @@ body {
     }
 
     color: var(--textColor);
+    font-weight: normal;
 }
 
 body,
 a {
     // 隐藏光标
     // cursor: none;
-}
-
-h1,
-h2 {
-    // font-family: 'Circular Bold';
-    // 取消firefox浏览器自作聪明的 bold
-    font-weight: normal;
 }
 
 a {

@@ -51,15 +51,17 @@
 
         h2,
         h1 {
-            font-family: $titleFont;
+            font-family: $headerFont;
         }
 
         h2 {
             font-size: 1em;
+            font-weight: 700;
         }
 
         h1 {
             font-size: 0.75em;
+            font-weight: 100;
             margin-top: 0.5em;
         }
 
@@ -155,7 +157,8 @@
                 h1,
                 h2 {
                     font-size: 1em;
-                    font-family: $boldFont;
+                    font-family: $headerFont;
+                    font-weight: 700;
                     text-shadow: $textShadow;
                 }
             }

@@ -1,7 +1,7 @@
 // * globals
 
 // 背景图片
-$backgroundImage: '/assets/imgs/background/72235081_p0.jpg';
+$backgroundImage: 'https://i.loli.net/2020/02/20/B793gFK156XqtvY.jpg';
 
 // 页面左右最小边距
 $miniMargin: 64px;
@@ -9,21 +9,28 @@ $miniMargin: 64px;
 // * fonts
 
 // 默认字体
-$defaultFont: 'PingFang SC',
-'Circular',
-'MircoSoft YaHei',
-Sans-serif;
+$defaultFont: 
+'.PingFang SC',
+'PingFang SC',
+'Helvetica Neue',
+'Hiragino Sans GB',
+'Microsoft YaHei',
+Helvetica,
+Arial,
+sans-serif;
 
-// hero字体
-$titleFont: 'Circular Bold',
-'PingFang SC';
-
-// 加粗字体
-$boldFont: 'Circular Bold',
-'PingFang SC Bold';
+// header字体
+$headerFont: 
+'Microsoft YaHei',
+'Helvetica Neue',
+'.PingFang SC',
+'PingFang SC',
+'Heiti SC',
+Arial,
+sans-serif;
 
 // hero文本大小
-$titleFontSize: 96px;
+$heroFontSize: 96px;
 
 // works文本大小
 $workFontSize: 36px;

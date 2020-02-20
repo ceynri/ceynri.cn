@@ -26,8 +26,9 @@
         span {
             --textColor: var(--themeColor);
 
-            font-size: $aboutHeaderFontSize;
-            font-family: 'Tondu Beta', 'Circular Bold';
+            font: 100 $aboutHeaderFontSize $headerFont;
+            font: 400 $aboutHeaderFontSize 'Tondu Beta';
+
             line-height: .8;
 
             width: fit-content;
@@ -39,6 +40,8 @@
             // 将字变为描边文字
             -webkit-text-stroke: 2px var(--textColor);
             -webkit-text-fill-color: transparent;
+            opacity: 0.25;
+
 
             // 质数数列，为实心
             &:nth-child(2),
@@ -53,7 +56,9 @@
             &:nth-child(29),
             &:nth-child(31),
             &:nth-child(37) {
+            // &:nth-of-type(odd) {
                 // 将字变为描边文字
+                // -webkit-text-stroke: 3px var(--textColor);
                 -webkit-text-stroke: initial;
                 -webkit-text-fill-color: initial;
                 color: var(--textColor);
@@ -61,6 +66,7 @@
 
             &:hover {
                 --textColor: var(--embelliColor);
+                opacity: 1;
                 transition: all .2s;
             }
 
@@ -78,7 +84,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        
+
         font-size: 22px;
         color: #fff;
         text-shadow: $textShadow;

@@ -55,9 +55,10 @@
     justify-content: space-between;
 
     box-shadow: 0 0 6px var(--borderColor),
-        inset 0 0 6px var(--borderColor);
+    inset 0 0 6px var(--borderColor);
 
-    transition: border .5s, box-shadow .5s;
+    transition: border .5s,
+    box-shadow .5s;
 
     // 用于为子元素提供参考字体大小
     font-size: $contactFontSize;
@@ -71,18 +72,19 @@
     &-header {
         display: flex;
         flex-direction: column;
-        font-family: $boldFont;
+        font-family: $headerFont;
         text-shadow: $textShadow;
         line-height: 1;
-
-        h1 {
-            font-size: 1.25em;
-            margin-left: 0.1em; // 微调因字体大小导致视觉不对齐
-        }
 
         h2 {
             font-size: 2.6em;
             margin-bottom: .2em;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 1.25em;
+            margin-left: 0.1em; // 微调因字体大小导致视觉不对齐
         }
     }
 
@@ -195,6 +197,7 @@
         .contact-default::after {
             content: '移动鼠标至下面的图标查看更多';
         }
+
         .contact-mail::after {
             content: '点击按钮复制邮箱';
         }
@@ -204,6 +207,7 @@
         .contact-default::after {
             content: '点击以下图标查看更多';
         }
+
         .contact-mail::after {
             content: '长按按钮复制邮箱';
         }
