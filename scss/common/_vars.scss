@@ -10,22 +10,25 @@ $miniMargin: 64px;
 
 // 默认字体
 $defaultFont: 
-'.PingFang SC',
+// 英文
 'PingFang SC',
+Tahoma,
 'Helvetica Neue',
+// 中文
 'Hiragino Sans GB',
 'Microsoft YaHei',
+// 保底
 Helvetica,
 Arial,
+'\5b8b\4f53', // 宋体
 sans-serif;
 
 // header字体
 $headerFont: 
+'Ubuntu',
 'Microsoft YaHei',
-'Helvetica Neue',
-'.PingFang SC',
+'HelveticaNeue-Bold',
 'PingFang SC',
-'Heiti SC',
 Arial,
 sans-serif;
 

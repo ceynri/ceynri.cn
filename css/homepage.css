@@ -8,16 +8,6 @@
   --cursorColor: white;
 }
 
-@font-face {
-  font-family: '.PingFang SC';
-  src: url("/assets/fonts/PingFang-SC.ttf");
-}
-
-@font-face {
-  font-family: 'Tondu Beta';
-  src: url("/assets/fonts/Tondu_Beta.ttf");
-}
-
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -40,7 +30,7 @@ html::-webkit-scrollbar {
 
 body {
   font-size: 16px;
-  font-family: ".PingFang SC", "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  font-family: "PingFang SC", Tahoma, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, "宋体", sans-serif;
   color: var(--textColor);
   font-weight: normal;
 }
@@ -305,7 +295,7 @@ a {
 
 .hero .title h2 {
   font-size: 96px;
-  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-family: "Ubuntu", "Microsoft YaHei", "HelveticaNeue-Bold", "PingFang SC", Arial, sans-serif;
   line-height: 1;
   text-align: right;
   max-width: 6.4em;
@@ -330,7 +320,6 @@ a {
   margin-top: .5em;
   text-align: right;
   font-size: 32px;
-  font-weight: 100;
   position: relative;
 }
 
@@ -343,7 +332,7 @@ a {
   margin-right: .5em;
   position: relative;
   font-size: 128px;
-  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-family: "Ubuntu", "Microsoft YaHei", "HelveticaNeue-Bold", "PingFang SC", Arial, sans-serif;
   font-weight: 900;
   line-height: 100%;
 }
@@ -412,8 +401,7 @@ a {
 
 .about-header span {
   --textColor: var(--themeColor);
-  font: 100 100px "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
-  font: 400 100px "Tondu Beta";
+  font: 900 100px "Titillium Web";
   line-height: .8;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -522,7 +510,7 @@ a {
 
 .works-header h2,
 .works-header h1 {
-  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-family: "Ubuntu", "Microsoft YaHei", "HelveticaNeue-Bold", "PingFang SC", Arial, sans-serif;
 }
 
 .works-header h2 {
@@ -624,7 +612,7 @@ a {
 .works .work-text .work-title h1,
 .works .work-text .work-title h2 {
   font-size: 1em;
-  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-family: "Ubuntu", "Microsoft YaHei", "HelveticaNeue-Bold", "PingFang SC", Arial, sans-serif;
   font-weight: 700;
   text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
 }
@@ -1181,7 +1169,7 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-family: "Microsoft YaHei", "Helvetica Neue", ".PingFang SC", "PingFang SC", "Heiti SC", Arial, sans-serif;
+  font-family: "Ubuntu", "Microsoft YaHei", "HelveticaNeue-Bold", "PingFang SC", Arial, sans-serif;
   text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
   line-height: 1;
 }
