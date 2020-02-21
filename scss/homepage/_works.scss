@@ -240,7 +240,6 @@
 
     // 手机和平板
     @media screen and (max-device-width: 1024px) and (min-device-width: 768px) and (orientation: portrait),
-    screen and (max-device-width: 1366px) and (min-device-width: 1024px) and (orientation: landscape),
     screen and (max-device-width: 767px),
     screen and (max-width: 540px) {
         &-wrapper {
@@ -271,28 +270,48 @@
         }
     }
 
-    // 平板
-    @media screen and (max-device-width: 1366px) and (min-device-width: 1024px) and (orientation: landscape) {
+    // 平板横屏
+    @media screen and (max-device-width: 1366px) and (min-device-width: 768px) and (orientation: landscape) {
+        &-wrapper {
+            height: auto;
+            margin-top: $gapWidth;
+        }
+        // .center-wrapper {
+        //     margin: 0 auto;
+        // }
+        
+        height: auto;
+        width: 100vw;
+        padding: 30vh 0 0 0;
+
+        justify-content: space-between;
         flex-direction: row;
         flex-wrap: wrap;
 
-        .work {
-            $spaceWidth: 100vh * 4/3 - $workWidth * 2;
+        &-header {
+            top: 10vh;
+        }
 
-            margin-left: $spaceWidth / 4;
-            margin-right: $spaceWidth / 4;
-            margin-bottom: $spaceWidth / 3;
+        .work {
+            margin: 0 0 20vh 0;
             align-self: initial !important;
 
             &:nth-of-type(odd) {
-                margin-left: $spaceWidth / 3;
-                margin-right: $spaceWidth / 3;
+                margin-left: 20vh;
+            }
+            &:nth-of-type(even) {
+                margin-left: 10vh;
+                margin-right: 20vh;
             }
 
-            &:nth-of-type(even) {
-                margin-left: 0;
-                margin-right: $spaceWidth / 3;
+            &:last-child:nth-of-type(odd) {
+                margin-right: auto;
             }
+        }
+
+        &-background {
+            height: 100%;
+            top: 0;
         }
     }
 }
