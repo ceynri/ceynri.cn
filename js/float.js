@@ -46,5 +46,5 @@ if (!MediaMatcher.isTouchScreenDevice()){
     float.addFloat(background, 1)
         .addFloat(hero, 2)
         .addFloat(engTitle, .5)
-        .addFloat(lines, 4);
+        .addFloat(lines, 6);
 }
