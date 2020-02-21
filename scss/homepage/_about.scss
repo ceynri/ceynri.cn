@@ -78,11 +78,12 @@
     }
 
     &-text {
-        height: calc(#{$aboutHeight * .4} + 100vh);
+        height: calc(#{$aboutHeight * .4} + 66.7vh);
+        margin-top: 33.3vh;
 
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-around;
 
         font-size: 22px;
         color: #fff;

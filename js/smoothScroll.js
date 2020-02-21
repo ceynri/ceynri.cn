@@ -10,19 +10,22 @@
             this.initConst();
             // 初始化并绑定事件
             this.initEvents();
-            // 开始循环渲染滚动页面
-            this.renderScrollPage();
+            if (!MediaMatcher.isTouchScreenDevice()) {
+                // 开始循环渲染滚动页面
+                this.render();
+            } else {
+                this.touchScreenRender();
+            }
         }
         initElem() {
             // 可滚动元素
             this.page = document.querySelector('div[data-scroll]');
             this.works = document.querySelector('.works');
             this.footer = document.querySelector('.homepage-footer');
+            this.copyright = this.footer.querySelector('.copyright');
         }
         initProp() {
             // * 属性初始化
-            // footer最大高度
-            this.footerHeight = 72;
             // 设置body高度
             this.setBodySize();
             // 初始化文档滚动高度
@@ -41,6 +44,8 @@
             this.WORK_SCROLL_RATIO = 1.2;
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
             this.WORK_ELASTIC_RANGE = 200;
+            // footer高度
+            this.FOOTER_HEIGHT = parseInt(getComputedStyle(this.footer, null).getPropertyValue('height'));
         }
         initEvents() {
             // * 事件监听初始化
@@ -73,19 +78,19 @@
                     ease: Power4.easeOut
                 });
             };
-            const touchDragWorksMoveEvent = e => {
-                if (e.targetTouches.length > 1 || e.scale && e.scale !== 1) {
-                    return;
-                }
-                // 触屏设备的拖动不要缓动动画，直接set
-                let worksTargetX = this.dragOffset + e.targetTouches[0].clientX * this.WORK_SCROLL_RATIO;
-                const safedX = this.convertToWorksSafedX(worksTargetX);
-                const bias = worksTargetX - safedX;
-                worksTargetX = safedX + CeynriUtils.normallize(bias, this.WORK_ELASTIC_RANGE);
-                TweenLite.to(this.works, .2, {
-                    x: worksTargetX
-                });
-            }
+            // const touchDragWorksMoveEvent = e => {
+            //     if (e.targetTouches.length > 1 || e.scale && e.scale !== 1) {
+            //         return;
+            //     }
+            //     // 触屏设备的拖动不要缓动动画，直接set
+            //     let worksTargetX = this.dragOffset + e.targetTouches[0].clientX * this.WORK_SCROLL_RATIO;
+            //     const safedX = this.convertToWorksSafedX(worksTargetX);
+            //     const bias = worksTargetX - safedX;
+            //     worksTargetX = safedX + CeynriUtils.normallize(bias, this.WORK_ELASTIC_RANGE);
+            //     TweenLite.to(this.works, .2, {
+            //         x: worksTargetX
+            //     });
+            // }
 
             // start
             const mouseDragWorksStartEvent = e => {
@@ -98,12 +103,12 @@
                     document.addEventListener('mouseup', mouseDragWorksEndEvent);
                 }
             };
-            const touchDragWorksStartEvent = event => {
-                const e = event.targetTouches[0];
-                this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
-                document.addEventListener('touchmove', touchDragWorksMoveEvent);
-                document.addEventListener('touchend', touchDragWorksEndEvent);
-            };
+            // const touchDragWorksStartEvent = event => {
+            //     const e = event.targetTouches[0];
+            //     this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
+            //     document.addEventListener('touchmove', touchDragWorksMoveEvent);
+            //     document.addEventListener('touchend', touchDragWorksEndEvent);
+            // };
 
             // end
             const mouseDragWorksEndEvent = () => {
@@ -120,59 +125,63 @@
                     }
                 }, 200);
             };
-            const touchDragWorksEndEvent = () => {
-                document.removeEventListener('touchmove', touchDragWorksMoveEvent);
-                document.removeEventListener('touchend', touchDragWorksEndEvent);
-                let times = 2;
-                const checkLoop = setInterval(() => {
-                    // 检测是否超出边界，如果超出则移动回安全范围
-                    if (times-- == 0 || !this.checkWorksXSafe()) {
-                        // 循环次数到了或者检测到不安全已经执行了回弹，则结束检测
-                        clearInterval(checkLoop);
-                    }
-                }, 200);
-            };
+            // const touchDragWorksEndEvent = () => {
+            //     document.removeEventListener('touchmove', touchDragWorksMoveEvent);
+            //     document.removeEventListener('touchend', touchDragWorksEndEvent);
+            //     let times = 2;
+            //     const checkLoop = setInterval(() => {
+            //         // 检测是否超出边界，如果超出则移动回安全范围
+            //         if (times-- == 0 || !this.checkWorksXSafe()) {
+            //             // 循环次数到了或者检测到不安全已经执行了回弹，则结束检测
+            //             clearInterval(checkLoop);
+            //         }
+            //     }, 200);
+            // };
 
             // 判断是否是移动设备
             if (!MediaMatcher.isTouchScreenDevice()) {
                 // 电脑设备
                 // 监听works上的mousedown/mouseup事件
                 this.works.addEventListener('mousedown', mouseDragWorksStartEvent);
-            } else if (MediaMatcher.isTabletDevice()) {
-                // 平板设备
-                // 手指拖动事件
-                this.works.addEventListener('touchstart', touchDragWorksStartEvent);
             }
-            // 手机设备改变works样式为竖向排列，不再需要横向滚动
+            // 触屏设备改变works样式为竖向排列，不再需要横向滚动
         }
         pageScroll() {
             // 使内容滚动
-            if (!MediaMatcher.isTouchScreenDevice()) {
                 TweenLite.to(this.page, this.EASE_SPEED, {
                     y: -this.getPageScrollTop(),
                     ease: this.EASE
                 });
-            } else {
-                TweenLite.set(this.page, {
-                    y: -this.getPageScrollTop(),
-                });
-            }
         }
-        footerScroll() {
-            const bottom = document.querySelector('.content-wrapper').getBoundingClientRect().bottom;
-            const footerHasShownTop = (document.documentElement.clientHeight || window.innerHeight) - bottom;
-            if (footerHasShownTop > 0) {
-                TweenLite.set(this.footer, {
-                    height: footerHasShownTop
+        touchScreenPageScroll() {
+            TweenLite.set(this.page, {
+                y: -this.getPageScrollTop(),
+            });
+        }
+        copyrightFixed() {
+            const top = this.footer.getBoundingClientRect().top;
+            const footerShowingTop = (document.documentElement.clientHeight || window.innerHeight) - top;
+            // 提前100px进行文字的相对窗口固定
+            if (footerShowingTop > -100) {
+                TweenLite.set(this.copyright, {
+                    y: footerShowingTop - this.FOOTER_HEIGHT
                 })
             }
         }
-        renderScrollPage() {
+
+        render() {
             // * 渲染滚动页面
             const frame = () => {
                 this.pageScroll();
-                this.footerScroll();
+                this.copyrightFixed();
                 // 循环下去
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
+        touchScreenRender() {
+            const frame = () => {
+                this.touchScreenPageScroll();
                 requestAnimationFrame(frame);
             }
             requestAnimationFrame(frame);
@@ -181,7 +190,7 @@
         // setter
         setBodySize() {
             // * 设置主体的高度
-            document.body.style.height = `${this.page.scrollHeight - this.footer.scrollHeight + this.footerHeight}px`;
+            document.body.style.height = `${this.page.scrollHeight}px`;
         }
         setWorksRightBound() {
             // * 设置works的右边界（即向左最多可以位移的距离）
