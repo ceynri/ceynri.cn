@@ -9,9 +9,11 @@ $miniMargin: 64px;
 // * fonts
 
 // 默认字体
-$defaultFont: 
+$defaultFont: '-apple-system',
+'BlinkMacSystemFont',
 // 英文
 'PingFang SC',
+'Segoe UI',
 Tahoma,
 'Helvetica Neue',
 // 中文
@@ -20,12 +22,16 @@ Tahoma,
 // 保底
 Helvetica,
 Arial,
-'\5b8b\4f53', // 宋体
-sans-serif;
+// 宋体
+'\5b8b\4f53',
+sans-serif,
+// Emoji
+'Apple Color Emoji',
+'Segoe UI Emoji';
+
 
 // header字体
-$headerFont: 
-'Ubuntu',
+$headerFont: 'Ubuntu',
 'Microsoft YaHei',
 'HelveticaNeue-Bold',
 'PingFang SC',
