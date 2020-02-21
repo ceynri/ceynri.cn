@@ -1073,7 +1073,7 @@ a {
           box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
 }
 
-@media screen and (max-device-width: 1366px) and (orientation: landscape), screen and (max-device-width: 1024px) and (orientation: portrait), screen and (max-width: 540px) {
+@media screen and (max-device-width: 1024px) and (min-device-width: 768px) and (orientation: portrait), screen and (max-device-width: 1366px) and (min-device-width: 1024px) and (orientation: landscape), screen and (max-device-width: 767px), screen and (max-width: 540px) {
   .works {
     height: auto;
     width: 100vw;
@@ -1089,12 +1089,6 @@ a {
   .works-wrapper {
     height: auto;
     margin-top: 20vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
   }
   .works-header {
     top: 10vh;
@@ -1109,6 +1103,33 @@ a {
   .works-background {
     height: 100%;
     top: 0;
+  }
+}
+
+@media screen and (max-device-width: 1366px) and (min-device-width: 1024px) and (orientation: landscape) {
+  .works {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .works .work {
+    margin-left: 15.83333vh;
+    margin-right: 15.83333vh;
+    margin-bottom: 21.11111vh;
+    -ms-flex-item-align: initial !important;
+        -ms-grid-row-align: initial !important;
+        align-self: initial !important;
+  }
+  .works .work:nth-of-type(odd) {
+    margin-left: 21.11111vh;
+    margin-right: 21.11111vh;
+  }
+  .works .work:nth-of-type(even) {
+    margin-left: 0;
+    margin-right: 21.11111vh;
   }
 }
 

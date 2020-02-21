@@ -237,17 +237,15 @@
         }
     }
 
-    @media 
-    screen and (max-device-width: 1366px) and (orientation: landscape),
-    screen and (max-device-width: 1024px) and (orientation: portrait),
-    // screen and (max-device-width: 767px),
+
+    // 手机和平板
+    @media screen and (max-device-width: 1024px) and (min-device-width: 768px) and (orientation: portrait),
+    screen and (max-device-width: 1366px) and (min-device-width: 1024px) and (orientation: landscape),
+    screen and (max-device-width: 767px),
     screen and (max-width: 540px) {
         &-wrapper {
             height: auto;
             margin-top: $gapWidth;
-
-            display: flex;
-            align-items: center;
         }
 
         height: auto;
@@ -270,6 +268,31 @@
         &-background {
             height: 100%;
             top: 0;
+        }
+    }
+
+    // 平板
+    @media screen and (max-device-width: 1366px) and (min-device-width: 1024px) and (orientation: landscape) {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .work {
+            $spaceWidth: 100vh * 4/3 - $workWidth * 2;
+
+            margin-left: $spaceWidth / 4;
+            margin-right: $spaceWidth / 4;
+            margin-bottom: $spaceWidth / 3;
+            align-self: initial !important;
+
+            &:nth-of-type(odd) {
+                margin-left: $spaceWidth / 3;
+                margin-right: $spaceWidth / 3;
+            }
+
+            &:nth-of-type(even) {
+                margin-left: 0;
+                margin-right: $spaceWidth / 3;
+            }
         }
     }
 }
