@@ -54,14 +54,12 @@
             return elem.getBoundingClientRect().top - rate * (this.clientHeight / 2);
         }
     }
+    // 触屏设备上进行transfrom非常卡
     if (!MediaMatcher.isTouchScreenDevice()) {
         const aboutText = document.querySelector('.about-text');
         const parallax = new ParallaxScroll();
         parallax.addParallax(aboutText, .4, TOP);
         // parallax.addParallax(lines, 1.2, CENTER);
         parallax.render();
-    } else {
-        const lines = CeynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
-        (new ParallaxScroll()).addParallax(lines, 1.3, CENTER).render();
     }
 }
