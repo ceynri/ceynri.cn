@@ -80,20 +80,23 @@
             }
             this.iconBtn.addEventListener('mouseout', mouseOutAnimation);
         }
-        addClickCopyString(str, copyedInfoText = '已复制😊', isResetInfoText = false) {
+        addClickCopyString(str, copyedInfoText, isResetInfoText = false) {
             if (isResetInfoText) {
                 this.infoText = `点击复制${copyedInfoText}`;
             }
             this.iconBtn.addEventListener('click', () => {
-                this.copyToClipboard(str);
-                this.info.innerHTML = `已复制${copyedInfoText}😊`;
+                if (this.copyToClipboard(str)) {
+                    this.info.innerHTML = `已复制${copyedInfoText}😊`;
+                } else {
+                    this.info.innerHTML = `复制${str}失败😥`;
+                }
             });
         }
-        addTouchCopyString(str, copyedInfoText = '已复制😊', isResetInfoText = false) {
+        addTouchCopyString(str, copyedInfoText, isResetInfoText = false) {
             // 禁止弹出菜单，避免长按导致浏览器菜单弹出
-            // this.iconBtn.oncontextmenu = e => {
-            //     e.preventDefault();
-            // };
+            this.iconBtn.oncontextmenu = e => {
+                e.preventDefault();
+            };
             if (isResetInfoText) {
                 this.infoText = `长按复制${copyedInfoText}`;
             }
@@ -102,9 +105,12 @@
             this.iconBtn.addEventListener('touchstart', e => {
                 longPressTimer = setTimeout(() => {
                     e.preventDefault();
-                    this.copyToClipboard(str);
-                    this.info.innerHTML = `已复制${copyedInfoText}😊`;
-                }, 1000);
+                    if (this.copyToClipboard(str)) {
+                        this.info.innerHTML = `已复制${copyedInfoText}😊`;
+                    } else {
+                        this.info.innerHTML = `复制${str}失败😥`;
+                    }
+                }, 500);
             });
             this.iconBtn.addEventListener('touchend', () => {
                 clearTimeout(longPressTimer);
@@ -118,13 +124,14 @@
             document.body.appendChild(strWrapper);
             strWrapper.select();
             if (document.execCommand('copy')) {
-                if (document.execCommand('copy')) {
-                    console.log('复制内容：' + str);
-                } else {
-                    console.error('复制失败');
-                }
+                document.body.removeChild(strWrapper);
+                console.log('复制内容：' + str);
+                return true;
+            } else {
+                document.body.removeChild(strWrapper);
+                console.error('复制失败');
+                return false;
             }
-            document.body.removeChild(strWrapper);
         };
     }
 
