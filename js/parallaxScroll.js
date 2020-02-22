@@ -54,15 +54,14 @@
             return elem.getBoundingClientRect().top - rate * (this.clientHeight / 2);
         }
     }
-
-    // const aboutHeader = document.querySelector('.about-header');
-    const aboutText = document.querySelector('.about-text');
-    const lines = CeynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
-
-    const parallax = new ParallaxScroll();
-    parallax
-        .addParallax(aboutText, .4, TOP)
-        // .addParallax(aboutHeader, 1.0, BOTTOM)
-        // .addParallax(lines, 1.2, CENTER);
-    parallax.render();
+    if (!MediaMatcher.isTouchScreenDevice()) {
+        const aboutText = document.querySelector('.about-text');
+        const parallax = new ParallaxScroll();
+        parallax.addParallax(aboutText, .4, TOP);
+        // parallax.addParallax(lines, 1.2, CENTER);
+        parallax.render();
+    } else {
+        const lines = CeynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
+        (new ParallaxScroll()).addParallax(lines, 1.3, CENTER).render();
+    }
 }
