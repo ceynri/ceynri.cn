@@ -276,10 +276,11 @@
             height: auto;
             margin-top: $gapWidth;
         }
+
         // .center-wrapper {
         //     margin: 0 auto;
         // }
-        
+
         height: auto;
         width: 100vw;
         padding: 30vh 0 0 0;
@@ -299,6 +300,7 @@
             &:nth-of-type(odd) {
                 margin-left: 20vh;
             }
+
             &:nth-of-type(even) {
                 margin-left: 10vh;
                 margin-right: 20vh;

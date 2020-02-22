@@ -26,7 +26,8 @@ const MediaMatcher = {
     isTabletDevice: () => {
         // ipad (mini) ~ ipad pro 12.9
         const portraitLimit = window.matchMedia("screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait)").matches;
-        const landscapeLimit = window.matchMedia("screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape)").matches;
+        // ? ipad在横屏的时候，设备宽度竟然和竖屏时的设备宽度相等？
+        const landscapeLimit = window.matchMedia("screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape)").matches;
         return portraitLimit || landscapeLimit;
     },
     isMobileDevice: () => {

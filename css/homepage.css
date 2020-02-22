@@ -170,47 +170,46 @@ a {
   font-size: 20px;
 }
 
-.scrollbar {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 6px;
-  height: 100vh;
-  background-color: var(--scrollbarColor);
-  z-index: 10000;
-  --barColor: var(--themeColor);
-}
-
-.scrollbar:hover {
-  --barColor: var(--embelliColor);
-}
-
-.scrollbar .bar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 0;
-  background-color: var(--barColor);
-  -webkit-box-shadow: 0 4px 8px var(--barColor);
-          box-shadow: 0 4px 8px var(--barColor);
-  -webkit-transition: background-color .5s ease, -webkit-box-shadow .5s ease;
-  transition: background-color .5s ease, -webkit-box-shadow .5s ease;
-  transition: background-color .5s ease, box-shadow .5s ease;
-  transition: background-color .5s ease, box-shadow .5s ease, -webkit-box-shadow .5s ease;
-}
-
-.scrollbar .bar::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  right: 0;
-  border-top: 3px solid var(--barColor);
-  border-right: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-left: 3px solid var(--barColor);
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease;
+@media screen and (min-device-width: 1367px) {
+  .scrollbar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 100vh;
+    background-color: var(--scrollbarColor);
+    z-index: 10000;
+    --barColor: var(--themeColor);
+  }
+  .scrollbar:hover {
+    --barColor: var(--embelliColor);
+  }
+  .scrollbar .bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--barColor);
+    -webkit-box-shadow: 0 4px 8px var(--barColor);
+            box-shadow: 0 4px 8px var(--barColor);
+    -webkit-transition: background-color .5s ease, -webkit-box-shadow .5s ease;
+    transition: background-color .5s ease, -webkit-box-shadow .5s ease;
+    transition: background-color .5s ease, box-shadow .5s ease;
+    transition: background-color .5s ease, box-shadow .5s ease, -webkit-box-shadow .5s ease;
+  }
+  .scrollbar .bar::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border-top: 3px solid var(--barColor);
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 3px solid var(--barColor);
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+  }
 }
 
 .body-window {
@@ -371,7 +370,7 @@ a {
 .about {
   width: 100%;
   max-width: 900px;
-  height: 330vh;
+  height: 300vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -385,10 +384,11 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  height: calc(300vh + 30vh);
 }
 
 .about-header {
-  height: calc(330vh - 30vh);
+  height: 300vh;
   margin-right: 3em;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -439,7 +439,7 @@ a {
 }
 
 .about-text {
-  height: calc(132vh + 66.7vh);
+  height: calc(120vh + 70vh);
   margin-top: 33.3vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -462,6 +462,13 @@ a {
 @media screen and (max-width: 900px) {
   .about-header {
     display: none;
+  }
+}
+
+@media screen and (max-device-width: 1366px) {
+  .about-text {
+    height: 300vh;
+    margin-top: 0;
   }
 }
 
@@ -686,8 +693,13 @@ a {
   width: 1px;
   height: 1px;
   margin-left: -66px;
-  -webkit-animation: speeder .4s linear infinite;
-          animation: speeder .4s linear infinite;
+}
+
+@media screen and (min-device-width: 1367px) {
+  .works .work.case-demo-collection .work-card .flying-man {
+    -webkit-animation: speeder .4s linear infinite;
+            animation: speeder .4s linear infinite;
+  }
 }
 
 .works .work.case-demo-collection .work-card .flying-man .jet-propeller {
@@ -700,41 +712,39 @@ a {
   border-radius: 2px 10px 1px 0;
 }
 
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(1),
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(2),
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(3),
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(4) {
-  width: 30px;
-  height: 1px;
-  background: #234;
-  position: absolute;
-}
-
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(1) {
-  -webkit-animation: jet1 .2s linear infinite;
-          animation: jet1 .2s linear infinite;
-}
-
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(2) {
-  top: 3px;
-  -webkit-animation: jet2 .4s linear infinite;
-          animation: jet2 .4s linear infinite;
-}
-
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(3) {
-  top: 1px;
-  -webkit-animation: jet3 .4s linear infinite;
-          animation: jet3 .4s linear infinite;
-  -webkit-animation-delay: -1s;
-          animation-delay: -1s;
-}
-
-.works .work.case-demo-collection .work-card .flying-man .gas:nth-child(4) {
-  top: 4px;
-  -webkit-animation: jet4 1s linear infinite;
-          animation: jet4 1s linear infinite;
-  -webkit-animation-delay: -1s;
-          animation-delay: -1s;
+@media screen and (min-device-width: 1367px) {
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(1),
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(2),
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(3),
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(4) {
+    width: 30px;
+    height: 1px;
+    background: #234;
+    position: absolute;
+  }
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(1) {
+    -webkit-animation: jet1 .2s linear infinite;
+            animation: jet1 .2s linear infinite;
+  }
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(2) {
+    top: 3px;
+    -webkit-animation: jet2 .4s linear infinite;
+            animation: jet2 .4s linear infinite;
+  }
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(3) {
+    top: 1px;
+    -webkit-animation: jet3 .4s linear infinite;
+            animation: jet3 .4s linear infinite;
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+  }
+  .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(4) {
+    top: 4px;
+    -webkit-animation: jet4 1s linear infinite;
+            animation: jet4 1s linear infinite;
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+  }
 }
 
 .works .work.case-demo-collection .work-card .flying-man .man-body {
@@ -796,51 +806,48 @@ a {
           transform-origin: 50% 50%;
 }
 
-.works .work.case-demo-collection .work-card .speed-lines {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.works .work.case-demo-collection .work-card .speed-lines span {
-  position: absolute;
-  height: 2px;
-  width: 20%;
-  background: #234;
-}
-
-.works .work.case-demo-collection .work-card .speed-lines span:nth-child(1) {
-  top: 20%;
-  -webkit-animation: fly .4s linear infinite;
-          animation: fly .4s linear infinite;
-  -webkit-animation-delay: -5s;
-          animation-delay: -5s;
-}
-
-.works .work.case-demo-collection .work-card .speed-lines span:nth-child(2) {
-  top: 40%;
-  -webkit-animation: fly .5s linear infinite;
-          animation: fly .5s linear infinite;
-  -webkit-animation-delay: -1s;
-          animation-delay: -1s;
-}
-
-.works .work.case-demo-collection .work-card .speed-lines span:nth-child(3) {
-  top: 60%;
-  -webkit-animation: fly2 .4s linear infinite;
-          animation: fly2 .4s linear infinite;
-  -webkit-animation-delay: -1s;
-          animation-delay: -1s;
-}
-
-.works .work.case-demo-collection .work-card .speed-lines span:nth-child(4) {
-  top: 80%;
-  -webkit-animation: fly2 .3s linear infinite;
-          animation: fly2 .3s linear infinite;
-  -webkit-animation-delay: -3s;
-          animation-delay: -3s;
+@media screen and (min-device-width: 1367px) {
+  .works .work.case-demo-collection .work-card .speed-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .works .work.case-demo-collection .work-card .speed-lines span {
+    position: absolute;
+    height: 2px;
+    width: 20%;
+    background: #234;
+  }
+  .works .work.case-demo-collection .work-card .speed-lines span:nth-child(1) {
+    top: 20%;
+    -webkit-animation: fly .4s linear infinite;
+            animation: fly .4s linear infinite;
+    -webkit-animation-delay: -5s;
+            animation-delay: -5s;
+  }
+  .works .work.case-demo-collection .work-card .speed-lines span:nth-child(2) {
+    top: 40%;
+    -webkit-animation: fly .5s linear infinite;
+            animation: fly .5s linear infinite;
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+  }
+  .works .work.case-demo-collection .work-card .speed-lines span:nth-child(3) {
+    top: 60%;
+    -webkit-animation: fly2 .4s linear infinite;
+            animation: fly2 .4s linear infinite;
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+  }
+  .works .work.case-demo-collection .work-card .speed-lines span:nth-child(4) {
+    top: 80%;
+    -webkit-animation: fly2 .3s linear infinite;
+            animation: fly2 .3s linear infinite;
+    -webkit-animation-delay: -3s;
+            animation-delay: -3s;
+  }
 }
 
 @-webkit-keyframes speeder {
