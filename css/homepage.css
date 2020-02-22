@@ -1350,13 +1350,13 @@ a {
   }
 }
 
-@media screen and (max-width: 500px), screen and (max-height: 550px) {
+@media screen and (max-height: 550px) {
   .contact {
     font-size: 18.2px;
   }
 }
 
-@media screen and (max-width: 424px), screen and (max-height: 424px) {
+@media screen and (max-height: 424px) {
   .contact {
     font-size: 16.9px;
   }
@@ -1365,7 +1365,7 @@ a {
 @media screen and (max-width: 400px) {
   .contact {
     width: 80vw;
-    height: 104vw;
+    height: 108vw;
   }
   .contact-texts > * {
     width: calc(80vw - 1.75em * 2);
