@@ -1,11 +1,12 @@
 .about {
+    $aboutWidth: $heroWidth;
+    $aboutHeight: 300vh;
+
     &-wrapper {
         display: flex;
         justify-content: center;
+        height: calc(#{$aboutHeight} + 30vh);
     }
-
-    $aboutWidth: $heroWidth;
-    $aboutHeight: 330vh;
 
     width: 100%;
     max-width: $aboutWidth;
@@ -18,7 +19,7 @@
     &-header {
         $aboutHeaderFontSize: 100px;
 
-        height: calc(#{$aboutHeight} - 30vh);
+        height: $aboutHeight;
         margin-right: 3em;
         display: inline-flex;
         flex-direction: column;
@@ -55,7 +56,7 @@
             &:nth-child(29),
             &:nth-child(31),
             &:nth-child(37) {
-            // &:nth-of-type(odd) {
+                // &:nth-of-type(odd) {
                 // 将字变为描边文字
                 // -webkit-text-stroke: 3px var(--textColor);
                 -webkit-text-stroke: initial;
@@ -78,7 +79,7 @@
     }
 
     &-text {
-        height: calc(#{$aboutHeight * .4} + 66.7vh);
+        height: calc(#{$aboutHeight * .4} + 70vh);
         margin-top: 33.3vh;
 
         display: flex;
@@ -97,6 +98,13 @@
     @media screen and (max-width: 900px) {
         &-header {
             display: none;
+        }
+    }
+
+    @media screen and (max-device-width: 1366px) {
+        &-text {
+            height: $aboutHeight;
+            margin-top: 0;
         }
     }
 }
