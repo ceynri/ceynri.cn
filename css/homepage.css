@@ -1350,15 +1350,19 @@ a {
   }
 }
 
-@media screen and (max-height: 550px) {
-  .contact {
-    font-size: 18.2px;
+@media screen and (max-width: 426px) {
+  .contact .switch-bar {
+    margin-left: .5em;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-transform: translateY(1.2em);
+            transform: translateY(1.2em);
   }
-}
-
-@media screen and (max-height: 424px) {
-  .contact {
-    font-size: 16.9px;
+  .contact .switch-bar .btn-info {
+    margin: .2em 0 0 .6em;
+    padding: 0;
   }
 }
 
@@ -1373,6 +1377,18 @@ a {
   .contact .qrcode-wrapper {
     width: calc(80vw - 1.75em * 2);
     height: calc(80vw - 1.75em * 2);
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .contact {
+    font-size: 18.2px;
+  }
+}
+
+@media screen and (max-height: 425px) {
+  .contact {
+    font-size: 16.9px;
   }
 }
 

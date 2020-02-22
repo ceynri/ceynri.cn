@@ -218,12 +218,17 @@
         font-size: $contactFontSize * .8;
     }
 
-    @media screen and (max-height: 550px) {
-        font-size: $contactFontSize * .7;
-    }
+    @media screen and (max-width: 426px) {
+        .switch-bar {
+            margin-left: .5em;
+            flex-direction: column;
+            transform: translateY(1.2em);
 
-    @media screen and (max-height: 424px) {
-        font-size: $contactFontSize * .65;
+            .btn-info {
+                margin: .2em 0 0 .6em;
+                padding: 0;
+            }
+        }
     }
 
     @media screen and (max-width: 400px) {
@@ -242,4 +247,13 @@
             height: calc(#{$minWidth} - #{$outerPadding} * 2);
         }
     }
+
+    @media screen and (max-height: 550px) {
+        font-size: $contactFontSize * .7;
+    }
+
+    @media screen and (max-height: 425px) {
+        font-size: $contactFontSize * .65;
+    }
+
 }

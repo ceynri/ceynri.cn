@@ -98,7 +98,7 @@
                 e.preventDefault();
             };
             if (isResetInfoText) {
-                this.infoText = `长按复制${copyedInfoText}`;
+                this.infoText = `长按按钮复制${copyedInfoText}`;
             }
 
             let longPressTimer;
