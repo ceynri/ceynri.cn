@@ -58,6 +58,11 @@
             }
         }
 
+        .page-down {
+            width: $normalInnerCursorSize;
+            height: $normalInnerCursorSize;
+        }
+
         .detail i {
             font-size: $normalInnerCursorSize * 1.2;
         }

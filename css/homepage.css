@@ -5,7 +5,7 @@
   --textColor: #cccccc;
   --lightTextColor: snow;
   --scrollbarColor: #232628;
-  --cursorColor: white;
+  --cursorColor: #ffffff;
 }
 
 * {
@@ -118,6 +118,11 @@ a {
 .cursor-inner-box .zoom-in::after {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+}
+
+.cursor-inner-box .page-down {
+  width: 20px;
+  height: 20px;
 }
 
 .cursor-inner-box .detail i {
