@@ -28,6 +28,12 @@
         display: inline-flex;
         flex-direction: column;
 
+        // 禁止选中文字
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
         span {
             --textColor: var(--themeColor);
 

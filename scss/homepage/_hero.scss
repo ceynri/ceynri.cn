@@ -17,6 +17,12 @@
     text-shadow: $textShadow;
     transition: text-shadow .5s;
 
+    // 禁止选中文字
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     --lineColor: var(--themeColor);
 
     // 装饰线的基础样式规则

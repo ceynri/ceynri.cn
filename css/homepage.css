@@ -256,6 +256,10 @@ a {
   text-shadow: 0 0 8px rgba(16, 16, 16, 0.4);
   -webkit-transition: text-shadow .5s;
   transition: text-shadow .5s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   --lineColor: var(--themeColor);
 }
 
@@ -407,6 +411,10 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .about-header span {
