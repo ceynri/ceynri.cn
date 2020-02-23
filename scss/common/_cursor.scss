@@ -20,6 +20,7 @@
         width: $innerBoxSize;
         height: $innerBoxSize;
 
+        overflow: visible;
         position: fixed;
         pointer-events: none;
         z-index: 12000;
@@ -74,6 +75,7 @@
 
         mix-blend-mode: exclusion;
 
+        overflow: visible;
         position: fixed;
         pointer-events: none;
         z-index: 11000;
