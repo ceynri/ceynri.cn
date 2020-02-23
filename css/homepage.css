@@ -81,6 +81,7 @@ a {
 .cursor-inner-box {
   width: 40px;
   height: 40px;
+  overflow: visible;
   position: fixed;
   pointer-events: none;
   z-index: 12000;
@@ -133,6 +134,7 @@ a {
   width: 160px;
   height: 160px;
   mix-blend-mode: exclusion;
+  overflow: visible;
   position: fixed;
   pointer-events: none;
   z-index: 11000;

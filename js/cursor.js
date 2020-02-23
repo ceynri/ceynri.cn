@@ -53,6 +53,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.clientX = -1000;
             this.clientY = -1000;
 
+            // 是否在hero区域
+            this.isInHero = false;
             // 是否在work区域
             this.isInWork = false;
         }
@@ -61,7 +63,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 外光标移动速度
             this.MOVE_SPEED = 0.15;
             // 缓动动画播放速度
-            this.ANIMATION_SPEED = 0.3;
+            this.ANIMATION_SPEED = .3;
             // hero区域的鼠标缩放比例
             this.HERO_SCALE_RATE = 4;
             // about区域的鼠标缩放比例
@@ -213,6 +215,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             });
 
             const pageDownMouseMove = () => {
+                this.isInHero = true;
                 outerCursorExpandTween.play();
                 this.tween.brightenOuterCursor.play();
                 this.tween.shrinkPoint.play();
@@ -221,6 +224,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.setCursorCoord(this.outerCursor.box);
             }
             const pageDownMouseLeave = () => {
+                setTimeout(() => {
+                    this.isInHero = false;
+                }, this.ANIMATION_SPEED * 1000);
                 outerCursorExpandTween.reverse();
                 this.tween.brightenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
@@ -241,9 +247,16 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             });
 
             const aboutMouseMove = () => {
-                outerCursorExpandTween.play();
-                this.tween.whitenOuterCursor.play();
-                this.tween.shrinkPoint.play();
+                const mouseMoveAnimation = () => {
+                    outerCursorExpandTween.play();
+                    this.tween.whitenOuterCursor.play();
+                    this.tween.shrinkPoint.play();
+                }
+                if (this.isInHero) {
+                    setTimeout(mouseMoveAnimation, this.ANIMATION_SPEED * 1000);
+                } else {
+                    mouseMoveAnimation();
+                }
             }
             const aboutMouseLeave = () => {
                 outerCursorExpandTween.reverse();
