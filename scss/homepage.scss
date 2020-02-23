@@ -94,7 +94,6 @@
 
 .homepage-footer {
     $footerHeight: 72px;
-    $footerFontSize: 14px;
 
     width: 100%;
     height: $footerHeight;
@@ -106,13 +105,19 @@
     align-items: center;
     overflow: hidden;
 
-    font-size: $footerFontSize;
-    color: $darkGrey;
+    * {
+        font-size: 14px;
+        color: $darkGrey;
+
+        @media screen and (max-width: 426px) {
+            font-size: 12px;
+        }
+    }
 }
 
 @media screen and (max-aspect-ratio: 1/1) {
-    // 宽高比在1：1以下的屏幕，缩减底部边距
     .page-bottom {
+        // 宽高比在1：1以下的屏幕，缩减底部边距
         height: 10vh;
     }
 }
