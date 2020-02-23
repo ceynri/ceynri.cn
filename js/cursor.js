@@ -1,4 +1,7 @@
 if (!MediaMatcher.isTouchScreenDevice()) {
+    // 已知bug：当刷新页面后，光标第一次显示出现于会改变默认光标样式的区域时，
+    //         快速移动到另外一个非默认光标样式的区域，会使某些样式永久失效（直到刷新）
+    // 暂时解决：加大了about与其他区域之间的距离，最大程度避免bug情况的条件达成        
     /*
      * @title 光标类
      * @author ceynri
@@ -60,7 +63,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 缓动动画播放速度
             this.ANIMATION_SPEED = 0.3;
             // hero区域的鼠标缩放比例
-            this.HERO_SCALE_RATE = 2;
+            this.HERO_SCALE_RATE = 4;
+            // about区域的鼠标缩放比例
+            this.ABOUT_SCALE_RATE = 6;
             // works元素区域的鼠标缩放比例
             this.WORKS_SCALE_RATE = 3;
         }
@@ -146,11 +151,15 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 scale: 0.8,
                 ease: Back.ease,
                 paused: true
-            })
-            this.tween.darkenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-                backgroundColor: 'rgba(0, 0, 0, .618)',
+            });
+            this.tween.brightenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                backgroundColor: 'rgba(255, 255, 255, .9)',
                 paused: true
-            })
+            });
+            this.tween.whitenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                backgroundColor: '#ffffff',
+                paused: true
+            });
 
             this.tween.shrinkPoint = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                 scale: 0,
@@ -164,6 +173,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.addGlobalAnimation();
             // hero
             this.addHeroAnimation();
+            // about
+            this.addAboutAnimation();
             // icon-btn
             this.addIconBtnAnimation();
             // icon-link
@@ -189,7 +200,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             document.addEventListener('mouseup', globalMouseUp);
         }
         addHeroAnimation() {
-            // * hero出现向下箭头的动画
+            // * pagedown出现向下箭头的动画
             const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
                 scale: this.HERO_SCALE_RATE,
                 ease: Back.easeOut.config(1.5),
@@ -201,10 +212,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 paused: true
             });
 
-            // 使用mouseMove而不是mouseEnter，可以解决一些bug
             const pageDownMouseMove = () => {
                 outerCursorExpandTween.play();
-                this.tween.darkenOuterCursor.play();
+                this.tween.brightenOuterCursor.play();
                 this.tween.shrinkPoint.play();
                 downArrowShowTween.play();
                 this.outerCursorSpeed = 0;
@@ -212,15 +222,38 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             const pageDownMouseLeave = () => {
                 outerCursorExpandTween.reverse();
-                this.tween.darkenOuterCursor.reverse();
+                this.tween.brightenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
                 downArrowShowTween.reverse();
                 this.outerCursorSpeed = this.MOVE_SPEED;
             }
             // 应用hero相关监听器
-            const pageDownArea = document.querySelector('.page-down-area');
-            pageDownArea.addEventListener('mousemove', pageDownMouseMove);
-            pageDownArea.addEventListener('mouseleave', pageDownMouseLeave);
+            const hero = document.querySelector('.hero');
+            hero.addEventListener('mousemove', pageDownMouseMove);
+            hero.addEventListener('mouseleave', pageDownMouseLeave);
+        }
+        addAboutAnimation() {
+            // * about部分的动画
+            const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                scale: this.ABOUT_SCALE_RATE,
+                ease: Back.easeOut.config(1.5),
+                paused: true
+            });
+
+            const aboutMouseMove = () => {
+                outerCursorExpandTween.play();
+                this.tween.whitenOuterCursor.play();
+                this.tween.shrinkPoint.play();
+            }
+            const aboutMouseLeave = () => {
+                outerCursorExpandTween.reverse();
+                this.tween.whitenOuterCursor.reverse();
+                this.tween.shrinkPoint.reverse();
+            }
+            // 应用hero相关监听器
+            const aboutArea = document.querySelector('.about');
+            aboutArea.addEventListener('mousemove', aboutMouseMove);
+            aboutArea.addEventListener('mouseleave', aboutMouseLeave);
         }
         addIconBtnAnimation() {
             // * icon-btn动画
@@ -398,7 +431,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             const workMouseMove = () => {
                 workDetailShowTween.play();
                 arrowFadeOutTween.play();
-                this.tween.darkenOuterCursor.play();
+                this.tween.brightenOuterCursor.play();
                 // 外光标改为实时移动
                 this.outerCursorSpeed = 0;
                 this.setCursorCoord(this.outerCursor.box);
@@ -409,7 +442,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 // 反向播放动画
                 arrowFadeOutTween.reverse();
                 workDetailShowTween.reverse();
-                this.tween.darkenOuterCursor.reverse();
+                this.tween.brightenOuterCursor.reverse();
                 // 恢复缓动移动
                 this.outerCursorSpeed = this.MOVE_SPEED;
                 // 恢复hand型

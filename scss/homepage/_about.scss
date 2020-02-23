@@ -1,17 +1,21 @@
 .about {
     $aboutWidth: $heroWidth;
     $aboutHeight: 300vh;
+    $marginHeight: 30vh;
 
     &-wrapper {
         display: flex;
         justify-content: center;
-        height: calc(#{$aboutHeight} + 30vh);
+        height: $aboutHeight + $marginHeight * 2;
     }
 
     width: 100%;
     max-width: $aboutWidth;
     height: $aboutHeight;
 
+    margin-top: $marginHeight;
+    margin-bottom: $marginHeight;
+    
     display: flex;
 
     position: relative;

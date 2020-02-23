@@ -132,6 +132,7 @@ a {
 .cursor-outer-box {
   width: 160px;
   height: 160px;
+  mix-blend-mode: exclusion;
   position: fixed;
   pointer-events: none;
   z-index: 11000;
@@ -270,14 +271,6 @@ a {
           justify-content: center;
 }
 
-.hero-wrapper .page-down-area {
-  position: absolute;
-  top: 61.8vh;
-  left: 0;
-  height: 38.2vh;
-  width: 100%;
-}
-
 .hero .decoration-line {
   position: absolute;
   width: 20px;
@@ -384,6 +377,8 @@ a {
   width: 100%;
   max-width: 900px;
   height: 300vh;
+  margin-top: 30vh;
+  margin-bottom: 30vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -397,7 +392,7 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: calc(300vh + 30vh);
+  height: 360vh;
 }
 
 .about-header {

@@ -72,6 +72,8 @@
         width: $outerBoxSize;
         height: $outerBoxSize;
 
+        mix-blend-mode: exclusion;
+
         position: fixed;
         pointer-events: none;
         z-index: 11000;

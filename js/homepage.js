@@ -22,8 +22,8 @@
 
 {
     // * 点击下page-down-area自动向下滚动页面
-    const pageDownArea = document.querySelector('.page-down-area');
-    pageDownArea.addEventListener('click', () => {
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('click', () => {
         window.scrollTo(0, (document.documentElement.clientHeight || window.innerHeight));
     });
 }
