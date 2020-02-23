@@ -140,12 +140,14 @@
     const defaultText = contact.querySelector('.contact-default');
     const githubText = contact.querySelector('.contact-github');
     const bilibiliText = contact.querySelector('.contact-bilibili');
+    const musicText = contact.querySelector('.contact-music');
     const mailText = contact.querySelector('.contact-mail');
     const wechatText = contact.querySelector('.contact-wechat');
     const qqText = contact.querySelector('.contact-qq');
 
     const githubBtn = contact.querySelector('.github-btn');
     const bilibiliBtn = contact.querySelector('.bilibili-btn');
+    const musicBtn = contact.querySelector('.music-btn');
     const mailBtn = contact.querySelector('.mail-btn');
     const wechatBtn = contact.querySelector('.wechat-btn');
     const qqBtn = contact.querySelector('.qq-btn');
@@ -154,7 +156,8 @@
 
     const github = new Contact(githubText, defaultText, githubBtn, btnInfo, 'Github');
     const bilibili = new Contact(bilibiliText, defaultText, bilibiliBtn, btnInfo, 'bilibili');
-    const mail = new Contact(mailText, defaultText, mailBtn, btnInfo, 'Mail');
+    const music = new Contact(musicText, defaultText, musicBtn, btnInfo, '网易云音乐');
+    const mail = new Contact(mailText, defaultText, mailBtn, btnInfo, 'Gmail');
     const wechat = new Contact(wechatText, defaultText, wechatBtn, btnInfo, 'WeChat');
     const qq = new Contact(qqText, defaultText, qqBtn, btnInfo, 'QQ');
 

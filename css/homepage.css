@@ -658,7 +658,7 @@ a {
 
 .works .work.case-note .work-card .bangage {
   height: 100%;
-  width: 8%;
+  width: 9%;
   position: absolute;
   top: 0;
   right: 27%;
@@ -1310,6 +1310,11 @@ a {
   left: 0;
   top: 0;
   pointer-events: none;
+}
+
+.contact .switch-bar .contact-btns .icon-btn .icons .icon-music {
+  color: #e72d2c;
+  opacity: 0;
 }
 
 .contact .switch-bar .btn-info {
