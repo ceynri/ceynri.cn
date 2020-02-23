@@ -108,7 +108,7 @@
                     if (this.copyToClipboard(str)) {
                         this.info.innerHTML = `已复制${copyedInfoText}😊`;
                     } else {
-                        this.info.innerHTML = `复制${str}失败😥`;
+                        this.info.innerHTML = `复制${str}失败😥 浏览器不支持`;
                     }
                 }, 500);
             });
