@@ -21,10 +21,18 @@
 }
 
 {
-    // * 点击下page-down-area自动向下滚动页面
+    // * 点击hero自动向下滚动页面
     const hero = document.querySelector('.hero');
     hero.addEventListener('click', () => {
         window.scrollTo(0, (document.documentElement.clientHeight || window.innerHeight));
+    });
+}
+
+{
+    // * 点击about-header区域向下滚30vh
+    const aboutHeader = document.querySelector('.about-header');
+    aboutHeader.addEventListener('click', () => {
+        window.scrollBy(0, document.documentElement.clientHeight * .3);
     });
 }
 
