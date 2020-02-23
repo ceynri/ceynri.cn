@@ -138,6 +138,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 为了高性能所以使用单独的frame函数调用requestAnimationFrame函数来提高性能
             requestAnimationFrame(frame);
         }
+
         initTweens() {
             // * 全局Tween
             this.tween = {};
@@ -146,6 +147,16 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 ease: Back.ease,
                 paused: true
             })
+            this.tween.darkenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                backgroundColor: 'rgba(0, 0, 0, .618)',
+                paused: true
+            })
+
+            this.tween.shrinkPoint = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
+                scale: 0,
+                ease: Back.easeInOut.config(2.5),
+                paused: true
+            });
         }
         initEvents() {
             // * 各种事件监听的初始化
@@ -164,6 +175,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // work的a标签
             this.listenWorkLinkEvent();
         }
+
         addGlobalAnimation() {
             // * 全局动画
             const globalMouseDown = () => {
@@ -180,13 +192,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // * hero出现向下箭头的动画
             const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
                 scale: this.HERO_SCALE_RATE,
-                backgroundColor: 'rgba(0, 0, 0, .618)',
                 ease: Back.easeOut.config(1.5),
-                paused: true
-            });
-            const pointShrinkTween = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
-                scale: 0,
-                ease: Back.easeInOut.config(2.5),
                 paused: true
             });
             const downArrowShowTween = TweenLite.to(this.innerCursor.down, this.ANIMATION_SPEED, {
@@ -198,14 +204,16 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 使用mouseMove而不是mouseEnter，可以解决一些bug
             const heroMouseMove = () => {
                 outerCursorExpandTween.play();
-                pointShrinkTween.play();
+                this.tween.darkenOuterCursor.play();
+                this.tween.shrinkPoint.play();
                 downArrowShowTween.play();
                 this.outerCursorSpeed = 0;
                 this.setCursorCoord(this.outerCursor.box);
             }
             const heroMouseLeave = () => {
                 outerCursorExpandTween.reverse();
-                pointShrinkTween.reverse();
+                this.tween.darkenOuterCursor.reverse();
+                this.tween.shrinkPoint.reverse();
                 downArrowShowTween.reverse();
                 this.outerCursorSpeed = this.MOVE_SPEED;
             }
@@ -306,11 +314,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 paused: true
             });
 
-            const pointShrinkTween = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
-                scale: 0,
-                ease: Back.easeInOut.config(2.5),
-                paused: true
-            });
             const handShowTween = TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
                 scale: this.WORKS_SCALE_RATE,
                 ease: Back.easeOut.config(1.5),
@@ -320,7 +323,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 使用mouseMove而不是mouseEnter，可以解决一些bug
             const worksMouseMove = () => {
                 outerCursorExpandTween.play();
-                pointShrinkTween.play();
+                this.tween.shrinkPoint.play();
                 // 判断是否在work内
                 if (!this.isInWork && MediaMatcher.widthMoreThan(540)) {
                     // 在works内而不在work内，且浏览器宽度大于540px，则显示hand和arrow
@@ -355,7 +358,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 const reverseAnimation = () => {
                     outerCursorExpandTween.reverse();
                     arrowShowTween.reverse();
-                    pointShrinkTween.reverse();
+                    this.tween.shrinkPoint.reverse();
                     handShowTween.reverse();
                 }
                 // 如果鼠标是拖拽着超出了works边缘
@@ -391,15 +394,11 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 ease: Back.easeOut.config(1.5),
                 paused: true
             });
-            const outerCursorDarkenTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-                backgroundColor: 'rgba(0, 0, 0, .618)',
-                paused: true
-            })
 
             const workMouseMove = () => {
                 workDetailShowTween.play();
                 arrowFadeOutTween.play();
-                outerCursorDarkenTween.play();
+                this.tween.darkenOuterCursor.play();
                 // 外光标改为实时移动
                 this.outerCursorSpeed = 0;
                 this.setCursorCoord(this.outerCursor.box);
@@ -410,7 +409,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 // 反向播放动画
                 arrowFadeOutTween.reverse();
                 workDetailShowTween.reverse();
-                outerCursorDarkenTween.reverse();
+                this.tween.darkenOuterCursor.reverse();
                 // 恢复缓动移动
                 this.outerCursorSpeed = this.MOVE_SPEED;
                 // 恢复hand型
