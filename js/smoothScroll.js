@@ -37,7 +37,7 @@
         }
         initConst() {
             // 缓动速度
-            this.EASE_SPEED = 2;
+            this.EASE_SPEED = 1.75;
             // 页面滚动的缓动类型
             this.EASE = Power4.easeOut;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
