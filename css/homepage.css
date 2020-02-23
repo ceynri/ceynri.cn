@@ -270,6 +270,14 @@ a {
           justify-content: center;
 }
 
+.hero-wrapper .page-down-area {
+  position: absolute;
+  top: 61.8vh;
+  left: 0;
+  height: 38.2vh;
+  width: 100%;
+}
+
 .hero .decoration-line {
   position: absolute;
   width: 20px;
@@ -1438,8 +1446,17 @@ a {
       -ms-flex-align: center;
           align-items: center;
   overflow: hidden;
+}
+
+.homepage-footer * {
   font-size: 14px;
   color: #333333;
+}
+
+@media screen and (max-width: 426px) {
+  .homepage-footer * {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-aspect-ratio: 1 / 1) {

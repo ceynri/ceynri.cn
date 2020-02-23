@@ -5,6 +5,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        
+        .page-down-area {
+            position: absolute;
+            top: 61.8vh;
+            left: 0;
+            height: 38.2vh;
+            width: 100%;
+        }
     }
 
     width: 100%;

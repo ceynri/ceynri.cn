@@ -202,7 +202,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             });
 
             // 使用mouseMove而不是mouseEnter，可以解决一些bug
-            const heroMouseMove = () => {
+            const pageDownMouseMove = () => {
                 outerCursorExpandTween.play();
                 this.tween.darkenOuterCursor.play();
                 this.tween.shrinkPoint.play();
@@ -210,7 +210,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.outerCursorSpeed = 0;
                 this.setCursorCoord(this.outerCursor.box);
             }
-            const heroMouseLeave = () => {
+            const pageDownMouseLeave = () => {
                 outerCursorExpandTween.reverse();
                 this.tween.darkenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
@@ -218,9 +218,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.outerCursorSpeed = this.MOVE_SPEED;
             }
             // 应用hero相关监听器
-            const hero = document.querySelector('.hero');
-            hero.addEventListener('mousemove', heroMouseMove);
-            hero.addEventListener('mouseleave', heroMouseLeave);
+            const pageDownArea = document.querySelector('.page-down-area');
+            pageDownArea.addEventListener('mousemove', pageDownMouseMove);
+            pageDownArea.addEventListener('mouseleave', pageDownMouseLeave);
         }
         addIconBtnAnimation() {
             // * icon-btn动画

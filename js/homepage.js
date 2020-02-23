@@ -21,6 +21,14 @@
 }
 
 {
+    // * 点击下page-down-area自动向下滚动页面
+    const pageDownArea = document.querySelector('.page-down-area');
+    pageDownArea.addEventListener('click', () => {
+        window.scrollTo(0, (document.documentElement.clientHeight || window.innerHeight));
+    });
+}
+
+{
     // * 新页面从新标签页打开
     const aTags = document.querySelectorAll('a');
     for (let i = 0; i < aTags.length; i++) {
