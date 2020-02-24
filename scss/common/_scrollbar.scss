@@ -25,8 +25,8 @@
             background-color: var(--barColor);
             box-shadow: 0 4px 8px var(--barColor);
 
-            transition: background-color .5s ease,
-                box-shadow .5s ease;
+            transition: background-color .5s,
+                box-shadow .5s;
 
             // 在底端加一个三角形
             &::after {
@@ -43,7 +43,8 @@
                     left: $scrollbarWidth / 2 solid var(--barColor);
                 }
 
-                transition: all .5s ease;
+                transition: border .5s,
+                    box-shadow .5s;
             }
         }
     }

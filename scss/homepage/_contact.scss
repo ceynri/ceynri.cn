@@ -227,7 +227,7 @@
         .switch-bar {
             margin-left: .5em;
             flex-direction: column;
-            transform: translateY(1.2em);
+            transform: translate3d(0, 1.2em, 0);
 
             .btn-info {
                 margin: .2em 0 0 .6em;

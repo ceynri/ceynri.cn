@@ -19,7 +19,55 @@
     // 万万没想到 CSS3 动画对于移动设备是那么的卡爆...
     @media screen and (min-device-width: 1367px) {
         animation: speeder .4s linear infinite;
+
+        @keyframes speeder {
+            0% {
+                transform: translate3d(2px, 1px, 0) rotate(0deg);
+            }
+
+            10% {
+                transform: translate3d(-1px, -3px, 0) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate3d(-2px, 0px, 0) rotate(1deg);
+            }
+
+            30% {
+                transform: translate3d(1px, 2px, 0) rotate(0deg);
+            }
+
+            40% {
+                transform: translate3d(1px, -1px, 0) rotate(1deg);
+            }
+
+            50% {
+                transform: translate3d(-1px, 3px, 0) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate3d(-1px, 1px, 0) rotate(0deg);
+            }
+
+            70% {
+                transform: translate3d(3px, 1px, 0) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate3d(-2px, -1px, 0) rotate(1deg);
+            }
+
+            90% {
+                transform: translate3d(2px, 1px, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate3d(1px, -2px, 0) rotate(-1deg);
+            }
+        }
     }
+
+    will-change: transform;
 
     .jet-propeller {
         height: 5px;
@@ -32,6 +80,7 @@
     }
 
     @media screen and (min-device-width: 1367px) {
+
         .gas:nth-child(1),
         .gas:nth-child(2),
         .gas:nth-child(3),
@@ -61,6 +110,50 @@
             top: 4px;
             animation: jet4 1s linear infinite;
             animation-delay: -1s;
+        }
+
+        @keyframes jet1 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-80px, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes jet2 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100px, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes jet3 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-50px, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes jet4 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-150px, 0, 0);
+                opacity: 0;
+            }
         }
     }
 
@@ -139,148 +232,61 @@
             width: 20%;
             background: #234;
 
+            left: 0;
+            transform: translate3d($workMaxWidth, 0, 0);
+
+            // 在参数的选择上使用了较为“质数”的随机数值以避免产生视觉上的规律性
             &:nth-child(1) {
-                top: 20%;
-                animation: fly .4s linear infinite;
-                animation-delay: -5s;
+                top: 10%;
+                animation: fly 1.4s linear infinite;
+                animation-delay: -3.4s;
             }
 
             &:nth-child(2) {
-                top: 40%;
-                animation: fly .5s linear infinite;
-                animation-delay: -1s;
+                top: 36.7%;
+                animation: fly2 .69s linear infinite;
+                animation-delay: -1.3s;
             }
 
             &:nth-child(3) {
-                top: 60%;
-                animation: fly2 .4s linear infinite;
-                animation-delay: -1s;
+                top: 63.3%;
+                animation: fly2 .47s linear infinite;
+                animation-delay: -3.4s;
             }
 
             &:nth-child(4) {
-                top: 80%;
-                animation: fly2 .3s linear infinite;
-                animation-delay: -3s;
+                top: 90%;
+                animation: fly .87s linear infinite;
+                animation-delay: -5.1s;
+            }
+
+            // * fly
+
+            @keyframes fly {
+                0% {
+                    transform: translate3d(500%, 0, 0);
+                    opacity: 1;
+                }
+
+                27.3%,
+                100% {
+                    transform: translate3d(-100%, 0, 0);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes fly2 {
+                0% {
+                    transform: translate3d(500%, 0, 0);
+                    opacity: .6;
+                }
+
+                43.7%,
+                100% {
+                    transform: translate3d(-100%, 0, 0);
+                    opacity: .2;
+                }
             }
         }
-    }
-}
-
-// * speeder
-
-@keyframes speeder {
-    0% {
-        transform: translate(2px, 1px) rotate(0deg);
-    }
-
-    10% {
-        transform: translate(-1px, -3px) rotate(-1deg);
-    }
-
-    20% {
-        transform: translate(-2px, 0px) rotate(1deg);
-    }
-
-    30% {
-        transform: translate(1px, 2px) rotate(0deg);
-    }
-
-    40% {
-        transform: translate(1px, -1px) rotate(1deg);
-    }
-
-    50% {
-        transform: translate(-1px, 3px) rotate(-1deg);
-    }
-
-    60% {
-        transform: translate(-1px, 1px) rotate(0deg);
-    }
-
-    70% {
-        transform: translate(3px, 1px) rotate(-1deg);
-    }
-
-    80% {
-        transform: translate(-2px, -1px) rotate(1deg);
-    }
-
-    90% {
-        transform: translate(2px, 1px) rotate(0deg);
-    }
-
-    100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-    }
-}
-
-// * jet
-
-@keyframes jet1 {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -80px;
-        opacity: 0;
-    }
-}
-
-@keyframes jet2 {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -100px;
-        opacity: 0;
-    }
-}
-
-@keyframes jet3 {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -50px;
-        opacity: 0;
-    }
-}
-
-@keyframes jet4 {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: -150px;
-        opacity: 0;
-    }
-}
-
-// * fly
-
-@keyframes fly {
-    0% {
-        left: 200%;
-    }
-
-    100% {
-        left: -200%;
-        opacity: 0;
-    }
-}
-
-@keyframes fly2 {
-    0% {
-        left: 200%;
-        opacity: 100%;
-    }
-
-    100% {
-        left: -50%;
-        opacity: 0;
     }
 }

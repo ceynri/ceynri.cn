@@ -25,7 +25,7 @@
         pointer-events: none;
         z-index: 12000;
         // 一开始先让鼠标处于屏幕外
-        transform: translate(-200px, -200px);
+        transform: translate3d(-200px, -200px, 0);
 
         .point {
             width: $normalInnerCursorSize / 2;
@@ -80,7 +80,7 @@
         pointer-events: none;
         z-index: 11000;
         // 一开始先让鼠标处于屏幕外
-        transform: translate(-200px, -200px);
+        transform: translate3d(-200px, -200px, 0);
 
         .normal {
             box-sizing: content-box;
@@ -101,14 +101,14 @@
                     position: absolute;
                     right: 100%;
                     top: 50%;
-                    transform: translateY(-50%);
+                    transform: translate3d(0, -50%, 0);
                 }
 
                 &-right-arrow {
                     position: absolute;
                     left: 100%;
                     top: 50%;
-                    transform: translateY(-50%);
+                    transform: translate3d(0, -50%, 0);
                 }
             }
         }
