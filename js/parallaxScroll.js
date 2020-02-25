@@ -59,7 +59,6 @@
         const aboutText = document.querySelector('.about-text');
         const parallax = new ParallaxScroll();
         parallax.addParallax(aboutText, .4, TOP);
-        // parallax.addParallax(lines, 1.2, CENTER);
         parallax.render();
     }
 }
