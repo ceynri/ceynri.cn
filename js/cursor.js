@@ -67,7 +67,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // hero区域的鼠标缩放比例
             this.HERO_SCALE_RATE = 4;
             // about区域的鼠标缩放比例
-            this.ABOUT_SCALE_RATE = 6;
+            this.ABOUT_SCALE_RATE = 8;
             // works元素区域的鼠标缩放比例
             this.WORKS_SCALE_RATE = 3;
         }
