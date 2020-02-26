@@ -8,6 +8,16 @@
   --cursorColor: #ffffff;
 }
 
+@font-face {
+  font-family: 'Ubuntu';
+  src: url("/assets/font/Ubuntu-Bold.woff2");
+}
+
+@font-face {
+  font-family: 'Titillium Web';
+  src: url("/assets/font/Titillium-Web-Black.woff2");
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -33,6 +43,11 @@ body {
   font-family: "-apple-system", "BlinkMacSystemFont", "PingFang SC", "Segoe UI", Tahoma, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, "宋体", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--textColor);
   font-weight: normal;
+}
+
+body,
+a {
+  cursor: none;
 }
 
 a {
