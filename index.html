@@ -3,11 +3,28 @@
 
 <head>
   <meta charset="UTF-8">
+  <!-- 移动端视口固定适配 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="format-detection" content="email=no" />
+  <!-- 指定网页的兼容性模式（尽可能使用最新的版本标准） -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <!-- 默认使用 webkit 内核渲染 -->
+  <meta name="renderer" content="webkit">
+  <!-- 禁止识别手机号和邮箱 -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="email=no">
+  <!-- 网站信息 -->
   <title>山风的小角落</title>
+  <meta name="description" content="山风的个人网站，欢迎你的到来。">
+  <meta name="keywords" content="山风,ceynri,个人主页,前端,交互,动画,设计">
+  <!-- icon -->
+  <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/logo-128x128.png">
+  <!-- 设置请求头 -->
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <!-- 禁止百度进行移动端的页面转码 -->
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
   <!-- Iconfont 字体 -->
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1611839_w1wl5qglw2c.css">
@@ -15,12 +32,11 @@
   <!-- import font -->
   <link href="https://fonts.font.im/css?family=Ubuntu:700|Titillium+Web:900" rel="stylesheet">
   <!-- TweenLite.js -->
-  <script src="/js/lib/TweenLite.js"></script>
-  <script src="/js/lib/EasePack.js"></script>
-  <script src="/js/lib/CSSPlugin.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.0/plugins/CSSPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.0/easing/EasePack.min.js"></script>
   <!-- my CSS -->
-  <link rel="stylesheet" href="/css/homepage.css">
+  <link rel="stylesheet" href="/css/homepage.min.css">
   <!-- my js -->
   <script src="/js/ceynriUtils.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
