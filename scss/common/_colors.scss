@@ -22,13 +22,13 @@ $haloColor: rgba($lightWhite, .4);
 
 :root {
     // 主题色
-    --themeColor: #{$themeColor};
+    --themeColor: #882233;  // $darkRed
     // 点缀色
-    --embelliColor: #{$embelliColor};
+    --embelliColor: #12e4fb;  // $cyan
     // 文本默认颜色
-    --textColor: #{$lightWhite};
+    --textColor: #cccccc;  // $lightWhite
     // 文本亮色
-    --lightTextColor: snow;
+    --lightTextColor: #fffafa;
     // 滚动条背景色
     --scrollbarColor: #232628;
     // 光标色

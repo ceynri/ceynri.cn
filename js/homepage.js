@@ -7,6 +7,16 @@
 // ? (()=>{})()写法和{}写法的区别
 
 {
+    // * 在head标签中添加theme-color meta标签
+    const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--themeColor').trim() || '#333333';
+    const meta = document.createElement('meta');
+    meta.setAttribute('name', 'theme-color');
+    meta.setAttribute('content', themeColor);
+    const head = document.querySelector('head');
+    head.append(meta);
+}
+
+{
     // * 设置hero日期
     const month = document.querySelector('.date .month');
     const day = document.querySelector('.date .day');
