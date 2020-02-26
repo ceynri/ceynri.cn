@@ -165,11 +165,15 @@
 
             .see-more {
                 @extend %work-text;
-                font-size: 0.4em;
                 display: inline-block;
+                font-size: 0.4em;
                 margin-top: 7.5em;
                 border-bottom: 1px solid var(--lightTextColor);
                 opacity: 0;
+
+                &::before {
+                    content: 'See more';
+                }
             }
         }
 
