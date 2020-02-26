@@ -67,7 +67,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // hero区域的鼠标缩放比例
             this.HERO_SCALE_RATE = 4;
             // about区域的鼠标缩放比例
-            this.ABOUT_SCALE_RATE = 8;
+            this.ABOUT_SCALE_RATE = 6;
             // works元素区域的鼠标缩放比例
             this.WORKS_SCALE_RATE = 3;
         }
@@ -149,6 +149,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         initTweens() {
             // * 全局Tween
             this.tween = {};
+            // outerCursor
             this.tween.shrinkOuterCursor = TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
                 scale: 0.8,
                 ease: Back.ease,
@@ -158,11 +159,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 backgroundColor: 'rgba(255, 255, 255, .9)',
                 paused: true
             });
-            this.tween.whitenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-                backgroundColor: '#ffffff',
-                paused: true
-            });
-
+            // innerCursor
             this.tween.shrinkPoint = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                 scale: 0,
                 ease: Back.easeInOut.config(2.5),
@@ -249,7 +246,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             const aboutMouseMove = () => {
                 const mouseMoveAnimation = () => {
                     outerCursorExpandTween.play();
-                    this.tween.whitenOuterCursor.play();
+                    this.tween.brightenOuterCursor.play();
                     this.tween.shrinkPoint.play();
                 }
                 if (this.isInHero) {
@@ -260,7 +257,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             const aboutMouseLeave = () => {
                 outerCursorExpandTween.reverse();
-                this.tween.whitenOuterCursor.reverse();
+                this.tween.brightenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
             }
             // 应用hero相关监听器
