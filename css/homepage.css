@@ -645,11 +645,15 @@ a {
 }
 
 .works .work-text .see-more {
-  font-size: 0.4em;
   display: inline-block;
+  font-size: 0.4em;
   margin-top: 7.5em;
   border-bottom: 1px solid var(--lightTextColor);
   opacity: 0;
+}
+
+.works .work-text .see-more::before {
+  content: 'See more';
 }
 
 .works .work-card {

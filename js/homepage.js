@@ -29,8 +29,16 @@
 }
 
 {
-    // * 点击about-header区域向下滚30vh
+    // * 生成about-header
     const aboutHeader = document.querySelector('.about-header');
+    const textNum = 38;
+    for (let i = 0; i < textNum; i++) {
+        const text = document.createElement('span');
+        text.append('ABOUT');
+        aboutHeader.append(text);
+    }
+    aboutHeader.children[textNum - 1].classList.add('full-text');
+    // 点击about-header区域向下滚30vh
     aboutHeader.addEventListener('click', () => {
         window.scrollBy(0, document.documentElement.clientHeight * .3);
     });
