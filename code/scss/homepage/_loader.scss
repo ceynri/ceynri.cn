@@ -1,0 +1,52 @@
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 16000;
+    overflow: hidden;
+
+    &>* {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    .overlay {
+        &-loading {
+            background-color: #48dbfb;
+            padding: 5em 6em;
+            display: flex;
+            align-items: flex-end;
+
+            div {
+                font-size: 1.5em;
+                color: #fff;
+            }
+            @media screen and (max-width: 1024px) {
+                padding: 4em 3em;
+            }
+        }
+
+        &:nth-child(2) {
+            background-color: #f368e0;
+        }
+
+        &:nth-child(3) {
+            background-color: #ff9f43;
+        }
+
+        &:nth-child(4) {
+            background-color: #10ac84;
+        }
+
+        &:nth-child(5) {
+            background-color: #5f27cd;
+        }
+
+        &:nth-child(6) {
+            background-color: #ee5253;
+        }
+    }
+}

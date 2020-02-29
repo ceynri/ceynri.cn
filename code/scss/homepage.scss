@@ -6,6 +6,8 @@
 @import 'common/cursor';
 @import 'common/scrollbar';
 
+@import 'homepage/loader';
+
 .body {
     &-window {
         width: 100vw;

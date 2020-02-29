@@ -43,17 +43,30 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158846445-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
     gtag('config', 'UA-158846445-1');
+
   </script>
 </head>
 
 <body>
   <!-- TODO 全屏加载动画 -->
   <main class="body-window">
+    <div class="loader">
+      <div class="overlay-loading">
+        <div>Loading...</div>
+      </div>
+      <div class="overlay"></div>
+      <div class="overlay"></div>
+      <div class="overlay"></div>
+      <div class="overlay"></div>
+      <div class="overlay"></div>
+    </div>
     <div data-scroll>
-
       <!-- hero -->
       <div class="hero-wrapper margin-wrapper">
         <section class="hero">
@@ -339,6 +352,7 @@
   </div>
 
   <!-- script import -->
+  <script src="/js/loader.js"></script>
   <script src="/js/homepage.js"></script>
   <script src="/js/contact.js"></script>
   <script src="/js/smoothScroll.js"></script>

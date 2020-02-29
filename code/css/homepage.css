@@ -237,6 +237,64 @@ a {
   }
 }
 
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 16000;
+  overflow: hidden;
+}
+
+.loader > * {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.loader .overlay-loading {
+  background-color: #48dbfb;
+  padding: 5em 6em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.loader .overlay-loading div {
+  font-size: 1.5em;
+  color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .loader .overlay-loading {
+    padding: 4em 3em;
+  }
+}
+
+.loader .overlay:nth-child(2) {
+  background-color: #f368e0;
+}
+
+.loader .overlay:nth-child(3) {
+  background-color: #ff9f43;
+}
+
+.loader .overlay:nth-child(4) {
+  background-color: #10ac84;
+}
+
+.loader .overlay:nth-child(5) {
+  background-color: #5f27cd;
+}
+
+.loader .overlay:nth-child(6) {
+  background-color: #ee5253;
+}
+
 .body-window {
   width: 100vw;
   height: 100vh;
