@@ -1,7 +1,9 @@
+// 已知bug：对于第一次使用play方法执行的tween动画，如果在reverse动画播放过程中执行了冲突的
+//         另外一个动画，会使某些样式（主要是缩放）永久失效（直到重新刷新页面）
+// 暂时解决：加大了about与其他区域之间的距离，最大程度避免bug情况的条件达成（但仍然无法避免）
+// 问题原因：overwrite使得play/reverse()保存了错误的状态
+// 完全解决：不使用play与reverse，直接写死动画效果（目前已将部分易出现bug的scale效果改写）
 if (!MediaMatcher.isTouchScreenDevice()) {
-    // 已知bug：当刷新页面后，光标第一次显示出现于会改变默认光标样式的区域时，
-    //         快速移动到另外一个非默认光标样式的区域，会使某些样式永久失效（直到刷新）
-    // 暂时解决：加大了about与其他区域之间的距离，最大程度避免bug情况的条件达成        
     /*
      * @title 光标类
      * @author ceynri
@@ -53,8 +55,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.clientX = -1000;
             this.clientY = -1000;
 
-            // 是否在hero区域
-            this.isInHero = false;
             // 是否在work区域
             this.isInWork = false;
         }
@@ -65,11 +65,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 缓动动画播放速度
             this.ANIMATION_SPEED = .3;
             // hero区域的鼠标缩放比例
-            this.HERO_SCALE_RATE = 4;
+            this.HERO_SCALING_RATIO = 4;
             // about区域的鼠标缩放比例
-            this.ABOUT_SCALE_RATE = 6;
+            this.ABOUT_SCALING_RATIO = 6;
             // works元素区域的鼠标缩放比例
-            this.WORKS_SCALE_RATE = 3;
+            this.WORKS_SCALING_RATIO = 3;
+            // icon-btn元素区域的内光标缩放比例
+            this.ICON_BTN_SCALING_RATIO = 3;
         }
 
         initCursor() {
@@ -152,7 +154,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // outerCursor
             this.tween.shrinkOuterCursor = TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
                 scale: 0.8,
-                ease: Back.ease,
+                ease: Back.easeOut,
                 paused: true
             });
             this.tween.brightenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
@@ -162,9 +164,25 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // innerCursor
             this.tween.shrinkPoint = TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                 scale: 0,
-                ease: Back.easeInOut.config(2.5),
+                ease: Back.easeOut.config(2),
                 paused: true
             });
+            // 因为外光标的scale动画使用play与reverse太容易出现bug，所以单独写为函数，便于手动play与reverse
+            this.tween.expandOuterCursorFunc = (scalingRatio = 1) => {
+                if (scalingRatio !== 1) {
+                    // 正向动画
+                    TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                        scale: scalingRatio,
+                        ease: Back.easeOut.config(1.5)
+                    });
+                } else {
+                    // 逆向动画（复原为默认大小的动画）
+                    TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
+                        scale: 1,
+                        ease: Back.easeIn.config(2)
+                    });
+                }
+            }
         }
         initEvents() {
             // * 各种事件监听的初始化
@@ -174,14 +192,14 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.addHeroAnimation();
             // about
             this.addAboutAnimation();
-            // icon-btn
-            this.addIconBtnAnimation();
-            // icon-link
-            this.addIconLinkAnimation();
             // works
             this.addWorksAnimation();
             // work
             this.addWorkAnimation();
+            // icon-btn
+            this.addIconBtnAnimation();
+            // icon-link
+            this.addIconLinkAnimation();
             // work的a标签
             this.listenWorkLinkEvent();
         }
@@ -200,20 +218,14 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         }
         addHeroAnimation() {
             // * pagedown出现向下箭头的动画
-            const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-                scale: this.HERO_SCALE_RATE,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
             const downArrowShowTween = TweenLite.to(this.innerCursor.down, this.ANIMATION_SPEED, {
-                scale: this.HERO_SCALE_RATE,
+                scale: this.HERO_SCALING_RATIO,
                 ease: Back.easeOut.config(1.5),
                 paused: true
             });
 
             const pageDownMouseMove = () => {
-                this.isInHero = true;
-                outerCursorExpandTween.play();
+                this.tween.expandOuterCursorFunc(this.HERO_SCALING_RATIO);
                 this.tween.brightenOuterCursor.play();
                 this.tween.shrinkPoint.play();
                 downArrowShowTween.play();
@@ -221,10 +233,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.setCursorCoord(this.outerCursor.box);
             }
             const pageDownMouseLeave = () => {
-                setTimeout(() => {
-                    this.isInHero = false;
-                }, this.ANIMATION_SPEED * 1000);
-                outerCursorExpandTween.reverse();
+                this.tween.expandOuterCursorFunc(1);
                 this.tween.brightenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
                 downArrowShowTween.reverse();
@@ -237,26 +246,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         }
         addAboutAnimation() {
             // * about部分的动画
-            const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-                scale: this.ABOUT_SCALE_RATE,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
-
             const aboutMouseMove = () => {
-                const mouseMoveAnimation = () => {
-                    outerCursorExpandTween.play();
-                    this.tween.brightenOuterCursor.play();
-                    this.tween.shrinkPoint.play();
-                }
-                if (this.isInHero) {
-                    setTimeout(mouseMoveAnimation, this.ANIMATION_SPEED * 1000);
-                } else {
-                    mouseMoveAnimation();
-                }
+                this.tween.expandOuterCursorFunc(this.ABOUT_SCALING_RATIO);
+                this.tween.brightenOuterCursor.play();
+                this.tween.shrinkPoint.play();
             }
             const aboutMouseLeave = () => {
-                outerCursorExpandTween.reverse();
+                this.tween.expandOuterCursorFunc(1);
                 this.tween.brightenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
             }
@@ -265,11 +261,127 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             aboutArea.addEventListener('mousemove', aboutMouseMove);
             aboutArea.addEventListener('mouseleave', aboutMouseLeave);
         }
+        addWorksAnimation() {
+            // * works动画
+            const arrowShowTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED, {
+                scale: this.WORKS_SCALING_RATIO,
+                ease: Back.easeOut.config(1.5),
+                paused: true
+            });
+
+            const handShowTween = TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
+                scale: this.WORKS_SCALING_RATIO,
+                ease: Back.easeOut.config(1.5),
+                paused: true
+            });
+
+            // 使用mouseMove而不是mouseEnter，可以解决一些bug
+            const worksMouseMove = () => {
+                this.tween.expandOuterCursorFunc(this.WORKS_SCALING_RATIO);
+                this.tween.shrinkPoint.play();
+                // 判断是否在work内
+                if (!this.isInWork && MediaMatcher.widthMoreThan(540)) {
+                    // 在works内而不在work内，且浏览器宽度大于540px，则显示hand和arrow
+                    handShowTween.play();
+                    // 因为opacity一开始就是1，想要实现进入works是缩放而work中退出是渐变则不能合并入handShowTween
+                    TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
+                        opacity: 1
+                    })
+                    arrowShowTween.play();
+                } else if (this.isInWork) {
+                    // 在work内，隐藏hand和arrow，其中hand应用透明度渐变动画
+                    handShowTween.reverse();
+                    TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
+                        opacity: 0
+                    });
+                    arrowShowTween.reverse();
+                }
+            }
+
+            const worksMouseDown = () => {
+                // hand变为drag-hand
+                this.innerCursor.hand.children[0].classList.remove('icon-hand');
+                this.innerCursor.hand.children[0].classList.add('icon-drag-hand');
+            }
+            const worksMouseUp = () => {
+                // 换回去
+                this.innerCursor.hand.children[0].classList.remove('icon-drag-hand');
+                this.innerCursor.hand.children[0].classList.add('icon-hand');
+            }
+            const worksMouseLeave = e => {
+                // 保存一下需要执行的动画
+                const reverseAnimation = () => {
+                    this.tween.expandOuterCursorFunc(1);
+                    arrowShowTween.reverse();
+                    this.tween.shrinkPoint.reverse();
+                    handShowTween.reverse();
+                }
+                // 如果鼠标是拖拽着超出了works边缘
+                if (e.buttons) {
+                    // 持续监听直到松开鼠标再执行动画
+                    const delayReverseAnimation = () => {
+                        reverseAnimation();
+                        worksMouseUp();
+                        document.removeEventListener('mouseup', delayReverseAnimation);
+                    }
+                    document.addEventListener('mouseup', delayReverseAnimation);
+                } else {
+                    // 直接执行动画
+                    reverseAnimation();
+                }
+            }
+            // 应用works相关监听器
+            const works = document.querySelector('.works');
+            works.addEventListener('mousemove', worksMouseMove);
+            works.addEventListener('mousedown', worksMouseDown);
+            works.addEventListener('mouseup', worksMouseUp);
+            works.addEventListener('mouseleave', worksMouseLeave);
+        }
+        addWorkAnimation() {
+            // * work动画
+            const workDetailShowTween = TweenLite.to(this.innerCursor.detail, this.ANIMATION_SPEED, {
+                scale: this.WORKS_SCALING_RATIO,
+                ease: Back.easeOut.config(1.5),
+                paused: true
+            });
+            const arrowFadeOutTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED / 2, {
+                opacity: 0,
+                ease: Back.easeOut.config(1.5),
+                paused: true
+            });
+
+            const workMouseMove = () => {
+                workDetailShowTween.play();
+                arrowFadeOutTween.play();
+                this.tween.brightenOuterCursor.play();
+                // 外光标改为实时移动
+                this.outerCursorSpeed = 0;
+                this.setCursorCoord(this.outerCursor.box);
+                // 处于work中,works中监听的mousemove改为隐藏hand和arrow
+                this.isInWork = true;
+            }
+            const workMouseLeave = () => {
+                // 反向播放动画
+                arrowFadeOutTween.reverse();
+                workDetailShowTween.reverse();
+                this.tween.brightenOuterCursor.reverse();
+                // 恢复缓动移动
+                this.outerCursorSpeed = this.MOVE_SPEED;
+                // 恢复hand型
+                this.isInWork = false;
+            }
+
+            const works = document.querySelectorAll('.work');
+            works.forEach(work => {
+                work.addEventListener('mousemove', workMouseMove);
+                work.addEventListener('mouseleave', workMouseLeave);
+            });
+        }
         addIconBtnAnimation() {
             // * icon-btn动画
             const iconBtnMouseEnter = () => {
                 TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
-                    scale: 3,
+                    scale: this.ICON_BTN_SCALING_RATIO,
                     opacity: 0.25,
                     ease: Back.easeOut.config(1.5)
                 });
@@ -344,127 +456,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 item.addEventListener('mouseleave', iconLinkMouseLeave);
             });
         }
-        addWorksAnimation() {
-            // * works动画
-            const outerCursorExpandTween = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
-                scale: this.WORKS_SCALE_RATE,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
-            const arrowShowTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED, {
-                scale: this.WORKS_SCALE_RATE,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
 
-            const handShowTween = TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
-                scale: this.WORKS_SCALE_RATE,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
-
-            // 使用mouseMove而不是mouseEnter，可以解决一些bug
-            const worksMouseMove = () => {
-                outerCursorExpandTween.play();
-                this.tween.shrinkPoint.play();
-                // 判断是否在work内
-                if (!this.isInWork && MediaMatcher.widthMoreThan(540)) {
-                    // 在works内而不在work内，且浏览器宽度大于540px，则显示hand和arrow
-                    handShowTween.play();
-                    // 因为opacity一开始就是1，想要实现进入works是缩放而work中退出是渐变则不能合并入handShowTween
-                    TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
-                        opacity: 1
-                    })
-                    arrowShowTween.play();
-                } else if (this.isInWork) {
-                    // 在work内，隐藏hand和arrow，其中hand应用透明度渐变动画
-                    handShowTween.reverse();
-                    TweenLite.to(this.innerCursor.hand, this.ANIMATION_SPEED, {
-                        opacity: 0
-                    });
-                    arrowShowTween.reverse();
-                }
-            }
-
-            const worksMouseDown = () => {
-                // hand变为drag-hand
-                this.innerCursor.hand.children[0].classList.remove('icon-hand');
-                this.innerCursor.hand.children[0].classList.add('icon-drag-hand');
-            }
-            const worksMouseUp = () => {
-                // 换回去
-                this.innerCursor.hand.children[0].classList.remove('icon-drag-hand');
-                this.innerCursor.hand.children[0].classList.add('icon-hand');
-            }
-            const worksMouseLeave = e => {
-                // 保存一下需要执行的动画
-                const reverseAnimation = () => {
-                    outerCursorExpandTween.reverse();
-                    arrowShowTween.reverse();
-                    this.tween.shrinkPoint.reverse();
-                    handShowTween.reverse();
-                }
-                // 如果鼠标是拖拽着超出了works边缘
-                if (e.buttons) {
-                    // 持续监听直到松开鼠标再执行动画
-                    const delayReverseAnimation = () => {
-                        reverseAnimation();
-                        worksMouseUp();
-                        document.removeEventListener('mouseup', delayReverseAnimation);
-                    }
-                    document.addEventListener('mouseup', delayReverseAnimation);
-                } else {
-                    // 直接执行动画
-                    reverseAnimation();
-                }
-            }
-            // 应用works相关监听器
-            const works = document.querySelector('.works');
-            works.addEventListener('mousemove', worksMouseMove);
-            works.addEventListener('mousedown', worksMouseDown);
-            works.addEventListener('mouseup', worksMouseUp);
-            works.addEventListener('mouseleave', worksMouseLeave);
-        }
-        addWorkAnimation() {
-            // * work动画
-            const workDetailShowTween = TweenLite.to(this.innerCursor.detail, this.ANIMATION_SPEED, {
-                scale: this.WORKS_SCALE_RATE,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
-            const arrowFadeOutTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED / 2, {
-                opacity: 0,
-                ease: Back.easeOut.config(1.5),
-                paused: true
-            });
-
-            const workMouseMove = () => {
-                workDetailShowTween.play();
-                arrowFadeOutTween.play();
-                this.tween.brightenOuterCursor.play();
-                // 外光标改为实时移动
-                this.outerCursorSpeed = 0;
-                this.setCursorCoord(this.outerCursor.box);
-                // 处于work中,works中监听的mousemove改为隐藏hand和arrow
-                this.isInWork = true;
-            }
-            const workMouseLeave = () => {
-                // 反向播放动画
-                arrowFadeOutTween.reverse();
-                workDetailShowTween.reverse();
-                this.tween.brightenOuterCursor.reverse();
-                // 恢复缓动移动
-                this.outerCursorSpeed = this.MOVE_SPEED;
-                // 恢复hand型
-                this.isInWork = false;
-            }
-
-            const works = document.querySelectorAll('.work');
-            works.forEach(work => {
-                work.addEventListener('mousemove', workMouseMove);
-                work.addEventListener('mouseleave', workMouseLeave);
-            });
-        }
         listenWorkLinkEvent() {
             // 监听鼠标点击，允许用户可以在work上仍然执行拖动的操作
             let mouseDownX = 0,
@@ -493,6 +485,5 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         }
     }
 
-    // Debug用
-    const cursor = new Cursor();
+    new Cursor();
 }
