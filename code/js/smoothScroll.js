@@ -78,20 +78,6 @@
                     ease: Power4.easeOut
                 });
             };
-            // const touchDragWorksMoveEvent = e => {
-            //     if (e.targetTouches.length > 1 || e.scale && e.scale !== 1) {
-            //         return;
-            //     }
-            //     // 触屏设备的拖动不要缓动动画，直接set
-            //     let worksTargetX = this.dragOffset + e.targetTouches[0].clientX * this.WORK_SCROLL_RATIO;
-            //     const safedX = this.convertToWorksSafedX(worksTargetX);
-            //     const bias = worksTargetX - safedX;
-            //     worksTargetX = safedX + CeynriUtils.normallize(bias, this.WORK_ELASTIC_RANGE);
-            //     TweenLite.to(this.works, .2, {
-            //         x: worksTargetX
-            //     });
-            // }
-
             // start
             const mouseDragWorksStartEvent = e => {
                 // 仅当屏幕宽度大于540px时，才允许拖动works
@@ -103,13 +89,6 @@
                     document.addEventListener('mouseup', mouseDragWorksEndEvent);
                 }
             };
-            // const touchDragWorksStartEvent = event => {
-            //     const e = event.targetTouches[0];
-            //     this.dragOffset = this.getWorksScrollLeft() - e.clientX * this.WORK_SCROLL_RATIO;
-            //     document.addEventListener('touchmove', touchDragWorksMoveEvent);
-            //     document.addEventListener('touchend', touchDragWorksEndEvent);
-            // };
-
             // end
             const mouseDragWorksEndEvent = () => {
                 // mouseup时删除works拖拽事件监听（如果有的话）
@@ -125,19 +104,6 @@
                     }
                 }, 200);
             };
-            // const touchDragWorksEndEvent = () => {
-            //     document.removeEventListener('touchmove', touchDragWorksMoveEvent);
-            //     document.removeEventListener('touchend', touchDragWorksEndEvent);
-            //     let times = 2;
-            //     const checkLoop = setInterval(() => {
-            //         // 检测是否超出边界，如果超出则移动回安全范围
-            //         if (times-- == 0 || !this.checkWorksXSafe()) {
-            //             // 循环次数到了或者检测到不安全已经执行了回弹，则结束检测
-            //             clearInterval(checkLoop);
-            //         }
-            //     }, 200);
-            // };
-
             // 判断是否是移动设备
             if (!MediaMatcher.isTouchScreenDevice()) {
                 // 电脑设备

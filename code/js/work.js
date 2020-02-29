@@ -152,7 +152,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         }
     }
 
-    const note = new Note(document.querySelector('.work.case-note'));
-    const demoCollection = new DemoCollection(document.querySelector('.work.case-demo-collection'));
-    const more = new Work(document.querySelector('.work.case-more'));
+    new Note(document.querySelector('.work.case-note'));
+    new DemoCollection(document.querySelector('.work.case-demo-collection'));
+    new Work(document.querySelector('.work.case-more'));
 }

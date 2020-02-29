@@ -130,5 +130,5 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         }
     }
 
-    const scrollbar = new Scrollbar();
+    new Scrollbar();
 }
