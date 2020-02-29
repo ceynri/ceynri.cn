@@ -30,7 +30,7 @@
     day.innerHTML = currentDay;
 }
 
-{
+if (!MediaMatcher.isTouchScreenDevice()) {
     // * 点击hero自动向下滚动页面
     const hero = document.querySelector('.hero');
     hero.addEventListener('click', () => {
