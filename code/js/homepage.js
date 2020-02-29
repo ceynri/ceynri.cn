@@ -1,5 +1,5 @@
 /**
- * @author ceynri
+ * 一些比较短的代码，收纳于此
  */
 
 'use strict';
@@ -41,7 +41,7 @@
 {
     // * 生成about-header
     const aboutHeader = document.querySelector('.about-header');
-    const textNum = 38;
+    const textNum = 42;
     for (let i = 0; i < textNum; i++) {
         const text = document.createElement('span');
         text.append('ABOUT');

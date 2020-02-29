@@ -455,7 +455,7 @@ a {
   transition: all 1s;
 }
 
-.about-header span:nth-child(2), .about-header span:nth-child(3), .about-header span:nth-child(5), .about-header span:nth-child(7), .about-header span:nth-child(11), .about-header span:nth-child(13), .about-header span:nth-child(15), .about-header span:nth-child(17), .about-header span:nth-child(23), .about-header span:nth-child(29), .about-header span:nth-child(31), .about-header span:nth-child(37) {
+.about-header span:nth-child(2), .about-header span:nth-child(3), .about-header span:nth-child(5), .about-header span:nth-child(7), .about-header span:nth-child(11), .about-header span:nth-child(13), .about-header span:nth-child(15), .about-header span:nth-child(17), .about-header span:nth-child(23), .about-header span:nth-child(29), .about-header span:nth-child(31), .about-header span:nth-child(37), .about-header span:nth-child(41) {
   -webkit-text-stroke: initial;
   -webkit-text-fill-color: initial;
   color: var(--textColor);

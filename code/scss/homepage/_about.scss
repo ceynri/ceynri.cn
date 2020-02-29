@@ -65,7 +65,8 @@
             &:nth-child(23),
             &:nth-child(29),
             &:nth-child(31),
-            &:nth-child(37) {
+            &:nth-child(37),
+            &:nth-child(41) {
                 // &:nth-of-type(odd) {
                 // 将字变为描边文字
                 // -webkit-text-stroke: 3px var(--textColor);
