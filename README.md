@@ -49,7 +49,11 @@
 
 因为在文章中插动图非常影响阅读的注意力，所以关于页面交互效果的动图演示被整合起来放在下面。
 
-（由于 gif 图较大，如果出现加载不出来的情况可以尝试点击动图的标题单独加载图片）
+> 由于 gif 图较大，如果出现加载不出来的情况可以尝试点击动图的标题单独加载图片
+
+0. [页面载入动画](https://i.loli.net/2020/03/01/RWj3kGxiNzvMyPU.gif)
+
+    ![loaded-animation.gif](https://i.loli.net/2020/03/01/RWj3kGxiNzvMyPU.gif)
 
 1. [圆形光标的双层结构](https://i.loli.net/2020/02/27/GCj84SvNfqRQFcY.gif)
 
@@ -71,7 +75,7 @@
 
     ![color-transition.gif](https://i.loli.net/2020/02/27/1xKfrjNCFnvEBi4.gif)
 
-6. [ABOUT 可以进行点击交互](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)（发现了么）
+6. [ABOUT 点击交互](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)（发现了么）
 
     ![about-click.gif](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)
 
