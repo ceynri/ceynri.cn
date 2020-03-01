@@ -3,15 +3,22 @@
     // * 在加载时所显示的内容
     class Loader {
         constructor(loader, page) {
+            // 一些元素
             this.loader = loader;
             this.overlays = loader.children;
             this.page = page;
 
+            // 覆盖层的个数
             this.overlayNum = loader.childElementCount;
+            // 动画时间（秒）
+            // 修改该属性时请同时修改 smoothScroll.js 内的 PAGE_LOADED_ANIMATION_TIME 属性
             this.ANIMATION_TIME = 2;
-            this.EASING = Power4.easeOut;
+            // 缓动效果类型
+            this.EASING = Power4.easeInOut;
 
+            // 初始化页面的位置
             this.initPageScrollTop();
+            // 等待页面加载完成，执行动画
             this.listenPageLoadedEvent();
         }
         initPageScrollTop() {

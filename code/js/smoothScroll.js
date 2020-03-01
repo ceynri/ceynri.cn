@@ -28,8 +28,10 @@
             this.setWorksRightBound();
         }
         initConst() {
-            // 缓动速度
+            // 缓动速度（秒）
             this.EASE_SPEED = 1.75;
+            // 页面加载完成后的动画时间（来自 loader.js 的ANIMATION_TIME）
+            this.PAGE_LOADED_ANIMATION_TIME = 2;
             // 页面滚动的缓动类型
             this.EASE = Power4.easeOut;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
@@ -108,11 +110,13 @@
         listenPageLoadedEvent() {
             const pageLoadedEvent = () => {
                 // 页面加载完成后开始循环渲染滚动页面
-                if (!MediaMatcher.isTouchScreenDevice()) {
-                    this.render();
-                } else {
-                    this.touchScreenRender();
-                }
+                setTimeout(() => {
+                    if (!MediaMatcher.isTouchScreenDevice()) {
+                        this.render();
+                    } else {
+                        this.touchScreenRender();
+                    }
+                }, this.PAGE_LOADED_ANIMATION_TIME * 1000);
             };
             window.addEventListener('load', pageLoadedEvent);
         }
