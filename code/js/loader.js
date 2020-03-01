@@ -46,11 +46,10 @@
         listenPageLoadedEvent() {
             // * 监听页面加载完成事件，进行一些操作
             const pageLoadedAction = () => {
-                // 播放动画
+                // 播放动画（y初值已经在css中设置好）
                 for (let i = 0; i < this.overlayNum; i++) {
                     TweenLite.to(this.overlays[i], this.ANIMATION_TIME, {
-                        // ".1"是为了避免缩放导致的误差故多预算一点空间出来
-                        y: (-100.1 * (i + 1)) + 'vh',
+                        y: 0,
                         ease: this.EASING
                     });
                 }

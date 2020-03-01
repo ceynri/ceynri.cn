@@ -14,12 +14,21 @@
     }
 
     .overlay {
+        // 底端对齐页面顶端
+        position: absolute;
+        bottom: 100%;
+
         &-loading {
             padding: 5em 6em;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+
+            // 底端对齐页面顶端
+            position: absolute;
+            bottom: 100%;
+            transform: translate3d(0, 100vh, 0);
 
             .loading {
                 &-emoji {
@@ -41,22 +50,27 @@
 
         &:nth-child(2) {
             background-color: #f368e0;
+            transform: translate3d(0, 200vh, 0);
         }
 
         &:nth-child(3) {
             background-color: #ff9f43;
+            transform: translate3d(0, 300vh, 0);
         }
 
         &:nth-child(4) {
             background-color: #10ac84;
+            transform: translate3d(0, 400vh, 0);
         }
 
         &:nth-child(5) {
             background-color: #5f27cd;
+            transform: translate3d(0, 500vh, 0);
         }
 
         &:nth-child(6) {
             background-color: #ee5253;
+            transform: translate3d(0, 600vh, 0);
         }
     }
 }
