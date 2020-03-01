@@ -254,25 +254,34 @@ a {
 }
 
 .loader .overlay-loading {
-  background-color: #48dbfb;
   padding: 5em 6em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #282c34;
 }
 
-.loader .overlay-loading div {
-  font-size: 1.5em;
-  color: #fff;
+.loader .overlay-loading .loading-emoji {
+  font-size: 3em;
 }
 
-@media screen and (max-width: 1024px) {
-  .loader .overlay-loading {
-    padding: 4em 3em;
-  }
+.loader .overlay-loading .loading-text {
+  margin-top: 1em;
+  font-size: 1em;
+}
+
+.loader .overlay-loading > * {
+  color: #6b768a;
 }
 
 .loader .overlay:nth-child(2) {

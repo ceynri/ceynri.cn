@@ -1,13 +1,15 @@
 {
+    // TODO 加载时，光标为“加载中”的样式
+    // * 在加载时所显示的内容
     class Loader {
-        constructor(loader, contentContainer) {
+        constructor(loader, page) {
             this.loader = loader;
             this.overlays = loader.children;
-            this.scrollablePage = contentContainer;
+            this.page = page;
 
             this.overlayNum = loader.childElementCount;
             this.ANIMATION_TIME = 2;
-            this.EASING = Power3.easeInOut;
+            this.EASING = Power4.easeOut;
 
             this.initPageScrollTop();
             this.listenPageLoadedEvent();
@@ -24,7 +26,7 @@
                 window.scrollTo(0, 0);
             }
             // 设置页面内容的初始位置，以便播放滚上来的动画
-            TweenLite.set(this.scrollablePage, {
+            TweenLite.set(this.page, {
                 y: (this.overlayNum * 100) + 'vh'
             });
         }
@@ -45,7 +47,7 @@
                         ease: this.EASING
                     });
                 }
-                TweenLite.to(this.scrollablePage, this.ANIMATION_TIME, {
+                TweenLite.to(this.page, this.ANIMATION_TIME, {
                     y: 0,
                     ease: this.EASING
                 });
@@ -62,6 +64,6 @@
     }
 
     const loader = document.querySelector('.loader');
-    const contentContainer = document.querySelector('div[data-scroll]');
-    new Loader(loader, contentContainer);
+    const page = document.querySelector('div[data-scroll]');
+    new Loader(loader, page);
 }
