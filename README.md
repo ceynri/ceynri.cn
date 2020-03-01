@@ -1,6 +1,6 @@
 <div align="center">
   <h1>山风的小角落</h1>
-  <p>实验性质个人主页 / 注重动画交互 / <a href="http://ceynri.cn/" target="_blank">ceynri.cn</a></p>
+  <p>实验性质个人主页 / 注重动画交互 / <a href="https://www.ceynri.cn/" target="_blank">ceynri.cn</a></p>
   <img src="https://i.loli.net/2020/02/28/VhjGPQi5S7HRpgy.jpg" alt="封面"/>
 </div>
 
@@ -75,7 +75,7 @@
 
     ![about-click.gif](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)
 
-7. [视差滚动（左右两栏向上滚动的速度不一样） & 渐入渐出滚动（透明度变化）](https://i.loli.net/2020/02/27/c6V8JRixWQ4AgIK.gif)
+7. [视差滚动（左右两栏向上滚动的速度不一样）& 渐入渐出滚动（透明度变化）](https://i.loli.net/2020/02/27/c6V8JRixWQ4AgIK.gif)
 
     ![parallax-fade-scroll.gif](https://i.loli.net/2020/02/27/c6V8JRixWQ4AgIK.gif)
 

@@ -100,7 +100,7 @@
 
 ### SCSS 预处理器
 
-在本项目中我第一次尝试 SCSS 语法来编写 CSS 代码，实际上非常容易上手，简单阅读完文档并做好[完整的笔记](http://docs.ceynri.cn/notes/css/sass.html)后，编写 CSS 确实要方便许多。
+在本项目中我第一次尝试 SCSS 语法来编写 CSS 代码，实际上非常容易上手，简单阅读完文档并做好[完整的笔记](https://docs.ceynri.cn/notes/css/sass.html)后，编写 CSS 确实要方便许多。
 
 ### 动画
 
@@ -171,11 +171,11 @@ table>.row>.elem+.elem
 </table>
 ```
 
-> 如果对 Emmet 语法有兴趣，可以看看这篇我写的 [Emmet 笔记](http://docs.ceynri.cn/notes/html/emmet.html)
+> 如果对 Emmet 语法有兴趣，可以看看这篇我写的 [Emmet 笔记](https://docs.ceynri.cn/notes/html/emmet.html)
 
 ### 语义化标签
 
-语义化是 HTML5 的重点之一，这部分我也是一边学习、一边通过别人的优秀代码中了解到不同的语义化标签，人尽皆知的`<section>`、`<header>`、`<nav>`等常用标签就不介绍了（[HTML5 结构元素介绍](http://docs.ceynri.cn/notes/html/h5-structure-tag.html) 一文可以通过实例帮助区分这些标签的作用），我还了解到下面几个标签：
+语义化是 HTML5 的重点之一，这部分我也是一边学习、一边通过别人的优秀代码中了解到不同的语义化标签，人尽皆知的`<section>`、`<header>`、`<nav>`等常用标签就不介绍了（[HTML5 结构元素介绍](https://docs.ceynri.cn/notes/html/h5-structure-tag.html) 一文可以通过实例帮助区分这些标签的作用），我还了解到下面几个标签：
 
 - `<main>`
 - `<time>`
