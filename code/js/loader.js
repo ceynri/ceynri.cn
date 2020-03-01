@@ -14,7 +14,7 @@
             // 修改该属性时请同时修改 smoothScroll.js 内的 PAGE_LOADED_ANIMATION_TIME 属性
             this.ANIMATION_TIME = 2;
             // 缓动效果类型
-            this.EASING = Power4.easeInOut;
+            this.EASING = Power2.easeInOut;
 
             // 初始化页面的位置
             this.initPageScrollTop();

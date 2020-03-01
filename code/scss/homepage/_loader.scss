@@ -8,9 +8,34 @@
     overflow: hidden;
 
     &>* {
-        position: relative;
         height: 100%;
         width: 100%;
+    }
+
+
+    .loading {
+        bottom: 0;
+
+        &>* {
+            color: #6b768a;
+        }
+    }
+
+    .loading,
+    .loaded {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &-emoji {
+            font-size: 3em;
+        }
+
+        &-text {
+            margin-top: 1em;
+            font-size: 1em;
+        }
     }
 
     .overlay {
@@ -18,34 +43,10 @@
         position: absolute;
         bottom: 100%;
 
-        &-loading {
-            padding: 5em 6em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-
-            // 底端对齐页面顶端
-            position: absolute;
-            bottom: 100%;
-            transform: translate3d(0, 100vh, 0);
-
-            .loading {
-                &-emoji {
-                    font-size: 3em;
-                }
-
-                &-text {
-                    margin-top: 1em;
-                    font-size: 1em;
-                }
-            }
-
-            &>* {
-                color: #6b768a;
-            }
-
+        // .loading
+        &:nth-child(1) {
             background-color: #282c34;
+            transform: translate3d(0, 100vh, 0);
         }
 
         &:nth-child(2) {
@@ -68,9 +69,16 @@
             transform: translate3d(0, 500vh, 0);
         }
 
+        // .loaded
         &:nth-child(6) {
-            background-color: #ee5253;
+            background-color: #ee5254;
             transform: translate3d(0, 600vh, 0);
+        }
+    }
+
+    .loaded {
+        &>* {
+            color: #e67375;
         }
     }
 }
