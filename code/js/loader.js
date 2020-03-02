@@ -37,12 +37,6 @@
                 y: (this.overlayNum * 100) + 'vh'
             });
         }
-        disableScroll(e) {
-            // * 禁止移动端的滚动事件
-            window.scrollTo(0, 0); // 电脑端
-            e.preventDefault(); // 移动端
-            // 等页面加载完了再允许滚动
-        }
         listenPageLoadedEvent() {
             // * 监听页面加载完成事件，进行一些操作
             const pageLoadedAction = () => {
@@ -65,7 +59,9 @@
                 document.body.style.overflow = 'visible';
                 this.loader.style.display = 'none';
             }
-            window.addEventListener('load', pageLoadedAction);
+            window.addEventListener('load', pageLoadedAction, {
+                passive: true
+            });
         }
     }
 

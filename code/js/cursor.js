@@ -118,14 +118,20 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     // 避免后文的缓动动画启用导致外部光标有从屏幕外移入动画的情况
                 }, 100);
                 // 完成任务后把自己移除
-                document.removeEventListener('mousemove', unveilCursor);
+                document.removeEventListener('mousemove', unveilCursor, {
+                    passive: true
+                });
             };
-            document.addEventListener('mousemove', unveilCursor);
+            document.addEventListener('mousemove', unveilCursor, {
+                passive: true
+            });
 
             // 监听鼠标移动
             document.addEventListener('mousemove', e => {
                 this.clientX = e.clientX;
                 this.clientY = e.clientY;
+            }, {
+                passive: true
             });
         }
         renderCursorMove() {
@@ -213,8 +219,12 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.tween.shrinkOuterCursor.reverse();
             }
 
-            document.addEventListener('mousedown', globalMouseDown);
-            document.addEventListener('mouseup', globalMouseUp);
+            document.addEventListener('mousedown', globalMouseDown, {
+                passive: true
+            });
+            document.addEventListener('mouseup', globalMouseUp, {
+                passive: true
+            });
         }
         addHeroAnimation() {
             // * pagedown出现向下箭头的动画
@@ -241,8 +251,12 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用hero相关监听器
             const hero = document.querySelector('.hero');
-            hero.addEventListener('mousemove', pageDownMouseMove);
-            hero.addEventListener('mouseleave', pageDownMouseLeave);
+            hero.addEventListener('mousemove', pageDownMouseMove, {
+                passive: true
+            });
+            hero.addEventListener('mouseleave', pageDownMouseLeave, {
+                passive: true
+            });
         }
         addAboutAnimation() {
             // * about部分的动画
@@ -258,8 +272,12 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用hero相关监听器
             const aboutArea = document.querySelector('.about');
-            aboutArea.addEventListener('mousemove', aboutMouseMove);
-            aboutArea.addEventListener('mouseleave', aboutMouseLeave);
+            aboutArea.addEventListener('mousemove', aboutMouseMove, {
+                passive: true
+            });
+            aboutArea.addEventListener('mouseleave', aboutMouseLeave, {
+                passive: true
+            });
         }
         addWorksAnimation() {
             // * works动画
@@ -322,9 +340,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     const delayReverseAnimation = () => {
                         reverseAnimation();
                         worksMouseUp();
-                        document.removeEventListener('mouseup', delayReverseAnimation);
+                        document.removeEventListener('mouseup', delayReverseAnimation, {
+                            passive: true
+                        });
                     }
-                    document.addEventListener('mouseup', delayReverseAnimation);
+                    document.addEventListener('mouseup', delayReverseAnimation, {
+                        passive: true
+                    });
                 } else {
                     // 直接执行动画
                     reverseAnimation();
@@ -332,10 +354,18 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用works相关监听器
             const works = document.querySelector('.works');
-            works.addEventListener('mousemove', worksMouseMove);
-            works.addEventListener('mousedown', worksMouseDown);
-            works.addEventListener('mouseup', worksMouseUp);
-            works.addEventListener('mouseleave', worksMouseLeave);
+            works.addEventListener('mousemove', worksMouseMove, {
+                passive: true
+            });
+            works.addEventListener('mousedown', worksMouseDown, {
+                passive: true
+            });
+            works.addEventListener('mouseup', worksMouseUp, {
+                passive: true
+            });
+            works.addEventListener('mouseleave', worksMouseLeave, {
+                passive: true
+            });
         }
         addWorkAnimation() {
             // * work动画
@@ -373,8 +403,12 @@ if (!MediaMatcher.isTouchScreenDevice()) {
 
             const works = document.querySelectorAll('.work');
             works.forEach(work => {
-                work.addEventListener('mousemove', workMouseMove);
-                work.addEventListener('mouseleave', workMouseLeave);
+                work.addEventListener('mousemove', workMouseMove, {
+                    passive: true
+                });
+                work.addEventListener('mouseleave', workMouseLeave, {
+                    passive: true
+                });
             });
         }
         addIconBtnAnimation() {
@@ -423,9 +457,15 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 应用icon-btn相关监听器
             const iconBtns = document.querySelectorAll('.icon-btn');
             iconBtns.forEach(item => {
-                item.addEventListener('mouseenter', iconBtnMouseEnter);
-                item.addEventListener('mouseover', iconBtnMouseOver);
-                item.addEventListener('mouseleave', iconBtnMouseLeave);
+                item.addEventListener('mouseenter', iconBtnMouseEnter, {
+                    passive: true
+                });
+                item.addEventListener('mouseover', iconBtnMouseOver, {
+                    passive: true
+                });
+                item.addEventListener('mouseleave', iconBtnMouseLeave, {
+                    passive: true
+                });
             });
         }
         addIconLinkAnimation() {
@@ -452,8 +492,12 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 应用icon-link相关监听器
             const iconLink = document.querySelectorAll('.icon-link');
             iconLink.forEach(item => {
-                item.addEventListener('mouseenter', iconLinkMouseEnter);
-                item.addEventListener('mouseleave', iconLinkMouseLeave);
+                item.addEventListener('mouseenter', iconLinkMouseEnter, {
+                    passive: true
+                });
+                item.addEventListener('mouseleave', iconLinkMouseLeave, {
+                    passive: true
+                });
             });
         }
 

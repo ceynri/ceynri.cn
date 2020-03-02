@@ -5,6 +5,8 @@
             this.clientHeight = document.documentElement.clientHeight;
             window.addEventListener('resize', () => {
                 this.clientHeight = document.documentElement.clientHeight;
+            }, {
+                passive: true
             });
         }
         addElems(elems, lowerbound, upperbound, fadeBound) {

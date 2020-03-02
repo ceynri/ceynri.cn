@@ -35,6 +35,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
     const hero = document.querySelector('.hero');
     hero.addEventListener('click', () => {
         window.scrollTo(0, (document.documentElement.clientHeight || window.innerHeight));
+    }, {
+        passive: true
     });
 }
 
@@ -51,6 +53,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
     // 点击about-header区域向下滚30vh
     aboutHeader.addEventListener('click', () => {
         window.scrollBy(0, document.documentElement.clientHeight * .3);
+    }, {
+        passive: true
     });
 }
 

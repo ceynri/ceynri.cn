@@ -1,4 +1,4 @@
-if (!MediaMatcher.isTouchScreenDevice()){
+if (!MediaMatcher.isTouchScreenDevice()) {
     class Float {
         constructor() {
             this.initProp();
@@ -13,6 +13,8 @@ if (!MediaMatcher.isTouchScreenDevice()){
             window.addEventListener('resize', () => {
                 this.clientWidth = document.documentElement.clientWidth;
                 this.clientHeight = document.documentElement.clientHeight;
+            }, {
+                passive: true
             })
         }
         addFloat(elems, level) {
@@ -33,7 +35,9 @@ if (!MediaMatcher.isTouchScreenDevice()){
                     ease: Power3.easeOut
                 });
             }
-            window.addEventListener('mousemove', floatTween);
+            window.addEventListener('mousemove', floatTween, {
+                passive: true
+            });
         }
     }
 

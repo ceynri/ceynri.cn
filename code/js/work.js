@@ -52,6 +52,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 cardZoomOutTween.play();
                 textZoomInTween.play();
                 seeMoreShowTween.play();
+            }, {
+                passive: true
             });
             this.work.addEventListener('mouseout', () => {
                 TweenLite.to(this.panel, this.ROTATE_SPEED, {
@@ -62,6 +64,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 cardZoomOutTween.reverse();
                 textZoomInTween.reverse();
                 seeMoreShowTween.reverse();
+            }, {
+                passive: true
             });
         }
     }
@@ -88,10 +92,14 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.work.addEventListener('mousemove', () => {
                 bangageZoomInTween.play();
                 bookmarkZoomInTween.play();
+            }, {
+                passive: true
             });
             this.work.addEventListener('mouseout', () => {
                 bangageZoomInTween.reverse();
                 bookmarkZoomInTween.reverse();
+            }, {
+                passive: true
             });
         }
     }
@@ -122,10 +130,14 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.work.addEventListener('mousemove', () => {
                 manZoomInTween.play();
                 speedLinesZoomInTween.play();
+            }, {
+                passive: true
             });
             this.work.addEventListener('mouseout', () => {
                 manZoomInTween.reverse();
                 speedLinesZoomInTween.reverse();
+            }, {
+                passive: true
             });
         }
         initCursorAttachment() {
@@ -140,6 +152,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     y: this.mouseY,
                     ease: Power0.easeOut,
                 });
+            }, {
+                passive: true
             });
             this.work.addEventListener('mouseout', () => {
                 cursorsFadedTween.reverse();
@@ -148,6 +162,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     y: 0,
                     ease: Power0.easeOut
                 });
+            }, {
+                passive: true
             });
         }
     }

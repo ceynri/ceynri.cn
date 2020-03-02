@@ -70,15 +70,21 @@
                 });
             };
 
-            this.iconBtn.addEventListener('mouseover', mouseOverAnimation);
+            this.iconBtn.addEventListener('mouseover', mouseOverAnimation, {
+                passive: true
+            });
             if (!MediaMatcher.isTouchScreenDevice()) {
                 this.iconBtn.addEventListener('click', () => {
                     TweenLite.to(this.info, this.FADE_SPEED, {
                         color: this.ICON_INFO_CLICK_COLOR,
                     });
+                }, {
+                    passive: true
                 });
             }
-            this.iconBtn.addEventListener('mouseout', mouseOutAnimation);
+            this.iconBtn.addEventListener('mouseout', mouseOutAnimation, {
+                passive: true
+            });
         }
         addClickCopyString(str, copyedInfoText, isResetInfoText = false) {
             if (isResetInfoText) {
@@ -90,6 +96,8 @@
                 } else {
                     this.info.innerHTML = `复制${str}失败😥`;
                 }
+            }, {
+                passive: true
             });
         }
         addTouchCopyString(str, copyedInfoText, isResetInfoText = false) {

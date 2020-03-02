@@ -9,6 +9,8 @@
             this.clientHeight = document.documentElement.clientHeight;
             window.addEventListener('resize', () => {
                 this.clientHeight = document.documentElement.clientHeight;
+            }, {
+                passive: true
             });
         }
         addParallax(elem, parallaxRate, positionRatio) {

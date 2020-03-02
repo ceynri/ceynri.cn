@@ -37,9 +37,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             window.addEventListener('resize', () => {
                 this.setPageHeight();
                 this.setWindowHeight();
+            }, {
+                passive: true
             });
             window.addEventListener('scroll', () => {
                 this.renderScroll()
+            }, {
+                passive: true
             });
 
             this.scrollbar.addEventListener('mousedown', e => {
@@ -98,12 +102,20 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     scrollPageByClickScrollbar(mouseDownClientY);
                 }
                 // 移除监听
-                document.removeEventListener('mousemove', dragEvent);
-                document.removeEventListener('mouseup', mouseUpEvent);
+                document.removeEventListener('mousemove', dragEvent, {
+                    passive: true
+                });
+                document.removeEventListener('mouseup', mouseUpEvent, {
+                    passive: true
+                });
             }
             // 因为用户拖动滚动条时可能会移出滚动条的边界，所以把事件绑定到document上
-            document.addEventListener('mousemove', dragEvent);
-            document.addEventListener('mouseup', mouseUpEvent);
+            document.addEventListener('mousemove', dragEvent, {
+                passive: true
+            });
+            document.addEventListener('mouseup', mouseUpEvent, {
+                passive: true
+            });
         }
 
         // setter 保存以不必重复从DOM中获取
