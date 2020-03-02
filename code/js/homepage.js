@@ -50,12 +50,14 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         aboutHeader.append(text);
     }
     aboutHeader.children[textNum - 1].classList.add('full-text');
-    // 点击about-header区域向下滚30vh
-    aboutHeader.addEventListener('click', () => {
-        window.scrollBy(0, document.documentElement.clientHeight * .3);
-    }, {
-        passive: true
-    });
+    if (!MediaMatcher.isTouchScreenDevice()) {
+        // 点击about-header区域向下滚30vh
+        aboutHeader.addEventListener('click', () => {
+            window.scrollBy(0, document.documentElement.clientHeight * .3);
+        }, {
+            passive: true
+        });
+    }
 }
 
 {
