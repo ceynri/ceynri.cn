@@ -29,7 +29,7 @@
         }
         initConst() {
             // 缓动速度（秒）
-            this.EASE_SPEED = 1.75;
+            this.EASE_SPEED = 1.6;
             // 页面加载完成后的动画时间（来自 loader.js 的ANIMATION_TIME）
             this.PAGE_LOADED_ANIMATION_TIME = 2;
             // 页面滚动的缓动类型
