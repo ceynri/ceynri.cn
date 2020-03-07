@@ -29,11 +29,11 @@
         }
         initConst() {
             // 缓动速度（秒）
-            this.EASE_SPEED = 1.6;
+            this.EASE_SPEED = 1.7;
             // 页面加载完成后的动画时间（来自 loader.js 的ANIMATION_TIME）
             this.PAGE_LOADED_ANIMATION_TIME = 2;
             // 页面滚动的缓动类型
-            this.EASE = Power4.easeOut;
+            this.EASE = Power3.easeOut;
             // 滚动效率（鼠标每移动1px，元素移动的px值）
             this.WORK_SCROLL_RATIO = 1.2;
             // works横向滚动边界的弹性区间（即最多可以移出边界范围的px值）
