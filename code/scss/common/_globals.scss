@@ -47,6 +47,11 @@ a {
     color: var(--textColor);
 }
 
+::selection {
+    color: #fff;
+    background: var(--embelliColor);
+}
+
 .margin-wrapper {
     margin: {
         left: $miniMargin;

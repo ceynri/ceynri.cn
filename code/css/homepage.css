@@ -45,6 +45,16 @@ a {
   color: var(--textColor);
 }
 
+::-moz-selection {
+  color: #fff;
+  background: var(--embelliColor);
+}
+
+::selection {
+  color: #fff;
+  background: var(--embelliColor);
+}
+
 .margin-wrapper {
   margin-left: 64px;
   margin-right: 64px;
