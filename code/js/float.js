@@ -1,3 +1,5 @@
+// ! 因为性能问题，已禁用该js脚本
+
 if (!MediaMatcher.isTouchScreenDevice()) {
     class Float {
         constructor() {
@@ -16,6 +18,14 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }, {
                 passive: true
             })
+            
+            // 监听鼠标移动
+            document.addEventListener('mousemove', e => {
+                this.clientX = e.clientX;
+                this.clientY = e.clientY;
+            }, {
+                passive: true
+            });
         }
         addFloat(elems, level) {
             if (!Array.isArray(elems)) {
@@ -25,30 +35,30 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     this.float(elem, level);
                 });
             }
+            // 连缀语法
             return this;
         }
         float(elem, level) {
-            const floatTween = e => {
+            const frame = () => {
                 TweenLite.to(elem, this.SPEED, {
-                    x: (this.clientWidth / 2 - e.clientX) * level * 0.01,
-                    y: (this.clientHeight / 2 - e.clientY) * level * 0.01,
+                    x: (this.clientWidth / 2 - this.clientX) * level * 0.01,
+                    y: (this.clientHeight / 2 - this.clientY) * level * 0.01,
                     ease: Power3.easeOut
                 });
+                requestAnimationFrame(frame);
             }
-            window.addEventListener('mousemove', floatTween, {
-                passive: true
-            });
+            requestAnimationFrame(frame);
         }
     }
 
-    const background = document.querySelector('.body-background');
     const hero = document.querySelector('.hero');
     const engTitle = hero.querySelector('.title h2');
     const lines = CeynriUtils.nodeListToArray(document.querySelectorAll('.decoration-line'));
+    const background = document.querySelector('.body-background');
 
     const float = new Float();
-    float.addFloat(background, 1)
-        .addFloat(hero, 2)
-        .addFloat(engTitle, .5)
+    float.addFloat(hero, 2)
+        // .addFloat(background, 1)
+        // .addFloat(engTitle, .5)
         .addFloat(lines, 6);
 }
