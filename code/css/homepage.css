@@ -547,8 +547,8 @@ a {
   -webkit-text-stroke: 2px var(--textColor);
   -webkit-text-fill-color: transparent;
   opacity: 0.25;
-  -webkit-transition: all 1s;
-  transition: all 1s;
+  -webkit-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }
 
 .about-header span:nth-child(2), .about-header span:nth-child(3), .about-header span:nth-child(5), .about-header span:nth-child(7), .about-header span:nth-child(11), .about-header span:nth-child(13), .about-header span:nth-child(15), .about-header span:nth-child(17), .about-header span:nth-child(23), .about-header span:nth-child(29), .about-header span:nth-child(31), .about-header span:nth-child(37), .about-header span:nth-child(41) {
@@ -557,11 +557,11 @@ a {
   color: var(--textColor);
 }
 
-.about-header span:hover {
+.about-header span:active {
   --textColor: var(--embelliColor);
   opacity: 1;
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.05s;
+  transition: all 0.05s;
 }
 
 .about-header .full-text {

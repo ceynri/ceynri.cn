@@ -75,13 +75,14 @@
                 color: var(--textColor);
             }
 
-            &:hover {
+            // 原本使用:hover，但光标过于容易频繁触发hover该效果导致出现性能问题，改为active后交互性能良好
+            &:active {
                 --textColor: var(--embelliColor);
                 opacity: 1;
-                transition: all .2s;
+                transition: all 0.05s;
             }
 
-            transition: all 1s;
+            transition: all 1s ease-in;
         }
 
         .full-text {
