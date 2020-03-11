@@ -58,6 +58,7 @@
                 // 重新允许滚动
                 document.body.style.overflow = 'visible';
                 this.loader.style.display = 'none';
+                this.loader.parentNode.removeChild(this.loader);
             }
             window.addEventListener('load', pageLoadedAction, {
                 passive: true

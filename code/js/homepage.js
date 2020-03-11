@@ -17,6 +17,18 @@
 }
 
 {
+    // * 加载时间超过5秒，提示刷新
+    setTimeout(() => {
+        let loadingText = document.querySelector('.loader .overlay.loading .loading-text');
+        if (loadingText) {
+            loadingText.innerHTML = '加载过慢？尝试刷新页面😥';
+        }
+        // 释放引用以允许垃圾内存回收
+        loadingText = null;
+    }, 5000);
+}
+
+{
     // * 设置hero日期
     const month = document.querySelector('.date .month');
     const day = document.querySelector('.date .day');
