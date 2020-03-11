@@ -1,4 +1,4 @@
-{
+if (!MediaMatcher.isTouchScreenDevice()) {
     class FadeScroll {
         constructor() {
             this.items = [];
