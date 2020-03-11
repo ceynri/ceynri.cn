@@ -46,7 +46,7 @@
                 });
                 this.info.innerHTML = this.infoText;
             };
-            const mouseOutAnimation = () => {
+            const mouseLeaveAnimation = () => {
                 TweenLite.to(this.icons.children[0], this.FADE_SPEED, {
                     opacity: 1,
                     ease: Power3.ease
@@ -82,7 +82,7 @@
                     passive: true
                 });
             }
-            this.iconBtn.addEventListener('mouseout', mouseOutAnimation, {
+            this.iconBtn.addEventListener('mouseleave', mouseLeaveAnimation, {
                 passive: true
             });
         }
@@ -116,7 +116,7 @@
                     if (this.copyToClipboard(str)) {
                         this.info.innerHTML = `已复制${copyedInfoText}😊`;
                     } else {
-                        this.info.innerHTML = `复制${str}失败😥 浏览器不支持`;
+                        this.info.innerHTML = `复制失败😥：${str} 浏览器不支持`;
                     }
                 }, 500);
             });
