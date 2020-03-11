@@ -140,7 +140,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 // 内部光标实时改变
                 this.setCursorCoord(this.innerCursor.box);
                 if (!this.isStuck) {
-                    // 内部光标平滑延迟移动
+                    // 外部光标平滑延迟移动
                     TweenLite.to(this.outerCursor.box, this.outerCursorSpeed, {
                         x: this.clientX - this.outerCursor.box.size / 2,
                         y: this.clientY - this.outerCursor.box.size / 2,
@@ -234,7 +234,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 paused: true
             });
 
-            const pageDownMouseMove = () => {
+            const pageDownMouseEnter = () => {
                 this.tween.expandOuterCursorFunc(this.HERO_SCALING_RATIO);
                 this.tween.brightenOuterCursor.play();
                 this.tween.shrinkPoint.play();
@@ -251,7 +251,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用hero相关监听器
             const hero = document.querySelector('.hero');
-            hero.addEventListener('mousemove', pageDownMouseMove, {
+            hero.addEventListener('mouseenter', pageDownMouseEnter, {
                 passive: true
             });
             hero.addEventListener('mouseleave', pageDownMouseLeave, {
@@ -260,7 +260,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         }
         addAboutAnimation() {
             // * about部分的动画
-            const aboutMouseMove = () => {
+            const aboutMouseEnter = () => {
                 this.tween.expandOuterCursorFunc(this.ABOUT_SCALING_RATIO);
                 this.tween.brightenOuterCursor.play();
                 this.tween.shrinkPoint.play();
@@ -272,7 +272,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用hero相关监听器
             const aboutArea = document.querySelector('.about');
-            aboutArea.addEventListener('mousemove', aboutMouseMove, {
+            aboutArea.addEventListener('mouseenter', aboutMouseEnter, {
                 passive: true
             });
             aboutArea.addEventListener('mouseleave', aboutMouseLeave, {
@@ -293,8 +293,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 paused: true
             });
 
-            // 使用mouseMove而不是mouseEnter，可以解决一些bug
-            const worksMouseMove = () => {
+            // mouseover与mouseenter的区别在于
+            // 在进入父元素的子元素时也会触发mouseover事件
+            const worksMouseOver = () => {
                 this.tween.expandOuterCursorFunc(this.WORKS_SCALING_RATIO);
                 this.tween.shrinkPoint.play();
                 // 判断是否在work内
@@ -354,7 +355,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用works相关监听器
             const works = document.querySelector('.works');
-            works.addEventListener('mousemove', worksMouseMove, {
+            works.addEventListener('mouseover', worksMouseOver, {
                 passive: true
             });
             works.addEventListener('mousedown', worksMouseDown, {
@@ -380,14 +381,15 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 paused: true
             });
 
-            const workMouseMove = () => {
+            // 因为work会有缩放，使用mouseenter会有点小bug，故使用mouseover
+            const workMouseOver = () => {
                 workDetailShowTween.play();
                 arrowFadeOutTween.play();
                 this.tween.brightenOuterCursor.play();
                 // 外光标改为实时移动
                 this.outerCursorSpeed = 0;
                 this.setCursorCoord(this.outerCursor.box);
-                // 处于work中,works中监听的mousemove改为隐藏hand和arrow
+                // 设置“处于work中”，works中监听的mouseover事件会让光标隐藏hand和arrow
                 this.isInWork = true;
             }
             const workMouseLeave = () => {
@@ -403,7 +405,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
 
             const works = document.querySelectorAll('.work');
             works.forEach(work => {
-                work.addEventListener('mousemove', workMouseMove, {
+                work.addEventListener('mouseover', workMouseOver, {
                     passive: true
                 });
                 work.addEventListener('mouseleave', workMouseLeave, {
@@ -438,6 +440,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     borderWidth: 2,
                     ease: Back.easeOut.config(1.5),
                 });
+                // 为什么不把mouseover部分放入mouseenter？
+                // 答：因为页面是缓动滚动的，如果放在mouseenter很容易提前固定导致错位
             };
             const iconBtnMouseLeave = () => {
                 this.isStuck = false;
