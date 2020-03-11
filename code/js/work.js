@@ -55,7 +55,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }, {
                 passive: true
             });
-            this.work.addEventListener('mouseout', () => {
+            this.work.addEventListener('mouseleave', () => {
                 TweenLite.to(this.panel, this.ROTATE_SPEED, {
                     rotationX: 0,
                     rotationY: 0,
@@ -89,13 +89,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 z: -20,
                 paused: true
             });
-            this.work.addEventListener('mousemove', () => {
+            this.work.addEventListener('mouseenter', () => {
                 bangageZoomInTween.play();
                 bookmarkZoomInTween.play();
             }, {
                 passive: true
             });
-            this.work.addEventListener('mouseout', () => {
+            this.work.addEventListener('mouseleave', () => {
                 bangageZoomInTween.reverse();
                 bookmarkZoomInTween.reverse();
             }, {
@@ -127,13 +127,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 paused: true
             })
 
-            this.work.addEventListener('mousemove', () => {
+            this.work.addEventListener('mouseenter', () => {
                 manZoomInTween.play();
                 speedLinesZoomInTween.play();
             }, {
                 passive: true
             });
-            this.work.addEventListener('mouseout', () => {
+            this.work.addEventListener('mouseleave', () => {
                 manZoomInTween.reverse();
                 speedLinesZoomInTween.reverse();
             }, {
@@ -155,7 +155,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }, {
                 passive: true
             });
-            this.work.addEventListener('mouseout', () => {
+            this.work.addEventListener('mouseleave', () => {
                 cursorsFadedTween.reverse();
                 TweenLite.to(this.man, this.ROTATE_SPEED, {
                     x: 0,
