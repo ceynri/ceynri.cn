@@ -17,7 +17,8 @@
 }
 
 {
-    // * 加载时间超过5秒，提示刷新
+    // * 加载时间超过一定时间，提示刷新
+    const TIMEOUT_THRESHOLD = 7;
     setTimeout(() => {
         let loadingText = document.querySelector('.loader .overlay.loading .loading-text');
         if (loadingText) {
@@ -25,7 +26,7 @@
         }
         // 释放引用以允许垃圾内存回收
         loadingText = null;
-    }, 5000);
+    }, TIMEOUT_THRESHOLD * 1000);
 }
 
 {
