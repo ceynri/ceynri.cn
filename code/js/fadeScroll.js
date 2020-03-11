@@ -53,4 +53,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
     const fadeScroll = new FadeScroll();
     fadeScroll.addElems(aboutTexts, 15, 15, 30);
     fadeScroll.render();
+} else {
+    CeynriUtils.nodeListToArray(document.querySelectorAll('.about-text div')).forEach(div => {
+        div.style.opacity = 1;
+    });
 }
