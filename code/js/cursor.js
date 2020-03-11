@@ -165,6 +165,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             });
             this.tween.brightenOuterCursor = TweenLite.to(this.outerCursor.normal, this.ANIMATION_SPEED, {
                 backgroundColor: 'rgba(255, 255, 255, .9)',
+                ease: Expo.easeOut,
                 paused: true
             });
             // innerCursor
@@ -240,7 +241,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.tween.shrinkPoint.play();
                 downArrowShowTween.play();
                 this.outerCursorSpeed = 0;
-                this.setCursorCoord(this.outerCursor.box);
             }
             const pageDownMouseLeave = () => {
                 this.tween.expandOuterCursorFunc(1);
@@ -261,11 +261,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         addAboutAnimation() {
             // * about部分的动画
             const aboutMouseEnter = () => {
+                this.outerCursorSpeed = 0;
                 this.tween.expandOuterCursorFunc(this.ABOUT_SCALING_RATIO);
                 this.tween.brightenOuterCursor.play();
                 this.tween.shrinkPoint.play();
             }
             const aboutMouseLeave = () => {
+                this.outerCursorSpeed = this.MOVE_SPEED;
                 this.tween.expandOuterCursorFunc(1);
                 this.tween.brightenOuterCursor.reverse();
                 this.tween.shrinkPoint.reverse();
@@ -388,7 +390,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.tween.brightenOuterCursor.play();
                 // 外光标改为实时移动
                 this.outerCursorSpeed = 0;
-                this.setCursorCoord(this.outerCursor.box);
                 // 设置“处于work中”，works中监听的mouseover事件会让光标隐藏hand和arrow
                 this.isInWork = true;
             }
