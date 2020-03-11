@@ -67,7 +67,7 @@
 
     ![cursor-transform.gif](https://i.loli.net/2020/02/27/xFQikNLCJOXHgsA.gif)
 
-3. [视差浮动效果](https://i.loli.net/2020/02/27/hu5I7tTRLCzqD1F.gif)（红色粗线条、标题与背景的移动距离不同）
+3. [视差浮动效果](https://i.loli.net/2020/02/27/hu5I7tTRLCzqD1F.gif)（红色粗线条、标题与背景的移动距离不同）[因性能问题已禁用该效果]
 
     ![float.gif](https://i.loli.net/2020/02/27/hu5I7tTRLCzqD1F.gif)
 
