@@ -128,6 +128,9 @@
                     } else {
                         this.touchScreenRender();
                     }
+                    window.removeEventListener('load', pageLoadedEvent, {
+                        passive: true
+                    });
                 }, this.PAGE_LOADED_ANIMATION_TIME * 1000);
             };
             window.addEventListener('load', pageLoadedEvent, {
