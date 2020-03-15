@@ -18,7 +18,7 @@
 
 {
     // * 加载时间超过一定时间，提示刷新
-    const TIMEOUT_THRESHOLD = 7;
+    const TIMEOUT_THRESHOLD = 10;
     setTimeout(() => {
         let loadingText = document.querySelector('.loader .overlay.loading .loading-text');
         if (loadingText) {
