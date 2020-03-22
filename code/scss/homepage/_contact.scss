@@ -120,13 +120,13 @@
             opacity: 1;
         }
 
-        .qrcode-wrapper {
-            height: $contentWidth;
-            min-height: $contentMinWidth;
-
-            img {
-                width: 100%;
+        .qrcode {
+            &-wrapper {
+                height: $contentWidth;
+                min-height: $contentMinWidth;
             }
+
+            width: 100%;
         }
     }
 

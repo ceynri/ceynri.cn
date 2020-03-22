@@ -4,8 +4,6 @@
 
 'use strict';
 
-// ? (()=>{})()写法和{}写法的区别
-
 {
     // * 在head标签中添加theme-color meta标签
     const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--themeColor').trim() || '#333333';
@@ -71,6 +69,16 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             passive: true
         });
     }
+}
+
+{
+    // * 图片延迟加载
+    window.addEventListener('load', () => {
+        const qrcodes = document.querySelectorAll('.qrcode');
+        qrcodes.forEach(qrcode => {
+            qrcode.setAttribute('src', qrcode.getAttribute('data-src'));
+        })
+    })
 }
 
 {

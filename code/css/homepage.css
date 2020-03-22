@@ -1409,13 +1409,13 @@ a {
   opacity: 1;
 }
 
+.contact-texts .qrcode {
+  width: 100%;
+}
+
 .contact-texts .qrcode-wrapper {
   height: calc(100vmin - (64px + 1.75em) * 2);
   min-height: calc(250px - 3.5em);
-}
-
-.contact-texts .qrcode-wrapper img {
-  width: 100%;
 }
 
 .contact .switch-bar {
