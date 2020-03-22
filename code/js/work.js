@@ -1,4 +1,8 @@
 if (!MediaMatcher.isTouchScreenDevice()) {
+    /*
+     * work基类
+     * 实现鼠标交互动画功能
+     */
     class Work {
         constructor(work) {
             this.initElem(work);
@@ -40,22 +44,29 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 ease: Strong.easeOut,
                 paused: true
             });
-
-            this.work.addEventListener('mousemove', e => {
-                this.mouseX = e.offsetX - this.workWidth / 2;
-                this.mouseY = e.offsetY - this.workHeight / 2;
-                TweenLite.to(this.panel, this.ROTATE_SPEED, {
-                    rotationX: -this.mouseY / this.workHeight * this.ANGLE,
-                    rotationY: this.mouseX / this.workWidth * this.ANGLE,
-                    ease: Power0.easeOut,
-                });
+            
+            this.work.addEventListener('mouseenter', () => {
                 cardZoomOutTween.play();
                 textZoomInTween.play();
                 seeMoreShowTween.play();
             }, {
                 passive: true
             });
+            this.work.addEventListener('mousemove', e => {
+                // 取得光标与work中心的相对坐标
+                this.mouseX = e.offsetX - this.workWidth / 2;
+                this.mouseY = e.offsetY - this.workHeight / 2;
+                // 应用动画：光标离中心越远，旋转角度越大
+                TweenLite.to(this.panel, this.ROTATE_SPEED, {
+                    rotationX: -this.mouseY / this.workHeight * this.ANGLE,
+                    rotationY: this.mouseX / this.workWidth * this.ANGLE,
+                    ease: Power0.easeOut,
+                });
+            }, {
+                passive: true
+            });
             this.work.addEventListener('mouseleave', () => {
+                // 复原旋转角度
                 TweenLite.to(this.panel, this.ROTATE_SPEED, {
                     rotationX: 0,
                     rotationY: 0,
@@ -140,13 +151,18 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 passive: true
             });
         }
+        // * 贴片元素吸附到光标上的交互效果
         initCursorAttachment() {
             const cursorsFadedTween = TweenLite.to(this.cursors, this.ROTATE_SPEED, {
                 opacity: 0,
                 paused: true
             });
-            this.work.addEventListener('mousemove', () => {
+            this.work.addEventListener('mouseenter', () => {
                 cursorsFadedTween.play();
+            }, {
+                passive: true
+            });
+            this.work.addEventListener('mousemove', () => {
                 TweenLite.to(this.man, this.ROTATE_SPEED, {
                     x: this.mouseX,
                     y: this.mouseY,

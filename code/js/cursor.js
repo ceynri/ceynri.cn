@@ -1,12 +1,11 @@
-// 已知bug：对于第一次使用play方法执行的tween动画，如果在reverse动画播放过程中执行了冲突的
-//         另外一个动画，会使某些样式（主要是缩放）永久失效（直到重新刷新页面）
-// 暂时解决：加大了about与其他区域之间的距离，最大程度避免bug情况的条件达成（但仍然无法避免）
-// 问题原因：overwrite使得play/reverse()保存了错误的状态
-// 完全解决：不使用play与reverse，直接写死动画效果（目前已将部分易出现bug的scale效果改写）
 if (!MediaMatcher.isTouchScreenDevice()) {
     /*
-     * @title 光标类
-     * @author ceynri
+     * 光标动画与交互效果实现
+     * 已知bug：对于第一次使用play方法执行的tween动画，如果在reverse动画播放过程中执行了冲突的
+     *         另外一个动画，会使某些样式（主要是缩放）永久失效（直到重新刷新页面）
+     * 临时办法：加大了about与其他区域之间的距离，最大程度避免bug情况的条件达成（但仍然无法避免）
+     * 问题原因：overwrite使得play/reverse()保存了错误的状态
+     * 完全解决：不使用play与reverse，直接写死动画效果（目前已将部分易出现bug的scale效果改写）
      */
     class Cursor {
         constructor() {
@@ -18,8 +17,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.initEvents();
         }
 
+        // * 初始化元素
         initElem() {
-            // * 初始化元素
             // 光标内部元素
             this.innerCursor = {};
             this.innerCursor.box = document.querySelector('.cursor-inner-box');
@@ -35,8 +34,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.outerCursor.normal = this.outerCursor.box.querySelector('.normal');
             this.outerCursor.arrow = this.outerCursor.box.querySelector('.arrow');
         }
+        // * 初始化属性
         initProp() {
-            // * 初始化属性
             // 内部光标大小
             this.innerCursor.box.size = this.innerCursor.box.getBoundingClientRect().width;
             // 外部光标大小
@@ -58,8 +57,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 是否在work区域
             this.isInWork = false;
         }
+        // * 初始化常量
         initConst() {
-            // * 初始化常量
             // 外光标移动速度
             this.MOVE_SPEED = 0.15;
             // 缓动动画播放速度
@@ -74,8 +73,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.ICON_BTN_SCALING_RATIO = 3;
         }
 
+        // * 初始化光标
         initCursor() {
-            // * 初始化光标
             // 初始化光标与动画相关的样式
             this.initCursorStyle();
             // 初始化光标位置
@@ -83,8 +82,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 开始渲染光标的移动
             this.renderCursorMove();
         }
+        // * 初始化光标与动画相关的样式
         initCursorStyle() {
-            // * 初始化光标与动画相关的样式
             // 需要缩小为0的光标
             const scale0List = [
                 this.innerCursor.zoomIn,
@@ -99,15 +98,15 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 });
             });
         }
+        // * 将传入的光标设定实时的鼠标坐标值
         setCursorCoord(cursorBox) {
-            // * 将传入的光标设定实时的鼠标坐标值
             TweenLite.set(cursorBox, {
                 x: this.clientX - cursorBox.size / 2,
                 y: this.clientY - cursorBox.size / 2
             });
         }
+        // * 初始化光标位置
         initCursorPos() {
-            // * 初始化光标位置
             // 自定义光标还没有显示时，监听鼠标第一次的移动，设置自定义光标到光标坐标处
             const unveilCursor = () => {
                 this.setCursorCoord(this.outerCursor.box);
@@ -134,8 +133,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 passive: true
             });
         }
+        // * 开始渲染光标移动
         renderCursorMove() {
-            // * 开始渲染光标移动
             const frame = () => {
                 // 内部光标实时改变
                 this.setCursorCoord(this.innerCursor.box);
@@ -154,8 +153,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             requestAnimationFrame(frame);
         }
 
+        // * 全局Tween
         initTweens() {
-            // * 全局Tween
             this.tween = {};
             // outerCursor
             this.tween.shrinkOuterCursor = TweenLite.to(this.outerCursor.box, this.ANIMATION_SPEED, {
@@ -191,8 +190,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 }
             }
         }
+        // * 各种事件监听的初始化
         initEvents() {
-            // * 各种事件监听的初始化
             // global
             this.addGlobalAnimation();
             // hero
@@ -211,8 +210,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.listenWorkLinkEvent();
         }
 
+        // * 全局动画
         addGlobalAnimation() {
-            // * 全局动画
             const globalMouseDown = () => {
                 this.tween.shrinkOuterCursor.play();
             }
@@ -227,8 +226,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 passive: true
             });
         }
+        // * pagedown出现向下箭头的动画
         addHeroAnimation() {
-            // * pagedown出现向下箭头的动画
             const downArrowShowTween = TweenLite.to(this.innerCursor.down, this.ANIMATION_SPEED, {
                 scale: this.HERO_SCALING_RATIO,
                 ease: Back.easeOut.config(1.5),
@@ -258,8 +257,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 passive: true
             });
         }
+        // * about部分的动画
         addAboutAnimation() {
-            // * about部分的动画
             const aboutMouseEnter = () => {
                 this.outerCursorSpeed = 0;
                 this.tween.expandOuterCursorFunc(this.ABOUT_SCALING_RATIO);
@@ -281,8 +280,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 passive: true
             });
         }
+        // * works动画
         addWorksAnimation() {
-            // * works动画
             const arrowShowTween = TweenLite.to(this.outerCursor.arrow, this.ANIMATION_SPEED, {
                 scale: this.WORKS_SCALING_RATIO,
                 ease: Back.easeOut.config(1.5),
@@ -370,8 +369,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 passive: true
             });
         }
+        // * work动画
         addWorkAnimation() {
-            // * work动画
             const workDetailShowTween = TweenLite.to(this.innerCursor.detail, this.ANIMATION_SPEED, {
                 scale: this.WORKS_SCALING_RATIO,
                 ease: Back.easeOut.config(1.5),
@@ -414,8 +413,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 });
             });
         }
+        // * icon-btn动画
         addIconBtnAnimation() {
-            // * icon-btn动画
             const iconBtnMouseEnter = () => {
                 TweenLite.to(this.innerCursor.point, this.ANIMATION_SPEED, {
                     scale: this.ICON_BTN_SCALING_RATIO,
@@ -473,8 +472,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 });
             });
         }
+        // * icon-link动画
         addIconLinkAnimation() {
-            // * icon-link动画
             const zoomInShowTween = TweenLite.to(this.innerCursor.zoomIn, this.ANIMATION_SPEED, {
                 scale: 1,
                 paused: true

@@ -1,4 +1,7 @@
 if (!MediaMatcher.isTouchScreenDevice()) {
+    /*
+     * 自定义滚动条的实现
+     */
     class Scrollbar {
         constructor() {
             this.initElem();
@@ -118,26 +121,25 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             });
         }
 
-        // setter 保存以不必重复从DOM中获取
+        // * 保存页面的高度
         setPageHeight() {
-            // * 保存页面的高度
             this.pageHeight = this.page.scrollHeight;
         }
+        // * 保存窗口高度
         setWindowHeight() {
-            // * 保存窗口高度
             this.windowHeight = document.documentElement.clientHeight || window.innerHeight;
         }
-        // getter
+
+        // * 获得滚动条应该设置的高度
         getScrollbarHeight() {
-            // * 获得滚动条应该设置的高度
             return (this.getWindowBottomY() / this.pageHeight) * this.windowHeight;
         }
+        // * 获得当前窗口底端所对应的y坐标值
         getWindowBottomY() {
-            // * 获得当前窗口底端所对应的y坐标值
             return this.getScrollTop() + this.windowHeight;
         }
+        // * 获得当前页面的滚动高度
         getScrollTop() {
-            // * 获得当前页面的滚动高度
             return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
         }
     }

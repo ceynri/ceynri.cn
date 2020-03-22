@@ -1,4 +1,8 @@
 {
+    /*
+     * 绑定文本与对应的按钮
+     * 增加交互动画与复制文本功能
+     */
     class Contact {
         constructor(text, defaultText, iconBtn, info, infoText) {
             this.initElem(text, defaultText, iconBtn, info, infoText);
@@ -124,8 +128,8 @@
                 clearTimeout(longPressTimer);
             });
         }
+        // * 将字符串复制到剪贴板
         copyToClipboard(str) {
-            // * 将字符串复制到剪贴板
             const strWrapper = document.createElement('input');
             strWrapper.setAttribute('readonly', 'readonly');
             strWrapper.setAttribute('value', str);
@@ -142,33 +146,34 @@
             }
         };
     }
-
+    // 主体
     const contact = document.querySelector('.contact');
-
+    // 默认介绍
     const defaultText = contact.querySelector('.contact-default');
+    // 不同平台的介绍
     const githubText = contact.querySelector('.contact-github');
     const bilibiliText = contact.querySelector('.contact-bilibili');
     const musicText = contact.querySelector('.contact-music');
     const mailText = contact.querySelector('.contact-mail');
     const wechatText = contact.querySelector('.contact-wechat');
     const qqText = contact.querySelector('.contact-qq');
-
+    // 不同平台的按钮
     const githubBtn = contact.querySelector('.github-btn');
     const bilibiliBtn = contact.querySelector('.bilibili-btn');
     const musicBtn = contact.querySelector('.music-btn');
     const mailBtn = contact.querySelector('.mail-btn');
     const wechatBtn = contact.querySelector('.wechat-btn');
     const qqBtn = contact.querySelector('.qq-btn');
-
+    // 按钮的文本解释
     const btnInfo = contact.querySelector('.btn-info');
-
+    // 绑定文本与按钮的关联，绑定交互事件
     const github = new Contact(githubText, defaultText, githubBtn, btnInfo, 'Github');
     const bilibili = new Contact(bilibiliText, defaultText, bilibiliBtn, btnInfo, 'bilibili');
     const music = new Contact(musicText, defaultText, musicBtn, btnInfo, '网易云音乐');
     const mail = new Contact(mailText, defaultText, mailBtn, btnInfo, 'Gmail');
     const wechat = new Contact(wechatText, defaultText, wechatBtn, btnInfo, 'WeChat');
     const qq = new Contact(qqText, defaultText, qqBtn, btnInfo, 'QQ');
-
+    // 设置点击按钮复制相关内容的功能
     if (!MediaMatcher.isTouchScreenDevice()) {
         wechat.addClickCopyString('sakuramemory', '微信号', true);
         qq.addClickCopyString('347670115', 'QQ号', true);

@@ -1,4 +1,7 @@
 if (!MediaMatcher.isTouchScreenDevice()) {
+    /*
+     * 实现文字随着窗口坐标位置变化产生透明度的淡入淡出效果
+     */
     class FadeScroll {
         constructor() {
             this.items = [];
@@ -38,8 +41,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             };
             requestAnimationFrame(frame);
         }
+        // * 获得当前的页面滚动高度
         getPageScrollTop() {
-            // * 获得当前的页面滚动高度
             return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
         }
         getElemClientCenterY(elem) {
@@ -53,7 +56,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
     const fadeScroll = new FadeScroll();
     fadeScroll.addElems(aboutTexts, 15, 15, 30);
     fadeScroll.render();
+
 } else {
+    // 移动端访问，不再应用透明度变化效果
     CeynriUtils.nodeListToArray(document.querySelectorAll('.about-text div')).forEach(div => {
         div.style.opacity = 1;
     });

@@ -1,4 +1,6 @@
+// 个人的自定义函数工具箱
 const CeynriUtils = {
+    // 将NodeList转换为装Node的Array
     nodeListToArray: (nodes) => {
         let array = null;
         try {
@@ -16,6 +18,7 @@ const CeynriUtils = {
     normallize: (x, scale = 1) => scale * Math.tanh(x / scale),
 }
 
+// 简易的媒体查询函数工具箱
 const MediaMatcher = {
     isTouchScreenDevice: () => {
         // < ipad pro 12.9

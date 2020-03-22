@@ -1,6 +1,8 @@
 {
-    // TODO 加载时，光标为“加载中”的样式
-    // * 在加载时所显示的内容
+    /*
+     * 在加载时所显示的内容
+     * @todo 加载时，光标改变为“加载中”的样式
+     */
     class Loader {
         constructor(loader, page) {
             // 一些元素
@@ -21,8 +23,8 @@
             // 等待页面加载完成，执行动画
             this.listenPageLoadedEvent();
         }
+        // * 初始化页面滚动位置
         initPageScrollTop() {
-            // * 初始化页面滚动位置
             // 禁止页面滚动
             document.body.style.overflow = 'hidden';
 
@@ -37,8 +39,8 @@
                 y: (this.overlayNum * 100) + 'vh'
             });
         }
+        // * 监听页面加载完成事件，进行一些操作
         listenPageLoadedEvent() {
-            // * 监听页面加载完成事件，进行一些操作
             const pageLoadedAction = () => {
                 // 播放动画（y初值已经在css中设置好）
                 for (let i = 0; i < this.overlayNum; i++) {

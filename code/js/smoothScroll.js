@@ -18,8 +18,8 @@
             this.footer = document.querySelector('.homepage-footer');
             this.copyright = this.footer.querySelector('.copyright');
         }
+        // * 属性初始化
         initProp() {
-            // * 属性初始化
             // 设置body高度
             this.setBodySize();
 
@@ -41,14 +41,14 @@
             // footer高度
             this.FOOTER_HEIGHT = parseInt(getComputedStyle(this.footer, null).getPropertyValue('height'));
         }
+        // * 事件监听初始化
         initEvents() {
-            // * 事件监听初始化
             this.listenWindowResizeEvent();
             this.listenWorksDragEvent();
             this.listenPageLoadedEvent();
         }
+        // * resize窗口大小时重新设置body的高度
         listenWindowResizeEvent() {
-            // * resize窗口大小时重新设置body的高度
             window.addEventListener('resize', () => {
                 this.setBodySize();
                 this.setWorksRightBound();
@@ -57,8 +57,8 @@
                 passive: true
             });
         }
+        // * 拖动works事件
         listenWorksDragEvent() {
-            // * 拖动works事件
             // drag动画
             const dragWorksAnimation = e => {
                 // 获得works应该需要移动到的坐标位置
@@ -138,8 +138,8 @@
             });
         }
 
+        // * 渲染滚动页面
         render() {
-            // * 渲染滚动页面
             const frame = () => {
                 this.pageScroll();
                 this.copyrightFixed();
@@ -179,23 +179,21 @@
             }
         }
 
-        // setter
+        // * 设置主体的高度
         setBodySize() {
-            // * 设置主体的高度
             document.body.style.height = `${this.page.scrollHeight}px`;
         }
+        // * 设置works的右边界（即向左最多可以位移的距离）
         setWorksRightBound() {
-            // * 设置works的右边界（即向左最多可以位移的距离）
             this.worksRightBound = this.works.getBoundingClientRect().width - document.documentElement.clientWidth;
         }
 
-        // getter
+        // * 获得works的横向滚动距离
         getWorksScrollLeft() {
-            // * 获得works的横向滚动距离
             return this.works.getBoundingClientRect().left;
         }
+        // * 获得当前的页面滚动高度
         getPageScrollTop() {
-            // * 获得当前的页面滚动高度
             return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
         }
 

@@ -3,6 +3,9 @@
     const CENTER = 1;
     const BOTTOM = 2;
 
+    /*
+     * 视差滚动效果
+     */
     class ParallaxScroll {
         constructor() {
             this.items = [];
@@ -35,8 +38,8 @@
             return this;
         }
 
+        // * 渲染滚动页面
         render() {
-            // * 渲染滚动页面
             const frame = () => {
                 this.items.forEach((item) => {
                     // 使item滚动
@@ -56,7 +59,7 @@
             return elem.getBoundingClientRect().top - rate * (this.clientHeight / 2);
         }
     }
-    // 触屏设备上进行transfrom非常卡
+    // 触屏设备上进行transfrom非常卡，故仅在电脑端使用本效果
     if (!MediaMatcher.isTouchScreenDevice()) {
         const aboutText = document.querySelector('.about-text');
         const parallax = new ParallaxScroll();

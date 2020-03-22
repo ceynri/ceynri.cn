@@ -22,8 +22,6 @@
         if (loadingText) {
             loadingText.innerHTML = '加载过慢？尝试刷新页面😥';
         }
-        // 释放引用以允许垃圾内存回收
-        loadingText = null;
     }, TIMEOUT_THRESHOLD * 1000);
 }
 
@@ -62,9 +60,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
     }
     aboutHeader.children[textNum - 1].classList.add('full-text');
     if (!MediaMatcher.isTouchScreenDevice()) {
-        // 点击about-header区域向下滚30vh
+        // 点击about-header区域向下滚50vh
         aboutHeader.addEventListener('click', () => {
-            window.scrollBy(0, document.documentElement.clientHeight * .3);
+            window.scrollBy(0, document.documentElement.clientHeight * .5);
         }, {
             passive: true
         });
