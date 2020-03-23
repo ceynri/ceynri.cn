@@ -219,12 +219,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 this.tween.shrinkOuterCursor.reverse();
             }
 
-            document.addEventListener('mousedown', globalMouseDown, {
-                passive: true
-            });
-            document.addEventListener('mouseup', globalMouseUp, {
-                passive: true
-            });
+            document.addEventListener('mousedown', globalMouseDown);
+            document.addEventListener('mouseup', globalMouseUp);
         }
         // * pagedown出现向下箭头的动画
         addHeroAnimation() {
@@ -250,12 +246,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用hero相关监听器
             const hero = document.querySelector('.hero');
-            hero.addEventListener('mouseenter', pageDownMouseEnter, {
-                passive: true
-            });
-            hero.addEventListener('mouseleave', pageDownMouseLeave, {
-                passive: true
-            });
+            hero.addEventListener('mouseenter', pageDownMouseEnter);
+            hero.addEventListener('mouseleave', pageDownMouseLeave);
         }
         // * about部分的动画
         addAboutAnimation() {
@@ -273,12 +265,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用hero相关监听器
             const aboutArea = document.querySelector('.about');
-            aboutArea.addEventListener('mouseenter', aboutMouseEnter, {
-                passive: true
-            });
-            aboutArea.addEventListener('mouseleave', aboutMouseLeave, {
-                passive: true
-            });
+            aboutArea.addEventListener('mouseenter', aboutMouseEnter);
+            aboutArea.addEventListener('mouseleave', aboutMouseLeave);
         }
         // * works动画
         addWorksAnimation() {
@@ -342,13 +330,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     const delayReverseAnimation = () => {
                         reverseAnimation();
                         worksMouseUp();
-                        document.removeEventListener('mouseup', delayReverseAnimation, {
-                            passive: true
-                        });
+                        document.removeEventListener('mouseup', delayReverseAnimation);
                     }
-                    document.addEventListener('mouseup', delayReverseAnimation, {
-                        passive: true
-                    });
+                    document.addEventListener('mouseup', delayReverseAnimation);
                 } else {
                     // 直接执行动画
                     reverseAnimation();
@@ -356,18 +340,10 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             }
             // 应用works相关监听器
             const works = document.querySelector('.works');
-            works.addEventListener('mouseover', worksMouseOver, {
-                passive: true
-            });
-            works.addEventListener('mousedown', worksMouseDown, {
-                passive: true
-            });
-            works.addEventListener('mouseup', worksMouseUp, {
-                passive: true
-            });
-            works.addEventListener('mouseleave', worksMouseLeave, {
-                passive: true
-            });
+            works.addEventListener('mouseover', worksMouseOver);
+            works.addEventListener('mousedown', worksMouseDown);
+            works.addEventListener('mouseup', worksMouseUp);
+            works.addEventListener('mouseleave', worksMouseLeave);
         }
         // * work动画
         addWorkAnimation() {
@@ -405,12 +381,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
 
             const works = document.querySelectorAll('.work');
             works.forEach(work => {
-                work.addEventListener('mouseover', workMouseOver, {
-                    passive: true
-                });
-                work.addEventListener('mouseleave', workMouseLeave, {
-                    passive: true
-                });
+                work.addEventListener('mouseover', workMouseOver);
+                work.addEventListener('mouseleave', workMouseLeave);
             });
         }
         // * icon-btn动画
@@ -461,15 +433,9 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 应用icon-btn相关监听器
             const iconBtns = document.querySelectorAll('.icon-btn');
             iconBtns.forEach(item => {
-                item.addEventListener('mouseenter', iconBtnMouseEnter, {
-                    passive: true
-                });
-                item.addEventListener('mouseover', iconBtnMouseOver, {
-                    passive: true
-                });
-                item.addEventListener('mouseleave', iconBtnMouseLeave, {
-                    passive: true
-                });
+                item.addEventListener('mouseenter', iconBtnMouseEnter);
+                item.addEventListener('mouseover', iconBtnMouseOver);
+                item.addEventListener('mouseleave', iconBtnMouseLeave);
             });
         }
         // * icon-link动画
@@ -496,12 +462,8 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             // 应用icon-link相关监听器
             const iconLink = document.querySelectorAll('.icon-link');
             iconLink.forEach(item => {
-                item.addEventListener('mouseenter', iconLinkMouseEnter, {
-                    passive: true
-                });
-                item.addEventListener('mouseleave', iconLinkMouseLeave, {
-                    passive: true
-                });
+                item.addEventListener('mouseenter', iconLinkMouseEnter);
+                item.addEventListener('mouseleave', iconLinkMouseLeave);
             });
         }
 

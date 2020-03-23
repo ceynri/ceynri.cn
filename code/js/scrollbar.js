@@ -40,8 +40,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             window.addEventListener('resize', () => {
                 this.setPageHeight();
                 this.setWindowHeight();
-            }, {
-                passive: true
             });
             window.addEventListener('scroll', () => {
                 this.renderScroll()
@@ -108,17 +106,13 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 document.removeEventListener('mousemove', dragEvent, {
                     passive: true
                 });
-                document.removeEventListener('mouseup', mouseUpEvent, {
-                    passive: true
-                });
+                document.removeEventListener('mouseup', mouseUpEvent);
             }
             // 因为用户拖动滚动条时可能会移出滚动条的边界，所以把事件绑定到document上
             document.addEventListener('mousemove', dragEvent, {
                 passive: true
             });
-            document.addEventListener('mouseup', mouseUpEvent, {
-                passive: true
-            });
+            document.addEventListener('mouseup', mouseUpEvent);
         }
 
         // * 保存页面的高度

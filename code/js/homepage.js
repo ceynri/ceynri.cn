@@ -15,6 +15,7 @@
 }
 
 {
+    
     // * 加载时间超过一定时间，提示刷新
     const TIMEOUT_THRESHOLD = 10;
     setTimeout(() => {
@@ -44,8 +45,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
     const hero = document.querySelector('.hero');
     hero.addEventListener('click', () => {
         window.scrollTo(0, (document.documentElement.clientHeight || window.innerHeight));
-    }, {
-        passive: true
     });
 }
 
@@ -63,8 +62,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         // 点击about-header区域向下滚50vh
         aboutHeader.addEventListener('click', () => {
             window.scrollBy(0, document.documentElement.clientHeight * .5);
-        }, {
-            passive: true
         });
     }
 }

@@ -49,8 +49,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 cardZoomOutTween.play();
                 textZoomInTween.play();
                 seeMoreShowTween.play();
-            }, {
-                passive: true
             });
             this.work.addEventListener('mousemove', e => {
                 // 取得光标与work中心的相对坐标
@@ -75,8 +73,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                 cardZoomOutTween.reverse();
                 textZoomInTween.reverse();
                 seeMoreShowTween.reverse();
-            }, {
-                passive: true
             });
         }
     }
@@ -103,14 +99,10 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.work.addEventListener('mouseenter', () => {
                 bangageZoomInTween.play();
                 bookmarkZoomInTween.play();
-            }, {
-                passive: true
             });
             this.work.addEventListener('mouseleave', () => {
                 bangageZoomInTween.reverse();
                 bookmarkZoomInTween.reverse();
-            }, {
-                passive: true
             });
         }
     }
@@ -141,14 +133,10 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             this.work.addEventListener('mouseenter', () => {
                 manZoomInTween.play();
                 speedLinesZoomInTween.play();
-            }, {
-                passive: true
             });
             this.work.addEventListener('mouseleave', () => {
                 manZoomInTween.reverse();
                 speedLinesZoomInTween.reverse();
-            }, {
-                passive: true
             });
         }
         // * 贴片元素吸附到光标上的交互效果
@@ -159,8 +147,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             });
             this.work.addEventListener('mouseenter', () => {
                 cursorsFadedTween.play();
-            }, {
-                passive: true
             });
             this.work.addEventListener('mousemove', () => {
                 TweenLite.to(this.man, this.ROTATE_SPEED, {
@@ -178,8 +164,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
                     y: 0,
                     ease: Power0.easeOut
                 });
-            }, {
-                passive: true
             });
         }
     }

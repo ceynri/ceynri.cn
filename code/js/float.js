@@ -15,8 +15,6 @@ if (!MediaMatcher.isTouchScreenDevice()) {
             window.addEventListener('resize', () => {
                 this.clientWidth = document.documentElement.clientWidth;
                 this.clientHeight = document.documentElement.clientHeight;
-            }, {
-                passive: true
             })
             
             // 监听鼠标移动

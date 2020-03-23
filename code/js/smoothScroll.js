@@ -53,8 +53,6 @@
                 this.setBodySize();
                 this.setWorksRightBound();
                 this.checkWidth();
-            }, {
-                passive: true
             });
         }
         // * 拖动works事件
@@ -85,9 +83,7 @@
                     document.addEventListener('mousemove', dragWorksAnimation, {
                         passive: true
                     });
-                    document.addEventListener('mouseup', mouseDragWorksEndEvent, {
-                        passive: true
-                    });
+                    document.addEventListener('mouseup', mouseDragWorksEndEvent);
                 }
             };
             // end
@@ -96,9 +92,7 @@
                 document.removeEventListener('mousemove', dragWorksAnimation, {
                     passive: true
                 });
-                document.removeEventListener('mouseup', mouseDragWorksEndEvent, {
-                    passive: true
-                });
+                document.removeEventListener('mouseup', mouseDragWorksEndEvent);
                 // 设置循环检测是否超出边界，避免出现鼠标抬起后因为works缓动惯性导致超过安全区域
                 let times = 5;
                 const checkLoop = setInterval(() => {
@@ -113,9 +107,7 @@
             if (!MediaMatcher.isTouchScreenDevice()) {
                 // 电脑设备
                 // 监听works上的mousedown/mouseup事件
-                this.works.addEventListener('mousedown', mouseDragWorksStartEvent, {
-                    passive: true
-                });
+                this.works.addEventListener('mousedown', mouseDragWorksStartEvent);
             }
             // 触屏设备改变works样式为竖向排列，不再需要横向滚动
         }
@@ -128,14 +120,10 @@
                     } else {
                         this.touchScreenRender();
                     }
-                    window.removeEventListener('load', pageLoadedEvent, {
-                        passive: true
-                    });
+                    window.removeEventListener('load', pageLoadedEvent);
                 }, this.PAGE_LOADED_ANIMATION_TIME * 1000);
             };
-            window.addEventListener('load', pageLoadedEvent, {
-                passive: true
-            });
+            window.addEventListener('load', pageLoadedEvent);
         }
 
         // * 渲染滚动页面
