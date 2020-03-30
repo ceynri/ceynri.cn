@@ -7,6 +7,7 @@
         constructor(loader, page) {
             // 一些元素
             this.loader = loader;
+            this.loadingInner = loader.querySelector('.loading-inner');
             this.overlays = loader.children;
             this.page = page;
 
@@ -42,6 +43,10 @@
         // * 监听页面加载完成事件，进行一些操作
         listenPageLoadedEvent() {
             const pageLoadedAction = () => {
+                // 隐藏loading
+                TweenLite.to(this.loadingInner, this.ANIMATION_TIME / 4, {
+                    opacity: 0
+                });
                 // 播放动画（y初值已经在css中设置好）
                 for (let i = 0; i < this.overlayNum; i++) {
                     TweenLite.to(this.overlays[i], this.ANIMATION_TIME, {
