@@ -5,6 +5,13 @@
 'use strict';
 
 {
+    // 2020.4.4公祭日 主页灰度化处理
+    if ((new Date() + '').includes('Sat Apr 04 2020')) {
+        document.documentElement.setAttribute('style', 'filter: grayscale(100%)');
+    }
+}
+
+{
     // * 在head标签中添加theme-color meta标签
     const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--themeColor').trim() || '#333333';
     const meta = document.createElement('meta');
