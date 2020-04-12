@@ -47,7 +47,7 @@
     day.innerHTML = currentDay;
 }
 
-if (!MediaMatcher.isTouchScreenDevice()) {
+if (MediaMatcher.isPC()) {
     // * 点击hero自动向下滚动页面
     const hero = document.querySelector('.hero');
     hero.addEventListener('click', () => {
@@ -65,7 +65,7 @@ if (!MediaMatcher.isTouchScreenDevice()) {
         aboutHeader.append(text);
     }
     aboutHeader.children[textNum - 1].classList.add('full-text');
-    if (!MediaMatcher.isTouchScreenDevice()) {
+    if (MediaMatcher.isPC()) {
         // 点击about-header区域向下滚50vh
         aboutHeader.addEventListener('click', () => {
             window.scrollBy(0, document.documentElement.clientHeight * .5);

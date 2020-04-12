@@ -75,7 +75,7 @@
             };
 
             this.iconBtn.addEventListener('mouseover', mouseOverAnimation);
-            if (!MediaMatcher.isTouchScreenDevice()) {
+            if (MediaMatcher.isPC()) {
                 this.iconBtn.addEventListener('click', () => {
                     TweenLite.to(this.info, this.FADE_SPEED, {
                         color: this.ICON_INFO_CLICK_COLOR,
@@ -166,7 +166,7 @@
     const wechat = new Contact(wechatText, defaultText, wechatBtn, btnInfo, 'WeChat');
     const qq = new Contact(qqText, defaultText, qqBtn, btnInfo, 'QQ');
     // 设置点击按钮复制相关内容的功能
-    if (!MediaMatcher.isTouchScreenDevice()) {
+    if (MediaMatcher.isPC()) {
         wechat.addClickCopyString('sakuramemory', '微信号', true);
         qq.addClickCopyString('347670115', 'QQ号', true);
         mail.addClickCopyString('ceynri@gmail.com', 'Mail');

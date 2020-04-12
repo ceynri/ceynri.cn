@@ -1,4 +1,4 @@
-if (!MediaMatcher.isTouchScreenDevice()) {
+if (MediaMatcher.isPC()) {
     /*
      * 光标动画与交互效果实现
      * 已知bug：对于第一次使用play方法执行的tween动画，如果在reverse动画播放过程中执行了冲突的

@@ -1,4 +1,4 @@
-if (!MediaMatcher.isTouchScreenDevice()) {
+if (MediaMatcher.isPC()) {
     /*
      * 自定义滚动条的实现
      */

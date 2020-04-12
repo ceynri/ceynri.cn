@@ -1,6 +1,6 @@
 // ! 因为性能问题，已禁用该js脚本
 
-if (!MediaMatcher.isTouchScreenDevice()) {
+if (MediaMatcher.isPC()) {
     class Float {
         constructor() {
             this.initProp();

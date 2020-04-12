@@ -58,7 +58,7 @@
         }
     }
     // 触屏设备上进行transfrom非常卡，故仅在电脑端使用本效果
-    if (!MediaMatcher.isTouchScreenDevice()) {
+    if (MediaMatcher.isPC()) {
         const aboutText = document.querySelector('.about-text');
         const parallax = new ParallaxScroll();
         parallax.addParallax(aboutText, .4, TOP);

@@ -104,7 +104,7 @@
                 }, 200);
             };
             // 判断是否是移动设备
-            if (!MediaMatcher.isTouchScreenDevice()) {
+            if (MediaMatcher.isPC()) {
                 // 电脑设备
                 // 监听works上的mousedown/mouseup事件
                 this.works.addEventListener('mousedown', mouseDragWorksStartEvent);
@@ -115,7 +115,7 @@
             const pageLoadedEvent = () => {
                 // 页面加载完成后开始循环渲染滚动页面
                 setTimeout(() => {
-                    if (!MediaMatcher.isTouchScreenDevice()) {
+                    if (MediaMatcher.isPC()) {
                         this.render();
                     } else {
                         this.touchScreenRender();
