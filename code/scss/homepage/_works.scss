@@ -243,7 +243,7 @@
 
 
     // 手机和平板
-    @media screen and (max-device-width: 1024px) and (min-device-width: 768px) and (orientation: portrait),
+    @media screen and (max-device-width: 1200px) and (min-device-width: 768px),
     screen and (max-device-width: 767px),
     screen and (max-width: 540px) {
         &-wrapper {
@@ -275,45 +275,25 @@
     }
 
     // 平板横屏
-    @media screen and (max-device-width: 1366px) and (min-device-width: 768px) and (orientation: landscape) {
-        &-wrapper {
-            height: auto;
-            margin-top: $gapWidth;
-        }
+    // will remove: 大平板屏幕宽度与小电脑屏幕宽度边界模糊，故不再进行适配（除非使用js进行样式控制）
+    // @media screen and (max-device-width: 1200px) and (min-device-width: 768px) and (orientation: landscape) {
+    //     justify-content: space-between;
+    //     flex-direction: row;
+    //     flex-wrap: wrap;
 
-        height: auto;
-        width: 100vw;
-        padding: 30vh 0 0 0;
+    //     .work {
+    //         &:nth-of-type(odd) {
+    //             margin-left: 20vh;
+    //         }
 
-        justify-content: space-between;
-        flex-direction: row;
-        flex-wrap: wrap;
+    //         &:nth-of-type(even) {
+    //             margin-left: 10vh;
+    //             margin-right: 20vh;
+    //         }
 
-        &-header {
-            top: 10vh;
-        }
-
-        .work {
-            margin: 0 0 20vh 0;
-            align-self: initial !important;
-
-            &:nth-of-type(odd) {
-                margin-left: 20vh;
-            }
-
-            &:nth-of-type(even) {
-                margin-left: 10vh;
-                margin-right: 20vh;
-            }
-
-            &:last-child:nth-of-type(odd) {
-                margin-right: auto;
-            }
-        }
-
-        &-background {
-            height: 100%;
-            top: 0;
-        }
-    }
+    //         &:last-child:nth-of-type(odd) {
+    //             margin-right: auto;
+    //         }
+    //     }
+    // }
 }
