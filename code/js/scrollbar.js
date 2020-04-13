@@ -1,4 +1,6 @@
-if (MediaMatcher.isPC()) {
+'use strict';
+
+if (MediaMatcher.isPC) {
     /*
      * 自定义滚动条的实现
      */
@@ -139,4 +141,6 @@ if (MediaMatcher.isPC()) {
     }
 
     new Scrollbar();
+} else {
+    document.querySelector('.scrollbar').setAttribute('style', 'display: none');
 }

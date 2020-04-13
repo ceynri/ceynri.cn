@@ -5,7 +5,7 @@
 'use strict';
 
 {
-    // 2020.4.4公祭日 主页灰度化处理
+    // * 2020.4.4公祭日 主页灰度化处理
     if ((new Date() + '').includes('Sat Apr 04 2020')) {
         document.documentElement.setAttribute('style', 'filter: grayscale(100%)');
     }
@@ -47,7 +47,7 @@
     day.innerHTML = currentDay;
 }
 
-if (MediaMatcher.isPC()) {
+if (MediaMatcher.isPC) {
     // * 点击hero自动向下滚动页面
     const hero = document.querySelector('.hero');
     hero.addEventListener('click', () => {
@@ -65,12 +65,21 @@ if (MediaMatcher.isPC()) {
         aboutHeader.append(text);
     }
     aboutHeader.children[textNum - 1].classList.add('full-text');
-    if (MediaMatcher.isPC()) {
+    if (MediaMatcher.isPC) {
         // 点击about-header区域向下滚50vh
         aboutHeader.addEventListener('click', () => {
             window.scrollBy(0, document.documentElement.clientHeight * .5);
         });
     }
+}
+
+{
+    // * 移动端重设about样式
+    if (!MediaMatcher.isPC) {
+        const aboutText = document.querySelector('.about-text');
+        aboutText.style.height = '300vh';
+        aboutText.style.marginTop = 0;
+    }    
 }
 
 {

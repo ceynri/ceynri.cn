@@ -198,26 +198,6 @@
         }
     }
 
-    @media screen and (min-device-width: 1024px) {
-        .contact-default::after {
-            content: '移动鼠标至下面的图标查看更多';
-        }
-
-        .contact-mail::after {
-            content: '点击按钮复制邮箱';
-        }
-    }
-
-    @media screen and (max-device-width: 1024px) {
-        .contact-default::after {
-            content: '点击以下图标查看更多';
-        }
-
-        .contact-mail::after {
-            content: '长按按钮复制邮箱';
-        }
-    }
-
     @media screen and (max-width: 570px),
     screen and (max-height: 570px) {
         font-size: $contactFontSize * .8;

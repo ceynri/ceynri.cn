@@ -1,3 +1,5 @@
+'use strict';
+
 {
     /*
      * 绑定文本与对应的按钮
@@ -75,7 +77,7 @@
             };
 
             this.iconBtn.addEventListener('mouseover', mouseOverAnimation);
-            if (MediaMatcher.isPC()) {
+            if (MediaMatcher.isPC) {
                 this.iconBtn.addEventListener('click', () => {
                     TweenLite.to(this.info, this.FADE_SPEED, {
                         color: this.ICON_INFO_CLICK_COLOR,
@@ -166,7 +168,7 @@
     const wechat = new Contact(wechatText, defaultText, wechatBtn, btnInfo, 'WeChat');
     const qq = new Contact(qqText, defaultText, qqBtn, btnInfo, 'QQ');
     // 设置点击按钮复制相关内容的功能
-    if (MediaMatcher.isPC()) {
+    if (MediaMatcher.isPC) {
         wechat.addClickCopyString('sakuramemory', '微信号', true);
         qq.addClickCopyString('347670115', 'QQ号', true);
         mail.addClickCopyString('ceynri@gmail.com', 'Mail');
@@ -175,4 +177,17 @@
         qq.addTouchCopyString('347670115', 'QQ号', true);
         mail.addTouchCopyString('ceynri@gmail.com', '邮箱');
     }
+    // 提示文本
+    let defaultMoreText = document.createElement('p');
+    let mailMoreText = document.createElement('p');
+    if (MediaMatcher.isPC) {
+        defaultMoreText.innerHTML = '移动鼠标至以下图标查看更多';
+        mailMoreText.innerHTML = '点击按钮复制邮箱';
+    } else {
+        defaultMoreText.innerHTML = '点击以下图标查看更多';
+        mailMoreText.innerHTML = '长按按钮复制邮箱';
+
+    }
+    document.querySelector('.contact-default').append(defaultMoreText);
+    document.querySelector('.contact-mail').append(mailMoreText);
 }

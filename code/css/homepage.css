@@ -193,48 +193,49 @@ a {
   font-size: 20px;
 }
 
-@media screen and (min-device-width: 1367px) {
-  .scrollbar {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 6px;
-    height: 100vh;
-    background-color: var(--scrollbarColor);
-    z-index: 10000;
-    --barColor: var(--themeColor);
-  }
-  .scrollbar:hover {
-    --barColor: var(--embelliColor);
-  }
-  .scrollbar .bar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 0;
-    background-color: var(--barColor);
-    -webkit-box-shadow: 0 4px 8px var(--barColor);
-            box-shadow: 0 4px 8px var(--barColor);
-    -webkit-transition: background-color .5s, -webkit-box-shadow .5s;
-    transition: background-color .5s, -webkit-box-shadow .5s;
-    transition: background-color .5s, box-shadow .5s;
-    transition: background-color .5s, box-shadow .5s, -webkit-box-shadow .5s;
-  }
-  .scrollbar .bar::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    right: 0;
-    border-top: 3px solid var(--barColor);
-    border-right: 3px solid transparent;
-    border-bottom: 3px solid transparent;
-    border-left: 3px solid var(--barColor);
-    -webkit-transition: border .5s, -webkit-box-shadow .5s;
-    transition: border .5s, -webkit-box-shadow .5s;
-    transition: border .5s, box-shadow .5s;
-    transition: border .5s, box-shadow .5s, -webkit-box-shadow .5s;
-  }
+.scrollbar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 6px;
+  height: 100vh;
+  background-color: var(--scrollbarColor);
+  z-index: 10000;
+  --barColor: var(--themeColor);
+}
+
+.scrollbar:hover {
+  --barColor: var(--embelliColor);
+}
+
+.scrollbar .bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--barColor);
+  -webkit-box-shadow: 0 4px 8px var(--barColor);
+          box-shadow: 0 4px 8px var(--barColor);
+  -webkit-transition: background-color .5s, -webkit-box-shadow .5s;
+  transition: background-color .5s, -webkit-box-shadow .5s;
+  transition: background-color .5s, box-shadow .5s;
+  transition: background-color .5s, box-shadow .5s, -webkit-box-shadow .5s;
+}
+
+.scrollbar .bar::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-top: 3px solid var(--barColor);
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid var(--barColor);
+  -webkit-transition: border .5s, -webkit-box-shadow .5s;
+  transition: border .5s, -webkit-box-shadow .5s;
+  transition: border .5s, box-shadow .5s;
+  transition: border .5s, box-shadow .5s, -webkit-box-shadow .5s;
 }
 
 .loader {
@@ -718,13 +719,6 @@ a {
   }
 }
 
-@media screen and (max-device-width: 1366px) {
-  .about-text {
-    height: 300vh;
-    margin-top: 0;
-  }
-}
-
 .works {
   height: 80vh;
   padding: 10vh 20vw;
@@ -953,7 +947,7 @@ a {
   will-change: transform;
 }
 
-@media screen and (min-device-width: 1367px) {
+@media screen and (min-device-width: 1025px) {
   .works .work.case-demo-collection .work-card .flying-man {
     -webkit-animation: speeder .4s linear infinite;
             animation: speeder .4s linear infinite;
@@ -1062,7 +1056,7 @@ a {
   border-radius: 2px 10px 1px 0;
 }
 
-@media screen and (min-device-width: 1367px) {
+@media screen and (min-device-width: 1025px) {
   .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(1),
   .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(2),
   .works .work.case-demo-collection .work-card .flying-man .gas:nth-child(3),
@@ -1244,7 +1238,7 @@ a {
           transform-origin: 50% 50%;
 }
 
-@media screen and (min-device-width: 1367px) {
+@media screen and (min-device-width: 1025px) {
   .works .work.case-demo-collection .work-card .speed-lines {
     position: absolute;
     width: 100%;
@@ -1357,7 +1351,7 @@ a {
           box-shadow: 0 0 24px 8px rgba(16, 16, 16, 0.4);
 }
 
-@media screen and (max-device-width: 1024px) and (min-device-width: 768px) and (orientation: portrait), screen and (max-device-width: 767px), screen and (max-width: 540px) {
+@media screen and (max-device-width: 1200px) and (min-device-width: 768px), screen and (max-device-width: 767px), screen and (max-width: 540px) {
   .works {
     height: auto;
     width: 100vw;
@@ -1383,50 +1377,6 @@ a {
     -ms-flex-item-align: initial !important;
         -ms-grid-row-align: initial !important;
         align-self: initial !important;
-  }
-  .works-background {
-    height: 100%;
-    top: 0;
-  }
-}
-
-@media screen and (max-device-width: 1366px) and (min-device-width: 768px) and (orientation: landscape) {
-  .works {
-    height: auto;
-    width: 100vw;
-    padding: 30vh 0 0 0;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
-  .works-wrapper {
-    height: auto;
-    margin-top: 20vh;
-  }
-  .works-header {
-    top: 10vh;
-  }
-  .works .work {
-    margin: 0 0 20vh 0;
-    -ms-flex-item-align: initial !important;
-        -ms-grid-row-align: initial !important;
-        align-self: initial !important;
-  }
-  .works .work:nth-of-type(odd) {
-    margin-left: 20vh;
-  }
-  .works .work:nth-of-type(even) {
-    margin-left: 10vh;
-    margin-right: 20vh;
-  }
-  .works .work:last-child:nth-of-type(odd) {
-    margin-right: auto;
   }
   .works-background {
     height: 100%;
@@ -1606,24 +1556,6 @@ a {
           align-items: center;
   white-space: nowrap;
   opacity: 0;
-}
-
-@media screen and (min-device-width: 1024px) {
-  .contact .contact-default::after {
-    content: '移动鼠标至下面的图标查看更多';
-  }
-  .contact .contact-mail::after {
-    content: '点击按钮复制邮箱';
-  }
-}
-
-@media screen and (max-device-width: 1024px) {
-  .contact .contact-default::after {
-    content: '点击以下图标查看更多';
-  }
-  .contact .contact-mail::after {
-    content: '长按按钮复制邮箱';
-  }
 }
 
 @media screen and (max-width: 570px), screen and (max-height: 570px) {

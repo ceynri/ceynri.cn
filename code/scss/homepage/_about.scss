@@ -110,11 +110,4 @@
             display: none;
         }
     }
-
-    @media screen and (max-device-width: 1366px) {
-        &-text {
-            height: $aboutHeight;
-            margin-top: 0;
-        }
-    }
 }
