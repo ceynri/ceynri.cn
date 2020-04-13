@@ -17,7 +17,8 @@
     margin-left: -66px;
 
     // 万万没想到 CSS3 动画对于移动设备是那么的卡爆...
-    @media screen and (min-device-width: 1367px) {
+    // TODO 在移动端修改代码逻辑使用默认滚动后，尝试启用该动画测试性能
+    @media screen and (min-device-width: 1025px) {
         animation: speeder .4s linear infinite;
 
         @keyframes speeder {
@@ -79,8 +80,7 @@
         border-radius: 2px 10px 1px 0;
     }
 
-    @media screen and (min-device-width: 1367px) {
-
+    @media screen and (min-device-width: 1025px) {
         .gas:nth-child(1),
         .gas:nth-child(2),
         .gas:nth-child(3),
@@ -218,7 +218,7 @@
     }
 }
 
-@media screen and (min-device-width: 1367px) {
+@media screen and (min-device-width: 1025px) {
     .speed-lines {
         position: absolute;
         width: 100%;
