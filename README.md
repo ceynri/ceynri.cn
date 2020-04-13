@@ -19,11 +19,11 @@
 
 | Chrome | Firefox | Mircosoft Edge | Internet Explorer | 手机浏览器 |
 | :----: | :-----: | :------------: | :---------------: | :--------: |
-|   O    |    O    |       ×        |         ×         |     O      |
+|   O    |    O    |       ×        |         ×         |     -      |
 
-> 开发时以 Chrome 浏览器为主，并尽量兼容了 Firefox。在 Edge 上遇到了性能问题故表现较差，不推荐使用。
+> 开发时以 Chrome 浏览器为主，并尽量兼容了 Firefox。在 Edge 上遇到了性能问题以及渲染方式的不同，故表现较差，不推荐使用。
 > 
-> 手机端进行了一定的适配，但取消了大部分效果。
+> 手机端进行了一定的适配，但取消了大部分效果。因为页面滚动逻辑存在问题，目前手机端体验较为卡顿，有空会修复它。
 > 
 > 暂未进行更多详细的兼容性测试。
 
@@ -53,57 +53,65 @@
 
 因为在文章中插动图非常影响阅读的注意力，所以关于页面交互效果的动图演示被整合起来放在下面。
 
-> 由于 gif 图较大，如果出现加载不出来的情况可以尝试点击动图的标题单独加载图片
+> 由于 gif 图较大，而github采用转存为webp图片至其服务器的方式，所以非科学上网用户较难加载gif图。
+> 
+> 如果出现加载不出来的情况可以尝试点击动图的标题单独加载图片。
 
-0. [页面载入动画](https://i.loli.net/2020/03/01/RWj3kGxiNzvMyPU.gif)
+1. 页面载入动画
+
+    [（新）彩虹载入动画：](https://i.loli.net/2020/04/13/O9xon4HJ36eAbaP.gif)
+
+    ![loaded-animation2.gif](https://i.loli.net/2020/04/13/O9xon4HJ36eAbaP.gif)
+    
+    [（旧）颜文字载入动画：](https://i.loli.net/2020/03/01/RWj3kGxiNzvMyPU.gif)
 
     ![loaded-animation.gif](https://i.loli.net/2020/03/01/RWj3kGxiNzvMyPU.gif)
 
-1. [圆形光标的双层结构](https://i.loli.net/2020/02/27/GCj84SvNfqRQFcY.gif)
+2. [圆形光标的双层结构](https://i.loli.net/2020/02/27/GCj84SvNfqRQFcY.gif)
 
     ![cursor-move.gif](https://i.loli.net/2020/02/27/GCj84SvNfqRQFcY.gif)
 
-2. [光标样式变化](https://i.loli.net/2020/02/27/xFQikNLCJOXHgsA.gif)
+3. [光标样式变化](https://i.loli.net/2020/02/27/xFQikNLCJOXHgsA.gif)
 
     ![cursor-transform.gif](https://i.loli.net/2020/02/27/xFQikNLCJOXHgsA.gif)
 
-3. [视差浮动效果](https://i.loli.net/2020/02/27/hu5I7tTRLCzqD1F.gif)（红色粗线条、标题与背景的移动距离不同）[因性能问题已禁用该效果]
+4. [视差浮动效果](https://i.loli.net/2020/02/27/hu5I7tTRLCzqD1F.gif)（红色粗线条、标题与背景的移动距离不同）[因性能问题已禁用该效果]
 
     ![float.gif](https://i.loli.net/2020/02/27/hu5I7tTRLCzqD1F.gif)
 
-4. [向下滚动的指引](https://i.loli.net/2020/02/27/M5REnATWa4kOXhg.gif)
+5. [向下滚动的指引](https://i.loli.net/2020/02/27/M5REnATWa4kOXhg.gif)
 
     ![page-down.gif](https://i.loli.net/2020/02/27/M5REnATWa4kOXhg.gif)
 
-5. [红-青颜色渐变动画](https://i.loli.net/2020/02/27/1xKfrjNCFnvEBi4.gif)
+6. [红-青颜色渐变动画](https://i.loli.net/2020/02/27/1xKfrjNCFnvEBi4.gif)
 
     ![color-transition.gif](https://i.loli.net/2020/02/27/1xKfrjNCFnvEBi4.gif)
 
-6. [ABOUT 点击交互](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)（发现了么）
+7. [ABOUT 点击交互](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)（发现了么）
 
     ![about-click.gif](https://i.loli.net/2020/02/27/HNCbyFKarpom4YQ.gif)
 
-7. [视差滚动（左右两栏向上滚动的速度不一样）& 渐入渐出滚动（透明度变化）](https://i.loli.net/2020/02/27/c6V8JRixWQ4AgIK.gif)
+8. [视差滚动（左右两栏向上滚动的速度不一样）& 渐入渐出滚动（透明度变化）](https://i.loli.net/2020/02/27/c6V8JRixWQ4AgIK.gif)
 
     ![parallax-fade-scroll.gif](https://i.loli.net/2020/02/27/c6V8JRixWQ4AgIK.gif)
 
-8. [3D 透视交互](https://i.loli.net/2020/02/27/1YWfMpsOVdlz68T.gif)
+9. [3D 透视交互](https://i.loli.net/2020/02/27/1YWfMpsOVdlz68T.gif)
 
     ![3d-transition.gif](https://i.loli.net/2020/02/27/1YWfMpsOVdlz68T.gif)
 
-9. [喷气式飞行员 CSS 动画 + JS 鼠标交互](https://i.loli.net/2020/02/27/HEhTJ8PBZe7d5CO.gif)
+10. [喷气式飞行员 CSS 动画 + JS 鼠标交互](https://i.loli.net/2020/02/27/HEhTJ8PBZe7d5CO.gif)
 
     ![flying-man.gif](https://i.loli.net/2020/02/27/HEhTJ8PBZe7d5CO.gif)
 
-10. [可以拖动的 works 栏与进度条](https://i.loli.net/2020/02/27/fPLZaG59rtlxp8X.gif)
+11. [可以拖动的 works 栏与进度条](https://i.loli.net/2020/02/27/fPLZaG59rtlxp8X.gif)
 
     ![draggable-elem.gif](https://i.loli.net/2020/02/27/fPLZaG59rtlxp8X.gif)
 
-11. [拖动超过内容区域后的回弹动画](https://i.loli.net/2020/02/27/TSYQwcb3AeiVn8v.gif)
+12. [拖动超过内容区域后的回弹动画](https://i.loli.net/2020/02/27/TSYQwcb3AeiVn8v.gif)
 
     ![drag-rebound.gif](https://i.loli.net/2020/02/27/TSYQwcb3AeiVn8v.gif)
 
-12. [“揭底”效果的底部栏](https://i.loli.net/2020/02/27/1rXCWzGTmnSgQqF.gif)
+13. [“揭底”效果的底部栏](https://i.loli.net/2020/02/27/1rXCWzGTmnSgQqF.gif)
 
     ![footer.gif](https://i.loli.net/2020/02/27/1rXCWzGTmnSgQqF.gif)
 
