@@ -1,6 +1,8 @@
+'use strict';
+
 // ! 因为性能问题，已禁用该js脚本
 
-if (MediaMatcher.isPC()) {
+if (MediaMatcher.isPC) {
     class Float {
         constructor() {
             this.initProp();

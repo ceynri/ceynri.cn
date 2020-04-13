@@ -1,4 +1,6 @@
-if (MediaMatcher.isPC()) {
+'use strict';
+
+if (MediaMatcher.isPC) {
     /*
      * 实现文字随着窗口坐标位置变化产生透明度的淡入淡出效果
      */

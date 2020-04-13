@@ -1,4 +1,6 @@
-if (MediaMatcher.isPC()) {
+'use strict';
+
+if (MediaMatcher.isPC) {
     /*
      * work基类
      * 实现鼠标交互动画功能
