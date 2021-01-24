@@ -4,6 +4,8 @@
   <img src="https://i.loli.net/2020/02/28/VhjGPQi5S7HRpgy.jpg" alt="封面"/>
 </div>
 
+> 黑历史，请辩证看待代码。存在较多可以优化的地方
+
 <br>
 <br>
 
