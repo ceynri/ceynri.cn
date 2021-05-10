@@ -1,16 +1,13 @@
 // This is where project configuration and plugin options are located.
 // Learn more: https://gridsome.org/docs/config
 
-// Changes here requires a server restart.
-// To restart press CTRL + C in terminal and run `gridsome develop`
-
 module.exports = {
-  siteName: 'Gridsome Blog Starter',
-  siteDescription: 'A simple, hackable & minimalistic starter for Gridsome that uses Markdown for content.',
+  siteName: 'Ceynri',
+  siteDescription: "山风的个人网站。Ceynri's personal website.",
 
   templates: {
     Post: '/:title',
-    Tag: '/tag/:id'
+    Tag: '/tag/:id',
   },
 
   plugins: [
@@ -19,27 +16,25 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'Post',
-        path: 'content/posts/*.md',
+        path: 'content/blogs/*.md',
         refs: {
           // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
           tags: {
             typeName: 'Tag',
-            create: true
-          }
-        }
-      }
-    }
+            create: true,
+          },
+        },
+      },
+    },
   ],
 
   transformers: {
-    //Add markdown support to all file-system sources
+    // Add markdown support to all file-system sources
     remark: {
       externalLinksTarget: '_blank',
       externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
       anchorClassName: 'icon icon-link',
-      plugins: [
-        '@gridsome/remark-prismjs'
-      ]
-    }
-  }
-}
+      plugins: ['@gridsome/remark-prismjs'],
+    },
+  },
+};
