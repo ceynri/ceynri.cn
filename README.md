@@ -1,5 +1,5 @@
 # ceynri.cn
 
-新版个人博客，重新建设中🐟
+New version powered by [Gridsome](https://gridsome.org) is Work-In-Progress 🐟
 
-> 旧版个人主页项目归档至文件夹 [v1](./v1)
+> Old version project was archived at [v1](./v1) folder.
