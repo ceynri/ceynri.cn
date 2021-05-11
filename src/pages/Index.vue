@@ -1,7 +1,8 @@
 <template>
   <Layout :show-logo="false">
-    <!-- Author intro -->
-    <Author :show-title="true" />
+    <section class="hero">
+      <h1 class="hero__title">Ceynri's Blog</h1>
+    </section>
 
     <!-- List posts -->
     <div class="posts">
@@ -34,16 +35,27 @@ query {
 </page-query>
 
 <script>
-import Author from '~/components/Author.vue';
 import PostCard from '~/components/PostCard.vue';
 
 export default {
   components: {
-    Author,
     PostCard,
   },
   metaInfo: {
-    title: 'Hello, world!',
+    title: 'Blogs',
   },
 };
 </script>
+
+<style lang="scss">
+.hero {
+  margin-bottom: var(--space);
+
+  &__title {
+    margin: auto;
+    max-width: var(--content-width);
+    font-size: 4rem;
+    color: var(--title-color);
+  }
+}
+</style>
