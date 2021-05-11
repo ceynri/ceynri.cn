@@ -13,17 +13,14 @@
     <main class="main">
       <slot />
     </main>
-
-    <footer class="footer">
-      <span class="footer__copyright">Copyright © 2020-{{ new Date().getFullYear() }}</span>
-      <a href="https://beian.miit.gov.cn/">粤ICP备20009331号</a>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue';
 import ToggleTheme from '~/components/ToggleTheme.vue';
+import Footer from '~/components/Footer.vue';
 
 export default {
   props: {
@@ -35,6 +32,7 @@ export default {
   components: {
     Logo,
     ToggleTheme,
+    Footer,
   },
 };
 </script>
@@ -64,24 +62,6 @@ export default {
 
 .main {
   margin: 0 auto;
-  padding: 1.5vw 15px 0;
-}
-
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: calc(var(--space) / 2);
-  text-align: center;
-  font-size: 0.6em;
-  color: var(--light-color);
-
-  & > * {
-    margin: 0 0.35em;
-  }
-
-  @media screen and (max-width: 650px) {
-    flex-direction: column;
-  }
+  padding: 16px 16px 0;
 }
 </style>
