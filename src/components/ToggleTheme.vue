@@ -47,22 +47,27 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   data() {
     return {
-      darkTheme: false,
+      darkTheme: true,
     };
   },
-  methods: {
-    toggleTheme() {
-      this.darkTheme = !this.darkTheme;
-
-      // This is using a script that is added in index.html
-      window.__setPreferredTheme(this.darkTheme ? 'dark' : 'light');
-    },
+  computed: {
+    ...mapState(['theme']),
   },
   mounted() {
-    if (window.__theme == 'dark') this.darkTheme = true;
+    this.setTheme(window.__theme);
+    this.darkTheme = (this.theme === 'dark');
+  },
+  methods: {
+    ...mapMutations(['setTheme']),
+    toggleTheme() {
+      this.darkTheme = !this.darkTheme;
+      this.setTheme(this.darkTheme ? 'dark' : 'light');
+    },
   },
 };
 </script>
