@@ -6,7 +6,7 @@ module.exports = {
   siteDescription: "山风的个人网站。Ceynri's personal website.",
 
   templates: {
-    Post: '/:title',
+    Post: '/:fileInfo__name',
     Tag: '/tag/:id',
   },
 
