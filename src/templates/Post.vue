@@ -14,7 +14,7 @@
         <g-image alt="Cover image" v-if="$page.post.cover_image" :src="$page.post.cover_image" />
       </div>
 
-      <div class="post__content" v-html="$page.post.content" />
+      <div class="post__content link-highlight" v-html="$page.post.content" />
 
       <div class="post__footer">
         <PostTags :post="$page.post" />

@@ -46,3 +46,16 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+// my reset
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.button {
+  border: 0;
+  background-color: none;
+  outline: none;
+  -webkit-appearance: none; // remove native styles under iOS
+}
