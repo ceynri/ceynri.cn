@@ -8,7 +8,7 @@
 body {
   background-color: var(--bg-color);
   color: var(--body-color);
-  transition: color 0.6s, background-color 0.6s;
+  transition: color var(--duration), background-color var(--duration);
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
   margin: 0;
@@ -16,34 +16,16 @@ body {
   line-height: 1.5;
 }
 
-a:not(.button) {
+.link-highlight a:not(.button) {
   color: var(--link-color);
-  transition: opacity 0.2s;
-  &:hover {
-    opacity: 0.8;
+  transition: opacity var(--duration);
+  opacity: 0.8;
+
+	&:hover {
+    opacity: 1;
   }
 }
 
 img {
   max-width: 100%;
-}
-
-// my reset
-a {
-  text-decoration: none;
-  color: currentColor;
-
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    color: currentColor;
-  }
-}
-
-.button {
-  border: 0;
-  background-color: none;
-  outline: none;
-  -webkit-appearance: none; // remove native styles under iOS
 }

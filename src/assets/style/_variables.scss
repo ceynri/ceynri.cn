@@ -8,7 +8,7 @@ body {
   --bg-color: #f6faff;
   --bg-content-color: #fff;
   --bg-code: #fffbf3;
-  --title-color: #111;
+  --title-color: #202327;
   --body-color: #444;
   --link-color: #00f;
 	--light-color: #aaa;
@@ -18,6 +18,19 @@ body {
   --content-width: 860px;
   --header-height: 80px;
   --radius: 8px;
+	--duration: 0.6s;
+
+	// Override variables for Dark theme
+	&[data-theme='dark'] {
+		--bg-color: #000;
+		--bg-content-color: #101216;
+		--bg-code: rgba(#000, 0.3);
+		--border-color: rgba(#fff, 0.1);
+		--title-color: #f6faff;
+		--body-color: #ced8de;
+		--link-color: #33f;
+		--light-color: #333;
+	}
 }
 
 // Make things smaller for mobile
@@ -29,16 +42,4 @@ body {
     --space: 1.5rem;
     --header-height: 60px;
   }
-}
-
-// Override variables for Dark theme
-body[data-theme='dark'] {
-  --bg-color: #000;
-  --bg-content-color: #101216;
-  --bg-code: rgba(0, 0, 0, 0.3);
-  --border-color: rgba(#fff, 0.1);
-  --title-color: #fff;
-  --body-color: #ced8de;
-  --link-color: #33f;
-	--light-color: #333;
 }
