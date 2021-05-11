@@ -18,21 +18,22 @@
         var preferredTheme;
         try {
           preferredTheme = localStorage.getItem('theme');
-        } catch (err) { }
-
+        } catch (err) {}
+        
+        // todo: 该代码逻辑可以不用放在window下
         window.__setPreferredTheme = function(newTheme) {
           setTheme(newTheme);
           try {
             localStorage.setItem('theme', newTheme);
           } catch (err) {}
         }
-
-        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        darkQuery.addListener(function(e) {
-          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
-        });
-
-        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+        
+        // var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        // darkQuery.addListener(function(e) {
+        //   window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        // });
+        // setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+        setTheme(preferredTheme || 'dark');
       })();
     </script>
 
