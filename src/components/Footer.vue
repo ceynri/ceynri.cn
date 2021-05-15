@@ -3,7 +3,16 @@
     <div class="footer__content">
       <div class="footer__left">
         <div class="social">
+
           <a
+            class="social__link"
+            v-for="(item, name) in social"
+            :href="item.url"
+            :key="name"
+          >
+            {{ item.name }}
+          </a>
+          <!-- <a
             class="social__link"
             v-for="(item, name) in social"
             :href="item.url"
@@ -17,7 +26,7 @@
               :name="name"
               :html="item.icon"
             />
-          </a>
+          </a> -->
         </div>
         <span class="footer__copyright">
           Copyright © 2020-{{ new Date().getFullYear() }} Ceynri
@@ -89,13 +98,15 @@ export default {
 
 .social {
   display: flex;
-  margin: 1em 0;
+  margin-bottom: var(--space);
 
   &__link {
+    font-size: 0.9em;
     transition: color calc(var(--duration) / 2);
+    margin-right: 1.5em;
 
     &:hover {
-      opacity: 1;
+      color: var(--link-color);
     }
 
     & > svg {

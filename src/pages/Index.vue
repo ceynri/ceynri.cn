@@ -49,12 +49,12 @@ export default {
 
 <style lang="scss">
 .hero {
-  margin-bottom: var(--space);
+  margin-bottom: var(--header-height);
 
   &__title {
     margin: auto;
     max-width: var(--content-width);
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--title-color);
   }
 }

@@ -6,7 +6,7 @@
     class="toggle-theme"
   >
     <svg
-      v-if="darkTheme"
+      v-if="theme === 'light'"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -50,23 +50,16 @@
 import { mapState, mapMutations } from 'vuex';
 
 export default {
-  data() {
-    return {
-      darkTheme: true,
-    };
-  },
   computed: {
     ...mapState(['theme']),
   },
   mounted() {
     this.setTheme(window.__theme);
-    this.darkTheme = (this.theme === 'dark');
   },
   methods: {
     ...mapMutations(['setTheme']),
     toggleTheme() {
-      this.darkTheme = !this.darkTheme;
-      this.setTheme(this.darkTheme ? 'dark' : 'light');
+      this.setTheme(this.theme === 'light' ? 'dark' : 'light');
     },
   },
 };
