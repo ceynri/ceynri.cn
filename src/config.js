@@ -18,8 +18,8 @@ module.exports = {
       // color: '#f93292',
       // darkmodeColor: '#f93292',
     },
-    gmail: {
-      name: 'Gmail',
+    mail: {
+      name: 'Mail',
       url: 'mailto:ceynri@gmail.com',
       tooltip: 'ceynri[at]gmail.com',
       // icon: icons.bangumi,
