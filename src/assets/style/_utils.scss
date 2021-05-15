@@ -5,3 +5,8 @@
 .space-bottom {
 	margin-bottom: var(--space);
 }
+
+.center-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
