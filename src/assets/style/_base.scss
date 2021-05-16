@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: var(--bg-color);
   color: var(--body-color);
+  background-color: var(--bg-color);
   transition: color var(--duration), background-color var(--duration);
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
@@ -16,16 +16,26 @@ body {
   line-height: 1.5;
 }
 
+html {
+  background: var(--bg-content-color);
+  transition: color var(--duration), background-color var(--duration);
+}
+
 .link-highlight a:not(.button) {
   color: var(--link-color);
   transition: opacity var(--duration);
   opacity: 0.8;
 
-	&:hover {
+  &:hover {
     opacity: 1;
   }
 }
 
 img {
   max-width: 100%;
+}
+
+::selection {
+  background: var(--title-color);
+  color: var(--bg-color);
 }
