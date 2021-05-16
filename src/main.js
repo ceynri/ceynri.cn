@@ -1,4 +1,4 @@
-import '~/assets/style/index.scss';
+import '~/assets/styles/index.scss';
 import DefaultLayout from '~/layouts/Default.vue';
 import Vuex from 'vuex';
 import store from '~/store';
