@@ -19,9 +19,8 @@ query {
         id
         title
         date (format: "YYYY.MM.DD")
-        # timeToRead
         description
-        cover_image (width: 770, height: 380, blur: 10)
+        cover_image (width: 860, height: 400, blur: 10)
         path
         tags {
           id
