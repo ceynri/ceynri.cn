@@ -4,16 +4,7 @@ html {
 }
 
 // Light default theme
-body {
-  --bg-color: #f6faff;
-  --bg-content-color: #fff;
-  --bg-code: #fffbf3;
-  --title-color: #202327;
-  --body-color: #444;
-  --link-color: #00f;
-	--light-color: #aaa;
-
-  --border-color: rgba(#000, 0.1);
+:root {
   --space: 3.5rem;
   --content-width: 860px;
   --header-height: 80px;
