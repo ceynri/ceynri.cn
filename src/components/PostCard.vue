@@ -64,8 +64,9 @@ export default {
   }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 1px 10px 30px 0 rgba(#000, 0.1);
+    transform: translateY(-4px);
+    // transform: scale(1.005);
+    box-shadow: 2px 8px 48px 4px rgba(#000, 0.05);
   }
 
   &__tags {
