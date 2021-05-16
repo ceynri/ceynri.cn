@@ -13,7 +13,7 @@ module.exports = {
     bangumi: {
       name: 'Bangumi',
       url: 'http://bgm.tv/user/558747',
-      tooltip: 'bangumi',
+      tooltip: '@山风',
       // icon: icons.bangumi,
       // color: '#f93292',
       // darkmodeColor: '#f93292',
@@ -21,7 +21,7 @@ module.exports = {
     mail: {
       name: 'Mail',
       url: 'mailto:ceynri@gmail.com',
-      tooltip: 'ceynri[at]gmail.com',
+      tooltip: 'ceynri@gmail.com',
       // icon: icons.bangumi,
       // color: '#f93292',
       // darkmodeColor: '#f93292',
