@@ -21,12 +21,16 @@ html {
   transition: color var(--duration), background-color var(--duration);
 }
 
-.link-highlight a:not(.button) {
-  color: var(--link-color);
-  transition: opacity var(--duration);
+.link-highlight a {
+  text-decoration: underline;
+}
+
+a:not(.button) {
   opacity: 0.8;
+  transition: color calc(var(--duration) / 2), opacity calc(var(--duration) / 2);
 
   &:hover {
+    color: var(--link-color);
     opacity: 1;
   }
 }

@@ -103,15 +103,10 @@ export default {
 
   &__link {
     font-size: 0.9em;
-    transition: color calc(var(--duration) / 2);
     margin-right: 1.5em;
 
     &:last-child {
       margin-right: 0;
-    }
-
-    &:hover {
-      color: var(--link-color);
     }
 
     & > svg {
