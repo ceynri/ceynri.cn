@@ -18,8 +18,8 @@ query {
       node {
         id
         title
-        date (format: "D. MMMM YYYY")
-        timeToRead
+        date (format: "YYYY.MM.DD")
+        # timeToRead
         description
         cover_image (width: 770, height: 380, blur: 10)
         path
@@ -52,6 +52,7 @@ export default {
   padding: calc(var(--space) / 2) 0 calc(var(--space) / 2);
 
   &__title {
+    font-size: 2.5rem;
     color: var(--title-color);
     text-align: center;
   }
