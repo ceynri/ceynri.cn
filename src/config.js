@@ -26,6 +26,11 @@ module.exports = {
       // color: '#f93292',
       // darkmodeColor: '#f93292',
     },
+    rss: {
+      name: 'RSS',
+      url: '/feed.xml',
+      tooltip: '',
+    },
   },
   beian: {
     url: 'https://beian.miit.gov.cn/',
