@@ -9,19 +9,28 @@ html {
   --content-width: 860px;
   --header-height: 80px;
   --radius: 8px;
-	--duration: 0.6s;
+  --duration: 0.6s;
 
-	// Override variables for Dark theme
-	&[data-theme='dark'] {
-		--bg-color: #000;
-		--bg-content-color: #101216;
-		--bg-code: rgba(#000, 0.3);
-		--border-color: rgba(#fff, 0.1);
-		--title-color: #f6faff;
-		--body-color: #ced8de;
-		--link-color: #00f;
-		--light-color: #333;
-	}
+  --bg-color: #f8fafd;
+  --bg-content-color: #fff;
+  --bg-code: #282c34;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --title-color: #24292e;
+  --body-color: #34393e;
+  --link-color: #00f;
+  --light-color: #a4a9ae;
+
+  // Override variables for Dark theme
+  &[data-theme='dark'] {
+    --bg-color: #000;
+    --bg-content-color: #101216;
+    --bg-code: rgba(0, 0, 0, 0.3);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --title-color: #c9d1d9;
+    --body-color: #a9b1b9;
+    --link-color: #00f;
+    --light-color: #394149;
+  }
 }
 
 // Make things smaller for mobile

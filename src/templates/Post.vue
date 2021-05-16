@@ -56,7 +56,7 @@ query Post ($id: ID!) {
     title
     path
     date (format: "D. MMMM YYYY")
-    timeToRead
+    # timeToRead
     tags {
       id
       title
@@ -95,20 +95,26 @@ query Post ($id: ID!) {
   }
 
   &__content {
-    h2:first-child {
-      margin-top: 0;
+    h1:first-child {
+      display: none;
     }
 
-    p:first-of-type {
-      font-size: 1.2em;
-      color: var(--title-color);
+    @for $i from 1 through 5 {
+      // 连续的标题
+      h#{$i} + h#{$i + 1},
+      // br标签后的标题
+      br + h#{$i},
+      // 处于开头的标题
+      h#{$i}:first-child {
+        margin-top: 0;
+      }
     }
 
     img {
-      width: calc(100% + var(--space) * 2);
-      margin-left: calc(var(--space) * -1);
       display: block;
-      max-width: none;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 61.8%;
     }
   }
 }

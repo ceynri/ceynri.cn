@@ -27,6 +27,7 @@ export default {
     color: currentColor;
     text-decoration: none;
     background-color: var(--bg-color);
+    transition: background-color var(--duration);
     padding: 0.5em;
     border-radius: var(--radius);
   }
