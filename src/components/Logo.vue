@@ -16,6 +16,7 @@ query {
 .logo {
   text-decoration: none;
   color: var(--body-color) !important;
+  transition: color var(--duration);
   font-size: 0.9em;
 
   &__image {
