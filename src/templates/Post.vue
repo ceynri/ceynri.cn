@@ -11,10 +11,18 @@
 
     <div class="post content-box">
       <div class="post__header">
-        <g-image alt="Cover image" v-if="$page.post.cover_image" :src="$page.post.cover_image" />
+        <g-image
+          alt="Cover image"
+          v-if="$page.post.cover_image"
+          :src="$page.post.cover_image"
+        />
       </div>
 
-      <div class="post__content link-highlight" v-html="$page.post.content" />
+      <div
+        class="post__content link-highlight"
+        :class="$page.post.add_classes"
+        v-html="$page.post.content"
+      />
 
       <div class="post__footer">
         <PostTags :post="$page.post" />
@@ -28,26 +36,26 @@
 </template>
 
 <script>
-import PostMeta from '~/components/PostMeta'
-import PostTags from '~/components/PostTags'
+import PostMeta from '~/components/PostMeta';
+import PostTags from '~/components/PostTags';
 
 export default {
   components: {
     PostMeta,
-    PostTags
+    PostTags,
   },
-  metaInfo () {
+  metaInfo() {
     return {
       title: this.$page.post.title,
       meta: [
         {
           name: 'description',
-          content: this.$page.post.description
-        }
-      ]
-    }
-  }
-}
+          content: this.$page.post.description,
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <page-query>
@@ -64,6 +72,7 @@ query Post ($id: ID!) {
     description
     content
     cover_image (width: 860, blur: 10)
+    add_classes
   }
 }
 </page-query>
@@ -75,7 +84,6 @@ query Post ($id: ID!) {
 }
 
 .post {
-
   &__header {
     width: calc(100% + var(--space) * 2);
     margin-left: calc(var(--space) * -1);
@@ -113,7 +121,30 @@ query Post ($id: ID!) {
       display: block;
       margin-left: auto;
       margin-right: auto;
-      max-width: 61.8%;
+      max-width: 100%;
+    }
+
+    &.image {
+      &--small img {
+        max-width: 50%;
+      }
+
+      &--medium img {
+        max-width: calc(0.618 * (100% + 2 * var(--space)));
+      }
+
+      &--large img {
+        max-width: 100%;
+      }
+
+      &--full img {
+        margin: {
+          left: calc(var(--space) * -1);
+          right: calc(var(--space) * -1);
+        }
+        max-width: none;
+        width: calc(100% + var(--space) * 2);
+      }
     }
   }
 }
