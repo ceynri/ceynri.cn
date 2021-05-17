@@ -9,8 +9,8 @@ module.exports = {
   siteDescription,
   siteUrl: 'https://ceynri.cn',
   templates: {
-    Post: '/:fileInfo__name',
-    Tag: '/tag/:id',
+    Post: '/blog/:year-:month-:day/:fileInfo__name',
+    Tag: '/blog/tag/:id',
   },
   plugins: [
     {
