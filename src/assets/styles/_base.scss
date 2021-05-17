@@ -17,20 +17,23 @@ body {
 }
 
 html {
-  background: var(--bg-content-color);
   transition: color var(--duration), background-color var(--duration);
 }
 
-.link-highlight a {
-  text-decoration: underline;
+a:not(.button) {
+  transition: color calc(var(--duration) / 2);
+
+  &:hover {
+    color: var(--link-color);
+  }
 }
 
-a:not(.button) {
+.link-highlight a:not(.button) {
+  text-decoration: underline;
   opacity: 0.8;
   transition: color calc(var(--duration) / 2), opacity calc(var(--duration) / 2);
 
   &:hover {
-    color: var(--link-color);
     opacity: 1;
   }
 }

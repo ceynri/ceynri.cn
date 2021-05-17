@@ -57,7 +57,7 @@ export default {
 
 <style lang="scss">
 .footer {
-  margin: calc(2 * var(--space)) auto 0;
+  margin-top: var(--space);
   padding: 16px;
   background: var(--bg-content-color);
   transition: background-color var(--duration);
@@ -68,7 +68,7 @@ export default {
     padding: var(--space) 0;
     color: var(--light-color);
     transition: color var(--duration);
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 639px) {
       justify-content: center;
       text-align: center;
     }
@@ -79,8 +79,7 @@ export default {
     margin-bottom: 0.25em;
     line-height: 1;
     text-align: end;
-
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 639px) {
       display: none;
     }
   }
