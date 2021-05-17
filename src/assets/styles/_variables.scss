@@ -29,14 +29,14 @@ html {
     --title-color: #c9d1d9;
     --body-color: #a9b1b9;
     --link-color: #00f;
-    --light-color: #394149;
+    --light-color: #495159;
   }
 }
 
 // Make things smaller for mobile
 @media screen and (max-width: 650px) {
   html {
-    --base-font-size: 17px;
+    --base-font-size: 16px;
   }
   body {
     --space: 1.5rem;
