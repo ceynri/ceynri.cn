@@ -48,10 +48,10 @@ export default {
 
 <style lang="scss">
 .hero {
-  padding: calc(var(--space) / 2) 0 calc(var(--space) / 2);
+  padding: calc(var(--space) / 2) 0;
 
   &__title {
-    font-size: 2.5rem;
+    font-size: 3em;
     color: var(--title-color);
     text-align: center;
   }
