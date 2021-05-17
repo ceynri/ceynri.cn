@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss">
 .post-card {
-  margin-bottom: calc(var(--space) / 2);
+  margin-bottom: calc(var(--space) * 2 / 3);
   position: relative;
 
 
