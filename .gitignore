@@ -1,0 +1,6 @@
+# v2 gitignore
+**/node_modules
+dist
+.cache
+/content
+.temp
