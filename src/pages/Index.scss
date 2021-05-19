@@ -1,0 +1,103 @@
+#app {
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+.frame {
+  position: fixed;
+  text-align: left;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  display: grid;
+  -ms-flex-line-pack: justify;
+  align-content: space-between;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  padding: 3rem;
+  // pointer-events: none;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    'lt rt'
+    'lm rm'
+    'lb rb';
+
+  &__lt {
+    grid-area: lt;
+  }
+  &__lm {
+    grid-area: lm;
+    align-self: center;
+  }
+  &__lb {
+    grid-area: lb;
+    align-self: end;
+  }
+  &__rt {
+    grid-area: rt;
+    justify-self: end;
+  }
+  &__rm {
+    grid-area: rm;
+    justify-self: end;
+    align-self: center;
+  }
+  &__rb {
+    grid-area: rb;
+    justify-self: end;
+    align-self: end;
+  }
+
+  &__intro {
+    width: 12em;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.75;
+
+    .link::before {
+      content: '- ';
+    }
+  }
+
+  &__social {
+    font-size: 0.8em;
+    // transform: translateX(50%) rotate(90deg);
+    // transform-origin: center top;
+  }
+
+  &__copyright {
+    text-align: end;
+    font-size: 0.7em;
+    line-height: 1.75;
+  }
+}
+
+.link {
+  padding: 0 0.5em;
+}
+
+.logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  text-align: center;
+  
+  font-size: 16vw;
+  font-weight: bold;
+}
+
+.impression-pic {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+}
