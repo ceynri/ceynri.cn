@@ -7,7 +7,7 @@
             class="social__link"
             v-for="(item, name) in social"
             :title="item.tooltip"
-            :href="item.url"
+            :href="item.link"
             :key="name"
           >
             {{ item.name }}
@@ -19,7 +19,7 @@
           <a
             v-if="beian"
             class="footer__beian"
-            :href="beian.url"
+            :href="beian.link"
           >{{ beian.text }}</a>
         </span>
       </div>

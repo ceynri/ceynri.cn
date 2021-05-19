@@ -1,39 +1,52 @@
-// const icons = require('~/assets/images/icons');
-
 module.exports = {
+  nav: {
+    blog: {
+      name: 'Blog',
+      link: '/blog/',
+    },
+    note: {
+      name: 'Note',
+      link: 'https://notes.ceynri.cn/',
+    },
+    // v1: {
+    //   name: 'V1',
+    //   link: 'https://ceynri.cn/v1/',
+    // },
+  },
   social: {
     github: {
       name: 'GitHub',
-      url: 'https://github.com/ceynri',
+      link: 'https://github.com/ceynri',
       tooltip: '@ceynri',
-      // icon: icons.github,
-      // color: '#161b22',
-      // darkmodeColor: '#fff',
+      showOn: ['home', 'blog'],
     },
     bangumi: {
       name: 'Bangumi',
-      url: 'http://bgm.tv/user/558747',
+      link: 'https://bgm.tv/user/558747',
       tooltip: '@山风',
-      // icon: icons.bangumi,
-      // color: '#f93292',
-      // darkmodeColor: '#f93292',
+      showOn: ['home', 'blog'],
+    },
+    bilibili: {
+      name: 'Bilibili',
+      link: 'https://space.bilibili.com/937275',
+      tooltip: '@山风P',
+      showOn: ['blog'],
     },
     mail: {
       name: 'Mail',
-      url: 'mailto:ceynri@gmail.com',
+      link: 'mailto:ceynri@gmail.com',
       tooltip: 'ceynri@gmail.com',
-      // icon: icons.bangumi,
-      // color: '#f93292',
-      // darkmodeColor: '#f93292',
+      showOn: ['blog'],
     },
     rss: {
       name: 'RSS',
-      url: '/feed.xml',
+      link: '/feed.xml',
       tooltip: '',
+      showOn: ['Blog'],
     },
   },
   beian: {
-    url: 'https://beian.miit.gov.cn/',
+    link: 'https://beian.miit.gov.cn/',
     text: '粤ICP备20009331号',
   },
 };
