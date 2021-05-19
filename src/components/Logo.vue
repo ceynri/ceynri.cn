@@ -16,9 +16,8 @@ query {
 .logo {
   &__image {
     vertical-align: middle;
-    border-radius: 99px;
-    height: 40px;
-    width: 40px;
+    border-radius: 50%;
+    height: 100%;
     margin-right: 0.5em;
   }
 }
