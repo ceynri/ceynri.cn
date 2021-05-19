@@ -13,6 +13,7 @@
     "@gridsome/transformer-remark": "^0.3.0",
     "@microflash/gridsome-plugin-feed": "^1.2.1",
     "gridsome": "^0.7.0",
+    "gsap": "^3.6.1",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
