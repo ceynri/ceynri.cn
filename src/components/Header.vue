@@ -7,7 +7,12 @@
     </div>
 
     <nav class="header__right nav">
-      <g-link class="nav__item" to="/blog/">Blog</g-link>
+      <g-link
+        class="nav__item"
+        v-for="(item, name) in nav"
+        :to="item.link"
+        :key="name"
+      >{{ item.name }}</g-link>
       <ToggleTheme />
     </nav>
   </header>
@@ -16,12 +21,18 @@
 <script>
 import Logo from '~/components/Logo.vue';
 import ToggleTheme from '~/components/ToggleTheme.vue';
+import { nav } from '~/config';
 
 export default {
+  data() {
+    return {
+      nav,
+    };
+  },
   components: {
     Logo,
     ToggleTheme,
-  }
+  },
 };
 </script>
 
