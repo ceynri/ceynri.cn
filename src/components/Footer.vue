@@ -32,26 +32,20 @@
 </template>
 
 <script>
-import Icon from '~/components/Icon.vue';
+import objFilter from '~/utils/objFilter';
 import { social, beian } from '~/config';
 
 export default {
   data() {
     return {
-      social,
       beian,
     };
   },
-  methods: {
-    iconColor(event, color = '') {
-      const dom = event.target;
-      if (!dom) return;
-      dom.style.color = color;
+  computed: {
+    social() {
+      return objFilter(social, (item) => item.showOn.includes('blog'));
     },
-  },
-  components: {
-    Icon,
-  },
+  }
 };
 </script>
 

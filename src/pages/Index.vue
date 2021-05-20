@@ -71,18 +71,21 @@ query {
 import objFilter from '~/utils/objFilter';
 import { isPc } from '~/utils/env';
 import { Float } from '~/utils/float';
+
 import { nav, social, beian } from '~/config';
 
 export default {
   data() {
     return {
-      nav,
       beian,
     };
   },
   computed: {
     social() {
       return objFilter(social, (item) => item.showOn.includes('home'));
+    },
+    nav() {
+      return objFilter(nav, (item) => item.showOn.includes('home'));
     },
   },
   mounted() {

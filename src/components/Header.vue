@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__left">
-      <g-link class="nav__item" to="/">
+      <g-link class="nav__item" to="/blog/">
         <Logo />
       </g-link>
     </div>
@@ -21,13 +21,15 @@
 <script>
 import Logo from '~/components/Logo.vue';
 import ToggleTheme from '~/components/ToggleTheme.vue';
+
+import objFilter from '~/utils/objFilter';
 import { nav } from '~/config';
 
 export default {
-  data() {
-    return {
-      nav,
-    };
+  computed: {
+    nav() {
+      return objFilter(nav, (item) => item.showOn.includes('blog'));
+    },
   },
   components: {
     Logo,

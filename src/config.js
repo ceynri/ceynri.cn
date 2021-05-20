@@ -1,17 +1,25 @@
 module.exports = {
   nav: {
+    home: {
+      name: 'Home',
+      link: '/',
+      showOn: ['blog'],
+    },
     blog: {
       name: 'Blog',
       link: '/blog/',
+      showOn: ['home', 'blog'],
     },
     note: {
       name: 'Note',
       link: 'https://notes.ceynri.cn/',
+      showOn: ['home', 'blog'],
     },
-    // v1: {
-    //   name: 'V1',
-    //   link: 'https://ceynri.cn/v1/',
-    // },
+    v1: {
+      name: 'V1',
+      link: 'https://ceynri.cn/v1/',
+      showOn: [],
+    },
   },
   social: {
     github: {
@@ -42,7 +50,7 @@ module.exports = {
       name: 'RSS',
       link: '/feed.xml',
       tooltip: '',
-      showOn: ['Blog'],
+      showOn: ['blog'],
     },
   },
   beian: {
