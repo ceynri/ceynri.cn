@@ -1,60 +1,51 @@
+@import '~/assets/styles/_grid-3x3';
+
 #app {
   background-color: #000;
   color: #fff;
   overflow: hidden;
 }
+
 .frame {
+  // more props are in 3x3-grid.scss
+  @include grid-3x3;
+
   position: fixed;
-  text-align: left;
   z-index: 10000;
   top: 0;
   left: 0;
-  display: grid;
-  -ms-flex-line-pack: justify;
-  align-content: space-between;
+
   width: 100%;
   max-width: none;
   height: 100vh;
   padding: 3rem;
-  // pointer-events: none;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    'lt rt'
-    'lm rm'
-    'lb rb';
 
-  &__lt {
-    grid-area: lt;
-  }
-  &__lm {
-    grid-area: lm;
-    align-self: center;
-  }
-  &__lb {
-    grid-area: lb;
-    align-self: end;
-  }
-  &__rt {
-    grid-area: rt;
-    justify-self: end;
-  }
-  &__rm {
-    grid-area: rm;
-    justify-self: end;
-    align-self: center;
-  }
-  &__rb {
-    grid-area: rb;
-    justify-self: end;
-    align-self: end;
+  justify-content: space-between;
+  align-content: space-between;
+
+  text-align: left;
+
+  .logo {
+    @extend .frame__cm;
+    z-index: 10;
+
+    font-size: 16vw;
+    font-weight: bold;
   }
 
-  &__intro {
-    width: 12em;
+  .impression-pic {
+    @extend .frame__cm;
+    display: block;
+    width: 80%;
+    z-index: -10;
+  }
+
+  &__website {
+    @extend .frame__lt;
   }
 
   &__nav {
+    @extend .frame__lm;
     display: flex;
     flex-direction: column;
     line-height: 1.75;
@@ -64,40 +55,56 @@
     }
   }
 
+  &__intro {
+    @extend .frame__lb;
+    max-width: 12em;
+  }
+
   &__social {
+    @extend .frame__rt;
     font-size: 0.8em;
     // transform: translateX(50%) rotate(90deg);
     // transform-origin: center top;
+
+    .link:not(:last-child) {
+      margin-right: 1.5em;
+    }
   }
 
   &__copyright {
+    @extend .frame__rb;
     text-align: end;
     font-size: 0.7em;
     line-height: 1.75;
   }
-}
 
-.link {
-  padding: 0 0.5em;
-}
+  @media screen {
+    @media (max-width: 1279px) {
+      &__nav {
+        flex-direction: row;
+        grid-area: rt;
+        justify-content: end;
+        justify-self: end;
 
-.logo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+        .link {
+          &::before {
+            content: '';
+          }
 
-  text-align: center;
-  
-  font-size: 16vw;
-  font-weight: bold;
-}
+          &:not(:last-child) {
+            margin-right: 1.5em;
+          }
+        }
+      }
+      &__social {
+        display: none;
+      }
+    }
 
-.impression-pic {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40%;
+    @media (max-width: 639px) {
+      &__intro {
+        max-width: 9em;
+      }
+    }
+  }
 }
