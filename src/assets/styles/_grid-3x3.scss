@@ -1,0 +1,53 @@
+@mixin grid-3x3($columns: auto auto auto, $rows: auto auto auto) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  /*
+   * l: left, c: center, r: right
+   * t: top, m: middle, b:bottom
+   */
+  grid-template-areas:
+    'lt ct rt'
+    'lm cm rm'
+    'lb cb rb';
+
+  &__lt {
+    grid-area: lt;
+  }
+  &__lm {
+    grid-area: lm;
+    align-self: center;
+  }
+  &__lb {
+    grid-area: lb;
+    align-self: end;
+  }
+  &__ct {
+    grid-area: ct;
+    align-self: center;
+  }
+  &__cm {
+    grid-area: cm;
+    justify-self: center;
+    align-self: center;
+  }
+  &__cb {
+    grid-area: cb;
+    justify-self: center;
+    align-self: end;
+  }
+  &__rt {
+    grid-area: rt;
+    justify-self: end;
+  }
+  &__rm {
+    grid-area: rm;
+    justify-self: end;
+    align-self: center;
+  }
+  &__rb {
+    grid-area: rb;
+    justify-self: end;
+    align-self: end;
+  }
+}
