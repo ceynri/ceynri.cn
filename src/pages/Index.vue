@@ -68,10 +68,10 @@ query {
 </static-query>
 
 <script>
-import { Float } from '~/utils/float';
-import { isMobile } from '~/utils/env';
-import { nav, social, beian } from '~/config';
 import objFilter from '~/utils/objFilter';
+import { isPc } from '~/utils/env';
+import { Float } from '~/utils/float';
+import { nav, social, beian } from '~/config';
 
 export default {
   data() {
@@ -86,14 +86,13 @@ export default {
     },
   },
   mounted() {
-    if (isMobile) {
-      return;
+    if (isPc()) {
+      const float = new Float();
+      const logo = this.$refs.logo;
+      const pic = this.$refs.pic;
+      float.addFloat(logo, 10);
+      float.addFloat(pic, 2);
     }
-    const float = new Float();
-    const logo = this.$refs.logo;
-    const pic = this.$refs.pic;
-    float.addFloat(logo, 10);
-    float.addFloat(pic, 2);
   },
 };
 </script>
