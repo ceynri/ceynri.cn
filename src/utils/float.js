@@ -1,4 +1,15 @@
-import { TweenLite, Power1 } from 'gsap';
+import {
+  TweenLite,
+  Power1,
+  CSSPlugin,
+  // AttrPlugin,
+} from 'gsap/all';
+
+// to prevent tree shaking
+const plugins = [
+  CSSPlugin,
+  // AttrPlugin,
+];
 
 /**
  * Make element floatable
@@ -44,12 +55,14 @@ export class Float {
   }
   float(elem, level) {
     const frame = () => {
-      TweenLite.to(elem, this.SPEED, {
-        x: (this.clientWidth / 2 - this.clientX) * level * 0.01,
-        y: (this.clientHeight / 2 - this.clientY) * level * 0.01,
-        ease: Power1.easeOut,
-      });
-      requestAnimationFrame(frame);
+      try {
+        TweenLite.to(elem, this.SPEED, {
+          x: (this.clientWidth / 2 - this.clientX) * level * 0.01,
+          y: (this.clientHeight / 2 - this.clientY) * level * 0.01,
+          ease: Power1.easeOut,
+        });
+        requestAnimationFrame(frame);
+      } catch (e) {}
     };
     requestAnimationFrame(frame);
   }
