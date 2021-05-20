@@ -36,7 +36,7 @@
   .impression-pic {
     @extend .frame__cm;
     display: block;
-    width: 50%;
+    width: 40%;
     z-index: -10;
   }
 
@@ -48,6 +48,7 @@
     @extend .frame__lm;
     display: flex;
     flex-direction: column;
+    font-size: 1.2em;
     line-height: 1.75;
 
     .link::before {
@@ -62,7 +63,6 @@
 
   &__social {
     @extend .frame__rt;
-    font-size: 0.8em;
     // transform: translateX(50%) rotate(90deg);
     // transform-origin: center top;
 
