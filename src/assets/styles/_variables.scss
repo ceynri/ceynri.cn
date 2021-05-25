@@ -17,7 +17,8 @@ html {
   --border-color: rgba(0, 0, 0, 0.1);
   --title-color: #24292e;
   --body-color: #34393e;
-  --link-color: #00f;
+  --link-color: #f22;
+  --link-shadow-color: #ff222233;
   --light-color: #a4a9ae;
 
   // Override variables for Dark theme
@@ -29,6 +30,7 @@ html {
     --title-color: #c9d1d9;
     --body-color: #a9b1b9;
     --link-color: #00f;
+    --link-shadow-color: #22f;
     --light-color: #495159;
   }
 }

@@ -21,10 +21,11 @@ html {
 }
 
 a:not(.button) {
-  transition: color calc(var(--duration) / 2);
+  transition: color calc(var(--duration) / 2), filter var(--duration);
 
   &:hover {
     color: var(--link-color);
+    filter: drop-shadow(0 0 0.2em var(--link-shadow-color));
   }
 }
 
