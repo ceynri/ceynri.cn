@@ -38,14 +38,10 @@
         Hello. I'm a frontend developer, like to create some gadgets.
       </div>
 
-      <div class="frame__social">
-        <a
-          v-for="(item, name) in social"
-          class="link"
-          :href="item.link"
-          :key="name"
-        >{{ item.name }}</a>
-      </div>
+      <Social
+        at="home"
+        class="frame__social"
+      />
 
       <div class="frame__copyright">
         <div>© {{ new Date().getFullYear() }} Ceynri</div>
@@ -68,6 +64,8 @@ query {
 </static-query>
 
 <script>
+import Social from '~/components/Social';
+
 import objFilter from '~/utils/objFilter';
 import { isPc } from '~/utils/env';
 import { Float } from '~/utils/float';
@@ -100,6 +98,9 @@ export default {
       float.addFloat(pic, 2);
     }
     document.documentElement.setAttribute('data-theme', 'dark');
+  },
+  components: {
+    Social,
   },
 };
 </script>

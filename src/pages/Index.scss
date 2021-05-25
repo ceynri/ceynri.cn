@@ -66,10 +66,6 @@
     @extend .frame__rt;
     // transform: translateX(50%) rotate(90deg);
     // transform-origin: center top;
-
-    .link:not(:last-child) {
-      margin-right: 1.5em;
-    }
   }
 
   &__copyright {
