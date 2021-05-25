@@ -96,6 +96,7 @@ export default {
       float.addFloat(logo, 10);
       float.addFloat(pic, 2);
     }
+    document.documentElement.setAttribute('data-theme', 'dark');
   },
 };
 </script>
