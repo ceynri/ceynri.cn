@@ -2,18 +2,10 @@
   <footer class="footer">
     <div class="footer__content center-content">
       <div class="footer__left">
-        <div class="social">
-          <a
-            class="social__link"
-            v-for="(item, name) in social"
-            :title="item.tooltip"
-            :href="item.link"
-            :key="name"
-          >
-            {{ item.name }}
-          </a>
-        </div>
-
+        <Social
+          class="footer__social"
+          at="footer"
+        />
         <span class="footer__copyright">
           <div>Copyright © 2020-{{ new Date().getFullYear() }} Ceynri</div>
           <a
@@ -33,6 +25,7 @@
 
 <script>
 import objFilter from '~/utils/objFilter';
+import Social from '~/components/Social.vue';
 import { social, beian } from '~/config';
 
 export default {
@@ -45,7 +38,10 @@ export default {
     social() {
       return objFilter(social, (item) => item.showOn.includes('blog'));
     },
-  }
+  },
+  components: {
+    Social,
+  },
 };
 </script>
 
@@ -83,34 +79,9 @@ export default {
     font-size: 0.6em;
     line-height: 1;
   }
-}
 
-.social {
-  display: flex;
-  margin-bottom: 1rem;
-
-  &__title {
-    font-size: 0.9em;
-    margin-right: 1.5em;
-  }
-
-  &__link {
-    font-size: 0.9em;
-    margin-right: 1.5em;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    & > svg {
-      display: block;
-    }
-  }
-
-  &__icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 4px;
+  &__social {
+    margin-bottom: 1rem;
   }
 }
 </style>
