@@ -1,10 +1,10 @@
 module.exports = {
   nav: {
-    home: {
-      name: 'Home',
-      link: '/',
-      showOn: ['blog'],
-    },
+    // home: {
+    //   name: 'Home',
+    //   link: '/',
+    //   showOn: ['blog'],
+    // },
     blog: {
       name: 'Blog',
       link: '/blog/',
@@ -30,7 +30,7 @@ module.exports = {
     },
     bangumi: {
       name: 'Bangumi',
-      link: 'https://bgm.tv/user/558747',
+      link: 'https://bgm.tv/anime/list/558747',
       tooltip: '@山风',
       showOn: ['home', 'blog'],
     },

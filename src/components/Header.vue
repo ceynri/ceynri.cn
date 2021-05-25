@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__left">
-      <g-link class="nav__item" to="/blog/">
+      <g-link class="nav__item" to="/">
         <Logo />
       </g-link>
     </div>
