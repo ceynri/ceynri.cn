@@ -75,6 +75,9 @@ import { Float } from '~/utils/float';
 import { nav, social, beian } from '~/config';
 
 export default {
+  metaInfo: {
+    titleTemplate: '%s',
+  },
   data() {
     return {
       beian,
