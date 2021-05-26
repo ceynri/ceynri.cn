@@ -4,6 +4,7 @@ import {
   CSSPlugin,
   // AttrPlugin,
 } from 'gsap/all';
+import { throttle } from '~/utils'
 
 // to prevent tree shaking
 const plugins = [
@@ -19,11 +20,13 @@ export class Float {
     this.initProp();
     this.initEvent();
   }
+
   initProp() {
     this.clientWidth = document.documentElement.clientWidth;
     this.clientHeight = document.documentElement.clientHeight;
     this.SPEED = 1;
   }
+
   initEvent() {
     window.addEventListener('resize', () => {
       this.clientWidth = document.documentElement.clientWidth;
@@ -33,15 +36,22 @@ export class Float {
     // 监听鼠标移动
     document.addEventListener(
       'mousemove',
-      (e) => {
+      throttle((e) => {
         this.clientX = e.clientX;
         this.clientY = e.clientY;
-      },
+      }, 20),
       {
         passive: true,
       }
     );
   }
+
+  /**
+   * make element floaty
+   * @param {HTMLElement | Array} elems HTMLElement array or HTMLElement
+   * @param {*} level float effective level
+   * @returns this
+   */
   addFloat(elems, level) {
     if (!Array.isArray(elems)) {
       this.float(elems, level);
@@ -53,6 +63,7 @@ export class Float {
     // 连缀语法
     return this;
   }
+
   float(elem, level) {
     const frame = () => {
       try {
