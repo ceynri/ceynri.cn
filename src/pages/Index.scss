@@ -21,9 +21,6 @@
   height: 100vh;
   padding: 3rem;
 
-  justify-content: space-between;
-  align-content: space-between;
-
   text-align: left;
 
   .logo {
@@ -47,6 +44,7 @@
 
   &__nav {
     @extend .frame__lm;
+
     display: flex;
     flex-direction: column;
     font-size: 1.2em;
@@ -70,7 +68,6 @@
 
   &__copyright {
     @extend .frame__rb;
-    text-align: end;
     font-size: 0.7em;
     line-height: 1.75;
   }
@@ -79,9 +76,11 @@
     @media (max-width: 1279px) {
       &__nav {
         flex-direction: row;
-        grid-area: rt;
         justify-content: end;
+        // overwrite
+        grid-area: rt;
         justify-self: end;
+        align-self: start;
 
         .link {
           &::before {
