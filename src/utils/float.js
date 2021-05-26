@@ -48,12 +48,25 @@ export class Float {
       defaults: { duration: 1 },
       extendTimeline: true,
     });
+    gsap.registerEffect({
+      name: 'blur',
+      effect: (targets, config) => {
+        return gsap.to(targets, {
+          duration: config.duration,
+          filter: `blur(${config.blur}px)`,
+        });
+      },
+      defaults: {
+        duration: 1,
+        blur: 8,
+      },
+    });
   }
 
   /**
    * make element floaty
    * @param {object} elems HTMLElement array or HTMLElement
-   * @param {object | Number} scale float effective scale (percent)
+   * @param {object | Number} scale float (and blur) effective scale (percent)
    */
   apply(elems, scale) {
     if (typeof scale === 'number') {
@@ -70,6 +83,17 @@ export class Float {
           x: shiftX * scale.float,
           y: shiftY * scale.float,
         });
+        if (scale.blur) {
+          let blur = 0;
+          if (scale.blur > 0) {
+            blur = shiftDist * scale.blur;
+          } else {
+            const maxDist = Math.max(this.clientWidth, this.clientHeight) / 2;
+            const reverseDist = maxDist - shiftDist;
+            blur = Math.max(reverseDist * -scale.blur, 0);
+          }
+          gsap.effects.blur(elems, { blur });
+        }
       } catch (e) {}
     };
     this.applyAnimation(frame);
