@@ -94,8 +94,8 @@ export default {
       const float = new Float();
       const logo = this.$refs.logo;
       const pic = this.$refs.pic;
-      float.addFloat(logo, 10);
-      float.addFloat(pic, 2);
+      float.addFloat(logo, -8);
+      float.addFloat(pic, 4);
     }
     document.documentElement.setAttribute('data-theme', 'dark');
   },
