@@ -10,9 +10,9 @@
       </div>
 
       <g-image
-        class="impression-pic"
+        class="impression-image"
         src="~/assets/images/the-sun-at-night.jpg"
-        ref="pic"
+        ref="impressionImage"
       />
     </div>
 
@@ -93,12 +93,12 @@ export default {
     if (isPc()) {
       const perspective = new Perspective();
       const logo = this.$refs.logo;
-      const pic = this.$refs.pic;
+      const impressionImage = this.$refs.impressionImage;
       perspective.apply(logo, {
         float: -0.16,
         blur: 0.004,
       });
-      perspective.apply(pic, {
+      perspective.apply(impressionImage, {
         float: 0.04,
         blur: -0.02,
       });
