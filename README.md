@@ -21,6 +21,14 @@ All IE versions are not supported. Please use modern browser.
 
 Mobile is compatible.
 
+## Effect
+
+> Made for fun
+
+Home logo and impression image add perspective effect:
+
+![perspective](https://static.ceynri.cn/perspective.gif)
+
 ## Old version
 
 Old version project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch. You can still access online experience website via <https://ceynri.cn/v1/>.
