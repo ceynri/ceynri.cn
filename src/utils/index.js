@@ -1,5 +1,5 @@
 export * as env from './env';
-export { Float } from './float';
+export { Perspective } from './perspective';
 export { default as objFilter } from './objFilter';
 
 function throttle(method, delay = 100, context = this) {

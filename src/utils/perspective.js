@@ -2,9 +2,10 @@ import { gsap } from 'gsap';
 import { throttle } from '~/utils';
 
 /**
- * Make element floatable
+ * Make elements perspective in full screen
+ *
  */
-export class Float {
+export class Perspective {
   constructor() {
     this.initProp();
     this.initEvent();
@@ -64,15 +65,15 @@ export class Float {
   }
 
   /**
-   * make element floaty
-   * @param {object} elems HTMLElement array or HTMLElement
-   * @param {object | Number} scale float (and blur) effective scale (percent)
+   * make element perspective
+   * @param {(Object|string)} elems - HTMLElement array or HTMLElement
+   * @param {(Object|number)} scale - float (and blur) effective scale (percent)
+   * @param {number} scale.float - float effective scale (percent)
+   * @param {number} scale.blur - blur effective scale (percent)
    */
   apply(elems, scale) {
     if (typeof scale === 'number') {
-      scale = {
-        float: scale,
-      };
+      scale = { float: scale };
     }
     const frame = () => {
       try {

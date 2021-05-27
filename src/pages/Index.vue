@@ -68,7 +68,7 @@ import Social from '~/components/Social';
 
 import objFilter from '~/utils/objFilter';
 import { isPc } from '~/utils/env';
-import { Float } from '~/utils/float';
+import { Perspective } from '~/utils/perspective';
 
 import { nav, social, beian } from '~/config';
 
@@ -91,11 +91,17 @@ export default {
   },
   mounted() {
     if (isPc()) {
-      const float = new Float();
+      const perspective = new Perspective();
       const logo = this.$refs.logo;
       const pic = this.$refs.pic;
-      float.addFloat(logo, -8);
-      float.addFloat(pic, 4);
+      perspective.apply(logo, {
+        float: -0.16,
+        blur: 0.004,
+      });
+      perspective.apply(pic, {
+        float: 0.04,
+        blur: -0.02,
+      });
     }
     document.documentElement.setAttribute('data-theme', 'dark');
   },
