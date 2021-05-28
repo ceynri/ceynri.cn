@@ -32,7 +32,7 @@ module.exports = {
       name: 'Bangumi',
       link: 'https://bgm.tv/anime/list/558747',
       tooltip: '@山风',
-      showOn: ['home', 'footer'],
+      showOn: ['footer'],
     },
     bilibili: {
       name: 'Bilibili',
@@ -44,7 +44,7 @@ module.exports = {
       name: 'Mail',
       link: 'mailto:ceynri@gmail.com',
       tooltip: 'ceynri@gmail.com',
-      showOn: ['footer'],
+      showOn: ['home', 'footer'],
     },
     rss: {
       name: 'RSS',
