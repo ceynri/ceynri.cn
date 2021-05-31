@@ -38,11 +38,18 @@ html {
   }
 }
 
-// Make things smaller for mobile
-@media screen and (max-width: 639px) {
+// laptop
+@media screen and (max-width: 1023px) {
   html {
     --base-font-size: 16px;
   }
+  :root {
+    --aside-width: 170px;
+  }
+}
+
+// tablet
+@media screen and (max-width: 639px) {
   :root {
     --padding-width: 1.5rem;
     --top-margin-width: 60px;

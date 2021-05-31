@@ -40,7 +40,7 @@ export default {
     max-width: calc(100% - var(--aside-width) - var(--space));
   }
 
-  @media screen and (max-width: 639px){
+  @media screen and (max-width: 767px) {
     flex-direction: column;
 
     .aside {
