@@ -1,9 +1,9 @@
 <template>
   <div class="social">
     <a
-      v-for="(item, name) in social"
+      v-for="(item, name) in items"
       class="social__link"
-      :title="showTooltip ? item.tooltip : ''"
+      :title="item.tooltip || ''"
       :href="item.link"
       :key="name"
       rel="noopener noreferrer"
@@ -13,27 +13,9 @@
 </template>
 
 <script>
-import objFilter from '~/utils/objFilter';
-import { social } from '~/config';
-
 export default {
   props: {
-    at: {
-      type: String,
-      default: 'default',
-    },
-    showTooltip: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    social() {
-      if (this.at === 'default') {
-        return social;
-      }
-      return objFilter(social, (item) => item.showOn.includes(this.at));
-    },
+    items: Array,
   },
 };
 </script>
