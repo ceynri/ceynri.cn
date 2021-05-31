@@ -1,6 +1,6 @@
 # ceynri.cn
 
-> The new version personal website is Work-In-Progress. 🐟
+> The new version personal website is still Work In Progress. 🐟
 >
 > You can visit <https://ceynri.cn/> to experience preview version.
 
@@ -30,8 +30,8 @@ Home logo and impression image add perspective effect:
 
 ![perspective](https://static.ceynri.cn/images/2021/5/27/perspective.gif)
 
-## Version
+## Versions
 
-**v2** is the version that is actually working now.
+**v2** is the version that is working now.
 
-v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch. You can still access online experience website via <https://ceynri.cn/v1/>.
+v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch. You can still visit <https://ceynri.cn/v1/> to experience it.
