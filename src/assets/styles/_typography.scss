@@ -21,7 +21,6 @@ h1, h2, h3, h4, h5 {
   line-height: 1.15;
 }
 
-
 h1 {font-size: 1.802em; margin-top: 0;}
 
 h2 {font-size: 1.602em;}
@@ -42,6 +41,16 @@ blockquote {
   border-left: 4px solid var(--border-color);
   padding-left: calc(var(--padding-width) / 2);
   color: var(--title-color);
+}
+
+hr {
+  width: 10%;
+  height: 2px;
+  margin: var(--padding-width) auto;
+  background: var(--light-color);
+  opacity: 0.5;
+  border: none;
+  border-radius: 1px;
 }
 
 em {
