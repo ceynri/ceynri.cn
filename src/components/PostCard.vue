@@ -41,7 +41,6 @@ export default {
   margin-bottom: calc(var(--padding-width) * 2 / 3);
   position: relative;
 
-
   &__header {
     margin-left: calc(var(--padding-width) * -1);
     margin-right: calc(var(--padding-width) * -1);
