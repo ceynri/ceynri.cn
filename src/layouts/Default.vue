@@ -1,36 +1,36 @@
 <template>
-  <div id="app">
-    <Header />
+  <div class="main-container">
+    <Aside />
     <main class="main">
       <slot />
+      <Footer />
     </main>
-    <Footer />
   </div>
 </template>
 
 <script>
-import Header from '~/components/Header.vue';
+import Aside from '~/components/Aside.vue';
 import Footer from '~/components/Footer.vue';
 
 export default {
   components: {
-    Header,
+    Aside,
     Footer,
   },
 };
 </script>
 
 <style lang="scss">
-#app {
-  min-height: 100vh;
+.main-container {
+  margin: 0 auto;
+  width: fit-content;
   display: flex;
-  flex-direction: column;
+  padding: 0 20px;
+  position: relative;
 }
 
 .main {
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px 16px 0;
-  flex: 1;
+  margin: 0;
+  padding: 60px 20px 0;
 }
 </style>

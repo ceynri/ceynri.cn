@@ -32,12 +32,10 @@ query Tag ($id: ID!) {
 </page-query>
 
 <script>
-import Author from '~/components/Author.vue'
 import PostCard from '~/components/PostCard.vue'
 
 export default {
   components: {
-    Author,
     PostCard
   },
   metaInfo: {
