@@ -18,13 +18,17 @@ module.exports = {
         name: 'Blog',
         link: '/blog/',
       },
-      {
-        name: 'About',
-        link: '/about/',
-      },
+      // {
+      //   name: 'Tags',
+      //   link: '/tags/',
+      // },
       // {
       //   name: 'Archive',
       //   link: '/archive/',
+      // },
+      // {
+      //   name: 'About',
+      //   link: '/about/',
       // },
       {
         name: 'Home',
