@@ -1,6 +1,6 @@
 # ceynri.cn
 
-> The new version personal website is still Work In Progress. 🐟
+> The new version personal website is still [Work In Progress](https://github.com/ceynri/ceynri.cn/milestone/1). 🐟
 >
 > You can visit <https://ceynri.cn/> to experience preview version.
 
@@ -35,3 +35,7 @@ Home logo and impression image add perspective effect:
 **v2** is the version that is working now.
 
 v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch. You can still visit <https://ceynri.cn/v1/> to experience it.
+
+## License
+
+MIT © Ceynri
