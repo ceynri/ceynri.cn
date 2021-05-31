@@ -53,9 +53,6 @@ export default {
   flex-direction: column;
   align-items: flex-start;
 
-  position: sticky;
-  top: 0;
-
   .header {
     margin-bottom: var(--space);
   }
