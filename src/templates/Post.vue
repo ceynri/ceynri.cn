@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <PostLayout>
     <div class="post-title">
       <h1 class="post-title__text">
         {{ $page.post.title }}
@@ -32,7 +32,7 @@
     <div class="post-comments">
       <!-- Add comment widgets here -->
     </div>
-  </Layout>
+  </PostLayout>
 </template>
 
 <script>
