@@ -31,16 +31,11 @@ query {
 
 <script>
 import SiteInfo from '~/components/SiteInfo.vue';
-import Logo from '~/components/Logo.vue';
 import ToggleTheme from '~/components/ToggleTheme.vue';
 
 export default {
-  data() {
-    return {};
-  },
   components: {
     SiteInfo,
-    Logo,
     ToggleTheme,
   },
 };
@@ -48,8 +43,9 @@ export default {
 
 <style lang="scss">
 .aside {
-  width: 210px;
+  width: var(--aside-width);
   max-height: 100vh;
+  padding: var(--top-margin-width) var(--space);
   margin-right: var(--space);
   color: var(--title-color);
 

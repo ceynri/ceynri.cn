@@ -6,8 +6,11 @@ html {
 // Light default theme
 :root {
   --content-width: 900px;
+  --aside-width: 210px;
+  --main-width: calc(var(--content-width) + var(--aside-width) + var(--space));
   --padding-width: 3.5rem;
   --space: 1rem;
+  --top-margin-width: 80px;
   --radius: 12px;
   --duration: 0.6s;
 
@@ -40,6 +43,8 @@ html {
   html {
     --base-font-size: 16px;
   }
+  :root {
     --padding-width: 1.5rem;
+    --top-margin-width: 60px;
   }
 }
