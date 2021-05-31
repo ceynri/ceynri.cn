@@ -1,10 +1,5 @@
 <template>
-  <Layout :show-logo="false">
-    <section class="hero">
-      <h1 class="hero__title">Ceynri's Blog</h1>
-    </section>
-
-    <!-- List posts -->
+  <Layout>
     <div class="posts">
       <PostCard v-for="edge in $page.posts.edges" :key="edge.node.id" :post="edge.node" />
     </div>
@@ -20,7 +15,7 @@ query {
         title
         date (format: "YYYY.MM.DD")
         description
-        cover_image (width: 860, height: 400, blur: 10)
+        cover_image (width: 900, height: 400, blur: 10)
         path
         tags {
           id
@@ -47,13 +42,4 @@ export default {
 </script>
 
 <style lang="scss">
-.hero {
-  padding: calc(var(--space) / 2) 0;
-
-  &__title {
-    font-size: 3em;
-    color: var(--title-color);
-    text-align: center;
-  }
-}
 </style>
