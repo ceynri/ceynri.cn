@@ -43,6 +43,10 @@ img {
   max-width: 100%;
 }
 
+.button {
+	display: inline-block;
+}
+
 // 被选中的文字
 ::selection {
   // background: var(--title-color);
