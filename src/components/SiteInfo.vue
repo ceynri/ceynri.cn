@@ -36,7 +36,7 @@ export default {};
 .site-info {
   &__avatar {
     border-radius: 100%;
-    max-width: 160px;
+    max-width: 8em;
     margin-bottom: 0.75em;
   }
 
