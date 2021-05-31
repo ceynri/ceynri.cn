@@ -1,6 +1,6 @@
 <template>
   <aside class="aside">
-    <header class="header">
+    <header class="aside__header">
       <SiteInfo />
     </header>
 
@@ -10,9 +10,17 @@
         v-for="(item, name) in $static.metadata.nav.blog"
         :to="item.link"
         :key="name"
-      >{{ item.name }}</g-link>
+      >
+        <div class="icon">
+          <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
+        </div>
+        {{ item.name }}
+      </g-link>
     </nav>
-    <ToggleTheme />
+
+    <footer class="aside__footer">
+      <ToggleTheme class="button" />
+    </footer>
   </aside>
 </template>
 
@@ -23,6 +31,7 @@ query {
       blog {
         name
         link
+        icon
       }
     }
   }
@@ -53,7 +62,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
 
-  .header {
+  &__header {
     margin-bottom: var(--space);
   }
 
@@ -66,8 +75,35 @@ export default {
       padding: calc(var(--space) / 2) 0;
       margin: calc(var(--space) / 2) 0;
 
-      &::before {
-        content: '- ';
+      display: flex;
+      align-items: center;
+
+      .icon {
+        width: 1em;
+        height: 1em;
+        margin-right: 1em;
+      }
+    }
+  }
+
+  &__footer {
+    .button {
+      width: 1.5em;
+      height: 1.5em;
+      color: var(--body-color);
+
+      transition: opacity var(--duration), transform calc(var(--duration) / 2);
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        transform: scale(0.8);
+      }
+
+      &:not(:last-child) {
+        margin-right: 0.75em;
       }
     }
   }
