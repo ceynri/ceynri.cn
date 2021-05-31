@@ -50,8 +50,7 @@ export default {
 .aside {
   width: 210px;
   max-height: 100vh;
-  padding: 60px 20px;
-  margin-right: 20px;
+  margin-right: var(--space);
   color: var(--title-color);
 
   display: flex;
@@ -62,7 +61,7 @@ export default {
   top: 0;
 
   .header {
-    margin-bottom: 30px;
+    margin-bottom: var(--space);
   }
 
   .nav {
@@ -71,8 +70,8 @@ export default {
     flex: 1;
 
     &__item {
-      padding: 10px 0;
-      margin: 10px 0;
+      padding: calc(var(--space) / 2) 0;
+      margin: calc(var(--space) / 2) 0;
 
       &::before {
         content: '- ';

@@ -79,16 +79,16 @@ query Post ($id: ID!) {
 
 <style lang="scss">
 .post-title {
-  padding: calc(var(--space) / 2) 0;
+  padding: calc(var(--padding-width) / 2) 0;
   text-align: center;
 }
 
 .post {
   &__header {
-    width: calc(100% + var(--space) * 2);
-    margin-left: calc(var(--space) * -1);
-    margin-top: calc(var(--space) * -1);
-    margin-bottom: calc(var(--space) / 2);
+    width: calc(100% + var(--padding-width) * 2);
+    margin-left: calc(var(--padding-width) * -1);
+    margin-top: calc(var(--padding-width) * -1);
+    margin-bottom: calc(var(--padding-width) / 2);
     overflow: hidden;
     border-radius: var(--radius) var(--radius) 0 0;
 
@@ -130,7 +130,7 @@ query Post ($id: ID!) {
       }
 
       &--medium img {
-        max-width: calc(0.618 * (100% + 2 * var(--space)));
+        max-width: calc(0.618 * (100% + 2 * var(--padding-width)));
       }
 
       &--large img {
@@ -139,18 +139,18 @@ query Post ($id: ID!) {
 
       &--full img {
         margin: {
-          left: calc(var(--space) * -1);
-          right: calc(var(--space) * -1);
+          left: calc(var(--padding-width) * -1);
+          right: calc(var(--padding-width) * -1);
         }
         max-width: none;
-        width: calc(100% + var(--space) * 2);
+        width: calc(100% + var(--padding-width) * 2);
       }
     }
   }
 }
 
 .post-comments {
-  padding: calc(var(--space) / 2);
+  padding: calc(var(--padding-width) / 2);
 
   &:empty {
     display: none;
@@ -158,6 +158,6 @@ query Post ($id: ID!) {
 }
 
 .post-author {
-  margin-top: calc(var(--space) / 2);
+  margin-top: calc(var(--padding-width) / 2);
 }
 </style>

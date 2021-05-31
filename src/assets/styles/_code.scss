@@ -7,7 +7,7 @@ body {
 	}
 
 	pre[class*="language-"] {
-		padding: calc(var(--space) / 3) calc(var(--space) / 2);
+		padding: calc(var(--padding-width) / 3) calc(var(--padding-width) / 2);
 		background-color: var(--bg-code);
 		margin-bottom: 2em;
 		border-radius: var(--radius);

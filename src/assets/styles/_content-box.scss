@@ -4,7 +4,7 @@
   max-width: var(--content-width);
   margin: 0 auto;
   transition: background-color var(--duration);
-  padding: var(--space);
+  padding: var(--padding-width);
   border-radius: var(--radius);
   box-shadow: 1px 1px 16px 0 rgba(#000, 0.02);
   transition: transform calc(var(--duration) / 2),

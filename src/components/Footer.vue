@@ -30,7 +30,7 @@ query {
   &__content {
     display: flex;
     flex-direction: column;
-    margin: var(--space) 0;
+    margin: var(--padding-width) 0;
     line-height: 2;
 
     color: var(--light-color);
