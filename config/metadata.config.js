@@ -1,7 +1,12 @@
 module.exports = {
-  myName: '山风',
-  myId: 'ceynri',
-  bio: 'Stay thinking.',
+  my: {
+    name: '山风',
+    id: 'ceynri',
+    bio: 'Stay thinking.',
+  },
+  link: {
+    feed: '/feed.xml',
+  },
   nav: {
     home: [
       {

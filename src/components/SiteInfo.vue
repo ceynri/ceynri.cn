@@ -10,10 +10,10 @@
     />
 
     <h1 class="site-info__name">
-      {{ $static.metadata.myName }}
-      <span class="site-info__id">@{{ $static.metadata.myId }}</span>
+      {{ $static.metadata.my.name }}
+      <span class="site-info__id">@{{ $static.metadata.my.id }}</span>
     </h1>
-    <p class="site-info__bio">{{ $static.metadata.bio }}</p>
+    <p class="site-info__bio">{{ $static.metadata.my.bio }}</p>
   </div>
 </template>
 
@@ -21,9 +21,11 @@
 query {
   metadata {
     siteName
-    myName
-    myId
-    bio
+    my {
+      name
+      id
+      bio
+    }
   }
 }
 </static-query>
