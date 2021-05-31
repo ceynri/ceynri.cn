@@ -76,34 +76,36 @@ export class Perspective {
       scale = { float: scale };
     }
     const frame = () => {
-      try {
-        const shiftX = this.clientWidth / 2 - this.clientX;
-        const shiftY = this.clientHeight / 2 - this.clientY;
-        const shiftDist = Math.abs(shiftX) + Math.abs(shiftY);
-        gsap.effects.float(elems, {
-          x: shiftX * scale.float,
-          y: shiftY * scale.float,
-        });
-        if (scale.blur) {
-          let blur = 0;
-          if (scale.blur > 0) {
-            blur = shiftDist * scale.blur;
-          } else {
-            const maxDist = Math.max(this.clientWidth, this.clientHeight) / 2;
-            const reverseDist = maxDist - shiftDist;
-            blur = Math.max(reverseDist * -scale.blur, 0);
-          }
-          gsap.effects.blur(elems, { blur });
+      const shiftX = this.clientWidth / 2 - this.clientX;
+      const shiftY = this.clientHeight / 2 - this.clientY;
+      const shiftDist = Math.abs(shiftX) + Math.abs(shiftY);
+      gsap.effects.float(elems, {
+        x: shiftX * scale.float,
+        y: shiftY * scale.float,
+      });
+      if (scale.blur) {
+        let blur = 0;
+        if (scale.blur > 0) {
+          blur = shiftDist * scale.blur;
+        } else {
+          const maxDist = Math.max(this.clientWidth, this.clientHeight) / 2;
+          const reverseDist = maxDist - shiftDist;
+          blur = Math.max(reverseDist * -scale.blur, 0);
         }
-      } catch (e) {}
+        gsap.effects.blur(elems, { blur });
+      }
     };
     this.applyAnimation(frame);
   }
 
   applyAnimation(frame) {
     const loopFrame = () => {
-      frame();
-      requestAnimationFrame(loopFrame);
+      try {
+        frame();
+        requestAnimationFrame(loopFrame);
+      } catch (e) {
+        console.error('loopFrameError', e);
+      }
     };
     requestAnimationFrame(loopFrame);
   }
