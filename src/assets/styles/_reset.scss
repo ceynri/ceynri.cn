@@ -53,9 +53,12 @@ a {
   color: inherit;
 }
 
-.button {
+button {
   border: 0;
-  background-color: none;
+  background-color: transparent;
   outline: none;
   -webkit-appearance: none; // remove native styles under iOS
+	font-size: 1rem;
+	padding: 0;
+  cursor: pointer;
 }
