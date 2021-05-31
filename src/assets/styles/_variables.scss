@@ -5,10 +5,10 @@ html {
 
 // Light default theme
 :root {
-  --space: 3.5rem;
   --content-width: 900px;
-  --header-height: 80px;
-  --radius: 8px;
+  --padding-width: 3.5rem;
+  --space: 1rem;
+  --radius: 12px;
   --duration: 0.6s;
 
   --bg-color: #f8fafd;
@@ -40,8 +40,6 @@ html {
   html {
     --base-font-size: 16px;
   }
-  body {
-    --space: 1.5rem;
-    --header-height: 60px;
+    --padding-width: 1.5rem;
   }
 }

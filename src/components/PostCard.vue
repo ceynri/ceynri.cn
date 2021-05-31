@@ -38,15 +38,15 @@ export default {
 
 <style lang="scss">
 .post-card {
-  margin-bottom: calc(var(--space) * 2 / 3);
+  margin-bottom: calc(var(--padding-width) * 2 / 3);
   position: relative;
 
 
   &__header {
-    margin-left: calc(var(--space) * -1);
-    margin-right: calc(var(--space) * -1);
-    margin-bottom: calc(var(--space) / 2);
-    margin-top: calc(var(--space) * -1);
+    margin-left: calc(var(--padding-width) * -1);
+    margin-right: calc(var(--padding-width) * -1);
+    margin-bottom: calc(var(--padding-width) / 2);
+    margin-top: calc(var(--padding-width) * -1);
     overflow: hidden;
     border-radius: var(--radius) var(--radius) 0 0;
 

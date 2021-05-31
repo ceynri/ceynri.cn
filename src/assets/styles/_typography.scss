@@ -40,7 +40,7 @@ strong {
 
 blockquote {
   border-left: 4px solid var(--border-color);
-  padding-left: calc(var(--space) / 2);
+  padding-left: calc(var(--padding-width) / 2);
   color: var(--title-color);
 }
 
