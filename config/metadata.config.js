@@ -22,26 +22,27 @@ module.exports = {
       {
         name: 'Blog',
         link: '/blog/',
+        icon: 'feather',
       },
       // {
-      //   name: 'Tags',
-      //   link: '/tags/',
+      //   name: 'About',
+      //   link: '/about/',
+      //   icon: 'info',
       // },
       // {
       //   name: 'Archive',
       //   link: '/archive/',
-      // },
-      // {
-      //   name: 'About',
-      //   link: '/about/',
+      //   icon: 'archive',
       // },
       {
         name: 'Home',
         link: '/',
+        icon: 'home',
       },
       {
         name: 'Feed',
         link: '/feed.xml',
+        icon: 'rss',
       },
     ],
   },
