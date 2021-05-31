@@ -1,49 +1,29 @@
 <template>
   <footer class="footer">
-    <div class="footer__content center-content">
-      <div class="footer__left">
-        <Social
-          class="footer__social"
-          at="footer"
-        />
-        <span class="footer__copyright">
-          <div>Copyright © 2020-{{ new Date().getFullYear() }} Ceynri</div>
-          <a
-            v-if="beian"
-            class="footer__beian"
-            :href="beian.link"
-          >{{ beian.text }}</a>
-        </span>
-      </div>
-      <div class="footer__right">
-        <div class="footer__bio">Stay<br>Thinking</div>
-      </div>
+    <div class="footer__content">
+      <span class="footer__copyright">
+        Copyright © 2020-{{ new Date().getFullYear() }} Ceynri
+      </span>
+      <a
+        v-if="$static.metadata.beian"
+        class="footer__beian"
+        :href="$static.metadata.beian.link"
+      >{{ $static.metadata.beian.text }}</a>
     </div>
 
   </footer>
 </template>
 
-<script>
-import objFilter from '~/utils/objFilter';
-import Social from '~/components/Social.vue';
-import { social, beian } from '~/config';
-
-export default {
-  data() {
-    return {
-      beian,
-    };
-  },
-  computed: {
-    social() {
-      return objFilter(social, (item) => item.showOn.includes('blog'));
-    },
-  },
-  components: {
-    Social,
-  },
-};
-</script>
+<static-query>
+query {
+  metadata {
+    beian {
+      link
+      text
+    }
+  }
+}
+</static-query>
 
 <style lang="scss">
 .footer {

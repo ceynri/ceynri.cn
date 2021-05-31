@@ -25,7 +25,7 @@
       >
         <g-link
           class="link"
-          v-for="(item, name) in nav"
+          v-for="(item, name) in $static.metadata.nav.home"
           :to="item.link"
           :key="name"
         >{{ item.name }}</g-link>
@@ -41,14 +41,15 @@
       <Social
         at="home"
         class="frame__social"
+        :items="$static.metadata.social.home"
       />
 
       <div class="frame__copyright">
         <div>© {{ new Date().getFullYear() }} Ceynri</div>
         <a
-          v-if="beian"
-          :href="beian.link"
-        >{{ beian.text }}</a>
+          v-if="$static.metadata.beian"
+          :href="$static.metadata.beian.link"
+        >{{ $static.metadata.beian.text }}</a>
       </div>
 
     </div>
@@ -59,6 +60,23 @@
 query {
   metadata {
     siteName
+    nav {
+      home {
+        name
+        link
+      }
+    }
+    social {
+      home {
+        name
+        link
+        tooltip
+      }
+    }
+    beian {
+      link
+      text
+    }
   }
 }
 </static-query>
@@ -66,28 +84,12 @@ query {
 <script>
 import Social from '~/components/Social';
 
-import objFilter from '~/utils/objFilter';
 import { isPc } from '~/utils/env';
 import { Perspective } from '~/utils/perspective';
-
-import { nav, social, beian } from '~/config';
 
 export default {
   metaInfo: {
     titleTemplate: '%s',
-  },
-  data() {
-    return {
-      beian,
-    };
-  },
-  computed: {
-    social() {
-      return objFilter(social, (item) => item.showOn.includes('home'));
-    },
-    nav() {
-      return objFilter(nav, (item) => item.showOn.includes('home'));
-    },
   },
   mounted() {
     if (isPc()) {
