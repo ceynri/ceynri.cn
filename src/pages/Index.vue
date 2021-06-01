@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-
+  <div class="home">
     <div class="frame">
       <div
         class="logo"
@@ -35,7 +34,7 @@
         class="frame__intro"
         ref="intro"
       >
-        Hello. I'm a frontend developer, like to create some gadgets.
+        Hello. I'm a frontend developer, like to create meaningful things.
       </div>
 
       <Social
@@ -92,6 +91,7 @@ export default {
     titleTemplate: '%s',
   },
   mounted() {
+    document?.documentElement.setAttribute('data-theme', 'dark');
     if (isPc()) {
       const perspective = new Perspective();
       const logo = this.$refs.logo;
@@ -105,7 +105,6 @@ export default {
         blur: -0.02,
       });
     }
-    document.documentElement.setAttribute('data-theme', 'dark');
   },
   components: {
     Social,
@@ -113,4 +112,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./Index.scss"></style>
+<style lang="scss" src="./Index.scss"></style>

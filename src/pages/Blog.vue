@@ -1,7 +1,11 @@
 <template>
   <Layout>
     <div class="posts">
-      <PostCard v-for="edge in $page.posts.edges" :key="edge.node.id" :post="edge.node" />
+      <PostCard
+        v-for="edge in $page.posts.edges"
+        :key="edge.node.id"
+        :post="edge.node"
+      />
     </div>
   </Layout>
 </template>
@@ -32,6 +36,10 @@ query {
 import PostCard from '~/components/PostCard.vue';
 
 export default {
+  mounted() {
+    // add loaded class to add css transition on the body
+    document.body.classList.add('loaded');
+  },
   components: {
     PostCard,
   },
