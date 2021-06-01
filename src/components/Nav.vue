@@ -68,6 +68,12 @@ export default {
       height: 1em;
       margin-right: 1em;
     }
+
+    color: var(--light-color);
+
+    &.active--exact {
+      color: var(--body-color);
+    }
   }
 }
 </style>
