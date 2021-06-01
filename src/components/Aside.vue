@@ -55,7 +55,7 @@ export default {
       }
 
       &:active {
-        transform: scale(0.8);
+        transform: scale(0.667);
       }
 
       &:not(:last-child) {
