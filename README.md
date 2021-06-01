@@ -8,11 +8,15 @@
 
 [Home](https://ceynri.cn/) - A fancy single-screen page.
 
-![Home](https://static.ceynri.cn/images/2021/5/27/Home.png)
+![Home](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554363449-Home.png)
 
 [Blog](https://ceynri.cn/blog/) - The main part of the website.
 
-![Blog](https://static.ceynri.cn/images/2021/5/27/Blog.png)
+![Blog](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554746577-new-blog.png)
+
+> Obsolete blog layout:
+>
+> ![Blog](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554384746-Blog.png)
 
 ## Techology
 
@@ -28,7 +32,7 @@ ceynri.cn v2 is powered by [Gridsome](https://gridsome.org), which is a Vue-powe
 
 Home logo and impression image add perspective effect:
 
-![perspective](https://static.ceynri.cn/images/2021/5/27/perspective.gif)
+![perspective](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554395766-perspective.gif)
 
 ## Versions
 
