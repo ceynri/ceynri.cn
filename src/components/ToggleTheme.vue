@@ -5,16 +5,22 @@
     @click.prevent="toggleTheme"
     class="toggle-theme button"
   >
-    <svg-icon
-      v-if="theme === 'light'"
-      class="icon"
-      src="/assets/icons/sun.svg"
-    />
-    <svg-icon
-      v-else
-      class="icon"
-      src="/assets/icons/moon.svg"
-    />
+    <!--
+      `v-show` prop not on svg-icon is because there is a bug
+      issue #11: https://github.com/ceynri/ceynri.cn/issues/11
+    -->
+    <i v-show="theme === 'dark'">
+      <svg-icon
+        class="icon"
+        src="/assets/icons/moon.svg"
+      />
+    </i>
+    <i v-show="theme === 'light'">
+      <svg-icon
+        class="icon"
+        src="/assets/icons/sun.svg"
+      />
+    </i>
   </button>
 </template>
 
