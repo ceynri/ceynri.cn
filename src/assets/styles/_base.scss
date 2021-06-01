@@ -8,16 +8,16 @@
 body {
   color: var(--body-color);
   background-color: var(--bg-color);
-  transition: color var(--duration), background-color var(--duration);
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.5;
-}
 
-html {
-  transition: color var(--duration), background-color var(--duration);
+  // Delay settings the transition to avoid the background color flashing when the page is refreshed
+  &.loaded {
+    transition: color var(--duration), background-color var(--duration);
+  }
 }
 
 a:not(.button) {
@@ -44,7 +44,7 @@ img {
 }
 
 .button {
-	display: inline-block;
+  display: inline-block;
 }
 
 // 被选中的文字
