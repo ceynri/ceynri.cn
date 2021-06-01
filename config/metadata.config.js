@@ -43,6 +43,7 @@ module.exports = {
         name: 'Feed',
         link: '/feed.xml',
         icon: 'rss',
+        use: 'a',
       },
     ],
   },

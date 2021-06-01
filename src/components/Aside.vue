@@ -4,19 +4,7 @@
       <SiteInfo />
     </header>
 
-    <nav class="nav">
-      <g-link
-        class="nav__item"
-        v-for="(item, name) in $static.metadata.nav.blog"
-        :to="item.link"
-        :key="name"
-      >
-        <div class="icon">
-          <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
-        </div>
-        {{ item.name }}
-      </g-link>
-    </nav>
+    <Nav />
 
     <footer class="aside__footer">
       <ToggleTheme class="button" />
@@ -24,27 +12,15 @@
   </aside>
 </template>
 
-<static-query>
-query {
-  metadata {
-    nav {
-      blog {
-        name
-        link
-        icon
-      }
-    }
-  }
-}
-</static-query>
-
 <script>
 import SiteInfo from '~/components/SiteInfo.vue';
+import Nav from '~/components/Nav.vue';
 import ToggleTheme from '~/components/ToggleTheme.vue';
 
 export default {
   components: {
     SiteInfo,
+    Nav,
     ToggleTheme,
   },
 };
@@ -64,26 +40,6 @@ export default {
 
   &__header {
     margin-bottom: var(--space);
-  }
-
-  .nav {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    &__item {
-      padding: calc(var(--space) / 2) 0;
-      margin: calc(var(--space) / 2) 0;
-
-      display: flex;
-      align-items: center;
-
-      .icon {
-        width: 1em;
-        height: 1em;
-        margin-right: 1em;
-      }
-    }
   }
 
   &__footer {
