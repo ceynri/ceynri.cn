@@ -8,7 +8,7 @@ module.exports = {
   siteDescription: "山风的个人网站 / Ceynri's personal website",
   siteUrl: 'https://ceynri.cn',
   templates: {
-    Post: '/blog/:year/:month/:day/:fileInfo__name',
+    Post: '/blog/:year/:month/:day/:slug',
     Tag: '/blog/tag/:id',
   },
   metadata,
