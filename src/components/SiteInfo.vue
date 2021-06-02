@@ -4,8 +4,8 @@
       alt="site avatar"
       class="site-info__avatar"
       src="~/assets/images/avatar.jpg"
-      width="180"
-      height="180"
+      width="160"
+      height="160"
       blur="5"
     />
 
@@ -53,6 +53,7 @@ export default {};
 
   &__bio {
     color: var(--body-color);
+    transition: color var(--duration);
     margin-bottom: 0;
   }
 }
