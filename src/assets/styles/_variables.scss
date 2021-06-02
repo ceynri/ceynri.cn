@@ -1,19 +1,18 @@
-// Default variables
-html {
-  --base-font-size: 20px;
-}
-
-// Light default theme
 :root {
+  --base-font-size: 20px;
   --content-width: 900px;
   --aside-width: 210px;
   --main-width: calc(var(--content-width) + var(--aside-width) + var(--space));
+  --top-margin-width: 80px;
   --padding-width: 3.5rem;
   --space: 1rem;
-  --top-margin-width: 80px;
+  
+  --article-font-size: 0.9em;
+  --article-line-height: 1.75;
   --radius: 12px;
   --duration: 0.6s;
-
+  
+  // Light default theme
   --bg-color: #f8fafd;
   --bg-content-color: #fff;
   --bg-code: #282c34;
@@ -40,10 +39,8 @@ html {
 
 // laptop
 @media screen and (max-width: 1023px) {
-  html {
-    --base-font-size: 16px;
-  }
   :root {
+    --base-font-size: 16px;
     --aside-width: 170px;
   }
 }

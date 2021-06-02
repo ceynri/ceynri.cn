@@ -3,20 +3,22 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', 'Myriad Pro', -apple-system, BlinkMacSystemFont,
+    'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
   font-weight: 400;
-  line-height: 1.45;
+  // line-height: 1.45;
 }
 
 p {
-	margin-bottom: 1.25em;
+  line-height: var(--article-line-height);
+  margin-bottom: 1em;
 }
 
 h1, h2, h3, h4, h5 {
   transition: color var(--duration);
   color: var(--title-color);
   margin: 2.75rem 0 1rem;
-  font-family: 'Poppins', sans-serif;
+  // font-family: 'Poppins', sans-serif;
   font-weight: 600;
   line-height: 1.15;
 }
