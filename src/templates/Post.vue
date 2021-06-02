@@ -103,6 +103,7 @@ query Post ($id: ID!) {
 
   &__content {
     font-size: var(--article-font-size);
+    margin-bottom: calc(var(--padding-width) / 2);
 
     h1:first-child {
       display: none;
