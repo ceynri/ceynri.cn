@@ -9,14 +9,14 @@
   
   --article-font-size: 0.9em;
   --article-line-height: 1.75;
-  --radius: 12px;
+  --radius: 0.75em;
   --duration: 0.6s;
   
   // Light default theme
   --bg-color: #f8fafd;
   --bg-content-color: #fff;
   --bg-code: #282c34;
-  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(#000, 0.1);
   --title-color: #24292e;
   --body-color: #34393e;
   --link-color: #f22;
@@ -27,8 +27,8 @@
   &[data-theme='dark'] {
     --bg-color: #000;
     --bg-content-color: #16181a;
-    --bg-code: rgba(0, 0, 0, 0.3);
-    --border-color: rgba(255, 255, 255, 0.1);
+    --bg-code: rgba(#000, 0.3);
+    --border-color: rgba(#fff, 0.1);
     --title-color: #c9d1d9;
     --body-color: #a9b1b9;
     --link-color: #00f;
