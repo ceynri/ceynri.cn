@@ -29,17 +29,20 @@ export default {
 <style lang="scss">
 .aside {
   width: var(--aside-width);
-  max-height: 100vh;
+  height: 100vh;
   padding: var(--top-margin-width) var(--space);
   margin-right: var(--space);
   color: var(--title-color);
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 
   &__header {
     margin-bottom: var(--space);
+  }
+
+  .nav {
+    margin-bottom: auto;
   }
 
   &__footer {
@@ -61,6 +64,20 @@ export default {
       &:not(:last-child) {
         margin-right: 0.75em;
       }
+    }
+  }
+
+  // mobile
+  @media screen and (max-width: $md - 1px) {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    text-align: center;
+
+    
+    .nav {
+      margin-bottom: var(--space);
     }
   }
 }

@@ -1,31 +1,34 @@
 <template>
   <nav class="nav">
-    <template
-      v-for="item in $static.metadata.nav.blog"
-    >
-      <a
-        v-if="item.use === 'a'"
-        class="nav__item"
-        :href="item.link"
+    <ul>
+      <li
+        v-for="item in $static.metadata.nav.blog"
         :key="item.name"
       >
-        <div class="icon">
-          <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
-        </div>
-        {{ item.name }}
-      </a>
-      <g-link
-        v-else
-        class="nav__item"
-        :to="item.link"
-        :key="item.name"
-      >
-        <div class="icon">
-          <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
-        </div>
-        {{ item.name }}
-      </g-link>
-    </template>
+        <a
+          v-if="item.use === 'a'"
+          class="nav__item"
+          :href="item.link"
+          :key="item.name"
+        >
+          <div class="icon">
+            <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
+          </div>
+          {{ item.name }}
+        </a>
+        <g-link
+          v-else
+          class="nav__item"
+          :to="item.link"
+          :key="item.name"
+        >
+          <div class="icon">
+            <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
+          </div>
+          {{ item.name }}
+        </g-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
@@ -45,20 +48,29 @@ query {
 </static-query>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="scss">
 .nav {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  
+  ul {
+    // reset
+    list-style: none;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  li {
+    margin: 0 0 var(--space);
+  }
 
   &__item {
-    padding: calc(var(--space) / 2) 0;
-    margin: calc(var(--space) / 2) 0;
+    padding: calc(var(--space) / 2);
+    padding-left: 0;
+    width: fit-content;
 
     display: flex;
     align-items: center;
@@ -73,6 +85,25 @@ export default {
 
     &.active--exact {
       color: var(--body-color);
+    }
+  }
+
+  @media screen and (max-width: $md - 1px) {
+    ul {
+      flex-direction: row;
+      justify-content: center;
+
+      li {
+        margin: 0;
+      }
+    }
+
+    &__item {
+      padding: var(--space);
+    }
+
+    .icon {
+      display: none;
     }
   }
 }

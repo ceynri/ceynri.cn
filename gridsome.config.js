@@ -13,4 +13,11 @@ module.exports = {
   },
   metadata,
   plugins,
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "~/assets/styles/_mixin.scss";`,
+      },
+    },
+  },
 };
