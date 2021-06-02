@@ -102,6 +102,8 @@ query Post ($id: ID!) {
   }
 
   &__content {
+    font-size: var(--article-font-size);
+
     h1:first-child {
       display: none;
     }
@@ -119,12 +121,29 @@ query Post ($id: ID!) {
 
     img {
       display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 100%;
+
+      // full
+      margin-left: calc(var(--padding-width) * -1);
+      margin-right: calc(var(--padding-width) * -1);
+      width: calc(100% + var(--padding-width) * 2);
+      max-width: none;
     }
 
     &.image {
+      &--small,
+      &--medium,
+      &--large {
+        img {
+          margin-left: auto;
+          margin-right: auto;
+          width: initial;
+        }
+      }
+
+      &--normalize img {
+        width: 100%;
+      }
+
       &--small img {
         max-width: 50%;
       }
@@ -138,12 +157,7 @@ query Post ($id: ID!) {
       }
 
       &--full img {
-        margin: {
-          left: calc(var(--padding-width) * -1);
-          right: calc(var(--padding-width) * -1);
-        }
-        max-width: none;
-        width: calc(100% + var(--padding-width) * 2);
+        // default
       }
     }
   }
@@ -155,9 +169,5 @@ query Post ($id: ID!) {
   &:empty {
     display: none;
   }
-}
-
-.post-author {
-  margin-top: calc(var(--padding-width) / 2);
 }
 </style>
