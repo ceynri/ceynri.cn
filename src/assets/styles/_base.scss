@@ -21,7 +21,10 @@ body {
 }
 
 a:not(.button) {
-  transition: color calc(var(--duration) / 2), filter var(--duration);
+  transition: color calc(var(--duration) / 2),
+    background-color calc(var(--duration) / 2),
+    opacity calc(var(--duration) / 2),
+    filter var(--duration);
 
   &:hover {
     color: var(--link-color);
@@ -32,7 +35,9 @@ a:not(.button) {
 .link-highlight a:not(.button) {
   text-decoration: underline;
   opacity: 0.8;
-  transition: color calc(var(--duration) / 2), opacity calc(var(--duration) / 2);
+  transition: color calc(var(--duration) / 2),
+    opacity calc(var(--duration) / 2),
+    filter var(--duration);
 
   &:hover {
     opacity: 1;
