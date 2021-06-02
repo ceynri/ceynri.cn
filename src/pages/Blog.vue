@@ -37,8 +37,10 @@ import PostCard from '~/components/PostCard.vue';
 
 export default {
   mounted() {
-    // add loaded class to add css transition on the body
-    document.body.classList.add('loaded');
+    setTimeout(() => {
+      // add loaded class to add css transition on the body
+      document.body.classList.add('loaded');
+    }, 1000);
   },
   components: {
     PostCard,
