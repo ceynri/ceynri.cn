@@ -32,7 +32,8 @@ query {
   color: var(--light-color);
   transition: color var(--duration);
 
-  @media screen and (max-width: 639px) {
+  // mobile
+  @media screen and (max-width: $md - 1px) {
     justify-content: center;
     text-align: center;
   }

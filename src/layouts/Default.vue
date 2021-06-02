@@ -1,6 +1,6 @@
 <template>
   <div class="layout__default main-container">
-    <Aside class="aside" />
+    <Aside />
     <main class="main">
       <slot />
       <Footer />
@@ -37,23 +37,21 @@ export default {
   .main {
     margin: 0;
     padding: var(--top-margin-width) 20px 0;
-    max-width: calc(100% - var(--aside-width) - var(--space));
+    width: calc(100% - var(--aside-width) - var(--space));
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: $md - 1px) {
     flex-direction: column;
 
-    .aside {
-      position: static;
-      top: none;
-      width: 100%;
-      margin: 0;
-    }
-
     .main {
+      z-index: 1;
       width: 100%;
       max-width: none;
+      background-color: var(--bg-color);
+      transition: background-color var(--duration), box-shadow var(--duration);
       padding: 0;
+
+      box-shadow: 0 0 20px -4px var(--bg-color);
     }
   }
 }

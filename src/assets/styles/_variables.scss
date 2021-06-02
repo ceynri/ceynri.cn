@@ -37,16 +37,16 @@
   }
 }
 
-// laptop
-@media screen and (max-width: 1023px) {
+// tablet
+@media screen and (max-width: $lg - 1) {
   :root {
     --base-font-size: 16px;
     --aside-width: 170px;
   }
 }
 
-// tablet
-@media screen and (max-width: 639px) {
+// mobile
+@media screen and (max-width: $sm - 1) {
   :root {
     --padding-width: 1.5rem;
     --top-margin-width: 60px;
