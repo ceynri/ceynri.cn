@@ -13,6 +13,16 @@ module.exports = [
           create: true,
         },
       },
+      remark: {
+        // remark options
+        plugins: ["@gridsome/remark-prismjs"],
+      },
+    },
+  },
+  {
+    use: "@gridsome/plugin-google-analytics",
+    options: {
+      id: "UA-158846445-1",
     },
   },
   {
