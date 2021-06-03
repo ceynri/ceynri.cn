@@ -24,7 +24,7 @@ export default {
   display: flex;
   padding: 0 var(--padding-width);
   position: relative;
-  max-width: var(--content-width);
+  max-width: var(--main-width);
   justify-content: center;
 }
 

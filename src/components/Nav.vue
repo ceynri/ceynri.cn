@@ -64,11 +64,11 @@ export default {};
   }
 
   li {
-    margin: 0 0 var(--space);
+    margin: 0 0 1em;
   }
 
   &__item {
-    padding: calc(var(--space) / 2);
+    padding: 0.5em;
     padding-left: 0;
     width: fit-content;
 
@@ -99,7 +99,7 @@ export default {};
     }
 
     &__item {
-      padding: var(--space);
+      padding: 1em;
     }
 
     .icon {

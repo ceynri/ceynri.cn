@@ -27,7 +27,7 @@ export default {
   display: flex;
   padding: 0 var(--padding-width);
   position: relative;
-  max-width: var(--main-width);
+  max-width: var(--layout-width);
 
   .aside {
     position: sticky;
@@ -35,9 +35,10 @@ export default {
   }
 
   .main {
+    box-sizing: content-box;
     margin: 0;
-    padding: var(--top-margin-width) 20px 0;
-    width: calc(100% - var(--aside-width) - var(--space));
+    padding: var(--top-margin-width) var(--space) 0;
+    width: var(--main-width);
   }
 
   @media screen and (max-width: $md - 1px) {
