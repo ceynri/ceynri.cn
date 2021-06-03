@@ -15,7 +15,7 @@ module.exports = [
       },
       remark: {
         // remark options
-        plugins: ["@gridsome/remark-prismjs"],
+        plugins: ['@gridsome/remark-prismjs'],
         externalLinksTarget: '_blank',
         externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
         anchorClassName: 'icon icon-link',
@@ -23,9 +23,9 @@ module.exports = [
     },
   },
   {
-    use: "@gridsome/plugin-google-analytics",
+    use: '@gridsome/plugin-google-analytics',
     options: {
-      id: "UA-158846445-1",
+      id: 'UA-158846445-1',
     },
   },
   {
