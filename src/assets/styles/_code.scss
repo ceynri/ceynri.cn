@@ -3,7 +3,7 @@ body {
 	pre[class*="language-"],
 	code[class*="language-"] {
 		font-size: .85em;
-		transition: color var(--duration), background-color var(--duration);
+		transition: background-color var(--duration);
 	}
 
 	pre[class*="language-"] {

@@ -51,7 +51,7 @@ export default {
       height: 1.5em;
       color: var(--body-color);
 
-      transition: opacity var(--duration), transform calc(var(--duration) / 2);
+      transition: opacity var(--duration), transform var(--duration);
 
       &:hover {
         opacity: 0.8;
@@ -75,7 +75,6 @@ export default {
     margin: 0;
     text-align: center;
 
-    
     .nav {
       margin-bottom: var(--space);
     }

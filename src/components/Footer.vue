@@ -30,7 +30,6 @@ query {
   line-height: 2;
 
   color: var(--light-color);
-  transition: color var(--duration);
 
   // mobile
   @media screen and (max-width: $md - 1px) {

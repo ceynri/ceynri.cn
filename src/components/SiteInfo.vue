@@ -53,7 +53,6 @@ export default {};
 
   &__bio {
     color: var(--body-color);
-    transition: color var(--duration);
     margin-bottom: 0;
   }
 }
