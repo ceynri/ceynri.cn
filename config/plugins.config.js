@@ -33,7 +33,7 @@ module.exports = [
     options: {
       contentTypes: ['Post'],
       feedOptions: {
-        title: '山风的Blog',
+        title: '山风的小角落',
         description: '随便写写。',
       },
       rss: {

@@ -4,9 +4,10 @@ const metadata = require('./config/metadata.config');
 const plugins = require('./config/plugins.config');
 
 module.exports = {
-  siteName: 'Ceynri',
-  siteDescription: "山风的个人网站 / Ceynri's personal website",
+  siteName: '山风',
+  siteDescription: "山风的小角落 / Ceynri's personal website",
   siteUrl: 'https://ceynri.cn',
+  titleTemplate: '%s | 山风',
   templates: {
     Post: '/blog/:year/:month/:day/:slug',
     Tag: '/blog/tag/:id',
