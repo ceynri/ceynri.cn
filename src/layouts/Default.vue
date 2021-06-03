@@ -49,10 +49,10 @@ export default {
       width: 100%;
       max-width: none;
       background-color: var(--bg-color);
-      transition: background-color var(--duration), box-shadow var(--duration);
-      padding: 0;
-
       box-shadow: 0 0 20px -4px var(--bg-color);
+      transition: background-color calc(var(--duration) * 2),
+        box-shadow calc(var(--duration) * 2);
+      padding: 0;
     }
   }
 }

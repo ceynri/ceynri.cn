@@ -2,10 +2,10 @@
 .content-box {
   background-color: var(--bg-content-color);
   margin: 0 auto;
-  transition: background-color var(--duration);
   padding: var(--padding-width);
   border-radius: var(--radius);
   box-shadow: 1px 1px 16px 0 rgba(#000, 0.02);
-  transition: transform calc(var(--duration) / 2),
-    background-color calc(var(--duration) / 2), box-shadow var(--duration);
+  transition: transform var(--duration),
+    background-color var(--duration),
+    box-shadow var(--duration);
 }

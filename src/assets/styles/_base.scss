@@ -16,15 +16,15 @@ body {
 
   // Delay settings the transition to avoid the background color flashing when the page is refreshed
   &.loaded {
-    transition: color var(--duration), background-color var(--duration);
+    transition: background-color calc(var(--duration) * 2);
   }
 }
 
 a:not(.button) {
-  transition: color calc(var(--duration) / 2),
-    background-color calc(var(--duration) / 2),
-    opacity calc(var(--duration) / 2),
-    filter var(--duration);
+  transition: color var(--duration),
+    background-color var(--duration),
+    opacity var(--duration),
+    filter calc(var(--duration) * 2);
 
   &:hover {
     color: var(--link-color);
@@ -35,9 +35,9 @@ a:not(.button) {
 .link-highlight a:not(.button) {
   text-decoration: underline;
   opacity: 0.8;
-  transition: color calc(var(--duration) / 2),
-    opacity calc(var(--duration) / 2),
-    filter var(--duration);
+  transition: color var(--duration),
+    opacity var(--duration),
+    filter calc(var(--duration) * 2);
 
   &:hover {
     opacity: 1;
