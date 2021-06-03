@@ -1,8 +1,8 @@
 :root {
   --base-font-size: 20px;
-  --content-width: 900px;
+  --main-width: 900px;
   --aside-width: 210px;
-  --main-width: calc(var(--content-width) + var(--aside-width) + var(--space));
+  --layout-width: calc(var(--main-width) + var(--aside-width) + var(--space) * 3);
   --top-margin-width: 80px;
   --padding-width: 3.5rem;
   --space: 1rem;

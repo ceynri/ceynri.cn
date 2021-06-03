@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss">
 .post-tags {
-  margin: 1em 0 0;
+  margin: var(--space) 0 0;
 
   &__link {
     margin-right: 0.7em;
