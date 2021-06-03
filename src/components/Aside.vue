@@ -29,7 +29,7 @@ export default {
 <style lang="scss">
 .aside {
   width: var(--aside-width);
-  height: 100vh;
+  max-height: 100vh;
   padding: var(--top-margin-width) var(--space);
   margin-right: var(--space);
   color: var(--title-color);
