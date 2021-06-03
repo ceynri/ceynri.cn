@@ -46,7 +46,8 @@ export default {
     PostCard,
   },
   metaInfo: {
-    title: 'Blog',
+    title: '山风的小角落',
+    titleTemplate: '%s',
   },
 };
 </script>
