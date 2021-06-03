@@ -71,7 +71,7 @@ query Post ($id: ID!) {
     }
     description
     content
-    cover_image (width: 860, blur: 10)
+    cover_image (width: 900, blur: 10, quality: 98)
     add_classes
   }
 }
