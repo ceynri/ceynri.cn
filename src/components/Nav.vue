@@ -1,33 +1,11 @@
 <template>
   <nav class="nav">
     <ul>
-      <li
+      <NavItem
         v-for="item in $static.metadata.nav.blog"
+        :item="item"
         :key="item.name"
-      >
-        <a
-          v-if="item.use === 'a'"
-          class="nav__item"
-          :href="item.link"
-          :key="item.name"
-        >
-          <div class="icon">
-            <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
-          </div>
-          {{ item.name }}
-        </a>
-        <g-link
-          v-else
-          class="nav__item"
-          :to="item.link"
-          :key="item.name"
-        >
-          <div class="icon">
-            <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
-          </div>
-          {{ item.name }}
-        </g-link>
-      </li>
+      />
     </ul>
   </nav>
 </template>
@@ -48,12 +26,16 @@ query {
 </static-query>
 
 <script>
-export default {};
+import NavItem from './NavItem.vue';
+export default {
+  components: {
+    NavItem,
+  },
+};
 </script>
 
 <style lang="scss">
 .nav {
-  
   ul {
     // reset
     list-style: none;
@@ -63,47 +45,10 @@ export default {};
     flex-direction: column;
   }
 
-  li {
-    margin: 0 0 1em;
-  }
-
-  &__item {
-    padding: 0.5em;
-    padding-left: 0;
-    width: fit-content;
-
-    display: flex;
-    align-items: center;
-
-    .icon {
-      width: 1em;
-      height: 1em;
-      margin-right: 1em;
-    }
-
-    color: var(--light-color);
-
-    &.active--exact {
-      color: var(--body-color);
-    }
-  }
-
   @media screen and (max-width: $md - 1px) {
     ul {
       flex-direction: row;
       justify-content: center;
-
-      li {
-        margin: 0;
-      }
-    }
-
-    &__item {
-      padding: 1em;
-    }
-
-    .icon {
-      display: none;
     }
   }
 }
