@@ -26,6 +26,7 @@ query {
 .footer {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   margin: var(--padding-width) 0;
   line-height: 2;
 

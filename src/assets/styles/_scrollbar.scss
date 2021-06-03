@@ -1,7 +1,12 @@
 // 滚动条整体样式
 ::-webkit-scrollbar {
-  width: 0.8em;
-  height: 0.8em;
+  width: 16px;
+  height: 16px;
+
+  @media screen and (max-width: $lg - 1) {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 // 滚动条里面小方块
@@ -11,6 +16,6 @@
 
 // 滚动条里面轨道
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 0.8em #{rgba(#000, 0.2)};
+  box-shadow: inset 0 0 16px #{rgba(#000, 0.2)};
   background-color: var(--bg-content-color);
 }
