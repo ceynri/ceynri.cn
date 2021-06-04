@@ -29,6 +29,7 @@ export default {
 <style lang="scss">
 .aside {
   width: var(--aside-width);
+  flex: none;
   max-height: 100vh;
   padding: var(--top-margin-width) var(--space);
   margin-right: var(--space);
@@ -39,10 +40,6 @@ export default {
 
   &__header {
     margin-bottom: var(--space);
-  }
-
-  .nav {
-    margin-bottom: auto;
   }
 
   &__footer {
@@ -72,12 +69,10 @@ export default {
     position: static;
     width: 100%;
     height: auto;
+    max-height: none;
     margin: 0;
+    align-items: center;
     text-align: center;
-
-    .nav {
-      margin-bottom: var(--space);
-    }
   }
 }
 </style>
