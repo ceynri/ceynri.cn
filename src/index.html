@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html ${htmlAttrs}>
   <head>
+    <meta name="color-scheme" content="light dark" />
     ${head}
   </head>
   <body ${bodyAttrs}>
     <script>
-      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      // Add dark / light detection that runs before Vue.js load.
       (function() {
-        window.__onThemeChange = function() {};
-        function setTheme(newTheme) {
-          window.__theme = newTheme;
-          preferredTheme = newTheme;
-          document.documentElement.setAttribute('data-theme', newTheme);
-          window.__onThemeChange(newTheme);
-        }
+        const colorSchemeMeta = document.querySelector('html head meta[name="color-scheme"]');
 
-        var preferredTheme;
-        try {
-          preferredTheme = localStorage.getItem('theme');
-        } catch (err) {}
-        
-        // todo: 该代码逻辑可以不用放在window下
-        window.__setPreferredTheme = function(newTheme) {
-          setTheme(newTheme);
+        window.__setColorScheme = function(value) {
+          window.__colorScheme = value;
+          document.documentElement.dataset.scheme = value;
+          if (colorSchemeMeta) {
+            colorSchemeMeta.content = value;
+          }
           try {
-            localStorage.setItem('theme', newTheme);
+            // localStorage.setItem will fail when the user accesses in incognito mode
+            localStorage.setItem('colorScheme', value);
           } catch (err) {}
-        }
-        // var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        // darkQuery.addListener(function(e) {
-        //   window.__setPreferredTheme(e.matches ? 'dark' : 'light')
-        // });
-        // setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
-        setTheme(preferredTheme || 'dark');
+        };
+        
+        // Select the default color scheme by user system setting
+        // const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+        // __setColorScheme(colorScheme || (supportDarkMode ? 'dark' : 'light'));
+        
+        let colorScheme = localStorage.getItem('colorScheme');
+        __setColorScheme(colorScheme || 'dark');
       })();
     </script>
 

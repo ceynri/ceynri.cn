@@ -24,7 +24,7 @@
   --light-color: #a4a9ae;
 
   // Override variables for Dark theme
-  &[data-theme='dark'] {
+  &[data-scheme='dark'] {
     --bg-color: #000;
     --bg-content-color: #16181a;
     --bg-code: #{rgba(#000, 0.3)};
