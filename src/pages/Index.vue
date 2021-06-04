@@ -83,7 +83,7 @@ query {
 <script>
 import Social from '~/components/Social';
 
-import { isPc } from '~/utils/env';
+// import { isPc } from '~/utils/env';
 import { Perspective } from '~/utils/perspective';
 
 export default {
@@ -91,7 +91,12 @@ export default {
     titleTemplate: '%s',
   },
   mounted() {
-    if (isPc()) {
+    // if (isPc()) {
+    this.applyPerspective();
+    // }
+  },
+  methods: {
+    applyPerspective() {
       const perspective = new Perspective();
       const logo = this.$refs.logo;
       const impressionImage = this.$refs.impressionImage;
@@ -103,7 +108,7 @@ export default {
         float: 0.16,
         blur: -0.02,
       });
-    }
+    },
   },
   components: {
     Social,
