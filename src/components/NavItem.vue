@@ -6,6 +6,7 @@
       :href="item.link"
       :key="item.name"
     >
+      <!-- TODO: Use another way to inline svg icon -->
       <div class="icon">
         <svg-icon :src="`/assets/icons/${item.icon}.svg`" />
       </div>

@@ -24,16 +24,20 @@ module.exports = {
         link: '/blog/',
         icon: 'feather',
       },
-      // {
-      //   name: 'About',
-      //   link: '/about/',
-      //   icon: 'info',
-      // },
-      // {
-      //   name: 'Archive',
-      //   link: '/archive/',
-      //   icon: 'archive',
-      // },
+      {
+        name: 'About',
+        // link: '/about/',
+        link: 'javascript:alert("Coming soon! 😂");',
+        use: 'a',
+        icon: 'info',
+      },
+      {
+        name: 'Archive',
+        // link: '/archive/',
+        link: 'javascript:alert("Coming soon! 😂");',
+        use: 'a',
+        icon: 'archive',
+      },
       {
         name: 'Home',
         link: '/',

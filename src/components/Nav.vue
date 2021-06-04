@@ -36,6 +36,12 @@ export default {
 
 <style lang="scss">
 .nav {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  margin-bottom: var(--space);
+
   ul {
     // reset
     list-style: none;
@@ -49,6 +55,7 @@ export default {
     ul {
       flex-direction: row;
       justify-content: center;
+      flex-wrap: wrap;
     }
   }
 }

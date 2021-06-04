@@ -35,10 +35,8 @@ export default {
   }
 
   .main {
-    box-sizing: content-box;
     margin: 0;
     padding: var(--top-margin-width) var(--space) 0;
-    width: var(--main-width);
   }
 
   @media screen and (max-width: $md - 1px) {
