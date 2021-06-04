@@ -98,10 +98,10 @@ export default {
       const impressionImage = this.$refs.impressionImage;
       perspective.apply(logo, {
         float: -0.16,
-        blur: 0.004,
+        blur: 0.008,
       });
       perspective.apply(impressionImage, {
-        float: 0.04,
+        float: 0.16,
         blur: -0.02,
       });
     }
