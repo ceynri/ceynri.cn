@@ -32,7 +32,7 @@ export default {
       scheme: 'dark',
     };
   },
-  created() {
+  mounted() {
     this.scheme = window.__colorScheme;
   },
   methods: {
