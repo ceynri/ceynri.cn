@@ -7,7 +7,7 @@
     <Nav />
 
     <footer class="aside__footer">
-      <ToggleTheme class="button" />
+      <SchemeToggle class="button" />
     </footer>
   </aside>
 </template>
@@ -15,13 +15,13 @@
 <script>
 import SiteInfo from '~/components/SiteInfo.vue';
 import Nav from '~/components/Nav.vue';
-import ToggleTheme from '~/components/ToggleTheme.vue';
+import SchemeToggle from '~/components/SchemeToggle.vue';
 
 export default {
   components: {
     SiteInfo,
     Nav,
-    ToggleTheme,
+    SchemeToggle,
   },
 };
 </script>

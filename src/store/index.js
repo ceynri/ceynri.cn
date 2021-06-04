@@ -11,7 +11,7 @@ export default new Vuex.Store({
     setTheme(state, value) {
       state.theme = value;
       // This is using a script that is added in index.html
-      window.__setPreferredTheme(value);
+      window.__setColorScheme(value);
     },
   },
   actions: {},

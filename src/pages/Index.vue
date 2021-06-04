@@ -91,7 +91,6 @@ export default {
     titleTemplate: '%s',
   },
   mounted() {
-    document?.documentElement.setAttribute('data-theme', 'dark');
     if (isPc()) {
       const perspective = new Perspective();
       const logo = this.$refs.logo;
