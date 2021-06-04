@@ -1,11 +1,12 @@
 // // 滚动条整体样式
 // ::-webkit-scrollbar {
 //   content: '';
+
 //   // 滚动条里面小方块
 //   &-thumb {
 //     background-color: var(--light-color);
 //   }
-  
+
 //   // 滚动条里面轨道
 //   &-track {
 //     box-shadow: inset 0 0 16px #{rgba(#000, 0.2)};
@@ -13,3 +14,9 @@
 //   }
 // }
 
+@media screen and (min-width: $xl) {
+  // trick: Offset the scrollbar width to make the layout symmetrical
+  body {
+    margin-left: calc(100vw - 100%);
+  }
+}
