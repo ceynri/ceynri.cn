@@ -33,21 +33,19 @@ module.exports = {
       },
       {
         name: 'Archive',
-        // link: '/archive/',
-        link: 'javascript:alert("Coming soon! 😂");',
-        use: 'a',
+        link: '/blog/archive/',
         icon: 'archive',
-      },
-      {
-        name: 'Home',
-        link: '/',
-        icon: 'home',
       },
       {
         name: 'Feed',
         link: '/feed.xml',
         icon: 'rss',
         use: 'a',
+      },
+      {
+        name: 'Home',
+        link: '/',
+        icon: 'home',
       },
     ],
   },
