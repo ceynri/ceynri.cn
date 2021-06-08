@@ -63,7 +63,7 @@ query Post ($id: ID!) {
   post: post (id: $id) {
     title
     path
-    date (format: "YYYY.MM.DD")
+    date (format: "MMM DD, YYYY")
     tags {
       id
       title
