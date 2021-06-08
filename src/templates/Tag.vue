@@ -29,7 +29,7 @@ query Tag ($id: ID!) {
           ...on Post {
             title
             path
-            date (format: "YYYY.MM.DD")
+            date (format: "MMM DD, YYYY")
             description
             content
           }
