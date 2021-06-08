@@ -16,4 +16,8 @@ export default function(Vue, { appOptions, head }) {
   head.htmlAttrs = {
     lang: 'zh_CN',
   };
+  head.meta.push({
+    name: 'keywords',
+    content: '山风,博客,前端,ceynri,frontend,blog',
+  });
 }
