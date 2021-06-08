@@ -17,7 +17,7 @@ query {
       node {
         id
         title
-        date (format: "YYYY.MM.DD")
+        date (format: "MMM DD, YYYY")
         description
         cover_image (width: 900, height: 400, blur: 10, quality: 90)
         path
