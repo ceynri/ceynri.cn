@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <header class="tag__header">
-      <h1 class="tag__title space-bottom">
+      <h1 class="tag__title">
         <span class="hash">#</span> {{ $page.tag.title.toUpperCase() }}
       </h1>
       <div class="tag__info">
@@ -67,21 +67,27 @@ export default {
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 10px;
-      height: 100%;
-      background-color: var(--border-color);
-      transition: background-color var(--duration);
-    }
+    // &::before {
+    //   content: '';
+    //   display: block;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 10px;
+    //   height: 100%;
+    //   background-color: var(--border-color);
+    //   transition: background-color var(--duration);
+    // }
   }
 
   &__title {
     margin: 0;
+
+    .hash {
+      transition: color var(--duration), filter var(--duration);
+      color: var(--link-color);
+      filter: drop-shadow(0 0 0.2em var(--link-shadow-color));
+    }
   }
 
   &__info {
