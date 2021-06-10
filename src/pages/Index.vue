@@ -1,10 +1,7 @@
 <template>
   <div class="home">
     <div class="frame">
-      <div
-        class="logo"
-        ref="logo"
-      >
+      <div class="logo" ref="logo">
         {{ $static.metadata.siteName }}
       </div>
 
@@ -18,22 +15,17 @@
     <div class="frame">
       <div class="frame__website">ceynri.cn</div>
 
-      <div
-        class="frame__nav"
-        ref="nav"
-      >
+      <div class="frame__nav" ref="nav">
         <g-link
           class="link"
           v-for="(item, name) in $static.metadata.nav.home"
           :to="item.link"
           :key="name"
-        >{{ item.name }}</g-link>
+          >{{ item.name }}</g-link
+        >
       </div>
 
-      <div
-        class="frame__intro"
-        ref="intro"
-      >
+      <div class="frame__intro" ref="intro">
         Hello. I'm a frontend developer, like to create meaningful things.
       </div>
 
@@ -45,12 +37,10 @@
 
       <div class="frame__copyright">
         <div>© {{ new Date().getFullYear() }} Ceynri</div>
-        <a
-          v-if="$static.metadata.beian"
-          :href="$static.metadata.beian.link"
-        >{{ $static.metadata.beian.text }}</a>
+        <a v-if="$static.metadata.beian" :href="$static.metadata.beian.link">{{
+          $static.metadata.beian.text
+        }}</a>
       </div>
-
     </div>
   </div>
 </template>

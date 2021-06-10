@@ -2,16 +2,8 @@
   <nav class="nav">
     <ul>
       <li>
-        <g-link
-          class="nav__item"
-          to="/blog/"
-          key="Blog"
-        >
-          <img
-            svg-inline
-            class="icon"
-            src='~/assets/icons/feather.svg'
-          />
+        <g-link class="nav__item" to="/blog/" key="Blog">
+          <img svg-inline class="icon" src="~/assets/icons/feather.svg" />
           Blog
         </g-link>
       </li>
@@ -21,53 +13,25 @@
           href="javascript:alert('Coming soon! 😂');"
           key="About"
         >
-          <img
-            svg-inline
-            class="icon"
-            src="~/assets/icons/info.svg"
-          />
+          <img svg-inline class="icon" src="~/assets/icons/info.svg" />
           About
         </a>
       </li>
       <li>
-        <g-link
-          class="nav__item"
-          to="/blog/archive/"
-          key="Archive"
-        >
-          <img
-            svg-inline
-            class="icon"
-            src='~/assets/icons/archive.svg'
-          />
+        <g-link class="nav__item" to="/blog/archive/" key="Archive">
+          <img svg-inline class="icon" src="~/assets/icons/archive.svg" />
           Archive
         </g-link>
       </li>
       <li>
-        <a
-          class="nav__item"
-          href="/feed.xml"
-          key="Feed"
-        >
-          <img
-            svg-inline
-            class="icon"
-            src="~/assets/icons/rss.svg"
-          />
+        <a class="nav__item" href="/feed.xml" key="Feed">
+          <img svg-inline class="icon" src="~/assets/icons/rss.svg" />
           Feed
         </a>
       </li>
       <li>
-        <g-link
-          class="nav__item"
-          to="/"
-          key="Home"
-        >
-          <img
-            svg-inline
-            class="icon"
-            src='~/assets/icons/home.svg'
-          />
+        <g-link class="nav__item" to="/" key="Home">
+          <img svg-inline class="icon" src="~/assets/icons/home.svg" />
           Home
         </g-link>
       </li>

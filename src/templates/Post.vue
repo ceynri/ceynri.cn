@@ -18,10 +18,7 @@
           />
         </div>
 
-        <div
-          class="post__content link-highlight"
-          v-html="$page.post.content"
-        />
+        <div class="post__content link-highlight" v-html="$page.post.content" />
 
         <div class="post__footer">
           <PostTags :tags="$page.post.tags" />
@@ -32,12 +29,7 @@
         <!-- Add comment widgets here -->
       </div>
     </template>
-    <template
-      v-else
-      class="post content-box"
-    >
-      该 Post 暂未公开！
-    </template>
+    <template v-else class="post content-box">该 Post 暂未公开！</template>
   </PostLayout>
 </template>
 
@@ -139,29 +131,29 @@ export default {
       width: calc(100% + var(--padding-width) * 2);
       max-width: none;
 
-      &[alt$="?size=small"],
-      &[alt$="?size=medium"],
-      &[alt$="?size=large"],
-      &[alt$="?size=auto"] {
+      &[alt$='?size=small'],
+      &[alt$='?size=medium'],
+      &[alt$='?size=large'],
+      &[alt$='?size=auto'] {
         margin-left: auto;
         margin-right: auto;
         width: initial;
       }
 
-      &[alt$="?size=small"] {
+      &[alt$='?size=small'] {
         max-width: 50%;
       }
 
-      &[alt$="?size=medium"] {
+      &[alt$='?size=medium'] {
         max-width: calc(0.618 * (100% + 2 * var(--padding-width)));
       }
 
-      &[alt$="?size=large"],
-      &[alt$="?size=auto"] {
+      &[alt$='?size=large'],
+      &[alt$='?size=auto'] {
         max-width: 100%;
       }
 
-      &[alt$="?size=full"] {
+      &[alt$='?size=full'] {
         // default
       }
     }
