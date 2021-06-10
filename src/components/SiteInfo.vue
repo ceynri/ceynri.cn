@@ -2,6 +2,7 @@
   <div class="site-info">
     <g-image
       alt="site avatar"
+      title="?"
       class="site-info__avatar"
       src="~/assets/images/avatar.jpg"
       width="160"
