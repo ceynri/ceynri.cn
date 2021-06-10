@@ -18,36 +18,6 @@ module.exports = {
         link: 'https://notes.ceynri.cn/',
       },
     ],
-    blog: [
-      {
-        name: 'Blog',
-        link: '/blog/',
-        icon: 'feather',
-      },
-      {
-        name: 'About',
-        // link: '/about/',
-        link: 'javascript:alert("Coming soon! 😂");',
-        use: 'a',
-        icon: 'info',
-      },
-      {
-        name: 'Archive',
-        link: '/blog/archive/',
-        icon: 'archive',
-      },
-      {
-        name: 'Feed',
-        link: '/feed.xml',
-        icon: 'rss',
-        use: 'a',
-      },
-      {
-        name: 'Home',
-        link: '/',
-        icon: 'home',
-      },
-    ],
   },
   social: {
     home: [

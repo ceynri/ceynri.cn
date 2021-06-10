@@ -6,19 +6,21 @@
     class="toggle-theme button"
   >
     <!--
-      `v-show` prop not on svg-icon is because there is a bug
+      `v-show` prop not on svg is because there is a bug
       issue #11: https://github.com/ceynri/ceynri.cn/issues/11
     -->
     <i v-show="scheme === 'dark'">
-      <svg-icon
+      <img
+        svg-inline
         class="icon"
-        src="/assets/icons/moon.svg"
+        src="~/assets/icons/moon.svg"
       />
     </i>
     <i v-show="scheme === 'light'">
-      <svg-icon
+      <img
+        svg-inline
         class="icon"
-        src="/assets/icons/sun.svg"
+        src="~/assets/icons/sun.svg"
       />
     </i>
   </button>
