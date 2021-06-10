@@ -5,7 +5,7 @@
         <span class="hash">#</span> {{ $page.tag.title.toUpperCase() }}
       </h1>
       <div class="tag__info">
-        {{ $page.tag.belongsTo.edges.length }} POST{{ $page.tag.belongsTo.edges.length > 1 ? 'S' : '' }}
+        {{ totalCount }} POST{{ totalCount > 1 ? 'S' : '' }}
       </div>
     </header>
 
@@ -35,6 +35,7 @@ query Tag ($id: ID!) {
           }
         }
       }
+      totalCount
     }
   }
 }
@@ -44,6 +45,11 @@ query Tag ($id: ID!) {
 import PostCard from '~/components/PostCard.vue';
 
 export default {
+  computed: {
+    totalCount() {
+      return this.$page.tag.belongsTo.totalCount;
+    },
+  },
   components: {
     PostCard,
   },
