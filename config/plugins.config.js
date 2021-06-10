@@ -14,11 +14,12 @@ module.exports = [
         },
       },
       remark: {
-        // remark options
+        // code highlight
         plugins: ['@gridsome/remark-prismjs'],
-        externalLinksTarget: '_blank',
-        externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
-        anchorClassName: 'icon icon-link',
+        // default
+        // externalLinksTarget: '_blank',
+        // externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
+        // anchorClassName: 'icon icon-link',
       },
     },
   },
