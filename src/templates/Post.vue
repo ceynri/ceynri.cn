@@ -20,7 +20,6 @@
 
         <div
           class="post__content link-highlight"
-          :class="$page.post.add_classes"
           v-html="$page.post.content"
         />
 
@@ -79,7 +78,6 @@ query Post ($id: ID!) {
     description
     content
     cover_image (width: 900, blur: 10, quality: 98)
-    add_classes
     published
   }
 }
@@ -136,36 +134,30 @@ query Post ($id: ID!) {
       margin-right: calc(var(--padding-width) * -1);
       width: calc(100% + var(--padding-width) * 2);
       max-width: none;
-    }
 
-    &.image {
-      &--small,
-      &--medium,
-      &--large {
-        img {
-          margin-left: auto;
-          margin-right: auto;
-          width: initial;
-        }
+      &[alt$="?size=small"],
+      &[alt$="?size=medium"],
+      &[alt$="?size=large"],
+      &[alt$="?size=auto"] {
+        margin-left: auto;
+        margin-right: auto;
+        width: initial;
       }
 
-      &--normalize img {
-        width: 100%;
-      }
-
-      &--small img {
+      &[alt$="?size=small"] {
         max-width: 50%;
       }
 
-      &--medium img {
+      &[alt$="?size=medium"] {
         max-width: calc(0.618 * (100% + 2 * var(--padding-width)));
       }
 
-      &--large img {
+      &[alt$="?size=large"],
+      &[alt$="?size=auto"] {
         max-width: 100%;
       }
 
-      &--full img {
+      &[alt$="?size=full"] {
         // default
       }
     }
