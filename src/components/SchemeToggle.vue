@@ -1,6 +1,7 @@
 <template>
   <button
     role="button"
+    title="Toggle dark/light"
     aria-label="Toggle dark/light"
     @click.prevent="toggleColorScheme"
     class="toggle-theme button"
