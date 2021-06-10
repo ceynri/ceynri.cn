@@ -24,11 +24,11 @@ a:not(.button) {
   transition: color var(--duration),
     background-color var(--duration),
     opacity var(--duration),
-    filter calc(var(--duration) * 2);
+    text-shadow calc(var(--duration) * 2);
 
   &:hover {
     color: var(--link-color);
-    filter: drop-shadow(0 0 0.2em var(--link-shadow-color));
+    text-shadow: 0 0 0.2em var(--link-shadow-color);
   }
 }
 
@@ -37,7 +37,7 @@ a:not(.button) {
   opacity: 0.8;
   transition: color var(--duration),
     opacity var(--duration),
-    filter calc(var(--duration) * 2);
+    text-shadow calc(var(--duration) * 2);
 
   &:hover {
     opacity: 1;

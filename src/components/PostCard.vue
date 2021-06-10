@@ -64,7 +64,6 @@ export default {
 
   &:hover {
     transform: translateY(-4px);
-    // transform: scale(1.005);
     box-shadow: 2px 8px 48px 4px rgba(#000, 0.05);
   }
 
