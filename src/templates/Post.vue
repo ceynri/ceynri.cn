@@ -95,11 +95,15 @@ export default {
     margin-left: calc(var(--padding-width) * -1);
     margin-top: calc(var(--padding-width) * -1);
     margin-bottom: calc(var(--padding-width) / 2);
-    overflow: hidden;
+
     border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+
+    display: flex;
 
     img {
-      width: 100%;
+      width: var(--thin-main-width);
+      flex: 1;
     }
 
     &:empty {
