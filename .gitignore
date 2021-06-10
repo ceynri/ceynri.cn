@@ -7,3 +7,8 @@ dist
 .env
 .env.*
 deploy.sh
+*.tmp.md
+**/assets/icons/unused
+
+# temp
+About.vue
