@@ -11,8 +11,7 @@
   },
   "dependencies": {
     "@gridsome/plugin-google-analytics": "^0.1.0",
-    "gsap": "^3.6.1",
-    "vuex": "^3.6.2"
+    "gsap": "^3.6.1"
   },
   "devDependencies": {
     "@gridsome/remark-prismjs": "^0.2.0",
