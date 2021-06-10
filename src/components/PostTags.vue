@@ -2,26 +2,30 @@
   <div class="post-tags">
     <g-link
       class="post-tags__link"
-      v-for="tag in post.tags"
+      v-for="tag in tags"
       :key="tag.id"
       :to="tag.path"
     >
       <span>#</span> {{ tag.title }}
+      <span v-if="tag.belongsTo">{{ tag.belongsTo.totalCount }}</span>
     </g-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['post'],
+  props: ['tags'],
 };
 </script>
 
 <style lang="scss">
 .post-tags {
-  margin: var(--space) 0 0;
+  display: flex;
+  flex-wrap: wrap;
 
   &__link {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
     margin-right: 0.7em;
     font-size: 0.8em;
     color: currentColor;

@@ -1,26 +1,48 @@
 <template>
   <Layout>
-    <dl class="archive-posts">
-      <div
-        v-for="postGroup in postGroupList"
-        :key="postGroup.year"
-        class="post-group content-box"
-      >
-        <dt>{{ postGroup.year }}</dt>
-        <dd class="post-list">
-          <PostStrip
-            v-for="post in postGroup.list"
-            :key="post.node.id"
-            :post="post.node"
-          />
-        </dd>
-      </div>
-    </dl>
+    <div class="archive">
+      <section class="archive__tags content-box">
+        <h2 class="archive__title">TAGS</h2>
+        <PostTags
+          class="tag-list"
+          :tags="tags"
+        />
+      </section>
+
+      <dl class="archive__posts">
+        <div
+          v-for="postGroup in postGroupList"
+          :key="postGroup.year"
+          class="post-group content-box"
+        >
+          <dt class="archive__title">{{ postGroup.year }}</dt>
+          <dd class="post-list">
+            <PostStrip
+              v-for="post in postGroup.list"
+              :key="post.node.id"
+              :post="post.node"
+            />
+          </dd>
+        </div>
+      </dl>
+    </div>
   </Layout>
 </template>
 
 <page-query>
 query {
+  tags: allTag(sortBy: "title", order: ASC) {
+    edges {
+      node {
+        id
+        title
+        path
+        belongsTo {
+          totalCount
+        }
+      }
+    }
+  }
   posts: allPost(filter: { published: { eq: true }}) {
     edges {
       node {
@@ -36,6 +58,7 @@ query {
 </page-query>
 
 <script>
+import PostTags from '~/components/PostTags';
 import PostStrip from '~/components/PostStrip.vue';
 
 export default {
@@ -62,8 +85,14 @@ export default {
       // reverse order
       return postList.sort((a, b) => b.year - a.year);
     },
+    tags() {
+      return this.$page.tags.edges
+        .map((item) => item.node)
+        .sort((a, b) => b.belongsTo.totalCount - a.belongsTo.totalCount);
+    },
   },
   components: {
+    PostTags,
     PostStrip,
   },
   metaInfo: {
@@ -73,15 +102,32 @@ export default {
 </script>
 
 <style lang="scss">
-.archive-posts {
-  .post-group {
-    padding: calc(var(--padding-width) / 2);
-    margin-bottom: calc(var(--padding-width) / 2);
+.archive {
+  &__title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: normal;
   }
 
-  .post-list {
-    border-radius: var(--radius);
-    overflow: hidden;
+  &__tags {
+    padding: calc(var(--padding-width) / 2);
+    margin-bottom: calc(var(--padding-width) / 2);
+
+    .tag-list {
+      padding: calc(var(--padding-width) / 2);
+    }
+  }
+
+  &__posts {
+    .post-group {
+      padding: calc(var(--padding-width) / 2);
+      margin-bottom: calc(var(--padding-width) / 2);
+    }
+
+    .post-list {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
   }
 }
 </style>
