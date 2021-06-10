@@ -16,7 +16,7 @@
       <p class="post-card__description" v-html="post.description" />
 
       <PostMeta class="post-card__meta" :post="post" />
-      <PostTags class="post-card__tags" :post="post" />
+      <PostTags class="post-card__tags" :tags="post.tags" />
 
       <g-link class="post-card__link" :to="post.path">Link</g-link>
     </div>
@@ -69,8 +69,9 @@ export default {
   }
 
   &__tags {
-    z-index: 1;
+    margin: var(--space) 0 0;
     position: relative;
+    z-index: 1;
   }
 
   &__link {
