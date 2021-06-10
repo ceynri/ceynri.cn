@@ -38,6 +38,7 @@ export default {
     margin: 0;
     padding: var(--top-margin-width) var(--space) 0;
     flex: 1;
+    // overflow: auto;
   }
 
   @media screen and (max-width: $md - 1px) {
