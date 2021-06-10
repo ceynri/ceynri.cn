@@ -90,9 +90,9 @@ export default {
     margin: 0;
 
     .hash {
-      transition: color var(--duration), filter var(--duration);
+      transition: color var(--duration), text-shadow var(--duration);
       color: var(--link-color);
-      filter: drop-shadow(0 0 0.2em var(--link-shadow-color));
+      text-shadow: 0 0 0.2em var(--link-shadow-color);
     }
   }
 
