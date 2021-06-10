@@ -24,7 +24,7 @@
         />
 
         <div class="post__footer">
-          <PostTags :post="$page.post" />
+          <PostTags :tags="$page.post.tags" />
         </div>
       </div>
 
@@ -40,6 +40,25 @@
     </template>
   </PostLayout>
 </template>
+
+<page-query>
+query Post ($id: ID!) {
+  post: post (id: $id) {
+    title
+    path
+    date (format: "MMM DD, YYYY")
+    tags {
+      id
+      title
+      path
+    }
+    description
+    content
+    cover_image (width: 900, blur: 10, quality: 98)
+    published
+  }
+}
+</page-query>
 
 <script>
 import PostMeta from '~/components/PostMeta';
@@ -63,25 +82,6 @@ export default {
   },
 };
 </script>
-
-<page-query>
-query Post ($id: ID!) {
-  post: post (id: $id) {
-    title
-    path
-    date (format: "MMM DD, YYYY")
-    tags {
-      id
-      title
-      path
-    }
-    description
-    content
-    cover_image (width: 900, blur: 10, quality: 98)
-    published
-  }
-}
-</page-query>
 
 <style lang="scss">
 .post-title {
