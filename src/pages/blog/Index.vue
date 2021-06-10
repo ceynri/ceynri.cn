@@ -7,12 +7,21 @@
         :post="edge.node"
       />
     </div>
+    <Pagination :page-info="$page.posts.pageInfo" />
   </Layout>
 </template>
 
 <page-query>
-query {
-  posts: allPost(filter: { published: { eq: true }}) {
+query ($page: Int) {
+  posts: allPost(
+    filter: { published: { eq: true } },
+    perPage: 8,
+    page: $page
+  ) @paginate {
+    pageInfo {
+      totalPages
+      currentPage
+    }
     edges {
       node {
         id
@@ -34,6 +43,7 @@ query {
 
 <script>
 import PostCard from '~/components/PostCard.vue';
+import Pagination from '~/components/Pagination.vue';
 
 export default {
   mounted() {
@@ -44,6 +54,7 @@ export default {
   },
   components: {
     PostCard,
+    Pagination,
   },
   metaInfo: {
     title: '山风的小角落',
