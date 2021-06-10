@@ -10,18 +10,10 @@
       issue #11: https://github.com/ceynri/ceynri.cn/issues/11
     -->
     <i v-show="scheme === 'dark'">
-      <img
-        svg-inline
-        class="icon"
-        src="~/assets/icons/moon.svg"
-      />
+      <img svg-inline class="icon" src="~/assets/icons/moon.svg" />
     </i>
     <i v-show="scheme === 'light'">
-      <img
-        svg-inline
-        class="icon"
-        src="~/assets/icons/sun.svg"
-      />
+      <img svg-inline class="icon" src="~/assets/icons/sun.svg" />
     </i>
   </button>
 </template>
@@ -39,7 +31,8 @@ export default {
   },
   methods: {
     toggleColorScheme() {
-      const newColorScheme = window.__colorScheme === 'light' ? 'dark' : 'light';
+      const newColorScheme =
+        window.__colorScheme === 'light' ? 'dark' : 'light';
       window.__setColorScheme(newColorScheme);
       this.scheme = newColorScheme;
     },
