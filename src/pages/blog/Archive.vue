@@ -23,11 +23,12 @@
         </div>
       </dl>
     </div>
+    <Pagination :page-info="$page.posts.pageInfo" />
   </Layout>
 </template>
 
 <page-query>
-query {
+query ($page: Int) {
   tags: allTag(sortBy: "title", order: ASC) {
     edges {
       node {
@@ -40,7 +41,15 @@ query {
       }
     }
   }
-  posts: allPost(filter: { published: { eq: true }}) {
+  posts: allPost(
+    filter: { published: { eq: true } },
+    perPage: 16,
+    page: $page
+  ) @paginate {
+    pageInfo {
+      totalPages
+      currentPage
+    }
     edges {
       node {
         id
@@ -57,6 +66,7 @@ query {
 <script>
 import PostTags from '~/components/PostTags';
 import PostStrip from '~/components/PostStrip.vue';
+import Pagination from '~/components/Pagination.vue';
 
 export default {
   computed: {
@@ -91,6 +101,7 @@ export default {
   components: {
     PostTags,
     PostStrip,
+    Pagination,
   },
   metaInfo: {
     title: 'Archives',

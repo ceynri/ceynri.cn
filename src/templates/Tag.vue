@@ -16,14 +16,19 @@
         :post="edge.node"
       />
     </div>
+    <Pagination :page-info="$page.tag.belongsTo.pageInfo" />
   </Layout>
 </template>
 
 <page-query>
-query Tag ($id: ID!) {
+query Tag ($id: ID!, $page: Int) {
   tag (id: $id) {
     title
-    belongsTo {
+    belongsTo (perPage: 8, page: $page) @paginate {
+      pageInfo {
+        totalPages
+        currentPage
+      }
       edges {
         node {
           ...on Post {
@@ -43,6 +48,7 @@ query Tag ($id: ID!) {
 
 <script>
 import PostCard from '~/components/PostCard.vue';
+import Pagination from '~/components/Pagination.vue';
 
 export default {
   computed: {
@@ -52,6 +58,7 @@ export default {
   },
   components: {
     PostCard,
+    Pagination,
   },
   metaInfo() {
     return {
