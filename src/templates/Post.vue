@@ -1,37 +1,44 @@
 <template>
   <PostLayout>
-    <div class="post-title">
-      <h1 class="post-title__text">
-        {{ $page.post.title }}
-      </h1>
+    <template v-if="$page.post.published">
+      <div class="post-title">
+        <h1 class="post-title__text">
+          {{ $page.post.title }}
+        </h1>
 
-      <PostMeta :post="$page.post" />
+        <PostMeta :post="$page.post" />
+      </div>
 
-    </div>
+      <div class="post content-box">
+        <div class="post__header">
+          <g-image
+            alt="Cover image"
+            v-if="$page.post.cover_image"
+            :src="$page.post.cover_image"
+          />
+        </div>
 
-    <div class="post content-box">
-      <div class="post__header">
-        <g-image
-          alt="Cover image"
-          v-if="$page.post.cover_image"
-          :src="$page.post.cover_image"
+        <div
+          class="post__content link-highlight"
+          :class="$page.post.add_classes"
+          v-html="$page.post.content"
         />
+
+        <div class="post__footer">
+          <PostTags :post="$page.post" />
+        </div>
       </div>
 
-      <div
-        class="post__content link-highlight"
-        :class="$page.post.add_classes"
-        v-html="$page.post.content"
-      />
-
-      <div class="post__footer">
-        <PostTags :post="$page.post" />
+      <div class="post-comments">
+        <!-- Add comment widgets here -->
       </div>
-    </div>
-
-    <div class="post-comments">
-      <!-- Add comment widgets here -->
-    </div>
+    </template>
+    <template
+      v-else
+      class="post content-box"
+    >
+      该 Post 暂未公开！
+    </template>
   </PostLayout>
 </template>
 
@@ -73,6 +80,7 @@ query Post ($id: ID!) {
     content
     cover_image (width: 900, blur: 10, quality: 98)
     add_classes
+    published
   }
 }
 </page-query>
