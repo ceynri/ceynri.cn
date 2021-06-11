@@ -46,6 +46,9 @@ import PostCard from '~/components/PostCard.vue';
 import Pagination from '~/components/Pagination.vue';
 
 export default {
+  mounted() {
+    window.__checkColorScheme();
+  },
   components: {
     PostCard,
     Pagination,
