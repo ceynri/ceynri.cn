@@ -9,8 +9,9 @@ module.exports = {
   siteUrl: 'https://ceynri.cn',
   titleTemplate: '%s | 山风',
   templates: {
-    Post: '/blog/:year/:month/:day/:slug',
+    Post: '/blog/:slug',
     Tag: '/blog/tag/:id',
+    SinglePage: '/:slug',
   },
   metadata,
   plugins,

@@ -16,10 +16,26 @@ module.exports = [
       remark: {
         // code highlight
         plugins: ['@gridsome/remark-prismjs'],
-        // default
-        // externalLinksTarget: '_blank',
-        // externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
-        // anchorClassName: 'icon icon-link',
+      },
+    },
+  },
+  {
+    // Create pages from markdown files
+    use: '@gridsome/source-filesystem',
+    options: {
+      typeName: 'SinglePage',
+      baseDir: './content',
+      path: ['./pages/*.md'],
+      refs: {
+        // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
+        tags: {
+          typeName: 'Tag',
+          create: true,
+        },
+      },
+      remark: {
+        // code highlight
+        plugins: ['@gridsome/remark-prismjs'],
       },
     },
   },

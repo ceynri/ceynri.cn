@@ -8,11 +8,7 @@
         </g-link>
       </li>
       <li>
-        <a
-          class="nav__item"
-          href="javascript:alert('Coming soon! 😂');"
-          key="About"
-        >
+        <a class="nav__item" href="/about/" key="About">
           <img svg-inline class="icon" src="~/assets/icons/info.svg" />
           About
         </a>
@@ -72,8 +68,6 @@
       width: 1em;
       height: 1em;
       margin-right: 1em;
-      // English baseline offset
-      margin-bottom: 0.2em;
     }
 
     color: var(--light-color);
