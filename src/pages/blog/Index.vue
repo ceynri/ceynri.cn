@@ -46,12 +46,6 @@ import PostCard from '~/components/PostCard.vue';
 import Pagination from '~/components/Pagination.vue';
 
 export default {
-  mounted() {
-    setTimeout(() => {
-      // add loaded class to add css transition on the body
-      document.body.classList.add('loaded');
-    }, 1000);
-  },
   components: {
     PostCard,
     Pagination,

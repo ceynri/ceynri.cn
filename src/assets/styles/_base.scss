@@ -13,11 +13,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-
-  // Delay settings the transition to avoid the background color flashing when the page is refreshed
-  &.loaded {
-    transition: background-color calc(var(--duration) * 2);
-  }
+  transition: background-color calc(var(--duration) * 2);
 }
 
 a:not(.button) {
