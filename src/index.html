@@ -10,24 +10,30 @@
       (function() {
         const colorSchemeMeta = document.querySelector('html head meta[name="color-scheme"]');
 
-        window.__setColorScheme = function(value) {
-          window.__colorScheme = value;
+        window.__setColorScheme = function(value, isTemp) {
           document.documentElement.dataset.scheme = value;
           if (colorSchemeMeta) {
             colorSchemeMeta.content = value;
           }
-          try {
-            // localStorage.setItem will fail when the user accesses in incognito mode
-            localStorage.setItem('colorScheme', value);
-          } catch (err) {}
+          if (!isTemp) {
+            window.__colorScheme = value;
+            try {
+              // localStorage.setItem will fail when the user accesses in incognito mode
+              localStorage.setItem('colorScheme', value);
+            } catch (err) {}
+          }
         };
-        
-        // Select the default color scheme by user system setting
-        // const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-        // __setColorScheme(colorScheme || (supportDarkMode ? 'dark' : 'light'));
-        
-        let colorScheme = localStorage.getItem('colorScheme');
-        __setColorScheme(colorScheme || 'dark');
+        window.__checkColorScheme = function() {
+          const colorScheme = localStorage.getItem('colorScheme');
+          if (colorScheme) {
+            __setColorScheme(colorScheme);
+            return;
+          }
+          // Select the default color scheme by user system setting
+          const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+          __setColorScheme(supportDarkMode ? 'dark' : 'light');
+        }
+        window.__checkColorScheme();
       })();
     </script>
 

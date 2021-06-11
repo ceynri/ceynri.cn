@@ -81,6 +81,7 @@ export default {
     titleTemplate: '%s',
   },
   mounted() {
+    window.__setColorScheme('dark', true);
     // if (isPc()) {
     this.applyPerspective();
     // }
