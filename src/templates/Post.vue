@@ -29,13 +29,13 @@
         <!-- Add comment widgets here -->
       </div>
     </template>
-    <template v-else class="post content-box">该 Post 暂未公开！</template>
+    <template v-else class="post content-box">该 Blog 暂未公开 🤕</template>
   </PostLayout>
 </template>
 
 <page-query>
 query Post ($id: ID!) {
-  post: post (id: $id) {
+  post (id: $id) {
     title
     path
     date (format: "MMM DD, YYYY")
@@ -131,29 +131,29 @@ export default {
       width: calc(100% + var(--padding-width) * 2);
       max-width: none;
 
-      &[alt$='?size=small'],
-      &[alt$='?size=medium'],
-      &[alt$='?size=large'],
-      &[alt$='?size=auto'] {
+      &[alt*='size=small'],
+      &[alt*='size=medium'],
+      &[alt*='size=large'],
+      &[alt*='size=auto'] {
         margin-left: auto;
         margin-right: auto;
         width: initial;
       }
 
-      &[alt$='?size=small'] {
+      &[alt*='size=small'] {
         max-width: 50%;
       }
 
-      &[alt$='?size=medium'] {
+      &[alt*='size=medium'] {
         max-width: calc(0.618 * (100% + 2 * var(--padding-width)));
       }
 
-      &[alt$='?size=large'],
-      &[alt$='?size=auto'] {
+      &[alt*='size=large'],
+      &[alt*='size=auto'] {
         max-width: 100%;
       }
 
-      &[alt$='?size=full'] {
+      &[alt*='size=full'] {
         // default
       }
     }
