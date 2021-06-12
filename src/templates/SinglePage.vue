@@ -34,11 +34,7 @@ query SinglePage ($id: ID!) {
     title
     path
     date (format: "MMM DD, YYYY")
-    tags {
-      id
-      title
-      path
-    }
+    tags
     content
     published
   }
@@ -51,6 +47,20 @@ import PostTags from '~/components/PostTags';
 export default {
   components: {
     PostTags,
+  },
+  computed: {
+    tags() {
+      const tags = this.$page.page.tags;
+      // SinglePage is not included in the tags list, so it needs to be compatible
+      if (typeof tags?.[0] === 'string') {
+        return tags.map((tag) => ({
+          id: tag,
+          title: tag,
+          path: `/blog/tags/${tag}`,
+        }));
+      }
+      return tags;
+    },
   },
   metaInfo() {
     return {
