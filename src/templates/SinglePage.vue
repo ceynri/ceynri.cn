@@ -1,12 +1,12 @@
 <template>
-  <PostLayout>
-    <article v-if="$page.page.published">
-      <header class="post-page__title">
+  <PostLayout v-if="$page.page.published">
+    <article>
+      <header class="single-page__title">
         <h1>{{ $page.page.title }}</h1>
       </header>
 
-      <section class="post-page content-box">
-        <header class="post-page__header">
+      <section class="single-page content-box">
+        <header class="single-page__header">
           <g-image
             alt="Cover image"
             v-if="$page.page.cover_image"
@@ -14,18 +14,17 @@
           />
         </header>
 
-        <section class="post-page__content" v-html="$page.page.content" />
+        <section class="single-page__content" v-html="$page.page.content" />
 
-        <footer class="post-page__footer">
+        <footer class="single-page__footer">
           <PostTags :tags="tags" />
         </footer>
       </section>
     </article>
-
-    <template v-else class="post-page content-box"
-      >该 Blog 暂未公开 🤕</template
-    >
   </PostLayout>
+  
+  <!-- Bottom-up strategy -->
+  <Page404 v-else />
 </template>
 
 <page-query>
@@ -43,10 +42,12 @@ query SinglePage ($id: ID!) {
 
 <script>
 import PostTags from '~/components/PostTags';
+import Page404 from '~/pages/404';
 
 export default {
   components: {
     PostTags,
+    Page404,
   },
   computed: {
     tags() {
@@ -63,21 +64,26 @@ export default {
     },
   },
   metaInfo() {
+    if (this.$page.page.published) {
+      return {
+        title: this.$page.page.title,
+        meta: [
+          {
+            name: 'description',
+            content: this.$page.page.description,
+          },
+        ],
+      };
+    }
     return {
-      title: this.$page.page.title,
-      meta: [
-        {
-          name: 'description',
-          content: this.$page.page.description,
-        },
-      ],
+      title: '404',
     };
   },
 };
 </script>
 
 <style lang="scss">
-.post-page {
+.single-page {
   &__title {
     padding: calc(var(--padding-width) / 2) 0;
     text-align: center;
