@@ -7,14 +7,16 @@
       :to="tag.path"
     >
       <span>#</span> {{ tag.title }}
-      <span v-if="tag.belongsTo">{{ tag.belongsTo.totalCount }}</span>
+      <span v-if="tag.count">{{ tag.count }}</span>
     </g-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['tags'],
+  props: {
+    tags: Array | Object,
+  },
 };
 </script>
 
