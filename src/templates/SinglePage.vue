@@ -1,14 +1,12 @@
 <template>
   <PostLayout>
     <template v-if="$page.page.published">
-      <div class="post-title">
-        <h1 class="post-title__text">
-          {{ $page.page.title }}
-        </h1>
+      <div class="post-page__title">
+        <h1>{{ $page.page.title }}</h1>
       </div>
 
-      <div class="post content-box">
-        <div class="post__header">
+      <div class="post-page content-box">
+        <div class="post-page__header">
           <g-image
             alt="Cover image"
             v-if="$page.page.cover_image"
@@ -16,14 +14,16 @@
           />
         </div>
 
-        <div class="post__content link-highlight" v-html="$page.page.content" />
+        <div class="post-page__content" v-html="$page.page.content" />
 
-        <div class="post__footer">
+        <div class="post-page__footer">
           <PostTags :tags="$page.page.tags" />
         </div>
       </div>
     </template>
-    <template v-else class="post content-box">该 Blog 暂未公开 🤕</template>
+    <template v-else class="post-page content-box"
+      >该 Blog 暂未公开 🤕</template
+    >
   </PostLayout>
 </template>
 
@@ -66,33 +66,11 @@ export default {
 </script>
 
 <style lang="scss">
-.post-title {
-  padding: calc(var(--padding-width) / 2) 0;
-  text-align: center;
-}
-
-.post {
-  &__header {
-    width: calc(100% + var(--padding-width) * 2);
-    margin-left: calc(var(--padding-width) * -1);
-    margin-top: calc(var(--padding-width) * -1);
-    margin-bottom: calc(var(--padding-width) / 2);
-
-    border-radius: var(--radius) var(--radius) 0 0;
-    overflow: hidden;
-
-    display: flex;
-
-    img {
-      width: var(--thin-main-width);
-      flex: 1;
-    }
-
-    &:empty {
-      display: none;
-    }
+.post-page {
+  &__title {
+    padding: calc(var(--padding-width) / 2) 0;
+    text-align: center;
   }
-
   &__content {
     font-size: var(--article-font-size);
     margin-bottom: calc(var(--padding-width) / 2);
@@ -102,11 +80,11 @@ export default {
     }
 
     @for $i from 1 through 5 {
-      // 连续的标题
+      // Consecutive headings
       h#{$i} + h#{$i + 1},
-      // br标签后的标题
+      // Title after <br>
       br + h#{$i},
-      // 处于开头的标题
+      // At the beginning heading
       h#{$i}:first-child {
         margin-top: 0;
       }
@@ -147,14 +125,33 @@ export default {
         // default
       }
     }
-  }
-}
 
-.post-comments {
-  padding: calc(var(--padding-width) / 2);
+    a {
+      font-size: 100%;
+      transition: color var(--duration);
 
-  &:empty {
-    display: none;
+      position: relative;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 61.8%;
+        background-color: var(--link-color);
+        transition: width var(--duration);
+      }
+
+      &:hover {
+        color: var(--link-color);
+
+        &::before {
+          width: 100%;
+        }
+      }
+    }
   }
 }
 </style>
