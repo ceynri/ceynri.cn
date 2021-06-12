@@ -2,7 +2,7 @@
   <Layout>
     <div class="archive">
       <section class="archive__tags content-box">
-        <h2 class="archive__title">TAGS</h2>
+        <header class="archive__title">TAGS</header>
         <PostTags class="tag-list" :tags="tags" />
       </section>
 

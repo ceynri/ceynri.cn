@@ -1,11 +1,11 @@
 <template>
-  <div class="post-strip content-box">
+  <article class="post-strip content-box">
     <div class="post-strip__content">
       <h4 class="post-strip__title" v-html="post.title" />
       <PostMeta class="post-strip__meta" :post="post" />
       <g-link class="post-strip__link" :to="post.path">Link</g-link>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>
