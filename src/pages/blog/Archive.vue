@@ -112,9 +112,7 @@ export default {
 <style lang="scss">
 .archive {
   &__title {
-    margin: 0;
-    font-size: 1em;
-    font-weight: normal;
+    font-size: 0.9em;
   }
 
   &__tags {

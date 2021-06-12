@@ -24,19 +24,13 @@ export default {
   padding: calc(var(--padding-width) * 0.5);
   border-radius: 0;
 
-  position: relative;
-
   &:not(:last-child) {
     border-bottom: 1px dotted var(--border-color);
   }
 
-  // &__content {
-  //   transition: transform var(--duration);
-
-  //   &:hover {
-  //     transform: translateY(-4px);
-  //   }
-  // }
+  &__content {
+    position: relative;
+  }
 
   &__title {
     margin-top: 0;
