@@ -10,7 +10,7 @@ module.exports = {
   titleTemplate: '%s | 山风',
   templates: {
     Post: '/blog/:slug',
-    Tag: '/blog/tag/:id',
+    Tag: '/blog/tags/:id',
     SinglePage: '/:slug',
   },
   metadata,

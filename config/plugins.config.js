@@ -26,13 +26,6 @@ module.exports = [
       typeName: 'SinglePage',
       baseDir: './content',
       path: ['./pages/*.md'],
-      refs: {
-        // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
-        tags: {
-          typeName: 'Tag',
-          create: true,
-        },
-      },
       remark: {
         // code highlight
         plugins: ['@gridsome/remark-prismjs'],
