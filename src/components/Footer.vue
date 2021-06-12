@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" :style="{ alignItems }">
     <span class="footer__copyright">
       Copyright © 2020-{{ new Date().getFullYear() }} Ceynri
     </span>
@@ -7,7 +7,8 @@
       v-if="$static.metadata.beian"
       class="footer__beian"
       :href="$static.metadata.beian.link"
-    >{{ $static.metadata.beian.text }}</a>
+      >{{ $static.metadata.beian.text }}</a
+    >
   </footer>
 </template>
 
@@ -22,11 +23,34 @@ query {
 }
 </static-query>
 
+<script>
+export default {
+  props: {
+    align: {
+      type: String,
+      default: 'left',
+    },
+  },
+  computed: {
+    alignItems() {
+      switch (this.align) {
+        case 'center':
+          return 'center';
+        case 'right':
+          return 'flex-end';
+        case 'left':
+        default:
+          return 'flex-start';
+      }
+    },
+  },
+};
+</script>
+
 <style lang="scss">
 .footer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin: var(--padding-width) 0;
   line-height: 2;
 

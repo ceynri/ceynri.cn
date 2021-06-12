@@ -2,7 +2,7 @@
   <div class="layout__post main-container">
     <main class="main">
       <slot />
-      <Footer />
+      <Footer align="center" />
     </main>
   </div>
 </template>
