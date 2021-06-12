@@ -11,12 +11,12 @@
 
     <section class="posts">
       <PostCard
-        v-for="edge in $page.tag.belongsTo.edges"
+        v-for="edge in $page.posts.edges"
         :key="edge.node.id"
         :post="edge.node"
       />
     </section>
-    <Pagination :page-info="$page.tag.belongsTo.pageInfo" />
+    <Pagination :page-info="$page.posts.pageInfo" />
   </Layout>
 </template>
 
@@ -24,23 +24,28 @@
 query Tag ($id: ID!, $page: Int) {
   tag (id: $id) {
     title
-    belongsTo (perPage: 8, page: $page) @paginate {
-      pageInfo {
-        totalPages
-        currentPage
-      }
-      edges {
-        node {
-          ...on Post {
-            title
-            path
-            date (format: "MMM DD, YYYY")
-            description
-          }
-        }
-      }
-      totalCount
+  }
+  posts: allPost(
+    filter: {
+      tags: { contains: [$id] },
+      published: { eq: true }
+    },
+    perPage: 8,
+    page: $page
+  ) @paginate {
+    pageInfo {
+      totalPages
+      currentPage
     }
+    edges {
+      node {
+        title
+        path
+        date (format: "MMM DD, YYYY")
+        description
+      }
+    }
+    totalCount
   }
 }
 </page-query>
@@ -52,7 +57,7 @@ import Pagination from '~/components/Pagination.vue';
 export default {
   computed: {
     totalCount() {
-      return this.$page.tag.belongsTo.totalCount;
+      return this.$page.posts.totalCount;
     },
   },
   components: {
