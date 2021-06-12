@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="layout__post main-container">
     <main class="main">
       <slot />
       <Footer />
@@ -17,8 +17,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.main-container {
+<style lang="scss">
+.layout__post {
   box-sizing: content-box;
   margin: 0 auto;
   display: flex;
@@ -26,11 +26,11 @@ export default {
   position: relative;
   max-width: var(--main-width);
   justify-content: center;
-}
 
-.main {
-  margin: 0;
-  max-width: 100%;
-  padding: var(--top-margin-width) 0 0;
+  .main {
+    margin: 0;
+    max-width: 100%;
+    padding: var(--top-margin-width) 0 0;
+  }
 }
 </style>
