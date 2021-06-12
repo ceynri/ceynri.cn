@@ -36,7 +36,13 @@ query ($page: Int) {
         title
         path
         belongsTo {
-          totalCount
+          edges {
+            node {
+              ...on Post {
+                published
+              }
+            }
+          }
         }
       }
     }
@@ -92,10 +98,27 @@ export default {
       // reverse order
       return postList.sort((a, b) => b.year - a.year);
     },
+    /**
+     * get the published tags with count number
+     */
     tags() {
-      return this.$page.tags.edges
-        .map((item) => item.node)
-        .sort((a, b) => b.belongsTo.totalCount - a.belongsTo.totalCount);
+      const tags = this.$page.tags.edges;
+      // filter out the published tags
+      const filteredTags = tags
+        .map((edge) => {
+          const tag = edge.node;
+          const publishedPosts = tag.belongsTo.edges.filter(
+            (edge) => edge.node.published
+          );
+          return {
+            ...tag,
+            count: publishedPosts.length,
+          };
+        })
+        .filter((tag) => tag.count !== 0);
+      // sort by count
+      const sortedTags = filteredTags.sort((a, b) => b.count - a.count);
+      return sortedTags;
     },
   },
   components: {
