@@ -22,10 +22,7 @@
           class="post__content link-highlight"
           v-html="$page.post.content"
         />
-
-        <footer class="post__footer">
-          <PostTags :tags="$page.post.tags" />
-        </footer>
+        <PostFooter :post="$page.post" />
       </section>
 
       <article class="post-comments">
@@ -44,6 +41,7 @@ query Post ($id: ID!) {
     title
     path
     date (format: "MMM DD, YYYY")
+    lastmod (format: "MMM DD, YYYY")
     tags {
       id
       title
@@ -59,13 +57,13 @@ query Post ($id: ID!) {
 
 <script>
 import PostMeta from '~/components/PostMeta';
-import PostTags from '~/components/PostTags';
+import PostFooter from '~/components/PostFooter';
 import Page404 from '~/pages/404';
 
 export default {
   components: {
     PostMeta,
-    PostTags,
+    PostFooter,
     Page404,
   },
   metaInfo() {
@@ -168,6 +166,10 @@ export default {
       &[alt*='size=full'] {
         // default
       }
+    }
+
+    br:last-child {
+      display: none;
     }
   }
 }
