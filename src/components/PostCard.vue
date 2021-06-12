@@ -3,7 +3,7 @@
     class="post-card content-box"
     :class="{ 'post-card--has-poster': post.poster }"
   >
-    <div class="post-card__header">
+    <div class="post-card__cover">
       <g-image
         alt="Cover image"
         v-if="post.cover_image"
@@ -42,7 +42,7 @@ export default {
   margin-bottom: calc(var(--padding-width) / 2);
   position: relative;
 
-  &__header {
+  &__cover {
     margin-left: calc(var(--padding-width) * -1);
     margin-right: calc(var(--padding-width) * -1);
     margin-bottom: calc(var(--padding-width) / 2);
@@ -72,6 +72,10 @@ export default {
     margin: var(--space) 0 0;
     position: relative;
     z-index: 1;
+
+    &:empty {
+      display: none;
+    }
   }
 
   &__link {
