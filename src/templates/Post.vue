@@ -1,6 +1,6 @@
 <template>
-  <PostLayout>
-    <article v-if="$page.post.published">
+  <PostLayout v-if="$page.post.published">
+    <article>
       <header class="post-title">
         <h1 class="post-title__text">
           {{ $page.post.title }}
@@ -18,7 +18,10 @@
           />
         </header>
 
-        <section class="post__content link-highlight" v-html="$page.post.content" />
+        <section
+          class="post__content link-highlight"
+          v-html="$page.post.content"
+        />
 
         <footer class="post__footer">
           <PostTags :tags="$page.post.tags" />
@@ -29,9 +32,10 @@
         <!-- Add comment widgets here -->
       </article>
     </article>
-
-    <template v-else class="post content-box">该 Blog 暂未公开 🤕</template>
   </PostLayout>
+
+  <!-- Bottom-up strategy -->
+  <Page404 v-else />
 </template>
 
 <page-query>
@@ -56,21 +60,28 @@ query Post ($id: ID!) {
 <script>
 import PostMeta from '~/components/PostMeta';
 import PostTags from '~/components/PostTags';
+import Page404 from '~/pages/404';
 
 export default {
   components: {
     PostMeta,
     PostTags,
+    Page404,
   },
   metaInfo() {
+    if (this.$page.post.published) {
+      return {
+        title: this.$page.post.title,
+        meta: [
+          {
+            name: 'description',
+            content: this.$page.post.description,
+          },
+        ],
+      };
+    }
     return {
-      title: this.$page.post.title,
-      meta: [
-        {
-          name: 'description',
-          content: this.$page.post.description,
-        },
-      ],
+      title: '404',
     };
   },
 };
