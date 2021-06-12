@@ -1,21 +1,21 @@
 <template>
-  <div class="home">
-    <div class="frame">
-      <div class="logo" ref="logo">
+  <main class="home">
+    <header class="frame">
+      <h1 class="logo" ref="logo">
         {{ $static.metadata.siteName }}
-      </div>
+      </h1>
 
       <g-image
         class="impression-image"
         src="~/assets/images/the-sun-at-night.jpg"
         ref="impressionImage"
       />
-    </div>
+    </header>
 
-    <div class="frame">
-      <div class="frame__website">ceynri.cn</div>
+    <section class="frame">
+      <header class="frame__website">ceynri.cn</header>
 
-      <div class="frame__nav" ref="nav">
+      <nav class="frame__nav" ref="nav">
         <g-link
           class="link"
           v-for="(item, name) in $static.metadata.nav.home"
@@ -23,26 +23,22 @@
           :key="name"
           >{{ item.name }}</g-link
         >
-      </div>
+      </nav>
 
       <div class="frame__intro" ref="intro">
         Hello. I'm a frontend developer, like to create meaningful things.
       </div>
 
-      <Social
-        at="home"
-        class="frame__social"
-        :items="$static.metadata.social.home"
-      />
+      <Social class="frame__social" :items="$static.metadata.social.home" />
 
-      <div class="frame__copyright">
+      <footer class="frame__copyright">
         <div>© {{ new Date().getFullYear() }} Ceynri</div>
         <a v-if="$static.metadata.beian" :href="$static.metadata.beian.link">{{
           $static.metadata.beian.text
         }}</a>
-      </div>
-    </div>
-  </div>
+      </footer>
+    </section>
+  </main>
 </template>
 
 <static-query>

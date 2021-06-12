@@ -1,26 +1,27 @@
 <template>
   <PostLayout>
-    <template v-if="$page.page.published">
-      <div class="post-page__title">
+    <article v-if="$page.page.published">
+      <header class="post-page__title">
         <h1>{{ $page.page.title }}</h1>
-      </div>
+      </header>
 
-      <div class="post-page content-box">
-        <div class="post-page__header">
+      <section class="post-page content-box">
+        <header class="post-page__header">
           <g-image
             alt="Cover image"
             v-if="$page.page.cover_image"
             :src="$page.page.cover_image"
           />
-        </div>
+        </header>
 
-        <div class="post-page__content" v-html="$page.page.content" />
+        <section class="post-page__content" v-html="$page.page.content" />
 
-        <div class="post-page__footer">
-          <PostTags :tags="$page.page.tags" />
-        </div>
-      </div>
-    </template>
+        <footer class="post-page__footer">
+          <PostTags :tags="tags" />
+        </footer>
+      </section>
+    </article>
+
     <template v-else class="post-page content-box"
       >该 Blog 暂未公开 🤕</template
     >

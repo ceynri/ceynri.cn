@@ -1,34 +1,35 @@
 <template>
   <PostLayout>
-    <template v-if="$page.post.published">
-      <div class="post-title">
+    <article v-if="$page.post.published">
+      <header class="post-title">
         <h1 class="post-title__text">
           {{ $page.post.title }}
         </h1>
 
         <PostMeta :post="$page.post" />
-      </div>
+      </header>
 
-      <div class="post content-box">
-        <div class="post__header">
+      <section class="post content-box">
+        <header class="post__header">
           <g-image
             alt="Cover image"
             v-if="$page.post.cover_image"
             :src="$page.post.cover_image"
           />
-        </div>
+        </header>
 
-        <div class="post__content link-highlight" v-html="$page.post.content" />
+        <section class="post__content link-highlight" v-html="$page.post.content" />
 
-        <div class="post__footer">
+        <footer class="post__footer">
           <PostTags :tags="$page.post.tags" />
-        </div>
-      </div>
+        </footer>
+      </section>
 
-      <div class="post-comments">
+      <article class="post-comments">
         <!-- Add comment widgets here -->
-      </div>
-    </template>
+      </article>
+    </article>
+
     <template v-else class="post content-box">该 Blog 暂未公开 🤕</template>
   </PostLayout>
 </template>

@@ -9,13 +9,13 @@
       </div>
     </header>
 
-    <div class="posts">
+    <section class="posts">
       <PostCard
         v-for="edge in $page.tag.belongsTo.edges"
         :key="edge.node.id"
         :post="edge.node"
       />
-    </div>
+    </section>
     <Pagination :page-info="$page.tag.belongsTo.pageInfo" />
   </Layout>
 </template>
@@ -36,7 +36,6 @@ query Tag ($id: ID!, $page: Int) {
             path
             date (format: "MMM DD, YYYY")
             description
-            content
           }
         }
       }
