@@ -1,28 +1,27 @@
 <template>
-  <PostLayout v-if="$page.page.published">
-    <article>
-      <header class="single-page__title">
-        <h1>{{ $page.page.title }}</h1>
-      </header>
-
-      <section class="single-page content-box">
-        <header class="single-page__header">
+  <Layout v-if="$page.page.published">
+    <article class="single-page">
+      <section class="content-box post">
+        <div class="post__header">
           <g-image
             alt="Cover image"
             v-if="$page.page.cover_image"
             :src="$page.page.cover_image"
           />
+        </div>
+        <header class="post__title">
+          <h1>{{ $page.page.title }}</h1>
         </header>
 
-        <section class="single-page__content" v-html="$page.page.content" />
+        <section class="post__content" v-html="$page.page.content" />
 
-        <footer class="single-page__footer">
+        <footer class="post__footer">
           <PostTags :tags="tags" />
         </footer>
       </section>
     </article>
-  </PostLayout>
-  
+  </Layout>
+
   <!-- Bottom-up strategy -->
   <Page404 v-else />
 </template>
@@ -64,108 +63,65 @@ export default {
     },
   },
   metaInfo() {
-    if (this.$page.page.published) {
-      return {
-        title: this.$page.page.title,
-        meta: [
-          {
-            name: 'description',
-            content: this.$page.page.description,
-          },
-        ],
-      };
+    if (!this.$page.page.published) {
+      return { title: '404' };
     }
     return {
-      title: '404',
+      title: this.$page.page.title,
+      meta: [
+        {
+          name: 'description',
+          content: this.$page.page.description,
+        },
+      ],
     };
   },
 };
 </script>
 
 <style lang="scss">
+// overwrite
 .single-page {
-  &__title {
-    padding: calc(var(--padding-width) / 2) 0;
-    text-align: center;
-  }
-  &__content {
-    font-size: var(--article-font-size);
-    margin-bottom: calc(var(--padding-width) / 2);
+  .post {
+    &__title {
+      padding: 0 0 3em;
+      text-align: left;
 
-    h1:first-child {
-      display: none;
-    }
-
-    @for $i from 1 through 5 {
-      // Consecutive headings
-      h#{$i} + h#{$i + 1},
-      // Title after <br>
-      br + h#{$i},
-      // At the beginning heading
-      h#{$i}:first-child {
-        margin-top: 0;
+      h1 {
+        font-size: 2em;
+        margin-bottom: 0;
       }
     }
 
-    img {
-      display: block;
+    &__content {
+      // h1:first-child {
+      //   display: block;
+      // }
 
-      // full
-      margin-left: calc(var(--padding-width) * -1);
-      margin-right: calc(var(--padding-width) * -1);
-      width: calc(100% + var(--padding-width) * 2);
-      max-width: none;
+      a {
+        font-size: 100%;
+        transition: color var(--duration);
 
-      &[alt*='size=small'],
-      &[alt*='size=medium'],
-      &[alt*='size=large'],
-      &[alt*='size=auto'] {
-        margin-left: auto;
-        margin-right: auto;
-        width: initial;
-      }
+        position: relative;
 
-      &[alt*='size=small'] {
-        max-width: 50%;
-      }
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 2px;
+          width: 61.8%;
+          background-color: var(--link-color);
+          transition: width var(--duration);
+        }
 
-      &[alt*='size=medium'] {
-        max-width: calc(0.618 * (100% + 2 * var(--padding-width)));
-      }
+        &:hover {
+          color: var(--link-color);
 
-      &[alt*='size=large'],
-      &[alt*='size=auto'] {
-        max-width: 100%;
-      }
-
-      &[alt*='size=full'] {
-        // default
-      }
-    }
-
-    a {
-      font-size: 100%;
-      transition: color var(--duration);
-
-      position: relative;
-
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 2px;
-        width: 61.8%;
-        background-color: var(--link-color);
-        transition: width var(--duration);
-      }
-
-      &:hover {
-        color: var(--link-color);
-
-        &::before {
-          width: 100%;
+          &::before {
+            width: 100%;
+          }
         }
       }
     }
