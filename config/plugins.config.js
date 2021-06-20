@@ -16,6 +16,9 @@ module.exports = [
       remark: {
         // code highlight
         plugins: ['@gridsome/remark-prismjs'],
+        imageQuality: 95,
+        imageBlurRatio: 10,
+        // lazyLoadImages: false,
       },
     },
   },
@@ -29,6 +32,8 @@ module.exports = [
       remark: {
         // code highlight
         plugins: ['@gridsome/remark-prismjs'],
+        imageQuality: 95,
+        imageBlurRatio: 10,
       },
     },
   },
