@@ -21,21 +21,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      // Create a local scheme to synchronize with the window scheme in Vue.js
-      scheme: 'dark',
-    };
-  },
-  mounted() {
-    this.scheme = window.__colorScheme;
+  computed: {
+    scheme() {
+      return this.$store.state.scheme;
+    },
   },
   methods: {
     toggleColorScheme() {
-      const newColorScheme =
-        window.__colorScheme === 'light' ? 'dark' : 'light';
-      window.__setColorScheme(newColorScheme);
-      this.scheme = newColorScheme;
+      this.$store.commit('toggleColorScheme');
     },
   },
 };

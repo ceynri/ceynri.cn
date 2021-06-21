@@ -1,12 +1,19 @@
+import store from '~/utils/store';
+
 import '~/assets/styles/index.scss';
+
 import DefaultLayout from '~/layouts/Default.vue';
 import PostLayout from '~/layouts/Post.vue';
 
-// The Client API can be used here. Learn more: gridsome.org/docs/client-api
-export default function(Vue, { head }) {
-  // Set default layout as a global component
+// The Client API can be used here.
+// Learn more: https://gridsome.org/docs/client-api
+export default function(Vue, { appOptions, head }) {
+  // Set layout as a global component
   Vue.component('Layout', DefaultLayout);
   Vue.component('PostLayout', PostLayout);
+
+  appOptions.store = store;
+
   head.htmlAttrs = {
     lang: 'zh_CN',
   };
