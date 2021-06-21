@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    scheme: window.__colorScheme,
+    scheme: process.isClient ? window.__colorScheme : 'dark',
   },
   mutations: {
     toggleColorScheme(state) {
