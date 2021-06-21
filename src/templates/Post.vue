@@ -113,7 +113,7 @@ export default {
 
 <style lang="scss">
 .post-comments {
-  padding: calc(var(--padding-width) / 2);
+  margin: calc(var(--padding-width)) 0;
 
   &:empty {
     display: none;
