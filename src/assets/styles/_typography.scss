@@ -9,9 +9,23 @@ body {
   // line-height: 1.45;
 }
 
-p {
+p,
+details {
   line-height: var(--article-line-height);
   margin-bottom: 1em;
+}
+
+summary {
+  cursor: pointer;
+  opacity: 0.8;
+
+  transition: color var(--duration), opacity var(--duration),
+    text-shadow calc(var(--duration) * 2);
+
+  &:hover {
+    color: var(--link-color);
+    text-shadow: 0 0 0.2em var(--link-shadow-color);
+  }
 }
 
 h1,

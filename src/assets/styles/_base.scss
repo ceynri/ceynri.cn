@@ -31,9 +31,6 @@ a:not(.button) {
 .link-highlight a:not(.button) {
   text-decoration: underline;
   opacity: 0.8;
-  transition: color var(--duration),
-    opacity var(--duration),
-    text-shadow calc(var(--duration) * 2);
 
   &:hover {
     opacity: 1;
