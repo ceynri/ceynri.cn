@@ -26,7 +26,7 @@
       </section>
 
       <article class="post-comments">
-        <!-- Add comment widgets here -->
+        <Comment v-if="showComment" />
       </article>
     </article>
   </PostLayout>
@@ -51,6 +51,7 @@ query Post ($id: ID!) {
     content
     cover_image (width: 900, blur: 10, quality: 98)
     published
+    comment
   }
 }
 </page-query>
@@ -59,12 +60,39 @@ query Post ($id: ID!) {
 import PostMeta from '~/components/PostMeta';
 import PostFooter from '~/components/PostFooter';
 import Page404 from '~/pages/404';
+import Comment from '~/components/Comment.vue';
 
 export default {
+  computed: {
+    scheme() {
+      return this.$store.state.scheme;
+    },
+    showComment() {
+      return this.$page.post.comment;
+    },
+  },
+  watch: {
+    scheme() {
+      this.reloadComment();
+    },
+  },
+  methods: {
+    reloadComment() {
+      if (!this.showComment) {
+        return;
+      }
+      // use v-if to forced refresh component
+      this.showComment = false;
+      this.$nextTick(() => {
+        this.showComment = true;
+      });
+    },
+  },
   components: {
     PostMeta,
     PostFooter,
     Page404,
+    Comment,
   },
   metaInfo() {
     if (!this.$page.post.published) {
