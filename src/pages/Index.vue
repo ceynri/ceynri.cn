@@ -26,7 +26,7 @@
       </nav>
 
       <div class="frame__intro" ref="intro">
-        Hello. I'm a frontend developer, like to create meaningful things.
+        Hello. I'm a frontend developer, like to create meaningful stuff.
       </div>
 
       <Social class="frame__social" :items="$static.metadata.social.home" />
@@ -77,6 +77,7 @@ export default {
     titleTemplate: '%s',
   },
   mounted() {
+    // force setting to Dark Scheme on the home
     window.__setColorScheme('dark', true);
     // if (isPc()) {
     this.applyPerspective();

@@ -7,7 +7,7 @@ module.exports = {
   siteName: '山风',
   siteDescription: "山风的小角落 / Ceynri's personal website",
   siteUrl: 'https://ceynri.cn',
-  titleTemplate: '%s | 山风',
+  titleTemplate: '%s',
   templates: {
     Post: '/blog/:slug',
     Tag: '/blog/tags/:id',
