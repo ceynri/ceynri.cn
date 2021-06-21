@@ -7,34 +7,35 @@
   <body ${bodyAttrs}>
     <script>
       // Add dark / light detection that runs before Vue.js load.
-      (function() {
-        const colorSchemeMeta = document.querySelector('html head meta[name="color-scheme"]');
+      const colorSchemeMeta = document.querySelector(
+        'html head meta[name="color-scheme"]'
+      );
 
-        window.__setColorScheme = function(value, isTemp) {
-          document.documentElement.dataset.scheme = value;
-          if (colorSchemeMeta) {
-            colorSchemeMeta.content = value;
-          }
-          if (!isTemp) {
-            window.__colorScheme = value;
-            try {
-              // localStorage.setItem will fail when the user accesses in incognito mode
-              localStorage.setItem('colorScheme', value);
-            } catch (err) {}
-          }
-        };
-        window.__checkColorScheme = function() {
-          const colorScheme = localStorage.getItem('colorScheme');
-          if (colorScheme) {
-            __setColorScheme(colorScheme);
-            return;
-          }
-          // Select the default color scheme by user system setting
-          const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-          __setColorScheme(supportDarkMode ? 'dark' : 'light');
+      window.__setColorScheme = function(value, isTemp) {
+        document.documentElement.dataset.scheme = value;
+        if (colorSchemeMeta) {
+          colorSchemeMeta.content = value;
         }
-        window.__checkColorScheme();
-      })();
+        if (!isTemp) {
+          window.__colorScheme = value;
+          try {
+            // localStorage.setItem will fail when the user accesses in incognito mode
+            localStorage.setItem('colorScheme', value);
+          } catch (err) {}
+        }
+      };
+      window.__checkColorScheme = function() {
+        const colorScheme = localStorage.getItem('colorScheme');
+        if (colorScheme) {
+          __setColorScheme(colorScheme);
+          return;
+        }
+        // Select the default color scheme by user system setting
+        const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+        const supportDarkMode = matchMedia.matches === true;
+        __setColorScheme(supportDarkMode ? 'dark' : 'light');
+      };
+      window.__checkColorScheme();
     </script>
 
     ${app}
