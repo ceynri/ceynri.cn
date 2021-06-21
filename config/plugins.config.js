@@ -5,7 +5,7 @@ module.exports = [
     options: {
       typeName: 'Post',
       baseDir: './content',
-      path: ['./blogs/**/*.md', './poems/**/*.md', './abouts/**/*.md'],
+      path: ['./blogs/**/*.md', './poems/**/*.md'],
       refs: {
         // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
         tags: {
