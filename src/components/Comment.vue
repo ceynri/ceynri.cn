@@ -25,10 +25,10 @@ export default {
       <div class="giscus">
         <script
           src="https://giscus.app/client.js"
-          data-repo="ceynri/giscus-test"
-          data-repo-id="MDEwOlJlcG9zaXRvcnkzNzg4MDIwNTg="
+          data-repo="ceynri/ceynri.cn"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkyMzg4NDQwNzg="
           data-category="Announcements"
-          data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDQzMjE5"
+          data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDQxNzg2"
           data-mapping="title"
           data-reactions-enabled={this.enableReactions}
           data-theme={this.scheme}
