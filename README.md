@@ -1,38 +1,58 @@
 # ceynri.cn
 
-> The new version personal website is still [Work In Progress](https://github.com/ceynri/ceynri.cn/milestone/1). 🐟
+> The new version personal website is still [Work In Progress](https://github.com/ceynri/ceynri.cn/projects/1). 🐟
 >
 > You can visit <https://ceynri.cn/> to experience preview version.
 
 ## Structure
 
-[Home](https://ceynri.cn/) - A fancy single-screen page.
 
-![Home](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554363449-Home.png)
+<details>
+<summary>Home - A fancy single-screen page.</summary>
 
-[Blog](https://ceynri.cn/blog/) - The main part of the website.
+![Home](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279447155-home.png)
 
-![Blog](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554746577-new-blog.png)
+Home logo and impression image add perspective effect for fun:
 
-> Obsolete blog layout:
->
-> ![Blog](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554384746-Blog.png)
+![perspective](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624284710324-move.gif)
+
+</details>
+
+<details>
+<summary>Blog - The main part of the website. Chinese attention.</summary>
+
+![Blog](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279421290-blog.png)
+</details>
+
+<details>
+<summary>Archive - Posts archived by year.</summary>
+
+![archive](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279909009-archive.png)
+</details>
+
+<details>
+<summary>About - About me, about name, about...</summary>
+
+![about](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279861902-about.png)
+</details>
+
+<details>
+<summary>Tags - Posts aggregated according to the contained tags.</summary>
+
+![tag](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279924010-tag.png)
+</details>
 
 ## Techology
 
 ceynri.cn v2 is powered by [Gridsome](https://gridsome.org), which is a Vue-powered Static Site Generator inspired by [Gatsby](https://www.gatsbyjs.com/).
 
+The comment system currently uses [giscus](https://github.com/laymonage/giscus), a plugin similar to [utterances](https://github.com/utterance/utterances) but uses discussions instead of issues.
+
 ## Compatibility
 
 - 😅 All IE versions are not supported. Please use MODERN browser if you are using IE.
 - 📱 Mobile is compatible.
-- 🙏 If you meet bugs, please submit an issue.
-
-## For fun
-
-Home logo and impression image add perspective effect:
-
-![perspective](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1622554395766-perspective.gif)
+- 🙏 If you meet bugs, please submit an [issue](https://github.com/ceynri/ceynri.cn/issues).
 
 ## Versions
 
