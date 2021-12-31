@@ -8,10 +8,10 @@
         </g-link>
       </li>
       <li>
-        <a class="nav__item" href="/about/" key="About">
+        <g-link class="nav__item" to="/about/" key="About">
           <img svg-inline class="icon" src="~/assets/icons/info.svg" />
           About
-        </a>
+        </g-link>
       </li>
       <li>
         <g-link class="nav__item" to="/blog/archive/" key="Archive">
