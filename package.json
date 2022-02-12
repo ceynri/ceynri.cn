@@ -19,7 +19,7 @@
     "@gridsome/transformer-remark": "^0.3.4",
     "@microflash/gridsome-plugin-feed": "^1.2.1",
     "gridsome": "^0.7.23",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^8.0.0",
     "vue-svg-inline-loader": "^2.1.2",
     "vuex": "^3.6.2"
