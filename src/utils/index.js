@@ -1,4 +1,3 @@
-export * as env from './env';
 export { Perspective } from './perspective';
 export { default as objFilter } from './objFilter';
 
