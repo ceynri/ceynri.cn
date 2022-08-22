@@ -2,9 +2,9 @@
 <html ${htmlAttrs}>
   <head>
     <meta name="color-scheme" content="light dark" />
+
     ${head}
-  </head>
-  <body ${bodyAttrs}>
+
     <script>
       // Add dark / light detection that runs before Vue.js load.
       const colorSchemeMeta = document.querySelector(
@@ -37,7 +37,8 @@
       };
       window.__checkColorScheme();
     </script>
-
+  </head>
+  <body ${bodyAttrs}>
     ${app}
     ${scripts}
   </body>
