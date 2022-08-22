@@ -1,8 +1,8 @@
 # ceynri.cn
 
-> The new version personal website is still [Work In Progress](https://github.com/ceynri/ceynri.cn/projects/1). 🐟
->
-> You can visit <https://ceynri.cn/> to experience preview version.
+You can visit <https://ceynri.cn/> to experience.
+
+> [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance, so I am looking for a substitute for Gridsome later on. If you have a good recommendation, welcome to communicate with me! 😉
 
 ## Structure
 
