@@ -1,13 +1,25 @@
+<template>
+  <giscus-widget
+    id="giscus"
+    repo="ceynri/ceynri.cn"
+    repoid="MDEwOlJlcG9zaXRvcnkyMzg4NDQwNzg="
+    category="Announcements"
+    categoryid="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDQxNzg2"
+    mapping="title"
+    reactionsenabled="1"
+    emitmetadata="0"
+    inputposition="top"
+    :theme="scheme"
+    lang="zh-CN"
+    loading="lazy"
+  ></giscus-widget>
+</template>
+
 <script>
+import 'giscus';
+
 export default {
   props: {
-    /**
-     * enum: [0, 1]
-     */
-    enableReactions: {
-      type: Number,
-      default: 1,
-    },
     /**
      * enum: ['dark', 'light', 'preferred_color_scheme']
      */
@@ -20,23 +32,12 @@ export default {
       scheme: this.theme || this.$store.state.scheme,
     };
   },
-  render(h) {
-    return (
-      <div class="giscus">
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="ceynri/ceynri.cn"
-          data-repo-id="MDEwOlJlcG9zaXRvcnkyMzg4NDQwNzg="
-          data-category="Announcements"
-          data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDQxNzg2"
-          data-mapping="title"
-          data-reactions-enabled={this.enableReactions}
-          data-theme={this.scheme}
-          crossorigin="anonymous"
-          async
-        />
-      </div>
-    );
-  },
 };
 </script>
+
+<style lang="scss">
+// temp fix white background
+#giscus::part(iframe) {
+  color-scheme: light;
+}
+</style>
