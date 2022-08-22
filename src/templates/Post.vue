@@ -26,7 +26,9 @@
       </section>
 
       <article class="post-comments">
-        <Comment v-if="showComment" />
+        <ClientOnly>
+          <Comment v-if="showComment" />
+        </ClientOnly>
       </article>
     </article>
   </PostLayout>
@@ -60,7 +62,6 @@ query Post ($id: ID!) {
 import PostMeta from '~/components/PostMeta';
 import PostFooter from '~/components/PostFooter';
 import Page404 from '~/pages/404';
-import Comment from '~/components/Comment.vue';
 
 export default {
   computed: {
@@ -92,7 +93,7 @@ export default {
     PostMeta,
     PostFooter,
     Page404,
-    Comment,
+    Comment: () => import('~/components/Comment.vue'),
   },
   metaInfo() {
     if (!this.$page.post.published) {

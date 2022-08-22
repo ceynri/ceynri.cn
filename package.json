@@ -6,8 +6,8 @@
     "develop": "gridsome develop",
     "dev": "gridsome develop",
     "explore": "gridsome explore",
-    "deploy": "npm run build && bash deploy.sh",
-    "deploy:built": "bash deploy.sh"
+    "deploy": "npm run build && deploy.sh",
+    "deploy:built": "deploy.sh"
   },
   "dependencies": {
     "@gridsome/plugin-google-analytics": "^0.1.0",
