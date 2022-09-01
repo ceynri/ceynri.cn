@@ -1,6 +1,6 @@
 import store from '~/utils/store';
 
-import '~/assets/styles/index.scss';
+import '~/styles/index.scss';
 
 import DefaultLayout from '~/layouts/Default.vue';
 import PostLayout from '~/layouts/Post.vue';
