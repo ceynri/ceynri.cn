@@ -13,6 +13,7 @@ module.exports = {
     Tag: '/blog/tags/:id',
     SinglePage: '/:slug',
   },
+  assetsDir: `assets_${Date.now()}`,
   metadata,
   plugins,
   css: {
