@@ -31,6 +31,12 @@
         </ClientOnly>
       </article>
     </article>
+
+    <FloatingImage
+      v-for="(linkDom, i) in linkDoms"
+      :key="i"
+      :target-dom="linkDom"
+    />
   </PostLayout>
 
   <!-- Bottom-up strategy -->
@@ -59,11 +65,18 @@ query Post ($id: ID!) {
 </page-query>
 
 <script>
+import FloatingImage from '~/components/FloatingImage';
 import PostMeta from '~/components/PostMeta';
 import PostFooter from '~/components/PostFooter';
 import Page404 from '~/pages/404';
+import { findAllLinkDom } from '~/utils/dom';
 
 export default {
+  data() {
+    return {
+      linkDoms: [],
+    };
+  },
   computed: {
     scheme() {
       return this.$store.state.scheme;
@@ -76,6 +89,9 @@ export default {
     scheme() {
       this.reloadComment();
     },
+  },
+  mounted() {
+    this.linkDoms = findAllLinkDom();
   },
   methods: {
     reloadComment() {
@@ -93,6 +109,7 @@ export default {
     PostMeta,
     PostFooter,
     Page404,
+    FloatingImage,
     Comment: () => import('~/components/Comment.vue'),
   },
   metaInfo() {
