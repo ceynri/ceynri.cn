@@ -10,24 +10,25 @@
     }"
   >
     <img
+      ref="floatingImageRef"
       :src="picUrl"
       alt=""
       class="floating-image"
+      @load="onPicLoad"
     >
   </div>
 </template>
 
 <script>
+import { limitToInterval } from '~/utils/number';
+
 export default {
-  props: {
-    targetDom: {
-      type: HTMLAnchorElement,
-      default: null,
-    },
-  },
+  props: ['targetDom'],
   data() {
     return {
       picUrl: '',
+      picWidth: 0,
+      picHeight: 0,
       posX: 0,
       posY: 0,
       easeTimer: null,
@@ -46,9 +47,15 @@ export default {
       this.picUrl = targetDom.href;
 
       targetDom.addEventListener('mousemove', (event) => {
-        this.posX = event.clientX;
-        this.posY = event.clientY;
+        const windowWidth = document.documentElement.clientWidth;
+        const windowHeight = document.documentElement.clientHeight;
+        const halfPicWidth = this.picWidth / 2;
+        const halfPicHeight = this.picHeight / 2;
+        this.posX = limitToInterval(event.clientX, [halfPicWidth, windowWidth - halfPicWidth]);
+        this.posY = limitToInterval(event.clientY, [halfPicHeight, windowHeight - halfPicHeight]);
+
         this.isHovering = true;
+
         // delay a little time to avoid the image moving from the previous position with animation
         clearTimeout(this.easeTimer);
         this.easeTimer = setTimeout(() => {
@@ -65,7 +72,11 @@ export default {
         }, 500);
       });
     },
-  }
+    onPicLoad() {
+      this.picWidth = this.$refs.floatingImageRef.width;
+      this.picHeight = this.$refs.floatingImageRef.height;
+    },
+  },
 };
 </script>
 
