@@ -48,7 +48,7 @@
     img {
       display: block;
 
-      // full
+      // size=full is default
       margin-left: calc(var(--padding-width) * -1);
       margin-right: calc(var(--padding-width) * -1);
       width: calc(100% + var(--padding-width) * 2);
@@ -64,20 +64,23 @@
       }
 
       &[alt*='size=small'] {
-        max-width: 50%;
+        width: 50%;
       }
 
       &[alt*='size=medium'] {
-        max-width: calc(0.618 * (100% + 2 * var(--padding-width)));
+        width: calc(0.618 * (100% + 2 * var(--padding-width)));
       }
 
-      &[alt*='size=large'],
-      &[alt*='size=auto'] {
-        max-width: 100%;
+      &[alt*='size=large'] {
+        width: 100%;
       }
 
       &[alt*='size=full'] {
         // default
+      }
+
+      &[alt*='size=auto'] {
+        max-width: 100%;
       }
     }
 
