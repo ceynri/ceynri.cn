@@ -42,13 +42,20 @@ jobs:
       - name: Project build
         run: npm run build
       - name: Project deploy
-        uses: appleboy/scp-action@master
+        # uses: appleboy/scp-action@master
+        # with:
+        #   host: ${{ secrets.HOST }}
+        #   username: ${{ secrets.USERNAME }}
+        #   password: ${{ secrets.PASSWORD }}
+        #   port: ${{ secrets.PORT }}
+        #   strip_components: 1
+        #   source: dist/
+        #   target: ${{ secrets.TARGET_PATH }}
+        #   debug: true
+        uses: garygrossgarten/github-action-scp@release
         with:
+          local: dist
+          remote: ${{ secrets.TARGET_PATH }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          strip_components: 1
-          source: "dist/"
-          target: ${{ secrets.TARGET_PATH }}
-          debug: true
