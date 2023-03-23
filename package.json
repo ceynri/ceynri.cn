@@ -1,13 +1,17 @@
 {
   "name": "ceynri.cn",
   "private": true,
+  "description": "Ceynri's personal website",
+  "author": {
+    "name": "ceynri",
+    "email": "ceynri@gmail.com",
+    "url": "https://github.com/ceynri/"
+  },
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
     "dev": "gridsome develop",
-    "explore": "gridsome explore",
-    "deploy": "npm run build && deploy.sh",
-    "deploy:built": "deploy.sh"
+    "explore": "gridsome explore"
   },
   "dependencies": {
     "@gridsome/plugin-google-analytics": "^0.1.0",
@@ -17,7 +21,7 @@
   "devDependencies": {
     "@gridsome/remark-prismjs": "^0.2.0",
     "@gridsome/source-filesystem": "^0.6.2",
-    "@gridsome/transformer-remark": "^0.3.4",
+    "@gridsome/transformer-remark": "^0.6.4",
     "@microflash/gridsome-plugin-feed": "^1.2.1",
     "gridsome": "^0.7.23",
     "sass": "^1.49.7",
