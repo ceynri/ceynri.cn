@@ -16,9 +16,6 @@ on:
     types: [submodule-update]
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -53,4 +50,5 @@ jobs:
           port: ${{ secrets.PORT }}
           strip_components: 1
           source: "dist/"
-          target: "/srv/www/ceynri.cn/"
+          target: ${{ secrets.TARGET_PATH }}
+          debug: true
