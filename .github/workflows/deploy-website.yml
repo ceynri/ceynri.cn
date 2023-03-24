@@ -8,20 +8,19 @@ on:
   push:
     branches:
       - main
-      - github-action-test
-  pull_request:
-    branches:
-      - main
+      - feature/github-action/deploy-website
   repository_dispatch:
     types: [submodule-update]
   workflow_dispatch:
 
-permissions:
-  contents: read
+env:
+  NODE_VERSION: 14.20.0
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # use self-hosted HK server for solve the China's Internet speed issue
+    runs-on: self-hosted
+    # runs-on: ubuntu-latest
     environment: production
     steps:
       - name: Checkout repository
@@ -29,6 +28,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           submodules: true
+
       - name: Update submodules
         run: |
           git submodule update --remote
@@ -36,14 +36,26 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git commit -am "docs: update content" || exit 0
           git push || exit 0
-      - name: Use Node.js 14x
+
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+
       - name: Project install
-        run: npm install
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
       - name: Project build
         run: npm run build
+
       - name: Project deploy
         uses: appleboy/scp-action@master
         with:
@@ -52,5 +64,15 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           strip_components: 1
-          source: "dist/"
-          target: "/srv/www/ceynri.cn/"
+          source: dist/
+          target: ${{ secrets.TARGET_PATH }}
+
+      # another scp action, but transfer files one by one
+      # - name: Project deploy
+      #   uses: garygrossgarten/github-action-scp@release
+      #   with:
+      #     local: dist
+      #     remote: ${{ secrets.TARGET_PATH }}
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
