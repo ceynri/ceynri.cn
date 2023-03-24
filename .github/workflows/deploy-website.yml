@@ -8,10 +8,7 @@ on:
   push:
     branches:
       - main
-      - action-debug
-  pull_request:
-    branches:
-      - main
+      - feature/github-action/deploy-website
   repository_dispatch:
     types: [submodule-update]
   workflow_dispatch:
