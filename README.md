@@ -1,5 +1,7 @@
 # ceynri.cn
 
+![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)
+
 You can visit <https://ceynri.cn/> to experience.
 
 > [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance, so I am looking for a substitute for Gridsome later on. If you have a good recommendation, welcome to communicate with me! 😉
@@ -7,7 +9,6 @@ You can visit <https://ceynri.cn/> to experience.
 ## Introduction
 
 ### Structure
-
 
 <details>
 <summary>Home - A fancy single-screen page.</summary>
@@ -24,24 +25,28 @@ Home logo and impression image add perspective effect for fun:
 <summary>Blog - The main part of the website. Chinese attention.</summary>
 
 ![Blog](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279421290-blog.png)
+
 </details>
 
 <details>
 <summary>Archive - Posts archived by year.</summary>
 
 ![archive](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279909009-archive.png)
+
 </details>
 
 <details>
 <summary>About - About me, about name, about...</summary>
 
 ![about](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279861902-about.png)
+
 </details>
 
 <details>
 <summary>Tags - Posts aggregated according to the contained tags.</summary>
 
 ![tag](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279924010-tag.png)
+
 </details>
 
 ### Techology
