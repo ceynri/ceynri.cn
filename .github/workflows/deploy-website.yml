@@ -16,6 +16,9 @@ on:
     types: [submodule-update]
   workflow_dispatch:
 
+env:
+  NODE_VERSION: 14.20.0
+
 jobs:
   build:
     # use self-hosted HK server for solve the China's Internet speed issue
@@ -37,13 +40,19 @@ jobs:
           git commit -am "docs: update content" || exit 0
           git push || exit 0
 
-      - name: Use Node.js 14x
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Project install
-        run: npm install
+        run: npm ci
+
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
 
       - name: Project build
         run: npm run build
