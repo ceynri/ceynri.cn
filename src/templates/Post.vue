@@ -1,21 +1,28 @@
 <template>
   <PostLayout v-if="$page.post.published">
     <article>
-      <header class="post__title">
-        <h1 class="post-title__text">
-          {{ $page.post.title }}
-        </h1>
-
-        <PostMeta :post="$page.post" />
-      </header>
-
       <section class="post content-box">
         <header class="post__header">
-          <g-image
-            alt="Cover image"
-            v-if="$page.post.cover_image"
-            :src="$page.post.cover_image"
-          />
+          <div
+            v-if="showCover"
+            class="post__cover"
+          >
+            <g-image
+              alt="Cover image"
+              :src="$page.post.cover_image"
+            />
+          </div>
+
+          <div
+            class="post__title"
+            :class="{ embedded: showCover }"
+          >
+            <h1 class="post-title__text">
+              {{ $page.post.title }}
+            </h1>
+
+            <PostMeta :post="$page.post" />
+          </div>
         </header>
 
         <section
@@ -80,6 +87,9 @@ export default {
   computed: {
     scheme() {
       return this.$store.state.scheme;
+    },
+    showCover() {
+      return !!this.$page.post.cover_image;
     },
     showComment() {
       return this.$page.post.comment;

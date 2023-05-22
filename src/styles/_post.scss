@@ -1,16 +1,17 @@
 .post {
-  &__title {
-    width: 100%;
-    padding: calc(var(--padding-width) / 2) 0;
-    text-align: center;
-  }
-
   &__header {
+    position: relative;
     width: calc(100% + var(--padding-width) * 2);
     margin-left: calc(var(--padding-width) * -1);
     margin-top: calc(var(--padding-width) * -1);
     margin-bottom: calc(var(--padding-width) / 2);
 
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__cover {
     border-radius: var(--radius) var(--radius) 0 0;
     overflow: hidden;
 
@@ -20,9 +21,28 @@
       width: var(--thin-main-width);
       flex: 1;
     }
+  }
 
-    &:empty {
-      display: none;
+  &__title {
+    width: 100%;
+    padding: var(--padding-width);
+    text-align: center;
+
+    &.embedded {
+      text-align: initial;
+
+      position: absolute;
+      bottom: 0;
+
+      .post-title__text {
+        margin-bottom: 0.75rem;
+      }
+
+      .post-title__text,
+      .post-meta {
+        text-shadow: -2px 2px 8px var(--cover-text-shadow-color);
+        color: var(--cover-text-color);
+      }
     }
   }
 
