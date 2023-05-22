@@ -32,9 +32,13 @@
         <PostFooter :post="$page.post" />
       </section>
 
-      <article class="post-comments">
+      <div class="post__end">
+        <ReturnBar />
+      </div>
+
+      <article class="post__comments">
         <ClientOnly>
-          <Comment v-if="showComment" />
+          <Comment v-if="showComment && commentVisible" />
         </ClientOnly>
       </article>
     </article>
@@ -75,6 +79,7 @@ query Post ($id: ID!) {
 import FloatingImage from '~/components/FloatingImage';
 import PostMeta from '~/components/PostMeta';
 import PostFooter from '~/components/PostFooter';
+import ReturnBar from '~/components/ReturnBar';
 import Page404 from '~/pages/404';
 import { findAllLinkDom } from '~/utils/dom';
 
@@ -82,6 +87,7 @@ export default {
   data() {
     return {
       linkDoms: [],
+      commentVisible: true,
     };
   },
   computed: {
@@ -109,9 +115,9 @@ export default {
         return;
       }
       // use v-if to forced refresh component
-      this.showComment = false;
+      this.commentVisible = false;
       this.$nextTick(() => {
-        this.showComment = true;
+        this.commentVisible = true;
       });
     },
   },
@@ -120,6 +126,7 @@ export default {
     PostFooter,
     Page404,
     FloatingImage,
+    ReturnBar,
     Comment: () => import('~/components/Comment.vue'),
   },
   metaInfo() {
@@ -138,13 +145,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.post-comments {
-  margin: calc(var(--padding-width)) 0;
-
-  &:empty {
-    display: none;
-  }
-}
-</style>

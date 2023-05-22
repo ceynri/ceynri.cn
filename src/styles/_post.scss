@@ -108,4 +108,16 @@
       display: none;
     }
   }
+  
+  &__end {
+    margin: calc(var(--padding-width) / 2) auto;
+  }
+  
+  &__comments {
+    margin: var(--padding-width) 0;
+  
+    &:empty {
+      display: none;
+    }
+  }
 }
