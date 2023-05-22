@@ -69,7 +69,6 @@ query {
 <script>
 import Social from '~/components/Social';
 
-// import { isPc } from '~/utils/env';
 import { Perspective } from '~/utils/perspective';
 
 export default {
@@ -79,9 +78,7 @@ export default {
   mounted() {
     // force setting to Dark Scheme on the home
     window.__setColorScheme('dark', true);
-    // if (isPc()) {
     this.applyPerspective();
-    // }
   },
   methods: {
     applyPerspective() {

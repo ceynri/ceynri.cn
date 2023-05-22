@@ -34,10 +34,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// temp fix white background
-#giscus::part(iframe) {
-  color-scheme: light;
-}
-</style>

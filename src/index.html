@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html ${htmlAttrs}>
-  <head>
-    <meta name="color-scheme" content="light dark" />
 
-    ${head}
+<head>
+  <meta name="color-scheme" content="light dark" />
 
-    <script>
-      // Add dark / light detection that runs before Vue.js load.
-      const colorSchemeMeta = document.querySelector(
-        'html head meta[name="color-scheme"]'
-      );
+  ${head}
 
-      window.__setColorScheme = function(value, isTemp) {
-        document.documentElement.dataset.scheme = value;
-        if (colorSchemeMeta) {
-          colorSchemeMeta.content = value;
+  <script>
+    // Add dark / light detection that runs before Vue.js load.
+    window.__setColorScheme = function (value, isTemp) {
+      document.documentElement.dataset.scheme = value;
+      if (!isTemp) {
+        try {
+          // localStorage.setItem will fail when the user accesses in incognito mode
+          localStorage.setItem('colorScheme', value);
+        } catch (err) {
+          // do nothing
         }
-        if (!isTemp) {
-          window.__colorScheme = value;
-          try {
-            // localStorage.setItem will fail when the user accesses in incognito mode
-            localStorage.setItem('colorScheme', value);
-          } catch (err) {}
-        }
-      };
-      window.__checkColorScheme = function() {
+      }
+    };
+    window.__checkColorScheme = function () {
+      try {
         const colorScheme = localStorage.getItem('colorScheme');
-        if (colorScheme) {
-          __setColorScheme(colorScheme);
+        if (!colorScheme) {
+          // Select the default color scheme as dark
+          __setColorScheme('dark');
           return;
         }
-        // Select the default color scheme by user system setting
-        const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
-        const supportDarkMode = matchMedia.matches === true;
-        __setColorScheme(supportDarkMode ? 'dark' : 'light');
-      };
-      window.__checkColorScheme();
-    </script>
-    <script>
-      // pray for Mr.jiang
-      var timeOf20221204 = 1670083200000;
-      if (Date.now() < timeOf20221204) {
-        document.documentElement.style.filter = 'grayscale(95%)';
+        __setColorScheme(colorScheme);
+      } catch (err) {
+        // do nothing
       }
-    </script>
-  </head>
-  <body ${bodyAttrs}>
-    ${app}
-    ${scripts}
-  </body>
+    };
+    window.__checkColorScheme();
+  </script>
+
+  <script>
+    // pray for Mr.jiang
+    var timeOf20221204 = 1670083200000;
+    if (Date.now() < timeOf20221204) {
+      document.documentElement.style.filter = 'grayscale(95%)';
+    }
+  </script>
+</head>
+
+<body ${bodyAttrs}>
+  ${app}
+  ${scripts}
+</body>
+
 </html>
