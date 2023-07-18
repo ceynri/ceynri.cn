@@ -7,6 +7,7 @@
   background-color: #000;
   color: #fff;
   position: relative;
+  font-size: 1.25em;
 
   .frame {
     // more props are in 3x3-grid.scss
@@ -37,7 +38,7 @@
     .impression-image {
       @extend .frame__cm;
       display: block;
-      width: 40%;
+      width: 50%;
       z-index: -10;
     }
 
@@ -65,6 +66,7 @@
 
     &__social {
       @extend .frame__rt;
+      font-size: 1.2em;
       // transform: translateX(50%) rotate(90deg);
       // transform-origin: center top;
     }

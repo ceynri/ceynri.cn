@@ -18,7 +18,7 @@
       <nav class="frame__nav" ref="nav">
         <g-link
           class="link"
-          v-for="(item, name) in $static.metadata.nav.home"
+          v-for="(item, name) in $static.metadata.nav"
           :to="item.link"
           :key="name"
           >{{ item.name }}</g-link
@@ -26,16 +26,16 @@
       </nav>
 
       <div class="frame__intro" ref="intro">
-        Hello. I'm a frontend developer, like to create meaningful stuff.
+        {{ $static.metadata.my.welcome }}
       </div>
 
-      <Social class="frame__social" :items="$static.metadata.social.home" />
+      <Social class="frame__social" :items="$static.metadata.social" />
 
       <footer class="frame__copyright">
         <div>© {{ new Date().getFullYear() }} Ceynri</div>
-        <a v-if="$static.metadata.beian" :href="$static.metadata.beian.link">{{
-          $static.metadata.beian.text
-        }}</a>
+        <a v-if="$static.metadata.beian" :href="$static.metadata.beian.link">
+          {{ $static.metadata.beian.text }}
+        </a>
       </footer>
     </section>
   </main>
@@ -45,18 +45,17 @@
 query {
   metadata {
     siteName
+    my {
+      welcome
+    }
     nav {
-      home {
-        name
-        link
-      }
+      name
+      link
     }
     social {
-      home {
-        name
-        link
-        tooltip
-      }
+      name
+      link
+      tooltip
     }
     beian {
       link
