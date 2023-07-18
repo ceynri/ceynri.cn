@@ -1,6 +1,6 @@
 # ceynri.cn
 
-![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)
+[![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml)
 
 You can visit <https://ceynri.cn/> to experience.
 
