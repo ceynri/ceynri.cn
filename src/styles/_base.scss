@@ -50,3 +50,14 @@ img {
   background: var(--light-color);
   color: var(--bg-color);
 }
+
+del {
+  text-decoration: none;
+  background-color: var(--light-color);
+  color: var(--light-color);
+  transition: all 0.3s linear;
+
+  &:hover {
+    color: var(--body-color);
+  }
+}
