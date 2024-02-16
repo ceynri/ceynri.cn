@@ -26,7 +26,7 @@
         </header>
 
         <section
-          class="post__content link-highlight"
+          class="post__content"
           v-html="$page.post.content"
         />
         <PostFooter :post="$page.post" />
@@ -81,7 +81,7 @@ import PostMeta from '~/components/PostMeta';
 import PostFooter from '~/components/PostFooter';
 import ReturnBar from '~/components/ReturnBar';
 import Page404 from '~/pages/404';
-import { findAllLinkDom } from '~/utils/dom';
+import { findAllImageLinkDom } from '~/utils/dom';
 
 export default {
   data() {
@@ -107,7 +107,8 @@ export default {
     },
   },
   mounted() {
-    this.linkDoms = findAllLinkDom();
+    this.linkDoms = findAllImageLinkDom();
+    this.linkDoms.forEach(dom => dom.classList.add('image-link'));
   },
   methods: {
     reloadComment() {

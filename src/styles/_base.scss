@@ -28,15 +28,6 @@ a:not(.button) {
   }
 }
 
-.link-highlight a:not(.button) {
-  text-decoration: underline;
-  opacity: 0.8;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
 img {
   max-width: 100%;
 }

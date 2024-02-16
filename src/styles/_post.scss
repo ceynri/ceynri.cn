@@ -55,10 +55,11 @@
     }
 
     @for $i from 1 through 5 {
+
       // 连续的标题
-      h#{$i} + h#{$i + 1},
+      h#{$i}+h#{$i + 1},
       // br标签后的标题
-      br + h#{$i},
+      br+h#{$i},
       // 处于开头的标题
       h#{$i}:first-child {
         margin-top: 0;
@@ -104,20 +105,39 @@
       }
     }
 
+    blockquote img {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
     br:last-child {
       display: none;
     }
   }
-  
+
   &__end {
     margin: calc(var(--padding-width) / 2) auto;
   }
-  
+
   &__comments {
     margin: var(--padding-width) 0;
-  
+
     &:empty {
       display: none;
     }
+  }
+
+  a:not(.button, .image-link) {
+    text-decoration: underline;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .image-link {
+    opacity: 0.6;
   }
 }

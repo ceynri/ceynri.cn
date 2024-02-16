@@ -101,6 +101,8 @@ export default {
       a {
         font-size: 100%;
         transition: color var(--duration);
+        text-decoration: none;
+        opacity: 1;
 
         position: relative;
 

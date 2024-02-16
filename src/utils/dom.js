@@ -1,9 +1,9 @@
 /**
- * Finds all link DOM
+ * Finds all image link DOM
  * @param parentDom element which limits the search scope
- * @returns link DOM array
+ * @returns image link DOM array
  */
-export const findAllLinkDom = (parentDom = document) => {
+export const findAllImageLinkDom = (parentDom = document) => {
   const linkDoms = parentDom.querySelectorAll('a');
   return [...linkDoms].map((linkDom) => {
     if (!linkDom.href) {
