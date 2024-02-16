@@ -32,7 +32,7 @@
       <Social class="frame__social" :items="$static.metadata.social" />
 
       <footer class="frame__copyright">
-        <div>© {{ new Date().getFullYear() }} Ceynri</div>
+        <div>Ceynri © 2020-{{ new Date().getFullYear() }}</div>
         <a v-if="$static.metadata.beian" :href="$static.metadata.beian.link">
           {{ $static.metadata.beian.text }}
         </a>

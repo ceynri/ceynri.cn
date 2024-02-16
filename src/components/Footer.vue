@@ -1,7 +1,7 @@
 <template>
   <footer class="footer" :style="{ alignItems }">
     <span class="footer__copyright">
-      Copyright © 2020-{{ new Date().getFullYear() }} Ceynri
+      Ceynri © 2020-{{ new Date().getFullYear() }}
     </span>
     <a
       v-if="$static.metadata.beian"
