@@ -28,7 +28,7 @@ query ($page: Int) {
         title
         date (format: "MMM DD, YYYY")
         description
-        cover_image (width: 900, height: 400, blur: 10, quality: 90)
+        cover_image (width: 1350, height: 600, blur: 10, quality: 90)
         path
         tags {
           id

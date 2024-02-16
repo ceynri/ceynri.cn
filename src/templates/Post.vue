@@ -68,7 +68,7 @@ query Post ($id: ID!) {
     }
     description
     content
-    cover_image (width: 900, blur: 10, quality: 97)
+    cover_image (width: 1800, blur: 10, quality: 90)
     published
     comment
   }
