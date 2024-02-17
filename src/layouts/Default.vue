@@ -25,7 +25,7 @@ export default {
   box-sizing: content-box;
   margin: 0 auto;
   display: flex;
-  padding: 0 var(--padding-width);
+  padding: 0 calc(var(--padding-width) / 2);
   position: relative;
   max-width: var(--layout-width);
 

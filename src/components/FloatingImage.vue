@@ -100,8 +100,12 @@ export default {
   
   .floating-image {
     transform: translate(-50%, -50%);
-    max-width: 80vw;
-    max-height: 80vh;
+    $widthScale: 0.5;
+    $heightScale: 0.5;
+    width: $widthScale * 100%;
+    height: $heightScale * 100%;
+    max-width: calc(80vw / $widthScale);
+    max-height: calc(80vh / $heightScale);
   }
 }
 </style>

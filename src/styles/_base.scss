@@ -10,6 +10,7 @@ body {
   background-color: var(--bg-color);
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
+  word-break: break-word;
   margin: 0;
   padding: 0;
   line-height: 1.5;
@@ -42,11 +43,12 @@ img {
   color: var(--bg-color);
 }
 
+// 文字遮罩效果
 del {
   text-decoration: none;
   background-color: var(--light-color);
   color: var(--light-color);
-  transition: all 0.3s linear;
+  transition: all var(--duration) linear;
 
   &:hover {
     color: var(--title-color);
