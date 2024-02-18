@@ -5,7 +5,7 @@ module.exports = [
     options: {
       typeName: 'Post',
       baseDir: './content',
-      path: ['./blogs/**/*.md', './poems/**/*.md'],
+      path: ['./blogs/*.md', './poems/*.md'],
       refs: {
         // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
         tags: {
@@ -35,12 +35,6 @@ module.exports = [
         imageQuality: 97,
         imageBlurRatio: 50,
       },
-    },
-  },
-  {
-    use: '@gridsome/plugin-google-analytics',
-    options: {
-      id: 'UA-158846445-1',
     },
   },
   {

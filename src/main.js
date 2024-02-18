@@ -21,4 +21,12 @@ export default function(Vue, { appOptions, head }) {
     name: 'keywords',
     content: '山风,博客,前端,ceynri,frontend,blog',
   });
+
+  // umami
+  head.script.push({
+    src: 'https://analytics.eu.umami.is/script.js',
+    async: true,
+    defer: true,
+    'data-website-id': '3f5aac97-7561-4a4a-8649-9c929a18841f',
+  });
 }

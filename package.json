@@ -14,7 +14,6 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "@gridsome/plugin-google-analytics": "^0.1.0",
     "giscus": "^1.2.0",
     "gsap": "^3.6.1"
   },
