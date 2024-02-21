@@ -3,7 +3,7 @@ module.exports = {
     name: '山风',
     id: 'ceynri',
     bio: 'Stay thinking.',
-    welcome: `Hello. I'm a frontend developer, like to create meaningful stuff.`,
+    welcome: `👋 Hello. I'm a frontend developer, like to create meaningful stuff.`,
   },
   link: {
     feed: '/feed.xml',
