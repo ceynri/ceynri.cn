@@ -10,8 +10,20 @@
   font-size: 1.25em;
 
   .frame {
-    // more props are in 3x3-grid.scss
-    @include grid-3x3;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    justify-content: stretch;
+    align-content: stretch;
+    /*
+    * l: left, c: center, r: right
+    * t: top, m: middle, b:bottom
+    */
+    grid-template-areas:
+      'lt ct rt'
+      'lm cm rm'
+      'lb cb rb';
+    gap: 1rem;
 
     position: fixed;
     z-index: 10000;
@@ -25,88 +37,97 @@
 
     text-align: left;
 
-    .logo {
-      @extend .frame__cm;
-      z-index: 10;
+    @media screen and (max-width: $sm - 1px) {
+      padding: 2rem;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+    }
+  }
 
-      font-size: 16vw;
-      font-weight: 900;
-      // make up for visual height
-      padding-bottom: 0.2em;
+  .logo {
+    @include grid__cm;
+    z-index: 10;
+
+    font-size: 16vw;
+    font-weight: 900;
+    text-wrap: nowrap;
+  }
+
+  .impression-image {
+    @include grid__cm;
+    display: block;
+    width: 50%;
+    z-index: -10;
+  }
+
+  .frame__website {
+    @include grid__lt;
+
+    @media screen and (max-width: $sm - 1px) {
+      display: none;
+    }
+  }
+
+  .frame__nav {
+    @include grid__lm;
+
+    display: flex;
+    flex-direction: column;
+    column-gap: 1rem;
+
+    font-size: 1.2em;
+    line-height: 1.75;
+
+    .link::before {
+      content: '- ';
     }
 
-    .impression-image {
-      @extend .frame__cm;
-      display: block;
-      width: 50%;
-      z-index: -10;
-    }
+    @media screen and (max-width: $xl - 1px) {
+      @include grid__rt;
 
-    &__website {
-      @extend .frame__lt;
-    }
-
-    &__nav {
-      @extend .frame__lm;
-
-      display: flex;
-      flex-direction: column;
-      font-size: 1.2em;
-      line-height: 1.75;
+      flex-direction: row;
+      justify-content: end;
 
       .link::before {
-        content: '- ';
+        content: '';
       }
     }
 
-    &__intro {
-      @extend .frame__lb;
-      max-width: 12em;
+    @media screen and (max-width: $sm - 1px) {
+      @include grid__ct;
+
+      flex-wrap: wrap;
+      justify-content: center;
     }
+  }
 
-    &__social {
-      @extend .frame__rt;
-      font-size: 1.2em;
-      // transform: translateX(50%) rotate(90deg);
-      // transform-origin: center top;
+  .frame__intro {
+    @include grid__lb;
+    max-width: 12em;
+
+    @media screen and (max-width: $sm - 1px) {
+      @include grid__cm;
+      align-self: end;
+      max-width: none;
     }
+  }
 
-    &__copyright {
-      @extend .frame__rb;
-      font-size: 0.7em;
-      line-height: 1.75;
+  .frame__social {
+    @include grid__rt;
+    font-size: 1.2em;
+
+    @media screen and (max-width: $xl - 1px) {
+      display: none;
     }
+  }
 
-    @media screen {
-      @media (max-width: $xl - 1px) {
-        &__nav {
-          flex-direction: row;
-          justify-content: end;
-          // overwrite
-          grid-area: rt;
-          justify-self: end;
-          align-self: start;
+  .frame__copyright {
+    @include grid__rb;
+    font-size: 0.7em;
+    line-height: 1.75;
 
-          .link {
-            &::before {
-              content: '';
-            }
-
-            &:not(:last-child) {
-              margin-right: 1.5em;
-            }
-          }
-        }
-        &__social {
-          display: none;
-        }
-      }
-
-      @media (max-width: $sm - 1px) {
-        &__intro {
-          max-width: 9em;
-        }
-      }
+    @media screen and (max-width: $sm - 1px) {
+      @include grid__cb;
     }
   }
 }
