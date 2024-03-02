@@ -66,14 +66,17 @@ export class Perspective {
 
   /**
    * make element perspective
-   * @param {(Object|string)} elems - HTMLElement array or HTMLElement
-   * @param {(Object|number)} scale - float (and blur) effective scale (percent)
+   * @param {HTMLElement | HTMLElement[] | string} elems - HTMLElement array or HTMLElement
+   * @param {number | Object} scale - float (and blur) effective scale (percent)
    * @param {number} scale.float - float effective scale (percent)
    * @param {number} scale.blur - blur effective scale (percent)
    */
   apply(elems, scale) {
     if (typeof scale === 'number') {
       scale = { float: scale };
+    }
+    if (!elems) {
+      return;
     }
     const frame = () => {
       const shiftX = this.clientWidth / 2 - this.clientX;
