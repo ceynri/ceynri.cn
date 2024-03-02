@@ -19,7 +19,7 @@ export default function(Vue, { appOptions, head }) {
   };
   head.meta.push({
     name: 'keywords',
-    content: '山风,博客,前端,ceynri,frontend,blog',
+    content: '山风,博客,个人网站,开发者,前端,ceynri,blog,developer,frontend',
   });
 
   // umami
