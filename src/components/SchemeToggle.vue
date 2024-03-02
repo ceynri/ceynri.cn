@@ -20,11 +20,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   computed: {
-    scheme() {
-      return this.$store.state.scheme;
-    },
+    ...mapState(['scheme']),
   },
   methods: {
     toggleColorScheme() {

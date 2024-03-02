@@ -76,6 +76,8 @@ query Post ($id: ID!) {
 </page-query>
 
 <script>
+import { mapState } from 'vuex';
+
 import FloatingImage from '~/components/FloatingImage';
 import PostMeta from '~/components/PostMeta';
 import PostFooter from '~/components/PostFooter';
@@ -91,9 +93,7 @@ export default {
     };
   },
   computed: {
-    scheme() {
-      return this.$store.state.scheme;
-    },
+    ...mapState(['scheme']),
     showCover() {
       return !!this.$page.post.cover_image;
     },
