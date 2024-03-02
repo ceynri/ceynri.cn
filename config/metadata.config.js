@@ -3,7 +3,7 @@ module.exports = {
     name: '山风',
     id: 'ceynri',
     bio: 'Stay thinking.',
-    welcome: `Hello. I'm a frontend developer, like to create meaningful stuff.`,
+    welcome: `👋 Hello. I'm a frontend developer, like to create meaningful stuff.`,
   },
   link: {
     feed: '/feed.xml',
@@ -17,10 +17,10 @@ module.exports = {
       name: 'About',
       link: '/about/',
     },
-    // {
-    //   name: 'Note',
-    //   link: 'https://notes.ceynri.cn/',
-    // },
+    {
+      name: 'Note',
+      link: 'https://notes.ceynri.cn/',
+    },
   ],
   social: [
     {
@@ -29,10 +29,15 @@ module.exports = {
       tooltip: '@ceynri',
     },
     {
-      name: 'Mail',
-      link: 'mailto:ceynri@gmail.com',
-      tooltip: 'ceynri@gmail.com',
+      name: 'Bangumi',
+      link: 'https://bgm.tv/user/ceynri',
+      tooltip: '山风',
     },
+    // {
+    //   name: 'Mail',
+    //   link: 'mailto:ceynri@gmail.com',
+    //   tooltip: 'ceynri[at]gmail.com',
+    // },
   ],
   beian: {
     link: 'https://beian.miit.gov.cn/',

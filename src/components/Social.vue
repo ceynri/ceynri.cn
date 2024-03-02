@@ -25,7 +25,7 @@ export default {
   display: flex;
   align-items: center;
 
-  &__link {
+  .social__link {
     font-size: 0.9em;
 
     &:not(:last-child) {
@@ -37,7 +37,7 @@ export default {
     }
   }
 
-  &__icon {
+  .social__icon {
     width: 1.6em;
     height: 1.6em;
   }
