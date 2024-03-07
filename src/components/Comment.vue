@@ -1,7 +1,6 @@
 <template>
   <giscus-widget
     id="giscus"
-    :key="id"
     repo="ceynri/ceynri.cn"
     repoid="MDEwOlJlcG9zaXRvcnkyMzg4NDQwNzg="
     category="Comments"
@@ -9,7 +8,7 @@
     mapping="title"
     strict="1"
     reactionsenabled="1"
-    emitmetadata="0"
+    emitmetadata="1"
     inputposition="top"
     :theme="scheme"
     lang="en"
@@ -27,9 +26,6 @@ export default {
     theme: {
       type: String,
     },
-    id: {
-      type: String,
-    }
   },
   data() {
     return {
