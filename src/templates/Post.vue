@@ -41,10 +41,7 @@
         class="post__comments"
       >
         <ClientOnly>
-          <Comment
-            v-if="commentVisible"
-            :id="$page.post.path"
-          />
+          <Comment v-if="commentVisible" />
         </ClientOnly>
       </article>
     </article>
@@ -111,6 +108,14 @@ export default {
     scheme() {
       this.reloadComment();
     },
+  },
+  // 提前设置 document.title 以修复 giscus 初始化时获取的 title 为上一个页面的 title 的问题
+  beforeMount() {
+    if (!this.$page.post.published) {
+      document.title = '404';
+      return;
+    }
+    document.title = this.$page.post.title;
   },
   mounted() {
     this.linkDoms = findAllImageLinkDom();
