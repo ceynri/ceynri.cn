@@ -111,11 +111,7 @@ export default {
   },
   // 提前设置 document.title 以修复 giscus 初始化时获取的 title 为上一个页面的 title 的问题
   beforeMount() {
-    if (!this.$page.post.published) {
-      document.title = '404';
-      return;
-    }
-    document.title = this.$page.post.title;
+    document.title = this.getPostTitle();
   },
   mounted() {
     this.linkDoms = findAllImageLinkDom();
@@ -132,6 +128,12 @@ export default {
         this.commentVisible = true;
       });
     },
+    getPostTitle() {
+      if (!this.$page.post.published) {
+        return '404';
+      }
+      return this.$page.post.title;
+    }
   },
   components: {
     PostMeta,
@@ -142,11 +144,8 @@ export default {
     Comment: () => import('~/components/Comment.vue'),
   },
   metaInfo() {
-    if (!this.$page.post.published) {
-      return { title: '404' };
-    }
     return {
-      title: this.$page.post.title,
+      title: this.getPostTitle(),
       meta: [
         {
           name: 'description',
