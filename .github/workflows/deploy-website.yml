@@ -51,7 +51,7 @@ jobs:
 
       - name: Project install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npx pnpm@7 install --frozen-lockfile
 
       - name: Project build
         run: npm run build
