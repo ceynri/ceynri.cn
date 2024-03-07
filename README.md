@@ -78,7 +78,7 @@ v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/
 > Node.js 14x required
 
 ```sh
-npm install
+npx pnpm@7 install
 npm run dev
 ```
 

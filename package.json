@@ -14,7 +14,7 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "giscus": "^1.2.0",
+    "giscus": "~1.3.0",
     "gsap": "^3.6.1"
   },
   "devDependencies": {
