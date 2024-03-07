@@ -3,14 +3,15 @@
     id="giscus"
     repo="ceynri/ceynri.cn"
     repoid="MDEwOlJlcG9zaXRvcnkyMzg4NDQwNzg="
-    category="Announcements"
-    categoryid="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMzMDQxNzg2"
+    category="Comments"
+    categoryid="DIC_kwDODjx4rs4Cdy2e"
     mapping="title"
+    strict="1"
     reactionsenabled="1"
     emitmetadata="0"
     inputposition="top"
     :theme="scheme"
-    lang="zh-CN"
+    lang="en"
   ></giscus-widget>
 </template>
 
