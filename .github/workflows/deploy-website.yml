@@ -47,7 +47,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+          key: node_modules-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Project install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
