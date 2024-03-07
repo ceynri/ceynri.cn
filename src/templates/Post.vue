@@ -36,9 +36,15 @@
         <ReturnBar />
       </div>
 
-      <article class="post__comments">
+      <article
+        v-if="showComment"
+        class="post__comments"
+      >
         <ClientOnly>
-          <Comment v-if="showComment && commentVisible" />
+          <Comment
+            v-if="commentVisible"
+            :id="$page.post.path"
+          />
         </ClientOnly>
       </article>
     </article>
