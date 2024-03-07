@@ -11,7 +11,6 @@
     inputposition="top"
     :theme="scheme"
     lang="zh-CN"
-    loading="lazy"
   ></giscus-widget>
 </template>
 
