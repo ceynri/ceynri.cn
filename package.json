@@ -7,6 +7,10 @@
     "email": "ceynri@gmail.com",
     "url": "https://github.com/ceynri/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceynri/ceynri.cn.git"
+  },
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",

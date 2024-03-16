@@ -53,7 +53,6 @@
     />
   </PostLayout>
 
-  <!-- Bottom-up strategy -->
   <Page404 v-else />
 </template>
 
