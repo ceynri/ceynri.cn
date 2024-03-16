@@ -42,7 +42,7 @@ export default {
   margin-bottom: calc(var(--padding-width) / 2);
   position: relative;
 
-  &__cover {
+  .post-card__cover {
     margin-left: calc(var(--padding-width) * -1);
     margin-right: calc(var(--padding-width) * -1);
     margin-bottom: calc(var(--padding-width) / 2);
@@ -50,16 +50,22 @@ export default {
     overflow: hidden;
     border-radius: var(--radius) var(--radius) 0 0;
 
+    aspect-ratio: 9 / 4;
+    position: relative;
+
     &:empty {
       display: none;
     }
   }
 
-  &__image {
+  .post-card__image {
     min-width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  &__title {
+  .post-card__title {
     margin-top: 0;
   }
 
@@ -68,7 +74,7 @@ export default {
     box-shadow: 2px 8px 48px 4px rgba(#000, 0.05);
   }
 
-  &__tags {
+  .post-card__tags {
     margin: var(--space) 0 0;
     position: relative;
     z-index: 1;
@@ -78,7 +84,7 @@ export default {
     }
   }
 
-  &__link {
+  .post-card__link {
     position: absolute;
     top: 0;
     left: 0;
