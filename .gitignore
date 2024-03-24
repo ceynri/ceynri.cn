@@ -4,3 +4,5 @@ dist
 .cache
 /content
 .temp
+.DS_Store
+*.css.map

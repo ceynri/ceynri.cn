@@ -36,10 +36,10 @@
 
             // 三角形trick
             border: {
-                top: $scrollbarWidth / 2 solid var(--barColor);
-                right: $scrollbarWidth / 2 solid transparent;
-                bottom: $scrollbarWidth / 2 solid transparent;
-                left: $scrollbarWidth / 2 solid var(--barColor);
+                top: calc($scrollbarWidth / 2) solid var(--barColor);
+                right: calc($scrollbarWidth / 2) solid transparent;
+                bottom: calc($scrollbarWidth / 2) solid transparent;
+                left: calc($scrollbarWidth / 2) solid var(--barColor);
             }
 
             transition: border .5s,

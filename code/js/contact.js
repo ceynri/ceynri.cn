@@ -92,7 +92,7 @@
             }
             this.iconBtn.addEventListener('click', () => {
                 if (this.copyToClipboard(str)) {
-                    this.info.innerHTML = `已复制${copyedInfoText}😊`;
+                    this.info.innerHTML = `已复制（加密处理）😊`;
                 } else {
                     this.info.innerHTML = `复制${str}失败😥`;
                 }
@@ -112,7 +112,7 @@
                 longPressTimer = setTimeout(() => {
                     e.preventDefault();
                     if (this.copyToClipboard(str)) {
-                        this.info.innerHTML = `已复制${copyedInfoText}😊`;
+                        this.info.innerHTML = `已复制（加密处理）😊`;
                     } else {
                         this.info.innerHTML = `复制失败😥：${str} 浏览器不支持`;
                     }
@@ -169,13 +169,13 @@
     const qq = new Contact(qqText, defaultText, qqBtn, btnInfo, 'QQ');
     // 设置点击按钮复制相关内容的功能
     if (MediaMatcher.isPC) {
-        wechat.addClickCopyString('sakuramemory', '微信号', true);
-        qq.addClickCopyString('347670115', 'QQ号', true);
-        mail.addClickCopyString('ceynri@gmail.com', 'Mail');
+        wechat.addClickCopyString('Y2V5bnJp', '微信号', true);
+        qq.addClickCopyString('MzQ3NjcwMTE1', 'QQ号', true);
+        mail.addClickCopyString('ceynri[at]gmail.com', 'Mail');
     } else {
-        wechat.addTouchCopyString('sakuramemory', '微信号', true);
-        qq.addTouchCopyString('347670115', 'QQ号', true);
-        mail.addTouchCopyString('ceynri@gmail.com', '邮箱');
+        wechat.addTouchCopyString('Y2V5bnJp', '微信号', true);
+        qq.addTouchCopyString('MzQ3NjcwMTE1', 'QQ号', true);
+        mail.addTouchCopyString('ceynri[at]gmail.com', '邮箱');
     }
     // 提示文本
     let defaultMoreText = document.createElement('p');

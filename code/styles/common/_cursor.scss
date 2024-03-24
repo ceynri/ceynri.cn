@@ -28,8 +28,8 @@
         transform: translate3d(-200px, -200px, 0);
 
         .point {
-            width: $normalInnerCursorSize / 2;
-            height: $normalInnerCursorSize / 2;
+            width: calc($normalInnerCursorSize / 2);
+            height: calc($normalInnerCursorSize / 2);
 
             background: var(--cursorColor);
             border-radius: 50%;
@@ -44,7 +44,7 @@
             &::after {
                 content: '';
                 position: absolute;
-                left: $normalInnerCursorSize / 2;
+                left: calc($normalInnerCursorSize / 2);
                 height: $normalInnerCursorSize;
                 width: 1px;
                 background: var(--cursorColor);

@@ -60,8 +60,8 @@ a {
 
     @media screen and (max-width: 440px) {
         margin: {
-            left: $miniMargin / 2;
-            right: $miniMargin / 2;
+            left: calc($miniMargin / 2);
+            right: calc($miniMargin / 2);
         }
     }
 }

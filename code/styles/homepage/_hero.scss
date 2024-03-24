@@ -81,7 +81,7 @@
             text-align: right;
 
             font: {
-                size: $heroFontSize / 3;
+                size: calc($heroFontSize / 3);
             }
 
             position: relative;
@@ -98,7 +98,7 @@
         position: relative;
 
         font: {
-            size: $heroFontSize * 4/3;
+            size: calc($heroFontSize * 4/3);
             family: $headerFont;
             weight: 900;
         }
@@ -106,8 +106,8 @@
         line-height: 100%;
 
         .decoration-line {
-            top: $heroFontSize * 1.1 - $lineHeight / 4;
-            left: ($heroFontSize * .8 - $lineWidth / 2);
+            top: calc($heroFontSize * 1.1 - $lineHeight / 4);
+            left: calc($heroFontSize * .8 - $lineWidth / 2);
             transform: rotate(60deg);
         }
     }

@@ -7,8 +7,8 @@
     // work尺寸
     $workWidth: 35vh;
     $workMaxWidth: 400px;
-    $workHeight: $workWidth * 4 / 3;
-    $workMaxHeight: $workMaxWidth * 4 / 3;
+    $workHeight: calc($workWidth * 4 / 3);
+    $workMaxHeight: calc($workMaxWidth * 4 / 3);
 
     &-wrapper {
         height: 100vh;

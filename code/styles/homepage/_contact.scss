@@ -24,7 +24,7 @@
     }
 
     // 页面较小时的主体宽度
-    $_outerWidth: 100vmin - #{$miniMargin} * 2;
+    $_outerWidth: calc(100vmin - #{$miniMargin} * 2);
     $outerWidth: calc(100vmin - #{$miniMargin} * 2);
     // 主体外边界与内容之间的宽度
     $outerPadding: $borderWidth+$innerPadding;
