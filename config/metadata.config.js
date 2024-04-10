@@ -17,10 +17,10 @@ module.exports = {
       name: 'About',
       link: '/about/',
     },
-    {
-      name: 'Note',
-      link: 'https://notes.ceynri.cn/',
-    },
+    // {
+    //   name: 'Note',
+    //   link: 'https://notes.ceynri.cn/',
+    // },
   ],
   social: [
     {
