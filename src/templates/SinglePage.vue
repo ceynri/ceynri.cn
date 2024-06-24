@@ -32,7 +32,6 @@ query SinglePage ($id: ID!) {
     title
     path
     date (format: "MMM DD, YYYY")
-    tags
     content
     published
   }
