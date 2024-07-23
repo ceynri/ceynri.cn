@@ -3,31 +3,31 @@
     <ul>
       <li>
         <g-link class="nav__item" to="/blog/" key="Blog">
-          <img svg-inline class="icon" src="~/assets/icons/feather.svg" />
+          <img svg-inline class="icon" src="~/assets/icons/feather.svg" alt="blog icon" />
           Blog
         </g-link>
       </li>
       <li>
         <g-link class="nav__item" to="/about/" key="About">
-          <img svg-inline class="icon" src="~/assets/icons/info.svg" />
+          <img svg-inline class="icon" src="~/assets/icons/info.svg" alt="about icon" />
           About
         </g-link>
       </li>
       <li>
         <g-link class="nav__item" to="/blog/archive/" key="Archive">
-          <img svg-inline class="icon" src="~/assets/icons/archive.svg" />
+          <img svg-inline class="icon" src="~/assets/icons/archive.svg" alt="archive icon" />
           Archive
         </g-link>
       </li>
       <li>
         <a class="nav__item" href="/feed.xml" key="Feed">
-          <img svg-inline class="icon" src="~/assets/icons/rss.svg" />
-          Feed
+          <img svg-inline class="icon" src="~/assets/icons/rss.svg" alt="rss icon" />
+          RSS
         </a>
       </li>
       <li>
         <g-link class="nav__item" to="/" key="Home">
-          <img svg-inline class="icon" src="~/assets/icons/home.svg" />
+          <img svg-inline class="icon" src="~/assets/icons/home.svg" alt="home icon" />
           Home
         </g-link>
       </li>
@@ -72,6 +72,7 @@
 
     color: var(--light-color);
 
+    // 当前匹配上页面路由的 item
     &.active--exact {
       color: var(--body-color);
     }
