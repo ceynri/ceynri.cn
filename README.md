@@ -4,7 +4,7 @@
 
 You can visit <https://ceynri.cn/> to experience.
 
-> [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance, so I am looking for a substitute for Gridsome later on. If you have a good recommendation, welcome to communicate with me! 😉
+> [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance, so I will rewrite this project with [astro](https://github.com/withastro/astro) in the future! 🚀
 
 ## Introduction
 

@@ -105,10 +105,12 @@
       }
     }
 
-    blockquote img {
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
+    blockquote, table {
+      img {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
     }
 
     br:last-child {
