@@ -17,6 +17,10 @@
     "dev": "gridsome develop",
     "explore": "gridsome explore"
   },
+  "engines": {
+    "node": "= 14",
+    "pnpm": ">= 9"
+  },
   "dependencies": {
     "giscus": "~1.3.0",
     "gsap": "^3.6.1"
