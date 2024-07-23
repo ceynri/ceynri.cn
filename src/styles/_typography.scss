@@ -105,3 +105,36 @@ ol {
     margin-bottom: 0.6em;
   }
 }
+
+/* Tables */
+table { 
+  border-collapse: collapse; 
+  border-spacing: 0; 
+  width: 100%;
+}
+
+td { 
+  vertical-align: top; 
+}
+
+table {
+  margin-bottom: 1em;
+  font-size: 0.889em;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table th, table td {
+  border: 1px solid var(--border-color);
+  padding: 0.5em 1em;
+}
+
+// table tr {
+//   background-color: var(--bg-color);
+// }
+
+// table tr:nth-child(2n) {
+//   background-color: var(--bg-content-color);
+// }
