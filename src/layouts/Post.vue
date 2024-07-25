@@ -30,7 +30,7 @@ export default {
   .main {
     margin: 0;
     max-width: 100%;
-    padding: var(--top-margin-width) 0 0;
+    padding: calc(var(--top-margin-width) / 2) 0 0;
   }
 }
 </style>

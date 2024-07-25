@@ -1,5 +1,6 @@
 <template>
   <PostLayout v-if="$page.post.published">
+    <PostHeader :tags="$page.post.tags" />
     <article>
       <section class="post content-box">
         <header class="post__header">
@@ -80,11 +81,12 @@ query Post ($id: ID!) {
 <script>
 import { mapState } from 'vuex';
 
-import FloatingImage from '~/components/FloatingImage';
-import PostMeta from '~/components/PostMeta';
-import PostFooter from '~/components/PostFooter';
-import ReturnBar from '~/components/ReturnBar';
-import Page404 from '~/pages/404';
+import FloatingImage from '~/components/FloatingImage.vue';
+import PostHeader from '~/components/PostHeader.vue';
+import PostMeta from '~/components/PostMeta.vue';
+import PostFooter from '~/components/PostFooter.vue';
+import ReturnBar from '~/components/ReturnBar.vue';
+import Page404 from '~/pages/404.vue';
 import { findAllImageLinkDom } from '~/utils/dom';
 
 export default {
@@ -135,6 +137,7 @@ export default {
     }
   },
   components: {
+    PostHeader,
     PostMeta,
     PostFooter,
     Page404,

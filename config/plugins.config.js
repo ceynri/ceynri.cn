@@ -43,7 +43,7 @@ module.exports = [
       contentTypes: ['Post'],
       feedOptions: {
         title: '山风的小角落',
-        description: '随便写写。',
+        description: 'Stay thinking.',
       },
       rss: {
         enabled: true,
