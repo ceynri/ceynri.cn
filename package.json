@@ -12,6 +12,7 @@
     "url": "https://github.com/ceynri/ceynri.cn.git"
   },
   "scripts": {
+    "bootstrap": "npx pnpm@7 install --frozen-lockfile",
     "build": "gridsome build",
     "develop": "gridsome develop",
     "dev": "gridsome develop",
@@ -19,7 +20,7 @@
   },
   "engines": {
     "node": "= 14",
-    "pnpm": ">= 9"
+    "pnpm": ">= 7"
   },
   "dependencies": {
     "giscus": "~1.3.0",
@@ -31,6 +32,7 @@
     "@gridsome/transformer-remark": "^0.6.4",
     "@microflash/gridsome-plugin-feed": "^1.2.1",
     "gridsome": "^0.7.23",
+    "pnpm": "^7.33.7",
     "sass": "^1.71.0",
     "sass-loader": "^10.5.2",
     "vue-svg-inline-loader": "^2.1.2",

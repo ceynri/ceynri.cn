@@ -51,7 +51,7 @@ jobs:
 
       - name: Project install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npx pnpm@9 install --frozen-lockfile
+        run: npm run bootstrap
 
       - name: Project build
         run: npm run build
