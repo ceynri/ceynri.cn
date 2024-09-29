@@ -1,8 +1,9 @@
 {
   "name": "ceynri.cn",
+  "type": "module",
+  "version": "3.0.0-beta.1",
   "private": true,
   "description": "Ceynri's personal website",
-  "version": "3.0.0-beta.1",
   "author": {
     "name": "ceynri",
     "email": "ceynri@gmail.com",
@@ -20,22 +21,25 @@
     "dev": "astro dev",
     "sync": "astro sync",
     "start": "astro dev",
+    "lint": "eslint .",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.7.3",
     "@astrojs/check": "^0.9.3",
     "@astrojs/mdx": "^3.1.7",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.1",
+    "@typescript-eslint/parser": "^8.7.0",
     "astro": "^4.15.9",
+    "eslint": "^9.11.1",
+    "eslint-plugin-astro": "^1.2.4",
+    "sass": "^1.79.3",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.13",
-    "typescript": "^5.6.2"
-  },
-  "devDependencies": {
-    "sass": "^1.79.3"
+    "typescript": "^5.5.4"
   }
 }
