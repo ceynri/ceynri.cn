@@ -1,12 +1,16 @@
 ---
-import { Image } from "astro:assets";
-import { SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from "~/consts";
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+import {
+  IconArchive,
+  IconFeather,
+  IconHome,
+  IconInfo,
+  IconRSS,
+} from '~/assets/icons';
 import avatar from '~/assets/images/avatar.jpg';
-import blogSvg from '~/assets/icons/feather.svg';
-import aboutSvg from '~/assets/icons/info.svg';
-import archiveSvg from '~/assets/icons/archive.svg';
-import rssSvg from '~/assets/icons/rss.svg';
-import homeSvg from '~/assets/icons/home.svg';
+import { SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from '~/consts';
 
 const asideItems: Array<{
   name: string;
@@ -15,36 +19,36 @@ const asideItems: Array<{
 }> = [
   {
     name: 'Blog',
-    icon: blogSvg,
-    href: '/blog/'
+    icon: IconFeather,
+    href: '/blog/',
   },
   {
     name: 'About',
-    icon: aboutSvg,
-    href: '/about/'
+    icon: IconInfo,
+    href: '/about/',
   },
   {
     name: 'Archive',
-    icon: archiveSvg,
-    href: '/blog/archive/'
+    icon: IconArchive,
+    href: '/blog/archive/',
   },
   {
     name: 'RSS',
-    icon: rssSvg,
-    href: '/feed.xml'
+    icon: IconRSS,
+    href: '/feed.xml',
   },
   {
     name: 'Home',
-    icon: homeSvg,
-    href: '/'
+    icon: IconHome,
+    href: '/',
   },
 ] as const;
 
 const { pathname } = Astro.url;
-const subpath = pathname.match(/[^\/]+/g);
+const subpath = pathname.match(/[^/]+/g);
 
 function isActive(href: string) {
-  return href === pathname || href === '/' + subpath?.[0];
+  return href === pathname || href === `/${subpath?.[0]}`;
 }
 ---
 
@@ -59,7 +63,7 @@ function isActive(href: string) {
         height="160"
         class="rounded-full"
       />
-  
+
       <h1 class="text-lg">
         {SITE_OWNER_NAME}
         <span class="text-lg">@{SITE_OWNER_ID}</span>
