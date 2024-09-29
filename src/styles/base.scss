@@ -1,0 +1,65 @@
+// Default
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: var(--base-font-size);
+}
+
+body {
+  font-family: 'Poppins', -apple-system, system-ui, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  color: var(--body-color);
+  background-color: var(--bg-color);
+  word-break: break-word;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  transition: background-color calc(var(--duration) * 2);
+
+  @media screen and (min-width: $xl) {
+    // trick: Offset the scrollbar width to make the layout symmetrical
+    margin-left: calc(100vw - 100%);
+  }
+}
+
+a:not(.button) {
+  transition: color var(--duration),
+    background-color var(--duration),
+    opacity var(--duration),
+    text-shadow calc(var(--duration) * 2);
+
+  &:hover {
+    color: var(--link-color);
+    text-shadow: 0 0 0.2em var(--link-shadow-color);
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+.button {
+  display: inline-block;
+}
+
+::selection {
+  background: var(--light-color);
+  color: var(--bg-color);
+}
+
+// Text mask effect
+del {
+  text-decoration: none;
+  background-color: var(--light-color);
+  color: var(--light-color);
+  transition: all var(--duration) linear;
+
+  &:hover {
+    color: var(--title-color);
+  }
+}

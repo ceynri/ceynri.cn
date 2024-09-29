@@ -1,10 +1,10 @@
-@import 'fonts';
-@import 'reset';
-@import 'variables';
-@import 'base';
-@import 'typography';
-@import 'scrollbar';
-@import 'code';
-@import 'content-box';
-@import 'post';
-@import 'utils';
+@import './mixin.scss';
+@import './fonts.scss';
+@import './variables.scss';
+@import './reset.scss';
+
+@import './base.scss';
+@import './code.scss';
+@import './content-box.scss';
+@import './post.scss';
+@import './typography.scss';

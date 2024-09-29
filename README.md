@@ -1,10 +1,14 @@
 # ceynri.cn
 
-[![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml)
+> 🚀 V3 is WIP 🚀
+>
+> This project is currently being rewritten using [astro](https://github.com/withastro/astro)!
+
+---
+
+<!-- [![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml)
 
 You can visit <https://ceynri.cn/> to experience.
-
-> [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance, so I will rewrite this project with [astro](https://github.com/withastro/astro) in the future! 🚀
 
 ## Introduction
 
@@ -48,10 +52,10 @@ Home logo and impression image add perspective effect for fun:
 ![tag](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279924010-tag.png)
 
 </details>
-
+-->
 ### Techology
 
-ceynri.cn v2 is powered by [Gridsome](https://gridsome.org), which is a Vue-powered Static Site Generator inspired by [Gatsby](https://www.gatsbyjs.com/).
+ceynri.cn v3 is powered by [Astro](https://astro.build/), which is a content-driven web framework.
 
 The comment system currently uses [giscus](https://github.com/laymonage/giscus), a plugin similar to [utterances](https://github.com/utterance/utterances) but uses discussions instead of issues.
 
@@ -59,15 +63,15 @@ Automatic update deployment via [Github Action](https://github.com/ceynri/ceynri
 
 ### Compatibility
 
-- 😅 All IE versions are not supported. Please use MODERN browser if you are using IE.
+- ✅ All modern browser supported.
 - 📱 Mobile is compatible.
-- 🙏 If you meet bugs, please submit an [issue](https://github.com/ceynri/ceynri.cn/issues).
+- 🙏 If you meet bugs, submit an [issue](https://github.com/ceynri/ceynri.cn/issues) will be welcome.
 
 ### Versions
 
-**v2** is the version that is working now.
-
-v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch (Chinese attention). You can still visit <https://v1.ceynri.cn/> to experience it.
+- v3 is Work-In-Progress 😊.
+- v2 project is based on [Gridsome](https://gridsome.org/). Refactoring from v2 because of [Gridsome was abandoned by the maintainer](https://github.com/gridsome/gridsome/issues/1684).
+- v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch (Chinese attention). You can still visit <https://v1.ceynri.cn/> to experience it.
 
 ---
 
@@ -75,21 +79,17 @@ v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/
 
 ### Local development
 
-> Node.js 14x required
-
 ```sh
-npx pnpm@7 install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
-> GraphQL requires `content` folder with specific structure
-
-Visit `http://localhost:8080/` for development.
+Visit `http://localhost:4321/` for development.
 
 ### Build dist
 
 ```sh
-npm run build
+pnpm build
 ```
 
 ---

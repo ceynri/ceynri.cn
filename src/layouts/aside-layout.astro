@@ -1,0 +1,28 @@
+---
+import { Aside, Footer } from '~/components';
+---
+
+<div class="box-content mx-auto flex p-0 relative max-w-[1080px]">
+  <Aside class="sticky top-0" />
+  <main class="m-0 pt-16 px-4 flex-1">
+    <slot />
+    <Footer />
+  </main>
+</div>
+
+<style>
+@media screen and (max-width: 767px) {
+  div {
+    flex-direction: column;
+  }
+  main {
+    z-index: 1;
+    width: 100%;
+    max-width: none;
+    background-color: var(--bg-color);
+    box-shadow: 0 0 20px -4px var(--bg-color);
+    transition: background-color calc(var(--duration) * 2), box-shadow calc(var(--duration) * 2);
+    padding: 0;
+  }
+}
+</style>

@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { BaseHead, FormattedDate, Footer } from '~/components';
+import { Image } from 'astro:assets';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, date, lastmod, cover_image } = Astro.props;
+---
+
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={title} description={description ?? ''} />
+	</head>
+
+	<body>
+		<main>
+			<article>
+				<div class="hero-image">
+					{cover_image && <Image width={1020} height={510} src={cover_image} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						<div class="date">
+							<FormattedDate date={date} />
+							{
+								lastmod && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={lastmod} />
+									</div>
+								)
+							}
+						</div>
+						<h1>{title}</h1>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

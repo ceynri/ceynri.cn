@@ -1,0 +1,62 @@
+:root {
+  --base-font-size: 20px;
+  --main-width: 900px;
+  --aside-width: 210px;
+  --layout-width: calc(var(--main-width) + var(--aside-width) + var(--space) * 3);
+  --thin-main-width: 400px;
+  --top-margin-width: 80px;
+  --padding-width: 3.5rem;
+  --space: 1rem;
+
+  --article-font-size: 0.9em;
+  --article-line-height: 1.75;
+  --radius: 0.75em;
+  --duration: 0.3s;
+
+  --cover-text-color: #fff;
+  --cover-text-shadow-color: #101216;
+
+  // Light default theme
+  --bg-color: #f6f9fd;
+  --bg-content-color: #fff;
+  --bg-code: #282c34;
+  --border-color: #{rgba(#000, 0.1)};
+  --title-color: #24292e;
+  --body-color: #34393e;
+  --link-color: #f22;
+  --link-shadow-color: #ff222233;
+  --light-color: #a4a9ae;
+
+  // Override variables for Dark theme
+  &[data-scheme='dark'] {
+    --bg-color: #000;
+    --bg-content-color: #101216;
+    --bg-code: #{rgba(#000, 0.3)};
+    --border-color: #{rgba(#fff, 0.1)};
+    --title-color: #c9d1d9;
+    --body-color: #a9b1b9;
+    --link-color: #00f;
+    --link-shadow-color: #00f;
+    --light-color: #596169;
+  }
+
+  --color-primary: #fff;
+  --color-primary-100: #f6f9fd;
+}
+
+// tablet
+@media screen and (max-width: ($lg - 1)) {
+  :root {
+    --base-font-size: 18px;
+    --aside-width: 170px;
+  }
+}
+
+// mobile
+@media screen and (max-width: ($sm - 1)) {
+  :root {
+    // --base-font-size: 16px;
+    --padding-width: 1.5rem;
+    --top-margin-width: 60px;
+  }
+}

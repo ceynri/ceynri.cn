@@ -1,0 +1,33 @@
+---
+const { align = 'left' } = Astro.props;
+
+const alignItems = (() => {
+  switch (align) {
+    case 'center':
+      return 'items-center';
+    case 'right':
+      return 'items-end';
+    case 'left':
+    default:
+      return 'items-start';
+  }
+})();
+
+const currentYear = new Date().getFullYear();
+
+const beian = {
+  link: 'https://beian.miit.gov.cn/',
+  text: '粤ICP备20009331号',
+};
+---
+
+<footer class={`flex flex-col my-14 leading-8 text-light ${alignItems} md:justify-center md:text-center`}>
+  <span class="text-xs">
+    Ceynri © 2020-{currentYear}
+  </span>
+  {beian && (
+    <a href={beian.link} class="text-xs">
+      {beian.text}
+    </a>
+  )}
+</footer>

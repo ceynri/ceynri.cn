@@ -1,0 +1,38 @@
+---
+interface Props {
+  tags: Array<{
+    title: string;
+    count?: number;
+  }>;
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="post-tags">
+  {tags.map((tag) => (
+    <a href={`/blog/tags/${tag.title}`} class="post-tags__link">
+      <span>#</span> {tag.title}
+      {tag.count && <span>{tag.count}</span>}
+    </a>
+  ))}
+</div>
+
+<style lang="scss">
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__link {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    margin-right: 0.7em;
+    font-size: 0.8em;
+    color: currentColor;
+    text-decoration: none;
+    background-color: var(--bg-color);
+    padding: 0.5em 0.7em;
+    border-radius: var(--radius);
+  }
+}
+</style>

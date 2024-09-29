@@ -1,0 +1,129 @@
+---
+import { Image } from "astro:assets";
+import { SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from "~/consts";
+import avatar from '~/assets/images/avatar.jpg';
+import blogSvg from '~/assets/icons/feather.svg';
+import aboutSvg from '~/assets/icons/info.svg';
+import archiveSvg from '~/assets/icons/archive.svg';
+import rssSvg from '~/assets/icons/rss.svg';
+import homeSvg from '~/assets/icons/home.svg';
+
+const asideItems: Array<{
+  name: string;
+  icon: ImageMetadata;
+  href: string;
+}> = [
+  {
+    name: 'Blog',
+    icon: blogSvg,
+    href: '/blog/'
+  },
+  {
+    name: 'About',
+    icon: aboutSvg,
+    href: '/about/'
+  },
+  {
+    name: 'Archive',
+    icon: archiveSvg,
+    href: '/blog/archive/'
+  },
+  {
+    name: 'RSS',
+    icon: rssSvg,
+    href: '/feed.xml'
+  },
+  {
+    name: 'Home',
+    icon: homeSvg,
+    href: '/'
+  },
+] as const;
+
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+
+function isActive(href: string) {
+  return href === pathname || href === '/' + subpath?.[0];
+}
+---
+
+<aside class="aside sticky top-0 w-[210px] flex-none max-h-screen py-16 px-4 flex flex-col">
+  <header class="aside__header">
+    <div class="site-info">
+      <Image
+        alt="site owner avatar"
+        title="?"
+        src={avatar}
+        width="160"
+        height="160"
+        class="rounded-full"
+      />
+  
+      <h1 class="text-lg">
+        {SITE_OWNER_NAME}
+        <span class="text-lg">@{SITE_OWNER_ID}</span>
+      </h1>
+      <p class="text-lg">{SITE_OWNER_BIO}</p>
+    </div>
+  </header>
+
+  <nav class="nav flex-auto overflow-auto">
+    <ul class="list-none m-0">
+      {asideItems.map((item) => (
+        <li>
+          <a href={item.href} class={`flex ${isActive(item.href) ? 'text-slate-900' : 'text-slate-500'}`}>
+            {/* TODO: inline svg */}
+            <Image class="size-4" src={item.icon} alt="" />
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <footer class="aside__footer">
+    <button
+      id="themeToggle"
+      role="button"
+      title="Toggle dark/light"
+      aria-label="Toggle dark/light"
+      class="toggle-theme button size-4"
+    >
+      <i id="themeIcon">
+        <img class="icon" src="/assets/icons/sun.svg" alt="light mode" />
+      </i>
+    </button>
+  </footer>
+</aside>
+
+<script>
+  import moonSvg from '~/assets/icons/moon.svg';
+  import sunSvg from '~/assets/icons/sun.svg';
+
+  type Theme = 'light' | 'dark';
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+
+  function setTheme(theme: Theme) {
+    document.documentElement.setAttribute('data-scheme', theme);
+    localStorage.setItem('theme', theme);
+    updateIcon(theme);
+  }
+
+  function updateIcon(theme: Theme) {
+    themeIcon!.innerHTML = theme === 'dark'
+      ? `<img class="icon" src="${moonSvg.src}" alt="dark mode" />`
+      : `<img class="icon" src="${sunSvg.src}" alt="light mode" />`;
+  }
+
+  themeToggle!.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-scheme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  });
+
+  // 初始化主题
+  const theme: Theme = localStorage.getItem('theme') as Theme || 'light';
+  setTheme(theme);
+</script>
