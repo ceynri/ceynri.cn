@@ -4,7 +4,7 @@
 
 You can visit <https://ceynri.cn/> to experience.
 
-> [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance, so I will rewrite this project with [astro](https://github.com/withastro/astro) in the future! 🚀
+> 🚧 [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance. I am rewriting this project with [astro](https://github.com/withastro/astro) on the [v3 branch](https://github.com/ceynri/ceynri.cn/tree/v3)! 🚀
 
 ## Introduction
 
