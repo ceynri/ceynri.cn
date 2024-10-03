@@ -1,45 +1,38 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
-import {
-  IconArchive,
-  IconFeather,
-  IconHome,
-  IconInfo,
-  IconRSS,
-} from '~/assets/icons';
+import { Archive, Feather, Home, Info, Moon, Rss, Sun } from 'lucide-astro';
 import avatar from '~/assets/images/avatar.jpg';
 import { SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from '~/consts';
 
 const asideItems: Array<{
   name: string;
-  icon: ImageMetadata;
+  icon: any;
   href: string;
 }> = [
   {
     name: 'Blog',
-    icon: IconFeather,
+    icon: Feather,
     href: '/blog/',
   },
   {
     name: 'About',
-    icon: IconInfo,
+    icon: Info,
     href: '/about/',
   },
   {
     name: 'Archive',
-    icon: IconArchive,
+    icon: Archive,
     href: '/blog/archive/',
   },
   {
     name: 'RSS',
-    icon: IconRSS,
+    icon: Rss,
     href: '/feed.xml',
   },
   {
     name: 'Home',
-    icon: IconHome,
+    icon: Home,
     href: '/',
   },
 ] as const;
@@ -54,31 +47,30 @@ function isActive(href: string) {
 
 <aside class="aside sticky top-0 w-[210px] flex-none max-h-screen py-16 px-4 flex flex-col">
   <header class="aside__header">
-    <div class="site-info">
+    <div class="site-info mb-6">
       <Image
         alt="site owner avatar"
         title="?"
         src={avatar}
         width="160"
         height="160"
-        class="rounded-full"
+        class="rounded-full mb-4"
       />
 
-      <h1 class="text-lg">
+      <h1 class="text-xl font-medium mb-2">
         {SITE_OWNER_NAME}
-        <span class="text-lg">@{SITE_OWNER_ID}</span>
+        <span class="text-base">@{SITE_OWNER_ID}</span>
       </h1>
-      <p class="text-lg">{SITE_OWNER_BIO}</p>
+      <p class="mb-0">{SITE_OWNER_BIO}</p>
     </div>
   </header>
 
   <nav class="nav flex-auto overflow-auto">
     <ul class="list-none m-0">
       {asideItems.map((item) => (
-        <li>
-          <a href={item.href} class={`flex ${isActive(item.href) ? 'text-slate-900' : 'text-slate-500'}`}>
-            {/* TODO: inline svg */}
-            <Image class="size-4" src={item.icon} alt="" />
+        <li class="mb-4">
+          <a href={item.href} class:list={['flex items-center', isActive(item.href) ? 'text-slate-900' : 'text-slate-500']}>
+            <item.icon class="size-4 mr-2" />
             {item.name}
           </a>
         </li>
@@ -92,22 +84,19 @@ function isActive(href: string) {
       role="button"
       title="Toggle dark/light"
       aria-label="Toggle dark/light"
-      class="toggle-theme button size-4"
+      class="toggle-theme button size-5"
     >
-      <i id="themeIcon">
-        <img class="icon" src="/assets/icons/sun.svg" alt="light mode" />
-      </i>
+      <Moon id="iconDark" class="size-full" />
+      <Sun id="iconLight" class="size-full" />
     </button>
   </footer>
 </aside>
 
 <script>
-  import moonSvg from '~/assets/icons/moon.svg';
-  import sunSvg from '~/assets/icons/sun.svg';
-
   type Theme = 'light' | 'dark';
   const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
+  const iconDark = document.getElementById('iconDark');
+  const iconLight = document.getElementById('iconLight');
 
   function setTheme(theme: Theme) {
     document.documentElement.setAttribute('data-scheme', theme);
@@ -116,9 +105,14 @@ function isActive(href: string) {
   }
 
   function updateIcon(theme: Theme) {
-    themeIcon!.innerHTML = theme === 'dark'
-      ? `<img class="icon" src="${moonSvg.src}" alt="dark mode" />`
-      : `<img class="icon" src="${sunSvg.src}" alt="light mode" />`;
+    if (theme === 'dark') {
+      iconLight?.classList.add('hidden');
+      iconDark?.classList.remove('hidden');
+    }
+    else {
+      iconLight?.classList.remove('hidden');
+      iconDark?.classList.add('hidden');
+    }
   }
 
   themeToggle!.addEventListener('click', () => {

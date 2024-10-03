@@ -37,6 +37,7 @@
     "astro": "^4.15.9",
     "eslint": "^9.11.1",
     "eslint-plugin-astro": "^1.2.4",
+    "lucide-astro": "^0.446.0",
     "sass": "^1.79.3",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.13",
