@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container-padding {
+    @apply px-4 sm:px-8;
+  }
+
+  .hover-highlight {
+    transition: color 0.3s, text-shadow 0.6s;
+  
+    &:hover {
+      color: var(--accent-color);
+      text-shadow: 0 0 0.2em var(--accent-color);
+    }
+  }
+}

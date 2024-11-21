@@ -1,8 +1,8 @@
 # ceynri.cn
 
-> 🚀 V3 is WIP 🚀
+> [!TIP] 🚧 V3 is WIP 🚧
 >
-> This project is currently being rewritten using [astro](https://github.com/withastro/astro)!
+> This project is currently being rewritten using [astro](https://github.com/withastro/astro)! 🚀
 
 ---
 

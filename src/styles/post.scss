@@ -1,79 +1,25 @@
-.post__header {
-  position: relative;
-  width: calc(100% + var(--padding-width) * 2);
-  margin-left: calc(var(--padding-width) * -1);
-  margin-top: calc(var(--padding-width) * -1);
-  margin-bottom: calc(var(--padding-width) / 2);
+.prose {
+  @import './typography.scss';
 
-  &:empty {
-    display: none;
-  }
-}
-
-.post__cover {
-  border-radius: var(--radius) var(--radius) 0 0;
-  overflow: hidden;
-
-  display: flex;
-
-  img {
-    width: var(--thin-main-width);
-    flex: 1;
-  }
-}
-
-.post__title {
-  width: 100%;
-  padding: var(--padding-width);
-  text-align: center;
-
-  &.embedded {
-    text-align: initial;
-
-    position: absolute;
-    bottom: 0;
-
-    .post-title__text {
-      margin-bottom: 0.75rem;
-    }
-
-    .post-title__text,
-    .post-meta {
-      text-shadow: -2px 2px 8px var(--cover-text-shadow-color);
-      color: var(--cover-text-color);
-    }
-  }
-}
-
-.post__content {
-  font-size: var(--article-font-size);
-  margin-bottom: calc(var(--padding-width) / 2);
-
+  // 隐藏重复的文章标题
   h1:first-child {
     display: none;
   }
 
-  @for $i from 1 through 5 {
+  a {
+    transition: color 0.3s, opacity 0.3s, text-shadow 0.3s;
 
-    // 连续的标题
-    h#{$i}+h#{$i + 1},
-    // br标签后的标题
-    br+h#{$i},
-    // 处于开头的标题
-    h#{$i}:first-child {
-      margin-top: 0;
+    text-decoration: underline;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+      color: var(--accent-color);
+      text-shadow: 0 0 0.2em var(--accent-color);
     }
   }
 
   img {
-    display: block;
-
-    // size=full is default
-    margin-left: calc(var(--padding-width) * -1);
-    margin-right: calc(var(--padding-width) * -1);
-    width: calc(100% + var(--padding-width) * 2);
-    max-width: none;
-
     &[alt*='size=small'],
     &[alt*='size=medium'],
     &[alt*='size=large'],
@@ -84,11 +30,11 @@
     }
 
     &[alt*='size=small'] {
-      width: 50%;
+      width: 38.2%;
     }
 
     &[alt*='size=medium'] {
-      width: calc(0.618 * (100% + 2 * var(--padding-width)));
+      width: 61.8%;
     }
 
     &[alt*='size=large'] {
@@ -96,50 +42,15 @@
     }
 
     &[alt*='size=full'] {
-      // default
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 1024px;
     }
 
     &[alt*='size=auto'] {
       max-width: 100%;
     }
-  }
-
-  blockquote, table {
-    img {
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-    }
-  }
-
-  br:last-child {
-    display: none;
-  }
-}
-
-.post__end {
-  margin: calc(var(--padding-width) / 2) auto;
-}
-
-.post__comments {
-  margin: var(--padding-width) 0;
-
-  &:empty {
-    display: none;
-  }
-}
-
-.post {
-  a:not(.button, .image-link) {
-    text-decoration: underline;
-    opacity: 0.8;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .image-link {
-    opacity: 0.6;
   }
 }

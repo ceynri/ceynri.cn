@@ -7,36 +7,27 @@
 }
 
 html {
-  font-size: var(--base-font-size);
+  @apply text-sm sm:text-base;
 }
 
 body {
-  font-family: 'Poppins', -apple-system, system-ui, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Poppins', -apple-system, system-ui, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
   font-weight: 400;
-  color: var(--body-color);
-  background-color: var(--bg-color);
   word-break: break-word;
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  transition: background-color calc(var(--duration) * 2);
+  font-size: 18px;
 
-  @media screen and (min-width: $xl) {
-    // trick: Offset the scrollbar width to make the layout symmetrical
-    margin-left: calc(100vw - 100%);
-  }
-}
+  @apply bg-white dark:bg-black;
+  @apply text-jade-700 dark:text-jade-400;
+  @apply transition-background-color;
 
-a:not(.button) {
-  transition: color var(--duration),
-    background-color var(--duration),
-    opacity var(--duration),
-    text-shadow calc(var(--duration) * 2);
-
-  &:hover {
-    color: var(--link-color);
-    text-shadow: 0 0 0.2em var(--link-shadow-color);
-  }
+  // @media screen and (min-width: $xl) {
+  //   // trick: Offset the scrollbar width to make the layout symmetrical
+  //   margin-left: calc(100vw - 100%);
+  // }
 }
 
 img {
@@ -48,18 +39,14 @@ img {
 }
 
 ::selection {
-  background: var(--light-color);
-  color: var(--bg-color);
+  @apply text-white dark:text-black;
+  @apply bg-jade-400 dark:bg-jade-600;
 }
 
 // Text mask effect
 del {
   text-decoration: none;
-  background-color: var(--light-color);
-  color: var(--light-color);
-  transition: all var(--duration) linear;
 
-  &:hover {
-    color: var(--title-color);
-  }
+  @apply text-transparent bg-jade-400 dark:bg-jade-600;
+  @apply transition-colors hover:text-jade-800 dark:hover:text-white;
 }

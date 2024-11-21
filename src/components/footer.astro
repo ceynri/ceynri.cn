@@ -1,4 +1,6 @@
 ---
+import { cn } from '~/utils';
+
 const { align = 'left' } = Astro.props;
 
 const alignItems = (() => {
@@ -21,12 +23,12 @@ const beian = {
 };
 ---
 
-<footer class={`flex flex-col my-14 leading-8 text-light ${alignItems} md:justify-center md:text-center`}>
-  <span class="text-xs">
+<footer class={cn(`flex flex-col my-14`, alignItems, Astro.props.class)}>
+  <span class="text-xs leading-5">
     Ceynri © 2020-{currentYear}
   </span>
   {beian && (
-    <a href={beian.link} class="text-xs">
+    <a href={beian.link} class="text-xs leading-5">
       {beian.text}
     </a>
   )}

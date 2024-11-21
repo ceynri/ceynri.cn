@@ -28,15 +28,15 @@ const posts = (await getCollection('blog'))
           <ul>
             {
               posts.map((post) => (
-                <li class="mb-8 rounded-2xl overflow-hidden bg-white">
+                <li class="mb-8 rounded-2xl overflow-hidden bg-white dark:bg-jade-950 transition-colors duration-normal shadow-2xl">
                   <a href={`/blog/${post.slug}/`}>
                     {post.data.cover_image && (
-<Image
-  class="w-[900px] h-[400px] object-cover"
-  src={post.data.cover_image}
-  alt=""
-/>
-)}
+                      <Image
+                        class="w-[900px] h-[400px] object-cover"
+                        src={post.data.cover_image}
+                        alt=""
+                      />
+                    )}
                     <div class="p-8">
                       <h4 class="mt-0 mb-4">{post.data.title}</h4>
                       {post.data.description && <p class="mb-4">{post.data.description}</p>}
@@ -44,10 +44,7 @@ const posts = (await getCollection('blog'))
                         <FormattedDate date={post.data.date} />
                       </p>
                       <div>
-                        <PostTags tags={post.data.tags.map((tag) => ({
-                          title: tag,
-                        }))}
-                        />
+                        <PostTags tags={post.data.tags} />
                       </div>
                     </div>
                   </a>

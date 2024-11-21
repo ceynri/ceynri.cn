@@ -12,8 +12,8 @@ summary {
     text-shadow calc(var(--duration) * 2);
 
   &:hover {
-    color: var(--link-color);
-    text-shadow: 0 0 0.2em var(--link-shadow-color);
+    color: var(--accent-color);
+    text-shadow: 0 0 0.2em var(--accent-color);
   }
 }
 
@@ -22,7 +22,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: var(--title-color);
+  color: var(--c1);
   margin: 2.75rem 0 1rem;
   font-weight: 600;
   line-height: 1.15;
@@ -60,7 +60,7 @@ strong {
 blockquote {
   border-left: 4px solid var(--border-color);
   padding-left: calc(var(--padding-width) / 2);
-  color: var(--body-color);
+  color: var(--c2);
 }
 
 hr {
@@ -119,10 +119,6 @@ table th, table td {
   padding: 0.5em 1em;
 }
 
-// table tr {
-//   background-color: var(--bg-color);
-// }
-
-// table tr:nth-child(2n) {
-//   background-color: var(--bg-content-color);
-// }
+pre {
+  @apply text-sm leading-[1.2rem] p-5 rounded-md mb-4 shadow-lg shadow-jade-400;
+}
