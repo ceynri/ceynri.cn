@@ -7,7 +7,8 @@
 }
 
 html {
-  @apply text-sm sm:text-base;
+  // @apply text-sm sm:text-base;
+  @apply text-sm lg:text-[1.333vw] 2xl:text-[1vw];
 }
 
 body {
@@ -18,9 +19,9 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  font-size: 18px;
+  // font-size: 18px;
 
-  @apply bg-white dark:bg-black;
+  @apply bg-jade-50 dark:bg-black;
   @apply text-jade-700 dark:text-jade-400;
   @apply transition-background-color;
 

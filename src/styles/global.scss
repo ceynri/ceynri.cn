@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 @layer components {
-  .container-padding {
-    @apply px-4 sm:px-8;
+  .prose-padding {
+    @apply px-4 pb-4;
+    @apply sm:px-16 sm:pb-16;
+  }
+
+  .prose-no-padding {
+    @apply -mx-4;
+    @apply sm:-mx-16;
   }
 
   .hover-highlight {

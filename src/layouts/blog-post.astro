@@ -14,53 +14,50 @@ const { title, description, date, lastmod, cover_image } = Astro.props;
 
   <body>
     <CornerLogo />
-    <main class="post container-padding box-content max-w-screen-md mx-auto">
-      {cover_image
-        ? (
-        <div
-          class="relative overflow-hidden rounded-b-2xl mb-8 w-full max-h-[90vh] bg-gray-100"
-          style={{
-            aspectRatio: `${cover_image.width} / ${cover_image.height}`,
-            clipPath: 'border-box',
-          }}
-        >
-          <img
-            class="w-[calc(100%-4rem)] max-w-screen-md fixed"
-            src={cover_image.src}
-            alt="cover image"
-          />
-          <div class="p-4 sm:p-12 h-full w-full relative">
-            <div class="flex flex-wrap absolute left-12 top-12 space-x-2">
+    <div class="sm:p-8">
+      <main class="mx-auto prose-padding max-w-[50rem] mt-16 bg-white dark:bg-jade-950 rounded-3xl">
+        {cover_image
+          ? (
+          <div class="relative overflow-hidden rounded-t-3xl prose-no-padding mb-8 bg-gray-100">
+            <img
+              class="w-full"
+              style={{
+                aspectRatio: `${cover_image.width} / ${cover_image.height}`,
+              }}
+              src={cover_image.src}
+              alt="cover image"
+            />
+            {/* <div class="flex flex-wrap absolute left-12 top-12 space-x-2">
               {Astro.props.tags.map((tag) => (
                 <a href={`/blog/tags/${tag}`} class="my-1 text-white text-shadow-lg hover-highlight">
                   <span>#</span>{tag}
                 </a>
               ))}
-            </div>
-            <div class="absolute left-8 bottom-8 sm:left-12 sm:bottom-12">
+            </div> */}
+            <div class="absolute left-4 bottom-8 sm:left-16 sm:bottom-12">
               <h1 class="text-3xl font-bold text-white text-shadow-lg">{title}</h1>
               <div class="mt-3 text-white text-shadow-lg">
                 <FormattedDate date={date} />
               </div>
             </div>
           </div>
-        </div>
-        )
-        : (
-          <div class="pt-24 mb-16 flex flex-col items-center">
-            <h1 class="text-3xl font-bold">{title}</h1>
-            <div class="mt-3">
-              <FormattedDate date={date} />
+          )
+          : (
+            <div class="pt-24 mb-16 flex flex-col items-center">
+              <h1 class="text-3xl font-bold">{title}</h1>
+              <div class="mt-3">
+                <FormattedDate date={date} />
+              </div>
             </div>
-          </div>
-        )}
-      <article class="prose">
-        <slot />
-        {lastmod && (
-          <blockquote class="py-4">Last modified on <FormattedDate date={lastmod} />.</blockquote>
-        )}
-      </article>
-    </main>
+          )}
+        <article class="prose">
+          <slot />
+          {lastmod && (
+            <blockquote class="py-4">Last modified on <FormattedDate date={lastmod} />.</blockquote>
+          )}
+        </article>
+      </main>
+    </div>
     <Footer align="center" />
   </body>
 </html>
