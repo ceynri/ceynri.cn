@@ -24,7 +24,7 @@ export default function(Vue, { appOptions, head }) {
 
   // umami
   head.script.push({
-    src: 'https://analytics.eu.umami.is/script.js',
+    src: 'https://cloud.umami.is/script.js',
     async: true,
     defer: true,
     'data-website-id': '3f5aac97-7561-4a4a-8649-9c929a18841f',
