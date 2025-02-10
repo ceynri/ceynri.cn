@@ -12,6 +12,7 @@ body {
 p,
 details {
   line-height: var(--article-line-height);
+  margin-top: 1em;
   margin-bottom: 1em;
 }
 
@@ -118,7 +119,6 @@ td {
 }
 
 table {
-  margin-bottom: 1em;
   font-size: 0.889em;
 }
 
