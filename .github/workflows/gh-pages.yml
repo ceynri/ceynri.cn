@@ -1,4 +1,4 @@
-name: Deploy Website
+name: Deploy to GitHub Pages
 
 concurrency:
   group: production
@@ -8,21 +8,19 @@ on:
   push:
     branches:
       - main
-  repository_dispatch:
-    types: [submodule-update]
-  workflow_dispatch:
+      - feature/gh-pages
+
+permissions:
+  contents: write
 
 env:
   NODE_VERSION: 14.21.3
-
+  
 jobs:
-  build:
-    # use self-hosted HK server for solve the China's Internet speed issue
-    runs-on: self-hosted
-    # runs-on: ubuntu-latest
-    environment: production
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GH_PAT }}
@@ -36,7 +34,7 @@ jobs:
           git commit -am "docs: update content" || exit 0
           git push || exit 0
 
-      - name: Use Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -47,31 +45,17 @@ jobs:
         with:
           path: node_modules
           key: node_modules-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('pnpm-lock.yaml') }}
-
+  
       - name: Project install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm run bootstrap
-
-      - name: Project build
+  
+      - name: Build Project
         run: npm run build
 
-      - name: Project deploy
-        uses: appleboy/scp-action@master
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          strip_components: 1
-          source: dist/
-          target: ${{ secrets.TARGET_PATH }}
-
-      # another scp action, but transfer files one by one
-      # - name: Project deploy
-      #   uses: garygrossgarten/github-action-scp@release
-      #   with:
-      #     local: dist
-      #     remote: ${{ secrets.TARGET_PATH }}
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
+          github_token: ${{ secrets.GH_PAT }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
