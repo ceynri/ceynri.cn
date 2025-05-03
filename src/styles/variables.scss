@@ -1,3 +1,4 @@
+// TODO: 确认是否还需要断点变量
 // mini-tablet/mobile
 $md: 768px;
 // tablet
@@ -9,60 +10,115 @@ $xxl: 1536px;
 // mobile
 $sm: 640px;
 
-// TODO: 全部尽量改为 tailwindcss class
+$jade-50: #f6f9fd;
+$jade-100: #e8edf3;
+$jade-200: #d9e0e8;
+$jade-300: #c9d1d9;
+$jade-400: #b8c0c8;
+$jade-500: #808890;
+$jade-600: #596169;
+$jade-700: #34393e;
+$jade-800: #24292e;
+$jade-900: #1a1e22;
+$jade-950: #101216;
+
+$accent-color-light: #f22;
+$accent-color-dark: #00f;
+
 :root {
-  --main-width: 900px;
-  --aside-width: 210px;
-  --layout-width: calc(var(--main-width) + var(--aside-width) + var(--space) * 3);
-  --thin-main-width: 400px;
-  --top-margin-width: 80px;
+  // TODO: rename space-width etc
   --padding-width: 3.5rem;
-  --space: 1rem;
 
-  --article-font-size: 0.9em;
-  --article-line-height: 1.75;
-  --radius: 0.75em;
-  --duration: 0.3s;
+  --jade-50: #{$jade-50};
+  --jade-100: #{$jade-100};
+  --jade-200: #{$jade-200};
+  --jade-300: #{$jade-300};
+  --jade-400: #{$jade-400};
+  --jade-500: #{$jade-500};
+  --jade-600: #{$jade-600};
+  --jade-700: #{$jade-700};
+  --jade-800: #{$jade-800};
+  --jade-900: #{$jade-900};
+  --jade-950: #{$jade-950};
 
-  --cover-text-color: #fff;
-  --cover-text-shadow-color: #101216;
+  // Light theme
+  // 全局背景颜色
+  --global-bg-color: #{$jade-50};
+  // 文章背景颜色
+  --prose-bg-color: #fff;
+  // 代码块背景颜色
+  --inline-code-bg-color: #{$jade-50};
+  // 标签背景颜色
+  --tag-bg-color: #fff;
 
-  // Light default theme
-  --c1: #24292e; // jade-800
-  --c2: #34393e; // jade-700
-  --bgc1: #fff; // white
-  --bgc2: #f6f9fd; // jade-50
+  // 标题颜色
+  --title-color: #{$jade-800};
+  // 正文颜色
+  --text-color: #{$jade-700};
+  // 正文次要颜色
+  --text-secondary-color: #{$jade-600};
+  // 内联代码颜色
+  --inline-code-color: #{$jade-800};
 
-  --bg-code: #282c34;
-  --border-color: #{rgba(#000, 0.1)};
-  --accent-color: #f22;
-  --light-color: #a4a9ae; // jade-400
+  // 选中文字颜色
+  --selection-text-color: #fff;
+  // 选中背景颜色
+  --selection-bg-color: #{$jade-400};
 
-  // Override variables for Dark theme
+  // 边框颜色
+  --border-color: #{$jade-100};
+  // 强调色
+  --accent-color: #{$accent-color-light};
+  // 分隔线颜色
+  --hr-color: #{$jade-400};
+
+  // Dark theme
   &[data-scheme='dark'] {
-    --c1: #c9d1d9; // jade-300
-    --c2: #a9b1b9; // jade-400
-    --bgc1: #000; // black
-    --bgc2: #101216; // jade-950
+    // 全局背景颜色
+    --global-bg-color: #000;
+    // 文章背景颜色
+    --prose-bg-color: #{$jade-950};
+    // 代码块背景颜色
+    --inline-code-bg-color: #000;
+    // 标签背景颜色
+    --tag-bg-color: #000;
 
-    --bg-code: #{rgba(#000, 0.3)};
-    --border-color: #{rgba(#fff, 0.1)};
-    --accent-color: #00f;
-    --light-color: #596169; // jade-600
+    // 标题颜色
+    --title-color: #{$jade-300};
+    // 正文颜色
+    --text-color: #{$jade-400};
+    // 正文次要颜色
+    --text-secondary-color: #{$jade-500};
+    // 内联代码颜色
+    --inline-code-color: #{$jade-800};
+
+    // 选中文字颜色
+    --selection-text-color: #000;
+    // 选中背景颜色
+    --selection-bg-color: #{$jade-600};
+
+    // 边框颜色
+    --border-color: #{$jade-900};
+    // 强调色
+    --accent-color: #{$accent-color-dark};
+    // 分隔线颜色
+    --hr-color: #{$jade-600};
   }
 }
 
-// tablet
-@media screen and (max-width: ($lg - 1)) {
-  :root {
-    --aside-width: 170px;
-  }
-}
+// TODO: aside 响应式宽度适配
+// // tablet
+// @media screen and (max-width: ($lg - 1)) {
+//   :root {
+//     --aside-width: 170px;
+//   }
+// }
 
+// TODO: 移动端边距适配
 // mobile
 @media screen and (max-width: ($sm - 1)) {
   :root {
     --padding-width: 1.5rem;
-    --top-margin-width: 60px;
+    // --top-margin-width: 60px;
   }
 }

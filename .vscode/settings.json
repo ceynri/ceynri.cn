@@ -40,5 +40,8 @@
   ],
   "cSpell.words": [
     "clsx"
-  ]
+  ],
+  "[astro]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }

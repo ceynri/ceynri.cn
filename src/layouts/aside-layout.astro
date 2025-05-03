@@ -10,7 +10,8 @@ import { Aside, Footer } from '~/components';
   </main>
 </div>
 
-<style>
+<style lang="scss">
+// TODO: 移动端适配
 @media screen and (max-width: 767px) {
   div {
     flex-direction: column;
@@ -19,10 +20,10 @@ import { Aside, Footer } from '~/components';
     z-index: 1;
     width: 100%;
     max-width: none;
-    background-color: var(--bgc1);
-    box-shadow: 0 0 20px -4px var(--bgc1);
-    transition: background-color calc(var(--duration) * 2), box-shadow calc(var(--duration) * 2);
-    padding: 0;
+    background-color: var(--global-bg-color);
+    box-shadow: 0 0 20px var(--global-bg-color);
+    transition: background-color 0.5s, box-shadow 0.5s;
+    padding-top: 0;
   }
 }
 </style>

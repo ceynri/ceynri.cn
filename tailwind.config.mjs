@@ -5,25 +5,22 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: ['selector', '[data-scheme="dark"]'],
   theme: {
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: '0.5rem',
-        sm: '0.5rem',
-        md: '1rem',
-        lg: '2rem',
-        xl: '4rem',
-      },
-      // screens: {
-      //   '2xl': '1400px',
-      // },
-    },
+    // TODO: 确认是否需要 container
+    // container: {
+    //   center: true,
+    //   padding: {
+    //     DEFAULT: '0.5rem',
+    //     sm: '0.5rem',
+    //     md: '1rem',
+    //     lg: '2rem',
+    //     xl: '4rem',
+    //   },
+    //   // screens: {
+    //   //   '2xl': '1400px',
+    //   // },
+    // },
     extend: {
       colors: {
-        c1: 'var(--c1)',
-        c2: 'var(--c2)',
-        bgc1: 'var(--bgc1)',
-        bgc2: 'var(--bgc2)',
         jade: {
           50: '#f6f9fd',
           100: '#e8edf3',
@@ -36,10 +33,6 @@ export default {
           800: '#24292e',
           900: '#1a1e22',
           950: '#101216',
-        },
-        accent: {
-          light: '#ff2222',
-          dark: '#00ffff',
         },
       },
       boxShadow: {

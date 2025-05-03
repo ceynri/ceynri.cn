@@ -7,8 +7,9 @@
 }
 
 html {
-  // @apply text-sm sm:text-base;
-  @apply text-sm lg:text-[1.333vw] 2xl:text-[1vw];
+  // TODO: 字体大小响应式变化
+  @apply text-sm sm:text-base;
+  // @apply text-sm lg:text-[1.333vw] 2xl:text-[1vw];
 }
 
 body {

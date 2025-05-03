@@ -15,7 +15,7 @@ const { title, description, date, lastmod, cover_image } = Astro.props;
   <body>
     <CornerLogo />
     <div class="sm:p-8">
-      <main class="mx-auto prose-padding max-w-[50rem] mt-16 bg-white dark:bg-jade-950 rounded-3xl">
+      <main class="mx-auto prose-padding max-w-[50rem] mt-16 bg-[var(--prose-bg-color)] rounded-3xl">
         {cover_image
           ? (
           <div class="relative overflow-hidden rounded-t-3xl prose-no-padding mb-8 bg-gray-100">

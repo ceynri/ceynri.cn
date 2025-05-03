@@ -23,37 +23,28 @@ const posts = (await getCollection('blog'))
   </head>
   <body>
     <AsideLayout>
-      <main>
-        <section>
-          <ul>
-            {
-              posts.map((post) => (
-                <li class="mb-8 rounded-2xl overflow-hidden bg-white dark:bg-jade-950 transition-colors duration-normal shadow-2xl">
-                  <a href={`/blog/${post.slug}/`}>
-                    {post.data.cover_image && (
-                      <Image
-                        class="w-[900px] h-[400px] object-cover"
-                        src={post.data.cover_image}
-                        alt=""
-                      />
-                    )}
-                    <div class="p-8">
-                      <h4 class="mt-0 mb-4">{post.data.title}</h4>
-                      {post.data.description && <p class="mb-4">{post.data.description}</p>}
-                      <p class="text-sm">
-                        <FormattedDate date={post.data.date} />
-                      </p>
-                      <div>
-                        <PostTags tags={post.data.tags} />
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-      </main>
+      {
+        posts.map((post) => (
+          <div class="mb-8 rounded-2xl overflow-hidden bg-[var(--prose-bg-color)] transition-colors duration-normal shadow-2xl">
+            <a href={`/blog/${post.slug}/`}>
+              {post.data.cover_image && (
+                <Image
+                  class="w-[900px] h-[400px] object-cover"
+                  src={post.data.cover_image}
+                  alt=""
+                />
+              )}
+              <div class="p-10">
+                <h2 class="mt-0 mb-4 text-3xl">{post.data.title}</h2>
+                {post.data.description && <p class="mb-4 text-lg">{post.data.description}</p>}
+                <p class="text-base text-[var(--text-secondary-color)]">
+                  <FormattedDate date={post.data.date} />
+                </p>
+              </div>
+            </a>
+          </div>
+        ))
+      }
     </AsideLayout>
   </body>
 </html>

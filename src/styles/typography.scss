@@ -1,6 +1,6 @@
 p,
 details {
-  line-height: var(--article-line-height);
+  line-height: 1.75;
   margin-bottom: 1em;
 }
 
@@ -8,8 +8,7 @@ summary {
   cursor: pointer;
   opacity: 0.8;
 
-  transition: color var(--duration), opacity var(--duration),
-    text-shadow calc(var(--duration) * 2);
+  transition: color 0.3s, opacity 0.3s, text-shadow 0.5s;
 
   &:hover {
     color: var(--accent-color);
@@ -22,7 +21,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: var(--c1);
+  color: var(--title-color);
   margin: 2.75rem 0 1rem;
   font-weight: 600;
   line-height: 1.15;
@@ -60,14 +59,14 @@ strong {
 blockquote {
   border-left: 4px solid var(--border-color);
   padding-left: calc(var(--padding-width) / 2);
-  color: var(--c2);
+  color: var(--text-color);
 }
 
 hr {
   width: 10%;
   height: 2px;
   margin: var(--padding-width) auto;
-  background: var(--light-color);
+  background: var(--hr-color);
   opacity: 0.5;
   border: none;
   border-radius: 1px;
@@ -81,28 +80,31 @@ ul {
   list-style-type: disc;
   margin-left: 1.25em;
   margin-bottom: 1.25em;
+
   li {
     margin-bottom: 0.6em;
   }
 }
+
 ol {
   list-style-type: decimal;
   margin-left: 1.25em;
   margin-bottom: 1.25em;
+
   li {
     margin-bottom: 0.6em;
   }
 }
 
 /* Tables */
-table { 
-  border-collapse: collapse; 
-  border-spacing: 0; 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
   width: 100%;
 }
 
-td { 
-  vertical-align: top; 
+td {
+  vertical-align: top;
 }
 
 table {
@@ -114,11 +116,21 @@ table th {
   font-weight: 600;
 }
 
-table th, table td {
+table th,
+table td {
   border: 1px solid var(--border-color);
   padding: 0.5em 1em;
 }
 
 pre {
-  @apply text-sm leading-[1.2rem] p-5 rounded-md mb-4 shadow-lg shadow-jade-400;
+  @apply text-sm leading-[1.5] p-5 rounded-md mb-4 shadow-lg shadow-jade-400 transition-background-color;
+}
+
+// Inline code
+:not(pre)>code {
+  @apply text-sm;
+  color: var(--inline-code-color);
+  padding: 0.1em 0.3em;
+  background-color: var(--inline-code-bg-color);
+  border-radius: 0.3em;
 }

@@ -120,8 +120,4 @@ function isActive(href: string) {
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
   });
-
-  // 初始化主题
-  const theme: Theme = localStorage.getItem('theme') as Theme || 'light';
-  setTheme(theme);
 </script>
