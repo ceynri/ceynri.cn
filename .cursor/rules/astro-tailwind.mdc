@@ -1,0 +1,119 @@
+---
+description: 
+globs: *.astro,*.ts,*.js,*.vue,*.tsx,*.scss
+alwaysApply: false
+---
+# Astro + Tailwind 项目开发规范
+
+本项目采用 Astro 作为主框架，TailwindCSS 作为主要样式工具，TypeScript 用于类型约束。请遵循以下规范进行开发。
+
+## 目录结构
+- `src/components/`：通用 UI 组件，推荐 .astro 文件，必要时可用 .tsx
+- `src/layouts/`：页面布局组件，统一页面结构
+- `src/pages/`：页面文件，遵循 Astro file-based routing 规则
+- `src/styles/`：全局样式、变量
+- `src/utils/`：工具函数，推荐 TypeScript
+- `src/content/`：内容源（如 MD/MDX 文件）
+- `public/`：静态资源（如 favicon、图片等）
+
+## Astro 组件开发
+- 推荐使用 .astro 文件开发组件，必要时可用 React/Vue/Svelte 组件（通过集成）
+- 如果需要通过集成使用 React/Vue/Svelte 组件，在实际生成代码之前需要提前确认
+- 组件 props 推荐用 TypeScript interface 明确类型
+- 组件间数据传递用 Astro.props
+- 复用性强的 UI 元素放在 components，页面专用内容直接写在 pages
+
+### 组件模板
+```astro
+---
+import type { Props } from './types';
+
+interface Props {
+  // props 定义
+}
+const { /* 解构 props */ } = Astro.props;
+---
+
+<slot />
+```
+
+### 页面模板
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const title = '${1:页面标题}';
+const description = '${2:页面描述}';
+---
+
+<Layout {title} {description}>
+  <main class="container mx-auto px-4 py-8">
+    <slot />
+  </main>
+</Layout>
+```
+
+### 布局模板
+```astro
+---
+import type { Props } from './types';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+```
+
+## TailwindCSS 使用规范
+- 推荐全部使用 utility class，禁止 @apply
+- 响应式优先，善用 sm: md: lg: xl: 前缀
+- 主题色、间距等统一用 tailwind.config.mjs 配置
+
+## 内容管理
+- 推荐用 Markdown/MDX 文件管理内容，frontmatter 支持 meta 信息
+- 用 Astro.glob() 批量读取内容
+- 文章、页面内容建议放在 src/content/
+
+## 性能优化
+- 优先静态生成，减少 client 端 JS
+- 仅在必要时用 client:* 指令（如 client:load、client:idle、client:visible）
+- 图片用 Astro <img>，加 loading="lazy"
+- 合理利用 Astro 的 asset 优化能力
+
+## SEO/Meta
+- 统一用 BaseHead 组件处理 meta 信息
+- 页面建议加 canonical 链接
+- 支持 Open Graph/Twitter meta
+
+## 集成与部署
+- 推荐插件：@astrojs/tailwind、@astrojs/mdx、@astrojs/sitemap、@astrojs/rss
+- astro 配置见 [astro.config.mjs](mdc:astro.config.mjs)
+<!-- - 推荐用 Netlify/Vercel/静态空间部署 -->
+- CI/CD 推荐用 GitHub Actions
+
+## 可访问性与测试
+- 组件结构语义化，必要时加 ARIA 属性
+- 交互元素支持键盘操作
+- 工具函数建议写单元测试
+- 页面可用 Cypress 做端到端测试
+
+## 其他建议
+- 统一用 TypeScript，tsconfig 见 [tsconfig.json](mdc:tsconfig.json)
+- 代码风格需要遵循 ESLint/Prettier 规范
+- 参考 [Astro 官方文档](mdc:https:/docs.astro.build) 和 [Cursor Astro+Tailwind 规则](mdc:https:/cursor.directory/astro-tailwind-cursor-rules)

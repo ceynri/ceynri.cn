@@ -1,6 +1,4 @@
 .prose {
-  @import './typography.scss';
-
   // 隐藏重复的文章标题
   h1:first-child {
     display: none;

@@ -1,0 +1,5 @@
+src/content/*
+!src/content/blog
+!src/content/config.ts
+dist
+node_modules

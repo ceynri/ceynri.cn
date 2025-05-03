@@ -1,3 +1,14 @@
+// mini-tablet/mobile
+$md: 768px;
+// tablet
+$lg: 1024px;
+// laptop
+$xl: 1280px;
+// desktop
+$xxl: 1536px;
+// mobile
+$sm: 640px;
+
 // TODO: 全部尽量改为 tailwindcss class
 :root {
   --main-width: 900px;

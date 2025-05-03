@@ -1,0 +1,56 @@
+---
+description: 当需要得知项目整体结构或者重构的目标规划时
+globs: 
+alwaysApply: false
+---
+# 项目总览与重构规划
+
+## 项目简介
+本项目为个人博客网站，原始版本基于 Gridsome（Vue 生态），现正重构为 Astro（内容驱动、现代静态站点框架）。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
+
+## 目录结构
+- `src/`
+  - `components/`：通用 UI 组件（.astro/.tsx）
+  - `layouts/`：页面布局组件
+  - `pages/`：页面文件，遵循 Astro file-based routing
+  - `styles/`：全局样式、变量
+  - `utils/`：工具函数
+  - `content/`：内容源（如 MD/MDX 文件、内容配置）
+  - `assets/`：静态资源（图片、icon 等）
+- `public/`：静态资源（favicon、robots.txt 等）
+- `old/`：原 Gridsome 项目代码，仅供参考，不做修改
+- `.cursor/rules/`：AI 编程规则与项目文档
+
+## 重构目标
+1. **框架切换**：由 Gridsome 迁移到 Astro，保留原有页面结构和主要 UI 风格
+2. **样式优化**：用 TailwindCSS 内联 class 替换大部分 SCSS/SASS，减少冗余 class，仅保留通用样式
+
+## 当前进度
+- 已完成整体 Astro 项目结构搭建
+- 已迁移 blog 列表页、侧边栏、blog 内容页的大体结构
+- 已实现部分 Tailwind 公共样式
+- 已添加 AI 编程环境（Cursor 规则）
+- 依赖已升级至 Astro 5.x 及相关插件最新版
+
+## 待办事项
+- 细化已迁移页面的样式细节，确保 UI 还原度
+- 迁移并实现 About、Archive、Home 等页面
+- 持续优化 Tailwind class 使用，逐步移除冗余 SCSS
+- 按需补充/优化 Cursor 规则，提升 AI 编程体验
+
+## 开发建议与方向
+- **内容管理**：推荐用 Markdown/MDX 文件管理内容，frontmatter 支持 meta 信息，统一放在 `src/content/`
+- **组件开发**：优先用 .astro 文件，props 用 TypeScript interface 明确类型，复用性强的 UI 元素放在 components
+- **样式规范**：全部使用 Tailwind utility class，禁止 @apply，响应式优先，主题色等统一配置
+- **性能优化**：优先静态生成，减少 client JS，仅在必要时用 client:* 指令
+- **SEO/Meta**：统一用 BaseHead 组件处理 meta 信息，支持 Open Graph/Twitter meta
+- **CI/CD**：推荐用 GitHub Actions 自动部署，支持静态空间托管
+- **可访问性**：组件结构语义化，交互元素支持键盘操作
+
+## 参考文档
+- [Astro 官方文档](mdc:https:/docs.astro.build)
+- [Astro v5 升级指南](mdc:https:/docs.astro.build/en/guides/upgrade-to/v5)
+- [Cursor Astro+Tailwind 规则](mdc:https:/cursor.directory/astro-tailwind-cursor-rules)
+
+---
+如需细化某一部分的开发计划或补充更多上下文，请随时补充！

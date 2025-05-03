@@ -1,6 +1,6 @@
-@import './global.scss';
-@import './mixin.scss';
-@import './variables.scss';
-
-@import './base.scss';
-@import './post.scss';
+@use './global.scss';
+@use './variables.scss';
+@use './base.scss';
+@use './typography.scss';
+@use './code.scss';
+@use './post.scss';
