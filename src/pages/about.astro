@@ -1,7 +1,11 @@
 ---
+import { getEntry, render } from 'astro:content';
 import { BaseHead } from '~/components';
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
+
+const post = await getEntry('pages', 'about');
+const { Content } = post ? await render(post) : { Content: () => null };
 ---
 
 <!doctype html>
@@ -10,6 +14,35 @@ import { AsideLayout } from '~/layouts';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <AsideLayout />
+    <AsideLayout>
+      {post && (
+        <main class="article typography mx-auto p-[var(--prose-padding)] bg-[var(--prose-bg-color)] rounded-3xl max-sm:rounded-none transition-[background-color]">
+          <Content />
+        </main>
+      )}
+    </AsideLayout>
   </body>
 </html>
+
+<style lang="scss" is:global>
+.article a {
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+
+    width: 38.2%;
+    transition: width 0.3s;
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
+}
+</style>

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 import { FormattedDate, PostTags } from '~/components';
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 
 const { post } = Astro.props as Props;
 const { title, date, cover_image, lastmod, tags } = post.data;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <main class="p-[var(--prose-padding)] bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-3xl max-sm:rounded-none">
@@ -39,7 +40,7 @@ const { Content } = await post.render();
         </div>
       </div>
     )}
-  <article class="prose">
+  <article class="prose typography">
     <Content />
     {lastmod && (
       <blockquote class="mt-12 opacity-50">Last modified on <FormattedDate date={lastmod} />.</blockquote>

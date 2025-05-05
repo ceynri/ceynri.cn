@@ -7,7 +7,7 @@ const { post } = Astro.props as { post: CollectionEntry<'blog'> };
 ---
 
 <div class="mb-8 rounded-2xl overflow-hidden bg-[var(--prose-bg-color)] transition-[background-color,box-shadow,transform] hover:shadow-2xl hover:-translate-y-1">
-  <a href={`/blog/${post.slug}/`}>
+  <a href={`/blog/${post.id}/`}>
     {post.data.cover_image && (
       <Image
         class="w-full aspect-[9/4] max-sm:aspect-square object-cover"
