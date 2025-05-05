@@ -5,11 +5,8 @@ import { BaseHead, PostCard } from '~/components';
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => import.meta.env.MODE === 'development' || post.data.published)
-  .sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-  );
+const rawPosts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || data.published));
+const posts = rawPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <!doctype html>
@@ -22,11 +19,9 @@ const posts = (await getCollection('blog'))
   </head>
   <body>
     <AsideLayout>
-      {
-        posts.map((post) => (
-          <PostCard post={post} />
-        ))
-      }
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
     </AsideLayout>
   </body>
 </html>

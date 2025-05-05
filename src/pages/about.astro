@@ -1,23 +1,28 @@
 ---
 import { getEntry, render } from 'astro:content';
 import { BaseHead } from '~/components';
-import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
+import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 
 const post = await getEntry('pages', 'about');
-const { Content } = post ? await render(post) : { Content: () => null };
+if (!post) {
+  throw new Error('Could not find about post');
+}
+const { Content } = await render(post);
 ---
 
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={`关于 - ${SITE_TITLE}`} description="关于本站点以及站长的介绍" />
   </head>
   <body>
-    <AsideLayout>
+    <AsideLayout mainClass="max-md:px-0">
       {post && (
-        <main class="article typography mx-auto p-[var(--prose-padding)] bg-[var(--prose-bg-color)] rounded-3xl max-sm:rounded-none transition-[background-color]">
-          <Content />
+        <main class="article typography prose-card max-sm:rounded-none">
+          <article class="max-sm:mt-8">
+            <Content />
+          </article>
         </main>
       )}
     </AsideLayout>
@@ -25,24 +30,30 @@ const { Content } = post ? await render(post) : { Content: () => null };
 </html>
 
 <style lang="scss" is:global>
-.article a {
-  position: relative;
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    background-color: var(--accent-color);
-
-    width: 38.2%;
-    transition: width 0.3s;
+.article {
+  h2:first-child {
+    margin-top: 0;
   }
 
-  &:hover:before {
-    width: 100%;
+  a {
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 38.2%;
+      height: 2px;
+      border-radius: 1px;
+      background-color: var(--accent-color);
+      transition: background-color 0.3s ease-out, width 0.3s;
+    }
+
+    &:hover:before {
+      width: 100%;
+    }
   }
 }
 </style>

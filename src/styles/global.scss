@@ -45,6 +45,11 @@
     background-color: var(--selection-bg-color);
   }
 
+  mark {
+    background-color: var(--accent-color);
+    transition: background-color 0.3s ease-out;
+  }
+
   // Text mask effect
   del {
     text-decoration: none;
@@ -59,7 +64,11 @@
   }
 }
 
-@layer components {}
+@layer components {
+  .prose-card {
+    @apply p-[var(--prose-padding)] bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-3xl;
+  }
+}
 
 @layer utilities {
   .sparklable-text {

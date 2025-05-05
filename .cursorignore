@@ -1,5 +1,5 @@
 src/content/*
 !src/content/blog
-!src/content/config.ts
+!src/content/pages
 dist
 node_modules
