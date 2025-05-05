@@ -46,7 +46,7 @@ const { title, description, date, lastmod, cover_image } = Astro.props;
         <article class="prose">
           <slot />
           {lastmod && (
-            <blockquote class="mt-12">Last modified on <FormattedDate date={lastmod} />.</blockquote>
+            <blockquote class="mt-12 opacity-50">Last modified on <FormattedDate date={lastmod} />.</blockquote>
           )}
         </article>
         <PostTags tags={Astro.props.tags} class="mt-8" />

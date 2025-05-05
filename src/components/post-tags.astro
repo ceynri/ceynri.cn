@@ -1,13 +1,10 @@
 ---
-import { cn } from '~/utils';
-
 interface Props {
   tags: Array<{
     title: string;
     count?: number;
   } | string>;
   class?: string;
-  style?: 'default' | 'rounded';
 }
 
 const { tags } = Astro.props;
@@ -22,14 +19,14 @@ const formattedTags = (
 }>;
 ---
 
-<div class={cn('flex flex-wrap', Astro.props.class)}>
+<div class={Astro.props.class}>
   {formattedTags.map((tag) => (
     <a
       href={`/blog/tags/${tag.title}`}
-      class="my-1 mr-2 text-sm rounded-md bg-[var(--tag-bg-color)] py-1 px-2"
+      class="my-1 mr-2 text-sm rounded-md bg-[var(--tag-bg-color)] inline-flex"
     >
-      <span class="opacity-50 sparklable-text">
-        <span>#</span> {tag.title}
+      <span class="opacity-50 sparklable-text py-1.5 px-2.5">
+        # {tag.title}
         {tag.count && <span>{tag.count}</span>}
       </span>
     </a>
