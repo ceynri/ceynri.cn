@@ -20,9 +20,10 @@ const formattedTags = (
 }>;
 ---
 
+<!-- TODO: 重构 -->
 <div class={`flex flex-wrap ${className}`}>
   {formattedTags.map((tag) => (
-    <a href={`/blog/tags/${tag.title}`} class="post-tags__link">
+    <a href={`/blog/tags/${tag.title}`} class="post-tags-link">
       <span>#</span> {tag.title}
       {tag.count && <span>{tag.count}</span>}
     </a>
@@ -30,7 +31,7 @@ const formattedTags = (
 </div>
 
 <style lang="scss">
-.post-tags__link {
+.post-tags-link {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
   margin-right: 0.7em;

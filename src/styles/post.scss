@@ -1,11 +1,14 @@
 .prose {
+
   // 隐藏重复的文章标题
   h1:first-child {
     display: none;
   }
 
   a {
-    transition: color 0.3s, opacity 0.3s, text-shadow 0.3s;
+    transition-property: color, opacity, text-shadow;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
 
     text-decoration: underline;
     opacity: 0.8;
@@ -17,17 +20,18 @@
     }
   }
 
-  &>p:has(img) {
-    @apply prose-no-padding;
-  }
-
   img {
+    margin-left: calc(-1 * var(--prose-padding));
+    margin-right: calc(-1 * var(--prose-padding));
+    width: calc(100% + 2 * var(--prose-padding));
+    max-width: unset;
 
     &[alt*='size=small'],
     &[alt*='size=medium'],
     &[alt*='size=large'],
     &[alt*='size=auto'] {
-      @apply mx-auto prose-padding;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &[alt*='size=small'] {
@@ -42,9 +46,12 @@
       width: 100%;
     }
 
-    &[alt*='size=full'] {}
+    &[alt*='size=full'] {
+      // default
+    }
 
     &[alt*='size=auto'] {
+      width: auto;
       max-width: 100%;
     }
   }

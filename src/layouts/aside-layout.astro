@@ -1,9 +1,10 @@
 ---
-import { Aside, Footer } from '~/components';
+import { Aside, Footer, TopNavbar } from '~/components';
 ---
 
-<div class="mx-auto flex p-0 relative max-w-[1080px] min-h-screen">
-  <Aside class="sticky top-0" />
+<div class="mx-auto flex px-4 max-sm:px-0 relative max-w-[1080px] min-h-screen">
+  <Aside class="sticky top-0 max-md:hidden" />
+  <TopNavbar class="md:hidden" />
   <main class="m-0 pt-16 px-4 flex-1">
     <slot />
     <Footer />
@@ -17,12 +18,6 @@ import { Aside, Footer } from '~/components';
     flex-direction: column;
   }
   main {
-    z-index: 1;
-    width: 100%;
-    max-width: none;
-    background-color: var(--global-bg-color);
-    box-shadow: 0 0 20px var(--global-bg-color);
-    transition: background-color 0.5s, box-shadow 0.5s;
     padding-top: 0;
   }
 }

@@ -6,7 +6,9 @@ alwaysApply: false
 # 项目总览与重构规划
 
 ## 项目简介
-本项目为个人博客网站，原始版本基于 Gridsome（Vue 生态），现正重构为 Astro（内容驱动、现代静态站点框架）。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
+本项目为个人博客网站，主要面相 PC Web 端，同时兼容移动端浏览访问。
+
+原始版本基于 Gridsome（Vue 生态）+ SASS，现正重构为 Astro + tailwindcss + SASS。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
 
 ## 目录结构
 - `src/`
@@ -23,7 +25,7 @@ alwaysApply: false
 
 ## 重构目标
 1. **框架切换**：由 Gridsome 迁移到 Astro，保留原有页面结构和主要 UI 风格
-2. **样式优化**：用 TailwindCSS 内联 class 替换大部分 SCSS/SASS，减少冗余 class，仅保留通用样式
+2. **样式优化**：用 TailwindCSS 内联 class 替换大部分 SASS，减少冗余 class，SASS 部分仅保留通用样式；减少使用 em，使用 rem 代替
 
 ## 当前进度
 - 已完成整体 Astro 项目结构搭建
@@ -35,13 +37,14 @@ alwaysApply: false
 ## 待办事项
 - 细化已迁移页面的样式细节，确保 UI 还原度
 - 迁移并实现 About、Archive、Home 等页面
-- 持续优化 Tailwind class 使用，逐步移除冗余 SCSS
+- 持续优化 Tailwind class 使用，逐步移除冗余 SCSS，减少自定义的命名 class
 - 按需补充/优化 Cursor 规则，提升 AI 编程体验
 
 ## 开发建议与方向
 - **内容管理**：推荐用 Markdown/MDX 文件管理内容，frontmatter 支持 meta 信息，统一放在 `src/content/`
 - **组件开发**：优先用 .astro 文件，props 用 TypeScript interface 明确类型，复用性强的 UI 元素放在 components
-- **样式规范**：全部使用 Tailwind utility class，禁止 @apply，响应式优先，主题色等统一配置
+- **样式规范**：优先使用 Tailwind utility class，非必要不使用 @apply，响应式优先，主题色等统一配置
+- **颜色变量**：涉及背景、文字等颜色样式时，优先使用 `src/styles/variables.scss` 中定义的 CSS 变量
 - **性能优化**：优先静态生成，减少 client JS，仅在必要时用 client:* 指令
 - **SEO/Meta**：统一用 BaseHead 组件处理 meta 信息，支持 Open Graph/Twitter meta
 - **CI/CD**：推荐用 GitHub Actions 自动部署，支持静态空间托管

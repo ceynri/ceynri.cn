@@ -1,0 +1,27 @@
+---
+import { Moon, Sun } from 'lucide-astro';
+import { cn } from '~/utils/cn';
+---
+
+<button
+  role="button"
+  title="Toggle dark/light"
+  aria-label="Toggle dark/light"
+  class={cn('theme-toggle-button button size-full flex relative rotate-180 dark:rotate-0 transition-transform', Astro.props.class)}
+>
+  <Moon class="icon-dark hidden dark:block size-full" />
+  <Sun class="icon-light dark:hidden size-full" />
+</button>
+
+<script>
+// TODO: 确认该script 的执行时机，是否会出现执行时 DOM 元素还不存在的情况
+const buttons = document.querySelectorAll('.theme-toggle-button');
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-scheme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-scheme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+});
+</script>

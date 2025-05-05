@@ -1,15 +1,3 @@
-// TODO: 确认是否还需要断点变量
-// mini-tablet/mobile
-$md: 768px;
-// tablet
-$lg: 1024px;
-// laptop
-$xl: 1280px;
-// desktop
-$xxl: 1536px;
-// mobile
-$sm: 640px;
-
 $jade-50: #f6f9fd;
 $jade-100: #e8edf3;
 $jade-200: #d9e0e8;
@@ -22,13 +10,11 @@ $jade-800: #24292e;
 $jade-900: #1a1e22;
 $jade-950: #101216;
 
-$accent-color-light: #f22;
-$accent-color-dark: #00f;
+$accent-color-light: #ff2222;
+$accent-color-dark: #0000ff;
 
+// color variables
 :root {
-  // TODO: rename space-width etc
-  --padding-width: 3.5rem;
-
   --jade-50: #{$jade-50};
   --jade-100: #{$jade-100};
   --jade-200: #{$jade-200};
@@ -45,11 +31,13 @@ $accent-color-dark: #00f;
   // 全局背景颜色
   --global-bg-color: #{$jade-50};
   // 文章背景颜色
-  --prose-bg-color: #fff;
+  --prose-bg-color: #ffffff;
+  // 导航栏背景颜色
+  --navbar-bg-color: #ffffff;
   // 代码块背景颜色
   --inline-code-bg-color: #{$jade-50};
   // 标签背景颜色
-  --tag-bg-color: #fff;
+  --tag-bg-color: #{$jade-50};
 
   // 标题颜色
   --title-color: #{$jade-800};
@@ -60,28 +48,41 @@ $accent-color-dark: #00f;
   // 内联代码颜色
   --inline-code-color: #{$jade-800};
 
+  // 导航栏文本颜色
+  --navbar-text-color: #{$jade-500};
+  // 导航栏文本 hover 颜色
+  --navbar-text-hover-color: #{$jade-700};
+  // 导航栏文本激活颜色
+  --navbar-text-active-color: #{$jade-800};
+
   // 选中文字颜色
-  --selection-text-color: #fff;
+  --selection-text-color: #ffffff;
   // 选中背景颜色
   --selection-bg-color: #{$jade-400};
 
-  // 边框颜色
-  --border-color: #{$jade-100};
   // 强调色
   --accent-color: #{$accent-color-light};
+  // 引用边框颜色
+  --blockquote-border-color: #{$jade-100};
+  // 表格头部边框颜色
+  --table-header-border-color: #{$jade-300};
+  // 表格主体边框颜色
+  --table-body-border-color: #{$jade-100};
   // 分隔线颜色
   --hr-color: #{$jade-400};
 
   // Dark theme
   &[data-scheme='dark'] {
     // 全局背景颜色
-    --global-bg-color: #000;
+    --global-bg-color: #000000;
     // 文章背景颜色
     --prose-bg-color: #{$jade-950};
+    // 导航栏背景颜色
+    --navbar-bg-color: #{$jade-950};
     // 代码块背景颜色
-    --inline-code-bg-color: #000;
+    --inline-code-bg-color: #000000;
     // 标签背景颜色
-    --tag-bg-color: #000;
+    --tag-bg-color: #000000;
 
     // 标题颜色
     --title-color: #{$jade-300};
@@ -90,35 +91,53 @@ $accent-color-dark: #00f;
     // 正文次要颜色
     --text-secondary-color: #{$jade-500};
     // 内联代码颜色
-    --inline-code-color: #{$jade-800};
+    --inline-code-color: #{$jade-300};
+
+    // 导航栏文本颜色
+    --navbar-text-color: #{$jade-600};
+    // 导航栏文本 hover 颜色
+    --navbar-text-hover-color: #{$jade-400};
+    // 导航栏文本 激活颜色
+    --navbar-text-active-color: #{$jade-300};
 
     // 选中文字颜色
-    --selection-text-color: #000;
+    --selection-text-color: #000000;
     // 选中背景颜色
     --selection-bg-color: #{$jade-600};
 
-    // 边框颜色
-    --border-color: #{$jade-900};
     // 强调色
     --accent-color: #{$accent-color-dark};
+    // 引用边框颜色
+    --blockquote-border-color: #{$jade-700};
+    // 表格头部边框颜色
+    --table-header-border-color: #{$jade-600};
+    // 表格主体边框颜色
+    --table-body-border-color: #{$jade-700};
     // 分隔线颜色
     --hr-color: #{$jade-600};
   }
 }
 
-// TODO: aside 响应式宽度适配
-// // tablet
-// @media screen and (max-width: ($lg - 1)) {
-//   :root {
-//     --aside-width: 170px;
-//   }
-// }
-
-// TODO: 移动端边距适配
+// TODO: 确认是否还需要断点变量
 // mobile
-@media screen and (max-width: ($sm - 1)) {
-  :root {
-    --padding-width: 1.5rem;
-    // --top-margin-width: 60px;
+$sm: 640px;
+// mini-tablet/mobile
+$md: 768px;
+// tablet
+$lg: 1024px;
+// laptop
+$xl: 1280px;
+// desktop
+$xxl: 1536px;
+
+:root {
+  --prose-padding: 4rem;
+
+  @media screen and (max-width: ($md - 1)) {
+    --prose-padding: 2rem;
+  }
+
+  @media screen and (max-width: ($sm - 1)) {
+    --prose-padding: 1rem;
   }
 }

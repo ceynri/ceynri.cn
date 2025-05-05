@@ -1,41 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 
-import { Archive, Feather, Home, Info, Moon, Rss, Sun } from 'lucide-astro';
 import avatar from '~/assets/images/avatar.jpg';
-import { SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from '~/consts';
+import { NAV_ITEMS, SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from '~/consts';
+import { cn } from '~/utils';
 
-const asideItems: Array<{
-  name: string;
-  icon: any;
-  href: string;
-}> = [
-  {
-    name: 'Blog',
-    icon: Feather,
-    href: '/blog/',
-  },
-  {
-    name: 'About',
-    icon: Info,
-    href: '/about/',
-  },
-  {
-    name: 'Archive',
-    icon: Archive,
-    href: '/blog/archive/',
-  },
-  {
-    name: 'RSS',
-    icon: Rss,
-    href: '/feed.xml',
-  },
-  {
-    name: 'Home',
-    icon: Home,
-    href: '/',
-  },
-] as const;
+import ThemeToggleButton from './theme-toggle-button.astro';
 
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
@@ -45,32 +15,31 @@ function isActive(href: string) {
 }
 ---
 
-<aside class="aside sticky top-0 w-[210px] flex-none max-h-screen py-16 px-4 flex flex-col">
-  <header class="aside__header">
-    <div class="site-info mb-6">
-      <Image
-        alt="site owner avatar"
-        title="?"
-        src={avatar}
-        width="160"
-        height="160"
-        class="rounded-full mb-4"
-      />
+<aside class={cn('aside w-[192px] flex-none max-h-screen py-16 px-4 flex flex-col', Astro.props.class)}>
+  <header class="mb-10">
+    <Image
+      alt="site owner avatar"
+      title="?"
+      src={avatar}
+      width="160"
+      height="160"
+      class="rounded-full mb-3"
+    />
 
-      <h1 class="text-xl font-medium mb-2">
-        {SITE_OWNER_NAME}
-        <span class="text-base">@{SITE_OWNER_ID}</span>
-      </h1>
-      <p class="mb-0">{SITE_OWNER_BIO}</p>
-    </div>
+    <h1 class="text-2xl font-medium leading-[2] mb-1">
+      {SITE_OWNER_NAME}
+      <span class="text-xl">@{SITE_OWNER_ID}</span>
+    </h1>
+    <p class="mb-0 text-lg">{SITE_OWNER_BIO}</p>
   </header>
 
-  <nav class="nav flex-auto overflow-auto">
+  <!-- TODO: 页面过矮时兼容 -->
+  <nav class="flex-auto overflow-auto">
     <ul class="list-none m-0">
-      {asideItems.map((item) => (
+      {NAV_ITEMS.map((item) => (
         <li class="mb-4">
-          <a href={item.href} class:list={['flex items-center', isActive(item.href) ? 'text-slate-900' : 'text-slate-500']}>
-            <item.icon class="size-4 mr-2" />
+          <a href={item.href} class:list={['flex items-center py-2 text-lg text-[var(--navbar-text-color)] hover:text-[var(--navbar-text-hover-color)] transition-[color]', isActive(item.href) && '!text-[var(--navbar-text-active-color)]']}>
+            <item.icon class="size-5 mr-3" />
             {item.name}
           </a>
         </li>
@@ -78,46 +47,7 @@ function isActive(href: string) {
     </ul>
   </nav>
 
-  <footer class="aside__footer">
-    <button
-      id="themeToggle"
-      role="button"
-      title="Toggle dark/light"
-      aria-label="Toggle dark/light"
-      class="toggle-theme button size-5"
-    >
-      <Moon id="iconDark" class="size-full" />
-      <Sun id="iconLight" class="size-full" />
-    </button>
+  <footer class="flex">
+    <ThemeToggleButton class="size-6 text-[var(--navbar-text-color)] hover:text-[var(--navbar-text-active-color)] transition-[color]" />
   </footer>
 </aside>
-
-<script>
-  type Theme = 'light' | 'dark';
-  const themeToggle = document.getElementById('themeToggle');
-  const iconDark = document.getElementById('iconDark');
-  const iconLight = document.getElementById('iconLight');
-
-  function setTheme(theme: Theme) {
-    document.documentElement.setAttribute('data-scheme', theme);
-    localStorage.setItem('theme', theme);
-    updateIcon(theme);
-  }
-
-  function updateIcon(theme: Theme) {
-    if (theme === 'dark') {
-      iconLight?.classList.add('hidden');
-      iconDark?.classList.remove('hidden');
-    }
-    else {
-      iconLight?.classList.remove('hidden');
-      iconDark?.classList.add('hidden');
-    }
-  }
-
-  themeToggle!.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-scheme') || 'light';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-  });
-</script>

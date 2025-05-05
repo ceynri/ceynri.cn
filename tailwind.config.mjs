@@ -5,34 +5,20 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: ['selector', '[data-scheme="dark"]'],
   theme: {
-    // TODO: 确认是否需要 container
-    // container: {
-    //   center: true,
-    //   padding: {
-    //     DEFAULT: '0.5rem',
-    //     sm: '0.5rem',
-    //     md: '1rem',
-    //     lg: '2rem',
-    //     xl: '4rem',
-    //   },
-    //   // screens: {
-    //   //   '2xl': '1400px',
-    //   // },
-    // },
     extend: {
       colors: {
         jade: {
-          50: '#f6f9fd',
-          100: '#e8edf3',
-          200: '#d9e0e8',
-          300: '#c9d1d9',
-          400: '#b8c0c8',
-          500: '#808890',
-          600: '#596169',
-          700: '#34393e',
-          800: '#24292e',
-          900: '#1a1e22',
-          950: '#101216',
+          50: 'var(--jade-50)',
+          100: 'var(--jade-100)',
+          200: 'var(--jade-200)',
+          300: 'var(--jade-300)',
+          400: 'var(--jade-400)',
+          500: 'var(--jade-500)',
+          600: 'var(--jade-600)',
+          700: 'var(--jade-700)',
+          800: 'var(--jade-800)',
+          900: 'var(--jade-900)',
+          950: 'var(--jade-950)',
         },
       },
       boxShadow: {
@@ -42,9 +28,6 @@ export default {
         sm: '0 1px 2px rgba(0,0,0,0.5)',
         DEFAULT: '0 2px 4px rgba(0,0,0,0.5)',
         lg: '0 3px 8px rgba(0,0,0,0.5)',
-      },
-      transitionProperty: {
-        'background-color': 'background-color',
       },
       transitionDuration: {
         fast: '0.1s',
