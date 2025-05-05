@@ -1,35 +1,17 @@
 ---
+import { FILING } from '~/consts';
 import { cn } from '~/utils';
 
-const { align = 'left' } = Astro.props;
-
-const alignItems = (() => {
-  switch (align) {
-    case 'center':
-      return 'items-center';
-    case 'right':
-      return 'items-end';
-    case 'left':
-    default:
-      return 'items-start';
-  }
-})();
-
 const currentYear = new Date().getFullYear();
-
-const beian = {
-  link: 'https://beian.miit.gov.cn/',
-  text: '粤ICP备20009331号',
-};
 ---
 
-<footer class={cn(`flex flex-col my-14`, alignItems, Astro.props.class)}>
-  <span class="text-xs leading-5">
+<footer class={cn('my-[var(--prose-padding)]', Astro.props.class)}>
+  <div class="text-xs leading-[1.75]">
     Ceynri © 2020-{currentYear}
-  </span>
-  {beian && (
-    <a href={beian.link} class="text-xs leading-5">
-      {beian.text}
+  </div>
+  {FILING && (
+    <a href={FILING.link} class="block text-xs leading-[1.75]">
+      {FILING.text}
     </a>
   )}
 </footer>

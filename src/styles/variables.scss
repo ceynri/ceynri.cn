@@ -10,7 +10,7 @@ $jade-800: #24292e;
 $jade-900: #1a1e22;
 $jade-950: #101216;
 
-$accent-color-light: #ff2222;
+$accent-color-light: #407682;
 $accent-color-dark: #0000ff;
 
 // color variables
@@ -49,11 +49,7 @@ $accent-color-dark: #0000ff;
   --inline-code-color: #{$jade-800};
 
   // 导航栏文本颜色
-  --navbar-text-color: #{$jade-500};
-  // 导航栏文本 hover 颜色
-  --navbar-text-hover-color: #{$jade-700};
-  // 导航栏文本激活颜色
-  --navbar-text-active-color: #{$jade-800};
+  --navbar-text-color: #{$jade-800};
 
   // 选中文字颜色
   --selection-text-color: #ffffff;
@@ -94,11 +90,7 @@ $accent-color-dark: #0000ff;
     --inline-code-color: #{$jade-300};
 
     // 导航栏文本颜色
-    --navbar-text-color: #{$jade-600};
-    // 导航栏文本 hover 颜色
-    --navbar-text-hover-color: #{$jade-400};
-    // 导航栏文本 激活颜色
-    --navbar-text-active-color: #{$jade-300};
+    --navbar-text-color: #{$jade-300};
 
     // 选中文字颜色
     --selection-text-color: #000000;
@@ -115,6 +107,14 @@ $accent-color-dark: #0000ff;
     --table-body-border-color: #{$jade-700};
     // 分隔线颜色
     --hr-color: #{$jade-600};
+  }
+}
+
+:root {
+  --text-shadow-size: 0.1em;
+
+  &[data-scheme='dark'] {
+    --text-shadow-size: 0.25em;
   }
 }
 

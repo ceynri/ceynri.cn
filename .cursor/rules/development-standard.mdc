@@ -1,0 +1,24 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 开发建议
+
+## 命名风格
+
+- 文件、目录命名必须遵循 kebab-case 命名规则
+
+## 项目结构
+
+- 当目录存在 index.ts 时，在该目录下新建文件，同时需要在同目录下的 index.ts 里导出该文件所导出的模块
+
+## 类型/风格检查
+
+- 严格使用 TypeScript 声明类型 [tsconfig.json](mdc:tsconfig.json)
+- 严格遵循项目 eslint 规则 [eslint.config.js](mdc:eslint.config.js)
+
+## 样式处理
+
+- 优先使用 tailwindcss utility class，通用样式、需要多处复用的样式考虑用 sass 声明 class
+- 涉及声明 background-color、color 等颜色样式时，优先使用 `src/styles/variables.scss` 中定义的 CSS 变量

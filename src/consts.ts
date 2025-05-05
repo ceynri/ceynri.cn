@@ -1,13 +1,24 @@
 import { Archive, Feather, Home, Info, Rss } from 'lucide-astro';
 
-export const SITE_TITLE = 'ceynri.cn';
-export const SITE_DESCRIPTION = '';
+/** 站点信息 */
+export const SITE_TITLE = '山风的小角落';
 
+/** 站点描述 */
+export const SITE_DESCRIPTION = `山风的个人网站 / Ceynri's personal website`;
+
+/** 站点所有者名称 */
 export const SITE_OWNER_NAME = '山风';
+
+/** 站点所有者 ID */
 export const SITE_OWNER_ID = 'ceynri';
+
+/** 站点所有者简介 */
 export const SITE_OWNER_BIO = 'Stay thinking.';
+
+/** 站点欢迎语 */
 export const SITE_WELCOME = `👋 Hi there. I'm a frontend developer, like to create meaningful stuff.`;
 
+/** 导航栏项信息 */
 export const NAV_ITEMS: Array<{
   name: string;
   icon: any;
@@ -39,3 +50,9 @@ export const NAV_ITEMS: Array<{
     href: '/',
   },
 ] as const;
+
+/** 备案信息 */
+export const FILING = {
+  link: 'https://beian.miit.gov.cn/',
+  text: '粤ICP备20009331号',
+} as const;

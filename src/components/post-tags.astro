@@ -1,4 +1,6 @@
 ---
+import { cn } from '~/utils';
+
 interface Props {
   tags: Array<{
     title: string;
@@ -8,7 +10,7 @@ interface Props {
   style?: 'default' | 'rounded';
 }
 
-const { tags, class: className } = Astro.props;
+const { tags } = Astro.props;
 
 const formattedTags = (
   typeof tags[0] !== 'string'
@@ -20,25 +22,16 @@ const formattedTags = (
 }>;
 ---
 
-<!-- TODO: 重构 -->
-<div class={`flex flex-wrap ${className}`}>
+<div class={cn('flex flex-wrap', Astro.props.class)}>
   {formattedTags.map((tag) => (
-    <a href={`/blog/tags/${tag.title}`} class="post-tags-link">
-      <span>#</span> {tag.title}
-      {tag.count && <span>{tag.count}</span>}
+    <a
+      href={`/blog/tags/${tag.title}`}
+      class="my-1 mr-2 text-sm rounded-md bg-[var(--tag-bg-color)] py-1 px-2"
+    >
+      <span class="opacity-50 sparklable-text">
+        <span>#</span> {tag.title}
+        {tag.count && <span>{tag.count}</span>}
+      </span>
     </a>
   ))}
 </div>
-
-<style lang="scss">
-.post-tags-link {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
-  margin-right: 0.7em;
-  font-size: 0.8em;
-  color: currentColor;
-  text-decoration: none;
-  background-color: var(--tag-bg-color);
-  padding: 0.5em 0.7em;
-}
-</style>

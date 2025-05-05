@@ -1,4 +1,7 @@
 {
+  "[astro]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -17,11 +20,14 @@
   "[scss]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
   "css.customData": [".vscode/tailwind.json"],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabSize": 2,
   "eslint.validate": [
     "javascript",
@@ -33,15 +39,8 @@
     "astro"
   ],
   "npm.packageManager": "pnpm",
-  "stylelint.validate": [
-    "css",
-    "scss",
-    "astro"
-  ],
   "cSpell.words": [
-    "clsx"
-  ],
-  "[astro]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+    "clsx",
+    "sparklable"
+  ]
 }

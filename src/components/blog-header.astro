@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+
+import avatar from '~/assets/images/avatar.jpg';
+import { SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from '~/consts';
+import { cn } from '~/utils';
+
+import MenuButton from './menu-button.astro';
+import ThemeToggleButton from './theme-toggle-button.astro';
+---
+
+<header class={cn('w-full px-4', Astro.props.class)}>
+  <div class="mx-auto flex items-center h-20">
+    <div class="flex items-center ml-auto gap-2">
+      <ThemeToggleButton class="size-10 p-2" />
+      <MenuButton class="size-10 p-2" />
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center justify-center p-4 mb-8">
+    <Image src={avatar} alt="avatar" class="rounded-full w-48 h-48 mb-4" />
+    <h1 class="text-3xl font-medium mb-3">
+      {SITE_OWNER_NAME} <span class="text-2xl">@{SITE_OWNER_ID}</span>
+    </h1>
+    <p class="text-xl">{SITE_OWNER_BIO}</p>
+  </div>
+</header>

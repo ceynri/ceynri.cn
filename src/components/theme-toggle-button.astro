@@ -1,13 +1,13 @@
 ---
 import { Moon, Sun } from 'lucide-astro';
-import { cn } from '~/utils/cn';
+import { cn } from '~/utils';
 ---
 
 <button
   role="button"
   title="Toggle dark/light"
   aria-label="Toggle dark/light"
-  class={cn('theme-toggle-button button size-full flex relative rotate-180 dark:rotate-0 transition-transform', Astro.props.class)}
+  class={cn('theme-toggle-button size-full flex relative text-[var(--navbar-text-color)] opacity-50 hover:opacity-100 rotate-180 dark:rotate-0 transition-[transform,opacity]', Astro.props.class)}
 >
   <Moon class="icon-dark hidden dark:block size-full" />
   <Sun class="icon-light dark:hidden size-full" />

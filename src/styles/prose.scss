@@ -6,18 +6,10 @@
   }
 
   a {
-    transition-property: color, opacity, text-shadow;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-
     text-decoration: underline;
     opacity: 0.8;
 
-    &:hover {
-      opacity: 1;
-      color: var(--accent-color);
-      text-shadow: 0 0 0.2em var(--accent-color);
-    }
+    @apply sparklable-text;
   }
 
   img {
@@ -54,5 +46,12 @@
       width: auto;
       max-width: 100%;
     }
+  }
+
+  table img {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 100%;
   }
 }

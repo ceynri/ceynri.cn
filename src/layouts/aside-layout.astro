@@ -1,13 +1,13 @@
 ---
-import { Aside, Footer, TopNavbar } from '~/components';
+import { Aside, BlogHeader, Footer } from '~/components';
 ---
 
 <div class="mx-auto flex px-4 max-sm:px-0 relative max-w-[1080px] min-h-screen">
   <Aside class="sticky top-0 max-md:hidden" />
-  <TopNavbar class="md:hidden" />
+  <BlogHeader class="md:hidden" />
   <main class="m-0 pt-16 px-4 flex-1">
     <slot />
-    <Footer />
+    <Footer class="max-sm:text-center" />
   </main>
 </div>
 
