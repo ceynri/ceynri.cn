@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { FormattedDate, PostTags } from '~/components';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+const { title, date, cover_image, lastmod, tags } = post.data;
+const { Content } = await post.render();
+---
+
+<main class="p-[var(--prose-padding)] bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-3xl max-sm:rounded-none">
+  {cover_image
+    ? (
+    <div class="relative overflow-hidden rounded-t-3xl max-sm:rounded-t-none -mx-[var(--prose-padding)] -mt-[var(--prose-padding)] mb-8 bg-gray-100">
+      <img
+        class="w-full max-sm:min-h-[100vw] object-cover"
+        style={{
+          aspectRatio: `${cover_image.width} / ${cover_image.height}`,
+        }}
+        src={cover_image.src}
+        alt="cover image"
+      />
+      <div class="absolute left-4 bottom-8 sm:left-16 sm:bottom-12">
+        <h1 class="text-3xl font-bold text-white text-shadow-lg">{title}</h1>
+        <div class="mt-3 text-white text-shadow-lg">
+          <FormattedDate date={date} />
+        </div>
+      </div>
+    </div>
+    )
+    : (
+      <div class="pt-8 mb-16 flex flex-col items-center">
+        <h1 class="text-3xl font-bold">{title}</h1>
+        <div class="mt-3">
+          <FormattedDate date={date} />
+        </div>
+      </div>
+    )}
+  <article class="prose">
+    <Content />
+    {lastmod && (
+      <blockquote class="mt-12 opacity-50">Last modified on <FormattedDate date={lastmod} />.</blockquote>
+    )}
+  </article>
+  <PostTags tags={tags} class="mt-8" />
+</main>

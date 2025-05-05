@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { BaseHead, BlogPost, Footer, TopNavbar } from '~/components';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+const { title, description } = post.data;
+---
+
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={title} description={description ?? ''} />
+  </head>
+
+  <body>
+    <TopNavbar />
+    <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">
+      <div class="mx-auto max-w-[50rem]">
+        <BlogPost post={post} />
+      </div>
+    </div>
+    <Footer class="text-center" />
+  </body>
+</html>

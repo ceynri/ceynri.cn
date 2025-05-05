@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { FormattedDate } from '~/components';
+
+const { post } = Astro.props as { post: CollectionEntry<'blog'> };
+---
+
+<div class="mb-8 rounded-2xl overflow-hidden bg-[var(--prose-bg-color)] transition-[background-color,box-shadow,transform] hover:shadow-2xl hover:-translate-y-1">
+  <a href={`/blog/${post.slug}/`}>
+    {post.data.cover_image && (
+      <Image
+        class="w-full aspect-[9/4] max-sm:aspect-square object-cover"
+        src={post.data.cover_image}
+        alt=""
+      />
+    )}
+    <div class={`p-16 max-sm:p-8 ${post.data.cover_image ? 'pt-12 max-sm:pt-6' : ''}`}>
+      <h2 class="mt-0 mb-4 text-3xl font-bold">{post.data.title}</h2>
+      {post.data.description && <p class="mb-4 text-lg">{post.data.description}</p>}
+      <p class="text-base text-[var(--text-secondary-color)] mb-0">
+        <FormattedDate date={post.data.date} />
+      </p>
+    </div>
+  </a>
+</div>
