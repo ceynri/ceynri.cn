@@ -38,6 +38,8 @@ $accent-color-dark: #0000ff;
   --inline-code-bg-color: #{$jade-50};
   // 标签背景颜色
   --tag-bg-color: #{$jade-50};
+  // 翻页器选中背景颜色
+  --pagination-active-bg-color: #{$jade-100};
 
   // 标题颜色
   --title-color: #{$jade-800};
@@ -50,6 +52,8 @@ $accent-color-dark: #0000ff;
 
   // 导航栏文本颜色
   --navbar-text-color: #{$jade-800};
+  // 翻页器文本颜色
+  --pagination-text-color: #{$jade-800};
 
   // 选中文字颜色
   --selection-text-color: #ffffff;
@@ -81,6 +85,8 @@ $accent-color-dark: #0000ff;
     --inline-code-bg-color: #000000;
     // 标签背景颜色
     --tag-bg-color: #000000;
+    // 翻页器选中背景颜色
+    --pagination-active-bg-color: #{$jade-800};
 
     // 标题颜色
     --title-color: #{$jade-300};
@@ -93,6 +99,8 @@ $accent-color-dark: #0000ff;
 
     // 导航栏文本颜色
     --navbar-text-color: #{$jade-300};
+    // 翻页器文本颜色
+    --pagination-text-color: #{$jade-300};
 
     // 选中文字颜色
     --selection-text-color: #000000;

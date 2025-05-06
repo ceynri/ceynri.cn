@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { BaseHead, BlogPost, Footer, TopNavbar } from '~/components';
+import { SITE_TITLE } from '~/consts';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -12,7 +13,7 @@ const { title, description } = post.data;
 
 <html lang="zh-CN">
   <head>
-    <BaseHead title={title} description={description ?? ''} />
+    <BaseHead title={`${title} - ${SITE_TITLE}`} description={description ?? ''} />
   </head>
 
   <body>

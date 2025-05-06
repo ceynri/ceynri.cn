@@ -5,6 +5,7 @@ export { default as BlogPost } from './blog-post.astro';
 export { default as Footer } from './footer.astro';
 export { default as FormattedDate } from './formatted-date.astro';
 export { default as MenuButton } from './menu-button.astro';
+export { default as Pagination } from './pagination.astro';
 export { default as PostCard } from './post-card.astro';
 export { default as PostTags } from './post-tags.astro';
 export { default as ThemeToggleButton } from './theme-toggle-button.astro';

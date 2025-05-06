@@ -56,3 +56,6 @@ export const FILING = {
   link: 'https://beian.miit.gov.cn/',
   text: '粤ICP备20009331号',
 } as const;
+
+/** 博客每页文章数量 */
+export const BLOG_POST_PER_PAGE = 10;

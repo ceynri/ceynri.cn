@@ -1,6 +1,6 @@
 ---
 description: 
-globs: *.astro,*.ts,*.js,*.vue,*.tsx,*.scss
+globs: *.astro,*.ts,*.js,*.vue,*.scss
 alwaysApply: false
 ---
 # Astro + Tailwind 项目开发规范
@@ -37,6 +37,8 @@ alwaysApply: false
 
 - 推荐全部使用 utility class，非必要不使用 @apply
 - 响应式优先，以 PC 端为基准，适配移动端时善用 max-sm、max-lg 等
+- 使用 CSS 变量时需要从 [variables.scss](mdc:src/styles/variables.scss) 中选择，有必要时对应新增 CSS 变量
+- font-weight 不使用预设变量，改用直接书写单位的方式（例如 font-[500]）
 
 ## 内容管理
 
