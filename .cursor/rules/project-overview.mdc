@@ -37,13 +37,17 @@ alwaysApply: false
 - 已实现部分 Tailwind 公共样式
 - 已添加 AI 编程环境（Cursor 规则）
 - 依赖已升级至 Astro 5.x 及相关插件最新版
+- 迁移并实现 About、Archive 页面
 
 ## 待办事项
 
+- 更细致的 eslint format 规则
 - 细化已迁移页面的样式细节，确保 UI 还原度
-- 迁移并实现 About、Archive、Home 等页面
 - 持续优化 Tailwind class 使用，逐步移除冗余 SCSS，减少自定义的命名 class
 - 按需补充/优化 Cursor 规则，提升 AI 编程体验
+- 在文章底部使用 giscus 组件支持评论
+- 支持定位到文章的指定标题
+- 支持文章目录
 
 ## 参考文档
 

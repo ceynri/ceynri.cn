@@ -10,6 +10,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image } = Astro.props;
+// TODO: 默认图片
 const imageURL = new URL(image || '/favicon.png', Astro.site);
 ---
 

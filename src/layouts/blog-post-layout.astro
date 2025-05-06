@@ -8,12 +8,12 @@ interface Props {
 }
 
 const { post } = Astro.props as Props;
-const { title, description } = post.data;
+const { title, description, cover_image } = post.data;
 ---
 
 <html lang="zh-CN">
   <head>
-    <BaseHead title={`${title} - ${SITE_TITLE}`} description={description ?? ''} />
+    <BaseHead title={`${title} - ${SITE_TITLE}`} description={description ?? ''} image={cover_image?.src ?? ''} />
   </head>
 
   <body>

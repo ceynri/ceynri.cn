@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import { FormattedDate, PostTags } from '~/components';
 
@@ -15,14 +16,16 @@ const { Content } = await render(post);
 <main class="prose-card max-sm:rounded-none">
   {cover_image
     ? (
-    <div class="relative overflow-hidden rounded-t-3xl max-sm:rounded-t-none -mx-prose -mt-prose bg-gray-100">
-      <img
+    <div class="relative overflow-hidden rounded-t-3xl max-sm:rounded-t-none -mx-prose -mt-prose bg-jade-100 dark:bg-jade-900">
+      <Image
         class="w-full max-sm:min-h-[100vw] object-cover"
         style={{
           aspectRatio: `${cover_image.width} / ${cover_image.height}`,
         }}
-        src={cover_image.src}
+        src={cover_image}
         alt="cover image"
+        width={cover_image.width}
+        height={cover_image.height}
       />
       <div class="absolute left-4 bottom-8 sm:left-16 sm:bottom-12">
         <h1 class="text-3xl font-[700] text-white text-shadow-lg">{title}</h1>
