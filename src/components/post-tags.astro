@@ -23,7 +23,7 @@ const formattedTags = (
   {formattedTags.map((tag) => (
     <a
       href={`/blog/tags/${tag.title}`}
-      class="my-1 mr-2 text-sm rounded-md bg-[var(--tag-bg-color)] inline-flex"
+      class="my-1 mr-2 text-sm rounded-md bg-[var(--tag-bg-color)] transition-[background-color] ease-out inline-flex"
     >
       <span class="opacity-50 sparklable-text py-1.5 px-2.5">
         # {tag.title}

@@ -22,3 +22,4 @@ alwaysApply: true
 
 - 优先使用 tailwindcss utility class，通用样式、需要多处复用的样式考虑用 sass 声明 class
 - 涉及声明 background-color、color 等颜色样式时，优先使用 `src/styles/variables.scss` 中定义的 CSS 变量
+- 应用 CSS 变量添加背景颜色、阴影样式时，需要添加上对应的 transition 属性以正确渐变过渡（例如 tailwind utility class `transition-[background-color] ease-out`） 

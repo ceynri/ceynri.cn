@@ -23,6 +23,14 @@ alwaysApply: false
 - 如果需要通过集成使用 React/Vue/Svelte 组件，在实际生成代码之前需要提前确认
 - 组件 props 推荐用 TypeScript interface 明确类型
 - 组件间数据传递用 Astro.props
+- 在 astro 文件里编写 js 逻辑，代码块前后两行需要用 `---` 将其包裹
+  ```astro
+  ---
+  const someLogic = xxx();
+  ---
+
+  <div>DOM</div>
+  ```
 - 复用性强的 UI 元素放在 components，页面专用内容直接写在 pages
 
 ## TailwindCSS 使用规范

@@ -66,20 +66,24 @@
 
 @layer components {
   .prose-card {
-    @apply p-[var(--prose-padding)] bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-3xl;
+    @apply p-prose bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-3xl;
   }
-}
 
-@layer utilities {
   .sparklable-text {
     transition-property: color, text-shadow, opacity;
     transition-duration: 0.3s;
     transition-timing-function: ease-out;
 
     &:hover {
-      color: var(--accent-color);
-      text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
-      opacity: 1;
+      @apply sparkle-text;
     }
+  }
+}
+
+@layer utilities {
+  .sparkle-text {
+    color: var(--accent-color);
+    text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
+    opacity: 1;
   }
 }

@@ -20,6 +20,11 @@ export default {
           900: 'var(--jade-900)',
           950: 'var(--jade-950)',
         },
+        accent: 'var(--accent-color)',
+      },
+      spacing: {
+        'prose': 'var(--prose-padding)',
+        'prose-half': 'calc(var(--prose-padding) / 2)',
       },
       boxShadow: {
         card: '0 2px 4px rgba(0,0,0,0.25)',

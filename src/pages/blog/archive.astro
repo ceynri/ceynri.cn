@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import { BaseHead, FormattedDate, PostTags } from '~/components';
+import { SITE_TITLE } from '~/consts';
+import { AsideLayout } from '~/layouts';
+
+// 获取所有已发布的博客文章
+const allPosts = await getCollection('blog', ({ data }) => import.meta.env.DEV || data.published);
+
+// 按年份分组文章
+const postsByYear = allPosts.reduce((acc, post) => {
+  const year = post.data.date.getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<string, typeof allPosts>);
+
+// 转换为排序后的数组格式
+const postGroupList = Object.entries(postsByYear)
+  .map(([year, posts]) => ({
+    year,
+    list: posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+  }))
+  .sort((a, b) => Number(b.year) - Number(a.year));
+
+// 获取标签信息并计数
+const tagMap = new Map<string, number>();
+allPosts.forEach((post) => {
+  post.data.tags?.forEach((tag) => {
+    tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+  });
+});
+
+// 按使用次数排序标签
+const tags = Array.from(tagMap.entries())
+  .map(([title, count]) => ({ title, count }))
+  .sort((a, b) => b.count - a.count);
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={`Archive - ${SITE_TITLE}`} description="博客文章归档页面" />
+  </head>
+  <body>
+    <AsideLayout>
+      <div class="archive">
+        <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
+          <header class="text-[var(--text-secondary-color)] font-[500]">TAGS</header>
+          <div class="p-prose-half">
+            <PostTags tags={tags} />
+          </div>
+        </section>
+
+        <div>
+          {postGroupList.map(({ year, list }) => (
+            <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
+              <header class="text-[var(--text-secondary-color)] font-[500]">{year}</header>
+              {list.map((post) => (
+                <section class="p-prose-half border-b border-dotted border-[var(--border-color)] last:border-0">
+                  <a href={`/blog/${post.id}/`} class="block">
+                    <h2 class="mb-3 text-2xl text-[var(--title-color)] font-[500]">
+                      {post.data.title}
+                    </h2>
+                    <div class="text-sm text-[var(--text-secondary-color)]">
+                      <FormattedDate date={post.data.date} />
+                      {post.data.tags?.length > 0 && post.data.tags.map((tag) => (
+                        <span class="ml-2"><span class="mr-1">#</span>{tag}</span>
+                      ))}
+                    </div>
+                  </a>
+                </section>
+              ))}
+            </section>
+          ))}
+        </div>
+      </div>
+    </AsideLayout>
+  </body>
+</html>

@@ -15,7 +15,7 @@ const { Content } = await render(post);
 <main class="prose-card max-sm:rounded-none">
   {cover_image
     ? (
-    <div class="relative overflow-hidden rounded-t-3xl max-sm:rounded-t-none -mx-[var(--prose-padding)] -mt-[var(--prose-padding)] bg-gray-100">
+    <div class="relative overflow-hidden rounded-t-3xl max-sm:rounded-t-none -mx-prose -mt-prose bg-gray-100">
       <img
         class="w-full max-sm:min-h-[100vw] object-cover"
         style={{
@@ -25,7 +25,7 @@ const { Content } = await render(post);
         alt="cover image"
       />
       <div class="absolute left-4 bottom-8 sm:left-16 sm:bottom-12">
-        <h1 class="text-3xl font-bold text-white text-shadow-lg">{title}</h1>
+        <h1 class="text-3xl font-[700] text-white text-shadow-lg">{title}</h1>
         <div class="mt-3 text-white text-shadow-lg">
           <FormattedDate date={date} />
         </div>
@@ -34,7 +34,7 @@ const { Content } = await render(post);
     )
     : (
       <div class="py-8 flex flex-col items-center">
-        <h1 class="text-3xl font-bold">{title}</h1>
+        <h1 class="text-3xl font-[700]">{title}</h1>
         <div class="mt-3">
           <FormattedDate date={date} />
         </div>
