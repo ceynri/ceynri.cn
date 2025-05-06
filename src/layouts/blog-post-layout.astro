@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+
 import { BaseHead, BlogPost, Footer, TopNavbar } from '~/components';
 import { SITE_TITLE } from '~/consts';
 
@@ -13,7 +14,11 @@ const { title, description, cover_image } = post.data;
 
 <html lang="zh-CN">
   <head>
-    <BaseHead title={`${title} - ${SITE_TITLE}`} description={description ?? ''} image={cover_image?.src ?? ''} />
+    <BaseHead
+      title={`${title} - ${SITE_TITLE}`}
+      description={description ?? ''}
+      image={cover_image?.src ?? ''}
+    />
   </head>
 
   <body>

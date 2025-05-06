@@ -11,8 +11,8 @@ const { tags } = Astro.props;
 
 const formattedTags = (
   typeof tags[0] !== 'string'
-  ? tags
-  : tags.map((tag) => ({ title: tag }))
+    ? tags
+    : tags.map((tag) => ({ title: tag }))
 ) as Array<{
   title: string;
   count?: number;

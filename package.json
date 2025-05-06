@@ -22,7 +22,7 @@
     "dev": "astro dev",
     "sync": "astro sync",
     "start": "astro dev",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"

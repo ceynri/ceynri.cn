@@ -1,5 +1,6 @@
 ---
 import { getEntry, render } from 'astro:content';
+
 import { BaseHead } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
@@ -14,7 +15,10 @@ const { Content } = await render(post);
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={`关于 - ${SITE_TITLE}`} description="关于本站点以及站长的介绍" />
+    <BaseHead
+      title={`关于 - ${SITE_TITLE}`}
+      description="关于本站点以及站长的介绍"
+    />
   </head>
   <body>
     <AsideLayout mainClass="max-md:px-0">
@@ -29,7 +33,10 @@ const { Content } = await render(post);
   </body>
 </html>
 
-<style lang="scss" is:global>
+<style
+  lang="scss"
+  is:global
+>
 .article {
   h2:first-child {
     margin-top: 0;

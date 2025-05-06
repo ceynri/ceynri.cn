@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+
 import { BaseHead, FormattedDate, PostTags } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
@@ -42,7 +43,10 @@ const tags = Array.from(tagMap.entries())
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={`Archive - ${SITE_TITLE}`} description="博客文章归档页面" />
+    <BaseHead
+      title={`Archive - ${SITE_TITLE}`}
+      description="博客文章归档页面"
+    />
   </head>
   <body>
     <AsideLayout>
@@ -60,7 +64,10 @@ const tags = Array.from(tagMap.entries())
               <header class="text-[var(--text-secondary-color)] font-[500]">{year}</header>
               {list.map((post) => (
                 <section class="p-prose-half border-b border-dotted border-[var(--border-color)] last:border-0">
-                  <a href={`/blog/${post.id}/`} class="block">
+                  <a
+                    href={`/blog/${post.id}/`}
+                    class="block"
+                  >
                     <h2 class="mb-3 text-2xl text-[var(--title-color)] font-[500]">
                       {post.data.title}
                     </h2>

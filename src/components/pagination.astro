@@ -52,7 +52,7 @@ const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPag
           p !== currentPage
             ? 'hover:pagination-item-hovered'
             : 'pagination-item-active hover:pagination-item-active-hovered'
-          }`}
+        }`}
         aria-current={p === currentPage ? 'page' : undefined}
       >
         {p}

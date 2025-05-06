@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+
 import { Image } from 'astro:assets';
+
 import { FormattedDate } from '~/components';
 
 const { post } = Astro.props as { post: CollectionEntry<'blog'> };

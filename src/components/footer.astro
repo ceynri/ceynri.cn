@@ -10,7 +10,10 @@ const currentYear = new Date().getFullYear();
     Ceynri © 2020-{currentYear}
   </div>
   {FILING && (
-    <a href={FILING.link} class="block text-xs leading-[1.75]">
+    <a
+      href={FILING.link}
+      class="block text-xs leading-[1.75]"
+    >
       {FILING.text}
     </a>
   )}

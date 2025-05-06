@@ -35,7 +35,10 @@ const { tag, posts } = Astro.props;
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={`#${tag} - ${SITE_TITLE}`} description={`标签为 ${tag} 的所有文章`} />
+    <BaseHead
+      title={`#${tag} - ${SITE_TITLE}`}
+      description={`标签为 ${tag} 的所有文章`}
+    />
   </head>
   <body>
     <AsideLayout>

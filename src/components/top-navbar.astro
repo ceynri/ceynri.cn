@@ -10,8 +10,16 @@ import ThemeToggleButton from './theme-toggle-button.astro';
 
 <header class={cn('w-full p-4 flex items-center justify-between', Astro.props.class)}>
   <!-- 左侧头像 -->
-  <a href="/blog/" class="flex rounded-full overflow-hidden">
-    <Image src={avatar} alt="avatar" width={40} height={40} />
+  <a
+    href="/blog/"
+    class="flex rounded-full overflow-hidden"
+  >
+    <Image
+      src={avatar}
+      alt="avatar"
+      width={40}
+      height={40}
+    />
   </a>
   <!-- 右侧按钮 -->
   <div class="flex items-center gap-2">

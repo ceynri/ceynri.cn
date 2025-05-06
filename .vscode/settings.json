@@ -41,6 +41,7 @@
   "npm.packageManager": "pnpm",
   "cSpell.words": [
     "clsx",
+    "lastmod",
     "sparklable"
   ]
 }

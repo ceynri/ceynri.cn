@@ -38,7 +38,10 @@ function isActive(href: string) {
     <ul class="list-none m-0">
       {NAV_ITEMS.map((item) => (
         <li class="mb-3">
-          <a href={item.href} class:list={['flex items-center py-2 text-lg text-[var(--navbar-text-color)] sparklable-text opacity-50', isActive(item.href) && '!opacity-100']}>
+          <a
+            href={item.href}
+            class:list={['flex items-center py-2 text-lg text-[var(--navbar-text-color)] sparklable-text opacity-50', isActive(item.href) && '!opacity-100']}
+          >
             <item.icon class="size-5 mr-3" />
             {item.name}
           </a>
