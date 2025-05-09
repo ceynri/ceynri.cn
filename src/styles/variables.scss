@@ -13,21 +13,8 @@ $jade-950: #101216;
 $accent-color-light: #ffbb00;
 $accent-color-dark: #0000ff;
 
-// color variables
-:root {
-  --jade-50: #{$jade-50};
-  --jade-100: #{$jade-100};
-  --jade-200: #{$jade-200};
-  --jade-300: #{$jade-300};
-  --jade-400: #{$jade-400};
-  --jade-500: #{$jade-500};
-  --jade-600: #{$jade-600};
-  --jade-700: #{$jade-700};
-  --jade-800: #{$jade-800};
-  --jade-900: #{$jade-900};
-  --jade-950: #{$jade-950};
-
-  // Light theme
+// 亮色主题 mixin
+@mixin light-theme {
   // 全局背景颜色
   --global-bg-color: #{$jade-50};
   // 文章背景颜色
@@ -72,53 +59,74 @@ $accent-color-dark: #0000ff;
   --table-body-border-color: #{$jade-100};
   // 分隔线颜色
   --hr-color: #{$jade-400};
+}
 
-  // Dark theme
+// 暗色主题 mixin
+@mixin dark-theme {
+  // 全局背景颜色
+  --global-bg-color: #000000;
+  // 文章背景颜色
+  --prose-bg-color: #{$jade-950};
+  // 导航栏背景颜色
+  --navbar-bg-color: #{$jade-950};
+  // 代码块背景颜色
+  --inline-code-bg-color: #000000;
+  // 标签背景颜色
+  --tag-bg-color: #000000;
+  // 翻页器选中背景颜色
+  --pagination-active-bg-color: #{$jade-800};
+
+  // 标题颜色
+  --title-color: #{$jade-300};
+  // 正文颜色
+  --text-color: #{$jade-400};
+  // 正文次要颜色
+  --text-secondary-color: #{$jade-500};
+  // 内联代码颜色
+  --inline-code-color: #{$jade-300};
+
+  // 导航栏文本颜色
+  --navbar-text-color: #{$jade-300};
+  // 翻页器文本颜色
+  --pagination-text-color: #{$jade-300};
+
+  // 选中文字颜色
+  --selection-text-color: #000000;
+  // 选中背景颜色
+  --selection-bg-color: #{$jade-600};
+
+  // 强调色
+  --accent-color: #{$accent-color-dark};
+  // 边框颜色
+  --border-color: rgba(255, 255, 255, 0.1);
+  // 引用边框颜色
+  --blockquote-border-color: #{$jade-700};
+  // 表格头部边框颜色
+  --table-header-border-color: #{$jade-600};
+  // 表格主体边框颜色
+  --table-body-border-color: #{$jade-700};
+  // 分隔线颜色
+  --hr-color: #{$jade-600};
+}
+
+// 基础颜色变量
+:root {
+  --jade-50: #{$jade-50};
+  --jade-100: #{$jade-100};
+  --jade-200: #{$jade-200};
+  --jade-300: #{$jade-300};
+  --jade-400: #{$jade-400};
+  --jade-500: #{$jade-500};
+  --jade-600: #{$jade-600};
+  --jade-700: #{$jade-700};
+  --jade-800: #{$jade-800};
+  --jade-900: #{$jade-900};
+  --jade-950: #{$jade-950};
+
+  @include light-theme;
+
   &[data-scheme='dark'] {
-    // 全局背景颜色
-    --global-bg-color: #000000;
-    // 文章背景颜色
-    --prose-bg-color: #{$jade-950};
-    // 导航栏背景颜色
-    --navbar-bg-color: #{$jade-950};
-    // 代码块背景颜色
-    --inline-code-bg-color: #000000;
-    // 标签背景颜色
-    --tag-bg-color: #000000;
-    // 翻页器选中背景颜色
-    --pagination-active-bg-color: #{$jade-800};
-
-    // 标题颜色
-    --title-color: #{$jade-300};
-    // 正文颜色
-    --text-color: #{$jade-400};
-    // 正文次要颜色
-    --text-secondary-color: #{$jade-500};
-    // 内联代码颜色
-    --inline-code-color: #{$jade-300};
-
-    // 导航栏文本颜色
-    --navbar-text-color: #{$jade-300};
-    // 翻页器文本颜色
-    --pagination-text-color: #{$jade-300};
-
-    // 选中文字颜色
-    --selection-text-color: #000000;
-    // 选中背景颜色
-    --selection-bg-color: #{$jade-600};
-
-    // 强调色
-    --accent-color: #{$accent-color-dark};
-    // 边框颜色
-    --border-color: rgba(255, 255, 255, 0.1);
-    // 引用边框颜色
-    --blockquote-border-color: #{$jade-700};
-    // 表格头部边框颜色
-    --table-header-border-color: #{$jade-600};
-    // 表格主体边框颜色
-    --table-body-border-color: #{$jade-700};
-    // 分隔线颜色
-    --hr-color: #{$jade-600};
+    @include dark-theme;
   }
 }
 

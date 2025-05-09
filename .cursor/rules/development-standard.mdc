@@ -17,6 +17,7 @@ alwaysApply: true
 
 - 严格使用 TypeScript 声明类型 [tsconfig.json](mdc:tsconfig.json)
 - 严格遵循项目 eslint 规则 [eslint.config.js](mdc:eslint.config.js)
+- 推荐使用 /** */ 来书写变量与方法的注释，使其具备代码提示
 
 ## 样式处理
 

@@ -8,6 +8,7 @@ export default antfu(
         'style/arrow-parens': ['error', 'always'],
         'style/jsx-first-prop-new-line': ['error', 'multiprop'],
         'perfectionist/sort-imports': ['error', {}],
+        'curly': ['error', 'all'],
       },
     },
     astro: {

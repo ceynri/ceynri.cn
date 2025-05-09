@@ -1,0 +1,23 @@
+@use "../variables.scss" as *;
+@use "./common.scss";
+
+@import url("//giscus.app/themes/light.css");
+
+main {
+  @include light-theme;
+  
+  --color-canvas-subtle: var(--prose-bg-color);
+  --color-canvas-default: var(--prose-bg-color);
+  --color-canvas-inset: var(--global-bg-color);
+
+  --color-fg-default: var(--text-color);
+  --color-fg-muted: var(--text-secondary-color);
+
+  --color-accent-fg: var(--accent-color);
+
+  --color-border-muted: var(--border-color);
+  /* --accent-color 衍生 */
+  --color-accent-emphasis: #ffcc3e;
+  --color-accent-muted: #ffcc3e;
+  --color-accent-subtle: #fffaee;
+}

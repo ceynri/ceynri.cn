@@ -39,10 +39,10 @@ alwaysApply: false
 - 已添加 AI 编程环境（Cursor 规则）
 - 依赖已升级至 Astro 5.x 及相关插件最新版
 - 迁移并实现 About、Archive 页面
+- 更细致的 eslint format 规则
 
 ## 待办事项
 
-- 更细致的 eslint format 规则
 - 持续优化 Tailwind class 使用，逐步移除冗余 SCSS，减少自定义的命名 class
 - 按需补充/优化 Cursor 规则，提升 AI 编程体验
 - 在文章底部使用 giscus 组件支持评论

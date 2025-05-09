@@ -1,0 +1,13 @@
+@use "../variables.scss";
+
+main {
+  --color-border-default: transparent;
+  --color-segmented-control-button-selected-border: transparent;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-disabled-border: transparent;
+  --color-btn-border: transparent;
+}
+
+.gsc-header {
+  @apply max-sm:p-4;
+}
