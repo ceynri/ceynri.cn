@@ -14,7 +14,7 @@ alwaysApply: false
 - `src/pages/`：页面文件，遵循 Astro file-based routing 规则
 - `src/styles/`：全局样式、变量
 - `src/utils/`：工具函数，推荐 TypeScript
-- `src/content/`：内容源（如 MD/MDX 文件）
+- `content/`：内容源（如 MD/MDX 文件）
 - `public/`：静态资源（如 favicon、图片等）
 
 ## Astro 组件开发
@@ -44,7 +44,7 @@ alwaysApply: false
 
 - 推荐用 Markdown/MDX 文件管理内容，frontmatter 支持 meta 信息
 - 用 Astro.glob() 批量读取内容
-- 文章、页面内容建议放在 src/content/
+- 文章、页面内容建议放在 content/
 
 ## 性能优化
 

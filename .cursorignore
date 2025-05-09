@@ -1,5 +1,5 @@
-src/content/*
-!src/content/blog
-!src/content/pages
+content/*
+!content/blog
+!content/pages
 dist
 node_modules

@@ -1,3 +1,4 @@
 [submodule "content"]
-  path = content
-  url = https://github.com/ceynri/ceynri-words.git
+	path = content
+	url = https://github.com/ceynri/ceynri-words.git
+	branch = v3
