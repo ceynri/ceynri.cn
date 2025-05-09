@@ -54,13 +54,13 @@ Home logo and impression image add perspective effect for fun:
 </details>
 -->
 
-### Techology
+### Technology
 
-ceynri.cn v3 is powered by [Astro](https://astro.build/), which is a content-driven web framework.
-
-The comment system currently uses [giscus](https://github.com/laymonage/giscus), a plugin similar to [utterances](https://github.com/utterance/utterances) but uses discussions instead of issues.
-
-Automatic update deployment via [Github Action](https://github.com/ceynri/ceynri.cn/actions).
+- Web Framework: [Astro](https://astro.build/)
+- Styling: [TailwindCSS](https://tailwindcss.com/) + [SASS](https://sass-lang.com/)
+- Comments Engine: [giscus](https://github.com/laymonage/giscus)
+- AI tools: [Cursor](https://www.cursor.com/)
+<!-- - Deployment: [Github Action](https://github.com/ceynri/ceynri.cn/actions) -->
 
 ### Compatibility
 
