@@ -13,6 +13,11 @@ alwaysApply: true
 
 - 当目录存在 index.ts 时，在该目录下新建文件，同时需要在同目录下的 index.ts 里导出该文件所导出的模块
 
+## 文档说明
+
+- 注释一般使用中文书写
+- README、commit message 使用英文书写
+
 ## 类型/风格检查
 
 - 严格使用 TypeScript 声明类型 [tsconfig.json](mdc:tsconfig.json)

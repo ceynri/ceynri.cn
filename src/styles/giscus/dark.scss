@@ -5,7 +5,7 @@
 
 main {
   @include dark-theme;
-  
+
   --color-canvas-subtle: var(--prose-bg-color);
   --color-canvas-default: var(--prose-bg-color);
   --color-canvas-inset: var(--global-bg-color);
@@ -20,4 +20,4 @@ main {
   --color-accent-emphasis: #000080;
   --color-accent-muted: #000080;
   --color-accent-subtle: #00003d;
-} 
+}

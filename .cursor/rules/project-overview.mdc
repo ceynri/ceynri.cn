@@ -11,6 +11,11 @@ alwaysApply: false
 
 原始版本基于 Gridsome（Vue 生态）+ SASS，现正重构为 Astro + tailwindcss + SASS。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
 
+## 项目环境
+
+- 使用 pnpm 作为包管理器
+- node、pnpm 版本参考 [package.json](mdc:package.json) 的声明
+
 ## 目录结构
 
 - `src/`

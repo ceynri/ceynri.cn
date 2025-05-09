@@ -1,4 +1,31 @@
 {
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "svelte"
+    // "css",
+    // "less",
+    // "scss",
+    // "pcss",
+    // "postcss"
+  ],
   "[astro]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -24,20 +51,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
   "css.customData": [".vscode/tailwind.json"],
   "editor.tabSize": 2,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html",
-    "json",
-    "astro"
-  ],
   "npm.packageManager": "pnpm",
   "cSpell.words": [
     "clsx",

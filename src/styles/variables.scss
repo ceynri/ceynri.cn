@@ -132,7 +132,7 @@ $accent-color-dark: #0000ff;
 
 :root {
   --text-shadow-size: 0.1em;
-
+  
   &[data-scheme='dark'] {
     --text-shadow-size: 0.25em;
   }

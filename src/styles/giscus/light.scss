@@ -5,7 +5,7 @@
 
 main {
   @include light-theme;
-  
+
   --color-canvas-subtle: var(--prose-bg-color);
   --color-canvas-default: var(--prose-bg-color);
   --color-canvas-inset: var(--global-bg-color);

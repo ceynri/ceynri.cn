@@ -11,7 +11,7 @@ export function createCssEndpoint(cssContent: string): APIRoute {
       headers: {
         // 基本内容类型
         'Content-Type': 'text/css',
-        // 缓存控制
+        // 缓存控制（1 个月）
         'Cache-Control': 'public, max-age=2592000',
         // CORS 设置 - 允许任何源访问此 CSS (giscus 需要使用到)
         'Access-Control-Allow-Origin': '*',
