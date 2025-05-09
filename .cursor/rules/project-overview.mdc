@@ -3,13 +3,15 @@ description: When it is necessary to know the overall structure of the project o
 globs: 
 alwaysApply: false
 ---
-# 项目总览与重构规划
+# 项目总览
 
 ## 项目简介
 
-本项目为个人博客网站，主要面相 PC Web 端，同时兼容移动端浏览访问。
+本项目为个人博客网站，主要面向 PC Web 端，同时兼容移动端浏览访问。
 
-原始版本基于 Gridsome（Vue 生态）+ SASS，现正重构为 Astro + tailwindcss + SASS。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
+原始版本基于 Gridsome（Vue 生态）+ SASS，现正重构为 Astro + TailwindCSS + SASS。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
+
+更多介绍参见 [README.md](mdc:README.md)
 
 ## 项目环境
 
@@ -24,42 +26,8 @@ alwaysApply: false
   - `pages/`：页面文件，遵循 Astro file-based routing
   - `styles/`：全局样式、变量
   - `utils/`：工具函数
-  - `content/`：内容源（如 MD/MDX 文件、内容配置）
   - `assets/`：静态资源（图片、icon 等）
+- `content/`：内容源（如 MD/MDX 文件、内容配置）
 - `public/`：静态资源（favicon、robots.txt 等）
 - `old/`：原 Gridsome 项目代码，仅供参考，不做修改
 - `.cursor/rules/`：AI 编程规则与项目文档
-
-## 重构目标
-
-1. **框架切换**：由 Gridsome 迁移到 Astro，保留原有页面结构和主要 UI 风格
-2. **样式优化**：用 TailwindCSS 内联 class 替换大部分 SASS，减少冗余 class，SASS 部分仅保留通用样式；减少使用 em，使用 rem 代替
-
-## 当前进度
-
-- 已完成整体 Astro 项目结构搭建
-- 已迁移 blog 列表页、侧边栏、blog 内容页的大体结构
-- 细化已迁移页面的样式细节，确保 UI 还原度
-- 已实现部分 Tailwind 公共样式
-- 已添加 AI 编程环境（Cursor 规则）
-- 依赖已升级至 Astro 5.x 及相关插件最新版
-- 迁移并实现 About、Archive 页面
-- 更细致的 eslint format 规则
-
-## 待办事项
-
-- 持续优化 Tailwind class 使用，逐步移除冗余 SCSS，减少自定义的命名 class
-- 按需补充/优化 Cursor 规则，提升 AI 编程体验
-- 在文章底部使用 giscus 组件支持评论
-- 支持定位到文章的指定标题
-- 支持文章目录
-
-## 参考文档
-
-- [Astro 官方文档](mdc:https:/docs.astro.build)
-- [Astro v5 升级指南](mdc:https:/docs.astro.build/en/guides/upgrade-to/v5)
-- [Cursor Astro+Tailwind 规则](mdc:https:/cursor.directory/astro-tailwind-cursor-rules)
-
----
-
-如需细化某一部分的开发计划或补充更多上下文，请随时补充！
