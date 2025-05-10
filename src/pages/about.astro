@@ -42,24 +42,32 @@ const { Content } = await render(post);
     margin-top: 0;
   }
 
+  // 荧光划线效果
   a {
+    z-index: 1;
     position: relative;
 
+    $overflow-width: 1px;
+    $max-width: calc(100% + 2 * $overflow-width);
+
+    // TODO: 确认在移动端以及其他浏览器中是否正常显示
     &:before {
       content: '';
       display: block;
       position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 38.2%;
-      height: 2px;
+      z-index: -1;
+      left: -$overflow-width;
+      bottom: 0.1em;
+      width: 1.5em;
+      max-width: $max-width;
+      height: 0.5em;
       border-radius: 1px;
       background-color: var(--accent-color);
       transition: background-color 0.3s ease-out, width 0.3s;
     }
 
     &:hover:before {
-      width: 100%;
+      width: $max-width;
     }
   }
 }
