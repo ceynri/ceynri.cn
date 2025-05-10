@@ -3,21 +3,19 @@
 
 @import url("//giscus.app/themes/light.css");
 
-main {
+:root {
   @include light-theme;
+}
 
-  --color-canvas-subtle: var(--prose-bg-color);
-  --color-canvas-default: var(--prose-bg-color);
-  --color-canvas-inset: var(--global-bg-color);
-
-  --color-fg-default: var(--text-color);
-  --color-fg-muted: var(--text-secondary-color);
-
-  --color-accent-fg: var(--accent-color);
-
-  --color-border-muted: var(--border-color);
-  /* --accent-color 衍生 */
-  --color-accent-emphasis: #ffcc3e;
-  --color-accent-muted: #ffcc3e;
-  --color-accent-subtle: #fffaee;
+main {
+  // 评论点赞按钮边框色
+  --color-accent-emphasis: #{rgba($accent-color-light, 0.5)};
+  // Owner 标识边框色
+  --color-accent-muted: #{rgba($accent-color-light, 0.3)};
+  // 评论已经点过赞按钮背景色
+  --color-accent-subtle: #{rgba($accent-color-light, 0.1)};
+  // 评论点赞按钮 hover 状态背景色
+  --color-social-reaction-bg-hover: #{rgba($accent-color-light, 0.3)};
+  // 评论已经点过赞的按钮 hover 状态背景色
+  --color-social-reaction-bg-reacted-hover: #{rgba($accent-color-light, 0.5)};
 }

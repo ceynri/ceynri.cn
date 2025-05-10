@@ -1,13 +1,39 @@
 @use "../variables.scss";
 
 main {
+  // 各种边框色
   --color-border-default: transparent;
   --color-segmented-control-button-selected-border: transparent;
   --color-btn-primary-border: transparent;
   --color-btn-primary-disabled-border: transparent;
   --color-btn-border: transparent;
+
+  // 背景正常色
+  --color-canvas-default: var(--prose-bg-color);
+  // 背景次要色
+  --color-canvas-subtle: var(--prose-bg-color);
+  // 内部框背景色
+  --color-canvas-inset: var(--global-bg-color);
+  // 弹窗背景色
+  --color-canvas-overlay: var(--prose-bg-color);
+
+  // 正文颜色
+  --color-fg-default: var(--text-color);
+  // 正文次要颜色
+  --color-fg-muted: var(--text-secondary-color);
+
+  // 强调色（点赞按钮文字颜色）
+  --color-accent-fg: var(--accent-color);
+  // 回复评论头像连线色
+  --color-border-muted: var(--border-color);
 }
 
+// 头部栏
 .gsc-header {
   @apply max-sm:p-4;
+}
+
+// 评论点赞按钮弹窗
+.gsc-reactions-popover {
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.05));
 }

@@ -10,7 +10,7 @@ $jade-800: #24292e;
 $jade-900: #1a1e22;
 $jade-950: #101216;
 
-$accent-color-light: #ffbb00;
+$accent-color-light: #ffcc6e;
 $accent-color-dark: #0000ff;
 
 // 亮色主题 mixin
@@ -132,7 +132,7 @@ $accent-color-dark: #0000ff;
 
 :root {
   --text-shadow-size: 0.1em;
-  
+
   &[data-scheme='dark'] {
     --text-shadow-size: 0.25em;
   }
