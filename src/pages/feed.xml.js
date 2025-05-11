@@ -4,13 +4,15 @@ import MarkdownIt from 'markdown-it';
 import sanitizeHtml from 'sanitize-html';
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
+import { getSortedPosts, publishedPostFilter } from '~/utils';
 
 const parser = new MarkdownIt({
   html: true,
 });
 
 export async function GET(context) {
-  const posts = await getCollection('blog');
+  const rawPosts = await getCollection('blog', publishedPostFilter);
+  const posts = getSortedPosts(rawPosts);
   const items = await Promise.all(posts.map(async (post) => {
     return {
       title: post.data.title,

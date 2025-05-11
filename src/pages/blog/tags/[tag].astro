@@ -1,30 +1,23 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 import { getCollection } from 'astro:content';
 
 import { BaseHead, PostCard } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
+import { getSortedPosts, groupPosts, publishedPostFilter } from '~/utils';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || data.published);
-
-  // 先按标签分组文章
-  const postsByTag = posts.reduce((acc, post) => {
-    post.data.tags?.forEach((tag) => {
-      if (!acc[tag]) {
-        acc[tag] = [];
-      }
-      acc[tag].push(post);
-    });
-    return acc;
-  }, {} as Record<string, typeof posts>);
+  const posts = await getCollection('blog', publishedPostFilter);
+  const postsByTag = groupPosts(posts, (post: CollectionEntry<'blog'>) => post.data.tags);
 
   // 为每个标签创建页面
   return Object.entries(postsByTag).map(([tag, tagPosts]) => ({
     params: { tag },
     props: {
       tag,
-      posts: tagPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+      posts: getSortedPosts(tagPosts),
     },
   }));
 }

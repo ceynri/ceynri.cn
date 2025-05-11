@@ -7,10 +7,11 @@ import { getCollection } from 'astro:content';
 import { BaseHead, Pagination, PostCard } from '~/components';
 import { BLOG_POST_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
+import { getSortedPosts, publishedPostFilter } from '~/utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const rawPosts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || data.published));
-  const posts = rawPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const rawPosts = await getCollection('blog', publishedPostFilter);
+  const posts = getSortedPosts(rawPosts);
 
   return paginate(posts, { pageSize: BLOG_POST_PER_PAGE });
 }

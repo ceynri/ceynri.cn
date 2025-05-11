@@ -4,25 +4,19 @@ import { getCollection } from 'astro:content';
 import { BaseHead, FormattedDate, PostTags } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
+import { getSortedPosts, groupPosts, publishedPostFilter } from '~/utils';
 
 // 获取所有已发布的博客文章
-const allPosts = await getCollection('blog', ({ data }) => import.meta.env.DEV || data.published);
+const allPosts = await getCollection('blog', publishedPostFilter);
 
-// 按年份分组文章
-const postsByYear = allPosts.reduce((acc, post) => {
-  const year = post.data.date.getFullYear();
-  if (!acc[year]) {
-    acc[year] = [];
-  }
-  acc[year].push(post);
-  return acc;
-}, {} as Record<string, typeof allPosts>);
+// 按年份分组
+const postsByYear = groupPosts(allPosts, (post) => post.data.date.getFullYear());
 
 // 转换为排序后的数组格式
 const postGroupList = Object.entries(postsByYear)
   .map(([year, posts]) => ({
     year,
-    list: posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    list: getSortedPosts(posts),
   }))
   .sort((a, b) => Number(b.year) - Number(a.year));
 
@@ -73,9 +67,6 @@ const tags = Array.from(tagMap.entries())
                     </h2>
                     <div class="text-sm text-[var(--text-secondary-color)]">
                       <FormattedDate date={post.data.date} />
-                      {post.data.tags?.length > 0 && post.data.tags.map((tag) => (
-                        <span class="ml-2"><span class="mr-1">#</span>{tag}</span>
-                      ))}
                     </div>
                   </a>
                 </section>
