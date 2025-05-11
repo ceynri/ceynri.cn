@@ -31,3 +31,5 @@ alwaysApply: false
 - `public/`：静态资源（favicon、robots.txt 等）
 - `old/`：原 Gridsome 项目代码，仅供参考，不做修改
 - `.cursor/rules/`：AI 编程规则与项目文档
+- [README.md](mdc:README.md) 项目自述
+- [TASK.md](mdc:TASK.md) 任务列表（管理开发任务进度与步骤）
