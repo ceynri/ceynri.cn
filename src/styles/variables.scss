@@ -138,16 +138,10 @@ $accent-color-dark: #0000ff;
   }
 }
 
-// TODO: 确认是否还需要断点变量
-// mobile
 $sm: 640px;
-// mini-tablet/mobile
 $md: 768px;
-// tablet
 $lg: 1024px;
-// laptop
 $xl: 1280px;
-// desktop
 $xxl: 1536px;
 
 :root {

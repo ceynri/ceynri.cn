@@ -15,7 +15,6 @@ import { cn } from '~/utils';
 </button>
 
 <script>
-// TODO: 确认该script 的执行时机，是否会出现执行时 DOM 元素还不存在的情况
 const buttons = document.querySelectorAll('.theme-toggle-button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
