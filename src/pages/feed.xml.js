@@ -43,5 +43,6 @@ export async function GET(context) {
     site: context.site,
     items,
     customData: '<language>zh-CN</language>',
+    stylesheet: '/rss/style.xsl',
   });
 }
