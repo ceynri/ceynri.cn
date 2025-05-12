@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { Feather } from 'lucide-astro';
 
 import avatar from '~/assets/images/avatar.jpg';
 import { cn } from '~/utils';
@@ -11,7 +12,7 @@ import ThemeToggleButton from './theme-toggle-button.astro';
 <header class={cn('w-full p-4 flex items-center justify-between', Astro.props.class)}>
   <!-- 左侧头像 -->
   <a
-    href="/blog/"
+    href="/"
     class="flex rounded-full overflow-hidden"
   >
     <Image
@@ -23,6 +24,14 @@ import ThemeToggleButton from './theme-toggle-button.astro';
   </a>
   <!-- 右侧按钮 -->
   <div class="flex items-center gap-2">
+    <a
+      href="/blog/"
+      class="size-10 p-2 flex items-center justify-center text-[var(--navbar-text-color)] opacity-50 hover:opacity-100 hover:text-[var(--accent-color)] transition-[transform,opacity,color]"
+      aria-label="返回博客"
+      title="返回博客"
+    >
+      <Feather class="size-full" />
+    </a>
     <ThemeToggleButton class="size-10 p-2" />
     <MenuButton class="size-10 p-2" />
   </div>
