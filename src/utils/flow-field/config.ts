@@ -9,13 +9,13 @@ export const BG_COLOR = '#000000';
  * 默认配置选项
  */
 export const defaultOptions = {
-  color1: '#ffffff',
-  color2: '#0799f2',
-  color3: '#45217c',
+  color1: '#d9e0e8',
+  color2: '#808890',
+  color3: '#24292e',
   maxLife: 15,
   nums: 600,
   size: 2,
-  noiseScale: 800,
+  noiseScale: 1500,
   colorMode: 'normal',
   direction: 'auto',
 } as const satisfies AppOptions;

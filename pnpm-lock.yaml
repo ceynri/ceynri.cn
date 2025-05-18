@@ -66,6 +66,9 @@ importers:
       sharp:
         specifier: ^0.34.1
         version: 0.34.1
+      simple-icons-astro:
+        specifier: ^14.14.0
+        version: 14.14.0(astro@5.7.12(@types/node@22.15.17)(jiti@1.21.7)(rollup@4.40.2)(sass@1.87.0)(typescript@5.8.3)(yaml@2.7.1))
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
@@ -3238,6 +3241,11 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  simple-icons-astro@14.14.0:
+    resolution: {integrity: sha512-cRtniyemUq9e2iemmZugmUHGOp/U4AzY0MdjQ+N5JQ8MhvDY3LI6TS8pNC8bx2CxRQFPd47TjFhqgsiCCOMqCg==}
+    peerDependencies:
+      astro: '>=2.7.1'
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -7716,6 +7724,10 @@ snapshots:
       side-channel-weakmap: 1.0.2
 
   signal-exit@4.1.0: {}
+
+  simple-icons-astro@14.14.0(astro@5.7.12(@types/node@22.15.17)(jiti@1.21.7)(rollup@4.40.2)(sass@1.87.0)(typescript@5.8.3)(yaml@2.7.1)):
+    dependencies:
+      astro: 5.7.12(@types/node@22.15.17)(jiti@1.21.7)(rollup@4.40.2)(sass@1.87.0)(typescript@5.8.3)(yaml@2.7.1)
 
   simple-swizzle@0.2.2:
     dependencies:

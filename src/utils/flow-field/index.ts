@@ -5,6 +5,7 @@ import { sketch } from './sketch';
 /**
  * 初始化流场背景
  * @param containerId 容器元素的ID
+ * @returns P5实例
  */
 export function initFlowField(containerId: string) {
   const container = document.getElementById(containerId);

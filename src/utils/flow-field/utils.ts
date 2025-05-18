@@ -30,10 +30,9 @@ function randomFromArray<T>(arr: T[]): T {
 export function generateRandomOptions(): AppOptions {
   return {
     ...defaultOptions,
-    // TODO: 随机颜色？
-    // color1: getRandomHexColor(),
-    // color2: getRandomHexColor(),
-    // color3: getRandomHexColor(),
+    color1: getRandomHexColor(),
+    color2: getRandomHexColor(),
+    color3: getRandomHexColor(),
     maxLife: random(range.maxLife[0], range.maxLife[1]),
     nums: randomInt(range.nums[0], range.nums[1]),
     size: random(range.size[0], range.size[1]),

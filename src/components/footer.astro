@@ -2,19 +2,19 @@
 import { FILING } from '~/consts';
 import { cn } from '~/utils';
 
-const currentYear = new Date().getFullYear();
+import CurrentYear from './current-year.astro';
 ---
 
 <footer class={cn('my-prose opacity-50', Astro.props.class)}>
   <div class="text-xs leading-[1.75]">
-    Ceynri © 2020-{currentYear}
+    Ceynri © 2020-<CurrentYear />
   </div>
-  {FILING && (
-    <a
-      href={FILING.link}
-      class="block text-xs leading-[1.75]"
-    >
-      {FILING.text}
-    </a>
-  )}
+  <a
+    href={FILING.link}
+    class="block text-xs leading-[1.75]"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {FILING.text}
+  </a>
 </footer>

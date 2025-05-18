@@ -26,13 +26,10 @@ export default {
         'prose': 'var(--prose-padding)',
         'prose-half': 'calc(var(--prose-padding) / 2)',
       },
-      boxShadow: {
-        card: '0 2px 4px rgba(0,0,0,0.25)',
-      },
       textShadow: {
-        sm: '0 1px 2px rgba(0,0,0,0.5)',
-        DEFAULT: '0 2px 4px rgba(0,0,0,0.5)',
-        lg: '0 3px 8px rgba(0,0,0,0.5)',
+        sm: '0 1px 2px rgba(0, 0, 0, 0.5)',
+        DEFAULT: '0 2px 4px rgba(0, 0, 0, 0.5)',
+        lg: '0 3px 8px rgba(0, 0, 0, 0.5)',
       },
       transitionDuration: {
         fast: '0.1s',

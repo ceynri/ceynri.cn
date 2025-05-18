@@ -32,6 +32,14 @@ alwaysApply: true
   ---
   <div>DOM</div>
   ```
+- 自定义组件组合外部传入的 class 时，使用 cn 方法来组合
+  ```astro
+  ---
+  import { cn } from '~/utils';
+  ---
+
+  <div class={cn('foo', Astro.props.class)}></div>
+  ```
 
 ## 样式
 

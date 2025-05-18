@@ -1,0 +1,25 @@
+---
+import { cn } from '~/utils';
+
+interface Props {
+  /**
+   * 默认显示的文本，在客户端JS执行前显示
+   */
+  fallback?: string;
+  /**
+   * 附加的class
+   */
+  class?: string;
+}
+
+const { fallback = 'now' } = Astro.props;
+---
+
+<span class={cn('current-year', Astro.props.class)}>{fallback}</span>
+
+<script>
+  const currentYearElements = document.querySelectorAll('.current-year');
+  currentYearElements.forEach((element) => {
+    element.textContent = new Date().getFullYear().toString();
+  });
+</script>

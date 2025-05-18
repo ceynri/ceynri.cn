@@ -1,18 +1,10 @@
-<div id="flow-field-container"></div>
-
-<style>
-  #flow-field-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-</style>
+<div
+  id="flow-field-container"
+  class="fixed top-0 left-0 w-screen h-screen"
+></div>
 
 <script>
-// 注意：这里不能通过 ~/utils 导入，因为 p5 是 commonJS 模块，不支持在服务端环境被解析构建
+// 注意：这里不能通过 ~/utils 导入，因为 p5 不支持在服务端环境被解析构建
 import { initFlowField } from '~/utils/flow-field';
 
 initFlowField('flow-field-container');

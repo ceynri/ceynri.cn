@@ -2,13 +2,12 @@ import type P5 from 'p5';
 
 import type { AppOptions } from './types';
 
-import { BG_COLOR } from './config';
+import { BG_COLOR, defaultOptions } from './config';
 import { ParticleSystem } from './particle-system';
 import { generateRandomOptions } from './utils';
 
 export function sketch(p5: P5) {
   let particleSystem: ParticleSystem;
-  const options: AppOptions = generateRandomOptions();
   let bgColor: P5.Color;
 
   let container: HTMLElement | null;
@@ -29,7 +28,7 @@ export function sketch(p5: P5) {
     p5.smooth();
     p5.noStroke();
 
-    particleSystem = new ParticleSystem(p5, options);
+    particleSystem = new ParticleSystem(p5, defaultOptions);
 
     bgColor = p5.color(BG_COLOR);
     p5.background(bgColor);
@@ -47,6 +46,12 @@ export function sketch(p5: P5) {
       p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
     }
     particleSystem.initParticles();
+    p5.background(bgColor);
+  };
+
+  window.refreshFlowField = () => {
+    const options: AppOptions = generateRandomOptions();
+    particleSystem.updateOptions(options);
     p5.background(bgColor);
   };
 }
