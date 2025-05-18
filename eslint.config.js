@@ -9,6 +9,7 @@ export default antfu(
         'style/jsx-first-prop-new-line': ['error', 'multiprop'],
         'perfectionist/sort-imports': ['error', {}],
         'curly': ['error', 'all'],
+        'ts/member-ordering': 'error',
       },
     },
     astro: {

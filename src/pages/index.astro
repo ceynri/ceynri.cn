@@ -1,7 +1,6 @@
 ---
-import { BaseHead } from '~/components';
+import { BaseHead, FlowFieldBackground } from '~/components';
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
-import { AsideLayout } from '~/layouts';
 ---
 
 <!doctype html>
@@ -13,6 +12,20 @@ import { AsideLayout } from '~/layouts';
     />
   </head>
   <body>
-    <AsideLayout />
+    <FlowFieldBackground />
+
+    <main class="main">
+      <!-- TODO: 首页内容 -->
+    </main>
+
+    <style lang="scss">
+      .main {
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+        color: white;
+        padding: 0 1rem;
+      }
+    </style>
   </body>
 </html>

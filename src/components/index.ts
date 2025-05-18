@@ -3,6 +3,7 @@ export { default as BaseHead } from './base-head.astro';
 export { default as BlogHeader } from './blog-header.astro';
 export { default as BlogPost } from './blog-post.astro';
 export { default as Comments } from './comments.astro';
+export { default as FlowFieldBackground } from './flow-field-background.astro';
 export { default as Footer } from './footer.astro';
 export { default as FormattedDate } from './formatted-date.astro';
 export { default as MenuButton } from './menu-button.astro';
