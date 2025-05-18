@@ -50,7 +50,7 @@
   }
 
   mark {
-    color: #000000;
+    color: var(--title-color);
     background-color: var(--accent-color);
     transition: background-color 0.3s ease-out;
   }

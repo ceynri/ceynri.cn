@@ -8,7 +8,7 @@ import { FormattedDate } from '~/components';
 const { post } = Astro.props as { post: CollectionEntry<'blog'> };
 ---
 
-<div class="mb-8 rounded-2xl overflow-hidden bg-[var(--prose-bg-color)] transition-[background-color,box-shadow,transform] sm:hover:shadow-2xl sm:hover:-translate-y-1">
+<div class="mb-8 rounded-2xl overflow-hidden bg-[var(--prose-bg-color)] transition-[background-color,transform] sm:hover:-translate-y-1">
   <a href={`/blog/${post.id}/`}>
     {post.data.cover_image && (
       <Image

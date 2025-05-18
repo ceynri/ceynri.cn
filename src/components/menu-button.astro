@@ -59,42 +59,40 @@ import { cn } from '~/utils';
 </style>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  const menuBtn = document.querySelector('.menu-btn');
-  const menuCard = document.querySelector('.menu-card');
-  const menuMask = document.querySelector('.menu-mask');
+const menuBtn = document.querySelector('.menu-btn');
+const menuCard = document.querySelector('.menu-card');
+const menuMask = document.querySelector('.menu-mask');
 
-  function setMenuOpen(open: boolean) {
-    if (!menuCard || !menuMask) {
-      return;
-    }
-    if (open) {
-      menuCard.classList.add('active');
-      menuMask.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    else {
-      menuCard.classList.remove('active');
-      menuMask.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+function setMenuOpen(open: boolean) {
+  if (!menuCard || !menuMask) {
+    return;
   }
+  if (open) {
+    menuCard.classList.add('active');
+    menuMask.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  else {
+    menuCard.classList.remove('active');
+    menuMask.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
 
-  menuBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!menuCard || !menuMask) {
-      return;
-    }
-    const isOpen = !menuCard.classList.contains('active');
-    setMenuOpen(isOpen);
-  });
+menuBtn?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (!menuCard || !menuMask) {
+    return;
+  }
+  const isOpen = !menuCard.classList.contains('active');
+  setMenuOpen(isOpen);
+});
 
-  menuMask?.addEventListener('click', () => setMenuOpen(false));
+menuMask?.addEventListener('click', () => setMenuOpen(false));
 
-  menuCard?.addEventListener('click', (e) => {
-    if (e.target instanceof HTMLAnchorElement) {
-      setMenuOpen(false);
-    }
-  });
+menuCard?.addEventListener('click', (e) => {
+  if (e.target instanceof HTMLAnchorElement) {
+    setMenuOpen(false);
+  }
 });
 </script>
