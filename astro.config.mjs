@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import rehypeExternalLinks from 'rehype-external-links';
+import EntryShakingPlugin from 'vite-plugin-entry-shaking';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,6 +35,15 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    plugins: [
+      // issue: https://github.com/withastro/astro/issues/12793
+      EntryShakingPlugin({
+        targets: [
+          'lucide-astro',
+          'simple-icons-astro',
+        ],
+      }),
+    ],
   },
   prefetch: true,
 });

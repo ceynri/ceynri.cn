@@ -1,5 +1,4 @@
-import { Archive, Feather, Github, Home, Info, Mail, Rss } from 'lucide-astro';
-import { X } from 'simple-icons-astro';
+import { Archive, Feather, Github, Home, Info, Mail, Rss, X } from '~/components/icons';
 
 /** 站点信息 */
 export const SITE_TITLE = '山风的小角落';
