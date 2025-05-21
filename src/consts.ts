@@ -82,8 +82,8 @@ export const HOME_ENTRY_ITEMS = [
   NAV_ITEM_MAP.about,
 ] as const;
 
-/** 首页顶部外链列表 */
-export const HOME_TOP_NAV_ITEMS = [
+/** 首页社交外链列表 */
+export const HOME_SOCIAL_ITEMS = [
   NAV_ITEM_MAP.github,
   NAV_ITEM_MAP.twitter,
   NAV_ITEM_MAP.email,

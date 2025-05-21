@@ -24,7 +24,7 @@ const { title, description, image } = Astro.props;
 
     <script>
       // 外链点击事件上报 umami
-      const name = 'outbound-link-click';
+      const name = 'outbound-link';
       document.querySelectorAll('a').forEach((a) => {
         if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
           a.setAttribute('data-umami-event', name);

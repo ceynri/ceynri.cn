@@ -21,6 +21,9 @@ buttons.forEach((button) => {
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-scheme', newTheme);
     localStorage.setItem('theme', newTheme);
+    window.umami.track('theme-toggle-button', {
+      theme: newTheme,
+    });
   });
 });
 </script>

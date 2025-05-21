@@ -1,6 +1,6 @@
+export { default as AsideMobile } from './aside-mobile.astro';
 export { default as Aside } from './aside.astro';
 export { default as BaseHead } from './base-head.astro';
-export { default as BlogHeader } from './blog-header.astro';
 export { default as BlogPost } from './blog-post.astro';
 export { default as Comments } from './comments.astro';
 export { default as CurrentYear } from './current-year.astro';

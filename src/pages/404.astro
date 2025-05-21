@@ -22,4 +22,9 @@ import { AsideLayout } from '~/layouts';
       </div>
     </main>
   </a>
+  <script is:inline>
+    window.umami.track('404', {
+      url: window.location.href,
+    });
+  </script>
 </AsideLayout>

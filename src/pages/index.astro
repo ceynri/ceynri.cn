@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import avatar from '~/assets/images/avatar.jpg';
 import { CurrentYear, FlowFieldBackground } from '~/components';
 import { RefreshCw } from '~/components/icons';
-import { FILING, HOME_ENTRY_ITEMS, HOME_TOP_NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
+import { FILING, HOME_ENTRY_ITEMS, HOME_SOCIAL_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import BaseLayout from '~/layouts/base-layout.astro';
 ---
 
@@ -51,7 +51,7 @@ import BaseLayout from '~/layouts/base-layout.astro';
       <div class="absolute z-[1] top-0 right-0 flex items-start justify-end">
         <!-- 社交外链栏 -->
         <div class="flex gap-6">
-          {HOME_TOP_NAV_ITEMS.map((item) => (
+          {HOME_SOCIAL_ITEMS.map((item) => (
             <a
               href={item.href}
               class="flex text-white opacity-60 hover:opacity-100 active:opacity-50 transition-opacity"
@@ -70,6 +70,7 @@ import BaseLayout from '~/layouts/base-layout.astro';
           id="refresh-flow-field"
           class="size-[40px] group cursor-pointer active:opacity-50 transition-opacity"
           title="刷新背景流场效果"
+          data-umami-event="refresh-flow-field"
         >
           <Image
             alt="site owner avatar"
