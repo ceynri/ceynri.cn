@@ -1,34 +1,25 @@
 ---
-import { BaseHead } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead
-      title={`404 - ${SITE_TITLE}`}
-      description="页面未找到"
-    />
-  </head>
-  <body>
-    <AsideLayout>
-      <a href="/">
-        <main class="prose-card">
-          <div class="flex flex-col items-center justify-center h-96">
-            <h1 class="text-3xl mb-2 font-[700]">
-              404
-              <span class="ml-1 dark:hidden">🧭</span>
-              <span class="ml-1 hidden dark:inline">🥱</span>
-            </h1>
-            <p class="text-xl">
-              <span class="dark:hidden">Have a nice day!</span>
-              <span class="hidden dark:block">Have a good night.</span>
-            </p>
-          </div>
-        </main>
-      </a>
-    </AsideLayout>
-  </body>
-</html>
+<AsideLayout
+  title={`404 - ${SITE_TITLE}`}
+  description="页面未找到"
+>
+  <a href="/">
+    <main class="prose-card">
+      <div class="flex flex-col items-center justify-center h-96">
+        <h1 class="text-3xl mb-2 font-[700]">
+          404
+          <span class="ml-1 dark:hidden">🧭</span>
+          <span class="ml-1 hidden dark:inline">🥱</span>
+        </h1>
+        <p class="text-xl">
+          <span class="dark:hidden">Have a nice day!</span>
+          <span class="hidden dark:block">Have a good night.</span>
+        </p>
+      </div>
+    </main>
+  </a>
+</AsideLayout>

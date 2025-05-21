@@ -2,18 +2,27 @@
 import { Aside, BlogHeader, Footer } from '~/components';
 import { cn } from '~/utils';
 
+import BaseLayout from './base-layout.astro';
+
 interface Props {
   mainClass?: string;
+  title: string;
+  description?: string;
 }
 
 const props = Astro.props as Props;
 ---
 
-<div class="mx-auto flex max-md:flex-col px-4 max-sm:px-0 relative max-w-[1080px] min-h-screen">
-  <Aside class="sticky top-0 max-md:hidden" />
-  <BlogHeader class="md:hidden" />
-  <main class={cn(`m-0 pt-16 max-md:pt-0 px-4 flex-1`, props.mainClass)}>
-    <slot />
-    <Footer class="max-sm:text-center" />
-  </main>
-</div>
+<BaseLayout
+  title={props.title}
+  description={props.description}
+>
+  <div class="mx-auto flex max-md:flex-col px-4 max-sm:px-0 relative max-w-[1080px] min-h-screen">
+    <Aside class="sticky top-0 max-md:hidden" />
+    <BlogHeader class="md:hidden" />
+    <main class={cn(`m-0 pt-16 max-md:pt-0 px-4 flex-1`, props.mainClass)}>
+      <slot />
+      <Footer class="max-sm:text-center" />
+    </main>
+  </div>
+</BaseLayout>

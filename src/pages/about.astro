@@ -1,7 +1,6 @@
 ---
 import { getEntry, render } from 'astro:content';
 
-import { BaseHead } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 
@@ -12,26 +11,19 @@ if (!post) {
 const { Content } = await render(post);
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead
-      title={`关于 - ${SITE_TITLE}`}
-      description="关于本站点以及站长的介绍"
-    />
-  </head>
-  <body>
-    <AsideLayout mainClass="max-md:px-0">
-      {post && (
-        <main class="article typography prose-card max-sm:rounded-none">
-          <article class="max-sm:mt-8">
-            <Content />
-          </article>
-        </main>
-      )}
-    </AsideLayout>
-  </body>
-</html>
+<AsideLayout
+  title={`关于 - ${SITE_TITLE}`}
+  description="关于本站点以及站长的介绍"
+  mainClass="max-md:px-0"
+>
+  {post && (
+    <main class="article typography prose-card max-sm:rounded-none">
+      <article class="max-sm:mt-8">
+        <Content />
+      </article>
+    </main>
+  )}
+</AsideLayout>
 
 <style
   lang="scss"

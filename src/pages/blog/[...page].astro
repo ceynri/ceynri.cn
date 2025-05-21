@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 
 import { getCollection } from 'astro:content';
 
-import { BaseHead, Pagination, PostCard } from '~/components';
+import { Pagination, PostCard } from '~/components';
 import { BLOG_POST_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 import { getSortedPosts, publishedPostFilter } from '~/utils';
@@ -24,21 +24,12 @@ const { page } = Astro.props;
 const pageTitle = page.currentPage === 1 ? SITE_TITLE : `${SITE_TITLE} - 第${page.currentPage}页`;
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead
-      title={pageTitle}
-      description={SITE_DESCRIPTION}
-    />
-  </head>
-  <body>
-    <AsideLayout>
-      {page.data.map((post) => (
-        <PostCard post={post} />
-      ))}
-
-      <Pagination page={page} />
-    </AsideLayout>
-  </body>
-</html>
+<AsideLayout
+  title={pageTitle}
+  description={SITE_DESCRIPTION}
+>
+  {page.data.map((post) => (
+    <PostCard post={post} />
+  ))}
+  <Pagination page={page} />
+</AsideLayout>

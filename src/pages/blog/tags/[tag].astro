@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 
 import { getCollection } from 'astro:content';
 
-import { BaseHead, PostCard } from '~/components';
+import { PostCard } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 import { getSortedPosts, groupPosts, publishedPostFilter } from '~/utils';
@@ -25,24 +25,15 @@ export async function getStaticPaths() {
 const { tag, posts } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead
-      title={`#${tag} - ${SITE_TITLE}`}
-      description={`标签为 ${tag} 的所有文章`}
-    />
-  </head>
-  <body>
-    <AsideLayout>
-      <div class="p-prose bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl mb-8">
-        <h1 class="text-4xl font-[600] mb-4 text-[var(--title-color)]"><span class="sparkle-text">#</span> {tag.toUpperCase()}</h1>
-        <p class="text-[var(--text-secondary-color)]">{posts.length} {posts.length > 1 ? 'POSTS' : 'POST'}</p>
-      </div>
-
-      {posts.map((post) => (
-        <PostCard post={post} />
-      ))}
-    </AsideLayout>
-  </body>
-</html>
+<AsideLayout
+  title={`#${tag} - ${SITE_TITLE}`}
+  description={`标签为 ${tag} 的所有文章`}
+>
+  <div class="p-prose bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl mb-8">
+    <h1 class="text-4xl font-[600] mb-4 text-[var(--title-color)]"><span class="sparkle-text">#</span> {tag.toUpperCase()}</h1>
+    <p class="text-[var(--text-secondary-color)]">{posts.length} {posts.length > 1 ? 'POSTS' : 'POST'}</p>
+  </div>
+  {posts.map((post) => (
+    <PostCard post={post} />
+  ))}
+</AsideLayout>

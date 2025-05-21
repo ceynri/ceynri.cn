@@ -1,7 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-import { BaseHead, BlogPost, Comments, Footer, TopNavbar } from '~/components';
+import { BlogPost, Comments, Footer, TopNavbar } from '~/components';
+
+import BaseLayout from './base-layout.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -11,27 +13,17 @@ const { post } = Astro.props as Props;
 const { title, description, cover_image } = post.data;
 ---
 
-<html lang="zh-CN">
-  <head>
-    <!-- TODO: 处理giscus的标题映射问题后，改成 `${title} - ${SITE_TITLE}` -->
-    <BaseHead
-      title={title}
-      description={description ?? ''}
-      image={cover_image?.src ?? ''}
-    />
-  </head>
-
-  <body>
-    <TopNavbar />
-
-    <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">
-      <div class="mx-auto max-w-[50rem]">
-        <BlogPost post={post} />
-
-        <Comments class="mt-12" />
-
-        <Footer class="text-center" />
-      </div>
+<BaseLayout
+  title={title}
+  description={description}
+  image={cover_image?.src}
+>
+  <TopNavbar />
+  <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">
+    <div class="mx-auto max-w-[50rem]">
+      <BlogPost post={post} />
+      <Comments class="mt-12" />
+      <Footer class="text-center" />
     </div>
-  </body>
-</html>
+  </div>
+</BaseLayout>

@@ -1,58 +1,32 @@
 ---
+import { SITE_DESCRIPTION } from '~/consts';
 import '~/styles/index.scss';
 
 interface Props {
   title: string;
-  description: string;
+  postTitle?: string;
+  description?: string;
   image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const {
+  title,
+  postTitle,
+  description = SITE_DESCRIPTION,
+  image,
+} = Astro.props;
 
-const { title, description, image } = Astro.props;
+const pageTitle = postTitle ? `${postTitle} - ${title}` : title;
+
 // TODO: 默认图片
-const imageURL = new URL(image || '/favicon.png', Astro.site);
+const pageImage = new URL(image || '/favicon.png', Astro.site);
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta
   name="viewport"
   content="width=device-width,initial-scale=1"
 />
-<!-- TODO: svg icon -->
-<link
-  rel="icon"
-  type="image/png"
-  href="/favicon.png"
-/>
-<meta
-  name="generator"
-  content={Astro.generator}
-/>
-
-<!-- Font preloads -->
-<link
-  rel="preconnect"
-  href="https://fonts.googleapis.com"
-/>
-<link
-  rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin
-/>
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap"
-  rel="stylesheet"
-/>
-
-<!-- Canonical URL -->
-<link
-  rel="canonical"
-  href={canonicalURL}
-/>
-
-<!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta
   name="title"
@@ -62,6 +36,12 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
   name="description"
   content={description}
 />
+<!-- TODO: svg icon -->
+<!-- <link
+  rel="icon"
+  type="image/svg+xml"
+  href="/favicon.svg"
+/> -->
 <link
   rel="icon"
   type="image/png"
@@ -72,10 +52,20 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
   href="/favicon.png"
 />
 
-<!-- Open Graph / Facebook -->
+<!-- Font preloads -->
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- Open Graph -->
 <meta
   property="og:type"
-  content="website"
+  content={postTitle ? 'article' : 'website'}
 />
 <meta
   property="og:url"
@@ -83,7 +73,7 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
 />
 <meta
   property="og:title"
-  content={title}
+  content={pageTitle}
 />
 <meta
   property="og:description"
@@ -91,7 +81,7 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
 />
 <meta
   property="og:image"
-  content={imageURL}
+  content={pageImage}
 />
 
 <!-- Twitter -->
@@ -105,7 +95,7 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
 />
 <meta
   property="twitter:title"
-  content={title}
+  content={pageTitle}
 />
 <meta
   property="twitter:description"
@@ -113,15 +103,27 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
 />
 <meta
   property="twitter:image"
-  content={imageURL}
+  content={pageImage}
 />
 
 <!-- RSS -->
 <link
   rel="alternate"
   type="application/rss+xml"
-  title={title}
-  href={new URL('feed.xml', Astro.site)}
+  title="RSS feed"
+  href="/feed.xml"
+/>
+<link
+  rel="sitemap"
+  href="/sitemap-index.xml"
+/>
+<link
+  rel="canonical"
+  href={Astro.url}
+/>
+<meta
+  name="generator"
+  content={Astro.generator}
 />
 
 <!-- Theme -->
@@ -129,3 +131,10 @@ const imageURL = new URL(image || '/favicon.png', Astro.site);
   const theme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-scheme', theme);
 </script>
+
+<!-- Umami -->
+<script
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="3f5aac97-7561-4a4a-8649-9c929a18841f"
+></script>

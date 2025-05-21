@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 
-import { BaseHead, FormattedDate, PostTags } from '~/components';
+import { FormattedDate, PostTags } from '~/components';
 import { SITE_TITLE } from '~/consts';
 import { AsideLayout } from '~/layouts';
 import { getSortedPosts, groupPosts, publishedPostFilter } from '~/utils';
@@ -34,47 +34,38 @@ const tags = Array.from(tagMap.entries())
   .sort((a, b) => b.count - a.count);
 ---
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <BaseHead
-      title={`Archive - ${SITE_TITLE}`}
-      description="博客文章归档页面"
-    />
-  </head>
-  <body>
-    <AsideLayout>
-      <div class="archive">
+<AsideLayout
+  title={`Archive - ${SITE_TITLE}`}
+  description="博客文章归档页面"
+>
+  <div class="archive">
+    <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
+      <header class="text-[var(--text-secondary-color)] font-[500]">TAGS</header>
+      <div class="p-prose-half">
+        <PostTags tags={tags} />
+      </div>
+    </section>
+    <div>
+      {postGroupList.map(({ year, list }) => (
         <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
-          <header class="text-[var(--text-secondary-color)] font-[500]">TAGS</header>
-          <div class="p-prose-half">
-            <PostTags tags={tags} />
-          </div>
-        </section>
-
-        <div>
-          {postGroupList.map(({ year, list }) => (
-            <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
-              <header class="text-[var(--text-secondary-color)] font-[500]">{year}</header>
-              {list.map((post) => (
-                <section class="p-prose-half border-b border-dotted border-[var(--border-color)] last:border-0">
-                  <a
-                    href={`/blog/${post.id}/`}
-                    class="block"
-                  >
-                    <h2 class="mb-3 text-2xl text-[var(--title-color)] font-[500]">
-                      {post.data.title}
-                    </h2>
-                    <div class="text-sm text-[var(--text-secondary-color)]">
-                      <FormattedDate date={post.data.date} />
-                    </div>
-                  </a>
-                </section>
-              ))}
+          <header class="text-[var(--text-secondary-color)] font-[500]">{year}</header>
+          {list.map((post) => (
+            <section class="p-prose-half border-b border-dotted border-[var(--border-color)] last:border-0">
+              <a
+                href={`/blog/${post.id}/`}
+                class="block"
+              >
+                <h2 class="mb-3 text-2xl text-[var(--title-color)] font-[500]">
+                  {post.data.title}
+                </h2>
+                <div class="text-sm text-[var(--text-secondary-color)]">
+                  <FormattedDate date={post.data.date} />
+                </div>
+              </a>
             </section>
           ))}
-        </div>
-      </div>
-    </AsideLayout>
-  </body>
-</html>
+        </section>
+      ))}
+    </div>
+  </div>
+</AsideLayout>
