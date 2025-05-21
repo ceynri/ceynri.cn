@@ -28,7 +28,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "clean": "rm -rf node_modules dist .astro"
+    "clean": "rm -rf node_modules dist .astro",
+    "reinstall": "pnpm clean && pnpm install"
   },
   "dependencies": {
     "p5": "^2.0.2"
