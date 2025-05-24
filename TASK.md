@@ -63,6 +63,8 @@
   - [ ] 设计加载动画效果
   - [ ] 实现使用 CSS/JS 的动画
   - [ ] 添加页面加载完成后的过渡效果
+- [ ] atom.xml
+- [ ] OG image（https://astro.build/integrations?search=images）
 
 ## P3
 
