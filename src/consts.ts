@@ -97,3 +97,6 @@ export const FILING = {
 
 /** 博客每页文章数量 */
 export const BLOG_POST_PER_PAGE = 10;
+
+/** Umami 网站 ID */
+export const UMAMI_WEBSITE_ID = '3f5aac97-7561-4a4a-8649-9c929a18841f';

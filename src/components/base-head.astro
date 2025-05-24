@@ -1,5 +1,5 @@
 ---
-import { SITE_DESCRIPTION } from '~/consts';
+import { SITE_DESCRIPTION, UMAMI_WEBSITE_ID } from '~/consts';
 import '~/styles/index.scss';
 
 interface Props {
@@ -134,7 +134,8 @@ const pageImage = new URL(image || '/favicon.png', Astro.site);
 
 <!-- Umami -->
 <script
+  is:inline
   defer
   src="https://cloud.umami.is/script.js"
-  data-website-id="3f5aac97-7561-4a4a-8649-9c929a18841f"
+  data-website-id={UMAMI_WEBSITE_ID}
 ></script>
