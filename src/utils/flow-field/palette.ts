@@ -12,6 +12,23 @@ export class Palette {
   private options: AppOptions;
   private direction: Direction;
 
+  // 缓存的颜色对象，避免重复创建
+  private color1: Color;
+  private color2: Color;
+  private color3: Color;
+
+  private grayColors: {
+    color1: Color;
+    color2: Color;
+    color3: Color;
+  };
+
+  private invertedColors: {
+    color1: Color;
+    color2: Color;
+    color3: Color;
+  };
+
   /**
    * 创建一个新的颜色管理器
    * @param p5 p5实例
@@ -21,6 +38,25 @@ export class Palette {
     this.p5 = p5;
     this.options = options;
     this.direction = this.initDirection();
+
+    // 缓存颜色对象
+    this.color1 = this.p5.color(this.options.color1);
+    this.color2 = this.p5.color(this.options.color2);
+    this.color3 = this.p5.color(this.options.color3);
+
+    // 缓存灰度颜色
+    this.grayColors = {
+      color1: this.p5.color(this.getGrayscaleValue(this.color1)),
+      color2: this.p5.color(this.getGrayscaleValue(this.color2)),
+      color3: this.p5.color(this.getGrayscaleValue(this.color3)),
+    };
+
+    // 缓存反色
+    this.invertedColors = {
+      color1: this.p5.color(255 - this.p5.red(this.color1), 255 - this.p5.green(this.color1), 255 - this.p5.blue(this.color1)),
+      color2: this.p5.color(255 - this.p5.red(this.color2), 255 - this.p5.green(this.color2), 255 - this.p5.blue(this.color2)),
+      color3: this.p5.color(255 - this.p5.red(this.color3), 255 - this.p5.green(this.color3), 255 - this.p5.blue(this.color3)),
+    };
   }
 
   /**
@@ -34,6 +70,9 @@ export class Palette {
     switch (this.options.colorMode) {
       case 'normal':
         return this.getNormalColor(particleIndex);
+
+      case 'grayscale':
+        return this.getGrayscaleColor(particleIndex);
 
       case 'linear-gradient':
         return this.getLinearGradientColor(xPos, yPos);
@@ -70,12 +109,40 @@ export class Palette {
    */
   private getNormalColor(particleIndex: number): Color {
     if (particleIndex % 3 === 0) {
-      return this.p5.color(this.options.color1);
+      return this.color1;
     }
-    else if (particleIndex % 3 === 1) {
-      return this.p5.color(this.options.color2);
+    if (particleIndex % 3 === 1) {
+      return this.color2;
     }
-    else { return this.p5.color(this.options.color3); }
+    return this.color3;
+  }
+
+  /**
+   * 根据粒子索引获取灰度颜色
+   * @param particleIndex 粒子索引
+   * @returns 灰度颜色值
+   */
+  private getGrayscaleColor(particleIndex: number): Color {
+    if (particleIndex % 3 === 0) {
+      return this.grayColors.color1;
+    }
+    if (particleIndex % 3 === 1) {
+      return this.grayColors.color2;
+    }
+    return this.grayColors.color3;
+  }
+
+  /**
+   * 计算颜色的灰度值
+   * @param color 颜色对象
+   * @returns 灰度值（0-255）
+   */
+  private getGrayscaleValue(color: Color): number {
+    const r = this.p5.red(color);
+    const g = this.p5.green(color);
+    const b = this.p5.blue(color);
+    // 使用加权平均算法获得更自然的灰度值
+    return r * 0.299 + g * 0.587 + b * 0.114;
   }
 
   /**
@@ -94,11 +161,8 @@ export class Palette {
 
     const percent1Lin = this.p5.norm(pos, 0, halfDimension);
     const percent2Lin = this.p5.norm(pos, halfDimension, dimension);
-    const fromLin: Color = this.p5.color(this.options.color1);
-    const middleLin: Color = this.p5.color(this.options.color2);
-    const toLin: Color = this.p5.color(this.options.color3);
-    const between1Lin: Color = this.p5.lerpColor(fromLin, middleLin, percent1Lin);
-    const between2Lin: Color = this.p5.lerpColor(middleLin, toLin, percent2Lin);
+    const between1Lin: Color = this.p5.lerpColor(this.color1, this.color2, percent1Lin);
+    const between2Lin: Color = this.p5.lerpColor(this.color2, this.color3, percent2Lin);
 
     if (pos > 0 && pos < halfDimension) {
       return between1Lin;
@@ -119,11 +183,8 @@ export class Palette {
     const gradientRadius2 = size / 1;
     const percent1Rad = this.p5.norm(distance, 0, gradientRadius1);
     const percent2Rad = this.p5.norm(distance, gradientRadius1, gradientRadius2);
-    const fromRad: Color = this.p5.color(this.options.color1);
-    const middleRad: Color = this.p5.color(this.options.color2);
-    const toRad: Color = this.p5.color(this.options.color3);
-    const between1Rad: Color = this.p5.lerpColor(fromRad, middleRad, percent1Rad);
-    const between2Rad: Color = this.p5.lerpColor(middleRad, toRad, percent2Rad);
+    const between1Rad: Color = this.p5.lerpColor(this.color1, this.color2, percent1Rad);
+    const between2Rad: Color = this.p5.lerpColor(this.color2, this.color3, percent2Rad);
 
     if (distance < gradientRadius1) {
       return between1Rad;
@@ -151,12 +212,12 @@ export class Palette {
     // 灰度
     if (pos < oneThird) {
       if (particleIndex % 3 === 0) {
-        return this.p5.color(20);
+        return this.grayColors.color1;
       }
-      else if (particleIndex % 3 === 1) {
-        return this.p5.color(100);
+      if (particleIndex % 3 === 1) {
+        return this.grayColors.color2;
       }
-      else { return this.p5.color(220); }
+      return this.grayColors.color3;
     }
 
     // 原色
@@ -166,16 +227,11 @@ export class Palette {
 
     // 反色
     if (particleIndex % 3 === 0) {
-      const c1: Color = this.p5.color(this.options.color1);
-      return this.p5.color(255 - this.p5.red(c1), 255 - this.p5.green(c1), 255 - this.p5.blue(c1));
+      return this.invertedColors.color1;
     }
-    else if (particleIndex % 3 === 1) {
-      const c2: Color = this.p5.color(this.options.color2);
-      return this.p5.color(255 - this.p5.red(c2), 255 - this.p5.green(c2), 255 - this.p5.blue(c2));
+    if (particleIndex % 3 === 1) {
+      return this.invertedColors.color2;
     }
-    else {
-      const c3: Color = this.p5.color(this.options.color3);
-      return this.p5.color(255 - this.p5.red(c3), 255 - this.p5.green(c3), 255 - this.p5.blue(c3));
-    }
+    return this.invertedColors.color3;
   }
 }

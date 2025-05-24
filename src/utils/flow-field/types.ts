@@ -1,7 +1,7 @@
 /**
  * 颜色模式类型
  */
-export type ColorMode = 'normal' | 'linear-gradient' | 'radial-gradient' | 'splice';
+export type ColorMode = 'normal' | 'grayscale' | 'linear-gradient' | 'radial-gradient' | 'splice';
 
 /**
  * 方向类型
@@ -9,7 +9,7 @@ export type ColorMode = 'normal' | 'linear-gradient' | 'radial-gradient' | 'spli
 export type Direction = 'auto' | 'horizontal' | 'vertical';
 
 /**
- * 应用配置选项接口
+ * 应用配置选项类型定义
  */
 export interface AppOptions {
   /** 主要颜色1 */
@@ -30,4 +30,14 @@ export interface AppOptions {
   colorMode: ColorMode;
   /** 渐变方向，仅对部分颜色模式有效 */
   direction: Direction;
+}
+
+/**
+ * 配置选项范围类型定义
+ */
+export interface AppOptionsRange {
+  maxLife: [number, number];
+  nums: [number, number];
+  size: [number, number];
+  noiseScale: [number, number];
 }

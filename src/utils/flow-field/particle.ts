@@ -57,6 +57,7 @@ export class Particle {
     this.life -= 0.01666;
     if (this.life < 0) {
       this.respawn();
+      return;
     }
 
     for (let i = this.iterations; i > 0; i--) {

@@ -1,4 +1,4 @@
-import type { AppOptions } from './types';
+import type { AppOptionsRange, ColorMode } from './types';
 
 /**
  * 背景颜色
@@ -6,27 +6,39 @@ import type { AppOptions } from './types';
 export const BG_COLOR = '#000000';
 
 /**
- * 默认配置选项
+ * 颜色模式选项
  */
-export const defaultOptions = {
-  color1: '#d9e0e8',
-  color2: '#808890',
-  color3: '#24292e',
-  maxLife: 15,
-  nums: 600,
-  size: 2,
-  noiseScale: 1500,
-  colorMode: 'normal',
-  direction: 'auto',
-} as const satisfies AppOptions;
+export const COLOR_MODES: ColorMode[] = ['normal', 'grayscale', 'linear-gradient', 'radial-gradient', 'splice'];
 
-export const range = {
-  maxLife: [10, 30],
-  nums: [400, 1200],
-  size: [1.5, 4],
-  noiseScale: [200, 3000],
-  colorMode: ['normal', 'linear-gradient', 'radial-gradient', 'splice'],
-} as const satisfies Partial<Record<keyof AppOptions, AppOptions[keyof AppOptions][]>>;
+/**
+ * 小屏设备配置选项范围
+ */
+export const rangeForSm: AppOptionsRange = {
+  maxLife: [6, 12],
+  nums: [200, 400],
+  size: [1.5, 2.5],
+  noiseScale: [300, 1200],
+};
+
+/**
+ * 大屏设备配置选项范围
+ */
+export const rangeForLg: AppOptionsRange = {
+  maxLife: [15, 25],
+  nums: [400, 800],
+  size: [2, 3.5],
+  noiseScale: [400, 2000],
+};
+
+/**
+ * 超大屏设备配置选项范围
+ */
+export const rangeFor2xl: AppOptionsRange = {
+  maxLife: [20, 30],
+  nums: [600, 1000],
+  size: [2.5, 4],
+  noiseScale: [600, 2500],
+};
 
 /**
  * 粒子生成与消亡边界偏移量
@@ -38,6 +50,9 @@ export const BOUNDARY_OFFSET = 80;
  */
 export const FADE_LIFE_RATIO = 1 / 5;
 
+/**
+ * 迭代次数范围
+ */
 export const ITERATIONS_RANGE = [1, 4] as const;
 
 /**

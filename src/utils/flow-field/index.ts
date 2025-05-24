@@ -15,6 +15,6 @@ export function initFlowField(containerId: string) {
   }
 
   // 创建新的 P5 实例，将 sketch 和容器关联
-  const instance = new P5(sketch, container);
+  const instance = new P5((p5) => sketch(p5, container), container);
   return instance;
 }

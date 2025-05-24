@@ -50,16 +50,16 @@ export class ParticleSystem {
   public update() {
     // 每 n 帧绘制一次半透明背景以实现痕迹淡化
     if (this.p5.frameCount % diluteConfig.perFrame === 0) {
-      const ratio = diluteConfig.ratio;
+      const alpha = 255 * diluteConfig.ratio;
       this.p5.background(
         this.p5.red(this.bgColor),
         this.p5.green(this.bgColor),
         this.p5.blue(this.bgColor),
-        255 * ratio,
+        alpha,
       );
     }
 
-    for (let i = 0; i < this.options.nums; i++) {
+    for (let i = 0; i < this.particles.length; i++) {
       const particle = this.particles[i];
 
       // 检查粒子是否超出边界
@@ -71,14 +71,5 @@ export class ParticleSystem {
       // 渲染粒子
       particle.display();
     }
-  }
-
-  /**
-   * 设置新的配置选项
-   * @param options 新的配置选项
-   */
-  public updateOptions(options: AppOptions) {
-    this.options = options;
-    this.initParticles();
   }
 }
