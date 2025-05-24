@@ -8,6 +8,7 @@ import type { APIRoute } from 'astro';
 export function createCssEndpoint(cssContent: string): APIRoute {
   return async () => {
     return new Response(cssContent, {
+      // 仅服务端渲染/本地开发时，headers 生效
       headers: {
         // 基本内容类型
         'Content-Type': 'text/css',

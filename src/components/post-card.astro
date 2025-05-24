@@ -14,6 +14,7 @@ const { post } = Astro.props as { post: CollectionEntry<'blog'> };
       <Image
         class="w-full aspect-[9/4] max-sm:aspect-square object-cover"
         src={post.data.cover_image}
+        width="1600"
         alt=""
       />
     )}
