@@ -14,17 +14,6 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   site: 'https://ceynri.cn',
   integrations: [mdx(), sitemap(), tailwind()],
-  markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener', 'noreferrer'],
-        },
-      ],
-    ],
-  },
   server: {
     host: true,
     port: 4321,
@@ -46,4 +35,23 @@ export default defineConfig({
     ],
   },
   prefetch: true,
+  markdown: {
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          target: '_blank',
+          rel: ['noopener', 'noreferrer'],
+        },
+      ],
+    ],
+  },
+  experimental: {
+    // https://docs.astro.build/zh-cn/reference/experimental-flags/responsive-images/
+    responsiveImages: true,
+  },
+  image: {
+    // 将图像尺寸自适应优化用于所有的 Image、Picture 以及 Markdown 图像
+    experimentalLayout: 'full-width',
+  },
 });
