@@ -56,6 +56,9 @@ import BaseLayout from '~/layouts/base-layout.astro';
               href={item.href}
               class="flex text-white opacity-60 hover:opacity-100 active:opacity-50 transition-opacity"
               title={item.name}
+              rel="noopener"
+              aria-label={item.name}
+              target="_blank"
             >
               <item.icon class="size-6" />
             </a>
@@ -104,7 +107,7 @@ import BaseLayout from '~/layouts/base-layout.astro';
           <a
             href={FILING.link}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             class="block"
           >
             {FILING.text}

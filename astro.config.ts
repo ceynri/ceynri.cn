@@ -1,3 +1,5 @@
+import type { Element } from 'hast';
+
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
@@ -67,7 +69,13 @@ export default defineConfig({
       // 外部链接通过新标签页打开
       [rehypeExternalLinks, {
         target: '_blank',
-        rel: ['noopener', 'noreferrer'],
+        rel: ['noopener'],
+        test: (element: Element) => {
+          const href = element.properties.href;
+          return typeof href === 'string'
+            && href.startsWith('http')
+            && !href.startsWith('https://ceynri.cn/');
+        },
       }],
       // 自动为指向图片资源的链接添加 data-image-link 属性
       rehypeImageLinks,
