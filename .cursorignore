@@ -1,5 +1,3 @@
-content/*
-!content/blog
-!content/pages
-dist
-node_modules
+content/*/*
+!content/blog/TEST*
+!content/images/test*

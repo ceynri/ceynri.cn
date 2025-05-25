@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-import { BlogPost, Comments, Footer, TopNavbar } from '~/components';
+import { BlogPost, Comments, FloatingImages, Footer, TopNavbar } from '~/components';
 
 import BaseLayout from './base-layout.astro';
 
@@ -26,4 +26,7 @@ const { title, description, cover_image } = post.data;
       <Footer class="text-center" />
     </div>
   </div>
+
+  <!-- 浮动图片组件 -->
+  <FloatingImages />
 </BaseLayout>
