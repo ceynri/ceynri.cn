@@ -4,6 +4,8 @@
 
 My personal website. Visit <https://ceynri.cn/> to explore.
 
+![home](https://github.com/user-attachments/assets/c5ed9862-0739-4d79-84fd-2413eaee90d2)
+
 ## Overview
 
 A modern, responsive personal website featuring blog and portfolio content.
