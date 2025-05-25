@@ -1,17 +1,22 @@
 # ceynri.cn
 
-> [!TIP] 🚧 V3 is WIP 🚧
->
-> This project is currently being rewritten using [astro](https://github.com/withastro/astro)! 🚀
+<!-- [![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml) -->
 
----
+My personal website. Visit <https://ceynri.cn/> to explore.
 
-<!-- [![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml)
+## Overview
 
-You can visit <https://ceynri.cn/> to experience.
+A modern, responsive personal website featuring blog and portfolio content.
 
-## Introduction
+### Key Features
 
+- 🚀 Fast & modern with Astro
+- 📱 Mobile responsive design
+- ✨ Cool animation effect on homepage
+- 📝 Blog with tags and archives
+- 💬 Comments powered by Giscus
+
+<!--
 ### Structure
 
 <details>
@@ -52,45 +57,62 @@ Home logo and impression image add perspective effect for fun:
 ![tag](https://cdn.jsdelivr.net/gh/ceynri/assets@main/images/1624279924010-tag.png)
 
 </details>
+
+TODO: floating image effect
 -->
 
-### Technology
+## Tech Stack
 
-- Web Framework: [Astro](https://astro.build/)
-- Styling: [TailwindCSS](https://tailwindcss.com/) + [SASS](https://sass-lang.com/)
-- Comments Engine: [giscus](https://github.com/laymonage/giscus)
-- AI tools: [Cursor](https://www.cursor.com/)
-<!-- - Deployment: [Github Action](https://github.com/ceynri/ceynri.cn/actions) -->
+- [Astro](https://astro.build/) - Static site generator
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [TailwindCSS](https://tailwindcss.com/) + [SASS](https://sass-lang.com/) - Styling
+- [Giscus](https://github.com/laymonage/giscus) - Comments system
+- [ESLint](https://eslint.org/) ([@antfu/eslint-config](https://github.com/antfu/eslint-config)) - Code quality
+- Built with [Cursor](https://www.cursor.com/) - AI-powered IDE
+<!-- - [Github Action](https://github.com/ceynri/ceynri.cn/actions) -->
 
-### Compatibility
+## Browser Support
 
-- ✅ All modern browser supported.
-- 📱 Mobile is compatible.
-- 🙏 If you meet bugs, submit an [issue](https://github.com/ceynri/ceynri.cn/issues) will be welcome.
+- ✅ Modern browser supported.
+- 📱 Mobile compatible.
 
-### Versions
+> **Note**: If you encounter any bugs or issues, please feel free to [submit an issue](https://github.com/ceynri/ceynri.cn/issues).
 
-- v3 is Work-In-Progress 😊.
-- v2 project is based on [Gridsome](https://gridsome.org/). Refactoring from v2 because of [Gridsome was abandoned by the maintainer](https://github.com/gridsome/gridsome/issues/1684).
-- v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch (Chinese attention). You can still visit <https://v1.ceynri.cn/> to experience it.
+## Version History
+
+- **v3** (Current): Latest version built with Astro 🚀
+- **v2**: Previous version based on [Gridsome](https://gridsome.org/). Migrated to Astro due to [Gridsome being a deprecated technology](https://github.com/gridsome/gridsome/issues/1684)
+- **v1**: Legacy version archived in the [v1 branch](https://github.com/ceynri/ceynri.cn/tree/v1) (Chinese attention). Still accessible at <https://v1.ceynri.cn/>
 
 ---
 
 ## Development
 
-### Local development
+### Prerequisites
 
-```sh
+- Node.js 20+
+- pnpm 9+
+
+### Local Development
+
+```bash
+# Install dependencies
 pnpm install
+
+# Start development server
 pnpm dev
 ```
 
-Visit `http://localhost:4321/` for development.
+The development server will be available at `http://localhost:4321/`
 
-### Build dist
+### Build for Production
 
-```sh
+```bash
+# Build the project
 pnpm build
+
+# Preview the build locally
+pnpm preview
 ```
 
 ---
