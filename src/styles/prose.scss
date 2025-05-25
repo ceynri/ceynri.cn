@@ -28,10 +28,18 @@
 
     &[alt*='size=small'] {
       width: 38.2%;
+
+      @media screen and (max-width: 640px) {
+        width: 60%;
+      }
     }
 
     &[alt*='size=medium'] {
       width: 61.8%;
+
+      @media screen and (max-width: 640px) {
+        width: 80%;
+      }
     }
 
     &[alt*='size=large'] {
