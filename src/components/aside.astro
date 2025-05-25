@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+
+import avatar from '~/assets/images/avatar.jpg';
+import { NAV_ITEMS, SITE_OWNER_BIO, SITE_OWNER_ID, SITE_OWNER_NAME } from '~/consts';
+import { cn } from '~/utils';
+
+import ThemeToggleButton from './theme-toggle-button.astro';
+
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^/]+/g);
+
+function isActive(href: string) {
+  return href === pathname || href === `/${subpath?.[0]}`;
+}
+---
+
+<aside class={cn('aside w-[194px] flex-none max-h-screen py-16 px-4 flex flex-col mr-4 max-lg:mr-0', Astro.props.class)}>
+  <header class="mb-8">
+    <a href="/">
+      <Image
+        alt="site owner avatar"
+        title="?"
+        src={avatar}
+        width="320"
+        height="320"
+        class="rounded-full mb-3"
+      />
+    </a>
+
+    <h1 class="text-2xl font-[500] leading-[2] mb-1">
+      {SITE_OWNER_NAME}
+      <span class="text-xl">@{SITE_OWNER_ID}</span>
+    </h1>
+    <p class="mb-0 text-lg">{SITE_OWNER_BIO}</p>
+  </header>
+  <!-- TODO: 页面过矮时改为展示 menu-button -->
+  <!-- TODO: 升级 tailwind 4 后，mask-image 可以使用 mask-t-to-8 替代 -->
+  <nav class="flex-auto overflow-auto [mask-image:linear-gradient(to_top,transparent,black_2rem,black)]">
+    <ul class="list-none m-0">
+      {NAV_ITEMS.map((item) => (
+        <li class="mb-3">
+          <a
+            href={item.href}
+            class:list={['flex items-center py-2 text-lg text-[var(--navbar-text-color)] sparklable-text opacity-50', isActive(item.href) && '!opacity-100']}
+          >
+            <item.icon class="size-5 mr-3" />
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <footer class="flex mt-4">
+    <ThemeToggleButton class="size-6" />
+  </footer>
+</aside>

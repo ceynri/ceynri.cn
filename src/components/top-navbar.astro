@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+
+import avatar from '~/assets/images/avatar.jpg';
+import { NAV_ITEM_MAP } from '~/consts';
+import { cn } from '~/utils';
+
+import MenuButton from './menu-button.astro';
+import ThemeToggleButton from './theme-toggle-button.astro';
+---
+
+<header class={cn('w-full p-4 flex items-center justify-between', Astro.props.class)}>
+  <!-- 左侧 -->
+  <a
+    href={NAV_ITEM_MAP.blog.href}
+    class="size-10 rounded-full overflow-hidden"
+  >
+    <Image
+      src={avatar}
+      alt="avatar"
+      width="80"
+      height="80"
+    />
+  </a>
+
+  <!-- 右侧 -->
+  <div class="flex items-center gap-2">
+    <a
+      href={NAV_ITEM_MAP.blog.href}
+      class="size-10 p-2 flex items-center justify-center text-[var(--navbar-text-color)] opacity-50 hover:opacity-100 hover:text-[var(--accent-color)] transition-[transform,opacity,color]"
+      aria-label={NAV_ITEM_MAP.blog.name}
+      title={NAV_ITEM_MAP.blog.name}
+    >
+      <NAV_ITEM_MAP.blog.icon class="size-full" />
+    </a>
+    <ThemeToggleButton class="size-10 p-2" />
+    <MenuButton class="size-10 p-2" />
+  </div>
+</header>

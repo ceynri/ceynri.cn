@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    font-size: 17px;
+
+    @media screen and (max-width: 900px) {
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 4.2vw;
+    }
+  }
+
+  body {
+    font-family: 'Poppins', -apple-system, system-ui, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      sans-serif;
+    font-weight: 400;
+    word-break: break-word;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+
+    color: var(--text-color);
+    background-color: var(--global-bg-color);
+    transition: background-color 0.3s ease-out;
+
+    // @media screen and (min-width: $xl) {
+    //   // trick: Offset the scrollbar width to make the layout symmetrical
+    //   margin-left: calc(100vw - 100%);
+    // }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  ::selection {
+    color: var(--selection-text-color);
+    background-color: var(--selection-bg-color);
+  }
+
+  mark {
+    color: var(--title-color);
+    background-color: var(--accent-color);
+    transition: background-color 0.3s ease-out;
+  }
+
+  // Text mask effect
+  del {
+    text-decoration: none;
+    color: transparent;
+    background-color: var(--selection-bg-color);
+    border-radius: 0.1rem;
+    transition: color 0.3s ease-out;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+@layer components {
+  .prose-card {
+    @apply p-prose bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-3xl;
+  }
+
+  .sparklable-text {
+    transition-property: color, text-shadow, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+
+    &:hover {
+      @apply sparkle-text;
+    }
+  }
+}
+
+@layer utilities {
+  .sparkle-text {
+    color: var(--accent-color);
+    text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+
+import avatar from '~/assets/images/avatar.jpg';
+import { CurrentYear, FlowFieldBackground } from '~/components';
+import { RefreshCw } from '~/components/icons';
+import { FILING, HOME_ENTRY_ITEMS, HOME_SOCIAL_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
+import BaseLayout from '~/layouts/base-layout.astro';
+---
+
+<BaseLayout
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+>
+  <main class="fixed w-screen h-screen flex flex-col items-center text-white p-8 z-[1]">
+    <div class="w-full h-full relative">
+      <!-- 中间 -->
+      <header class="absolute z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex flex-col items-center justify-center text-center">
+        <!-- 主标题 -->
+        <div class="mt-12 flex flex-col items-center justify-center text-shadow-lg">
+          <div class="text-[3.8vw] max-lg:text-3xl max-sm:text-2xl font-medium leading-[1.4]">
+            ceynri, Frontend Developer
+          </div>
+          <div class="text-[3.8vw] max-lg:text-3xl max-sm:text-2xl font-medium leading-[1.4]">
+            based in Guangzhou, China
+          </div>
+          <div class="text-[1.5vw] max-lg:text-base w-[30vw] max-lg:w-[60vw] mt-6">
+            我在这里写点博客，分享我对于生活与日常的一些思考。
+          </div>
+        </div>
+        <!-- 入口导航栏 -->
+        <div class="flex gap-4 mt-10">
+          {HOME_ENTRY_ITEMS.map((item) => (
+            <a
+              href={item.href}
+              class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 active:opacity-50 transition-[background-color,opacity]"
+              title={item.name}
+            >
+              <item.icon class="size-6" />
+            </a>
+          ))}
+        </div>
+      </header>
+
+      <!-- 左上角 -->
+      <div class="absolute z-[1] top-0 left-0 flex items-start justify-start">
+        ceynri.cn
+      </div>
+
+      <!-- 右上角 -->
+      <div class="absolute z-[1] top-0 right-0 flex items-start justify-end">
+        <!-- 社交外链栏 -->
+        <div class="flex gap-6">
+          {HOME_SOCIAL_ITEMS.map((item) => (
+            <a
+              href={item.href}
+              class="flex text-white opacity-60 hover:opacity-100 active:opacity-50 transition-opacity"
+              title={item.name}
+            >
+              <item.icon class="size-6" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- 左下角 -->
+      <div class="absolute z-[1] bottom-0 left-0 flex items-end justify-end">
+        <!-- 头像/刷新按钮 -->
+        <button
+          id="refresh-flow-field"
+          class="size-[40px] group cursor-pointer active:opacity-50 transition-opacity"
+          title="刷新背景流场效果"
+          data-umami-event="refresh-flow-field"
+        >
+          <Image
+            alt="site owner avatar"
+            title="ceynri"
+            src={avatar}
+            width="80"
+            height="80"
+            class="rounded-full size-full group-hover:opacity-0 transition-opacity"
+          />
+          <div class="absolute top-0 left-0 size-full rounded-full flex items-center justify-center bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
+            <RefreshCw class="size-1/2 text-white" />
+          </div>
+        </button>
+
+        <script>
+          // 获取刷新按钮并添加点击事件
+          const refreshButton = document.getElementById('refresh-flow-field');
+          if (refreshButton) {
+            refreshButton.addEventListener('click', () => {
+              window.refreshFlowField();
+            });
+          }
+        </script>
+      </div>
+
+      <!-- 右下角 -->
+      <div class="absolute z-[1] bottom-0 right-0 flex items-end justify-end">
+        <!-- 版权信息 -->
+        <footer class="text-xs text-right leading-[1.75]">
+          <div>Ceynri © 2020-<CurrentYear /></div>
+          <a
+            href={FILING.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block"
+          >
+            {FILING.text}
+          </a>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <!-- 流场背景 -->
+  <FlowFieldBackground />
+</BaseLayout>

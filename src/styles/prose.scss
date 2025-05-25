@@ -1,0 +1,65 @@
+.prose {
+
+  // 隐藏重复的文章标题
+  h1:first-child {
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+    opacity: 0.8;
+
+    @apply sparklable-text;
+  }
+
+  img {
+    margin-left: calc(-1 * var(--prose-padding));
+    margin-right: calc(-1 * var(--prose-padding));
+    width: calc(100% + 2 * var(--prose-padding));
+    max-width: unset;
+
+    &[alt*='size=small'],
+    &[alt*='size=medium'],
+    &[alt*='size=large'],
+    &[alt*='size=auto'] {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &[alt*='size=small'] {
+      width: 38.2%;
+
+      @media screen and (max-width: 640px) {
+        width: 60%;
+      }
+    }
+
+    &[alt*='size=medium'] {
+      width: 61.8%;
+
+      @media screen and (max-width: 640px) {
+        width: 80%;
+      }
+    }
+
+    &[alt*='size=large'] {
+      width: 100%;
+    }
+
+    &[alt*='size=full'] {
+      // default
+    }
+
+    &[alt*='size=auto'] {
+      width: auto;
+      max-width: 100%;
+    }
+  }
+
+  table img {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 100%;
+  }
+}

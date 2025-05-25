@@ -1,0 +1,170 @@
+<script>
+import { limitToInterval, throttle } from '~/utils';
+
+interface FloatingImageInstance {
+  /** 容器元素 */
+  container: HTMLElement;
+  /** 图片元素 */
+  image: HTMLImageElement;
+  /** 图片宽度 */
+  imageWidth: number;
+  /** 图片高度 */
+  imageHeight: number;
+  /** 图片是否已经加载完成 */
+  isLoaded: boolean;
+  /** 是否已经准备好过渡动画 */
+  isTransitionReady: boolean;
+  /** 是否正在悬停 */
+  isHovering: boolean;
+}
+
+function main() {
+  // 借助 rehype-image-link 插件，在解析 markdown 时，自动为指向图片资源的链接添加 data-image-link 属性
+  const imageLinks = document.querySelectorAll('a[data-image-link]') as NodeListOf<HTMLAnchorElement>;
+
+  imageLinks.forEach((link) => {
+    // 创建浮动图片实例
+    const instance = createFloatingImageInstance(link);
+
+    // 绑定事件
+    link.addEventListener('mouseenter', () => {
+      instance.isHovering = true;
+    });
+    link.addEventListener('mousemove', throttle((event: MouseEvent) => {
+      handleMouseMove(event, instance);
+    }, 16));
+    link.addEventListener('mouseleave', () => {
+      instance.isHovering = false;
+      instance.container.style.opacity = '0';
+    });
+  });
+}
+
+function createFloatingImageInstance(link: HTMLAnchorElement): FloatingImageInstance {
+  // 创建容器
+  const container = document.createElement('div');
+  container.className = 'floating-image-container';
+
+  // 创建图片
+  const image = document.createElement('img');
+  image.className = 'floating-image';
+  image.alt = link.textContent ?? '';
+  image.src = link.href;
+
+  // 插入到页面中
+  container.appendChild(image);
+  document.body.appendChild(container);
+
+  const instance: FloatingImageInstance = {
+    container,
+    image,
+    imageWidth: 0,
+    imageHeight: 0,
+    isLoaded: false,
+    isTransitionReady: false,
+    isHovering: false,
+  };
+
+  // 图片加载处理
+  image.addEventListener('load', () => {
+    instance.imageWidth = image.offsetWidth;
+    instance.imageHeight = image.offsetHeight;
+    instance.isLoaded = true;
+  });
+
+  image.addEventListener('error', () => {
+    console.warn('[floating-image] failed to load image:', link.href);
+  });
+
+  return instance;
+}
+
+function handleMouseMove(event: MouseEvent, instance: FloatingImageInstance): void {
+  if (!instance.isLoaded || !instance.isHovering) {
+    return;
+  }
+
+  const { container, imageWidth, imageHeight } = instance;
+
+  const windowWidth = document.documentElement.clientWidth;
+  const windowHeight = document.documentElement.clientHeight;
+  const halfImageWidth = imageWidth / 2;
+  const halfImageHeight = imageHeight / 2;
+
+  // 限制在合理范围内，避免图片超出视窗
+  const posX = limitToInterval(
+    event.clientX,
+    [halfImageWidth, windowWidth - halfImageWidth],
+  );
+  const posY = limitToInterval(
+    event.clientY,
+    [halfImageHeight, windowHeight - halfImageHeight],
+  );
+
+  container.style.transform = `translate(${posX}px, ${posY}px)`;
+  container.style.opacity = '1';
+
+  if (!instance.isTransitionReady) {
+    instance.isTransitionReady = true;
+    // 等下一帧 translate 已经生效后，再给 translate 添加 transition
+    requestAnimationFrame(() => {
+      container.style.transitionProperty = 'transform, opacity';
+    });
+  }
+}
+
+main();
+</script>
+
+<style is:global>
+  .floating-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+  }
+
+  .floating-image {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 50%;
+    height: 50%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translate(-50%, -50%);
+  }
+
+  a[data-image-link] {
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  a[data-image-link]:hover {
+    color: var(--accent-color);
+  }
+
+  a[data-image-link]::after {
+    content: '🖼️';
+    display: inline-block;
+    transform: scale(0.8);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  a[data-image-link]:hover::after {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .floating-image-container {
+      display: none;
+    }
+
+    a[data-image-link]::after {
+      display: none;
+    }
+  }
+</style>

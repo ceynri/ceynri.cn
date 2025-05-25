@@ -1,0 +1,21 @@
+@use "../variables.scss" as *;
+@use "./common.scss";
+
+@import url("//giscus.app/themes/light.css");
+
+:root {
+  @include light-theme;
+}
+
+main {
+  // 评论点赞按钮边框色
+  --color-accent-emphasis: #{rgba($accent-color-light, 0.5)};
+  // Owner 标识边框色
+  --color-accent-muted: #{rgba($accent-color-light, 0.3)};
+  // 评论已经点过赞按钮背景色
+  --color-accent-subtle: #{rgba($accent-color-light, 0.1)};
+  // 评论点赞按钮 hover 状态背景色
+  --color-social-reaction-bg-hover: #{rgba($accent-color-light, 0.3)};
+  // 评论已经点过赞的按钮 hover 状态背景色
+  --color-social-reaction-bg-reacted-hover: #{rgba($accent-color-light, 0.5)};
+}

@@ -1,0 +1,80 @@
+---
+description: 
+globs: *.ts,*.astro,*.scss,*.js
+alwaysApply: false
+---
+# 开发与代码规范
+
+## 命名与结构
+
+- 文件、目录命名必须遵循 kebab-case 命名规则
+- 当目录存在 index.ts 时，在该目录下新建文件，同时需要在同目录下的 index.ts 里导出该文件所导出的模块
+- 复用性强或者可以解耦的大块 UI 元素抽象为组件放在 components，页面专用内容直接写在 pages
+- 一般情况下，utils 尽量保持原子化、扁平化，每一个 util 文件导出一个方法，且方法名与文件名一一对应
+
+## 类型与风格
+
+- 严格使用 TypeScript 声明类型，配置见 [tsconfig.json](mdc:tsconfig.json)
+- 组件 props 推荐用 TypeScript interface 明确类型
+- 组件间数据传递用 Astro.props
+- 推荐使用 /** */ 来书写变量与方法的注释，使其具备代码提示
+- 代码风格需要遵循 ESLint/Prettier 规范，规则见 [eslint.config.js](mdc:eslint.config.js)
+- 注释一般使用中文书写，README、commit message 使用英文书写
+
+## 组件开发
+
+- 推荐使用 .astro 文件开发组件，必要时可用 .tsx（React）
+- 如果需要通过集成使用 React/Vue/Svelte 组件，在实际生成代码之前需要提前确认
+- 在 astro 文件里编写 js 逻辑，代码块前后两行需要用 `---` 包裹
+  ```astro
+  ---
+  const someLogic = xxx();
+  ---
+  <div>DOM</div>
+  ```
+- 自定义组件组合外部传入的 class 时，使用 cn 方法来组合
+  ```astro
+  ---
+  import { cn } from '~/utils';
+  ---
+
+  <div class={cn('foo', Astro.props.class)}></div>
+  ```
+
+## 样式
+
+- 优先使用 tailwindcss utility class，通用样式、需要多处复用的样式考虑用 sass 声明 class
+- 推荐全部使用 utility class
+- sass 上下文中非必要不使用 @apply
+- 响应式优先，以 PC 端为基准，适配移动端时善用 max-sm、max-lg 等
+- 涉及声明 background-color、color 等颜色样式时，优先使用 [variables.scss](mdc:src/styles/variables.scss) 中定义的 CSS 变量，不允许使用未定义的 CSS 变量
+- 应用 CSS 变量添加背景颜色、阴影样式时，需要添加上对应的 transition 属性以正确渐变过渡（如 tailwind utility class `transition-[background-color] ease-out`）
+- font-weight 不使用预设变量，改用直接书写单位的方式（如 font-[500]）
+
+## 内容管理
+
+- 推荐用 Markdown/MDX 文件管理内容，frontmatter 支持 meta 信息
+
+## 性能优化
+
+- 优先静态生成，减少 client 端 JS
+- 仅在必要时用 client:* 指令（如 client:load、client:idle、client:visible）
+- 图片用 Astro <Image> 组件，加 loading="lazy"
+- 合理利用 Astro 的 asset 优化能力
+
+## SEO/Meta
+
+- 统一用 BaseHead 组件处理 meta 信息
+- 页面建议加 canonical 链接
+- 支持 Open Graph/Twitter meta
+
+## 可访问性与测试
+
+- 组件结构语义化，必要时加 ARIA 属性
+- 交互元素支持键盘操作
+- 工具函数建议写单元测试
+- 页面可用 Cypress 做端到端测试
+
+## 其他建议
+
+- 参考 [Astro 官方文档](mdc:https:/docs.astro.build) 和 [Cursor Astro+Tailwind 规则](mdc:https:/cursor.directory/astro-tailwind-cursor-rules)

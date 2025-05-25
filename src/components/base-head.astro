@@ -1,0 +1,137 @@
+---
+import { SITE_DESCRIPTION, UMAMI_WEBSITE_ID } from '~/consts';
+import '~/styles/index.scss';
+
+interface Props {
+  title: string;
+  postTitle?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  postTitle,
+  description = SITE_DESCRIPTION,
+  image,
+} = Astro.props;
+
+const pageTitle = postTitle ? `${postTitle} - ${title}` : title;
+
+// TODO: 默认图片
+const pageImage = new URL(image || '/favicon.png', Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+/>
+<title>{title}</title>
+<meta
+  name="title"
+  content={title}
+/>
+<meta
+  name="description"
+  content={description}
+/>
+<!-- TODO: svg icon -->
+<!-- <link
+  rel="icon"
+  type="image/svg+xml"
+  href="/favicon.svg"
+/> -->
+<link
+  rel="icon"
+  type="image/png"
+  href="/favicon.png"
+/>
+<link
+  rel="apple-touch-icon"
+  href="/favicon.png"
+/>
+
+<!-- Font preloads -->
+<link
+  href="/fonts/poppins.css"
+  rel="stylesheet"
+/>
+
+<!-- Open Graph -->
+<meta
+  property="og:type"
+  content={postTitle ? 'article' : 'website'}
+/>
+<meta
+  property="og:url"
+  content={Astro.url}
+/>
+<meta
+  property="og:title"
+  content={pageTitle}
+/>
+<meta
+  property="og:description"
+  content={description}
+/>
+<meta
+  property="og:image"
+  content={pageImage}
+/>
+
+<!-- Twitter -->
+<meta
+  property="twitter:card"
+  content="summary_large_image"
+/>
+<meta
+  property="twitter:url"
+  content={Astro.url}
+/>
+<meta
+  property="twitter:title"
+  content={pageTitle}
+/>
+<meta
+  property="twitter:description"
+  content={description}
+/>
+<meta
+  property="twitter:image"
+  content={pageImage}
+/>
+
+<!-- RSS -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="RSS feed"
+  href="/feed.xml"
+/>
+<link
+  rel="sitemap"
+  href="/sitemap-index.xml"
+/>
+<link
+  rel="canonical"
+  href={Astro.url}
+/>
+<meta
+  name="generator"
+  content={Astro.generator}
+/>
+
+<!-- Theme -->
+<script is:inline>
+  const theme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-scheme', theme);
+</script>
+
+<!-- Umami -->
+<script
+  is:inline
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id={UMAMI_WEBSITE_ID}
+></script>

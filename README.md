@@ -1,13 +1,22 @@
 # ceynri.cn
 
-[![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml)
+<!-- [![deploy workflow](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml/badge.svg)](https://github.com/ceynri/ceynri.cn/actions/workflows/deploy-website.yml) -->
 
-You can visit <https://ceynri.cn/> to experience.
+My personal website. Visit <https://ceynri.cn/> to explore.
 
-> 🚧 [Gridsome](https://github.com/Gridsome/Gridsome) looks like out of maintenance. I am rewriting this project with [astro](https://github.com/withastro/astro) on the [v3 branch](https://github.com/ceynri/ceynri.cn/tree/v3)! 🚀
+## Overview
 
-## Introduction
+A modern, responsive personal website featuring blog and portfolio content.
 
+### Key Features
+
+- 🚀 Fast & modern with Astro
+- 📱 Mobile responsive design
+- ✨ Cool animation effect on homepage
+- 📝 Blog with tags and archives
+- 💬 Comments powered by Giscus
+
+<!--
 ### Structure
 
 <details>
@@ -49,47 +58,61 @@ Home logo and impression image add perspective effect for fun:
 
 </details>
 
-### Techology
+TODO: floating image effect
+-->
 
-ceynri.cn v2 is powered by [Gridsome](https://gridsome.org), which is a Vue-powered Static Site Generator inspired by [Gatsby](https://www.gatsbyjs.com/).
+## Tech Stack
 
-The comment system currently uses [giscus](https://github.com/laymonage/giscus), a plugin similar to [utterances](https://github.com/utterance/utterances) but uses discussions instead of issues.
+- [Astro](https://astro.build/) - Static site generator
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [TailwindCSS](https://tailwindcss.com/) + [SASS](https://sass-lang.com/) - Styling
+- [Giscus](https://github.com/laymonage/giscus) - Comments system
+- [ESLint](https://eslint.org/) ([@antfu/eslint-config](https://github.com/antfu/eslint-config)) - Code quality
+- Built with [Cursor](https://www.cursor.com/) - AI-powered IDE
+<!-- - [Github Action](https://github.com/ceynri/ceynri.cn/actions) -->
 
-Automatic update deployment via [Github Action](https://github.com/ceynri/ceynri.cn/actions).
+## Browser Support
 
-### Compatibility
+- ✅ Modern browser supported.
+- 📱 Mobile compatible.
 
-- 😅 All IE versions are not supported. Please use MODERN browser if you are using IE.
-- 📱 Mobile is compatible.
-- 🙏 If you meet bugs, please submit an [issue](https://github.com/ceynri/ceynri.cn/issues).
+> **Note**: If you encounter any bugs or issues, please feel free to [submit an issue](https://github.com/ceynri/ceynri.cn/issues).
 
-### Versions
+## Version History
 
-**v2** is the version that is working now.
-
-v1 project in git repo was archived at [v1](https://github.com/ceynri/ceynri.cn/tree/v1) branch (Chinese attention). You can still visit <https://v1.ceynri.cn/> to experience it.
+- **v3** (Current): Latest version built with Astro 🚀
+- **v2**: Previous version based on [Gridsome](https://gridsome.org/). Migrated to Astro due to [Gridsome being a deprecated technology](https://github.com/gridsome/gridsome/issues/1684)
+- **v1**: Legacy version archived in the [v1 branch](https://github.com/ceynri/ceynri.cn/tree/v1) (Chinese attention). Still accessible at <https://v1.ceynri.cn/>
 
 ---
 
 ## Development
 
-### Local development
+### Prerequisites
 
-> Node.js 14x required
+- Node.js 20+
+- pnpm 9+
 
-```sh
-npm run bootstrap
-npm run dev
+### Local Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
 ```
 
-> GraphQL requires `content` folder with specific structure
+The development server will be available at `http://localhost:4321/`
 
-Visit `http://localhost:8080/` for development.
+### Build for Production
 
-### Build dist
+```bash
+# Build the project
+pnpm build
 
-```sh
-npm run build
+# Preview the build locally
+pnpm preview
 ```
 
 ---

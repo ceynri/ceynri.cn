@@ -1,0 +1,3 @@
+content/*/*
+!content/blog/TEST*
+!content/images/test*

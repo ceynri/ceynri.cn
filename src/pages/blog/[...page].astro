@@ -1,0 +1,35 @@
+---
+import type { GetStaticPathsOptions, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+
+import { getCollection } from 'astro:content';
+
+import { Pagination, PostCard } from '~/components';
+import { BLOG_POST_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
+import { AsideLayout } from '~/layouts';
+import { getSortedPosts, publishedPostFilter } from '~/utils';
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const rawPosts = await getCollection('blog', publishedPostFilter);
+  const posts = getSortedPosts(rawPosts);
+
+  return paginate(posts, { pageSize: BLOG_POST_PER_PAGE });
+}
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>;
+}
+
+const { page } = Astro.props;
+const pageTitle = page.currentPage === 1 ? SITE_TITLE : `${SITE_TITLE} - 第${page.currentPage}页`;
+---
+
+<AsideLayout
+  title={pageTitle}
+  description={SITE_DESCRIPTION}
+>
+  {page.data.map((post) => (
+    <PostCard post={post} />
+  ))}
+  <Pagination page={page} />
+</AsideLayout>

@@ -1,0 +1,29 @@
+---
+import { Moon, Sun } from '~/components/icons';
+import { cn } from '~/utils';
+---
+
+<button
+  role="button"
+  title="切换主题"
+  aria-label="切换主题"
+  class={cn('theme-toggle-button size-full flex relative text-[var(--navbar-text-color)] opacity-50 hover:opacity-100 rotate-180 dark:rotate-0 transition-[transform,opacity]', Astro.props.class)}
+>
+  <Moon class="icon-dark hidden dark:block size-full" />
+  <Sun class="icon-light dark:hidden size-full" />
+</button>
+
+<script>
+const buttons = document.querySelectorAll('.theme-toggle-button');
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-scheme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-scheme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    window.umami.track('theme-toggle-button', {
+      theme: newTheme,
+    });
+  });
+});
+</script>

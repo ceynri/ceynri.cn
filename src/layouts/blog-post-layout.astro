@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { BlogPost, Comments, FloatingImages, Footer, TopNavbar } from '~/components';
+
+import BaseLayout from './base-layout.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+const { title, description, cover_image } = post.data;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={cover_image?.src}
+>
+  <TopNavbar />
+  <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">
+    <div class="mx-auto max-w-[50rem]">
+      <BlogPost post={post} />
+      <Comments class="mt-12" />
+      <Footer class="text-center" />
+    </div>
+  </div>
+
+  <!-- 浮动图片组件 -->
+  <FloatingImages />
+</BaseLayout>

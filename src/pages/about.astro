@@ -1,0 +1,68 @@
+---
+import { getEntry, render } from 'astro:content';
+
+import { SITE_TITLE } from '~/consts';
+import { AsideLayout } from '~/layouts';
+
+const post = await getEntry('pages', 'about');
+if (!post) {
+  throw new Error('Could not find about post');
+}
+const { Content } = await render(post);
+---
+
+<AsideLayout
+  title={`关于 - ${SITE_TITLE}`}
+  description="关于本站点以及站长的介绍"
+  mainClass="max-md:px-0"
+>
+  {post && (
+    <main class="article typography prose-card max-sm:rounded-none">
+      <article class="max-sm:mt-8">
+        <Content />
+      </article>
+    </main>
+  )}
+</AsideLayout>
+
+<style
+  lang="scss"
+  is:global
+>
+.article {
+  h2:first-child {
+    margin-top: 0;
+  }
+
+  // 荧光划线效果
+  a {
+    z-index: 1;
+    position: relative;
+    // 划线效果在换行情况下会有样式问题，所以需要禁止换行
+    white-space: nowrap;
+
+    $overflow-width: 1px;
+    $max-width: calc(100% + 2 * $overflow-width);
+
+    // TODO: 确认在移动端以及其他浏览器中是否正常显示
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: -1;
+      left: -$overflow-width;
+      bottom: 0.1em;
+      width: 1.5em;
+      max-width: $max-width;
+      height: 0.6em;
+      border-radius: 1px;
+      background-color: var(--accent-color);
+      transition: background-color 0.3s ease-out, width 0.3s;
+    }
+
+    &:hover:before {
+      width: $max-width;
+    }
+  }
+}
+</style>

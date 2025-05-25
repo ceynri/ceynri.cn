@@ -1,0 +1,34 @@
+---
+interface Props {
+  tags: Array<{
+    title: string;
+    count?: number;
+  } | string>;
+  class?: string;
+}
+
+const { tags } = Astro.props;
+
+const formattedTags = (
+  typeof tags[0] !== 'string'
+    ? tags
+    : tags.map((tag) => ({ title: tag }))
+) as Array<{
+  title: string;
+  count?: number;
+}>;
+---
+
+<div class={Astro.props.class}>
+  {formattedTags.map((tag) => (
+    <a
+      href={`/blog/tags/${tag.title}`}
+      class="my-1 mr-2 text-sm rounded-md bg-[var(--tag-bg-color)] transition-[background-color] ease-out inline-flex"
+    >
+      <span class="opacity-50 sparklable-text py-1.5 px-2.5">
+        # {tag.title}
+        {tag.count && <span>{tag.count}</span>}
+      </span>
+    </a>
+  ))}
+</div>

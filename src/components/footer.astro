@@ -1,0 +1,20 @@
+---
+import { FILING } from '~/consts';
+import { cn } from '~/utils';
+
+import CurrentYear from './current-year.astro';
+---
+
+<footer class={cn('my-prose opacity-50', Astro.props.class)}>
+  <div class="text-xs leading-[1.75]">
+    Ceynri © 2020-<CurrentYear />
+  </div>
+  <a
+    href={FILING.link}
+    class="block text-xs leading-[1.75]"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {FILING.text}
+  </a>
+</footer>

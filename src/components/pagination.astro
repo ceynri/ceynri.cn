@@ -1,0 +1,89 @@
+---
+export interface Props {
+  page: {
+    url: {
+      prev?: string;
+      next?: string;
+    };
+    currentPage: number;
+    lastPage: number;
+  };
+}
+
+const { page } = Astro.props;
+const { url, currentPage, lastPage } = page;
+
+// 生成页码数组
+const pageRange = 2; // 当前页前后显示的页码数量
+let startPage = Math.max(1, currentPage - pageRange);
+let endPage = Math.min(lastPage, currentPage + pageRange);
+
+// 确保显示足够的页码
+if (endPage - startPage + 1 < pageRange * 2 + 1) {
+  if (startPage === 1) {
+    endPage = Math.min(lastPage, startPage + pageRange * 2);
+  }
+  else if (endPage === lastPage) {
+    startPage = Math.max(1, endPage - pageRange * 2);
+  }
+}
+
+const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+---
+
+<nav
+  class="my-8 flex w-full bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl overflow-hidden text-xl text-[var(--pagination-text-color)]"
+  aria-label="分页器"
+>
+  <div class="flex flex-wrap">
+    {url.prev && (
+      <a
+        href={url.prev}
+        class="pagination-item hover:pagination-item-hovered"
+      >
+        {'<'}
+      </a>
+    )}
+
+    {pages.map((p) => (
+      <a
+        href={p === 1 ? '/blog/' : `/blog/${p}/`}
+        class={`pagination-item ${
+          p !== currentPage
+            ? 'hover:pagination-item-hovered'
+            : 'pagination-item-active hover:pagination-item-active-hovered'
+        }`}
+        aria-current={p === currentPage ? 'page' : undefined}
+      >
+        {p}
+      </a>
+    ))}
+
+    {url.next && (
+      <a
+        href={url.next}
+        class="pagination-item hover:pagination-item-hovered"
+      >
+        {'>'}
+      </a>
+    )}
+  </div>
+</nav>
+
+<style lang="scss">
+.pagination-item {
+  @apply px-10 py-6 max-sm:px-6 max-sm:py-3 opacity-50 transition-[background-color,opacity] ease-out;
+}
+
+.pagination-item-active {
+  @apply bg-[var(--pagination-active-bg-color)] font-[500];
+}
+
+.pagination-item-hovered {
+  @apply opacity-80 bg-[var(--pagination-active-bg-color)];
+}
+
+.pagination-item-active-hovered {
+  @apply opacity-100;
+}
+</style>

@@ -1,10 +1,5 @@
-@import 'fonts';
-@import 'reset';
-@import 'variables';
-@import 'base';
-@import 'typography';
-@import 'scrollbar';
-@import 'code';
-@import 'content-box';
-@import 'post';
-@import 'utils';
+@use './global.scss';
+@use './variables.scss';
+@use './typography.scss';
+
+@use './prose.scss';
