@@ -30,7 +30,7 @@ const { tag, posts } = Astro.props;
   description={`标签为 ${tag} 的所有文章`}
 >
   <div class="p-prose bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl mb-8">
-    <h1 class="text-4xl font-[600] mb-4 text-[var(--title-color)]"><span class="sparkle-text">#</span> {tag.toUpperCase()}</h1>
+    <h1 class="text-4xl font-[700] mb-4 text-[var(--title-color)]"><span class="sparkle-text">#</span> {tag.toUpperCase()}</h1>
     <p class="text-[var(--text-secondary-color)]">{posts.length} {posts.length > 1 ? 'POSTS' : 'POST'}</p>
   </div>
   {posts.map((post) => (
