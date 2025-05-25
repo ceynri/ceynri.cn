@@ -1,7 +1,7 @@
 ---
 description: 
-globs: 
-alwaysApply: true
+globs: *.ts,*.astro,*.scss,*.js
+alwaysApply: false
 ---
 # 开发与代码规范
 

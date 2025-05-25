@@ -11,5 +11,10 @@ alwaysApply: true
 
 ## 任务
 
-- 当新增大功能点时，将任务加入到 [TASK.md](mdc:TASK.md) 中去进行管理，有必要时合理拆分为多个可以执行的小任务
-- 当完成一个功能点时，检查并更新 [TASK.md](mdc:TASK.md) 中可以被标记为完成的任务项
+- 当新增大功能点时，将任务加入到 [task.md](mdc:task.md) 中去进行管理，有必要时合理拆分为多个可以执行的小任务
+- 当完成一个小功能点时，检查并更新 [task.md](mdc:task.md) 中可以被标记为完成的任务项
+- 当一个大功能点被完成时，将其由 [task.md](mdc:task.md) 移动到 [task-completed.md](mdc:task-completed.md)
+
+## 规则
+
+- 当项目结构发生变动时，适当更新 [project-overview.mdc](mdc:.cursor/rules/project-overview.mdc)

@@ -7,29 +7,93 @@ alwaysApply: false
 
 ## 项目简介
 
-本项目为个人博客网站，主要面向 PC Web 端，同时兼容移动端浏览访问。
+本项目为个人博客网站 ceynri.cn，主要面向 PC Web 端，同时兼容移动端浏览访问。
 
-原始版本基于 Gridsome（Vue 生态）+ SASS，现正重构为 Astro + TailwindCSS + SASS。重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
+**版本历史：**
+- v3（当前）：基于 Astro + TailwindCSS + SASS，正在开发中（WIP）
+- v2：基于 Gridsome（Vue 生态）+ SASS，因 Gridsome 被维护者放弃而重构
+- v1：已归档至 v1 分支，可访问 https://v1.ceynri.cn/
+
+重构目标是在页面 UI 基本不变的前提下，完成底层框架切换，并提升开发体验与可维护性。
 
 更多介绍参见 [README.md](mdc:README.md)
 
+## 技术栈
+
+- **Web 框架**：[Astro](mdc:https:/astro.build) v5.7.12
+- **样式**：[TailwindCSS](mdc:https:/tailwindcss.com) v3.4.17 + [SASS](mdc:https:/sass-lang.com) v1.87.0
+- **评论系统**：[giscus](mdc:https:/github.com/laymonage/giscus)
+- **开发工具**：[Cursor](mdc:https:/www.cursor.com)
+- **包管理器**：pnpm v10.7.0
+- **代码规范**：ESLint + Prettier（@antfu/eslint-config）
+
 ## 项目环境
 
-- 使用 pnpm 作为包管理器
-- node、pnpm 版本参考 [package.json](mdc:package.json) 的声明
+- **Node.js**：>= 20
+- **pnpm**：>= 9
+- **包管理器**：强制使用 pnpm（禁用 npm/yarn）
+- **TypeScript**：严格模式，配置见 [tsconfig.json](mdc:tsconfig.json)
+
+## 开发命令
+
+```bash
+pnpm install          # 安装依赖
+pnpm dev              # 启动开发服务器（http://localhost:4321）
+pnpm build            # 构建生产版本
+pnpm preview          # 预览构建结果
+pnpm lint             # 代码检查和修复
+pnpm clean            # 清理缓存和依赖
+pnpm reinstall        # 重新安装依赖
+```
 
 ## 目录结构
 
 - `src/`
   - `components/`：通用 UI 组件（.astro/.tsx）
+    - `icons/`：图标组件
   - `layouts/`：页面布局组件
   - `pages/`：页面文件，遵循 Astro file-based routing
-  - `styles/`：全局样式、变量
+    - `blog/`：博客相关页面
+    - `giscus-theme/`：评论主题页面
+  - `styles/`：全局样式、变量、giscus 主题
   - `utils/`：工具函数
+    - `flow-field/`：首页背景动画相关
   - `assets/`：静态资源（图片、icon 等）
-- `content/`：内容源（如 MD/MDX 文件、内容配置）
-- `public/`：静态资源（favicon、robots.txt 等）
+  - `plugins/`：自定义 Astro/Markdown 插件
+  - `types/`：TypeScript 类型定义
+- `content/`：内容源（MD/MDX 文件、内容配置）
+  - `blog/`：博客文章
+  - `daily/`：日记
+  - `drafts/`：草稿
+  - `images/`：文章图片资源
+  - `pages/`：静态页面内容
+  - `poems/`：诗歌
+  - `thinkmaps/`：思维导图
+- `public/`：静态资源（favicon、robots.txt、RSS 等）
 - `old/`：原 Gridsome 项目代码，仅供参考，不做修改
 - `.cursor/rules/`：AI 编程规则与项目文档
-- [README.md](mdc:README.md) 项目自述
-- [TASK.md](mdc:TASK.md) 任务列表（管理开发任务进度与步骤）
+- [README.md](mdc:README.md)：项目自述
+- [task.md](mdc:task.md)：任务列表（管理开发任务进度与步骤）
+- [task-completed.md](mdc:task-completed.md)：已完成任务记录
+
+## 项目特性
+
+- **静态生成**：利用 Astro 的静态生成能力，优化性能
+- **响应式设计**：PC 端为主，移动端兼容
+- **深色模式**：支持明暗主题切换
+- **SEO 优化**：统一的 meta 信息管理，sitemap 生成
+- **图片优化**：使用 Astro Image 组件，支持懒加载和响应式图片
+- **内容管理**：基于 Markdown/MDX，支持 frontmatter
+- **评论系统**：集成 giscus，支持 GitHub 讨论
+- **性能优化**：预加载、部分水合、资源优化等
+
+## 开发状态
+
+当前处于 v3 重构阶段，主要任务包括：
+- ✅ 基础框架搭建和配置
+- ✅ 核心页面和组件迁移
+- 🚧 响应式设计优化和测试
+- 🚧 性能优化和 Lighthouse 评分提升
+- 📋 功能增强和用户体验改进
+
+详细任务进度参见 [task.md](mdc:task.md)

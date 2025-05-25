@@ -1,8 +1,8 @@
-# TASK LIST
+# TASKS
 
 ## P0
 
-- [ ] FloatingImage 迁移
+DONE
 
 ## 上线前测试
 
