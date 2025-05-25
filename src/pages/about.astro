@@ -38,6 +38,8 @@ const { Content } = await render(post);
   a {
     z-index: 1;
     position: relative;
+    // 划线效果在换行情况下会有样式问题，所以需要禁止换行
+    white-space: nowrap;
 
     $overflow-width: 1px;
     $max-width: calc(100% + 2 * $overflow-width);
