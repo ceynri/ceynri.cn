@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: v2
+          ref: v3
           fetch-depth: 0
 
       - name: Configure Git
@@ -29,4 +29,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_PAT }}
-          branch: v2
+          branch: v3
