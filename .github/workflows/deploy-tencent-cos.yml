@@ -1,0 +1,190 @@
+name: Deploy to Tencent COS
+
+# 并发控制：同一时间只允许一个部署任务运行
+concurrency:
+  group: tencent-cos-deployment
+  cancel-in-progress: true
+
+# 触发条件
+on:
+  push:
+    branches:
+      - main
+      - deploy
+  repository_dispatch:
+    types: [submodule-update]
+  workflow_dispatch:
+
+env:
+  # 使用项目要求的 Node.js 版本
+  NODE_VERSION: '20'
+  PNPM_VERSION: '10.7.0'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    outputs:
+      deployment-url: ${{ steps.deploy.outputs.deployment-url }}
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          submodules: true
+          fetch-depth: 0
+
+      # 2. 更新子模块（如果需要）
+      - name: Update submodules
+        run: |
+          git submodule update --remote
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -am "docs: update content"
+            git push
+          fi
+
+      # 3. 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
+
+      # 4. 设置 pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      # 5. 获取 pnpm store 目录
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      # 6. 缓存 pnpm store
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # 7. 缓存 Astro 构建产物
+      - name: Cache Astro build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro
+            node_modules/.astro
+          key: ${{ runner.os }}-astro-${{ hashFiles('**/astro.config.*') }}-${{ hashFiles('src/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-${{ hashFiles('**/astro.config.*') }}-
+            ${{ runner.os }}-astro-
+
+      # 8. 安装依赖
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      # 9. 运行类型检查和代码质量检查
+      - name: Type check and lint
+        run: |
+          pnpm astro check
+          pnpm lint
+
+      # 10. 构建项目
+      - name: Build project
+        run: pnpm build
+
+      # 11. 验证构建产物
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "❌ Build output directory 'dist' not found"
+            exit 1
+          fi
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ index.html not found in build output"
+            exit 1
+          fi
+          echo "✅ Build verification passed"
+          echo "📊 Build output size: $(du -sh dist)"
+
+      # 12. 部署到腾讯云 COS 并刷新 CDN
+      - name: Deploy to Tencent COS and refresh CDN
+        id: deploy
+        uses: sylingd/tencent-cos-and-cdn-action@v1.0.2
+        with:
+          secret_id: ${{ secrets.TENCENT_SECRET_ID }}
+          secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
+          cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
+          cos_region: ${{ secrets.TENCENT_COS_REGION }}
+          cos_accelerate: false
+          cdn_prefix: ${{ secrets.TENCENT_CDN_PREFIX }}
+          local_path: dist
+          remote_path: /
+          clean: true
+
+      # 13. 输出部署信息
+      - name: Output deployment info
+        run: |
+          echo "🚀 部署完成！"
+          echo "📅 部署时间: $(date)"
+          echo "🔗 COS 存储桶: ${{ secrets.TENCENT_COS_BUCKET }}"
+          echo "🌏 COS 区域: ${{ secrets.TENCENT_COS_REGION }}"
+          if [ -n "${{ secrets.TENCENT_CDN_PREFIX }}" ]; then
+            echo "🚀 CDN 地址: ${{ secrets.TENCENT_CDN_PREFIX }}"
+            echo "deployment-url=${{ secrets.TENCENT_CDN_PREFIX }}" >> $GITHUB_OUTPUT
+          fi
+
+      # 14. 部署状态通知
+      - name: Deployment notification
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ 部署成功！网站已更新到腾讯云 COS，CDN 缓存已刷新。"
+            echo "🎉 构建产物大小: $(du -sh dist | cut -f1)"
+            echo "⏰ 总执行时间: ${{ steps.deploy.conclusion }}"
+          else
+            echo "❌ 部署失败，请检查构建日志。"
+            echo "🔍 可能的原因："
+            echo "  - 腾讯云 API 密钥配置错误"
+            echo "  - COS 存储桶权限不足"
+            echo "  - 网络连接问题"
+            echo "  - 构建过程出现错误"
+          fi
+
+  # 可选：部署后的健康检查
+  health-check:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    if: success() && needs.build-and-deploy.outputs.deployment-url != ''
+
+    steps:
+      - name: Health check
+        run: |
+          DEPLOYMENT_URL="${{ needs.build-and-deploy.outputs.deployment-url }}"
+          if [ -n "$DEPLOYMENT_URL" ]; then
+            echo "🔍 正在检查部署状态..."
+            
+            # 等待 CDN 刷新完成
+            sleep 30
+            
+            # 检查网站是否可访问
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$DEPLOYMENT_URL" || echo "000")
+            
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "✅ 网站健康检查通过 (HTTP $HTTP_STATUS)"
+            else
+              echo "⚠️ 网站健康检查失败 (HTTP $HTTP_STATUS)"
+              echo "这可能是 CDN 缓存还未刷新完成，请稍后再试"
+            fi
+          else
+            echo "ℹ️ 跳过健康检查：未配置 CDN 域名"
+          fi
