@@ -91,4 +91,20 @@
     text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
     opacity: 1;
   }
+
+  // 兼容移动端
+  .h-screen {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .max-h-screen {
+    max-height: 100vh;
+    max-height: 100dvh;
+  }
 }

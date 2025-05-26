@@ -13,6 +13,7 @@ const blog = defineCollection({
     slug: z.string(),
     published: z.boolean().optional().default(true),
     comment: z.boolean().optional().default(true),
+    layout: z.enum(['narrow', 'normal']).optional().default('normal'),
   }),
 });
 

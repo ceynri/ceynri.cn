@@ -10,7 +10,9 @@ interface Props {
 }
 
 const { post } = Astro.props as Props;
-const { title, description, cover_image } = post.data;
+const { title, description, cover_image, layout } = post.data;
+
+const widthClass = layout === 'narrow' ? 'max-w-[30rem]' : 'max-w-[50rem]';
 ---
 
 <BaseLayout
@@ -20,7 +22,7 @@ const { title, description, cover_image } = post.data;
 >
   <TopNavbar />
   <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">
-    <div class="mx-auto max-w-[50rem]">
+    <div class={`mx-auto ${widthClass} max-sm:max-w-full`}>
       <BlogPost post={post} />
       <Comments class="mt-12" />
       <Footer class="text-center" />

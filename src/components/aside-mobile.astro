@@ -10,7 +10,7 @@ import ThemeToggleButton from './theme-toggle-button.astro';
 ---
 
 <header class={cn('w-full px-4', Astro.props.class)}>
-  <div class="mx-auto flex items-center h-20">
+  <div class="mx-auto flex items-center py-4">
     <div class="flex items-center ml-auto gap-2">
       <ThemeToggleButton class="size-10 p-2" />
       <MenuButton class="size-10 p-2" />
@@ -20,17 +20,17 @@ import ThemeToggleButton from './theme-toggle-button.astro';
   <div class="flex flex-col items-center justify-center p-4 mb-8">
     <a
       href={NAV_ITEM_MAP.blog.href}
-      class="w-48 h-48 mb-4"
+      class="w-24 h-24 mb-4"
     >
       <Image
         src={avatar}
         alt="avatar"
-        width="384"
-        height="384"
+        width="192"
+        height="192"
         class="rounded-full"
       />
     </a>
-    <h1 class="text-3xl font-[500] mb-3">
+    <h1 class="text-2xl font-[500] mb-3">
       {SITE_OWNER_NAME} <span class="text-2xl">@{SITE_OWNER_ID}</span>
     </h1>
     <p class="text-xl">{SITE_OWNER_BIO}</p>

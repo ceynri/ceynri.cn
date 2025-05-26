@@ -23,8 +23,7 @@ export default {
         accent: 'var(--accent-color)',
       },
       spacing: {
-        'prose': 'var(--prose-padding)',
-        'prose-half': 'calc(var(--prose-padding) / 2)',
+        prose: 'var(--prose-padding)',
       },
       textShadow: {
         sm: '0 1px 2px rgba(0, 0, 0, 0.5)',

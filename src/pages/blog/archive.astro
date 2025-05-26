@@ -35,22 +35,22 @@ const tags = Array.from(tagMap.entries())
 ---
 
 <AsideLayout
-  title={`Archive - ${SITE_TITLE}`}
+  title={`归档 - ${SITE_TITLE}`}
   description="博客文章归档页面"
 >
   <div class="archive">
-    <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
+    <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-8 max-sm:p-4 mb-8">
       <header class="text-[var(--text-secondary-color)] font-[500]">TAGS</header>
-      <div class="p-prose-half">
+      <div class="p-8 max-sm:p-4">
         <PostTags tags={tags} />
       </div>
     </section>
     <div>
       {postGroupList.map(({ year, list }) => (
-        <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-prose-half mb-8">
+        <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-8 max-sm:p-4 mb-8">
           <header class="text-[var(--text-secondary-color)] font-[500]">{year}</header>
           {list.map((post) => (
-            <section class="p-prose-half border-b border-dotted border-[var(--border-color)] last:border-0">
+            <section class="p-8 max-sm:p-4 border-b border-dotted border-[var(--border-color)] last:border-0">
               <a
                 href={`/blog/${post.id}/`}
                 class="block"
