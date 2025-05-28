@@ -19,6 +19,9 @@ env:
   # 使用项目要求的 Node.js 版本
   NODE_VERSION: '20'
   PNPM_VERSION: '10.7.0'
+  # 添加环境变量控制可选功能
+  ENABLE_SUBMODULE_UPDATE: ${{ vars.ENABLE_SUBMODULE_UPDATE || 'false' }}
+  ENABLE_TYPE_CHECK: ${{ vars.ENABLE_TYPE_CHECK || 'true' }}
 
 jobs:
   build-and-deploy:
@@ -34,11 +37,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
-          submodules: true
+          submodules: ${{ env.ENABLE_SUBMODULE_UPDATE == 'true' }}
           fetch-depth: 0
 
       # 2. 更新子模块（如果需要）
       - name: Update submodules
+        if: env.ENABLE_SUBMODULE_UPDATE == 'true'
         run: |
           git submodule update --remote
           git config --global user.name "github-actions[bot]"
@@ -94,6 +98,7 @@ jobs:
 
       # 9. 运行类型检查和代码质量检查
       - name: Type check and lint
+        if: env.ENABLE_TYPE_CHECK == 'true'
         run: |
           pnpm astro check
           pnpm lint
@@ -184,6 +189,7 @@ jobs:
             else
               echo "⚠️ 网站健康检查失败 (HTTP $HTTP_STATUS)"
               echo "这可能是 CDN 缓存还未刷新完成，请稍后再试"
+              exit 1
             fi
           else
             echo "ℹ️ 跳过健康检查：未配置 CDN 域名"
