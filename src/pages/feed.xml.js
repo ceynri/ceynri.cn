@@ -42,7 +42,13 @@ export async function GET(context) {
     description: SITE_DESCRIPTION,
     site: context.site,
     items,
-    customData: '<language>zh-CN</language>',
+    customData: `
+      <language>zh-CN</language>
+      <follow_challenge>
+        <feedId>109567107934380032</feedId>
+        <userId>67823700625606656</userId>
+      </follow_challenge>
+    `,
     stylesheet: '/rss/style.xsl',
   });
 }
