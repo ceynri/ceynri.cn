@@ -89,5 +89,7 @@ export default defineConfig({
   image: {
     // 将图像尺寸自适应优化用于所有的 Image、Picture 以及 Markdown 图像
     experimentalLayout: 'full-width',
+    // https://docs.astro.build/zh-cn/reference/configuration-reference/#imageexperimentalbreakpoints
+    experimentalBreakpoints: [750, 1080, 1920, 2560],
   },
 });
