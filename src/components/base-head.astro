@@ -129,8 +129,10 @@ const pageImage = new URL(image || '/favicon.png', Astro.site);
     document.documentElement.setAttribute('data-scheme', 'dark');
   }
   else {
-    // 其他页面根据 localStorage 中的 theme 设置主题，默认暗色主题
-    const theme = localStorage.getItem('theme') || 'dark';
+    // 默认根据系统偏好设置主题
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const defaultTheme = prefersDark ? 'dark' : 'light';
+    const theme = localStorage.getItem('theme') || defaultTheme;
     document.documentElement.setAttribute('data-scheme', theme);
   }
 </script>
