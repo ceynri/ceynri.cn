@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  TARGET_BRANCH: v3
+
 jobs:
   rebase:
     runs-on: ubuntu-latest
@@ -13,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: v3
+          ref: ${{ env.TARGET_BRANCH }}
           fetch-depth: 0
 
       - name: Configure Git
@@ -29,4 +32,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_PAT }}
-          branch: v3
+          branch: ${{ env.TARGET_BRANCH }}
