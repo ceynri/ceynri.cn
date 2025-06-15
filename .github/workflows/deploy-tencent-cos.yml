@@ -121,13 +121,13 @@ jobs:
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
       - name: Deploy to Tencent COS and refresh CDN
-        uses: ceynri/tencent-cos-and-cdn-action@v1.0.3
+        uses: sylingd/tencent-cos-and-cdn-action@v1.1.1
         with:
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
           secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
           cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
-          storage_class: MAZ_STANDARD
+          cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
           cos_accelerate: true
           cdn_prefix: ${{ secrets.TENCENT_CDN_PREFIX }}
           local_path: dist
