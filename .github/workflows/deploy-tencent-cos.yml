@@ -127,8 +127,7 @@ jobs:
           secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
           cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
-          cos_put_options:
-            - StorageClass: MAZ_STANDARD
+          cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
           cos_accelerate: true
           cdn_prefix: ${{ secrets.TENCENT_CDN_PREFIX }}
           local_path: dist
