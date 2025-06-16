@@ -19,7 +19,6 @@ env:
   # 使用项目要求的 Node.js 版本
   NODE_VERSION: '20'
   PNPM_VERSION: '10.7.0'
-  DEPLOYMENT_URL: 'https://ceynri.cn'
   # 添加环境变量控制可选功能
   ENABLE_SUBMODULE_UPDATE: ${{ vars.ENABLE_SUBMODULE_UPDATE || 'false' }}
   ENABLE_TYPE_CHECK: ${{ vars.ENABLE_TYPE_CHECK || 'true' }}
@@ -121,7 +120,7 @@ jobs:
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
       - name: Deploy to Tencent COS and refresh CDN
-        uses: sylingd/tencent-cos-and-cdn-action@v1.3.0
+        uses: ceynri/tencent-cos-and-cdn-action@master
         with:
           # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
@@ -164,14 +163,14 @@ jobs:
     steps:
       - name: Health check
         run: |
-          if [ -n "${{ env.DEPLOYMENT_URL }}" ]; then
+          if [ -n "${{ secrets.TENCENT_CDN_PREFIX }}" ]; then
             echo "🔍 Checking deployment status..."
             
             # 等待 CDN 刷新完成
             sleep 30
             
             # 检查网站是否可访问
-            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ env.DEPLOYMENT_URL }}" || echo "000")
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.TENCENT_CDN_PREFIX }}" || echo "000")
             
             if [ "$HTTP_STATUS" = "200" ]; then
               echo "✅ Website health check passed (HTTP $HTTP_STATUS)"
