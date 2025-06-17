@@ -132,8 +132,8 @@ jobs:
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
           # 指定 COS 存储类型为多 AZ 标准类型
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
-          # 对文件预先进行 hash 比对，重复文件不上传
-          cos_replace_file: crc64ecma
+          # 是否替换同名文件
+          cos_replace_file: false
           # 使用 COS 的加速域名进行上传
           cos_accelerate: true
           # CDN 域名前缀 (eg: https://cdn.example.com/)
