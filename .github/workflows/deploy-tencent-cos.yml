@@ -131,7 +131,7 @@ jobs:
           # COS 存储桶区域 (eg: ap-shanghai)
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
           # 设置文件上传的并行数量
-          cos_init_options: '{"FileParallelLimit":4}'
+          cos_init_options: '{"FileParallelLimit":10}'
           # 指定 COS 存储类型为多 AZ 标准类型
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
           # 是否替换同名文件
