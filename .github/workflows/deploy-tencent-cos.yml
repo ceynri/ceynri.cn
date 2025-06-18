@@ -120,7 +120,7 @@ jobs:
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
       - name: Deploy to Tencent COS and refresh CDN
-        uses: ceynri/tencent-cos-and-cdn-action@master
+        uses: sylingd/tencent-cos-and-cdn-action@master
         with:
           # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
@@ -130,10 +130,12 @@ jobs:
           cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
           # COS 存储桶区域 (eg: ap-shanghai)
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
+          # 设置文件上传的并行数量
+          cos_init_options: '{"FileParallelLimit":4}'
           # 指定 COS 存储类型为多 AZ 标准类型
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
           # 是否替换同名文件
-          cos_replace_file: false
+          cos_replace_file: crc64ecma
           # 使用 COS 的加速域名进行上传
           cos_accelerate: true
           # CDN 域名前缀 (eg: https://cdn.example.com/)
