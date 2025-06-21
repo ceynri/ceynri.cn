@@ -120,7 +120,7 @@ jobs:
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
       - name: Deploy to Tencent COS and refresh CDN
-        uses: sylingd/tencent-cos-and-cdn-action@master
+        uses: sylingd/tencent-cos-and-cdn-action@v1.4.2
         with:
           # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
@@ -130,10 +130,10 @@ jobs:
           cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
           # COS 存储桶区域 (eg: ap-shanghai)
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
-          # 设置文件上传的并行任务数量
-          cos_init_options: '{"FileParallelLimit":4}'
           # 指定 COS 存储类型为多 AZ 标准类型
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
+          # 设置文件上传的并行任务数量
+          cos_init_options: '{"FileParallelLimit":8}'
           # 是否替换同名文件
           cos_replace_file: crc64ecma
           # 检查重复文件的并行任务数量
@@ -149,7 +149,7 @@ jobs:
           # COS 桶上传路径
           remote_path: /
           # 上传完后清理 remote_path 中非本次上传的文件
-          clean: true
+          # clean: true
 
       # 13. 部署结果
       - name: Deployment result summary
