@@ -130,12 +130,14 @@ jobs:
           cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
           # COS 存储桶区域 (eg: ap-shanghai)
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
-          # 设置文件上传的并行数量
+          # 设置文件上传的并行任务数量
           cos_init_options: '{"FileParallelLimit":4}'
           # 指定 COS 存储类型为多 AZ 标准类型
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
           # 是否替换同名文件
           cos_replace_file: crc64ecma
+          # 检查重复文件的并行任务数量
+          cos_file_check_concurrent: 32
           # 使用 COS 的加速域名进行上传
           cos_accelerate: true
           # CDN 域名前缀 (eg: https://cdn.example.com/)
