@@ -120,7 +120,7 @@ jobs:
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
       - name: Deploy to Tencent COS and refresh CDN
-        uses: ceynri/tencent-cos-and-cdn-action@master
+        uses: sylingd/tencent-cos-and-cdn-action@master
         with:
           # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
