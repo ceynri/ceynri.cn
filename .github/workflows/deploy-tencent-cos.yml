@@ -19,7 +19,6 @@ env:
   # 使用项目要求的 Node.js 版本
   NODE_VERSION: '20'
   PNPM_VERSION: '10.7.0'
-  DEPLOYMENT_URL: 'https://ceynri.cn'
   # 添加环境变量控制可选功能
   ENABLE_SUBMODULE_UPDATE: ${{ vars.ENABLE_SUBMODULE_UPDATE || 'false' }}
   ENABLE_TYPE_CHECK: ${{ vars.ENABLE_TYPE_CHECK || 'true' }}
@@ -121,18 +120,36 @@ jobs:
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
       - name: Deploy to Tencent COS and refresh CDN
-        uses: sylingd/tencent-cos-and-cdn-action@v1.1.1
+        uses: sylingd/tencent-cos-and-cdn-action@v1.4.2
         with:
+          # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
+          # 腾讯云 API 密钥 Key
           secret_key: ${{ secrets.TENCENT_SECRET_KEY }}
+          # COS 存储桶名称 (eg: my-website-1234567890)
           cos_bucket: ${{ secrets.TENCENT_COS_BUCKET }}
+          # COS 存储桶区域 (eg: ap-shanghai)
           cos_region: ${{ secrets.TENCENT_COS_REGION }}
+          # 指定 COS 存储类型为多 AZ 标准类型
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
+          # 设置文件上传的并行任务数量
+          cos_init_options: '{"FileParallelLimit":8}'
+          # 是否替换同名文件
+          cos_replace_file: crc64ecma
+          # 检查重复文件的并行任务数量
+          cos_file_check_concurrent: 32
+          # 使用 COS 的加速域名进行上传
           cos_accelerate: true
+          # CDN 域名前缀 (eg: https://cdn.example.com/)
           cdn_prefix: ${{ secrets.TENCENT_CDN_PREFIX }}
+          # 等待 CDN 刷新完成再结束 step
+          cdn_wait_flush: true
+          # 项目文件本地路径
           local_path: dist
+          # COS 桶上传路径
           remote_path: /
-          clean: true
+          # 上传完后清理 remote_path 中非本次上传的文件
+          # clean: true
 
       # 13. 部署结果
       - name: Deployment result summary
@@ -150,14 +167,14 @@ jobs:
     steps:
       - name: Health check
         run: |
-          if [ -n "${{ env.DEPLOYMENT_URL }}" ]; then
+          if [ -n "${{ secrets.TENCENT_CDN_PREFIX }}" ]; then
             echo "🔍 Checking deployment status..."
             
             # 等待 CDN 刷新完成
             sleep 30
             
             # 检查网站是否可访问
-            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ env.DEPLOYMENT_URL }}" || echo "000")
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.TENCENT_CDN_PREFIX }}" || echo "000")
             
             if [ "$HTTP_STATUS" = "200" ]; then
               echo "✅ Website health check passed (HTTP $HTTP_STATUS)"
