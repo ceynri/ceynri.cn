@@ -81,15 +81,9 @@ export default defineConfig({
       rehypeImageLinks,
     ],
   },
-  experimental: {
-    // 启用全局的响应式图片优化
-    // https://docs.astro.build/zh-cn/reference/experimental-flags/responsive-images/
-    responsiveImages: true,
-  },
   image: {
     // 将图像尺寸自适应优化用于所有的 Image、Picture 以及 Markdown 图像
-    experimentalLayout: 'full-width',
-    // https://docs.astro.build/zh-cn/reference/configuration-reference/#imageexperimentalbreakpoints
-    experimentalBreakpoints: [750, 1080, 1920, 2560],
+    layout: 'full-width',
+    breakpoints: [750, 1080, 1920, 2560],
   },
 });

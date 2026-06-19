@@ -1,19 +1,25 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './content/blog' }),
   schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string().optional(),
+    summary: z.string().optional(),
     tags: z.array(z.string()),
     date: z.coerce.date(),
+    createAt: z.coerce.date().optional(),
     lastmod: z.coerce.date().optional(),
     cover_image: image().optional(),
     slug: z.string(),
+    status: z.enum(['seed', 'draft', 'evergreen', 'archived']).optional(),
     published: z.boolean().optional().default(true),
     comment: z.boolean().optional().default(true),
     layout: z.enum(['narrow', 'normal']).optional().default('normal'),
+    cost: z.string().optional(),
+    related: z.array(z.string()).optional(),
   }),
 });
 
@@ -29,7 +35,21 @@ const pages = defineCollection({
   }),
 });
 
+const poems = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './content/poems' }),
+  schema: () => z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    slug: z.string(),
+    status: z.enum(['seed', 'draft', 'evergreen', 'archived']).optional(),
+    published: z.boolean().optional().default(true),
+    tags: z.array(z.string()).optional(),
+    layout: z.enum(['narrow', 'normal']).optional(),
+  }),
+});
+
 export const collections = {
   blog,
   pages,
+  poems,
 };

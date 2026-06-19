@@ -6,13 +6,14 @@ DONE
 
 ## P1
 
+- [x] 升级到 Astro 6（含 Vite 7 / Zod 4；工具链迁移到 mise，Tailwind 3 改用 PostCSS 处理）
 - [ ] 利用 Astro 所提供的各种性能优化特性对项目做性能优化
   - [ ] 使用 Astro 的 View Transitions API 实现页面过渡动画
   - [ ] 利用 Astro 的 Partial Hydration 特性优化组件加载
   - [x] 配置 Astro 的资源预加载策略
   - [x] 使用 Astro 的 Content Collections API 优化内容管理
-  - [ ] 配置 Astro 的图片优化选项
-- [ ] 升级 Tailwind 4
+  - [x] 配置 Astro 的图片优化选项（已启用全局响应式图片 layout/breakpoints）
+- [ ] 升级 Tailwind 4（暂缓：官方确认 TW4 与 Sass 不兼容，需先迁移出 Sass）
   - https://docs.astro.build/zh-cn/guides/styling/#%E4%BB%8E-tailwind-3-%E5%8D%87%E7%BA%A7%E5%88%B0-4
 - [ ] 支持定位到文章的指定标题（锚点导航）
   - [ ] 实现标题点击复制链接功能
@@ -31,7 +32,7 @@ DONE
   - [x] 设置自动构建和部署流程
   - [x] 配置环境变量和密钥
   - [x] 添加部署状态检查和通知
-- [ ] 导入 content/poems 下的内容
+- [ ] 导入 content/poems 下的内容（collection 已定义，待开发诗歌路由页面）
 
 ## P2
 
