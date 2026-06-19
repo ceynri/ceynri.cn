@@ -12,10 +12,13 @@ A modern, responsive personal website featuring blog and portfolio content.
 
 ### Key Features
 
-- 🚀 Fast & modern with Astro
+- 🚀 Fast & modern with Astro (static generation)
 - 📱 Mobile responsive design
 - ✨ Cool animation effect on homepage
 - 📝 Blog with tags and archives
+- 🌓 Dark mode support
+- 🔍 SEO optimized (sitemap, Open Graph/Twitter meta)
+- 🖼️ Responsive image optimization via Astro Image
 - 💬 Comments powered by Giscus
 
 <!--
@@ -70,7 +73,6 @@ TODO: floating image effect
 - [TailwindCSS](https://tailwindcss.com/) + [SASS](https://sass-lang.com/) - Styling
 - [Giscus](https://github.com/laymonage/giscus) - Comments system
 - [ESLint](https://eslint.org/) ([@antfu/eslint-config](https://github.com/antfu/eslint-config)) - Code quality
-- Built with [Cursor](https://www.cursor.com/) - AI-powered IDE
 <!-- - [Github Action](https://github.com/ceynri/ceynri.cn/actions) -->
 
 ## Browser Support
@@ -92,7 +94,7 @@ TODO: floating image effect
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - pnpm 9+
 
 ### Local Development
