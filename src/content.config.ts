@@ -2,7 +2,9 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+// Vite SSR 环境下 import.meta.env 可用
 const contentBase = import.meta.env.CONTENT_BASE || './content';
+// 注意：与 astro.config.ts 中 resolveContentBase 读取同一 CONTENT_BASE 变量
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: `${contentBase}/blog` }),

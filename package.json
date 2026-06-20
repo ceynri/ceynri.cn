@@ -27,6 +27,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "cache:clean": "rm -rf .astro node_modules/.astro",
     "clean": "rm -rf node_modules dist .astro",
     "reinstall": "pnpm clean && pnpm install"
@@ -57,6 +59,7 @@
     "tailwindcss": "^4.3.1",
     "typescript": "^5.8.3",
     "unist-util-visit": "^5.0.0",
-    "vite-plugin-entry-shaking": "^0.5.1"
+    "vite-plugin-entry-shaking": "^0.5.1",
+    "vitest": "^4.1.9"
   }
 }
