@@ -1,4 +1,4 @@
-import { Archive, Feather, Github, Home, Info, Mail, Rss, X } from '~/components/icons';
+import { Archive, Feather, Github, House, Info, type LucideComponent, Mail, Rss, X } from '~/components/icons';
 
 /** 站点信息 */
 export const SITE_TITLE = '山风的小角落';
@@ -18,7 +18,7 @@ export const SITE_OWNER_BIO = 'Stay thinking.';
 /** 导航栏项类型 */
 interface NavItem {
   name: string;
-  icon: any;
+  icon: LucideComponent;
   href: string;
 }
 
@@ -26,7 +26,7 @@ interface NavItem {
 export const NAV_ITEM_MAP = {
   home: {
     name: 'Home',
-    icon: Home,
+    icon: House,
     href: '/',
   },
   blog: {
