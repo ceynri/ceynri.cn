@@ -1,4 +1,4 @@
-import type { Element } from 'hast';
+import type { Element, Root } from 'hast';
 
 import { visit } from 'unist-util-visit';
 
@@ -7,7 +7,7 @@ import { visit } from 'unist-util-visit';
  * 这样可以被浮动图片组件自动识别和处理
  */
 export function rehypeImageLinks() {
-  return (tree: any) => {
+  return (tree: Root) => {
     visit(tree, 'element', (node: Element) => {
       // 只处理 a 标签
       if (node.tagName !== 'a') {

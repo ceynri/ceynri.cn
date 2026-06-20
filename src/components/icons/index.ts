@@ -1,9 +1,9 @@
 // Re-export lucide-astro and simple-icons-astro in .ts file to make vite-plugin-entry-shaking work
-
+export type { AstroComponent as LucideComponent } from '@lucide/astro';
 export {
   Archive,
   Feather,
-  Home,
+  House,
   Info,
   Mail,
   Menu,
