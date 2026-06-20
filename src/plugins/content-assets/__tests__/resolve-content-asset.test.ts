@@ -1,0 +1,126 @@
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { ContentAssetNotFoundError, isLocalImageAsset, resolveContentAsset } from '../index';
+
+let tmpDir: string;
+let mdFile: string;
+
+beforeAll(() => {
+  tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'content-assets-test-'));
+  fs.mkdirSync(path.join(tmpDir, 'blog/assets/my-post'), { recursive: true });
+  fs.mkdirSync(path.join(tmpDir, 'assets'), { recursive: true });
+  fs.writeFileSync(path.join(tmpDir, 'blog/assets/my-post/diagram.png'), '');
+  fs.writeFileSync(path.join(tmpDir, 'assets/common.png'), '');
+  fs.writeFileSync(path.join(tmpDir, 'blog/my-post.md'), '');
+  mdFile = path.join(tmpDir, 'blog/my-post.md');
+});
+
+afterAll(() => {
+  fs.rmSync(tmpDir, { recursive: true });
+});
+
+describe('isLocalImageAsset', () => {
+  it('识别内容根 URI', () => {
+    expect(isLocalImageAsset('/blog/assets/my-post/diagram.png')).toBe(true);
+  });
+
+  it('识别相对路径', () => {
+    expect(isLocalImageAsset('./assets/my-post/diagram.png')).toBe(true);
+    expect(isLocalImageAsset('../assets/common.png')).toBe(true);
+  });
+
+  it('排除 https URL', () => {
+    expect(isLocalImageAsset('https://example.com/a.png')).toBe(false);
+  });
+
+  it('排除 http URL', () => {
+    expect(isLocalImageAsset('http://example.com/a.png')).toBe(false);
+  });
+
+  it('排除 data URL', () => {
+    expect(isLocalImageAsset('data:image/png;base64,xxx')).toBe(false);
+  });
+
+  it('排除非图片扩展名', () => {
+    expect(isLocalImageAsset('/blog/assets/my-post/doc.pdf')).toBe(false);
+  });
+
+  it('排除空字符串', () => {
+    expect(isLocalImageAsset('')).toBe(false);
+  });
+});
+
+describe('resolveContentAsset', () => {
+  describe('内容根 URI', () => {
+    it('解析 blog 私有资源', () => {
+      const result = resolveContentAsset('/blog/assets/my-post/diagram.png', {
+        markdownFilePath: mdFile,
+        contentBase: tmpDir,
+      });
+      expect(result.contentUri).toBe('/blog/assets/my-post/diagram.png');
+      expect(result.sourcePath).toBe(path.join(tmpDir, 'blog/assets/my-post/diagram.png'));
+      expect(result.outputUrl).toBe('/blog/assets/my-post/diagram.png');
+    });
+
+    it('解析公共资源', () => {
+      const result = resolveContentAsset('/assets/common.png', {
+        markdownFilePath: mdFile,
+        contentBase: tmpDir,
+      });
+      expect(result.contentUri).toBe('/assets/common.png');
+      expect(result.outputUrl).toBe('/assets/common.png');
+    });
+  });
+
+  describe('相对路径', () => {
+    it('从 md 文件相对路径推导 contentUri', () => {
+      const result = resolveContentAsset('./assets/my-post/diagram.png', {
+        markdownFilePath: mdFile,
+        contentBase: tmpDir,
+      });
+      expect(result.contentUri).toBe('/blog/assets/my-post/diagram.png');
+      expect(result.outputUrl).toBe('/blog/assets/my-post/diagram.png');
+    });
+  });
+
+  describe('重复引用', () => {
+    it('同一 asset 多次解析结果稳定', () => {
+      const r1 = resolveContentAsset('/blog/assets/my-post/diagram.png', {
+        markdownFilePath: mdFile,
+        contentBase: tmpDir,
+      });
+      const r2 = resolveContentAsset('/blog/assets/my-post/diagram.png', {
+        markdownFilePath: mdFile,
+        contentBase: tmpDir,
+      });
+      expect(r1.outputUrl).toBe(r2.outputUrl);
+    });
+  });
+
+  describe('缺失文件', () => {
+    it('抛出 ContentAssetNotFoundError', () => {
+      expect(() =>
+        resolveContentAsset('/blog/assets/my-post/nonexist.png', {
+          markdownFilePath: mdFile,
+          contentBase: tmpDir,
+        }),
+      ).toThrow(ContentAssetNotFoundError);
+    });
+
+    it('错误包含诊断信息', () => {
+      try {
+        resolveContentAsset('/blog/assets/my-post/nonexist.png', {
+          markdownFilePath: mdFile,
+          contentBase: tmpDir,
+        });
+      } catch (e) {
+        const err = e as ContentAssetNotFoundError;
+        expect(err.markdownFilePath).toBe(mdFile);
+        expect(err.originalUrl).toBe('/blog/assets/my-post/nonexist.png');
+        expect(err.expectedSourcePath).toContain('nonexist.png');
+      }
+    });
+  });
+});

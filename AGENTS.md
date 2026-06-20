@@ -21,11 +21,21 @@ pnpm build    # astro check + astro build
 pnpm lint     # biome check --write
 ```
 
+### 本地内容源
+
+项目通过 `.env`（gitignored）配置 `CONTENT_BASE` 指向本地 content 项目工作区，使 dev 时可直接预览未提交的内容改动：
+
+```env
+CONTENT_BASE=/xxx/workspace/content
+```
+
+未配置时默认使用当前工作区的 `./content`。
+
 ## 目录结构
 
 - `src/`：`components/`（通用组件）、`layouts/`、`pages/`（含 `blog/`）、`styles/`（含 `main.css` 入口 + `variables.css`）、`utils/`（含 `flow-field/` 首页动画）、`plugins/`、`content.config.ts`
-- `content/`：内容源 submodule（ceynri-words），`blog/`/`pages/`/`poems/` 对外发布，其余为私有
-- `public/`：直出静态资源
+- `content/`：内容源 submodule（ceynri-words），`blog/`/`pages/`/`poems/` 对外发布，其余为私有。ceynri-words 是上游内容库，ceynri.cn 是下游消费者——只发布公开内容及其显式引用的图片资源闭包
+- `public/`：直出静态资源（内容图片不再依赖 `public/images` symlink，由 content asset pipeline 在 dev/build 时按需 serve/copy）
 - `openspec/`：OpenSpec spec-driven 变更管理（`specs/` 活规范 + `changes/` 变更）
 
 ## 任务管理

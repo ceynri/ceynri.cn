@@ -10,45 +10,78 @@ import type { Element } from 'hast';
 import rehypeExternalLinks from 'rehype-external-links';
 import viteEntryShaking from 'vite-plugin-entry-shaking';
 
-import { rehypeImageLinks, remarkRelateImageLinks } from './src/plugins';
+import {
+  getManifest,
+  isLocalImageAsset,
+  rehypeImageLinks,
+  remarkContentAssets,
+  resolveContentBase,
+} from './src/plugins';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// astro.config.ts 在 Vite 初始化前加载，import.meta.env 不可用
-// 需要手动读取 .env 文件
-function loadEnvVar(key: string): string | undefined {
-  try {
-    const envContent = fs.readFileSync(path.resolve(__dirname, '.env'), 'utf-8');
-    const match = envContent.match(new RegExp(`^${key}=(.+)$`, 'm'));
-    return match?.[1]?.trim();
-  } catch {
-    return undefined;
-  }
-}
 
-const contentBase = loadEnvVar('CONTENT_BASE') || './content';
-const isLocalContent = !!loadEnvVar('CONTENT_BASE');
+const contentBase = resolveContentBase(__dirname);
 
-/** dev 模式下将 /images 请求代理到本地内容仓库的 images 目录 */
-function localContentImageServer() {
+const MIME_TYPES: Record<string, string> = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+  '.avif': 'image/avif',
+};
+
+/** dev 模式下将内容资源 URL 代理到本地内容源 */
+function contentAssetDevServer() {
   return {
-    name: 'local-content-image-server',
+    name: 'content-asset-dev-server',
     // biome-ignore lint/suspicious/noExplicitAny: Vite 插件类型在 astro config 中不可直接引用
     configureServer(server: any) {
-      if (!isLocalContent) return;
-      const localImagesDir = path.resolve(contentBase, 'images');
       // biome-ignore lint/suspicious/noExplicitAny: connect middleware 类型不可直接引用
       server.middlewares.use((req: any, res: any, next: any) => {
-        if (req.url?.startsWith('/images/')) {
-          const filePath = path.join(localImagesDir, req.url.slice('/images/'.length));
-          if (fs.existsSync(filePath)) {
-            res.writeHead(200);
-            fs.createReadStream(filePath).pipe(res);
-            return;
-          }
+        const rawUrl = req.url as string | undefined;
+        if (!rawUrl) return next();
+
+        // 去除 query string（Vite 可能附加 ?v=xxx 等）
+        const url = rawUrl.split('?')[0];
+
+        if (!isLocalImageAsset(url)) return next();
+
+        const filePath = path.join(contentBase, url);
+        if (fs.existsSync(filePath)) {
+          const ext = path.extname(url).toLowerCase();
+          const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+          res.writeHead(200, { 'Content-Type': contentType });
+          fs.createReadStream(filePath).pipe(res);
+          return;
         }
         next();
       });
+    },
+  };
+}
+
+/**
+ * build 完成后将 manifest 中收集的资源 copy 到 dist 目录
+ */
+function contentAssetBuildPlugin() {
+  return {
+    name: 'content-asset-build',
+    closeBundle() {
+      const manifest = getManifest();
+      if (manifest.size === 0) return;
+
+      const distDir = path.resolve(__dirname, 'dist');
+      for (const [, asset] of manifest) {
+        const destPath = path.join(distDir, asset.outputUrl);
+        const destDir = path.dirname(destPath);
+        if (!fs.existsSync(destDir)) {
+          fs.mkdirSync(destDir, { recursive: true });
+        }
+        fs.copyFileSync(asset.sourcePath, destPath);
+      }
     },
   };
 }
@@ -74,7 +107,8 @@ export default defineConfig({
     },
     plugins: [
       tailwindcss(),
-      localContentImageServer(),
+      contentAssetDevServer(),
+      contentAssetBuildPlugin(),
       // 实现开发时的按需加载
       // issue: https://github.com/withastro/astro/issues/12793
       viteEntryShaking({
@@ -89,11 +123,11 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [
-        // 转换 markdown 中指向本地图片资源的链接，指定路由路径
+        // 解析、校验、收集和改写 Markdown 中本地图片资源引用
         [
-          remarkRelateImageLinks,
+          remarkContentAssets,
           {
-            targetPath: '/images',
+            contentBase,
           },
         ],
       ],
