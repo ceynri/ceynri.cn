@@ -8,7 +8,6 @@ import { defineConfig } from 'astro/config';
 import type { Element } from 'hast';
 import rehypeExternalLinks from 'rehype-external-links';
 import viteEntryShaking from 'vite-plugin-entry-shaking';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 import { rehypeImageLinks, remarkRelateImageLinks } from './src/plugins';
 
@@ -23,6 +22,11 @@ export default defineConfig({
     host: true,
     port: 4321,
   },
+  security: {
+    // 允许 giscus iframe 跨域请求 dev server 上的主题 CSS
+    // dev server 默认拦截 Sec-Fetch-Site: cross-site 的子资源请求，将其加入白名单放行
+    allowedDomains: [{ hostname: 'giscus.app' }],
+  },
   vite: {
     resolve: {
       alias: {
@@ -35,15 +39,6 @@ export default defineConfig({
       // issue: https://github.com/withastro/astro/issues/12793
       viteEntryShaking({
         targets: ['@lucide/astro', 'simple-icons-astro'],
-      }),
-      // 将 content/images 目录下的资源可通过 /images 路径访问
-      viteStaticCopy({
-        targets: [
-          {
-            src: 'content/images/**/*',
-            dest: 'images',
-          },
-        ],
       }),
     ],
   },
