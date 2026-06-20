@@ -2,8 +2,10 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const contentBase = import.meta.env.CONTENT_BASE || './content';
+
 const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './content/blog' }),
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: `${contentBase}/blog` }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -25,7 +27,7 @@ const blog = defineCollection({
 });
 
 const pages = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './content/pages' }),
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: `${contentBase}/pages` }),
   schema: () =>
     z.object({
       title: z.string(),
@@ -38,7 +40,7 @@ const pages = defineCollection({
 });
 
 const poems = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './content/poems' }),
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: `${contentBase}/poems` }),
   schema: () =>
     z.object({
       title: z.string(),

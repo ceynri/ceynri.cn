@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { unified } from '@astrojs/markdown-remark';
@@ -13,6 +14,44 @@ import { rehypeImageLinks, remarkRelateImageLinks } from './src/plugins';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+// astro.config.ts 在 Vite 初始化前加载，import.meta.env 不可用
+// 需要手动读取 .env 文件
+function loadEnvVar(key: string): string | undefined {
+  try {
+    const envContent = fs.readFileSync(path.resolve(__dirname, '.env'), 'utf-8');
+    const match = envContent.match(new RegExp(`^${key}=(.+)$`, 'm'));
+    return match?.[1]?.trim();
+  } catch {
+    return undefined;
+  }
+}
+
+const contentBase = loadEnvVar('CONTENT_BASE') || './content';
+const isLocalContent = !!loadEnvVar('CONTENT_BASE');
+
+/** dev 模式下将 /images 请求代理到本地内容仓库的 images 目录 */
+function localContentImageServer() {
+  return {
+    name: 'local-content-image-server',
+    // biome-ignore lint/suspicious/noExplicitAny: Vite 插件类型在 astro config 中不可直接引用
+    configureServer(server: any) {
+      if (!isLocalContent) return;
+      const localImagesDir = path.resolve(contentBase, 'images');
+      // biome-ignore lint/suspicious/noExplicitAny: connect middleware 类型不可直接引用
+      server.middlewares.use((req: any, res: any, next: any) => {
+        if (req.url?.startsWith('/images/')) {
+          const filePath = path.join(localImagesDir, req.url.slice('/images/'.length));
+          if (fs.existsSync(filePath)) {
+            res.writeHead(200);
+            fs.createReadStream(filePath).pipe(res);
+            return;
+          }
+        }
+        next();
+      });
+    },
+  };
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,6 +74,7 @@ export default defineConfig({
     },
     plugins: [
       tailwindcss(),
+      localContentImageServer(),
       // 实现开发时的按需加载
       // issue: https://github.com/withastro/astro/issues/12793
       viteEntryShaking({
@@ -53,7 +93,6 @@ export default defineConfig({
         [
           remarkRelateImageLinks,
           {
-            sourceDir: './content/images',
             targetPath: '/images',
           },
         ],
