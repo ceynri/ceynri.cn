@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -51,32 +52,34 @@ export default defineConfig({
   },
   prefetch: true,
   markdown: {
-    remarkPlugins: [
-      // 转换 markdown 中指向本地图片资源的链接，指定路由路径
-      [
-        remarkRelateImageLinks,
-        {
-          sourceDir: './content/images',
-          targetPath: '/images',
-        },
-      ],
-    ],
-    rehypePlugins: [
-      // 外部链接通过新标签页打开
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener'],
-          test: (element: Element) => {
-            const href = element.properties.href;
-            return typeof href === 'string' && href.startsWith('http') && !href.startsWith('https://ceynri.cn/');
+    processor: unified({
+      remarkPlugins: [
+        // 转换 markdown 中指向本地图片资源的链接，指定路由路径
+        [
+          remarkRelateImageLinks,
+          {
+            sourceDir: './content/images',
+            targetPath: '/images',
           },
-        },
+        ],
       ],
-      // 自动为指向图片资源的链接添加 data-image-link 属性
-      rehypeImageLinks,
-    ],
+      rehypePlugins: [
+        // 外部链接通过新标签页打开
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['noopener'],
+            test: (element: Element) => {
+              const href = element.properties.href;
+              return typeof href === 'string' && href.startsWith('http') && !href.startsWith('https://ceynri.cn/');
+            },
+          },
+        ],
+        // 自动为指向图片资源的链接添加 data-image-link 属性
+        rehypeImageLinks,
+      ],
+    }),
   },
   image: {
     // 将图像尺寸自适应优化用于所有的 Image、Picture 以及 Markdown 图像
