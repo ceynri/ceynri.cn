@@ -1,9 +1,7 @@
 import type P5 from 'p5';
-
-import type { AppOptions } from './types';
-
 import { BG_COLOR } from './config';
 import { ParticleSystem } from './particle-system';
+import type { AppOptions } from './types';
 import { generateRandomOptions } from './utils';
 
 export function sketch(p5: P5, container: HTMLElement) {

@@ -1,10 +1,8 @@
-import type { Vector } from 'p5';
 import type P5 from 'p5';
-
+import type { Vector } from 'p5';
+import { BOUNDARY_OFFSET, FADE_LIFE_RATIO, ITERATIONS_RANGE, SPEED } from './config';
 import type { Palette } from './palette';
 import type { AppOptions } from './types';
-
-import { BOUNDARY_OFFSET, FADE_LIFE_RATIO, ITERATIONS_RANGE, SPEED } from './config';
 
 /**
  * 粒子类
@@ -61,10 +59,10 @@ export class Particle {
     }
 
     for (let i = this.iterations; i > 0; i--) {
-      const angle = this.p5.noise(
-        this.pos.x / this.options.noiseScale,
-        this.pos.y / this.options.noiseScale,
-      ) * this.p5.TWO_PI * this.options.noiseScale;
+      const angle =
+        this.p5.noise(this.pos.x / this.options.noiseScale, this.pos.y / this.options.noiseScale) *
+        this.p5.TWO_PI *
+        this.options.noiseScale;
 
       this.vel.x = this.p5.cos(angle);
       this.vel.y = this.p5.sin(angle);
@@ -78,10 +76,10 @@ export class Particle {
    */
   public checkEdge() {
     if (
-      this.pos.x > this.p5.width + BOUNDARY_OFFSET
-      || this.pos.x < -BOUNDARY_OFFSET
-      || this.pos.y > this.p5.height + BOUNDARY_OFFSET
-      || this.pos.y < -BOUNDARY_OFFSET
+      this.pos.x > this.p5.width + BOUNDARY_OFFSET ||
+      this.pos.x < -BOUNDARY_OFFSET ||
+      this.pos.y > this.p5.height + BOUNDARY_OFFSET ||
+      this.pos.y < -BOUNDARY_OFFSET
     ) {
       this.respawn();
     }
@@ -107,12 +105,7 @@ export class Particle {
     const fadeOutRatio = (this.options.maxLife - this.life) / (this.options.maxLife * FADE_LIFE_RATIO);
     const fadeRatio = Math.min(fadeInRatio, fadeOutRatio, 1);
 
-    this.p5.fill(
-      this.p5.red(color),
-      this.p5.green(color),
-      this.p5.blue(color),
-      255 * fadeRatio,
-    );
+    this.p5.fill(this.p5.red(color), this.p5.green(color), this.p5.blue(color), 255 * fadeRatio);
   }
 
   /**

@@ -1,5 +1,5 @@
-import type { Color } from 'p5';
 import type P5 from 'p5';
+import type { Color } from 'p5';
 
 import type { AppOptions, Direction } from './types';
 
@@ -53,9 +53,21 @@ export class Palette {
 
     // 缓存反色
     this.invertedColors = {
-      color1: this.p5.color(255 - this.p5.red(this.color1), 255 - this.p5.green(this.color1), 255 - this.p5.blue(this.color1)),
-      color2: this.p5.color(255 - this.p5.red(this.color2), 255 - this.p5.green(this.color2), 255 - this.p5.blue(this.color2)),
-      color3: this.p5.color(255 - this.p5.red(this.color3), 255 - this.p5.green(this.color3), 255 - this.p5.blue(this.color3)),
+      color1: this.p5.color(
+        255 - this.p5.red(this.color1),
+        255 - this.p5.green(this.color1),
+        255 - this.p5.blue(this.color1),
+      ),
+      color2: this.p5.color(
+        255 - this.p5.red(this.color2),
+        255 - this.p5.green(this.color2),
+        255 - this.p5.blue(this.color2),
+      ),
+      color3: this.p5.color(
+        255 - this.p5.red(this.color3),
+        255 - this.p5.green(this.color3),
+        255 - this.p5.blue(this.color3),
+      ),
     };
   }
 

@@ -10,28 +10,31 @@ export function groupPosts<T extends CollectionEntry<'blog'>, K extends string |
   posts: T[],
   getGroupKey: (post: T) => K[] | K | undefined,
 ): Record<string, T[]> {
-  return posts.reduce((acc, post) => {
-    const keys = getGroupKey(post);
+  return posts.reduce(
+    (acc, post) => {
+      const keys = getGroupKey(post);
 
-    // 异常情况
-    if (!keys || (Array.isArray(keys) && keys.length === 0)) {
+      // 异常情况
+      if (!keys || (Array.isArray(keys) && keys.length === 0)) {
+        return acc;
+      }
+
+      // 统一处理单个键和多个键的情况
+      const keyArray = Array.isArray(keys) ? keys : [keys];
+
+      keyArray.forEach((key) => {
+        if (!key) {
+          return;
+        }
+        const stringKey = String(key);
+        if (!acc[stringKey]) {
+          acc[stringKey] = [];
+        }
+        acc[stringKey].push(post);
+      });
+
       return acc;
-    }
-
-    // 统一处理单个键和多个键的情况
-    const keyArray = Array.isArray(keys) ? keys : [keys];
-
-    keyArray.forEach((key) => {
-      if (!key) {
-        return;
-      }
-      const stringKey = String(key);
-      if (!acc[stringKey]) {
-        acc[stringKey] = [];
-      }
-      acc[stringKey].push(post);
-    });
-
-    return acc;
-  }, {} as Record<string, T[]>);
+    },
+    {} as Record<string, T[]>,
+  );
 }

@@ -1,19 +1,18 @@
 ---
 interface Props {
-  tags: Array<{
-    title: string;
-    count?: number;
-  } | string>;
+  tags: Array<
+    | {
+        title: string;
+        count?: number;
+      }
+    | string
+  >;
   class?: string;
 }
 
 const { tags } = Astro.props;
 
-const formattedTags = (
-  typeof tags[0] !== 'string'
-    ? tags
-    : tags.map((tag) => ({ title: tag }))
-) as Array<{
+const formattedTags = (typeof tags[0] !== 'string' ? tags : tags.map((tag) => ({ title: tag }))) as Array<{
   title: string;
   count?: number;
 }>;

@@ -22,8 +22,7 @@ let endPage = Math.min(lastPage, currentPage + pageRange);
 if (endPage - startPage + 1 < pageRange * 2 + 1) {
   if (startPage === 1) {
     endPage = Math.min(lastPage, startPage + pageRange * 2);
-  }
-  else if (endPage === lastPage) {
+  } else if (endPage === lastPage) {
     startPage = Math.max(1, endPage - pageRange * 2);
   }
 }
@@ -70,20 +69,28 @@ const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPag
   </div>
 </nav>
 
-<style lang="scss">
+<style>
 .pagination-item {
-  @apply px-10 py-6 max-sm:px-6 max-sm:py-3 opacity-50 transition-[background-color,opacity] ease-out;
+  padding: 1.5rem 2.5rem;
+  opacity: 0.5;
+  transition: background-color 0.3s ease-out, opacity 0.3s ease-out;
+
+  @media (max-width: 639px) {
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 .pagination-item-active {
-  @apply bg-[var(--pagination-active-bg-color)] font-[500];
+  background-color: var(--pagination-active-bg-color);
+  font-weight: 500;
 }
 
 .pagination-item-hovered {
-  @apply opacity-80 bg-[var(--pagination-active-bg-color)];
+  opacity: 0.8;
+  background-color: var(--pagination-active-bg-color);
 }
 
 .pagination-item-active-hovered {
-  @apply opacity-100;
+  opacity: 1;
 }
 </style>

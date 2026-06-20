@@ -1,11 +1,9 @@
 import type P5 from 'p5';
 import type { Color } from 'p5';
-
-import type { AppOptions } from './types';
-
 import { BG_COLOR, diluteConfig } from './config';
 import { Palette } from './palette';
 import { Particle } from './particle';
+import type { AppOptions } from './types';
 
 /**
  * 粒子系统类
@@ -51,12 +49,7 @@ export class ParticleSystem {
     // 每 n 帧绘制一次半透明背景以实现痕迹淡化
     if (this.p5.frameCount % diluteConfig.perFrame === 0) {
       const alpha = 255 * diluteConfig.ratio;
-      this.p5.background(
-        this.p5.red(this.bgColor),
-        this.p5.green(this.bgColor),
-        this.p5.blue(this.bgColor),
-        alpha,
-      );
+      this.p5.background(this.p5.red(this.bgColor), this.p5.green(this.bgColor), this.p5.blue(this.bgColor), alpha);
     }
 
     for (let i = 0; i < this.particles.length; i++) {

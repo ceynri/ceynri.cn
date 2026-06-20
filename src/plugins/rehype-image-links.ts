@@ -29,8 +29,7 @@ export function rehypeImageLinks() {
           node.properties = node.properties || {};
           node.properties.dataImageLink = '';
         }
-      }
-      catch {
+      } catch {
         // 如果 URL 解析失败，直接检查文件扩展名
         if (imageExtensions.test(href)) {
           node.properties = node.properties || {};

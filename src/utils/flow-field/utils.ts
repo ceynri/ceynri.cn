@@ -1,6 +1,5 @@
-import type { AppOptions } from './types';
-
 import { COLOR_MODES, rangeFor2xl, rangeForLg, rangeForSm } from './config';
+import type { AppOptions } from './types';
 
 /**
  * 生成指定范围内的随机数
@@ -75,5 +74,7 @@ export function generateRandomOptions(): AppOptions {
  * @returns 十六进制颜色字符串
  */
 export function getRandomHexColor(): string {
-  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`;
 }

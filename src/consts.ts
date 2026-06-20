@@ -76,18 +76,10 @@ export const NAV_ITEMS = [
 ] as const;
 
 /** 首页入口项列表 */
-export const HOME_ENTRY_ITEMS = [
-  NAV_ITEM_MAP.home,
-  NAV_ITEM_MAP.blog,
-  NAV_ITEM_MAP.about,
-] as const;
+export const HOME_ENTRY_ITEMS = [NAV_ITEM_MAP.home, NAV_ITEM_MAP.blog, NAV_ITEM_MAP.about] as const;
 
 /** 首页社交外链列表 */
-export const HOME_SOCIAL_ITEMS = [
-  NAV_ITEM_MAP.github,
-  NAV_ITEM_MAP.twitter,
-  NAV_ITEM_MAP.email,
-] as const;
+export const HOME_SOCIAL_ITEMS = [NAV_ITEM_MAP.github, NAV_ITEM_MAP.twitter, NAV_ITEM_MAP.email] as const;
 
 /** 备案信息 */
 export const FILING = {

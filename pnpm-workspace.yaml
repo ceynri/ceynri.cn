@@ -1,4 +1,5 @@
 allowBuilds:
+  '@fission-ai/openspec': true
   '@parcel/watcher': true
   esbuild: true
   sharp: true

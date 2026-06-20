@@ -1,0 +1,37 @@
+@import "./common.css";
+@import url("//giscus.app/themes/light.css");
+
+:root {
+  --global-bg-color: #f6f9fd;
+  --prose-bg-color: #ffffff;
+  --navbar-bg-color: #ffffff;
+  --inline-code-bg-color: #f6f9fd;
+  --tag-bg-color: #f6f9fd;
+  --pagination-active-bg-color: #e8edf3;
+
+  --title-color: #24292e;
+  --text-color: #34393e;
+  --text-secondary-color: #596169;
+  --inline-code-color: #24292e;
+
+  --navbar-text-color: #24292e;
+  --pagination-text-color: #24292e;
+
+  --selection-text-color: #ffffff;
+  --selection-bg-color: #b8c0c8;
+
+  --accent-color: #ffcc6e;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --blockquote-border-color: #e8edf3;
+  --table-header-border-color: #c9d1d9;
+  --table-body-border-color: #e8edf3;
+  --hr-color: #b8c0c8;
+}
+
+main {
+  --color-accent-emphasis: rgba(255, 204, 110, 0.5);
+  --color-accent-muted: rgba(255, 204, 110, 0.3);
+  --color-accent-subtle: rgba(255, 204, 110, 0.1);
+  --color-social-reaction-bg-hover: rgba(255, 204, 110, 0.3);
+  --color-social-reaction-bg-reacted-hover: rgba(255, 204, 110, 0.5);
+}
