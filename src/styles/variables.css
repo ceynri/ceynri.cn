@@ -1,0 +1,82 @@
+:root {
+  /* jade 色阶 */
+  --jade-50: #f6f9fd;
+  --jade-100: #e8edf3;
+  --jade-200: #d9e0e8;
+  --jade-300: #c9d1d9;
+  --jade-400: #b8c0c8;
+  --jade-500: #808890;
+  --jade-600: #596169;
+  --jade-700: #34393e;
+  --jade-800: #24292e;
+  --jade-900: #1a1e22;
+  --jade-950: #101216;
+
+  /* 亮色主题（默认） */
+  --global-bg-color: #f6f9fd;
+  --prose-bg-color: #ffffff;
+  --navbar-bg-color: #ffffff;
+  --inline-code-bg-color: #f6f9fd;
+  --tag-bg-color: #f6f9fd;
+  --pagination-active-bg-color: #e8edf3;
+
+  --title-color: #24292e;
+  --text-color: #34393e;
+  --text-secondary-color: #596169;
+  --inline-code-color: #24292e;
+
+  --navbar-text-color: #24292e;
+  --pagination-text-color: #24292e;
+
+  --selection-text-color: #ffffff;
+  --selection-bg-color: #b8c0c8;
+
+  --accent-color: #ffcc6e;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --blockquote-border-color: #e8edf3;
+  --table-header-border-color: #c9d1d9;
+  --table-body-border-color: #e8edf3;
+  --hr-color: #b8c0c8;
+
+  --text-shadow-size: 0.1em;
+
+  /* 断点响应式 prose padding */
+  --prose-padding: 4rem;
+
+  @media screen and (max-width: 767px) {
+    --prose-padding: 2rem;
+  }
+
+  @media screen and (max-width: 639px) {
+    --prose-padding: 1rem;
+  }
+}
+
+:root[data-scheme="dark"] {
+  --global-bg-color: #000000;
+  --prose-bg-color: #101216;
+  --navbar-bg-color: #101216;
+  --inline-code-bg-color: #000000;
+  --tag-bg-color: #000000;
+  --pagination-active-bg-color: #24292e;
+
+  --title-color: #c9d1d9;
+  --text-color: #b8c0c8;
+  --text-secondary-color: #808890;
+  --inline-code-color: #c9d1d9;
+
+  --navbar-text-color: #c9d1d9;
+  --pagination-text-color: #c9d1d9;
+
+  --selection-text-color: #000000;
+  --selection-bg-color: #596169;
+
+  --accent-color: #0000ff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --blockquote-border-color: #34393e;
+  --table-header-border-color: #596169;
+  --table-body-border-color: #34393e;
+  --hr-color: #596169;
+
+  --text-shadow-size: 0.25em;
+}

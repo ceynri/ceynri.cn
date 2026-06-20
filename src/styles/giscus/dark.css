@@ -1,0 +1,37 @@
+@import "./common.css";
+@import url("//giscus.app/themes/dark.css");
+
+:root {
+  --global-bg-color: #000000;
+  --prose-bg-color: #101216;
+  --navbar-bg-color: #101216;
+  --inline-code-bg-color: #000000;
+  --tag-bg-color: #000000;
+  --pagination-active-bg-color: #24292e;
+
+  --title-color: #c9d1d9;
+  --text-color: #b8c0c8;
+  --text-secondary-color: #808890;
+  --inline-code-color: #c9d1d9;
+
+  --navbar-text-color: #c9d1d9;
+  --pagination-text-color: #c9d1d9;
+
+  --selection-text-color: #000000;
+  --selection-bg-color: #596169;
+
+  --accent-color: #0000ff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --blockquote-border-color: #34393e;
+  --table-header-border-color: #596169;
+  --table-body-border-color: #34393e;
+  --hr-color: #596169;
+}
+
+main {
+  --color-accent-emphasis: rgba(0, 0, 255, 0.5);
+  --color-accent-muted: rgba(0, 0, 255, 0.3);
+  --color-accent-subtle: rgba(0, 0, 255, 0.1);
+  --color-social-reaction-bg-hover: rgba(0, 0, 255, 0.3);
+  --color-social-reaction-bg-reacted-hover: rgba(0, 0, 255, 0.5);
+}

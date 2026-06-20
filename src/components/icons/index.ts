@@ -3,7 +3,6 @@
 export {
   Archive,
   Feather,
-  Github,
   Home,
   Info,
   Mail,
@@ -12,6 +11,6 @@ export {
   RefreshCw,
   Rss,
   Sun,
-} from 'lucide-astro';
+} from '@lucide/astro';
 
-export { X } from 'simple-icons-astro';
+export { Github, X } from 'simple-icons-astro';

@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@import "./variables.css";
+@import "./global.css";
+@import "./typography.css";
+@import "./prose.css";
+
+@custom-variant dark (&:where([data-scheme="dark"], [data-scheme="dark"] *));
+
+@theme {
+  --color-jade-50: var(--jade-50);
+  --color-jade-100: var(--jade-100);
+  --color-jade-200: var(--jade-200);
+  --color-jade-300: var(--jade-300);
+  --color-jade-400: var(--jade-400);
+  --color-jade-500: var(--jade-500);
+  --color-jade-600: var(--jade-600);
+  --color-jade-700: var(--jade-700);
+  --color-jade-800: var(--jade-800);
+  --color-jade-900: var(--jade-900);
+  --color-jade-950: var(--jade-950);
+  --color-accent: var(--accent-color);
+
+  --spacing-prose: var(--prose-padding);
+
+  --transition-duration-fast: 0.1s;
+  --transition-duration-DEFAULT: 0.3s;
+  --transition-duration-slow: 0.5s;
+}
+
+@utility text-shadow-sm {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@utility text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@utility text-shadow-lg {
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}

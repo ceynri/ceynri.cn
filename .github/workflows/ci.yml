@@ -1,0 +1,37 @@
+name: CI Quality Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm exec astro check
+
+      - name: Lint
+        run: pnpm exec biome ci ./src ./astro.config.ts
+
+      - name: Build
+        run: pnpm exec astro build
+
+      - name: Check broken links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --offline --base ./dist './dist/**/*.html'
+          fail: true

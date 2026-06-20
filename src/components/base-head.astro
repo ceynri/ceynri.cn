@@ -1,6 +1,6 @@
 ---
 import { SITE_DESCRIPTION, UMAMI_WEBSITE_ID } from '~/consts';
-import '~/styles/index.scss';
+import '~/styles/main.css';
 
 interface Props {
   title: string;
@@ -9,12 +9,7 @@ interface Props {
   image?: string;
 }
 
-const {
-  title,
-  postTitle,
-  description = SITE_DESCRIPTION,
-  image,
-} = Astro.props;
+const { title, postTitle, description = SITE_DESCRIPTION, image } = Astro.props;
 
 const pageTitle = postTitle ? `${postTitle} - ${title}` : title;
 

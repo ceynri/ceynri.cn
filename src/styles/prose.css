@@ -1,6 +1,4 @@
 .prose {
-
-  // 隐藏重复的文章标题
   h1:first-child {
     display: none;
   }
@@ -8,8 +6,15 @@
   a {
     text-decoration: underline;
     opacity: 0.8;
+    transition-property: color, text-shadow, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
 
-    @apply sparklable-text;
+    &:hover {
+      color: var(--accent-color);
+      text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
+      opacity: 1;
+    }
   }
 
   img {
@@ -18,15 +23,15 @@
     width: calc(100% + 2 * var(--prose-padding));
     max-width: unset;
 
-    &[alt*='size=small'],
-    &[alt*='size=medium'],
-    &[alt*='size=large'],
-    &[alt*='size=auto'] {
+    &[alt*="size=small"],
+    &[alt*="size=medium"],
+    &[alt*="size=large"],
+    &[alt*="size=auto"] {
       margin-left: auto;
       margin-right: auto;
     }
 
-    &[alt*='size=small'] {
+    &[alt*="size=small"] {
       width: 38.2%;
 
       @media screen and (max-width: 640px) {
@@ -34,7 +39,7 @@
       }
     }
 
-    &[alt*='size=medium'] {
+    &[alt*="size=medium"] {
       width: 61.8%;
 
       @media screen and (max-width: 640px) {
@@ -42,15 +47,11 @@
       }
     }
 
-    &[alt*='size=large'] {
+    &[alt*="size=large"] {
       width: 100%;
     }
 
-    &[alt*='size=full'] {
-      // default
-    }
-
-    &[alt*='size=auto'] {
+    &[alt*="size=auto"] {
       width: auto;
       max-width: 100%;
     }
