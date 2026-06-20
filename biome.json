@@ -48,6 +48,11 @@
       "formatter": { "enabled": false }
     }
   ],
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
