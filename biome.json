@@ -28,16 +28,7 @@
     }
   },
   "files": {
-    "includes": [
-      "**",
-      "!**/dist/",
-      "!**/node_modules/",
-      "!**/.astro/",
-      "!**/content/",
-      "!**/public/",
-      "!**/pnpm-lock.yaml",
-      "!**/src/styles/**"
-    ]
+    "includes": ["**", "!**/dist/**/*", "!**/.astro/**/*", "!**/content/**/*", "!**/public/**/*", "!**/pnpm-lock.yaml"]
   },
   "overrides": [
     {
