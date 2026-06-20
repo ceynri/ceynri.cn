@@ -42,3 +42,31 @@
 
 - **WHEN** `content/blog` 下存在以 `_` 开头的 `.md`/`.mdx` 文件
 - **THEN** 该文件不被 Content Collection 加载，也不产出页面
+
+### Requirement: 上游内容源关系
+
+系统 SHALL 将 `ceynri-words` 视为上游内容源，`ceynri.cn` 为下游消费者，只消费选定公开内容。
+
+#### Scenario: 默认内容源
+
+- **WHEN** 未配置本地内容源覆盖
+- **THEN** 系统从仓库 `content/` submodule 消费内容
+
+#### Scenario: 本地内容源覆盖
+
+- **WHEN** 开发时通过 `CONTENT_BASE` 配置本地内容源覆盖
+- **THEN** 系统从该本地 `ceynri-words` 工作树消费相同公开集合，无需先提交上游
+
+### Requirement: 公开博客资产闭包
+
+系统 SHALL 仅发布公开博客内容显式引用到的图片资产。
+
+#### Scenario: 已发布博客引用图片资产
+
+- **WHEN** 博客文章公开且其 Markdown 内容引用了本地图片资产
+- **THEN** 公开站点输出包含该被引用图片
+
+#### Scenario: 未发布博客引用图片资产
+
+- **WHEN** 博客文章未公开且其 Markdown 内容引用了本地图片资产
+- **THEN** 该图片不会仅因未发布文章引用而被发布
