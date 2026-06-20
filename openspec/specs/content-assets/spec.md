@@ -6,86 +6,86 @@
 
 ## Requirements
 
-### Requirement: Content image asset URI resolution
+### Requirement: 内容图片资产 URI 解析
 
-The system SHALL resolve local image asset references in Markdown content through content-root asset URI semantics.
+系统 SHALL 通过内容根 URI 语义解析 Markdown 中的本地图片引用。
 
-#### Scenario: Resolve blog-private asset URI
-- **WHEN** public Markdown content references `/blog/assets/post-slug/diagram.png`
-- **THEN** the system resolves it to `<contentBase>/blog/assets/post-slug/diagram.png` and records `/blog/assets/post-slug/diagram.png` as the initial output URL
+#### Scenario: 解析博客私有资产 URI
+- **WHEN** 公开 Markdown 内容引用 `/blog/assets/post-slug/diagram.png`
+- **THEN** 系统将其解析为 `<contentBase>/blog/assets/post-slug/diagram.png`，并记录 `/blog/assets/post-slug/diagram.png` 为初始 output URL
 
-#### Scenario: Resolve shared asset URI
-- **WHEN** public Markdown content references `/assets/common.png`
-- **THEN** the system resolves it to `<contentBase>/assets/common.png` and records `/assets/common.png` as the initial output URL
+#### Scenario: 解析公共资产 URI
+- **WHEN** 公开 Markdown 内容引用 `/assets/common.png`
+- **THEN** 系统将其解析为 `<contentBase>/assets/common.png`，并记录 `/assets/common.png` 为初始 output URL
 
-#### Scenario: Resolve relative asset URI
-- **WHEN** public Markdown content references a relative image path such as `./assets/post-slug/diagram.png` or `../assets/common.png`
-- **THEN** the system resolves it relative to the Markdown file path before deriving the content asset URI and output URL
+#### Scenario: 解析相对路径资产 URI
+- **WHEN** 公开 Markdown 内容引用相对路径如 `./assets/post-slug/diagram.png` 或 `../assets/common.png`
+- **THEN** 系统先相对于 Markdown 文件解析，再推导 contentUri 和 outputUrl
 
-### Requirement: Markdown image asset collection
+### Requirement: Markdown 图片资产收集
 
-The system SHALL collect supported local image assets from Markdown AST nodes during Markdown compilation.
+系统 SHALL 在 Markdown 编译期间从 AST 节点收集受支持的本地图片资产。
 
-#### Scenario: Markdown image node references local asset
-- **WHEN** a Markdown image node references a supported local image asset
-- **THEN** the system resolves the asset, records it in the in-memory asset manifest, and rewrites the node URL to the resolved output URL
+#### Scenario: Markdown image 节点引用本地资产
+- **WHEN** Markdown image 节点引用受支持的本地图片
+- **THEN** 系统解析该资产，记录到内存 manifest，并将节点 URL 改写为 outputUrl
 
-#### Scenario: Markdown link node references local image asset
-- **WHEN** a Markdown link node references a supported local image asset
-- **THEN** the system resolves the asset, records it in the in-memory asset manifest, and rewrites the link URL to the resolved output URL
+#### Scenario: Markdown link 节点引用本地图片资产
+- **WHEN** Markdown link 节点引用受支持的本地图片
+- **THEN** 系统解析该资产，记录到内存 manifest，并将链接 URL 改写为 outputUrl
 
-#### Scenario: External image reference
-- **WHEN** a Markdown image or link node references an `http`, `https`, or `data` URL
-- **THEN** the system does not collect or rewrite it as a local content asset
+#### Scenario: 外部图片引用
+- **WHEN** Markdown image 或 link 节点引用 `http`、`https` 或 `data` URL
+- **THEN** 系统不作为本地内容资产收集或改写
 
-#### Scenario: Unsupported local file extension
-- **WHEN** a Markdown link references a local file whose extension is not a supported image extension
-- **THEN** the system does not collect or rewrite it as a content image asset
+#### Scenario: 非图片扩展名的本地文件
+- **WHEN** Markdown link 引用的本地文件扩展名不受支持
+- **THEN** 系统不作为内容图片资产收集或改写
 
-### Requirement: Missing asset failure
+### Requirement: 缺失资产报错
 
-The system MUST fail when public content references a missing local image asset.
+系统 MUST 在公开内容引用不存在的本地图片资产时失败。
 
-#### Scenario: Referenced local image does not exist
-- **WHEN** public Markdown content references a local image asset whose source file cannot be found
-- **THEN** the system throws an error that includes the Markdown file path, the original URL, and the expected source path
+#### Scenario: 引用的本地图片不存在
+- **WHEN** 公开 Markdown 内容引用了一个源文件不存在的本地图片资产
+- **THEN** 系统抛出包含 Markdown 文件路径、原始 URL 和预期源路径的错误
 
-### Requirement: Referenced asset publishing
+### Requirement: 按引用发布资产
 
-The system SHALL publish only image assets collected from public content references.
+系统 SHALL 仅发布公开内容引用到的图片资产。
 
-#### Scenario: Build copies collected assets
-- **WHEN** the production build completes Markdown compilation and the manifest contains resolved image assets
-- **THEN** the system copies each manifest asset from `sourcePath` to the build output path represented by `outputUrl`
+#### Scenario: 构建时复制收集的资产
+- **WHEN** 生产构建完成 Markdown 编译且 manifest 包含已解析的图片资产
+- **THEN** 系统将 manifest 中每条资产从 `sourcePath` 复制到 `outputUrl` 对应的构建产物路径
 
-#### Scenario: Unreferenced asset remains unpublished
-- **WHEN** an image file exists under `<contentBase>/assets` or `<contentBase>/blog/assets` but is not referenced by public content
-- **THEN** the system does not publish that file solely because it exists in the directory
+#### Scenario: 未被引用的资产不发布
+- **WHEN** 图片文件存在于 `<contentBase>/assets` 或 `<contentBase>/blog/assets` 但未被公开内容引用
+- **THEN** 系统不因目录中存在而发布该文件
 
-#### Scenario: Duplicate asset references
-- **WHEN** multiple public Markdown files reference the same resolved image asset
-- **THEN** the system records and publishes that asset once
+#### Scenario: 重复引用去重
+- **WHEN** 多个公开 Markdown 文件引用同一个已解析的图片资产
+- **THEN** 系统仅记录并发布一次
 
-### Requirement: Dev server asset serving
+### Requirement: Dev Server 资产服务
 
-The system SHALL serve resolved content image assets during local development without relying on `public` symlinks.
+系统 SHALL 在本地开发时服务已解析的内容图片资产，不依赖 `public` 软链接。
 
-#### Scenario: Dev request for resolved asset URL
-- **WHEN** the dev server receives a request for a resolved content image asset output URL
-- **THEN** the system streams the corresponding source file from the active content source
+#### Scenario: Dev 请求已解析资产 URL
+- **WHEN** dev server 收到对已解析内容图片资产 output URL 的请求
+- **THEN** 系统从活动内容源流式传输对应源文件
 
-#### Scenario: Dev request for missing resolved asset URL
-- **WHEN** the dev server receives a request for a supported content image asset URL whose source file does not exist
-- **THEN** the request is not silently satisfied from an unrelated `public` symlink target
+#### Scenario: Dev 请求不存在的资产 URL
+- **WHEN** dev server 收到对受支持内容图片资产 URL 的请求但其源文件不存在
+- **THEN** 系统不会从无关的 `public` 软链接静默响应
 
-### Requirement: Route mapping extension point
+### Requirement: 路由映射扩展点
 
-The system SHALL represent each resolved image asset with separate `contentUri`, `sourcePath`, and `outputUrl` fields.
+系统 SHALL 用独立的 `contentUri`、`sourcePath`、`outputUrl` 字段表示每条已解析的图片资产。
 
-#### Scenario: Initial identity mapping
-- **WHEN** the first implementation resolves `/blog/assets/post-slug/diagram.png`
-- **THEN** `outputUrl` is `/blog/assets/post-slug/diagram.png`
+#### Scenario: 初始恒等映射
+- **WHEN** 当前实现解析 `/blog/assets/post-slug/diagram.png`
+- **THEN** `outputUrl` 为 `/blog/assets/post-slug/diagram.png`
 
-#### Scenario: Future route remapping
-- **WHEN** a future route policy maps content URI `/blog/assets/post-slug/diagram.png` to output URL `/assets/post-slug/diagram.png`
-- **THEN** Markdown source does not need to change for the asset to be published at the new output URL
+#### Scenario: 未来路由重映射
+- **WHEN** 未来路由策略将 content URI `/blog/assets/post-slug/diagram.png` 映射为 output URL `/assets/post-slug/diagram.png`
+- **THEN** Markdown 源码无需修改即可使资产按新 output URL 发布
