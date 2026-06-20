@@ -11,6 +11,7 @@ enabled: true
 
 - 代码注释
 - AI 资产
+- spec 文档
 
 ## 英文
 
