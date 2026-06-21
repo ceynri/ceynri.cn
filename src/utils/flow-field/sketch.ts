@@ -25,11 +25,7 @@ export function sketch(p5: P5, container: HTMLElement) {
     // 禁用描边
     p5.noStroke();
 
-    particleSystem = new ParticleSystem(p5, {
-      ...generateRandomOptions(),
-      // 默认使用灰度模式
-      colorMode: 'grayscale',
-    });
+    particleSystem = new ParticleSystem(p5, generateRandomOptions());
 
     bgColor = p5.color(BG_COLOR);
     p5.background(bgColor);
