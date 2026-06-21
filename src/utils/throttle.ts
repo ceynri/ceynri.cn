@@ -4,10 +4,9 @@
  * @param delay 节流的时间间隔（毫秒）
  * @returns 返回被节流的函数
  */
-export function throttle<T extends (...args: unknown[]) => unknown>(
-  func: T,
-  delay: number,
-): (...args: Parameters<T>) => void {
+
+// biome-ignore lint/suspicious/noExplicitAny: any
+export function throttle<T extends (...args: any[]) => any>(func: T, delay: number): (...args: Parameters<T>) => void {
   let lastCallTime = 0;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
