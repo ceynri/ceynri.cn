@@ -67,18 +67,6 @@
     transition: background-color 0.3s ease-out;
     border-radius: 1.5rem;
   }
-
-  .sparklable-text {
-    transition-property: color, text-shadow, opacity;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-
-    &:hover {
-      color: var(--accent-color);
-      text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
-      opacity: 1;
-    }
-  }
 }
 
 @layer utilities {

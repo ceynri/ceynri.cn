@@ -39,7 +39,7 @@ const tags = Array.from(tagMap.entries())
   description="博客文章归档页面"
 >
   <div class="archive">
-    <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-8 max-sm:p-4 mb-8">
+    <section class="bg-[var(--prose-bg-color)] transition-[background-color] duration-300 ease-out rounded-2xl p-8 max-sm:p-4 mb-8">
       <header class="text-[var(--text-secondary-color)] font-[500]">TAGS</header>
       <div class="p-8 max-sm:p-4">
         <PostTags tags={tags} />
@@ -47,7 +47,7 @@ const tags = Array.from(tagMap.entries())
     </section>
     <div>
       {postGroupList.map(({ year, list }) => (
-        <section class="bg-[var(--prose-bg-color)] transition-[background-color] ease-out rounded-2xl p-8 max-sm:p-4 mb-8">
+        <section class="bg-[var(--prose-bg-color)] transition-[background-color] duration-300 ease-out rounded-2xl p-8 max-sm:p-4 mb-8">
           <header class="text-[var(--text-secondary-color)] font-[500]">{year}</header>
           {list.map((post) => (
             <section class="p-8 max-sm:p-4 border-b border-dotted border-[var(--border-color)] last:border-0">

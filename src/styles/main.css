@@ -39,3 +39,15 @@
 @utility text-shadow-lg {
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
 }
+
+@utility sparklable-text {
+  transition-property: color, text-shadow, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+
+  &:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
+    opacity: 1;
+  }
+}
