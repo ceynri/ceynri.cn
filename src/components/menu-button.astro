@@ -5,7 +5,7 @@ import { cn } from '~/utils';
 ---
 
 <button
-  class={cn('menu-btn menu-button size-full flex relative text-[var(--navbar-text-color)] opacity-50 hover:opacity-100 transition-[transform,opacity]', Astro.props.class)}
+  class={cn('menu-btn menu-button size-full flex relative text-(--navbar-text-color) opacity-50 hover:opacity-100 transition-opacity duration-300 ease-out', Astro.props.class)}
   aria-label="显示导航菜单"
   type="button"
   data-umami-event="menu-button"
@@ -16,13 +16,13 @@ import { cn } from '~/utils';
 <!-- 背景 -->
 <div class="menu-mask fixed inset-0 z-40 bg-black/10 backdrop-blur-sm"></div>
 <!-- 下拉菜单卡片 -->
-<div class="menu-card fixed top-4 right-4 z-50 rounded-2xl py-4 bg-[var(--navbar-bg-color)] shadow-lg">
+<div class="menu-card fixed top-4 right-4 z-50 rounded-2xl py-4 bg-(--navbar-bg-color) shadow-lg">
   <ul>
     {NAV_ITEMS.map((item) => (
       <li class="py-3 px-8">
         <a
           href={item.href}
-          class="flex items-center gap-4 py-2 px-2 text-[var(--text-color)]"
+          class="flex items-center gap-4 py-2 px-2 text-(--text-color) sparklable-text"
         >
           <item.icon class="w-5 h-5" />
           {item.name}
