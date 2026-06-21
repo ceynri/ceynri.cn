@@ -54,6 +54,6 @@ CONTENT_BASE=/xxx/workspace/content
 
 **组件**：优先 `.astro`；未集成 React/Vue/Svelte，引入前先确认；props 用 TypeScript interface，数据经 `Astro.props` 传递；组合外部 class 用 `~/utils` 的 `cn`：`class={cn('foo', Astro.props.class)}`。
 
-**样式（工具类优先）**：能用 Tailwind 工具类表达的样式 SHALL 内联到 `class`，`<style>` 块仅承载工具类难以表达的少量样式（使用原生 CSS 嵌套，禁止 `lang="scss"`）。颜色只用 `src/styles/variables.css` 定义的 CSS 变量 或 `@theme` token，禁止硬编码未定义颜色。CSS 变量设置背景/阴影时加 `transition`（如 `transition-[background-color]`）；font-weight 直接写数值（如 `font-[500]`）；响应式以 PC 为基准，移动端用 `max-sm`/`max-lg`；meta 统一经 `BaseHead` 处理。
+**样式（工具类优先）**：能用 Tailwind 工具类表达的样式 SHALL 内联到 `class`，`<style>` 块仅承载工具类难以表达的少量样式（使用原生 CSS 嵌套）。颜色优先用语义色工具类（如 `bg-prose-bg`/`text-title`，由 `main.css` 的 `@theme inline` 注册、值取自 `variables.css`）；新增语义色须先在 `variables.css` 定义、再于 `main.css` `@theme inline` 注册（用 inline 才能运行时跟随 `data-scheme` 切换），禁止硬编码颜色及 `bg-[var(--xxx)]` 任意值写法。CSS 变量设置背景/阴影时加 `transition`（如 `transition-[background-color]`）；font-weight 直接写数值（如 `font-[500]`）；响应式以 PC 为基准，移动端用 `max-sm`/`max-lg`；meta 统一经 `BaseHead` 处理。
 
 **注释**：代码注释用中文，README、commit message 用英文；方法用 `/** */` 以获得代码提示。

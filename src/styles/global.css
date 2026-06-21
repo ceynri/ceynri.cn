@@ -70,12 +70,10 @@
 }
 
 @layer utilities {
-  .sparkle-text {
-    color: var(--accent-color);
-    text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
-    opacity: 1;
-  }
-
+  /* 覆盖 Tailwind 内置的 h-screen 系列（内置为纯 100vh）。
+     这里做渐进增强：新浏览器用 100dvh（避开移动端地址栏占位），
+     旧浏览器不识别 100dvh 时整条声明失效、回落到上一行 100vh，布局正常降级。
+     不用内置 h-dvh 是因为它只输出 100dvh、无 vh 兜底，旧浏览器会高度塌陷。 */
   .h-screen {
     height: 100vh;
     height: 100dvh;
