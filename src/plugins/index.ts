@@ -1,3 +1,3 @@
 export * from './content-assets';
 export * from './rehype-image-links';
-export * from './remark-content-assets';
+export * from './remark-content-image-links';
