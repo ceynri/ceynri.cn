@@ -19,13 +19,25 @@
   --color-jade-800: var(--jade-800);
   --color-jade-900: var(--jade-900);
   --color-jade-950: var(--jade-950);
+}
+
+@theme inline {
+  /* 语义色 token：引用 variables.css 中随 data-scheme 切换的 CSS 变量。
+     必须用 @theme inline，使工具类直接内联 var(--xxx-color) 并在运行时跟随主题切换；
+     非 inline 会在构建期固化取值，导致 dark 模式失效 */
   --color-accent: var(--accent-color);
+  --color-prose-bg: var(--prose-bg-color);
+  --color-navbar-bg: var(--navbar-bg-color);
+  --color-navbar-text: var(--navbar-text-color);
+  --color-tag-bg: var(--tag-bg-color);
+  --color-pagination-text: var(--pagination-text-color);
+  --color-title: var(--title-color);
+  --color-text: var(--text-color);
+  --color-text-secondary: var(--text-secondary-color);
+  --color-border: var(--border-color);
 
+  /* prose padding 随断点响应式变化，同样用 inline 跟随 */
   --spacing-prose: var(--prose-padding);
-
-  --transition-duration-fast: 0.1s;
-  --transition-duration-DEFAULT: 0.3s;
-  --transition-duration-slow: 0.5s;
 }
 
 @utility text-shadow-sm {
@@ -40,14 +52,20 @@
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
 }
 
+/* 常驻高亮态（accent 色 + 发光），用于需要一直点亮的装饰元素 */
+@utility sparkle-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
+  opacity: 1;
+}
+
+/* 可点亮的交互文字：hover 时进入 sparkle-text 常驻态，是 sparkle-text 的交互包装 */
 @utility sparklable-text {
   transition-property: color, text-shadow, opacity;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
 
   &:hover {
-    color: var(--accent-color);
-    text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
-    opacity: 1;
+    @apply sparkle-text;
   }
 }

@@ -10,6 +10,8 @@
     line-height: 1.15;
   }
 
+  /* 标题字号为 1.125（大二度）模数音阶：自 1em 起每级 ×1.125（h5→h1 即 1.125 的 1~5 次方）；
+     small 的 0.889em 为下沉一级（1.125⁻¹） */
   h1 {
     font-size: 1.802em;
     margin-top: 0;
@@ -48,15 +50,8 @@
   summary {
     cursor: pointer;
     opacity: 0.8;
-    transition-property: color, text-shadow, opacity;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-
-    &:hover {
-      color: var(--accent-color);
-      text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
-      opacity: 1;
-    }
+    /* hover 高亮逻辑复用单一来源 @utility sparklable-text */
+    @apply sparklable-text;
   }
 
   blockquote {

@@ -1,3 +1,6 @@
+/* .prose 是博客正文在 .typography 之上的「增量层」，必须与 .typography 同时使用
+   （见 blog-post.astro：class="prose typography"）。
+   标题/段落/列表/表格/代码等通用基础排版由 .typography 统一提供，此处只放特有样式。 */
 .prose {
   h1:first-child {
     display: none;
@@ -6,15 +9,8 @@
   a {
     text-decoration: underline;
     opacity: 0.8;
-    transition-property: color, text-shadow, opacity;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-
-    &:hover {
-      color: var(--accent-color);
-      text-shadow: 0 0 var(--text-shadow-size) var(--accent-color);
-      opacity: 1;
-    }
+    /* hover 高亮逻辑复用单一来源 @utility sparklable-text */
+    @apply sparklable-text;
   }
 
   img {
