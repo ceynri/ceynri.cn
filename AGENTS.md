@@ -42,6 +42,10 @@ CONTENT_BASE=/xxx/workspace/content
 
 使用 OpenSpec spec-driven workflow：`/opsx:propose` → `/opsx:apply` → `/opsx:archive`。`task.md` 仅保留意图级 backlog。
 
+## 项目知识库
+
+修改业务代码前，先查阅 `knowledge/README.md` 中的知识索引表，根据“使用场景”列判断是否有相关文档需要读取。OpenSpec 负责能力契约，knowledge 负责设计背景与踩坑提示。
+
 ## 代码约定
 
 仅记录本项目特有约定。通用最佳实践依赖 AI 既有认知。
