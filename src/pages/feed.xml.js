@@ -4,21 +4,23 @@ import MarkdownIt from 'markdown-it';
 import sanitizeHtml from 'sanitize-html';
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
-import { getSortedPosts, publishedPostFilter } from '~/utils';
+import { publishedPostFilter } from '~/utils';
 
 const parser = new MarkdownIt({
   html: true,
 });
 
+const getRssPubDate = (post) => post.data.publishedAt || post.data.date;
+
 export async function GET(context) {
   const rawPosts = await getCollection('blog', publishedPostFilter);
-  const posts = getSortedPosts(rawPosts);
+  const posts = rawPosts.sort((a, b) => getRssPubDate(b).getTime() - getRssPubDate(a).getTime());
   const items = await Promise.all(
     posts.map(async (post) => {
       return {
         title: post.data.title,
         description: post.data.description,
-        pubDate: post.data.lastmod || post.data.date,
+        pubDate: getRssPubDate(post),
         link: `/blog/${post.id}/`,
         content: post.body
           ? sanitizeHtml(parser.render(post.body), {
