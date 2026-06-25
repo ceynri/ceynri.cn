@@ -1,3 +1,8 @@
+/*
+ * giscus 主题样式（暗色）
+ * giscus 以 iframe 加载，无法访问父页面 CSS 变量，故主题变量值需在此内联。
+ * 变量值与 src/styles/variables.css 的 :root[data-scheme="dark"] 保持同步。
+ */
 @import "./common.css";
 @import url("//giscus.app/themes/dark.css");
 
@@ -29,9 +34,14 @@
 }
 
 main {
+  /* 评论点赞按钮边框色 */
   --color-accent-emphasis: rgba(0, 0, 255, 0.5);
+  /* Owner 标识边框色 */
   --color-accent-muted: rgba(0, 0, 255, 0.3);
+  /* 评论已经点过赞按钮背景色 */
   --color-accent-subtle: rgba(0, 0, 255, 0.1);
+  /* 评论点赞按钮 hover 状态背景色 */
   --color-social-reaction-bg-hover: rgba(0, 0, 255, 0.3);
+  /* 评论已经点过赞的按钮 hover 状态背景色 */
   --color-social-reaction-bg-reacted-hover: rgba(0, 0, 255, 0.5);
 }
