@@ -1,3 +1,8 @@
+/*
+ * giscus 主题样式（亮色）
+ * giscus 以 iframe 加载，无法访问父页面 CSS 变量，故主题变量值需在此内联。
+ * 变量值与 src/styles/variables.css 的 :root（默认亮色）保持同步。
+ */
 @import "./common.css";
 @import url("//giscus.app/themes/light.css");
 
@@ -29,9 +34,14 @@
 }
 
 main {
+  /* 评论点赞按钮边框色 */
   --color-accent-emphasis: rgba(255, 204, 110, 0.5);
+  /* Owner 标识边框色 */
   --color-accent-muted: rgba(255, 204, 110, 0.3);
+  /* 评论已经点过赞按钮背景色 */
   --color-accent-subtle: rgba(255, 204, 110, 0.1);
+  /* 评论点赞按钮 hover 状态背景色 */
   --color-social-reaction-bg-hover: rgba(255, 204, 110, 0.3);
+  /* 评论已经点过赞的按钮 hover 状态背景色 */
   --color-social-reaction-bg-reacted-hover: rgba(255, 204, 110, 0.5);
 }
