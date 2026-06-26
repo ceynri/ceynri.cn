@@ -1,5 +1,6 @@
-import { getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
+import type { APIContext } from 'astro';
 import MarkdownIt from 'markdown-it';
 import sanitizeHtml from 'sanitize-html';
 
@@ -10,11 +11,14 @@ const parser = new MarkdownIt({
   html: true,
 });
 
-const getRssPubDate = (post) => post.data.publishedAt || post.data.date;
+const getRssPubDate = (post: CollectionEntry<'blog'>) => post.data.publishedAt || post.data.date;
 
-export async function GET(context) {
+export async function GET(context: APIContext) {
+  if (!context.site) {
+    throw new Error('Astro site URL is not configured');
+  }
   const rawPosts = await getCollection('blog', publishedPostFilter);
-  const posts = rawPosts.sort((a, b) => getRssPubDate(b).getTime() - getRssPubDate(a).getTime());
+  const posts = [...rawPosts].sort((a, b) => getRssPubDate(b).getTime() - getRssPubDate(a).getTime());
   const items = await Promise.all(
     posts.map(async (post) => {
       return {

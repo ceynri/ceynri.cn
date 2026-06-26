@@ -11,6 +11,8 @@ interface Props {
 
 const { title, postTitle, description = SITE_DESCRIPTION, image } = Astro.props;
 
+// TODO: postTitle 链路未启用（BaseLayout 未透传），文章页 og:type 恒为 website、og:title 缺站点名
+// <title> 和 <meta name="title"> 也应改用 pageTitle，待 OG 元数据优化时统一处理（见 task.md Later · OG image）
 const pageTitle = postTitle ? `${postTitle} - ${title}` : title;
 
 // TODO: 默认图片

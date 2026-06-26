@@ -17,8 +17,8 @@ on:
 
 env:
   # 使用项目要求的 Node.js 版本
-  NODE_VERSION: '20'
-  PNPM_VERSION: '10.7.0'
+  NODE_VERSION: '24'
+  PNPM_VERSION: '11'
   # 添加环境变量控制可选功能
   ENABLE_SUBMODULE_UPDATE: ${{ vars.ENABLE_SUBMODULE_UPDATE || 'false' }}
   ENABLE_TYPE_CHECK: ${{ vars.ENABLE_TYPE_CHECK || 'true' }}
@@ -97,8 +97,8 @@ jobs:
       - name: Type check and lint
         if: env.ENABLE_TYPE_CHECK == 'true'
         run: |
-          pnpm astro check
-          pnpm lint
+          pnpm exec astro check
+          pnpm exec biome ci ./src ./astro.config.ts
 
       # 10. 构建项目
       - name: Build project

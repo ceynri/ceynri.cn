@@ -4,7 +4,11 @@ import type { CollectionEntry } from 'astro:content';
 
 import { FormattedDate } from '~/components';
 
-const { post } = Astro.props as { post: CollectionEntry<'blog'> };
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
 ---
 
 <div class="mb-8 rounded-2xl overflow-hidden bg-prose-bg transition-[background-color,translate] duration-300 ease-out sm:hover:-translate-y-1">
