@@ -16,13 +16,11 @@ const { Content } = await render(post);
   description="关于本站点以及站长的介绍"
   mainClass="max-md:px-0"
 >
-  {post && (
-    <main class="article typography prose-card max-sm:rounded-none">
-      <article class="max-sm:mt-8">
-        <Content />
-      </article>
-    </main>
-  )}
+  <main class="article typography prose-card max-sm:rounded-none">
+    <article class="max-sm:mt-8">
+      <Content />
+    </article>
+  </main>
 </AsideLayout>
 
 <style is:global>

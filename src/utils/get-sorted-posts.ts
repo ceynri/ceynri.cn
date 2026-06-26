@@ -6,5 +6,5 @@ import type { CollectionEntry } from 'astro:content';
  * @returns 排序后的博客文章集合
  */
 export function getSortedPosts<T extends CollectionEntry<'blog'>>(posts: T[]): T[] {
-  return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  return [...posts].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }

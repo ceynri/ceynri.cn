@@ -68,13 +68,3 @@ export function generateRandomOptions(): AppOptions {
     direction: 'auto',
   };
 }
-
-/**
- * 返回一个随机的十六进制颜色字符串
- * @returns 十六进制颜色字符串
- */
-export function getRandomHexColor(): string {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, '0')}`;
-}

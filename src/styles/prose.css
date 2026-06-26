@@ -30,7 +30,7 @@
     &[alt*="size=small"] {
       width: 38.2%;
 
-      @media screen and (max-width: 640px) {
+      @media screen and (max-width: 639px) {
         width: 60%;
       }
     }
@@ -38,7 +38,7 @@
     &[alt*="size=medium"] {
       width: 61.8%;
 
-      @media screen and (max-width: 640px) {
+      @media screen and (max-width: 639px) {
         width: 80%;
       }
     }

@@ -1,4 +1,5 @@
 import type P5 from 'p5';
+import { throttle } from '~/utils';
 import { BG_COLOR } from './config';
 import { ParticleSystem } from './particle-system';
 import type { AppOptions } from './types';
@@ -35,11 +36,12 @@ export function sketch(p5: P5, container: HTMLElement) {
     particleSystem.update();
   };
 
-  p5.windowResized = () => {
+  // 窗口尺寸变化时重置画布并重建粒子，加节流避免 resize 高频触发
+  p5.windowResized = throttle(() => {
     p5.resizeCanvas(container.clientWidth, container.clientHeight);
     particleSystem.initParticles();
     p5.background(bgColor);
-  };
+  }, 200);
 
   window.refreshFlowField = () => {
     const options: AppOptions = generateRandomOptions();
