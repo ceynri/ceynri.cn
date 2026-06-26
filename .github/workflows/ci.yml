@@ -4,6 +4,14 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+# 并发控制：同一 PR 的旧 CI 自动取消
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -20,9 +28,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+          check-latest: true
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - name: Cache Astro build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro
+            node_modules/.astro
+          key: ${{ runner.os }}-astro-${{ hashFiles('astro.config.*') }}-${{ hashFiles('src/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-${{ hashFiles('astro.config.*') }}-
+            ${{ runner.os }}-astro-
+
+      - run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Type check
         run: pnpm exec astro check
@@ -36,5 +56,5 @@ jobs:
       - name: Check broken links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress --offline --base ./dist './dist/**/*.html'
+          args: --no-progress --offline --root-dir ./dist './dist/**/*.html'
           fail: true
