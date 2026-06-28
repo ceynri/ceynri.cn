@@ -16,6 +16,9 @@ const __dirname = path.dirname(__filename);
 
 const contentBase = resolveContentBase(__dirname);
 
+// astro dev 时放行 giscus 跨域请求主题 CSS；build 时不需要（且会触发 prerendered 页面读 request.headers 的无害警告）
+const isDev = process.argv.includes('dev');
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ceynri.cn',
@@ -24,11 +27,9 @@ export default defineConfig({
     host: true,
     port: 4321,
   },
-  security: {
-    // 允许 giscus iframe 跨域请求 dev server 上的主题 CSS
-    // dev server 默认拦截 Sec-Fetch-Site: cross-site 的子资源请求，将其加入白名单放行
-    allowedDomains: [{ hostname: 'giscus.app' }],
-  },
+  // 允许 giscus iframe 跨域请求 dev server 上的主题 CSS
+  // dev server 默认拦截 Sec-Fetch-Site: cross-site 的子资源请求，将其加入白名单放行
+  security: isDev ? { allowedDomains: [{ hostname: 'giscus.app' }] } : undefined,
   vite: {
     resolve: {
       alias: {
