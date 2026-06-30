@@ -8,29 +8,29 @@
 
 :root {
   --global-bg-color: #000000;
-  --prose-bg-color: #101216;
-  --navbar-bg-color: #101216;
+  --prose-bg-color: var(--jade-950);
+  --navbar-bg-color: var(--jade-950);
   --inline-code-bg-color: #000000;
   --tag-bg-color: #000000;
-  --pagination-active-bg-color: #24292e;
+  --pagination-active-bg-color: var(--jade-800);
 
-  --title-color: #c9d1d9;
-  --text-color: #b8c0c8;
-  --text-secondary-color: #808890;
-  --inline-code-color: #c9d1d9;
+  --title-color: var(--jade-300);
+  --text-color: var(--jade-400);
+  --text-secondary-color: var(--jade-500);
+  --inline-code-color: var(--jade-300);
 
-  --navbar-text-color: #c9d1d9;
-  --pagination-text-color: #c9d1d9;
+  --navbar-text-color: var(--jade-300);
+  --pagination-text-color: var(--jade-300);
 
   --selection-text-color: #000000;
-  --selection-bg-color: #596169;
+  --selection-bg-color: var(--jade-600);
 
   --accent-color: #0000ff;
   --border-color: rgba(255, 255, 255, 0.1);
-  --blockquote-border-color: #34393e;
-  --table-header-border-color: #596169;
-  --table-body-border-color: #34393e;
-  --hr-color: #596169;
+  --blockquote-border-color: var(--jade-700);
+  --table-header-border-color: var(--jade-600);
+  --table-body-border-color: var(--jade-700);
+  --hr-color: var(--jade-600);
 }
 
 main {

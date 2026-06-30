@@ -1,3 +1,23 @@
+/*
+ * giscus 以 iframe 加载，是独立文档、无法访问父页面的 CSS 变量，故 jade 色阶需在此（iframe 内）
+ * 重新声明一份，作为 dark.css / light.css 共享的单一来源。jade 数值在明暗主题下相同，放在
+ * 二者共同 @import 的 common.css 里最合适；明暗差异仅体现在 dark/light 各自的语义色映射。
+ * 注：与父页 src/styles/variables.css 的 jade 互为两份拷贝（iframe 隔离所致，无法运行时共享）。
+ */
+:root {
+  --jade-50: #f6f9fd;
+  --jade-100: #e8edf3;
+  --jade-200: #d9e0e8;
+  --jade-300: #c9d1d9;
+  --jade-400: #b8c0c8;
+  --jade-500: #808890;
+  --jade-600: #596169;
+  --jade-700: #34393e;
+  --jade-800: #24292e;
+  --jade-900: #1a1e22;
+  --jade-950: #101216;
+}
+
 main {
   /* 各种边框色 */
   --color-border-default: transparent;
