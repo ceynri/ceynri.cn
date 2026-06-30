@@ -26,6 +26,11 @@ const blog = defineCollection({
       layout: z.enum(['narrow', 'normal']).optional().default('normal'),
       cost: z.string().optional(),
       related: z.array(z.string()).optional(),
+      // 目录采集到的最大标题层级（2–6，逐文覆盖，未声明则用组件默认 H3）。
+      // 必须在此显式声明，否则 zod 默认会 strip 掉该 FrontMatter 字段，post.data 取不到
+      tocDepth: z.number().int().min(2).max(6).optional(),
+      // 逐文关闭目录（默认开启）
+      toc: z.boolean().optional().default(true),
     }),
 });
 

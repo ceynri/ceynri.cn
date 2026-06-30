@@ -69,7 +69,26 @@
   }
 }
 
+/* blog-toc 模块的消费侧主题映射：把模块默认变量（声明在 :root 上）覆盖为本站语义色，
+   使目录配色随 data-scheme 明暗切换；模块自身不硬编码颜色。
+   刻意不放进 @layer：变量设在 .toc-rail 元素自身即可盖过 :root 的继承默认（元素自有值 >
+   继承值），与层级/特异性无关；放进 @layer 也能生效，但不分层更贴合「这是主题映射、不是组件样式」的语义。
+   accent 仅用于「鼠标悬停目录项」；轨道高亮条用中性的 title 色，不抢注意力。 */
+.toc-rail {
+  --toc-rail-line-color: var(--border-color);
+  --toc-rail-highlight-color: var(--title-color);
+  --toc-percent-color: var(--text-secondary-color);
+  --toc-panel-bg: var(--prose-bg-color);
+  /* 对齐 menu-card 的 Tailwind shadow-lg：固定黑色半透明投影，明暗一致、不随 border-color 在暗色翻成白色辉光 */
+  --toc-panel-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --toc-panel-title-color: var(--title-color);
+  --toc-panel-item-color: var(--text-color);
+  --toc-panel-item-active-color: var(--title-color);
+  --toc-panel-item-hover-color: var(--accent-color);
+}
+
 @layer utilities {
+
   /* 覆盖 Tailwind 内置的 h-screen 系列（内置为纯 100vh）。
      这里做渐进增强：新浏览器用 100dvh（避开移动端地址栏占位），
      旧浏览器不识别 100dvh 时整条声明失效、回落到上一行 100vh，布局正常降级。

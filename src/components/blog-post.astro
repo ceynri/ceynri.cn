@@ -42,7 +42,7 @@ const { Content } = await render(post);
         </div>
       </div>
     )}
-  <article class="prose typography mt-8">
+  <article class="prose typography mt-8" data-toc-body>
     <Content />
     {lastmod && (
       <blockquote class="mt-12 opacity-50">Last modified on <FormattedDate date={lastmod} />.</blockquote>

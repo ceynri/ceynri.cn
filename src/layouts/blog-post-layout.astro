@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 
-import { BlogPost, Comments, FloatingImages, Footer, TopNavbar } from '~/components';
+import { BlogPost, Comments, FloatingImages, Footer, TocRail, TopNavbar } from '~/components';
 
 import BaseLayout from './base-layout.astro';
 
@@ -10,9 +11,11 @@ interface Props {
 }
 
 const { post } = Astro.props as Props;
-const { title, description, cover_image, layout } = post.data;
+const { title, description, cover_image, layout, tocDepth, toc } = post.data;
 
 const widthClass = layout === 'narrow' ? 'max-w-[30rem]' : 'max-w-[50rem]';
+
+const { headings } = await render(post);
 ---
 
 <BaseLayout
@@ -28,6 +31,14 @@ const widthClass = layout === 'narrow' ? 'max-w-[30rem]' : 'max-w-[50rem]';
       <Footer class="text-center" />
     </div>
   </div>
+
+  {toc !== false && (
+    <TocRail
+      headings={headings}
+      title={title}
+      maxDepth={tocDepth}
+    />
+  )}
 
   <!-- 浮动图片组件 -->
   <FloatingImages />

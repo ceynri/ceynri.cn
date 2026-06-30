@@ -1,0 +1,511 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+import { cn } from '~/utils';
+
+import type { TocItem } from './core';
+
+interface Props {
+  /** render() 返回的标题列表（含所有层级；组件内部按采集深度过滤并排除 H1） */
+  headings: MarkdownHeading[];
+  /** 文章标题（H1），作为 hover 浮层的卡片标题头 */
+  title: string;
+  /** 采集到的最大标题层级（2–6），缺省默认 H3。消费侧可由文章 FrontMatter 逐文传入覆盖 */
+  maxDepth?: number;
+  /** 渲染所需的最小标题数，低于则整组件不渲染。默认 2 */
+  minHeadings?: number;
+  /** 视口断点（px）：低于该宽度不挂载客户端逻辑、并由脚本隐藏轨道。默认 1024 */
+  breakpoint?: number;
+  /** 正文范围选择器，决定阅读进度基准（排除封面/评论/页脚等） */
+  bodySelector?: string;
+  class?: string;
+}
+
+const {
+  headings,
+  title,
+  maxDepth = 3,
+  minHeadings = 2,
+  breakpoint = 1024,
+  bodySelector = '[data-toc-body]',
+  class: className,
+} = Astro.props;
+
+// 采集深度钳制在 [2, 6]（maxDepth 可能来自 FrontMatter 的任意整数）
+const depth = Math.min(6, Math.max(2, maxDepth));
+
+// 过滤：仅保留 H2..depth，排除 H1（H1 作浮层标题头、不入轨道、不引入缩进层级）
+const items: TocItem[] = headings
+  .filter((h) => h.depth >= 2 && h.depth <= depth)
+  .map((h) => ({ depth: h.depth, slug: h.slug, text: h.text }));
+
+// 合法性门槛收拢在组件内部：标题数不足时整组件不渲染
+const shouldRender = items.length >= minHeadings;
+---
+
+{shouldRender && (
+<nav
+  class={cn('toc-rail', className)}
+  aria-label="文章目录"
+  data-toc-rail
+  data-breakpoint={breakpoint}
+  data-body-selector={bodySelector}
+>
+  {/* 收起态轨道：纯线条 minimap */}
+  <div class="toc-rail__track" data-toc-track>
+    <ul class="toc-rail__lines" data-toc-lines>
+      {items.map((item) => (
+        <li class="toc-rail__line" data-depth={item.depth} data-slug={item.slug}>
+          <span class="toc-rail__line-track">
+            <span class="toc-rail__line-fill"></span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  {/* 阅读百分比：右对齐、低存在感 */}
+  <div class="toc-rail__progress" data-toc-progress aria-hidden="true">0%</div>
+
+  {/* hover 文字浮层：向左展开、覆盖正文之上 */}
+  <div class="toc-rail__panel" data-toc-panel>
+    <p class="toc-rail__panel-title">{title}</p>
+    <ul class="toc-rail__panel-list">
+      {items.map((item) => (
+        <li class="toc-rail__panel-item" data-depth={item.depth}>
+          <a class="toc-rail__panel-link" href={`#${item.slug}`} data-slug={item.slug}>
+            {item.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+)}
+
+<style>
+  /* 组件用到的全部 CSS 变量在此集中声明默认值（可读性优先）。
+     刻意挂在 :global(:root) 而非 .toc-rail：Astro 会把组件作用域选择器编译为
+     `.toc-rail[data-astro-cid-xxx]`（特异性 +1），若默认值声明在 .toc-rail 上会无条件压过
+     消费侧 global.css 的 `.toc-rail` 映射（与 @layer 无关，是特异性差）。挂到 :root 后默认值是
+     「继承基线」，消费侧把变量设在 .toc-rail 元素自身——元素自有值天然优先于继承值，于是
+     消费侧映射必然生效，无需比拼特异性/层级。变量命名 = 元素-部位。 */
+  :global(:root) {
+    /* 收起态轨道：基础细线 / 高亮进度条 */
+    --toc-rail-line-color: rgba(127, 127, 127, 0.35);
+    --toc-rail-highlight-color: rgba(127, 127, 127, 0.9);
+    /* 底部阅读百分比文字 */
+    --toc-percent-color: rgba(127, 127, 127, 0.6);
+    /* hover 浮层 */
+    --toc-panel-bg: rgba(20, 20, 20, 0.92);
+    --toc-panel-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    --toc-panel-title-color: #f5f5f5;
+    --toc-panel-item-color: #d0d0d0;
+    --toc-panel-item-active-color: #ffffff;
+    --toc-panel-item-hover-color: #ffffff;
+    /* 尺寸：H2 最长、逐级递减、最短 1rem */
+    --toc-len-2: 2rem;
+    --toc-len-3: 1.5rem;
+    --toc-len-4: 1.25rem;
+    --toc-len-5: 1.1rem;
+    --toc-len-6: 1rem;
+    --toc-line-thickness: 2px;
+    --toc-line-gap: 0.7rem;
+    --toc-max-height: 62vh;
+    --toc-right: 1.5rem;
+    --toc-panel-width: 16rem;
+    --toc-indent: 0.85rem;
+  }
+
+  .toc-rail {
+    position: fixed;
+    top: 50%;
+    right: var(--toc-right);
+    transform: translateY(-50%);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    /* 轨道本身不拦截正文交互，仅线条与浮层热区生效 */
+    pointer-events: none;
+  }
+
+  /* 低于断点时由脚本打上 data-toc-inactive 隐藏——断点单一来源即 breakpoint prop（见 <script>）。
+     CSS 媒体查询无法读取 JS 变量，故把显隐统一交给脚本，避免写死的断点与可配置 prop 不一致；
+     本组件全靠脚本驱动，无脚本时不显示静止轨道也更合理。 */
+  .toc-rail[data-toc-inactive] {
+    display: none;
+  }
+
+  /* —— 收起态轨道 —— */
+  .toc-rail__track {
+    max-height: var(--toc-max-height);
+    overflow: hidden; /* 不允许用户滚轮滚动，仅代码自动定位 */
+    pointer-events: auto;
+  }
+
+  /* 溢出时上下缘渐变蒙层，提示尚有内容 */
+  .toc-rail__track.is-overflowing {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
+  }
+
+  .toc-rail__lines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 右对齐：短线左缘自然内缩，形成层级缩进观感 */
+    gap: var(--toc-line-gap);
+    transform: translateY(0);
+    transition: transform 0.35s ease-out;
+    will-change: transform;
+  }
+
+  .toc-rail__line {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .toc-rail__line-track {
+    position: relative;
+    height: var(--toc-line-thickness);
+    border-radius: var(--toc-line-thickness);
+    background-color: var(--toc-rail-line-color);
+    transition: background-color 0.3s ease-out;
+  }
+
+  .toc-rail__line[data-depth='2'] .toc-rail__line-track {
+    width: var(--toc-len-2);
+  }
+
+  .toc-rail__line[data-depth='3'] .toc-rail__line-track {
+    width: var(--toc-len-3);
+  }
+
+  .toc-rail__line[data-depth='4'] .toc-rail__line-track {
+    width: var(--toc-len-4);
+  }
+
+  .toc-rail__line[data-depth='5'] .toc-rail__line-track {
+    width: var(--toc-len-5);
+  }
+
+  .toc-rail__line[data-depth='6'] .toc-rail__line-track {
+    width: var(--toc-len-6);
+  }
+
+  /* 高亮子区段：left=章首端、right=章末端，由 --fill-start / --fill-end ∈ [0,1] 驱动。
+     宽度为 0（start==end）即天然隐形，故不需要 opacity 显隐——每条线每帧都由纯函数给出确定值。
+     left/right 保留 CSS 过渡做平滑跟随（GPU 合成）；离场是连续收敛到本侧边缘，不会从右滑到左。 */
+  .toc-rail__line-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--fill-start, 0) * 100%);
+    right: calc((1 - var(--fill-end, 0)) * 100%);
+    border-radius: inherit;
+    background-color: var(--toc-rail-highlight-color);
+    transition:
+      left 0.15s linear,
+      right 0.15s linear,
+      background-color 0.3s ease-out;
+  }
+
+  /* —— 阅读百分比 —— */
+  .toc-rail__progress {
+    font-size: 0.7rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--toc-percent-color);
+    pointer-events: auto;
+    transition: color 0.3s ease-out;
+  }
+
+  /* —— hover 文字浮层 —— */
+  .toc-rail__panel {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%) translateX(0.5rem);
+    width: var(--toc-panel-width);
+    max-height: 70vh;
+    overflow-y: auto; /* 浮层内容过长可滚动（与轨道不可滚区分） */
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    background-color: var(--toc-panel-bg);
+    box-shadow: var(--toc-panel-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.2s ease-out;
+  }
+
+  .toc-rail:hover .toc-rail__panel,
+  .toc-rail:focus-within .toc-rail__panel {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+  }
+
+  .toc-rail__panel-title {
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--toc-panel-title-color);
+  }
+
+  .toc-rail__panel-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* H2 基准（缩进 0），H3 起每深一级多一档缩进 */
+  .toc-rail__panel-item[data-depth='3'] {
+    padding-left: var(--toc-indent);
+  }
+
+  .toc-rail__panel-item[data-depth='4'] {
+    padding-left: calc(var(--toc-indent) * 2);
+  }
+
+  .toc-rail__panel-item[data-depth='5'] {
+    padding-left: calc(var(--toc-indent) * 3);
+  }
+
+  .toc-rail__panel-item[data-depth='6'] {
+    padding-left: calc(var(--toc-indent) * 4);
+  }
+
+  .toc-rail__panel-link {
+    display: block;
+    padding: 0.2rem 0;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--toc-panel-item-color);
+    text-decoration: none;
+    opacity: 0.7;
+    transition:
+      opacity 0.2s ease-out,
+      color 0.2s ease-out;
+  }
+
+  /* 当前阅读章节（与轨道高亮联动） */
+  .toc-rail__panel-item[data-active] .toc-rail__panel-link {
+    color: var(--toc-panel-item-active-color);
+    opacity: 1;
+  }
+
+  /* 鼠标悬停项（强调色入口）。第二个选择器特异性 ≥ active 态，保证 hover 能盖过 active */
+  .toc-rail__panel-link:hover,
+  .toc-rail__panel-item[data-active] .toc-rail__panel-link:hover {
+    color: var(--toc-panel-item-hover-color);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toc-rail__lines,
+    .toc-rail__line-fill,
+    .toc-rail__panel {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import {
+    buildSections,
+    computeBandCenter,
+    computeLineFills,
+    computeProgress,
+    computeTrackOffset,
+    type LineGeometry,
+  } from './core';
+
+  function initTocRail() {
+    const rail = document.querySelector<HTMLElement>('[data-toc-rail]');
+    if (!rail) return;
+    // 幂等守卫：防止脚本被重复执行时对同一元素重复接线
+    if (rail.dataset.tocMounted) return;
+    rail.dataset.tocMounted = '1';
+
+    const linesElMaybe = rail.querySelector<HTMLElement>('[data-toc-lines]');
+    const trackElMaybe = rail.querySelector<HTMLElement>('[data-toc-track]');
+    const progressElMaybe = rail.querySelector<HTMLElement>('[data-toc-progress]');
+    const panel = rail.querySelector<HTMLElement>('[data-toc-panel]');
+    if (!linesElMaybe || !trackElMaybe || !progressElMaybe) return;
+    const linesEl = linesElMaybe;
+    const trackEl = trackElMaybe;
+    const progressEl = progressElMaybe;
+
+    const breakpointRaw = Number(rail.dataset.breakpoint ?? '1024');
+    const breakpoint = Number.isFinite(breakpointRaw) ? breakpointRaw : 1024;
+    const bodySelector = rail.dataset.bodySelector ?? '[data-toc-body]';
+    const lineItems = Array.from(linesEl.querySelectorAll<HTMLElement>('.toc-rail__line'));
+    const slugs = lineItems.map((el) => el.dataset.slug ?? '');
+
+    // 几何缓存：标题文档偏移、正文范围、轨道线几何。仅在 load/resize/回流时重建
+    let headingOffsets: { slug: string; top: number }[] = [];
+    let bodyTop = 0;
+    let bodyBottom = 0;
+    let lineGeometries: LineGeometry[] = [];
+    let trackViewportH = 0;
+    let contentH = 0;
+
+    function measure() {
+      const scrollY = window.scrollY;
+      headingOffsets = slugs
+        .map((slug) => {
+          const el = document.getElementById(slug);
+          return el ? { slug, top: el.getBoundingClientRect().top + scrollY } : null;
+        })
+        .filter((v): v is { slug: string; top: number } => v !== null);
+
+      const body = document.querySelector<HTMLElement>(bodySelector);
+      if (body) {
+        const rect = body.getBoundingClientRect();
+        bodyTop = rect.top + scrollY;
+        bodyBottom = rect.bottom + scrollY;
+      }
+
+      const listTop = linesEl.getBoundingClientRect().top;
+      lineGeometries = lineItems.map((el, i) => {
+        const r = el.getBoundingClientRect();
+        return { slug: slugs[i], top: r.top - listTop, height: r.height };
+      });
+      trackViewportH = trackEl.clientHeight;
+      contentH = linesEl.scrollHeight;
+      trackEl.classList.toggle('is-overflowing', contentH > trackViewportH + 1);
+    }
+
+    function update() {
+      const scrollY = window.scrollY;
+      const viewTop = scrollY;
+      const viewBottom = scrollY + window.innerHeight;
+
+      const sections = buildSections(headingOffsets, bodyBottom);
+      const fills = computeLineFills(sections, viewTop, viewBottom);
+      const fillBySlug = new Map(fills.map((f) => [f.slug, f]));
+      // 真正可见（零宽以上）的线，用于轨道居中与浮层高亮
+      const highlighted = new Set(fills.filter((f) => f.end > f.start).map((f) => f.slug));
+
+      // 逐线写入高亮子区段：每条线每帧都由纯函数给出确定值；
+      // 离屏章节自然收敛为零宽（[1,1] 或 [0,0]）→ 隐形，无需 opacity 显隐或冻结位置
+      for (const el of lineItems) {
+        const fill = el.querySelector<HTMLElement>('.toc-rail__line-fill');
+        if (!fill) continue;
+        const f = fillBySlug.get(el.dataset.slug ?? '');
+        fill.style.setProperty('--fill-start', String(f ? f.start : 0));
+        fill.style.setProperty('--fill-end', String(f ? f.end : 0));
+      }
+
+      // 轨道自动居中 + 头尾钳制。无可见章节时按滚动位置兜底：
+      // 文章已滚到视口上方（读完）→ 沉底；尚在视口下方（未到）→ 钉顶
+      let bandCenter = computeBandCenter(lineGeometries, highlighted);
+      if (bandCenter === null) {
+        bandCenter = viewTop >= bodyBottom ? contentH : 0;
+      }
+      const offset = computeTrackOffset(bandCenter, trackViewportH, contentH);
+      linesEl.style.transform = `translateY(${offset}px)`;
+
+      // 阅读百分比（视口中线焦点 / 正文为基准）
+      const progress = computeProgress(scrollY, window.innerHeight, bodyTop, bodyBottom);
+      progressEl.textContent = `${Math.round(progress * 100)}%`;
+
+      // 浮层标题高亮：与轨道高亮一致——所有高亮线对应的标题项同时高亮
+      if (panel) {
+        for (const item of panel.querySelectorAll<HTMLElement>('.toc-rail__panel-item')) {
+          const link = item.querySelector<HTMLElement>('.toc-rail__panel-link');
+          if (link?.dataset.slug && highlighted.has(link.dataset.slug)) {
+            item.setAttribute('data-active', '');
+          } else {
+            item.removeAttribute('data-active');
+          }
+        }
+      }
+    }
+
+    // —— 断点门槛：仅在 ≥ breakpoint 时接线，窄屏不引入滚动逻辑开销 ——
+    const mql = window.matchMedia(`(min-width: ${breakpoint}px)`);
+    let active = false;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+    const onResize = () => {
+      measure();
+      update();
+    };
+
+    function activate() {
+      if (active) return;
+      active = true;
+      measure();
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+    }
+    function deactivate() {
+      if (!active) return;
+      active = false;
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    }
+    // 显隐与接线均以 breakpoint（mql）为单一来源：宽屏揭示并接线，窄屏隐藏并断线。
+    // 显隐用 data-toc-inactive 属性独立设置（不走 active 状态机，确保首次即窄屏时也能隐藏）
+    const syncBreakpoint = () => {
+      if (mql.matches) {
+        rail.removeAttribute('data-toc-inactive');
+        activate();
+      } else {
+        rail.setAttribute('data-toc-inactive', '');
+        deactivate();
+      }
+    };
+
+    // 点击目录项平滑跳转，尊重 prefers-reduced-motion
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    panel?.addEventListener('click', (e) => {
+      const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[data-slug]');
+      if (!link) return;
+      const target = document.getElementById(link.dataset.slug ?? '');
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', `#${link.dataset.slug}`);
+    });
+
+    // 图片懒加载 / 字体回流后标题偏移会变：首屏 load 后重算一次（MPA 下 load 仅触发一次）
+    if (active || mql.matches) {
+      window.addEventListener('load', onResize, { once: true });
+    }
+    // 正文尺寸变化（图片撑高、字体回流等）后重测；窄屏未接线时短路跳过。
+    // observe() 会立即异步回调一次，此时若尚未 activate 会被短路，activate() 内已有 measure 兜底
+    const ro = new ResizeObserver(() => active && onResize());
+    const body = document.querySelector(bodySelector);
+    if (body) ro.observe(body);
+
+    mql.addEventListener('change', syncBreakpoint);
+    syncBreakpoint();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocRail);
+  } else {
+    initTocRail();
+  }
+  // 注：本站为 MPA（无 ClientRouter / 视图过渡），脚本随整页加载执行一次即可。
+  // 若将来启用视图过渡，需在此成对补：astro:page-load 重新挂载 + astro:before-swap 清理监听器/Observer。
+</script>
