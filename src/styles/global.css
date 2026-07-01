@@ -69,21 +69,24 @@
   }
 }
 
-/* blog-toc 模块的消费侧主题映射：把模块默认变量（声明在 :root 上）覆盖为本站语义色，
-   使目录配色随 data-scheme 明暗切换；模块自身不硬编码颜色。
+/* blog-toc 模块的消费侧主题映射：覆盖模块默认变量（声明在 :root 上）为本站 tone 色阶，
+   使目录配色随 data-scheme 明暗自动反转；模块自身不硬编码颜色。
    刻意不放进 @layer：变量设在 .toc-rail 元素自身即可盖过 :root 的继承默认（元素自有值 >
    继承值），与层级/特异性无关；放进 @layer 也能生效，但不分层更贴合「这是主题映射、不是组件样式」的语义。
-   accent 仅用于「鼠标悬停目录项」；轨道高亮条用中性的 title 色，不抢注意力。 */
+   tone 分层：1 轨道线 / 3 高亮条 / 6 百分比 / 7 浮层项 / 8 浮层标题与活跃项；
+   面板背景仍引用 --prose-bg-color（明暗非对称、tone 表达不了）；accent 仅用于 hover。 */
 .toc-rail {
-  --toc-rail-line-color: var(--border-color);
-  --toc-rail-highlight-color: var(--title-color);
-  --toc-percent-color: var(--text-secondary-color);
+  --toc-rail-line-color: var(--tone-1);
+  --toc-rail-highlight-color: var(--tone-3);
+  --toc-percent-color: var(--tone-5);
+
   --toc-panel-bg: var(--prose-bg-color);
-  /* 对齐 menu-card 的 Tailwind shadow-lg：固定黑色半透明投影，明暗一致、不随 border-color 在暗色翻成白色辉光 */
-  --toc-panel-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --toc-panel-title-color: var(--title-color);
-  --toc-panel-item-color: var(--text-color);
-  --toc-panel-item-active-color: var(--title-color);
+  /* 引用 Tailwind shadow-lg token：与 menu-card 同源，改主题时同步、不漂移 */
+  --toc-panel-shadow: var(--shadow-lg);
+
+  --toc-panel-title-color: var(--tone-8);
+  --toc-panel-item-color: var(--tone-7);
+  --toc-panel-item-active-color: var(--tone-max);
   --toc-panel-item-hover-color: var(--accent-color);
 }
 

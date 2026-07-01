@@ -1,3 +1,4 @@
+/* theme 无关的变量 */
 :root {
   /* jade 色阶 */
   --jade-50: #f6f9fd;
@@ -11,6 +12,38 @@
   --jade-800: #24292e;
   --jade-900: #1a1e22;
   --jade-950: #101216;
+
+  --selection-text-color: var(--tone-max);
+  --selection-bg-color: var(--accent-color);
+
+  /* 断点响应式 prose padding */
+  --prose-padding: 4rem;
+
+  @media screen and (max-width: 767px) {
+    --prose-padding: 2rem;
+  }
+
+  @media screen and (max-width: 639px) {
+    --prose-padding: 1rem;
+  }
+}
+
+/* light theme 变量 */
+:root {
+  /* tone 自适应色阶：0 贴近背景、10 贴近前景，dark 下物理色反转、语义层级不变 */
+  --tone-min: #ffffff;
+  --tone-0: var(--jade-50);
+  --tone-1: var(--jade-100);
+  --tone-2: var(--jade-200);
+  --tone-3: var(--jade-300);
+  --tone-4: var(--jade-400);
+  --tone-5: var(--jade-500);
+  --tone-6: var(--jade-600);
+  --tone-7: var(--jade-700);
+  --tone-8: var(--jade-800);
+  --tone-9: var(--jade-900);
+  --tone-10: var(--jade-950);
+  --tone-max: #000000;
 
   /* 亮色主题（默认） */
   --global-bg-color: var(--jade-50);
@@ -28,9 +61,6 @@
   --navbar-text-color: var(--jade-800);
   --pagination-text-color: var(--jade-800);
 
-  --selection-text-color: #ffffff;
-  --selection-bg-color: var(--jade-400);
-
   --accent-color: #ffcc6e;
   --border-color: rgba(0, 0, 0, 0.1);
   --blockquote-border-color: var(--jade-100);
@@ -39,20 +69,25 @@
   --hr-color: var(--jade-400);
 
   --text-shadow-size: 0.1em;
-
-  /* 断点响应式 prose padding */
-  --prose-padding: 4rem;
-
-  @media screen and (max-width: 767px) {
-    --prose-padding: 2rem;
-  }
-
-  @media screen and (max-width: 639px) {
-    --prose-padding: 1rem;
-  }
 }
 
+/* dark theme 变量 */
 :root[data-scheme="dark"] {
+  /* tone 自适应色阶：方向反转 */
+  --tone-min: #000000;
+  --tone-0: var(--jade-950);
+  --tone-1: var(--jade-900);
+  --tone-2: var(--jade-800);
+  --tone-3: var(--jade-700);
+  --tone-4: var(--jade-600);
+  --tone-5: var(--jade-500);
+  --tone-6: var(--jade-400);
+  --tone-7: var(--jade-300);
+  --tone-8: var(--jade-200);
+  --tone-9: var(--jade-100);
+  --tone-10: var(--jade-50);
+  --tone-max: #ffffff;
+
   --global-bg-color: #000000;
   --prose-bg-color: var(--jade-950);
   --navbar-bg-color: var(--jade-950);
@@ -68,15 +103,12 @@
   --navbar-text-color: var(--jade-300);
   --pagination-text-color: var(--jade-300);
 
-  --selection-text-color: #000000;
-  --selection-bg-color: var(--jade-600);
-
   --accent-color: #0000ff;
   --border-color: rgba(255, 255, 255, 0.1);
   --blockquote-border-color: var(--jade-700);
   --table-header-border-color: var(--jade-600);
   --table-body-border-color: var(--jade-700);
-  --hr-color: var(--jade-600);
+  --hr-color: var(--jade-500);
 
   --text-shadow-size: 0.25em;
 }
