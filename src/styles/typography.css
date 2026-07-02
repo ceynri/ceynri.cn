@@ -1,11 +1,13 @@
 .typography {
+
   h1,
   h2,
   h3,
   h4,
   h5 {
     color: var(--title-color);
-    margin: 2.75rem 0 1rem;
+    margin: 1.75rem 0 1rem;
+    padding-top: 1rem;
     font-weight: 600;
     line-height: 1.15;
   }
@@ -103,7 +105,7 @@
       border-bottom: 1px solid var(--table-header-border-color);
     }
 
-    tbody tr + tr {
+    tbody tr+tr {
       border-top: 1px solid var(--table-body-border-color);
     }
 
@@ -129,7 +131,7 @@
       0 4px 6px -4px rgba(0, 0, 0, 0.1);
   }
 
-  :not(pre) > code {
+  :not(pre)>code {
     font-size: 0.875em;
     color: var(--inline-code-color);
     padding: 0.2em 0.3em;
