@@ -244,8 +244,12 @@ const shouldRender = items.length >= minHeadings;
       transform 0.2s ease-out;
   }
 
+  /* 显隐单一来源 = 鼠标位置（:hover）+ 键盘聚焦（:has(:focus-visible)）。
+     不用 :focus-within：鼠标点击 <a> 后焦点残留其上，:focus-within 会持续生效，
+     导致鼠标已离开卡片却仍不隐藏——与「鼠标离开即隐藏」的直觉相悖。
+     :focus-visible 仅键盘 Tab 聚焦时匹配，鼠标点击不触发，故点击后显隐完全交给 :hover。 */
   .toc-rail:hover .toc-rail__panel,
-  .toc-rail:focus-within .toc-rail__panel {
+  .toc-rail:has(:focus-visible) .toc-rail__panel {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
     pointer-events: auto;
