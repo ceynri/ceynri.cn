@@ -59,11 +59,16 @@
   opacity: 1;
 }
 
-/* 可点亮的交互文字：hover 时进入 sparkle-text 常驻态，是 sparkle-text 的交互包装 */
-@utility sparklable-text {
+/* sparkle 过渡：只声明 transition，不绑定触发条件，方便与 hover:/group-hover: 等变体自由组合 */
+@utility sparkle-transition {
   transition-property: color, text-shadow, opacity;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
+}
+
+/* 可点亮的交互文字：hover 时进入 sparkle-text 常驻态，是 sparkle-transition + hover:sparkle-text 的便捷组合 */
+@utility sparklable-text {
+  @apply sparkle-transition;
 
   &:hover {
     @apply sparkle-text;
