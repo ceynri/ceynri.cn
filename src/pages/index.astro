@@ -14,33 +14,43 @@ import BaseLayout from '~/layouts/base-layout.astro';
 >
   <main class="fixed w-screen h-screen flex flex-col items-center text-white p-8 z-[1]">
     <div class="w-full h-full relative">
-      <!-- 中间 -->
-      <header class="absolute z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex flex-col items-center justify-center text-center">
-        <!-- 主标题 -->
-        <div class="mt-12 flex flex-col items-center justify-center text-shadow-lg">
-          <div class="text-[3.8vw] max-lg:text-3xl max-sm:text-2xl font-[500] leading-[1.4]">
-            ceynri, Frontend Developer
-          </div>
-          <div class="text-[3.8vw] max-lg:text-3xl max-sm:text-2xl font-[500] leading-[1.4]">
-            based in Guangdong, China
-          </div>
-          <div class="text-[1.5vw] max-lg:text-base w-[30vw] max-lg:w-[60vw] mt-6">
+      <!-- 中间主视觉：定位到构图指定的区域（fixed，坐标与全屏画布一致），初始 opacity-0，待构图确定后再显现，避免可见的位移跳动 -->
+      <header
+        id="hero"
+        class="fixed inset-0 z-[1] flex opacity-0 transition-opacity duration-500 ease-out items-center justify-center p-[6vw]"
+      >
+        <div
+          id="hero-block"
+          class="flex flex-col text-shadow-lg items-center text-center"
+        >
+          <!-- 主标题 -->
+          <h1 class="hero-title text-[3.8vw] max-lg:text-3xl max-sm:text-2xl font-[500] leading-[1.4] m-0">
+            <div>ceynri, Frontend Developer</div>
+            <div>based in Guangdong, China</div>
+          </h1>
+          <!-- 副标题：max-width 用 em 锚定字号，无论字号由 vw 还是断点驱动，行内字数恒定 -->
+          <div class="text-[1.5vw] max-lg:text-base max-w-[20em] max-sm:max-w-[80vw] mt-6">
             我在这里写点博客，分享我对于生活与日常的一些思考。
           </div>
-        </div>
-        <!-- 入口导航栏 -->
-        <div class="flex gap-4 mt-10">
-          {HOME_ENTRY_ITEMS.map((item) => (
-            <a
-              href={item.href}
-              class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 active:opacity-50 transition-[background-color,opacity] duration-300 ease-out"
-              title={item.name}
-            >
-              <item.icon class="size-6" />
-            </a>
-          ))}
+          <!-- 入口导航栏 -->
+          <div class="flex gap-4 mt-10">
+            {HOME_ENTRY_ITEMS.map((item) => (
+              <a
+                href={item.href}
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 active:opacity-50 transition-[background-color,opacity] duration-300 ease-out"
+                title={item.name}
+              >
+                <item.icon class="size-6" />
+              </a>
+            ))}
+          </div>
         </div>
       </header>
+
+      <!-- 禁用 JS 时强制显现主视觉（hero 初始 opacity-0 依赖 JS 淡入） -->
+      <noscript>
+        <style>#hero{opacity:1!important}</style>
+      </noscript>
 
       <!-- 左上角 -->
       <div class="absolute z-[1] top-0 left-0 flex items-start justify-start">
@@ -119,4 +129,57 @@ import BaseLayout from '~/layouts/base-layout.astro';
 
   <!-- 流场背景 -->
   <FlowFieldBackground />
+
+  <script>
+    import type { HomeComposition } from '~/utils/flow-field/types';
+
+    // 主视觉外层 / 内层的固定基础类，与模板初始类保持一致（仅保留 opacity 过渡，不含位移动画）
+    const HERO_WRAP_BASE = 'fixed z-[1] flex transition-opacity duration-500 ease-out';
+    const HERO_BLOCK_BASE = 'flex flex-col text-shadow-lg';
+
+    const wrap = () => document.getElementById('hero');
+    const block = () => document.getElementById('hero-block');
+
+    // 根据构图把主视觉定位到指定区域（瞬时生效、无位移动画），并在区域内按对齐类摆放文案，完成后淡入
+    const applyComposition = (composition: HomeComposition) => {
+      const wrapEl = wrap();
+      const blockEl = block();
+      if (!wrapEl || !blockEl) {
+        return;
+      }
+      const { left, top, width, height } = composition.heroRegion;
+      wrapEl.className = `${HERO_WRAP_BASE} ${composition.heroWrapClass}`;
+      wrapEl.style.left = `${left}px`;
+      wrapEl.style.top = `${top}px`;
+      wrapEl.style.width = `${width}px`;
+      wrapEl.style.height = `${height}px`;
+      blockEl.className = `${HERO_BLOCK_BASE} ${composition.heroBlockClass}`;
+      wrapEl.style.opacity = '1';
+    };
+
+    window.addEventListener('flowfield:composition', (event) => {
+      applyComposition((event as CustomEvent<HomeComposition>).detail);
+    });
+
+    // 刷新时随背景一起淡出，重定位在不可见状态下完成
+    window.addEventListener('flowfield:fadeout', () => {
+      const wrapEl = wrap();
+      if (wrapEl) {
+        wrapEl.style.opacity = '0';
+      }
+    });
+
+    // 兜底：若构图在监听器注册前已生成，立即应用
+    if (window.__flowFieldComposition) {
+      applyComposition(window.__flowFieldComposition);
+    }
+
+    // 安全兜底：即便背景脚本异常未派发构图，也在超时后以默认居中布局显现，避免主视觉永久隐藏
+    window.setTimeout(() => {
+      const wrapEl = wrap();
+      if (wrapEl && wrapEl.style.opacity !== '1') {
+        wrapEl.style.opacity = '1';
+      }
+    }, 1200);
+  </script>
 </BaseLayout>
