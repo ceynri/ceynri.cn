@@ -54,5 +54,12 @@
   "css.customData": [".vscode/tailwind.json"],
   "editor.tabSize": 2,
   "npm.packageManager": "pnpm",
-  "cSpell.words": ["clsx", "lastmod", "lucide", "Perlin", "sparklable"]
+  "cSpell.words": [
+    "clsx",
+    "lastmod",
+    "lucide",
+    "Perlin",
+    "sparklable",
+    "UMAMI"
+  ]
 }

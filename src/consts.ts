@@ -91,4 +91,4 @@ export const FILING = {
 export const BLOG_POST_PER_PAGE = 10;
 
 /** Umami 网站 ID */
-export const UMAMI_WEBSITE_ID = '3f5aac97-7561-4a4a-8649-9c929a18841f';
+export const UMAMI_WEBSITE_ID = 'f8741b6a-a620-4bba-a725-1f99a4c52bfa';
