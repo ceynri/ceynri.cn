@@ -119,8 +119,11 @@ jobs:
           echo "📊 Build output size: $(du -sh dist)"
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
+      # 使用 fork 分支：在官方 v1.5.2 基础上新增 cdn_purge_index_as_dir，
+      # 已向上游提交 issue/PR，待上游采纳后可切回官方 tag
+      # https://github.com/sylingd/tencent-cos-and-cdn-action
       - name: Deploy to Tencent COS and refresh CDN
-        uses: sylingd/tencent-cos-and-cdn-action@v1.4.2
+        uses: ceynri/tencent-cos-and-cdn-action@v1.5.2-purge-index-as-dir
         with:
           # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
@@ -144,6 +147,8 @@ jobs:
           cdn_prefix: ${{ secrets.TENCENT_CDN_PREFIX }}
           # 等待 CDN 刷新完成再结束 step
           cdn_wait_flush: true
+          # index.html 变更时额外刷新其所在目录的 URL（如 page/ 而非 page/index.html）
+          cdn_purge_index_as_dir: true
           # 项目文件本地路径
           local_path: dist
           # COS 桶上传路径
