@@ -487,8 +487,18 @@ const shouldRender = items.length >= minHeadings;
       const target = document.getElementById(link.dataset.slug ?? '');
       if (!target) return;
       e.preventDefault();
+      // 埋点：目录锚点点击
+      window.umami?.track('toc-anchor-click', { slug: link.dataset.slug });
       target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
       history.replaceState(null, '', `#${link.dataset.slug}`);
+    });
+
+    // 埋点：hover 展开目录。每次页面加载只上报一次，避免同一用户反复 hover 灌水
+    let hoverTracked = false;
+    rail.addEventListener('mouseenter', () => {
+      if (hoverTracked) return;
+      hoverTracked = true;
+      window.umami?.track('toc-rail-hover');
     });
 
     // 图片懒加载 / 字体回流后标题偏移会变：首屏 load 后重算一次（MPA 下 load 仅触发一次）
