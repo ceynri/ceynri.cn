@@ -26,3 +26,5 @@ pnpm-debug.log*
 .agents/memory
 
 docs/plans
+
+.playwright-cli
