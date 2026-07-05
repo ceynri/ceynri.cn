@@ -23,13 +23,15 @@ import BaseLayout from '~/layouts/base-layout.astro';
           id="hero-block"
           class="flex flex-col text-shadow-lg items-center text-center"
         >
-          <!-- 主标题 -->
-          <h1 class="hero-title text-[3.8vw] max-lg:text-3xl max-sm:text-2xl font-[500] leading-[1.4] m-0">
+          <!-- 主标题：clamp 让字号随 vw 流动的同时兜住两端——下限 1.5rem(≈原 text-2xl) 保小屏可读，
+               上限 4.5rem(≈1920px 处 3.8vw) 防超宽屏失控（纯 3.8vw 在 2560/3440px 会涨到 97/131px 过大） -->
+          <h1 class="hero-title text-[clamp(1.5rem,3.8vw,4.5rem)] font-[500] leading-[1.4] m-0">
             <div>ceynri, Frontend Developer</div>
             <div>based in Guangdong, China</div>
           </h1>
-          <!-- 副标题：max-width 用 em 锚定字号，无论字号由 vw 还是断点驱动，行内字数恒定 -->
-          <div class="text-[1.5vw] max-lg:text-base max-w-[20em] max-sm:max-w-[80vw] mt-6">
+          <!-- 副标题：clamp 同主标题，下限 1rem(≈原 text-base) 保可读、上限 1.75rem 防超宽屏过大；
+               max-width 用 em 锚定字号，无论字号由 clamp 如何取值，行内字数恒定 -->
+          <div class="text-[clamp(1rem,1.5vw,1.75rem)] max-w-[20em] max-sm:max-w-[80vw] mt-6">
             我在这里写点博客，分享我对于生活与日常的一些思考。
           </div>
           <!-- 入口导航栏 -->
