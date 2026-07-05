@@ -24,6 +24,8 @@ buttons.forEach((button) => {
     window.umami?.track('theme-toggle-button', {
       theme: newTheme,
     });
+    // 同步刷新会话维度，使后续行为可按切换后的配色方案分段
+    window.umami?.identify?.({ theme: newTheme });
   });
 });
 </script>
