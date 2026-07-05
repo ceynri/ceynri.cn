@@ -42,4 +42,24 @@ const { headings } = await render(post);
 
   <!-- 浮动图片组件 -->
   <FloatingImages />
+
+  <script>
+    // 埋点：读到文末（视作读完）。在正文末尾插入零高哨兵，进入视口即一次性上报。
+    // 用 IntersectionObserver 而非滚动监听，开销低；且不依赖仅在宽屏接线的 TOC，全尺寸生效。
+    // 本站为 MPA（无视图过渡），随整页加载执行一次即可。
+    const article = document.querySelector('[data-toc-body]');
+    if (article) {
+      const sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      article.appendChild(sentinel);
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          window.umami?.track('post-read');
+          observer.disconnect();
+          sentinel.remove();
+        }
+      });
+      observer.observe(sentinel);
+    }
+  </script>
 </BaseLayout>

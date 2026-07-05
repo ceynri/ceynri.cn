@@ -23,13 +23,36 @@ const { title, description, image } = Astro.props;
     <slot />
 
     <script>
-      // 外链点击事件上报 umami
-      const name = 'outbound-link';
+      // 链接点击事件上报 umami：区分「外链」「端内跳转」「联系方式」，事件的当前页 URL 由 umami 自动携带（即「从哪来」），事件数据只记「去哪」
+      // - outbound-link：跳出本站的外链
+      // - internal-link：站内页面跳转，用于区分某次 PV 是直接进入还是站内点击跳转而来
+      // - contact-link：mailto/tel 等联系方式点击，视作一次联系转化
+      // 跳过：javascript: 等其余协议、纯页内锚点（同 path 仅切 hash，另有专门埋点）、已显式声明 data-umami-event 的链接
       document.querySelectorAll('a').forEach((a) => {
-        if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
-          a.setAttribute('data-umami-event', name);
+        if (a.getAttribute('data-umami-event')) return;
+
+        if (a.protocol === 'mailto:' || a.protocol === 'tel:') {
+          a.setAttribute('data-umami-event', 'contact-link');
           a.setAttribute('data-umami-event-url', a.href);
+          return;
         }
+        if (a.protocol !== 'http:' && a.protocol !== 'https:') return;
+
+        if (a.host !== window.location.host) {
+          a.setAttribute('data-umami-event', 'outbound-link');
+          a.setAttribute('data-umami-event-url', a.href);
+        } else {
+          if (a.pathname === window.location.pathname && a.hash) return;
+          a.setAttribute('data-umami-event', 'internal-link');
+          a.setAttribute('data-umami-event-url', a.pathname);
+        }
+      });
+
+      // 会话维度：把当前配色方案写入 umami session，便于按 light/dark 分段分析行为差异。
+      // umami 脚本 defer 加载，用 load 事件确保其已就绪；主题切换时在 theme-toggle-button 内同步刷新。
+      window.addEventListener('load', () => {
+        const theme = document.documentElement.getAttribute('data-scheme') || 'light';
+        window.umami?.identify?.({ theme });
       });
     </script>
   </body>
