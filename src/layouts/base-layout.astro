@@ -23,12 +23,22 @@ const { title, description, image } = Astro.props;
     <slot />
 
     <script>
-      // 外链点击事件上报 umami
-      const name = 'outbound-link';
+      // 链接点击事件上报 umami：区分「外链」与「端内跳转」，事件的当前页 URL 由 umami 自动携带（即「从哪来」），事件数据只记「去哪」
+      // - outbound-link：跳出本站的外链
+      // - internal-link：站内页面跳转，用于区分某次 PV 是直接进入还是站内点击跳转而来
+      // 跳过：已显式声明 data-umami-event 的链接、非 http(s) 协议（mailto/tel/javascript 等）、纯页内锚点（同 path 仅切 hash）
       document.querySelectorAll('a').forEach((a) => {
-        if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
-          a.setAttribute('data-umami-event', name);
+        if (a.getAttribute('data-umami-event')) return;
+        if (a.protocol !== 'http:' && a.protocol !== 'https:') return;
+
+        if (a.host !== window.location.host) {
+          a.setAttribute('data-umami-event', 'outbound-link');
           a.setAttribute('data-umami-event-url', a.href);
+        } else {
+          // 纯页内锚点（如目录跳转）不算跳转，另有专门埋点
+          if (a.pathname === window.location.pathname && a.hash) return;
+          a.setAttribute('data-umami-event', 'internal-link');
+          a.setAttribute('data-umami-event-url', a.pathname);
         }
       });
     </script>
