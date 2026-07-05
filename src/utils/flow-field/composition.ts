@@ -47,17 +47,19 @@ function safeRegion(vw: number, vh: number): Box {
  * - 文案统一落在「安全区」内（见 safeRegion），从根本上避免与四角固定 chrome 冲突；
  * - 背景画框（frame）是一块艺术性矩形，允许与文案重叠——重叠时靠 text-shadow 保证可读；
  * - 每个预设仅通过 heroWrapClass 的对齐方式决定文案锚定在安全区的哪个边 / 角：
- *   背景不覆盖该锚点时自然形成「留白分离」，屏幕过小放不下时优雅降级为「叠加」。
+ *   背景不覆盖该锚点时自然形成「留白分离」，屏幕过小放不下时优雅降级为「叠加」；
+ * - 垂直几何居中（items-center）的预设额外加 mt 做光学校正，把视觉重心从几何中心略微上提；
+ * - 间距 / 字号统一用 clamp(vw) 表达，随视口等比例缩放并在两端设限，保证各屏宽下比例一致。
  * 说明：heroWrapClass / heroBlockClass 以字面量形式列在此处供 Tailwind 静态提取。
  */
 const PRESETS: CompositionPreset[] = [
-  // 全屏铺满 + 文案居中叠加
+  // 全屏铺满，文案居中叠加
   {
     name: 'fullbleed-center',
     supportsMobile: true,
     frame: (vw, vh) => ({ width: vw, height: vh, left: 0, top: 0 }),
     heroWrapClass: 'items-center justify-center',
-    heroBlockClass: 'items-center text-center',
+    heroBlockClass: 'items-center text-center mt-[clamp(1.5rem,3vw,3rem)]',
   },
   // 装裱式：四周留黑边画框，文案居中叠加
   {
@@ -68,9 +70,9 @@ const PRESETS: CompositionPreset[] = [
       return { width: vw - m * 2, height: vh - m * 2, left: m, top: m };
     },
     heroWrapClass: 'items-center justify-center',
-    heroBlockClass: 'items-center text-center',
+    heroBlockClass: 'items-center text-center mt-[clamp(1.5rem,3vw,3rem)]',
   },
-  // 顶部窗口画框 + 文案落在窗口下方、居中
+  // 顶部窗口画框，文案落在窗口下方居中
   {
     name: 'top-window',
     supportsMobile: true,
@@ -81,17 +83,15 @@ const PRESETS: CompositionPreset[] = [
     heroWrapClass: 'items-end justify-center pb-[2vh]',
     heroBlockClass: 'items-center text-center',
   },
-  // 上方横向画框 + 文案落在下方、靠左编排（左右结构）
-  // 文案被压进半屏高的横带，宽屏下主标题降一档避免过挤；lg: 限定只在宽屏生效，
-  // 保留 h1 自带的窄屏字号兜底（band-top 支持移动端，裸 vw 覆盖会让手机端标题过小）
+  // 上方横带，文案落在下方靠左；宽屏标题降档避免半屏高里过挤，lg: 限定不波及移动端字号
   {
     name: 'band-top',
     supportsMobile: true,
     frame: (vw, vh) => ({ width: vw, height: Math.round(vh * BAND_RATIO), left: 0, top: 0 }),
     heroWrapClass: 'items-end justify-start',
-    heroBlockClass: 'items-start text-left lg:[&_.hero-title]:text-[3vw]',
+    heroBlockClass: 'items-start text-left lg:[&_.hero-title]:text-[clamp(1.5rem,3vw,3.5rem)]',
   },
-  // 下方横向画框 + 文案落在上方、居中（顶部居中天然避开四角 chrome，仅宽屏以免移动端文案过高）
+  // 下方横带，文案垂直居中靠左、压在画框上边界，消除上下对半的割裂感，与 band-top 成套（仅宽屏）
   {
     name: 'band-bottom',
     supportsMobile: false,
@@ -99,18 +99,20 @@ const PRESETS: CompositionPreset[] = [
       const h = Math.round(vh * BAND_RATIO);
       return { width: vw, height: h, left: 0, top: vh - h };
     },
-    heroWrapClass: 'items-start justify-center',
-    heroBlockClass: 'items-center text-center lg:[&_.hero-title]:text-[3vw]',
+    heroWrapClass: 'items-center justify-start',
+    heroBlockClass:
+      'items-start text-left mt-[clamp(1.5rem,3vw,3rem)] lg:[&_.hero-title]:text-[clamp(1.5rem,3vw,3.5rem)]',
   },
-  // 左半屏纵向画框 + 文案居右半屏（仅宽屏）
+  // 左半屏画框，文案居右半屏（仅宽屏）
   {
     name: 'split-left',
     supportsMobile: false,
     frame: (vw, vh) => ({ width: Math.round(vw * SPLIT_RATIO), height: vh, left: 0, top: 0 }),
     heroWrapClass: 'items-center justify-end',
-    heroBlockClass: 'items-end text-right max-w-[38vw] [&_.hero-title]:text-[2.4vw]',
+    heroBlockClass:
+      'items-end text-right mt-[clamp(1.5rem,3vw,3rem)] max-w-[38vw] [&_.hero-title]:text-[clamp(1.5rem,2.4vw,2.75rem)]',
   },
-  // 右半屏纵向画框 + 文案居左半屏（仅宽屏）
+  // 右半屏画框，文案居左半屏（仅宽屏）
   {
     name: 'split-right',
     supportsMobile: false,
@@ -119,7 +121,8 @@ const PRESETS: CompositionPreset[] = [
       return { width: w, height: vh, left: vw - w, top: 0 };
     },
     heroWrapClass: 'items-center justify-start',
-    heroBlockClass: 'items-start text-left max-w-[38vw] [&_.hero-title]:text-[2.4vw]',
+    heroBlockClass:
+      'items-start text-left mt-[clamp(1.5rem,3vw,3rem)] max-w-[38vw] [&_.hero-title]:text-[clamp(1.5rem,2.4vw,2.75rem)]',
   },
 ];
 
