@@ -43,6 +43,7 @@
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
     "@biomejs/biome": "^2.5.0",
+    "@ceynri/astro-toc-rail": "^0.1.0",
     "@fission-ai/openspec": "^1.4.1",
     "@lucide/astro": "^1.21.0",
     "@tailwindcss/vite": "^4.3.1",
