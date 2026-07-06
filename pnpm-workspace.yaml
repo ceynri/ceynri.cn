@@ -5,3 +5,5 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   vue-demi: true
+minimumReleaseAgeExclude:
+  - '@ceynri/astro-toc-rail@0.1.0'

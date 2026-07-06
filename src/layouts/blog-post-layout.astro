@@ -61,5 +61,17 @@ const { headings } = await render(post);
       });
       observer.observe(sentinel);
     }
+
+    // 埋点：TocRail 组件不绑定统计实现，仅派发 CustomEvent，由本站转接到 umami
+    document.addEventListener('toc:anchor-click', (e) => {
+      window.umami?.track('toc-anchor-click', { ...e.detail });
+    });
+    // 组件每次 hover 都派发，节流是本站的埋点诉求：每页只上报一次，避免同一用户反复 hover 灌水
+    let tocHoverTracked = false;
+    document.addEventListener('toc:rail-hover', () => {
+      if (tocHoverTracked) return;
+      tocHoverTracked = true;
+      window.umami?.track('toc-rail-hover');
+    });
   </script>
 </BaseLayout>
