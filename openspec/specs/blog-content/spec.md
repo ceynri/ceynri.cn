@@ -17,7 +17,7 @@
 
 #### Scenario: 枚举字段取值非法
 
-- **WHEN** `status` 不属于 `seed | draft | evergreen | archived`，或 `layout` 不属于 `narrow | normal`
+- **WHEN** `layout` 不属于 `narrow | normal`
 - **THEN** 构建报错并指明非法取值
 
 #### Scenario: 合法 frontmatter
