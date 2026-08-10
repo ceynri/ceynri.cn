@@ -37,6 +37,7 @@ CONTENT_BASE=/xxx/workspace/content
 - `content/`：内容源 submodule（ceynri-words），`blog/`/`pages/`/`poems/` 对外发布，其余为私有。ceynri-words 是上游内容库，ceynri.cn 是下游消费者——只发布公开内容及其显式引用的图片资源闭包
 - `public/`：直出静态资源（内容图片不再依赖 `public/images` symlink，由 content asset pipeline 在 dev/build 时按需 serve/copy）
 - `openspec/`：OpenSpec spec-driven 变更管理（`specs/` 活规范 + `changes/` 变更）
+- `scripts/`：仓库级自动化脚本（Node 零依赖 `.mjs`，CI 与本地均可运行），如 `backfill-published-at.mjs` 在部署构建前回写首次发布文章的 `publishedAt`
 
 ## 任务管理
 
