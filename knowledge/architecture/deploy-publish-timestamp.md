@@ -24,6 +24,7 @@
 
 ## 注意事项
 
+- **子模块在 CI 中是游离 HEAD**：`actions/checkout`（无论主仓库 checkout 是否带 token）默认把子模块检出为 detached HEAD，不在任何分支上。回写 push 前必须 `git -C content checkout main` 切回分支，且先 `pull --rebase` 对齐远端**再**跑脚本生成时间戳——时间戳取自 `new Date()`，每次运行都不同，若先写再 rebase 必然冲突。
 - **哨兵是约定不是机制**：`[skip deploy]` 靠字符串匹配，任何含该子串的 push commit 都会跳过部署。勿在正常提交里误用；改动哨兵词需同步改 workflow 守卫。
 - **时间戳粒度有意不一致**：历史 date-only 值（如 `2021-05-16`）保留原样视为当日，新写入为秒级带时区。刻意**不**用「git 首 commit 时间」回填历史——commit 时间是版本副作用，不是作者表达的发布时间。
 - **脚本零依赖是有意为之**：用行锚定正则插入，不用 YAML 库，以免重排键序/丢注释污染 diff。代价是对极端 frontmatter 结构容错有限，靠本地真实数据 dry-run 兜底核验。

@@ -56,19 +56,24 @@ jobs:
       # 2.5 回写首次发布文章的 publishedAt
       # 检出与子模块就绪之后、构建之前执行，确保当次部署即包含新时间戳。
       # 回写 commit 以 [skip deploy] 开头，配合 job 级 if 守卫短路自触发部署环。
+      # 注意：actions/checkout 把子模块检出为游离 HEAD，需先切回 main 分支；
+      # 且先 rebase 对齐远端再生成时间戳，规避并发/重复触发导致的 non-fast-forward 与 stash 冲突。
       - name: Backfill publishedAt for first-published posts
         env:
           TZ: 'Asia/Shanghai'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # 脚本零依赖，直接用 runner 自带 node 运行（setup-node 之前即可）
+          # 子模块处于游离 HEAD，先检出 main 并同步到远端最新（此时工作区干净）
+          git -C content checkout main
+          git -C content pull --rebase origin main
+          # 脚本零依赖，直接用 runner 自带 node 运行（setup-node 之前即可），基于最新基线生成时间戳
           node scripts/backfill-published-at.mjs --base ./content
           # 若内容子模块有改动，则提交并推送（GH_PAT 认证）
           if [ -n "$(git -C content status --porcelain)" ]; then
             git -C content add -A
             git -C content commit -m "[skip deploy] chore: backfill publishedAt for first-published posts"
-            git -C content push
+            git -C content push origin main
             echo "✅ 已回写 publishedAt 并推送 content 仓库"
           else
             echo "ℹ️ 无需回写"

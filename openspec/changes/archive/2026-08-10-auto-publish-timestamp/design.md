@@ -40,6 +40,8 @@
 
 step 顺序：`checkout(submodules)` →（可选）submodule 指针更新 → **回写 publishedAt** → setup/install → build。保证 build 吃到刚写入的值，本次部署即含新时间戳，无需二次部署。
 
+**CI 子模块游离 HEAD 的处理**（实测踩坑）：`actions/checkout` 把子模块检出为 detached HEAD，直接 `push` 报「not currently on a branch」。回写 step 内必须先 `git -C content checkout main` 切回分支，再 `pull --rebase` 对齐远端，**然后才**跑脚本生成时间戳（时间戳取自 `new Date()` 每次不同，先写再 rebase 必冲突），最后提交推送。
+
 ### D5: 破环 —— 提交信息哨兵 + 并发收敛（双闸）
 
 环路：`回写 push 到 content main` →（content 的 `update-parent-repository.yml`，`paths: blog/**` 命中）→ `repository_dispatch(submodule-update)` → `deploy-tencent-cos.yml`。
