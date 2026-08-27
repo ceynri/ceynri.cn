@@ -47,6 +47,7 @@ const { headings } = await render(post);
     // 埋点：读到文末（视作读完）。在正文末尾插入零高哨兵，进入视口即一次性上报。
     // 用 IntersectionObserver 而非滚动监听，开销低；且不依赖仅在宽屏接线的 TOC，全尺寸生效。
     // 本站为 MPA（无视图过渡），随整页加载执行一次即可。
+    // 事件数据带上 slug，便于在 umami 里按文章筛选，而不必从页面 URL 反推。
     const article = document.querySelector('[data-toc-body]');
     if (article) {
       const sentinel = document.createElement('div');
@@ -54,7 +55,7 @@ const { headings } = await render(post);
       article.appendChild(sentinel);
       const observer = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          window.umami?.track('post-read');
+          window.umami?.track('post-read', { slug: article.getAttribute('data-slug') });
           observer.disconnect();
           sentinel.remove();
         }

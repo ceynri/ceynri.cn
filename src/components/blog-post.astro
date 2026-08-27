@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { post } = Astro.props as Props;
-const { title, date, cover_image, lastmod, tags } = post.data;
+const { title, date, cover_image, lastmod, tags, slug } = post.data;
 const { Content } = await render(post);
 ---
 
@@ -42,7 +42,7 @@ const { Content } = await render(post);
         </div>
       </div>
     )}
-  <article class="prose typography mt-8" data-toc-body>
+  <article class="prose typography mt-8" data-toc-body data-slug={slug}>
     <Content />
     {lastmod && (
       <blockquote class="mt-12 opacity-50">Last modified on <FormattedDate date={lastmod} />.</blockquote>
