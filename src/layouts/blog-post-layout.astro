@@ -22,6 +22,7 @@ const { headings } = await render(post);
   title={title}
   description={description}
   image={cover_image?.src}
+  markdownUrl={`/blog/${post.id}.md`}
 >
   <TopNavbar />
   <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">

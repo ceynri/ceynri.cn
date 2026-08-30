@@ -21,6 +21,7 @@
 |--------|---------|---------|
 | 内容图片与原图链接链路 | `architecture/content-image-assets.md` | 调整 Markdown 图片、内容资产 URL、Astro 图片优化、dev/build 资源访问链路时 |
 | 部署链路与首次发布时间回写 | `architecture/deploy-publish-timestamp.md` | 修改部署工作流、`publishedAt` 回写脚本、`[skip deploy]` 哨兵、跨仓库触发环时 |
+| AI 可读内容发布（Markdown 孪生与 llms.txt） | `architecture/ai-readable-content.md` | 改动文章 `.md` 孪生、`/llms.txt`、summary 透出、Markdown 净化管线（ruby/HTML 标签策略）、`markdownUrl` 发现标签时 |
 
 ## 已过时文档（Archive）
 
