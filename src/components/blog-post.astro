@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
 import { FormattedDate, PostTags } from '~/components';
+import { readingMinutes } from '~/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -12,6 +13,7 @@ interface Props {
 const { post } = Astro.props as Props;
 const { title, date, cover_image, lastmod, tags, slug } = post.data;
 const { Content } = await render(post);
+const readTime = `${readingMinutes(post.body ?? '')} min read`;
 ---
 
 <main class="prose-card max-sm:rounded-none">
@@ -30,6 +32,8 @@ const { Content } = await render(post);
           <h1 class="text-3xl font-[700] text-white text-shadow-lg">{title}</h1>
           <div class="mt-3 text-white text-shadow-lg">
             <FormattedDate date={date} />
+            <span class="mx-2 opacity-60">·</span>
+            <span>{readTime}</span>
           </div>
         </div>
       </div>
@@ -37,8 +41,10 @@ const { Content } = await render(post);
     : (
       <div class="py-8 flex flex-col items-center">
         <h1 class="text-3xl font-[700]">{title}</h1>
-        <div class="mt-3">
+        <div class="mt-3 text-text-secondary">
           <FormattedDate date={date} />
+          <span class="mx-2 opacity-60">·</span>
+          <span>{readTime}</span>
         </div>
       </div>
     )}
