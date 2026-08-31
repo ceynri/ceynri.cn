@@ -33,7 +33,7 @@ CONTENT_BASE=/xxx/workspace/content
 
 ## 目录结构
 
-- `src/`：`components/`（通用组件；复杂组件可建自包含子目录，如 `blog-toc/` = `*.astro` 壳 + `core.ts` 纯逻辑 + `core.test.ts` + `index.ts` barrel + README）、`layouts/`、`pages/`（含 `blog/`；另有 AI 可读产物 endpoint：`blog/[...slug].md.ts` 文章 Markdown 孪生、`llms.txt.ts` 站点索引）、`styles/`（`main.css` 入口 + `variables.css` 设计 token + `global.css` 全局/消费侧映射 + `typography.css`/`prose.css` + `giscus/`）、`utils/`（含 `flow-field/` 首页动画）、`plugins/`（含 `sanitize-markdown.ts` Markdown 孪生净化管线）、`content.config.ts`
+- `src/`：`components/`（通用组件；复杂组件可建自包含子目录，如 `blog-toc/` = `*.astro` 壳 + `core.ts` 纯逻辑 + `core.test.ts` + `index.ts` barrel + README）、`layouts/`、`pages/`（含 `blog/`；另有 AI 可读产物 endpoint：`blog/[...slug].md.ts` 文章 Markdown 孪生、`llms.txt.ts` 站点索引）、`styles/`（`main.css` 入口 + `variables.css` 设计 token + `global.css` 全局/消费侧映射 + `typography.css`/`prose.css` + `giscus/`）、`utils/`（含 `flow-field/` 首页动画）、`plugins/`（含 `sanitize-markdown.ts` Markdown 孪生净化管线、`content-assets/` 内容图片原图链路、`content-image-resolver/` 内容图 → 优化图 URL 解析——复用 Astro imageAssetMap + getImage，供孪生 endpoint 用）、`content.config.ts`
 - `content/`：内容源 submodule（ceynri-words），`blog/`/`pages/`/`poems/` 对外发布，其余为私有。ceynri-words 是上游内容库，ceynri.cn 是下游消费者——只发布公开内容及其显式引用的图片资源闭包
 - `public/`：直出静态资源（内容图片不再依赖 `public/images` symlink，由 content asset pipeline 在 dev/build 时按需 serve/copy）
 - `openspec/`：OpenSpec spec-driven 变更管理（`specs/` 活规范 + `changes/` 变更）

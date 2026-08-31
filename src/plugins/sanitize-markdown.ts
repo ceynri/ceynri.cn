@@ -14,6 +14,12 @@ export interface SanitizeMarkdownOptions {
    * 孪生已用 frontmatter.title 重建了 H1，故剥掉正文首 H1 以避免标题重复。
    */
   stripLeadingHeading?: boolean;
+  /**
+   * 本地图片解析函数：把正文原始相对路径解析为可访问的优化图绝对 URL。
+   * 返回 null 表示解析失败（查不到映射/不适合优化），此时降级为文本占位。
+   * 由调用方注入（生产用 content-image-resolver，测试用 mock），保持本模块可独立单测。
+   */
+  resolveImage?: (src: string) => Promise<string | null>;
 }
 
 /**
@@ -202,33 +208,60 @@ export async function sanitizeMarkdown(body: string, options: SanitizeMarkdownOp
   });
 
   // 再处理图片与图片类链接。
-  // 止血说明：孪生里的本地图片暂降级为 alt 文本占位，不产出 URL——
-  // 正文图经 Astro 优化后不复制原图，孪生若引用原图 URL 会 404；
-  // floating image 的「查看原图」链接同理（原图不对外）。待「全站复用 Astro
-  // 优化图」方案落地后，这里再改为指向确定的优化图 URL。远程图不受影响、保持不变。
+  // 本地图片经注入的 resolveImage 解析为可访问的优化图 URL；解析失败/未注入时降级为
+  // 文本占位（不产出会 404 的原图 URL）。远程图不受影响、保持不变。
+  // 先收集所有本地图片节点与其 src，批量 await 解析后再统一替换（visit 同步、解析异步）。
+  const imageJobs: Array<{ node: Image | Link; parent: RootContent[]; index: number; kind: 'image' | 'link' }> = [];
   visit(tree, (node, index, parent) => {
-    if (node.type === 'image') {
-      const img = node as Image;
-      if (isLocalImageAssetUrl(img.url)) {
-        // 本地正文图 → 文本占位（用全角括号，避免方括号被 remark 转义）
-        // alt 里可能带 ?size= 这类图片处理指令，剥离后只留可读描述
-        const alt = (img.alt ?? '').split('?')[0].trim() || '图片';
-        const replacement = { type: 'text', value: `（图：${alt}）` } as RootContent;
-        if (parent && typeof index === 'number') {
-          parent.children[index] = replacement;
-        }
-      }
-      return;
-    }
-    if (node.type === 'link') {
-      const link = node as Link;
-      if (isLocalImageAssetUrl(link.url) && parent && typeof index === 'number') {
-        // 本地图片链接（查看原图）→ 去掉链接，保留文字
-        const text = (link.children ?? []).map((c) => (c.type === 'text' ? c.value : '')).join('');
-        parent.children[index] = { type: 'text', value: text } as RootContent;
-      }
+    if (!parent || typeof index !== 'number') return;
+    if (node.type === 'image' && isLocalImageAssetUrl((node as Image).url)) {
+      imageJobs.push({
+        node: node as Image,
+        parent: (parent as { children: RootContent[] }).children,
+        index,
+        kind: 'image',
+      });
+    } else if (node.type === 'link' && isLocalImageAssetUrl((node as Link).url)) {
+      imageJobs.push({
+        node: node as Link,
+        parent: (parent as { children: RootContent[] }).children,
+        index,
+        kind: 'link',
+      });
     }
   });
+
+  /** alt 里可能带 ?size= 这类图片处理指令，剥离后只留可读描述 */
+  const cleanAlt = (alt: string | null | undefined) => (alt ?? '').split('?')[0].trim() || '图片';
+  /** 链接文字（用于图片链接降级/替换） */
+  const linkText = (link: Link) => (link.children ?? []).map((c) => (c.type === 'text' ? c.value : '')).join('');
+
+  for (const job of imageJobs) {
+    const src = job.node.url ?? '';
+    const resolved = options.resolveImage ? await options.resolveImage(src) : null;
+
+    if (job.kind === 'image') {
+      const img = job.node as Image;
+      const alt = cleanAlt(img.alt);
+      if (resolved) {
+        // 解析成功 → 指向优化图 URL 的图片（用全角括号注释的 alt 保留可读描述）
+        job.parent[job.index] = { type: 'image', url: resolved, alt } as RootContent;
+      } else {
+        // 解析失败 → 文本占位（用全角括号，避免方括号被 remark 转义）
+        job.parent[job.index] = { type: 'text', value: `（图：${alt}）` } as RootContent;
+      }
+    } else {
+      const link = job.node as Link;
+      const text = linkText(link);
+      if (resolved) {
+        // 图片链接（查看大图）→ 指向优化图 URL 的链接
+        job.parent[job.index] = { ...link, url: resolved } as RootContent;
+      } else {
+        // 解析失败 → 去链接留文字
+        job.parent[job.index] = { type: 'text', value: text } as RootContent;
+      }
+    }
+  }
 
   const result = processor.stringify(tree);
   return String(result).trim();

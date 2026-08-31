@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
 
-import { sanitizeMarkdown } from '~/plugins';
+import { resolveOptimizedImage, sanitizeMarkdown } from '~/plugins';
 import { publishedPostFilter } from '~/utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -39,6 +39,12 @@ export const GET: APIRoute = async ({ props: post, site }) => {
   const cleanBody = await sanitizeMarkdown(post.body ?? '', {
     // 正文首个 H1 与 frontmatter.title 重复，剥掉（孪生已用 title 重建 H1）
     stripLeadingHeading: true,
+    // 本地图经 Astro 优化管线解析为可访问的优化图绝对 URL（AI 可直接 fetch）；
+    // 解析失败（查不到映射/SVG/GIF）时 sanitize 内部降级为占位。
+    resolveImage: async (src) => {
+      const resolved = await resolveOptimizedImage(src, post.filePath ?? '');
+      return resolved ? new URL(resolved.url, site).href : null;
+    },
   });
 
   const lead = summary ? `\n\n> ${summary}` : '';

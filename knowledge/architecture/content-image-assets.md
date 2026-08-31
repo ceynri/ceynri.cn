@@ -26,6 +26,12 @@ Astro 原生图片优化
         │
         ▼
 dist/assets/a.hash.webp + srcset
+        │
+        ▼ （孪生 endpoint 复用）
+content-image-resolver：imageAssetMap.get(importId) + getImage
+        │
+        ▼
+孪生 Markdown：![图](https://ceynri.cn/assets/a.Hash_hash.webp)
 ```
 
 ```text
@@ -74,5 +80,7 @@ Astro content layer/cache 会影响 Markdown 编译与 build 进程内状态的�
 ## 注意事项
 
 - 如果 build 后正文图片又变回 `/blog/assets/...` 原图路径，优先检查是否有逻辑改写了 Markdown image 节点。
-- 验证图片优化问题时需要注意 Astro 缓存；必要时清理 `.astro` 和 `node_modules/.astro` 后再判断。
+- 验证图片优化问题时需要注意 Astro 缓存；必要时清理 `.astro` 和 `node_modules/.astro` 后再判断（`pnpm cache:clean`）。**探针/插件调试时尤其重要**：astro 会缓存编译产物，改了插件代码但 build 用的还是旧缓存，会造成「代码没生效」的假象——本次曾因此差点误判 remark 插件未执行。
 - 修改 `remarkContentImageLinks` 时，不要把它扩展回“处理所有 Markdown 图片”的总管职责。
+- **链接指向的图不在 Astro 图片映射里**：content layer 的 `remark-collect-images` 只收集正文 `image`/`imageReference` 节点，不收集 `link` 节点。所以 `[查看原图](./assets/x.jpg)` 这类链接图没有 ImageMetadata，无法经 `imageAssetMap`/`getImage` 优化——这是「查看原图」链接/浮窗仍走原图的根本原因。要让链接图也能优化，需自定义收集逻辑（独立变更）。
+- **正文图可在 endpoint 复用优化产物**：`content-image-resolver` 复用 `astro:asset-imports` 的 `imageAssetMap`（importId → ImageMetadata）+ `getImage`，在孪生 endpoint 拿到与正文同源、同 hash 的优化图 URL。importId 的 `importer` 用 `post.filePath` 原值（「相对项目根」posix 路径）。注意这些是 astro 内部 API，且 astro import 需动态加载。

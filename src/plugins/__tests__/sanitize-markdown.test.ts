@@ -78,11 +78,45 @@ describe('sanitizeMarkdown', () => {
     expect(out).toContain('![外链](https://example.com/a.png)');
   });
 
-  it('本地图片链接（查看原图）去链接留文字', async () => {
-    const out = await run('[查看原图](./assets/my-post/diagram.png)');
-    expect(out).toContain('查看原图');
+  it('注入 resolveImage 后本地正文图指向优化图 URL', async () => {
+    const out = await sanitizeMarkdown('![封面](./assets/my-post/diagram.png)', {
+      resolveImage: async () => `https://ceynri.cn/assets/diagram.Abc_123.webp`,
+    });
+    expect(out).toContain('![封面](https://ceynri.cn/assets/diagram.Abc_123.webp)');
     expect(out).not.toContain('./assets/');
-    expect(out).not.toContain('[查看原图](');
+    expect(out).not.toContain('（图：');
+  });
+
+  it('resolveImage 剥离 alt 的 ?size= 后作为图片 alt', async () => {
+    const out = await sanitizeMarkdown('![截图?size=small](./assets/my-post/diagram.png)', {
+      resolveImage: async () => 'https://ceynri.cn/assets/diagram.Abc_123.webp',
+    });
+    expect(out).toContain('![截图](https://ceynri.cn/assets/diagram.Abc_123.webp)');
+    expect(out).not.toContain('size=');
+  });
+
+  it('resolveImage 返回 null 时降级为占位', async () => {
+    const out = await sanitizeMarkdown('![封面](./assets/my-post/diagram.png)', {
+      resolveImage: async () => null,
+    });
+    expect(out).toContain('（图：封面）');
+    expect(out).not.toContain('![');
+  });
+
+  it('注入 resolveImage 后本地图片链接指向优化图 URL', async () => {
+    const out = await sanitizeMarkdown('[查看大图](./assets/my-post/diagram.png)', {
+      resolveImage: async () => 'https://ceynri.cn/assets/diagram.Abc_123.webp',
+    });
+    expect(out).toContain('[查看大图](https://ceynri.cn/assets/diagram.Abc_123.webp)');
+    expect(out).not.toContain('./assets/');
+  });
+
+  it('本地图片链接 resolveImage 失败时去链接留文字', async () => {
+    const out = await sanitizeMarkdown('[查看大图](./assets/my-post/diagram.png)', {
+      resolveImage: async () => null,
+    });
+    expect(out).toContain('查看大图');
+    expect(out).not.toContain('[查看大图](');
   });
 
   it('远程链接保持不变', async () => {

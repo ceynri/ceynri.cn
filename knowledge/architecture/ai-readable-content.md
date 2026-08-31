@@ -48,15 +48,24 @@ frontmatter 里的 `summary` 字段原本只用于本地检索/预览，本次�
 
 `visit` 会访问 root 和 paragraph 等多个带 children 的容器。若对每个容器都跑状态机会重复处理。应对：只在其 children 含 html/text/image/link 等 inline 节点的「叶子容器」上处理一次（root 的 children 是 block 节点，自然被跳过）。
 
-### 孪生正文图不能直接引用原图 URL（404 教训 + 当前止血方案）
+### 孪生正文图：经 imageAssetMap + getImage 升级为优化图 URL
 
-**这是本次最大的踩坑。** 最初孪生把正文图经 `resolveContentAssetReference` 转成原图 URL（`/blog/<year>/assets/...`），结果现网 9 张里 8 张 404。根因：**正文图被 Astro 优化成带 hash 的 `/assets/*.webp`，原图根本不复制到产物**——content-assets 的 build 复制只覆盖「floating image 的 Markdown link 原图」，从来不覆盖正文 image 的原图。这不是「后来被去掉」，是从未覆盖正文图（参 [content-image-assets](content-image-assets.md)）。
+**历史 404 教训**：最初孪生把正文图经 `resolveContentAssetReference` 转成原图 URL（`/blog/<year>/assets/...`），结果现网 9 张里 8 张 404。根因：**正文图被 Astro 优化成带 hash 的 `/assets/*.webp`，原图根本不复制到产物**（参 [content-image-assets](content-image-assets.md)）。中间曾用 `（图：alt）` 文本占位止血。
 
-**站点的不变量**：不对外暴露原图，只有源码持有者有原图。所以「build 出正文原图给孪生用」也违背这个意图。
+**当前实现（`use-optimized-images-everywhere`）**：孪生正文图经 `content-image-resolver` 升级为**可访问的优化图 URL**（`https://ceynri.cn/assets/x.Hash_hash.webp`）。机制见下一条。
 
-**当前止血方案**：孪生里本地正文图降级为 `（图：alt）` 文本占位（剥离 alt 里的 `?size=` 处理指令），「查看原图」链接去链接留文字，不产出任何原图 URL。远程图保持不变。
+**链接图仍降级**：本地图片链接（`[查看原图](./assets/x.jpg)`）指向的图**不在 imageAssetMap**（content layer 只收集正文 `image` 节点，不收 `link` 节点），无法优化，故孪生里仍「去链接留文字」。链接图 + floating image 在 HTML 页保留原图（用户决策的折中），原图机制全保留。
 
-**后续方向（独立变更 `use-optimized-images-everywhere`）**：全站统一改用 Astro 优化图——孪生、floating image、「查看原图」都指向确定的优化产物 URL。难点是一个源图对应多个宽度/format 的 srcset 变体（如某图 5 个变体），「选哪个」只有 Astro 渲染时确定，需拿到「源图 → 选定优化变体」的映射（耦合 Astro image service）。落地后把孪生的图片占位升级为优化图 URL。
+### 孪生正文图优化的核心机制：复用 Astro `imageAssetMap`（内部 API）
+
+拿到「源图 → 优化图 URL」的关键是**复用 Astro 自己为正文图维护的映射**，而非手工构造 ImageMetadata（PoC 已证手工构造走不通：`/@fs/` src 要么返回 `astro://` 占位符需 renderChunk 替换、要么 build 不落盘）。
+
+**链路**（`src/plugins/content-image-resolver/core.ts`）：
+1. content layer 收集每篇 entry 正文 `image` 节点 → 生成虚拟模块 `astro:asset-imports`（`Map<importId, ImageMetadata>`，value 是经 Vite 处理、产物落盘的合法 metadata）。
+2. `importId = ${src}?astroContentImageFlag=&importer=${filePath}`（复刻 astro 内部 `imageSrcToImportId`；`filePath` 用 `post.filePath` 原值——「相对项目根」posix 路径，URL 编码后与 `.astro/content-assets.mjs` 的 key 逐字节一致）。
+3. endpoint 里 `import imageAssetMap from 'astro:asset-imports'` → `map.get(importId)` 得 metadata → `getImage({ src: metadata, width: 1080, format: 'webp' })` → 返回真实 `/assets/x.Hash_hash.webp`，产物自动落盘。
+
+**注意（内部 API 耦合）**：`astro:asset-imports`、`astroContentImageFlag` 常量、importId 拼接、`getImage` 均为 astro 内部实现，跨版本可能变。astro 相关 import 必须**动态加载**（`await import('astro:assets')`），不能顶层 import，否则纯逻辑单测会因解析不到虚拟模块而失败。`resolveOptimizedImage` 查不到/SVG/GIF 返回 `null`，调用方（sanitize）降级为占位。
 
 ### `post.filePath` 是项目根相对路径
 
