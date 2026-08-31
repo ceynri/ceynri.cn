@@ -2,7 +2,7 @@
 
 ## Purpose
 
-将博客文章以 AI 可读的纯 Markdown 形式发布：为每篇文章生成 Markdown 孪生（`/blog/<slug>.md`）、站点索引 `/llms.txt`，并在 HTML `<head>` 输出 `<link rel="alternate" type="text/markdown">` 发现标签。使 `summary` frontmatter 字段从「仅本地用」转为「只给 AI、人不看」的发布内容。frontmatter 白名单制（默认私有）；正文经净化（删注释、ruby 用 `<rp>` 降级、保留语义标签、本地图降级为文本占位——Astro 优化原图不对外发布）。
+将博客文章以 AI 可读的纯 Markdown 形式发布：为每篇文章生成 Markdown 孪生（`/blog/<slug>.md`）、站点索引 `/llms.txt`，并在 HTML `<head>` 输出 `<link rel="alternate" type="text/markdown">` 发现标签。使 `summary` frontmatter 字段从「仅本地用」转为「只给 AI、人不看」的发布内容。frontmatter 白名单制（默认私有）；正文经净化（删注释、ruby 用 `<rp>` 降级、保留语义标签、正文本地图解析为 Astro 优化图 URL——不对外暴露原图；本地图片链接因不在优化映射中而降级为纯文字）。
 
 ## Requirements
 
@@ -51,7 +51,7 @@ The system SHALL include a YAML frontmatter block on each Markdown twin containi
 
 ### Requirement: Sanitized Markdown body
 
-The system SHALL sanitize the Markdown twin body so that it carries the full post content while normalizing inline HTML, stripping comments, and resolving local image references.
+The system SHALL sanitize the Markdown twin body so that it carries the full post content while normalizing inline HTML, stripping comments, and resolving local image references to published optimized images.
 
 #### Scenario: HTML comments stripped
 
@@ -78,16 +78,20 @@ The system SHALL sanitize the Markdown twin body so that it carries the full pos
 - **WHEN** the post body contains an HTML tag with no explicit policy
 - **THEN** the Markdown twin keeps its inner text content rather than silently dropping it
 
-#### Scenario: Local body images degrade to text placeholder (interim)
+#### Scenario: Local body images become optimized image URLs
 
 - **WHEN** the post body references a local image (Markdown image node) via a relative or content-root path
-- **THEN** the Markdown twin replaces it with a text placeholder carrying the readable alt description (image-processing directives such as `?size=` stripped), and does not emit an original-image URL
-- **NOTE**: Body images are optimized by Astro and their originals are not published, so an original-image URL would 404. Pointing the twin at a published optimized image is deferred to a follow-up change; see design.
+- **THEN** the Markdown twin emits a Markdown image pointing at the published Astro-optimized image URL (本站 `build.assets='assets'`，即 `![alt](/assets/....webp)`，可用 site 拼绝对), preserving the readable alt text with image-processing directives such as `?size=` stripped
 
-#### Scenario: Local image-pointing links drop the link (interim)
+#### Scenario: Local image-pointing links drop the link, keep the text (interim)
 
 - **WHEN** the post body contains a Markdown link pointing to a local image (e.g. "view original")
-- **THEN** the Markdown twin keeps the link text but drops the link target, because original images are not published
+- **THEN** the Markdown twin keeps the link text but drops the link target, because link-target images are not collected into Astro's image map and cannot be resolved to an optimized URL, and emitting a raw-original URL would 404 in the twin; this is an accepted interim until link images are brought into the optimization pipeline
+
+#### Scenario: Twin-referenced optimized asset is emitted
+
+- **WHEN** the Markdown twin references an optimized image URL
+- **THEN** a corresponding optimized asset file exists in the build output (the twin does not link to a 404)
 
 #### Scenario: Remote image references unchanged
 

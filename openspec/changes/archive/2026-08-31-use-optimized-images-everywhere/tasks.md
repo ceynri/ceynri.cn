@@ -12,8 +12,8 @@
 
 ## 3. 范围确认与收尾
 
-- [ ] 3.1 「查看原图」链接 + floating image **保留原图**（用户决策）：`remark-content-image-links.ts` / `content-assets/integration.ts` / `floating-images.astro` 维持现状，原图机制全保留。确认 build 后链接仍指原图、可访问。
-- [ ] 3.2 更新 AGENTS.md 目录结构（新增 `content-image-resolver/` 模块）与 `src/plugins/` 描述。
-- [ ] 3.3 `pnpm check`（biome）、`pnpm vitest run src`、`pnpm build` 全绿；`npx astro check` 0 errors。
-- [ ] 3.4 更新 `knowledge/architecture/ai-readable-content.md` 与 `content-image-assets.md`：记录「孪生图经 imageAssetMap + getImage 升级为优化图」「链接图保留原图的原因（不在 imageAssetMap）」「内部 API 耦合注意点」，移除过时的止血/占位表述。
-- [ ] 3.5 用 knowledge-manager 沉淀本变更机制。
+- [x] 3.1 「查看原图」链接 + floating image **保留原图**（用户决策）：`remark-content-image-links.ts` / `content-assets/integration.ts` / `floating-images.astro` 维持现状，原图机制全保留。已确认 build 后链接仍指原图、dev 下可访问（200）。
+- [x] 3.2 更新 AGENTS.md 目录结构（新增 `content-image-resolver/` 模块）与 `src/plugins/` 描述。
+- [x] 3.3 `pnpm check`（biome 无修复）、`pnpm vitest run src`（44/44）、`pnpm build`（0 errors 0 warnings）、`npx astro check`（0 errors）全绿。
+- [x] 3.4 更新 `knowledge/architecture/ai-readable-content.md` 与 `content-image-assets.md`：记录「孪生图经 imageAssetMap + getImage 升级为优化图」「链接图保留原图的原因（不在 imageAssetMap）」「内部 API 耦合注意点」「astro 缓存调试坑」，移除过时的止血/占位表述。
+- [x] 3.5 用 knowledge-manager 沉淀本变更机制（见 3.4 的 knowledge 更新）。
