@@ -18,7 +18,6 @@
 ## Later
 
 - 特殊格式链接显示为卡片（LinkCard + 元数据抓取）
-- 文章目录（TableOfContents + 联动高亮）
 - 更多首页主题 / 加载动画
 - atom.xml
 - OG image
