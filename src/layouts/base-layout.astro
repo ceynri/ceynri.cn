@@ -3,13 +3,15 @@ import { BaseHead } from '~/components';
 
 interface Props {
   title: string;
+  /** 文章页标题（用于 og:type=article、og:title 带站点名、<title> 组合） */
+  postTitle?: string;
   description?: string;
   image?: string;
   /** 该页面对应的 Markdown 孪生 URL（文章页传入，用于 AI Agent 发现） */
   markdownUrl?: string;
 }
 
-const { title, description, image, markdownUrl } = Astro.props;
+const { title, postTitle, description, image, markdownUrl } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,6 +19,7 @@ const { title, description, image, markdownUrl } = Astro.props;
   <head>
     <BaseHead
       title={title}
+      postTitle={postTitle}
       description={description}
       image={image}
       markdownUrl={markdownUrl}
