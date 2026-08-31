@@ -179,6 +179,8 @@ export async function sanitizeMarkdown(body: string, options: SanitizeMarkdownOp
   const processor = unified().use(remarkParse).use(remarkGfm).use(remarkStringify, {
     bullet: '-',
     fences: true,
+    // 主题分隔线输出 ---，与作者正文习惯一致（默认是 ***）
+    rule: '-',
   });
 
   const tree = processor.parse(body) as Root;

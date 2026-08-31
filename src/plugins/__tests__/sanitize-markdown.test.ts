@@ -13,6 +13,15 @@ describe('sanitizeMarkdown', () => {
     expect(out).toContain('- 列表项');
   });
 
+  it('主题分隔线统一序列化为 ---', async () => {
+    const fromDashes = await run('上文\n\n---\n\n下文');
+    const fromStars = await run('上文\n\n***\n\n下文');
+    expect(fromDashes).toContain('---');
+    expect(fromDashes).not.toContain('***');
+    expect(fromStars).toContain('---');
+    expect(fromStars).not.toContain('***');
+  });
+
   it('删除 HTML 注释', async () => {
     const out = await run('前文\n\n<!-- 这是注释 -->\n\n后文');
     expect(out).not.toContain('注释');
