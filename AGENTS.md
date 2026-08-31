@@ -41,7 +41,9 @@ CONTENT_BASE=/xxx/workspace/content
 
 ## 任务管理
 
-使用 OpenSpec spec-driven workflow：`/opsx:propose` → `/opsx:apply` → `/opsx:archive`。`task.md` 仅保留意图级 backlog。
+网站建设事项用 GitHub Issues 管理：<https://github.com/ceynri/ceynri.cn/issues>。不要在仓库里维护本地 backlog / todo（包括 `task.md`）。新功能愿望先开 issue，再按需走 OpenSpec：`/opsx:propose` → `/opsx:apply` → `/opsx:archive`。
+
+内容仓库（`ceynri-words`）的写作/知识待办仍放那边；只要是站点功能、样式、路由，一律记到本仓库 issue。
 
 ## 项目知识库
 
