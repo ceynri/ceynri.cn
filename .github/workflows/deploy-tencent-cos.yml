@@ -149,11 +149,11 @@ jobs:
           echo "📊 Build output size: $(du -sh dist)"
 
       # 12. 部署到腾讯云 COS 并刷新 CDN
-      # 使用 fork 正式版 v1.8.0：在官方 v1.5.2 基础上新增目录级刷新，以及
+      # 使用 fork 正式版 v1.8.1：在官方 v1.5.2 基础上新增目录级刷新，以及
       # cos_content_types（按后缀写入 charset，修复 .md/.txt 无 charset 乱码）。
       # https://github.com/sylingd/tencent-cos-and-cdn-action
       - name: Deploy to Tencent COS and refresh CDN
-        uses: ceynri/tencent-cos-and-cdn-action@v1.8.0
+        uses: ceynri/tencent-cos-and-cdn-action@v1.8.1
         with:
           # 腾讯云 API 密钥 ID
           secret_id: ${{ secrets.TENCENT_SECRET_ID }}
@@ -167,10 +167,8 @@ jobs:
           cos_put_options: '{"StorageClass":"MAZ_STANDARD"}'
           # 文本文件按后缀写入 charset=utf-8，避免浏览器按系统区域（中文 Windows 常见 GBK）猜编码
           cos_content_types: |
-            {
-              "md": "text/markdown; charset=utf-8",
-              "txt": "text/plain; charset=utf-8"
-            }
+            md: "text/markdown; charset=utf-8"
+            txt: "text/plain; charset=utf-8"
           # 设置文件上传的并行任务数量
           cos_init_options: '{"FileParallelLimit":8}'
           # 是否替换同名文件
