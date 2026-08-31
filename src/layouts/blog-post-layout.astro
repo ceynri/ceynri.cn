@@ -2,15 +2,17 @@
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
-import { BlogPost, Comments, FloatingImages, Footer, TocRail, TopNavbar } from '~/components';
+import { BlogPost, Comments, FloatingImages, Footer, PostPrevNext, TocRail, TopNavbar } from '~/components';
 
 import BaseLayout from './base-layout.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  prev?: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
 }
 
-const { post } = Astro.props as Props;
+const { post, prev, next } = Astro.props as Props;
 const { title, description, cover_image, layout, tocDepth, toc } = post.data;
 
 const widthClass = layout === 'narrow' ? 'max-w-[30rem]' : 'max-w-[50rem]';
@@ -28,6 +30,11 @@ const { headings } = await render(post);
   <div class="mt-8 max-sm:mt-0 px-8 max-sm:px-0">
     <div class={`mx-auto ${widthClass} max-sm:max-w-full`}>
       <BlogPost post={post} />
+      <PostPrevNext
+        prev={prev}
+        next={next}
+        class="mt-8"
+      />
       <Comments class="mt-12" />
       <Footer class="text-center" />
     </div>

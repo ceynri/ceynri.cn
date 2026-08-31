@@ -2,6 +2,8 @@
 export type { AstroComponent as LucideComponent } from '@lucide/astro';
 export {
   Archive,
+  ArrowLeft,
+  ArrowRight,
   Feather,
   House,
   Info,

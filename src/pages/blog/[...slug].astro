@@ -4,18 +4,31 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 import { BlogPostLayout } from '~/layouts';
-import { publishedPostFilter } from '~/utils';
+import { getSortedPosts, publishedPostFilter } from '~/utils';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', publishedPostFilter);
-  return posts.map((post) => ({
+  const posts = getSortedPosts(await getCollection('blog', publishedPostFilter));
+  return posts.map((post, index) => ({
     params: { slug: post.id },
-    props: post,
+    props: {
+      post,
+      // 排序为「新→旧」，prev=较新一篇（列表里的上一篇）、next=较旧一篇
+      prev: posts[index - 1],
+      next: posts[index + 1],
+    },
   }));
 }
-type Props = CollectionEntry<'blog'>;
+interface Props {
+  post: CollectionEntry<'blog'>;
+  prev?: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
+}
 
-const post = Astro.props;
+const { post, prev, next } = Astro.props;
 ---
 
-<BlogPostLayout post={post} />
+<BlogPostLayout
+  post={post}
+  prev={prev}
+  next={next}
+/>
