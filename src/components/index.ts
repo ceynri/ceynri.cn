@@ -12,6 +12,7 @@ export { default as FormattedDate } from './formatted-date.astro';
 export { default as MenuButton } from './menu-button.astro';
 export { default as Pagination } from './pagination.astro';
 export { default as PostCard } from './post-card.astro';
+export { default as PostPrevNext } from './post-prev-next.astro';
 export { default as PostTags } from './post-tags.astro';
 export { default as ThemeToggleButton } from './theme-toggle-button.astro';
 export { default as TopNavbar } from './top-navbar.astro';

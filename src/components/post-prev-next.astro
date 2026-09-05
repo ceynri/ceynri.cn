@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { ArrowLeft, ArrowRight } from '~/components/icons';
+import { cn } from '~/utils';
+
+interface Props {
+  prev?: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
+  class?: string;
+}
+
+const { prev, next, class: className } = Astro.props as Props;
+---
+
+{(prev || next) && (
+  <nav
+    aria-label="Previous / Next post"
+    class={cn('flex gap-4', className)}
+  >
+    {prev ? (
+      <a
+        href={`/blog/${prev.id}/`}
+        class="group flex min-w-0 flex-1 flex-col gap-1 rounded-2xl bg-tag-bg px-5 py-4 transition-[background-color] duration-300 hover:bg-pagination-active-bg"
+      >
+        <span class="flex items-center gap-1.5 text-sm text-text-secondary">
+          <ArrowLeft class="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          Prev
+        </span>
+        <span class="truncate font-[500] text-title">{prev.data.title}</span>
+      </a>
+    ) : (
+      <span class="flex-1" />
+    )}
+    {next ? (
+      <a
+        href={`/blog/${next.id}/`}
+        class="group flex min-w-0 flex-1 flex-col items-end gap-1 rounded-2xl bg-tag-bg px-5 py-4 text-right transition-[background-color] duration-300 hover:bg-pagination-active-bg"
+      >
+        <span class="flex items-center gap-1.5 text-sm text-text-secondary">
+          Next
+          <ArrowRight class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
+        <span class="truncate font-[500] text-title">{next.data.title}</span>
+      </a>
+    ) : (
+      <span class="flex-1" />
+    )}
+  </nav>
+)}

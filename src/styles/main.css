@@ -31,6 +31,7 @@
   --color-navbar-text: var(--navbar-text-color);
   --color-tag-bg: var(--tag-bg-color);
   --color-pagination-text: var(--pagination-text-color);
+  --color-pagination-active-bg: var(--pagination-active-bg-color);
   --color-title: var(--title-color);
   --color-text: var(--text-color);
   --color-text-secondary: var(--text-secondary-color);
