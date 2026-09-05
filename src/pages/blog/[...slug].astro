@@ -12,10 +12,10 @@ export async function getStaticPaths() {
     params: { slug: post.id },
     props: {
       post,
-      // 排序为「新→旧」。对齐英文惯例：prev=较旧一篇（previous post）、
-      // next=较新一篇（next post），故在「新→旧」序列里 prev 取后一个、next 取前一个。
-      prev: posts[index + 1],
-      next: posts[index - 1],
+      // 排序为「新→旧」。本站把「新→旧」视为阅读前进方向：
+      // Prev（左）= 时间上更晚/更新的一篇，Next（右）= 时间上更早/较旧的一篇。
+      prev: posts[index - 1],
+      next: posts[index + 1],
     },
   }));
 }
