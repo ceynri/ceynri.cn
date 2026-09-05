@@ -100,13 +100,11 @@ const { headings } = await render(post);
       position: relative;
       cursor: pointer;
     }
-    /* 缩小 hover 触发区域到文字本身：标题默认 display:block 占满整行，
-       改为 inline-block 后只包裹文字宽度；同时把 prose 排版给的 padding-top
-       转成 margin-top（padding 也算 hover 区，margin 不算），垂直间距保持不变。 */
+    /* 缩小 hover 触发区域：标题默认 display:block 占满整行，改为 inline-block
+       后只包裹文字宽度。保留 prose 的 padding-top 不动，以免影响锚定时
+       距视口顶端的间距。 */
     .typography .anchorable-heading {
       display: inline-block;
-      padding-top: 0;
-      margin-top: calc(1.75rem + 1rem);
     }
     .anchorable-heading::before {
       content: '#';
