@@ -75,5 +75,54 @@ const { headings } = await render(post);
       tocHoverTracked = true;
       window.umami?.track('toc-rail-hover');
     });
+
+    // 标题锚点：点击正文 h 标题 → 滚动锚定 + 更新 URL hash，便于复制可锚定的链接。
+    // 用 replaceState 而非 pushState：锚点是「同一页内的状态标注」，不应在浏览器历史里堆一条记录，
+    // 否则用户点几个标题后要按多次返回键才离开本文。
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll<HTMLElement>('[data-toc-body] h1[id], [data-toc-body] h2[id], [data-toc-body] h3[id]').forEach((heading) => {
+      heading.classList.add('anchorable-heading');
+      heading.addEventListener('click', () => {
+        const id = heading.id;
+        if (!id) return;
+        heading.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+        history.replaceState(null, '', `#${encodeURIComponent(id)}`);
+      });
+    });
   </script>
+
+  <style is:global>
+    /* 可锚定标题：低存在感提示，hover 时在标题前露出 `#`，明示可点击复制链接。
+       颜色用语义次要色，明暗主题自适应，不硬编码。
+       注意必须 is:global：.anchorable-heading 由下方脚本动态 classList.add，
+       元素上没有 Astro 的 scoped data 属性，带作用域的选择器匹配不到。 */
+    .anchorable-heading {
+      position: relative;
+      cursor: pointer;
+    }
+    /* 缩小 hover 触发区域：标题默认 display:block 占满整行，改为 inline-block
+       后只包裹文字宽度。保留 prose 的 padding-top 不动，以免影响锚定时
+       距视口顶端的间距。 */
+    .typography .anchorable-heading {
+      display: inline-block;
+    }
+    .anchorable-heading::before {
+      content: '#';
+      position: absolute;
+      left: -1.1em;
+      color: var(--text-secondary-color);
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+      font-weight: 400;
+    }
+    .anchorable-heading:hover::before {
+      opacity: 0.8;
+    }
+    /* 窄屏正文紧贴边缘，左侧没有空间放 `#`，避免裁切 */
+    @media screen and (max-width: 767px) {
+      .anchorable-heading::before {
+        content: none;
+      }
+    }
+  </style>
 </BaseLayout>
