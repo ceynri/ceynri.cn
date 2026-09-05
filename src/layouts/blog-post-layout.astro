@@ -91,9 +91,11 @@ const { headings } = await render(post);
     });
   </script>
 
-  <style>
+  <style is:global>
     /* 可锚定标题：低存在感提示，hover 时在标题前露出 `#`，明示可点击复制链接。
-       颜色用语义次要色，明暗主题自适应，不硬编码。 */
+       颜色用语义次要色，明暗主题自适应，不硬编码。
+       注意必须 is:global：.anchorable-heading 由下方脚本动态 classList.add，
+       元素上没有 Astro 的 scoped data 属性，带作用域的选择器匹配不到。 */
     .anchorable-heading {
       position: relative;
       cursor: pointer;
