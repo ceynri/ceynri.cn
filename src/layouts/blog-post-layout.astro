@@ -83,10 +83,19 @@ const { headings } = await render(post);
       window.umami?.track('toc-rail-hover');
     });
 
+    // 侧边栏主标题（TocRail 面板顶部的文章标题）：点击平滑回页面顶部。
+    // 标题由 TocRail 包渲染为 <p class="toc-rail__panel-title">，非链接，这里补点击与光标反馈。
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll<HTMLElement>('.toc-rail__panel-title').forEach((el) => {
+      el.classList.add('toc-panel-title-clickable');
+      el.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+      });
+    });
+
     // 标题锚点：点击正文 h 标题 → 滚动锚定 + 更新 URL hash，便于复制可锚定的链接。
     // 用 replaceState 而非 pushState：锚点是「同一页内的状态标注」，不应在浏览器历史里堆一条记录，
     // 否则用户点几个标题后要按多次返回键才离开本文。
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     document.querySelectorAll<HTMLElement>('[data-toc-body] h1[id], [data-toc-body] h2[id], [data-toc-body] h3[id]').forEach((heading) => {
       heading.classList.add('anchorable-heading');
       heading.addEventListener('click', () => {
@@ -99,6 +108,17 @@ const { headings } = await render(post);
   </script>
 
   <style is:global>
+    /* 侧边栏主标题可点击回顶：cursor 变 pointer，hover 用主题色强调反馈。
+       颜色变量取自 TocRail 暴露的 --toc-panel-title-color / --toc-rail-highlight-color，
+       与本站主题保持一致。 */
+    .toc-panel-title-clickable {
+      cursor: pointer;
+      transition: color 0.2s ease-out;
+    }
+    .toc-panel-title-clickable:hover {
+      color: var(--toc-panel-item-hover-color, var(--accent-color));
+    }
+
     /* 可锚定标题：低存在感提示，hover 时在标题前露出 `#`，明示可点击复制链接。
        颜色用语义次要色，明暗主题自适应，不硬编码。
        注意必须 is:global：.anchorable-heading 由下方脚本动态 classList.add，
