@@ -5,3 +5,4 @@ export * from './group-posts';
 export * from './limit-to-interval';
 export * from './published-post-filter';
 export * from './throttle';
+export * from './word-count';

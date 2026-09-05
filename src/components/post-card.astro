@@ -3,12 +3,14 @@ import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 import { FormattedDate } from '~/components';
+import { readingMinutes } from '~/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props as Props;
+const readTime = `${readingMinutes(post.body ?? '')} min read`;
 ---
 
 <div class="mb-8 rounded-2xl overflow-hidden bg-prose-bg transition-[background-color,translate] duration-300 ease-out sm:hover:-translate-y-1">
@@ -27,6 +29,8 @@ const { post } = Astro.props as Props;
       {post.data.description && <p class="mb-4 text-lg">{post.data.description}</p>}
       <p class="text-base text-text-secondary mb-0">
         <FormattedDate date={post.data.date} />
+        <span class="mx-2 opacity-60">·</span>
+        <span>{readTime}</span>
       </p>
     </div>
   </a>
