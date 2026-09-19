@@ -34,7 +34,9 @@
     "reinstall": "pnpm clean && pnpm install"
   },
   "dependencies": {
-    "p5": "^2.0.2"
+    "@resvg/resvg-js": "^2.6.2",
+    "p5": "^2.0.2",
+    "satori": "^0.33.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

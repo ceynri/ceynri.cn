@@ -16,7 +16,8 @@ const { title, postTitle, description = SITE_DESCRIPTION, image, markdownUrl } =
 // 文章页 og:type=article、og:title 与 <title> 用「文章名 - 站点名」组合；其余页 title 即完整标题。
 const pageTitle = postTitle ? `${postTitle} - ${title}` : title;
 
-// TODO: 默认 OG 图（#95 后续：生成式默认图，暂用 favicon 兜底）
+// OG 图：文章页由 blog-post-layout 传入构建期生成的 /og/<slug>.png（见 #95）；
+// 其余页面未传 image 时回退 favicon。
 const pageImage = new URL(image || '/favicon.png', Astro.site);
 ---
 
