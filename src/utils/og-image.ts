@@ -235,7 +235,11 @@ function buildElement(options: OgImageOptions, logo: { small: string; symbol: st
   };
 }
 
-/** 生成一张 OG 卡片的 PNG Buffer */
+/**
+ * 生成一张 OG 卡片的 JPEG Buffer。
+ * resvg 只输出 PNG，再经 sharp 转 JPEG q85：卡片含照片级封面与渐变色，
+ * JPEG 观感无损且体积约为 PNG 的 1/3（实测最大一张 460K → 129K）。
+ */
 export async function generateOgImage(options: OgImageOptions): Promise<Buffer> {
   const [fonts, logo] = await Promise.all([loadFonts(), loadLogo()]);
   const svg = await satori(buildElement(options, logo) as never, {
@@ -251,5 +255,6 @@ export async function generateOgImage(options: OgImageOptions): Promise<Buffer> 
     ],
   });
   const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: OG_WIDTH } });
-  return Buffer.from(resvg.render().asPng());
+  const png = resvg.render().asPng();
+  return sharp(png).flatten({ background: COLORS.bg }).jpeg({ quality: 85 }).toBuffer();
 }
