@@ -184,7 +184,10 @@ function buildElement(options: OgImageOptions, logo: { small: string; symbol: st
           style: { display: 'flex', flex: 1, alignItems: 'center', gap: '48px', paddingTop: '12px' },
           children: [
             titleNode,
-            { type: 'img', props: { src: coverDataUri, width: 400, height: 400, style: { borderRadius: '12px', flexShrink: 0 } } },
+            {
+              type: 'img',
+              props: { src: coverDataUri, width: 400, height: 400, style: { borderRadius: '12px', flexShrink: 0 } },
+            },
           ],
         },
       }
@@ -213,7 +216,17 @@ function buildElement(options: OgImageOptions, logo: { small: string; symbol: st
         // 无封面时右下品牌符号（logo 线稿放大，极低存在感）
         ...(coverDataUri
           ? []
-          : [{ type: 'img', props: { src: logo.symbol, width: 340, height: 340, style: { position: 'absolute', right: '24px', bottom: '-30px', opacity: 0.1 } } } as SatoriNode]),
+          : [
+              {
+                type: 'img',
+                props: {
+                  src: logo.symbol,
+                  width: 340,
+                  height: 340,
+                  style: { position: 'absolute', right: '24px', bottom: '-30px', opacity: 0.1 },
+                },
+              } as SatoriNode,
+            ]),
         topBar(logo.small, date),
         middle,
         bottomBar(),

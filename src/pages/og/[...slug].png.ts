@@ -1,9 +1,8 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
-
-import { generateOgImage } from '~/utils/og-image';
-import { extractCoverSrcFromMarkdown, processCoverForOg } from '~/utils/og-cover';
 import { publishedPostFilter } from '~/utils';
+import { extractCoverSrcFromMarkdown, processCoverForOg } from '~/utils/og-cover';
+import { generateOgImage } from '~/utils/og-image';
 
 /**
  * 文章 OG 分享卡片端点：构建时（SSG）为每篇文章静态产出 /og/<slug>.png。
