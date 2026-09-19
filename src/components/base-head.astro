@@ -13,11 +13,11 @@ interface Props {
 
 const { title, postTitle, description = SITE_DESCRIPTION, image, markdownUrl } = Astro.props;
 
-// TODO: postTitle 链路未启用（BaseLayout 未透传），文章页 og:type 恒为 website、og:title 缺站点名
-// <title> 和 <meta name="title"> 也应改用 pageTitle，待 OG 元数据优化时统一处理（见 #95）
+// 文章页 og:type=article、og:title 与 <title> 用「文章名 - 站点名」组合；其余页 title 即完整标题。
 const pageTitle = postTitle ? `${postTitle} - ${title}` : title;
 
-// TODO: 默认图片
+// OG 图：文章页由 blog-post-layout 传入构建期生成的 /og/<slug>.png（见 #95）；
+// 其余页面未传 image 时回退 favicon。
 const pageImage = new URL(image || '/favicon.png', Astro.site);
 ---
 
@@ -26,10 +26,10 @@ const pageImage = new URL(image || '/favicon.png', Astro.site);
   name="viewport"
   content="width=device-width,initial-scale=1"
 />
-<title>{title}</title>
+<title>{pageTitle}</title>
 <meta
   name="title"
-  content={title}
+  content={pageTitle}
 />
 <meta
   name="description"

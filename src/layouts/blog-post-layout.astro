@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
 import { BlogPost, Comments, FloatingImages, Footer, PostPrevNext, TocRail, TopNavbar } from '~/components';
+import { SITE_TITLE } from '~/consts';
 
 import BaseLayout from './base-layout.astro';
 
@@ -15,15 +16,19 @@ interface Props {
 const { post, prev, next } = Astro.props as Props;
 const { title, description, cover_image, layout, tocDepth, toc } = post.data;
 
+// OG 分享卡片：有封面用封面，否则用构建时为本文生成的 OG 卡片图
+const ogImage = cover_image?.src ?? `/og/${post.id}.png`;
+
 const widthClass = layout === 'narrow' ? 'max-w-[30rem]' : 'max-w-[50rem]';
 
 const { headings } = await render(post);
 ---
 
 <BaseLayout
-  title={title}
+  title={SITE_TITLE}
+  postTitle={title}
   description={description}
-  image={cover_image?.src}
+  image={ogImage}
   markdownUrl={`/blog/${post.id}.md`}
 >
   <TopNavbar />
