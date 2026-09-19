@@ -5,7 +5,7 @@ import { extractCoverSrcFromMarkdown, processCoverForOg } from '~/utils/og-cover
 import { generateOgImage } from '~/utils/og-image';
 
 /**
- * 文章 OG 分享卡片端点：构建时（SSG）为每篇文章静态产出 /og/<slug>.png。
+ * 文章 OG 分享卡片端点：构建时（SSG）为每篇文章静态产出 /og/<slug>.jpg。
  * 图片由 satori + resvg-js 生成（见 ~/utils/og-image）；有封面的文章整幅背景式
  * 融入去噪压暗后的封面并取主色当 accent（见 ~/utils/og-cover），dev 下亦可实时预览。
  */
@@ -26,14 +26,14 @@ export const GET: APIRoute = async ({ props: post }) => {
     }
   }
 
-  const png = await generateOgImage({
+  const jpg = await generateOgImage({
     title,
     date: date.toISOString().slice(0, 10),
     coverDataUri,
   });
-  return new Response(new Uint8Array(png), {
+  return new Response(new Uint8Array(jpg), {
     headers: {
-      'Content-Type': 'image/png',
+      'Content-Type': 'image/jpeg',
       // OG 图内容随文章而定，长缓存 + immutable
       'Cache-Control': 'public, max-age=31536000, immutable',
     },
