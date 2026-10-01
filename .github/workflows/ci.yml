@@ -48,7 +48,10 @@ jobs:
         run: pnpm exec astro check
 
       - name: Lint
-        run: pnpm exec biome ci ./src ./astro.config.ts
+        run: pnpm exec biome ci ./src ./astro.config.ts ./vitest.config.ts
+
+      - name: Test
+        run: pnpm test
 
       - name: Build
         run: pnpm exec astro build
