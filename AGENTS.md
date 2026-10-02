@@ -10,7 +10,7 @@
 - **样式**：Tailwind CSS v4（CSS-first，经 `@tailwindcss/vite` 接入）；设计 token 通过 `@theme` 定义在 `src/styles/main.css`；不使用 Sass
 - **代码规范**：Biome（lint + format，`biome.json`），TypeScript 严格模式（`astro check` 兜底类型安全）
 - **包管理**：pnpm（强制，禁用 npm/yarn）；工具版本由 mise 管理（`.mise.toml`，node 24 / pnpm 11）
-- **CI**：PR 质量门禁（`.github/workflows/ci.yml`）：`astro check` → `biome ci` → `astro build` → 死链检查，四绿方可合
+- **CI**：PR 质量门禁（`.github/workflows/ci.yml`）：`astro check` → `biome ci` → `pnpm test` → `astro build` → 死链检查，全绿方可合
 - 原生依赖需在 `pnpm-workspace.yaml` 的 `allowBuilds` 中声明
 
 ## 开发命令
@@ -19,6 +19,7 @@
 pnpm dev      # http://localhost:4321
 pnpm build    # astro check + astro build
 pnpm lint     # biome check --write
+pnpm test     # vitest run（仅 src/ 下的 *.test.ts）
 ```
 
 ### 本地内容源
