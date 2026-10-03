@@ -22,7 +22,7 @@ motion amplitude and reflection statistic below was measured from the source fra
 | `layout.ts` | Landscape / portrait composition |
 | `__tests__/motion.test.ts` | Loop seamlessness, bite timeline invariants, layout |
 
-The page side is `src/themes/night-fishing/` (`index.astro` markup, `client.ts` activation, click-to-bite, debug params). The homepage stage that mounts it is `src/pages/index.astro`.
+The page side is `src/home-themes/night-fishing/` (`index.astro` markup, `client.ts` activation, click-to-bite, debug params). The homepage stage that mounts it is `src/pages/index.astro`.
 
 ## How it renders
 

@@ -2,7 +2,7 @@ import type { HomeThemeId, HomeThemeMeta } from './types';
 
 /**
  * 首页主题注册表：顺序即切换器循环顺序。
- * 新增主题：在此登记 + 创建 src/themes/<id>/{index.astro,client.ts}
+ * 新增主题：在此登记 + 创建 src/home-themes/<id>/{index.astro,client.ts}
  * + 在 loader.ts 的 CLIENT_LOADERS 登记动态导入。
  */
 export const HOME_THEMES: HomeThemeMeta[] = [

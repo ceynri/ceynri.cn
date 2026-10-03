@@ -5,9 +5,9 @@
  */
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import BaseLayout from '~/layouts/base-layout.astro';
-import FlowField from '~/themes/flow-field/index.astro';
-import NightFishing from '~/themes/night-fishing/index.astro';
-import { DEFAULT_THEME, HOME_THEMES, LAST_THEME_KEY } from '~/themes/registry';
+import FlowField from '~/home-themes/flow-field/index.astro';
+import NightFishing from '~/home-themes/night-fishing/index.astro';
+import { DEFAULT_THEME, HOME_THEMES, LAST_THEME_KEY } from '~/home-themes/registry';
 
 const themeIds = HOME_THEMES.map((theme) => theme.id);
 ---
@@ -69,7 +69,7 @@ const themeIds = HOME_THEMES.map((theme) => theme.id);
   </main>
 
   <script>
-    import { initThemeLoader } from '~/themes/loader';
+    import { initThemeLoader } from '~/home-themes/loader';
 
     initThemeLoader();
   </script>

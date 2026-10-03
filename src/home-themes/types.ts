@@ -1,4 +1,4 @@
-/** 首页主题 ID（与 src/themes/<id>/ 目录名一致） */
+/** 首页主题 ID（与 src/home-themes/<id>/ 目录名一致） */
 export type HomeThemeId = 'night-fishing' | 'flow-field';
 
 /** 首页主题的注册信息 */
@@ -16,7 +16,7 @@ export interface HomeThemeMeta {
 }
 
 /**
- * 主题客户端模块约定：src/themes/<id>/client.ts 以 default 导出此接口。
+ * 主题客户端模块约定：src/home-themes/<id>/client.ts 以 default 导出此接口。
  * 主题的 DOM 由 index.astro 服务端渲染，client 只负责行为（背景引擎、交互）。
  */
 export interface HomeThemeClient {
