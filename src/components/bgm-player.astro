@@ -28,7 +28,7 @@ const BGM_SRC = 'https://music.163.com/song/media/outer/url?id=1963704569.mp3';
     <button
       id="bgm-toggle"
       type="button"
-      class="relative z-[1] flex size-8 cursor-pointer items-center justify-center rounded-full text-[var(--chrome-dim)] transition-[color,opacity] hover:text-[var(--chrome-strong)] active:opacity-50 group-data-[state=pending]/bgm:animate-pulse"
+      class="relative z-[1] flex size-8 cursor-pointer items-center justify-center rounded-full text-(--chrome-dim) transition-[color,opacity] hover:text-(--chrome-strong) active:opacity-50 group-data-[state=pending]/bgm:animate-pulse"
       aria-label="播放背景音乐"
       title="播放背景音乐"
       data-umami-event="bgm-toggle"
@@ -64,7 +64,7 @@ const BGM_SRC = 'https://music.163.com/song/media/outer/url?id=1963704569.mp3';
       <div class="h-8 w-10"></div>
     </div>
   </div>
-  <span class="whitespace-nowrap text-xs text-[var(--chrome)]">♪ ミツメ「夜釣り」</span>
+  <span class="whitespace-nowrap text-xs text-(--chrome)">♪ ミツメ「夜釣り」</span>
   <audio
     id="bgm-audio"
     src={BGM_SRC}
