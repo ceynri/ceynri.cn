@@ -6,7 +6,7 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import FlowField from '~/home-themes/flow-field/index.astro';
 import NightFishing from '~/home-themes/night-fishing/index.astro';
-import { DEFAULT_THEME, HOME_THEMES, LAST_THEME_KEY } from '~/home-themes/registry';
+import { DEFAULT_THEME, HOME_THEMES, SAVED_THEME_KEY } from '~/home-themes/registry';
 import BaseLayout from '~/layouts/base-layout.astro';
 
 const themeIds = HOME_THEMES.map((theme) => theme.id);
@@ -19,27 +19,21 @@ const themeIds = HOME_THEMES.map((theme) => theme.id);
   <Fragment slot="head">
     <script
       is:inline
-      define:vars={{ themeIds, defaultTheme: DEFAULT_THEME, lastThemeKey: LAST_THEME_KEY }}
+      define:vars={{ themeIds, defaultTheme: DEFAULT_THEME, savedThemeKey: SAVED_THEME_KEY }}
     >
       try {
         const params = new URLSearchParams(location.search);
         const requested = params.get('theme');
-        // 命中注册表才算强制指定；强制指定不写 localStorage，刷新仍可随机到别的主题
+        // 命中注册表才算强制指定；强制指定不写 localStorage，刷新后回到记住的主题
         let theme = themeIds.includes(requested) ? requested : '';
         if (!theme) {
-          let last = '';
+          let saved = '';
           try {
-            last = localStorage.getItem(lastThemeKey) || '';
+            saved = localStorage.getItem(savedThemeKey) || '';
           } catch {
-            last = '';
+            saved = '';
           }
-          const candidates = themeIds.filter((id) => id !== last);
-          theme = candidates.length > 0 ? candidates[Math.floor(Math.random() * candidates.length)] : themeIds[0];
-          try {
-            localStorage.setItem(lastThemeKey, theme);
-          } catch {
-            // 隐私模式等场景下写入失败不影响本次展示
-          }
+          theme = themeIds.includes(saved) ? saved : defaultTheme;
         }
         document.documentElement.dataset.homeTheme = theme;
         // 每条主题一条显示规则：运行时切换只改 data-home-theme，不必重写样式

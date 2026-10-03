@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, HOME_THEMES, LAST_THEME_KEY } from './registry';
+import { DEFAULT_THEME, HOME_THEMES, SAVED_THEME_KEY } from './registry';
 import type { HomeThemeChangeDetail, HomeThemeClient, HomeThemeId } from './types';
 
 /**
@@ -65,7 +65,7 @@ export function initThemeLoader() {
     instances.get(prev)?.deactivate();
     root.dataset.homeTheme = id;
     try {
-      localStorage.setItem(LAST_THEME_KEY, id);
+      localStorage.setItem(SAVED_THEME_KEY, id);
     } catch {
       // 隐私模式等场景下写入失败不影响切换
     }
