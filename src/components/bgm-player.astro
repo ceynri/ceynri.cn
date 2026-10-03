@@ -1,0 +1,418 @@
+---
+import { Volume, Volume1, Volume2, VolumeX } from '~/components/icons';
+import { cn } from '~/utils';
+
+interface Props {
+  class?: string;
+  /** 空格分隔的具备 BGM 能力的主题 id，写入 data-bgm-themes，供脚本做播放门控 */
+  bgmThemes: string;
+}
+
+const { class: className, bgmThemes } = Astro.props;
+
+/**
+ * 网易云外链音源，不占本站流量；失效时直接隐藏播放器。
+ * 外链第一跳的 302 不带 CORS 头，因此 audio 不能设置 crossorigin，也无法接入 Web Audio
+ */
+const BGM_SRC = 'https://music.163.com/song/media/outer/url?id=1963704569.mp3';
+---
+
+<div
+  id="bgm-player"
+  class={cn('group/bgm flex h-8 items-center gap-2 data-[state=unavailable]:hidden', className)}
+  data-state="muted"
+  data-level="muted"
+  data-bgm-themes={bgmThemes}
+>
+  <div class="relative h-8 w-8">
+    <button
+      id="bgm-toggle"
+      type="button"
+      class="relative z-[1] flex size-8 cursor-pointer items-center justify-center rounded-full text-[var(--chrome-dim)] transition-[color,opacity] hover:text-[var(--chrome-strong)] active:opacity-50 group-data-[state=pending]/bgm:animate-pulse"
+      aria-label="播放背景音乐"
+      title="播放背景音乐"
+      data-umami-event="bgm-toggle"
+    >
+      <VolumeX class="hidden size-5 group-data-[level=muted]/bgm:block" />
+      <Volume class="hidden size-5 group-data-[level=low]/bgm:block" />
+      <Volume1 class="hidden size-5 group-data-[level=mid]/bgm:block" />
+      <Volume2 class="hidden size-5 group-data-[level=high]/bgm:block" />
+    </button>
+    <!--
+      竖条用一根横滑条转 -90°，避免 writing-mode 把滑块画坏。
+      热区从按钮顶连到滑条顶，中间不留空隙；拖动时用 data-slider 钉住展开，避免指针滑出后收起。
+    -->
+    <div
+      class="pointer-events-none absolute bottom-0 left-1/2 z-0 flex w-10 -translate-x-1/2 flex-col items-center opacity-0 transition-opacity duration-200 group-hover/bgm:opacity-100 group-focus-within/bgm:opacity-100 group-data-[slider=open]/bgm:opacity-100 group-data-[volume=fixed]/bgm:hidden"
+    >
+      <div
+        class="pointer-events-none flex h-24 w-10 items-center justify-center group-hover/bgm:pointer-events-auto group-focus-within/bgm:pointer-events-auto group-data-[slider=open]/bgm:pointer-events-auto"
+      >
+        <input
+          id="bgm-volume"
+          class="bgm-slider h-1 w-24 shrink-0 -rotate-90 cursor-pointer appearance-none rounded-full"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          aria-label="背景音乐音量"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={50}
+        />
+      </div>
+      <div class="h-8 w-10"></div>
+    </div>
+  </div>
+  <span class="whitespace-nowrap text-xs text-[var(--chrome)]">♪ ミツメ「夜釣り」</span>
+  <audio
+    id="bgm-audio"
+    src={BGM_SRC}
+    loop
+    preload="none"
+  ></audio>
+</div>
+
+<style>
+  .bgm-slider {
+    --track-fill: var(--chrome-strong);
+    --track-rest: #3a4148;
+    background: linear-gradient(
+      to right,
+      var(--track-fill) var(--bgm-pct, 50%),
+      var(--track-rest) var(--bgm-pct, 50%)
+    );
+  }
+  .bgm-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    margin-top: -4px;
+    border-radius: 9999px;
+    background: var(--chrome-strong);
+  }
+  .bgm-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 9999px;
+  }
+  .bgm-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--chrome-strong);
+  }
+  .bgm-slider::-moz-range-track {
+    height: 4px;
+    border-radius: 9999px;
+    background: transparent;
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'bgm-settings';
+  const DEFAULT_VOLUME = 0.5;
+  const FADE_IN_MS = 3000;
+  const GESTURE_EVENTS = ['pointerdown', 'keydown'] as const;
+  /** 旧四档存档迁回连续音量 */
+  const LEGACY_LEVEL_VOLUME: Record<string, number> = { low: 0.3, mid: 0.55, high: 0.85 };
+
+  interface BgmSettings {
+    volume: number;
+    muted: boolean;
+  }
+
+  const root = document.getElementById('bgm-player');
+  const toggle = document.getElementById('bgm-toggle');
+  const slider = document.getElementById('bgm-volume');
+  const audio = document.getElementById('bgm-audio');
+
+  if (root instanceof HTMLElement && toggle && slider instanceof HTMLInputElement && audio instanceof HTMLAudioElement) {
+    const bgmThemes = new Set((root.dataset.bgmThemes ?? '').split(/\s+/).filter(Boolean));
+    const clampVolume = (value: number) => Math.min(1, Math.max(0, value));
+
+    const readSettings = (): BgmSettings => {
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '');
+        if (raw && typeof raw.volume === 'number') {
+          const volume = clampVolume(raw.volume);
+          return { volume, muted: raw.muted !== false || volume === 0 };
+        }
+        if (raw && typeof raw.level === 'string') {
+          const volume = LEGACY_LEVEL_VOLUME[raw.level] ?? DEFAULT_VOLUME;
+          return { volume, muted: raw.muted !== false };
+        }
+      } catch {
+        // 无存档或损坏时走默认：静音，滑条停在一半
+      }
+      return { volume: DEFAULT_VOLUME, muted: true };
+    };
+
+    const settings = readSettings();
+    let state: 'muted' | 'pending' | 'playing' | 'unavailable' = 'muted';
+    let fadeFrame = 0;
+    let starting = false;
+    let recovering = false;
+    let gesturesBound = false;
+    let interacted = false;
+
+    const canSetVolume = (() => {
+      const probe = document.createElement('audio');
+      probe.volume = 0.5;
+      return probe.volume === 0.5;
+    })();
+
+    const currentThemeIsBgm = () => bgmThemes.has(document.documentElement.dataset.homeTheme ?? '');
+    const wantsSound = () => !settings.muted && settings.volume > 0;
+
+    const saveSettings = () => {
+      if (!interacted) {
+        return;
+      }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      } catch {
+        // 忽略隐私模式等场景下的写入失败
+      }
+    };
+
+    const setGain = (gain: number) => {
+      if (canSetVolume) {
+        audio.volume = gain;
+      }
+    };
+
+    const targetGain = () => (wantsSound() ? settings.volume ** 2 : 0);
+
+    const fadeIn = () => {
+      cancelAnimationFrame(fadeFrame);
+      const startedAt = performance.now();
+      const step = () => {
+        if (state !== 'playing') {
+          return;
+        }
+        const progress = Math.min((performance.now() - startedAt) / FADE_IN_MS, 1);
+        setGain(targetGain() * progress);
+        if (progress < 1) {
+          fadeFrame = requestAnimationFrame(step);
+        }
+      };
+      step();
+    };
+
+    const iconLevel = () => {
+      if (!canSetVolume) {
+        return state === 'playing' ? 'high' : 'muted';
+      }
+      if (!wantsSound()) {
+        return 'muted';
+      }
+      if (settings.volume < 0.34) {
+        return 'low';
+      }
+      if (settings.volume < 0.67) {
+        return 'mid';
+      }
+      return 'high';
+    };
+
+    const paintSlider = () => {
+      const pct = Math.round(settings.volume * 100);
+      slider.value = String(pct);
+      slider.setAttribute('aria-valuenow', String(pct));
+      slider.style.setProperty('--bgm-pct', `${pct}%`);
+    };
+
+    const render = () => {
+      root.dataset.state = state;
+      root.dataset.level = iconLevel();
+      if (!canSetVolume) {
+        root.dataset.volume = 'fixed';
+      }
+      paintSlider();
+      const label = state === 'playing' ? '静音' : '播放背景音乐';
+      toggle.setAttribute('aria-label', label);
+      toggle.title = label;
+    };
+
+    const onGesture = (event: Event) => {
+      if (event.target instanceof Node && root.contains(event.target)) {
+        return;
+      }
+      void play(true);
+    };
+
+    const bindGestures = () => {
+      if (gesturesBound) {
+        return;
+      }
+      gesturesBound = true;
+      for (const type of GESTURE_EVENTS) {
+        window.addEventListener(type, onGesture, { capture: true, passive: true });
+      }
+    };
+
+    const unbindGestures = () => {
+      if (!gesturesBound) {
+        return;
+      }
+      gesturesBound = false;
+      for (const type of GESTURE_EVENTS) {
+        window.removeEventListener(type, onGesture, { capture: true });
+      }
+    };
+
+    const play = async (fromGesture: boolean) => {
+      if (!currentThemeIsBgm() || !wantsSound() || starting || !audio.paused) {
+        return;
+      }
+      if (!canSetVolume && !fromGesture) {
+        state = 'muted';
+        render();
+        return;
+      }
+
+      starting = true;
+      setGain(0);
+      try {
+        await audio.play();
+        if (!currentThemeIsBgm() || !wantsSound()) {
+          audio.pause();
+          setGain(0);
+          state = wantsSound() ? 'pending' : 'muted';
+          return;
+        }
+        state = 'playing';
+        unbindGestures();
+        fadeIn();
+      } catch {
+        if (audio.error?.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+          markUnavailable();
+        } else if (canSetVolume) {
+          state = 'pending';
+          bindGestures();
+        } else {
+          state = 'muted';
+        }
+      } finally {
+        starting = false;
+        render();
+      }
+    };
+
+    const markUnavailable = () => {
+      state = 'unavailable';
+      unbindGestures();
+    };
+
+    const mute = () => {
+      cancelAnimationFrame(fadeFrame);
+      setGain(0);
+      audio.pause();
+      unbindGestures();
+      state = 'muted';
+    };
+
+    const suspendForTheme = () => {
+      cancelAnimationFrame(fadeFrame);
+      setGain(0);
+      audio.pause();
+      unbindGestures();
+      state = wantsSound() ? 'pending' : 'muted';
+      render();
+    };
+
+    toggle.addEventListener('click', () => {
+      interacted = true;
+      if (state === 'playing') {
+        settings.muted = true;
+        mute();
+      } else {
+        settings.muted = false;
+        if (settings.volume === 0) {
+          settings.volume = DEFAULT_VOLUME;
+        }
+        void play(true);
+      }
+      saveSettings();
+      render();
+    });
+
+    const holdSlider = (open: boolean) => {
+      if (open) {
+        root.dataset.slider = 'open';
+      } else {
+        delete root.dataset.slider;
+      }
+    };
+    slider.addEventListener('pointerdown', () => holdSlider(true));
+    window.addEventListener('pointerup', () => holdSlider(false));
+    window.addEventListener('pointercancel', () => holdSlider(false));
+
+    slider.addEventListener('input', () => {
+      interacted = true;
+      settings.volume = clampVolume(Number(slider.value) / 100);
+      settings.muted = settings.volume === 0;
+      saveSettings();
+      cancelAnimationFrame(fadeFrame);
+      if (!wantsSound()) {
+        mute();
+      } else if (audio.paused) {
+        void play(true);
+      } else {
+        setGain(targetGain());
+        state = 'playing';
+      }
+      render();
+    });
+
+    audio.addEventListener('error', () => {
+      if (audio.error?.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+        markUnavailable();
+        render();
+        return;
+      }
+      if (state !== 'playing' || recovering || audio.error?.code !== MediaError.MEDIA_ERR_NETWORK) {
+        return;
+      }
+      recovering = true;
+      const resumeAt = audio.currentTime;
+      audio.load();
+      audio.currentTime = resumeAt;
+      void audio.play().catch(() => {
+        state = 'muted';
+        render();
+      });
+    });
+
+    audio.addEventListener('playing', () => {
+      recovering = false;
+    });
+
+    window.addEventListener('home:themechange', (event) => {
+      const nextTheme = (event as CustomEvent<{ id?: string }>).detail?.id;
+      if (!nextTheme) {
+        return;
+      }
+      if (bgmThemes.has(nextTheme)) {
+        if (wantsSound() && audio.paused) {
+          void play(false);
+        }
+        return;
+      }
+      if (state === 'playing' || state === 'pending') {
+        suspendForTheme();
+      }
+    });
+
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: '夜釣り', artist: 'ミツメ' });
+    }
+
+    state = wantsSound() ? 'pending' : 'muted';
+    if (wantsSound()) {
+      void play(false);
+    }
+    render();
+  }
+</script>

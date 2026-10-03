@@ -22,7 +22,7 @@ motion amplitude and reflection statistic below was measured from the source fra
 | `layout.ts` | Landscape / portrait composition |
 | `__tests__/motion.test.ts` | Loop seamlessness, bite timeline invariants, layout |
 
-The page side is `src/themes/night-fishing/` (`index.astro` markup, `client.ts` activation, click-to-bite, debug params). The homepage stage that mounts it is `src/pages/index.astro`.
+The page side is `src/home-themes/night-fishing/` (`index.astro` markup, `client.ts` activation, click-to-bite, debug params). The homepage stage that mounts it is `src/pages/index.astro`.
 
 ## How it renders
 
@@ -30,6 +30,11 @@ The page side is `src/themes/night-fishing/` (`index.astro` markup, `client.ts` 
   original is animated on twos; the canvas only re-renders when the drawing index changes.
 - Calm motion is a sum of sinusoids whose cycle counts are integers per `LOOP_SECONDS` (24 s), so the
   animation loops seamlessly (`t` and `t + LOOP_SECONDS` render identically — covered by tests).
+- Pointer attract (`POINTER_ATTRACT` in `config.ts`): while the bob keeps playing around its anchor, a
+  nearby cursor pulls the float a few pixels toward itself. Pull grows linearly with proximity (none at the
+  edge of the radius, strongest when the cursor is on the float) and a damped spring follows that
+  target, including on the way out. The spring is integrated once per drawing, on the same 12 fps step as
+  the bob — it is not smoothed between drawings. A biting float is left on its choreography.
 - **Float body**: `float-shape.ts` holds four layers (halo, silhouette, lit body, cream core). At start-up
   `buildShapeAtlas` fills them with Canvas 2D and runs a generalized Felzenszwalb distance transform
   (one pass per layer; edge texels are seeded with their sub-pixel coverage). The shader samples the atlas
@@ -131,7 +136,7 @@ breaks), keep `REFLECTION.mirror` / `reach` monotonic, and note the uniform budg
 
 ## Related notes
 
-- BGM (`src/components/bgm-player.astro`) streams a NetEase outer link from the lower-left dock. Four levels: muted (the default; nothing is stored until the visitor unmutes), low / mid / high (slider-equivalent 0.3 / 0.55 / 0.85, and the actual gain is that value squared). The icon stays put; hover or focus expands the level panel. There is no separate play/pause control. Switching to a theme without BGM pauses playback and does not change the saved preference. The first hop is a 302 without CORS headers, so the `<audio>` element must not set `crossorigin` and cannot be routed through Web Audio; iOS therefore cannot lower the volume (the level panel is hidden there, and playback starts only from a user gesture).
+- BGM (`src/components/bgm-player.astro`) is mounted by the night-fishing theme, next to its theme switch. Default is muted, with the slider parked at 50%; nothing is stored until the visitor unmutes or moves the slider. Clicking the mute button turns sound on at that level. Actual gain is the slider value squared, so 50% plays at 0.25. The track title stays visible. There is no separate play/pause control. Switching to a theme without BGM pauses playback and does not change the saved preference. The first hop is a 302 without CORS headers, so the `<audio>` element must not set `crossorigin` and cannot be routed through Web Audio; iOS therefore cannot lower the volume (the slider is hidden there, and playback starts only from a user gesture).
 - Known gaps: the landing ripple's main stroke is a bit thinner than the original, the mid-air reflection
   cluster is looser, portrait layouts have not been checked visually, and the line branch that connects
   the float to the main line during the recast is not drawn.

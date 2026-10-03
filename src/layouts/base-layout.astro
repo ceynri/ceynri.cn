@@ -24,6 +24,7 @@ const { title, postTitle, description, image, markdownUrl } = Astro.props;
       image={image}
       markdownUrl={markdownUrl}
     />
+    <slot name="head" />
   </head>
   <body>
     <slot />

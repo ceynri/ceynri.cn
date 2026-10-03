@@ -10,9 +10,14 @@ export {
   Mail,
   Menu,
   Moon,
+  Palette,
   RefreshCw,
   Rss,
   Sun,
+  Volume,
+  Volume1,
+  Volume2,
+  VolumeX,
 } from '@lucide/astro';
 
 export { Github, X } from 'simple-icons-astro';

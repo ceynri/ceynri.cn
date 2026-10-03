@@ -1,5 +1,5 @@
 import { BITE_DURATION, type BiteFrame, getBiteFrame } from './bite';
-import { FLOAT_GEOMETRY, FLOATS, LINE, LOOP_SECONDS, MAX_DPR, STEP_FPS } from './config';
+import { FLOAT_GEOMETRY, FLOATS, LINE, LOOP_SECONDS, MAX_DPR, POINTER_ATTRACT, STEP_FPS } from './config';
 import { computeLayout } from './layout';
 import { getFloatPose } from './motion';
 import { NightFishingRenderer } from './renderer';
@@ -155,6 +155,9 @@ export function initNightFishing(
   let lastStep = Number.NaN;
   let rafId = 0;
   let ready = false;
+  /** 视口坐标，与 hitTest 同一套；离开窗口后清空，吸力随下一张作画收回 */
+  let pointer: { x: number; y: number } | null = null;
+  const pull = FLOATS.map(() => ({ x: 0, y: 0, vx: 0, vy: 0 }));
 
   const isStatic = () => frozenTime !== undefined || reducedMotion.matches;
   const now = () => frozenTime ?? (performance.now() - startedAt) / 1000 + clockOffset;
@@ -175,6 +178,40 @@ export function initNightFishing(
     const { scale } = layout;
     const tau = activeBite?.index === i ? time - activeBite.startedAt : -1;
     const frame = computeFloatFrame(config, anchor, scale, loopTime, tau);
+    // 吸力相对这一张作画的静止中心，不替代浮沉。咬钩时只把弹簧收回，不改演出位移。
+    if (!isStatic()) {
+      const state = pull[i];
+      let targetX = 0;
+      let targetY = 0;
+      if (pointer && !frame.bite) {
+        const cx = frame.originX;
+        const cy = frame.waterY - FLOAT_GEOMETRY.height * 0.45 * scale;
+        const dx = pointer.x - cx;
+        const dy = pointer.y - cy;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 0.001 && dist < POINTER_ATTRACT.radius) {
+          const near = 1 - dist / POINTER_ATTRACT.radius;
+          const mag = POINTER_ATTRACT.maxShift * near;
+          targetX = (dx / dist) * mag;
+          targetY = (dy / dist) * mag;
+        }
+      }
+      const dt = STEP_FPS > 0 ? 1 / STEP_FPS : 1 / 60;
+      const { stiffness, damping } = POINTER_ATTRACT;
+      state.vx += (stiffness * (targetX - state.x) - damping * state.vx) * dt;
+      state.vy += (stiffness * (targetY - state.y) - damping * state.vy) * dt;
+      state.x += state.vx * dt;
+      state.y += state.vy * dt;
+      if (!frame.bite) {
+        frame.baseX += state.x;
+        frame.originX += state.x;
+        frame.waterY += state.y;
+        frame.pivotX += state.x;
+        frame.pivotY += state.y;
+        frame.tipX += state.x;
+        frame.tipY += state.y;
+      }
+    }
     const { bite } = frame;
     const offset = i * 4;
 
@@ -316,11 +353,22 @@ export function initNightFishing(
     start();
   };
 
+  const onPointerMove = (event: PointerEvent) => {
+    pointer = { x: event.clientX, y: event.clientY };
+  };
+  const onPointerOut = (event: PointerEvent) => {
+    if (!event.relatedTarget) {
+      pointer = null;
+    }
+  };
+
   resize();
   resizeObserver.observe(canvas);
   reducedMotion.addEventListener('change', start);
   canvas.addEventListener('webglcontextlost', onContextLost);
   canvas.addEventListener('webglcontextrestored', onContextRestored);
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerout', onPointerOut);
   start();
 
   return {
@@ -346,6 +394,8 @@ export function initNightFishing(
       reducedMotion.removeEventListener('change', start);
       canvas.removeEventListener('webglcontextlost', onContextLost);
       canvas.removeEventListener('webglcontextrestored', onContextRestored);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerout', onPointerOut);
     },
   };
 }

@@ -88,9 +88,8 @@ export interface CompositionPreset {
 }
 
 /**
- * 首页构图广播消息：背景脚本经 window 事件 / `__flowFieldComposition` 传给主视觉的排版信息，
+ * 首页构图：背景脚本经 onComposition 回调传给主视觉的排版信息，
  * 是 SelectedComposition 中与主视觉排版相关的子集（不含画框几何与 recompute）。
- * 作为跨脚本边界（sketch 生产 / index 消费 / window 全局声明）的唯一类型来源。
  */
 export interface HomeComposition {
   /** 预设名 */

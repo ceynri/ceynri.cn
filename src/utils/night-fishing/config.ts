@@ -15,8 +15,25 @@ export const STEP_FPS = 12;
 /** 渲染分辨率上限（devicePixelRatio 上限） */
 export const MAX_DPR = 2;
 
+/**
+ * 鼠标靠近时的轻微吸力。位移叠在原有浮沉之上，并且只在作画换帧时积分，
+ * 不单独提高刷新率，避免把一拍二的质感抹平。
+ */
+export const POINTER_ATTRACT = {
+  /** 超过这个距离（CSS 像素）不再产生吸力 */
+  radius: 150,
+  /** 鼠标贴在浮漂上时的最大位移（CSS 像素） */
+  maxShift: 26,
+  /** 弹簧刚度与阻尼，按 1/STEP_FPS 的步长调过，换帧时不会一下弹飞 */
+  stiffness: 36,
+  damping: 12,
+};
+
 /** 色块边缘的柔化宽度（参考像素）：按原片尺度柔化，高分屏上不会比原片更锐利 */
 export const EDGE_SOFTNESS = 1.5;
+
+/** 浮漂本体沿水面接触处渐隐的宽度（参考像素） */
+export const WATERLINE_FEATHER = 14.0;
 
 /** 调色板：原片为赛璐珞平涂 */
 export const PALETTE = {
@@ -72,7 +89,7 @@ export const FLOAT_GEOMETRY = {
    * 浮体与水面交界处被照亮的一圈水面：环绕浮体下部、略偏右的扁椭圆，叠一个贴着右缘、时大时小的小瓣；
    * 大部分藏在浮体之下，露出左侧 2~4 的一道细边与右缘 2~17 厚的一条，偶尔从浮体底下露出一道（原片：最宽处约 60，比浮体宽约 12，中心偏右约 5）
    */
-  glint: { x: 6, y: 31, rx: 33, ry: 13, lobe: { x: 28, y: 34, rx: 7, ry: 12 } },
+  glint: { x: 3, y: 27, rx: 33, ry: 13, lobe: { x: 25, y: 30, rx: 7, ry: 12 } },
 } as const;
 
 /** 浮漂轮廓距离场图集：覆盖范围（参考像素，含光晕余晖）、每参考像素的纹素数、距离编码范围 */

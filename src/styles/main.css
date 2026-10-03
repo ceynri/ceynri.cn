@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@import "./variables.css";
-@import "./global.css";
-@import "./typography.css";
-@import "./prose.css";
+@import './variables.css';
+@import './global.css';
+@import './typography.css';
+@import './prose.css';
 
 @custom-variant dark (&:where([data-scheme="dark"], [data-scheme="dark"] *));
 

@@ -6,7 +6,12 @@ import { ParticleSystem } from './particle-system';
 import type { Frame, HomeComposition, SelectedComposition } from './types';
 import { generateRandomOptions } from './utils';
 
-export function sketch(p5: P5, container: HTMLElement) {
+export interface SketchOptions {
+  /** 构图确定 / 变更时的回调，供首页主视觉根据画框协调排版 */
+  onComposition?: (composition: HomeComposition) => void;
+}
+
+export function sketch(p5: P5, container: HTMLElement, options: SketchOptions = {}) {
   let particleSystem: ParticleSystem;
   let bgColor: P5.Color;
   let canvasEl: HTMLCanvasElement;
@@ -22,20 +27,18 @@ export function sketch(p5: P5, container: HTMLElement) {
     canvasEl.style.top = `${frame.top}px`;
   };
 
-  // 广播当前构图，供首页主视觉根据画框协调排版
+  // 上报当前构图，供首页主视觉根据画框协调排版
   const emitComposition = () => {
-    const detail: HomeComposition = {
+    options.onComposition?.({
       name: composition.name,
       heroRegion: composition.heroRegion,
       heroWrapClass: composition.heroWrapClass,
       heroBlockClass: composition.heroBlockClass,
-    };
-    window.__flowFieldComposition = detail;
-    window.dispatchEvent(new CustomEvent('flowfield:composition', { detail }));
+    });
   };
 
-  // 重掷整套构图：重选画框 + 重建粒子 + 广播新布局，配合淡入淡出过渡
-  const reroll = () => {
+  // 初始化整套构图：选取画框 + 构建粒子 + 上报布局
+  const setupComposition = () => {
     composition = pickComposition();
     applyFrame(composition.frame);
     particleSystem = new ParticleSystem(p5, generateRandomOptions());
@@ -61,7 +64,7 @@ export function sketch(p5: P5, container: HTMLElement) {
     p5.noStroke();
 
     bgColor = p5.color(BG_COLOR);
-    reroll();
+    setupComposition();
 
     // 首次绘制后淡入
     requestAnimationFrame(() => {
@@ -83,13 +86,13 @@ export function sketch(p5: P5, container: HTMLElement) {
     emitComposition();
   }, 200);
 
-  window.refreshFlowField = () => {
-    // 先淡出（同时通知主视觉一起淡出），在不可见状态下重掷并重定位，再淡入，避免可见的位移跳动
-    canvasEl.style.opacity = '0';
-    window.dispatchEvent(new Event('flowfield:fadeout'));
-    window.setTimeout(() => {
-      reroll();
-      canvasEl.style.opacity = '1';
-    }, 250);
+  return {
+    /** 重新抽取画框与粒子。setup 完成前调用会被忽略 */
+    reroll() {
+      if (!canvasEl || !bgColor) {
+        return;
+      }
+      setupComposition();
+    },
   };
 }

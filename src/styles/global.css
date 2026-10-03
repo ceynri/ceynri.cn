@@ -60,6 +60,12 @@
   }
 }
 
+/* 首页多主题显隐的基础规则：JS 不可用 / 决策脚本未运行时仅显示兜底主题。
+   JS 可用时，首帧前由 head 内联脚本注入按激活主题的显隐规则（特异性更高，覆盖本条） */
+[data-home-theme-only]:not([data-home-theme-default]) {
+  display: none;
+}
+
 @layer components {
   .prose-card {
     padding: var(--prose-padding);
