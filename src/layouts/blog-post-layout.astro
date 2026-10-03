@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { post, prev, next } = Astro.props as Props;
-const { title, description, cover_image, layout, tocDepth, toc } = post.data;
+const { title, description, layout, tocDepth, toc } = post.data;
 
 // OG 分享卡片：始终用构建时为本文生成的 OG 卡片图（封面会作为图版融入其中）；
 // 不直接用封面原图——原图可能超出各平台 10MB og:image 限制

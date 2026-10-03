@@ -8,5 +8,6 @@
     "strictNullChecks": true
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  // content 是上游内容仓库的 submodule，有自己的工具脚本与规范，不纳入本站类型检查
+  "exclude": ["dist", "content"]
 }
