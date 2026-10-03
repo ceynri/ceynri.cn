@@ -1,0 +1,46 @@
+---
+/**
+ * 夜钓主题：复刻《Sonny Boy》第 5 话夜钓镜头中随海面起伏的电子浮漂。
+ * 主视觉横屏居中于两支浮漂之间；竖屏上移，让出下方的浮漂。
+ * 行为逻辑（WebGL 初始化、咬钩交互）在同目录 client.ts，由主题加载器按需激活。
+ */
+import { HOME_ENTRY_ITEMS, SITE_TITLE } from '~/consts';
+import Frame from '../frame.astro';
+---
+
+<!-- 海面底色须与 utils/night-fishing/config.ts 的 PALETTE.sea 一致 -->
+<div class="absolute inset-0 bg-[#030911]">
+  <canvas
+    id="night-fishing-canvas"
+    class="block size-full opacity-0 transition-opacity duration-1000 ease-out"
+    aria-hidden="true"
+  ></canvas>
+</div>
+
+<header
+  class="absolute inset-0 p-8 max-sm:p-5 flex flex-col items-center justify-center text-center portrait:justify-start portrait:pt-[14vh] transition-opacity duration-[2000ms] ease-out starting:opacity-0"
+>
+  <h1 class="m-0 text-[clamp(1.5rem,2.4vw,2.75rem)] font-[500] leading-[1.4] tracking-[0.12em] text-jade-200">
+    {SITE_TITLE}
+  </h1>
+  <!-- max-width 用 em 锚定字号，行内字数不随 clamp 取值变化 -->
+  <p class="mt-5 max-w-[20em] max-sm:max-w-[80vw] text-[clamp(0.875rem,1.05vw,1.125rem)] leading-[1.8] text-jade-500">
+    我在这里写点博客，分享我对于生活与日常的一些思考。
+  </p>
+  <nav class="mt-10 flex gap-4">
+    {
+      HOME_ENTRY_ITEMS.map((item) => (
+        <a
+          href={item.href}
+          class="flex size-12 items-center justify-center rounded-full bg-jade-200/10 text-jade-200 transition-[background-color,color,opacity] duration-300 ease-out hover:bg-jade-200/20 hover:text-jade-50 active:opacity-50"
+          title={item.name}
+          aria-label={item.name}
+        >
+          <item.icon class="size-5" />
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<Frame themeId="night-fishing" bgm color="#8d959c" strong="#c5ced6" dim="#8d959c" />

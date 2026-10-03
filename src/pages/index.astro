@@ -1,187 +1,76 @@
 ---
-import { Image } from 'astro:assets';
-
-import avatar from '~/assets/images/avatar.jpg';
-import { CurrentYear, FlowFieldBackground } from '~/components';
-import { RefreshCw } from '~/components/icons';
-import { FILING, HOME_ENTRY_ITEMS, HOME_SOCIAL_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
+/**
+ * 首页舞台：只负责把各主题整页渲染出来，并在首帧前选定可见主题。
+ * 边角、导航、页脚都由主题自己排布，舞台不再放一份跨主题的 chrome。
+ */
+import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
 import BaseLayout from '~/layouts/base-layout.astro';
+import FlowField from '~/themes/flow-field/index.astro';
+import NightFishing from '~/themes/night-fishing/index.astro';
+import { DEFAULT_THEME, HOME_THEMES, LAST_THEME_KEY } from '~/themes/registry';
+
+const themeIds = HOME_THEMES.map((theme) => theme.id);
 ---
 
 <BaseLayout
   title={SITE_TITLE}
   description={SITE_DESCRIPTION}
 >
-  <main class="fixed w-screen h-screen flex flex-col items-center text-white p-8 z-[1]">
-    <div class="w-full h-full relative">
-      <!-- 中间主视觉：定位到构图指定的区域（fixed，坐标与全屏画布一致），初始 opacity-0，待构图确定后再显现，避免可见的位移跳动 -->
-      <header
-        id="hero"
-        class="fixed inset-0 z-[1] flex opacity-0 transition-opacity duration-500 ease-out items-center justify-center p-[6vw]"
-      >
-        <div
-          id="hero-block"
-          class="flex flex-col text-shadow-lg items-center text-center"
-        >
-          <!-- 主标题：clamp 让字号随 vw 流动的同时兜住两端——下限 1.5rem(≈原 text-2xl) 保小屏可读，
-               上限 4.5rem(≈1920px 处 3.8vw) 防超宽屏失控（纯 3.8vw 在 2560/3440px 会涨到 97/131px 过大） -->
-          <h1 class="hero-title text-[clamp(1.5rem,3.8vw,4.5rem)] font-[500] leading-[1.4] m-0">
-            <div>ceynri, Frontend Developer</div>
-            <div>based in Guangdong, China</div>
-          </h1>
-          <!-- 副标题：clamp 同主标题，下限 1rem(≈原 text-base) 保可读、上限 1.75rem 防超宽屏过大；
-               max-width 用 em 锚定字号，无论字号由 clamp 如何取值，行内字数恒定 -->
-          <div class="text-[clamp(1rem,1.5vw,1.75rem)] max-w-[20em] max-sm:max-w-[80vw] mt-6">
-            我在这里写点博客，分享我对于生活与日常的一些思考。
-          </div>
-          <!-- 入口导航栏 -->
-          <div class="flex gap-4 mt-10">
-            {HOME_ENTRY_ITEMS.map((item) => (
-              <a
-                href={item.href}
-                class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 active:opacity-50 transition-[background-color,opacity] duration-300 ease-out"
-                title={item.name}
-              >
-                <item.icon class="size-6" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      <!-- 禁用 JS 时强制显现主视觉（hero 初始 opacity-0 依赖 JS 淡入） -->
-      <noscript>
-        <style>#hero{opacity:1!important}</style>
-      </noscript>
-
-      <!-- 左上角 -->
-      <div class="absolute z-[1] top-0 left-0 flex items-start justify-start">
-        ceynri.cn
-      </div>
-
-      <!-- 右上角 -->
-      <div class="absolute z-[1] top-0 right-0 flex items-start justify-end">
-        <!-- 社交外链栏 -->
-        <div class="flex gap-6">
-          {HOME_SOCIAL_ITEMS.map((item) => (
-            <a
-              href={item.href}
-              class="flex text-white opacity-60 hover:opacity-100 active:opacity-50 transition-opacity"
-              title={item.name}
-              rel="noopener"
-              aria-label={item.name}
-              target="_blank"
-            >
-              <item.icon class="size-6" />
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <!-- 左下角 -->
-      <div class="absolute z-[1] bottom-0 left-0 flex items-end justify-end">
-        <!-- 头像/刷新按钮 -->
-        <button
-          id="refresh-flow-field"
-          class="size-[40px] group cursor-pointer active:opacity-50 transition-opacity"
-          title="刷新背景流场效果"
-          data-umami-event="refresh-flow-field"
-        >
-          <Image
-            alt="site owner avatar"
-            title="ceynri"
-            src={avatar}
-            width="80"
-            height="80"
-            class="rounded-full size-full group-hover:opacity-0 transition-opacity"
-          />
-          <div class="absolute top-0 left-0 size-full rounded-full flex items-center justify-center bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
-            <RefreshCw class="size-1/2 text-white" />
-          </div>
-        </button>
-
-        <script>
-          // 获取刷新按钮并添加点击事件
-          const refreshButton = document.getElementById('refresh-flow-field');
-          if (refreshButton) {
-            refreshButton.addEventListener('click', () => {
-              window.refreshFlowField();
-            });
+  <Fragment slot="head">
+    <script
+      is:inline
+      define:vars={{ themeIds, defaultTheme: DEFAULT_THEME, lastThemeKey: LAST_THEME_KEY }}
+    >
+      try {
+        const params = new URLSearchParams(location.search);
+        const requested = params.get('theme');
+        // 命中注册表才算强制指定；强制指定不写 localStorage，刷新仍可随机到别的主题
+        let theme = themeIds.includes(requested) ? requested : '';
+        if (!theme) {
+          let last = '';
+          try {
+            last = localStorage.getItem(lastThemeKey) || '';
+          } catch {
+            last = '';
           }
-        </script>
-      </div>
+          const candidates = themeIds.filter((id) => id !== last);
+          theme = candidates.length > 0 ? candidates[Math.floor(Math.random() * candidates.length)] : themeIds[0];
+          try {
+            localStorage.setItem(lastThemeKey, theme);
+          } catch {
+            // 隐私模式等场景下写入失败不影响本次展示
+          }
+        }
+        document.documentElement.dataset.homeTheme = theme;
+        // 每条主题一条显示规则：运行时切换只改 data-home-theme，不必重写样式
+        const showRules = themeIds
+          .map((id) => `html[data-home-theme="${id}"] [data-home-theme-only="${id}"]{display:block}`)
+          .join('');
+        const style = document.createElement('style');
+        style.textContent = `[data-home-theme-only]{display:none}${showRules}`;
+        document.head.appendChild(style);
+      } catch {
+        document.documentElement.dataset.homeTheme = defaultTheme;
+      }
+    </script>
+  </Fragment>
 
-      <!-- 右下角 -->
-      <div class="absolute z-[1] bottom-0 right-0 flex items-end justify-end">
-        <!-- 版权信息 -->
-        <footer class="text-xs text-right leading-[1.75]">
-          <div>Ceynri © 2020-<CurrentYear /></div>
-          <a
-            href={FILING.link}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            class="block"
-          >
-            {FILING.text}
-          </a>
-        </footer>
-      </div>
-    </div>
+  <main class="fixed inset-0">
+    {HOME_THEMES.map((theme) => (
+      <section
+        data-home-theme-only={theme.id}
+        data-home-theme-default={theme.id === DEFAULT_THEME ? '' : undefined}
+        class="absolute inset-0"
+      >
+        {theme.id === 'night-fishing' && <NightFishing />}
+        {theme.id === 'flow-field' && <FlowField />}
+      </section>
+    ))}
   </main>
 
-  <!-- 流场背景 -->
-  <FlowFieldBackground />
-
   <script>
-    import type { HomeComposition } from '~/utils/flow-field/types';
+    import { initThemeLoader } from '~/themes/loader';
 
-    // 主视觉外层 / 内层的固定基础类，与模板初始类保持一致（仅保留 opacity 过渡，不含位移动画）
-    const HERO_WRAP_BASE = 'fixed z-[1] flex transition-opacity duration-500 ease-out';
-    const HERO_BLOCK_BASE = 'flex flex-col text-shadow-lg';
-
-    const wrap = () => document.getElementById('hero');
-    const block = () => document.getElementById('hero-block');
-
-    // 根据构图把主视觉定位到指定区域（瞬时生效、无位移动画），并在区域内按对齐类摆放文案，完成后淡入
-    const applyComposition = (composition: HomeComposition) => {
-      const wrapEl = wrap();
-      const blockEl = block();
-      if (!wrapEl || !blockEl) {
-        return;
-      }
-      const { left, top, width, height } = composition.heroRegion;
-      wrapEl.className = `${HERO_WRAP_BASE} ${composition.heroWrapClass}`;
-      wrapEl.style.left = `${left}px`;
-      wrapEl.style.top = `${top}px`;
-      wrapEl.style.width = `${width}px`;
-      wrapEl.style.height = `${height}px`;
-      blockEl.className = `${HERO_BLOCK_BASE} ${composition.heroBlockClass}`;
-      wrapEl.style.opacity = '1';
-    };
-
-    window.addEventListener('flowfield:composition', (event) => {
-      applyComposition((event as CustomEvent<HomeComposition>).detail);
-    });
-
-    // 刷新时随背景一起淡出，重定位在不可见状态下完成
-    window.addEventListener('flowfield:fadeout', () => {
-      const wrapEl = wrap();
-      if (wrapEl) {
-        wrapEl.style.opacity = '0';
-      }
-    });
-
-    // 兜底：若构图在监听器注册前已生成，立即应用
-    if (window.__flowFieldComposition) {
-      applyComposition(window.__flowFieldComposition);
-    }
-
-    // 安全兜底：即便背景脚本异常未派发构图，也在超时后以默认居中布局显现，避免主视觉永久隐藏
-    window.setTimeout(() => {
-      const wrapEl = wrap();
-      if (wrapEl && wrapEl.style.opacity !== '1') {
-        wrapEl.style.opacity = '1';
-      }
-    }, 1200);
+    initThemeLoader();
   </script>
 </BaseLayout>

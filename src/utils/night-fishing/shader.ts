@@ -13,6 +13,7 @@ import {
   STEP_FPS,
   TEXTURE,
   UNDERWATER_GLOW,
+  WATERLINE_FEATHER,
 } from './config';
 
 /** 数值转 GLSL 浮点字面量 */
@@ -615,8 +616,12 @@ vec3 drawBody(vec3 col, vec2 p, vec4 pose, vec4 water, float index, float stretc
   if (any(lessThan(f, SHAPE_MIN)) || any(greaterThan(f, SHAPE_MIN + SHAPE_SIZE))) {
     return col;
   }
-  float above = clamp((water.y - p.y) / (aa * pose.z) + 0.5, 0.0, 1.0);
-  if (above <= 0.0) {
+  float depth = (water.y - p.y) / pose.z;
+  // 接触处是扁椭圆，底边落在水线以下，起伏时鱼漂底部仍包在椭圆里
+  float ax = clamp(abs(f.x) / 42.0, 0.0, 1.0);
+  float rim = 18.0 * sqrt(max(0.0, 1.0 - ax * ax));
+  float above = smoothstep(0.0, ${glFloat(WATERLINE_FEATHER)}, depth + rim);
+  if (above <= 0.0 && depth < -8.0) {
     return col;
   }
   vec4 shape = shapeAt(f, index);
@@ -624,8 +629,7 @@ vec3 drawBody(vec3 col, vec2 p, vec4 pose, vec4 water, float index, float stretc
   // 光晕平涂带越厚余晖越明显：细杆两侧的光晕只是一圈描边，不带余晖
   col = mix(col, HALO, haloAlpha(shape.x, aa, smoothstep(2.0, 6.0, shape.y - shape.x)) * above);
 
-  // 浮体与水面交界处被照亮的一圈水面：环绕浮体底部，每张作画略有变形，右下方的小瓣时大时小；
-  // 浮漂离水或深没时消失，落水时小瓣一度放大变暗
+  // 接触光晕画在本体之下：实心椭圆被鱼漂挡住，只露出贴着分界的一圈，本身不被水线裁开
   float glintAlpha = (1.0 - smoothstep(30.0, 90.0, -water.z)) * (1.0 - smoothstep(120.0, 220.0, water.z));
   float key = mod(floor(drawing + 0.5), DRAW_COUNT);
   float hg = hash11(water.w * 7.3 + key * 1.93);
@@ -633,7 +637,7 @@ vec3 drawBody(vec3 col, vec2 p, vec4 pose, vec4 water, float index, float stretc
   float ring = sdEllipse(f - vec2(GLINT_X + (hg - 0.5) * 6.0, GLINT_Y + (hl - 0.5) * 6.0), vec2(GLINT_RX * (0.92 + 0.16 * hl), GLINT_RY * (0.85 + 0.45 * hg)));
   float k = (0.55 + 0.75 * hl) * (1.0 + (GLINT_SCALE - 1.0) * boost);
   float lobe = sdEllipse(f - GLINT_LOBE.xy - GLINT_OFFSET * boost, GLINT_LOBE.zw * k);
-  float glint = fill(smin(ring, lobe, 4.0), aa) * glintAlpha * above;
+  float glint = fill(smin(ring, lobe, 4.0), aa) * glintAlpha;
   col = mix(col, mix(GLINT, REFL_MID, 0.6 * boost), glint);
 
   float line = fill(abs(shape.y - STICK_LINE_W * 0.5) - STICK_LINE_W * 0.5, aa)
@@ -650,6 +654,7 @@ vec3 drawBody(vec3 col, vec2 p, vec4 pose, vec4 water, float index, float stretc
   vec3 cream = f.y > TIP_CORE_FROM ? TIP_CORE : CREAM;
   return mix(col, cream, fill(shape.w, aa) * above);
 }
+
 
 // 水花：从水面溅起、按抛物线飞散后落下的水滴
 vec3 drawSplash(vec3 col, vec2 p, vec2 origin, float age, float seed, float scale, float aa) {
@@ -696,7 +701,6 @@ void main() {
     bool active = index == uEvent.x;
     float stretch = active ? uEvent.y : 1.0;
     float aa = max(EDGE_SOFTNESS, 1.0 / pose.z);
-    col = drawReflection(col, p, water, pose.z, pose.w, index, active ? uRipple.w : 0.0, aa, theta, drawing);
     float boost = 0.0;
     if (active && uRipple.z >= 0.0) {
       col = drawRipple(col, p, uRipple, rippleSide(index), water.w, pose.z, aa);
@@ -709,6 +713,7 @@ void main() {
       col = drawLine(col, p, pose.z, aa);
     }
     col = drawBody(col, p, pose, water, index, stretch, boost, aa, drawing);
+    col = drawReflection(col, p, water, pose.z, pose.w, index, active ? uRipple.w : 0.0, aa, theta, drawing);
     if (active) {
       col = drawSplash(col, p, uTrail.zw, uEvent.w, index + fract(uTrail.z * 0.0137), pose.z, aa);
     }

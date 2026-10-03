@@ -1,0 +1,55 @@
+---
+/**
+ * 流场主题：基于柏林噪声的粒子流场背景 + 构图驱动的主视觉。
+ * 主视觉区域由背景构图（画框预设）决定落点，每次进入随机一种构图。
+ * 行为逻辑（p5 初始化、构图应用）在同目录 client.ts，由主题加载器按需激活。
+ */
+import { HOME_ENTRY_ITEMS } from '~/consts';
+import Frame from '../frame.astro';
+---
+
+<!-- 画布底色须与 utils/flow-field/config.ts 的 BG_COLOR 一致 -->
+<div id="flow-field-container" class="absolute inset-0 bg-black"></div>
+
+<!-- 主视觉：定位到构图指定的区域（坐标与全屏画布一致），初始 opacity-0，待构图确定后再显现，避免可见的位移跳动 -->
+<header
+  id="hero"
+  class="absolute z-[1] flex opacity-0 transition-opacity duration-500 ease-out items-center justify-center p-[6vw] text-white"
+>
+  <div id="hero-block" class="flex flex-col text-shadow-lg items-center text-center">
+    <!-- 主标题：clamp 让字号随 vw 流动的同时兜住两端——下限 1.5rem(≈原 text-2xl) 保小屏可读，
+         上限 4.5rem(≈1920px 处 3.8vw) 防超宽屏失控（纯 3.8vw 在 2560/3440px 会涨到 97/131px 过大） -->
+    <h1 class="hero-title text-[clamp(1.5rem,3.8vw,4.5rem)] font-[500] leading-[1.4] m-0">
+      <div>ceynri, Frontend Developer</div>
+      <div>based in Guangdong, China</div>
+    </h1>
+    <!-- 副标题：clamp 同主标题，下限 1rem(≈原 text-base) 保可读、上限 1.75rem 防超宽屏过大；
+         max-width 用 em 锚定字号，无论字号由 clamp 如何取值，行内字数恒定 -->
+    <div class="text-[clamp(1rem,1.5vw,1.75rem)] max-w-[20em] max-sm:max-w-[80vw] mt-6">
+      我在这里写点博客，分享我对于生活与日常的一些思考。
+    </div>
+    <!-- 入口导航栏 -->
+    <nav class="flex gap-4 mt-10">
+      {HOME_ENTRY_ITEMS.map((item) => (
+        <a
+          href={item.href}
+          class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 active:opacity-50 transition-[background-color,opacity] duration-300 ease-out"
+          title={item.name}
+        >
+          <item.icon class="size-6" />
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<!-- 禁用 JS 且本主题为兜底主题时强制显现主视觉（hero 初始 opacity-0 依赖 JS 淡入） -->
+<noscript>
+  <style>
+    #hero {
+      opacity: 1 !important;
+    }
+  </style>
+</noscript>
+
+<Frame themeId="flow-field" color="#e6eaee" strong="#ffffff" dim="#e6eaee" shadow />
