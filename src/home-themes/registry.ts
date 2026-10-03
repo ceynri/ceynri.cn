@@ -23,10 +23,14 @@ export const HOME_THEMES: HomeThemeMeta[] = [
 ];
 
 /**
- * 兜底主题：无 JS / 决策脚本异常时展示的主题。
- * 约定：一般设为最新上线的主题。
+ * 未记住主题、以及无 JS / 决策脚本异常时展示的主题。
+ * 用户从未主动切换时，每次进入都是这个主题。
  */
 export const DEFAULT_THEME: HomeThemeId = 'night-fishing';
 
-/** localStorage 键：记录上一次展示的主题，供下次访问随机时排除，保证连续两次访问不同 */
-export const LAST_THEME_KEY = 'home:last-theme';
+/**
+ * localStorage 键：用户主动切换后记住的主题。
+ * 只在点击切换器时写入；未写入或值无效时回退到 DEFAULT_THEME。
+ * 与旧键 home:last-theme 分开——旧键由「每次刷新避开上次」写入，不代表用户选择。
+ */
+export const SAVED_THEME_KEY = 'home:theme';
