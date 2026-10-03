@@ -4,8 +4,9 @@
  * 主视觉区域由背景构图（画框预设）决定落点，每次进入随机一种构图。
  * 行为逻辑（p5 初始化、构图应用）在同目录 client.ts，由主题加载器按需激活。
  */
-import { HOME_ENTRY_ITEMS } from '~/consts';
-import Frame from '../frame.astro';
+import { CurrentYear } from '~/components';
+import { Palette } from '~/components/icons';
+import { FILING, HOME_ENTRY_ITEMS, HOME_SOCIAL_ITEMS } from '~/consts';
 ---
 
 <!-- 画布底色须与 utils/flow-field/config.ts 的 BG_COLOR 一致 -->
@@ -52,4 +53,74 @@ import Frame from '../frame.astro';
   </style>
 </noscript>
 
-<Frame themeId="flow-field" color="#e6eaee" strong="#ffffff" dim="#e6eaee" shadow />
+<!-- 四角是本主题自己的，不和别的主题共用组件 -->
+<div class="ff-chrome pointer-events-none absolute inset-0 z-[2] p-8 max-sm:p-5">
+  <div class="relative size-full">
+    <div class="absolute top-0 left-0">ceynri.cn</div>
+    <div class="pointer-events-auto absolute top-0 right-0 flex gap-6">
+      {
+        HOME_SOCIAL_ITEMS.map((item) => (
+          <a
+            href={item.href}
+            class="ff-dim transition-[color,opacity] active:opacity-50"
+            title={item.name}
+            rel="noopener"
+            aria-label={item.name}
+            target="_blank"
+          >
+            <item.icon class="size-6" />
+          </a>
+        ))
+      }
+    </div>
+    <div class="pointer-events-auto absolute bottom-0 left-0 flex items-end gap-3">
+      <button
+        type="button"
+        data-theme-switch
+        class="flex h-8 cursor-pointer items-center gap-1.5 text-xs tracking-[0.08em] transition-[color,opacity] active:opacity-50"
+        aria-label="切换主题"
+        title="切换主题"
+      >
+        <Palette class="size-4" />
+        <span data-theme-switch-name>流场</span>
+      </button>
+    </div>
+    <footer class="pointer-events-auto absolute right-0 bottom-0 text-right text-xs leading-[1.75]">
+      <div class="max-sm:hidden">
+        <a
+          href="https://github.com/wangyasai/Perlin-Noise"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition-colors"
+        >
+          背景灵感来自 wangyasai/Perlin-Noise
+        </a>
+      </div>
+      <div>Ceynri © 2020-<CurrentYear /></div>
+      <a
+        href={FILING.link}
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        class="block transition-colors"
+      >
+        {FILING.text}
+      </a>
+    </footer>
+  </div>
+</div>
+
+<style>
+  .ff-chrome {
+    --chrome: #e6eaee;
+    --chrome-strong: #ffffff;
+    --chrome-dim: #e6eaee;
+    color: var(--chrome);
+    text-shadow: 0 0 2px rgb(0 0 0 / 0.55);
+  }
+  .ff-chrome .ff-dim {
+    color: var(--chrome-dim);
+  }
+  .ff-chrome :is(a, button):hover {
+    color: var(--chrome-strong);
+  }
+</style>

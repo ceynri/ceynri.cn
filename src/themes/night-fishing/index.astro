@@ -4,8 +4,10 @@
  * 主视觉横屏居中于两支浮漂之间；竖屏上移，让出下方的浮漂。
  * 行为逻辑（WebGL 初始化、咬钩交互）在同目录 client.ts，由主题加载器按需激活。
  */
-import { HOME_ENTRY_ITEMS, SITE_TITLE } from '~/consts';
-import Frame from '../frame.astro';
+import { CurrentYear } from '~/components';
+import BgmPlayer from '~/components/bgm-player.astro';
+import { Palette } from '~/components/icons';
+import { FILING, HOME_ENTRY_ITEMS, HOME_SOCIAL_ITEMS, SITE_TITLE } from '~/consts';
 ---
 
 <!-- 海面底色须与 utils/night-fishing/config.ts 的 PALETTE.sea 一致 -->
@@ -43,4 +45,65 @@ import Frame from '../frame.astro';
   </nav>
 </header>
 
-<Frame themeId="night-fishing" bgm color="#8d959c" strong="#c5ced6" dim="#8d959c" />
+<!-- 四角是本主题自己的，不和别的主题共用组件 -->
+<div class="nf-chrome pointer-events-none absolute inset-0 z-[2] p-8 max-sm:p-5">
+  <div class="relative size-full">
+    <div class="absolute top-0 left-0">ceynri.cn</div>
+    <div class="pointer-events-auto absolute top-0 right-0 flex gap-6">
+      {
+        HOME_SOCIAL_ITEMS.map((item) => (
+          <a
+            href={item.href}
+            class="nf-dim transition-[color,opacity] active:opacity-50"
+            title={item.name}
+            rel="noopener"
+            aria-label={item.name}
+            target="_blank"
+          >
+            <item.icon class="size-6" />
+          </a>
+        ))
+      }
+    </div>
+    <div class="pointer-events-auto absolute bottom-0 left-0 flex items-end gap-3">
+      <button
+        type="button"
+        data-theme-switch
+        class="flex h-8 cursor-pointer items-center gap-1.5 text-xs tracking-[0.08em] transition-[color,opacity] active:opacity-50"
+        aria-label="切换主题"
+        title="切换主题"
+      >
+        <Palette class="size-4" />
+        <span data-theme-switch-name>夜钓</span>
+      </button>
+      <BgmPlayer bgmThemes="night-fishing" />
+    </div>
+    <footer class="pointer-events-auto absolute right-0 bottom-0 text-right text-xs leading-[1.75]">
+      <div class="max-sm:hidden">画面致敬《Sonny Boy》第 5 话</div>
+      <div>Ceynri © 2020-<CurrentYear /></div>
+      <a
+        href={FILING.link}
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        class="block transition-colors"
+      >
+        {FILING.text}
+      </a>
+    </footer>
+  </div>
+</div>
+
+<style>
+  .nf-chrome {
+    --chrome: #8d959c;
+    --chrome-strong: #c5ced6;
+    --chrome-dim: #8d959c;
+    color: var(--chrome);
+  }
+  .nf-chrome .nf-dim {
+    color: var(--chrome-dim);
+  }
+  .nf-chrome :is(a, button):hover {
+    color: var(--chrome-strong);
+  }
+</style>
