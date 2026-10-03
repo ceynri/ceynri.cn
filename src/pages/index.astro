@@ -4,10 +4,10 @@
  * 边角、导航、页脚都由主题自己排布，舞台不再放一份跨主题的 chrome。
  */
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/consts';
-import BaseLayout from '~/layouts/base-layout.astro';
 import FlowField from '~/home-themes/flow-field/index.astro';
 import NightFishing from '~/home-themes/night-fishing/index.astro';
 import { DEFAULT_THEME, HOME_THEMES, LAST_THEME_KEY } from '~/home-themes/registry';
+import BaseLayout from '~/layouts/base-layout.astro';
 
 const themeIds = HOME_THEMES.map((theme) => theme.id);
 ---
