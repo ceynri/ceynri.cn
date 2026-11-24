@@ -58,23 +58,74 @@ const { headings } = await render(post);
   <FloatingImages />
 
   <script>
-    // 埋点：读到文末（视作读完）。在正文末尾插入零高哨兵，进入视口即一次性上报。
-    // 用 IntersectionObserver 而非滚动监听，开销低；且不依赖仅在宽屏接线的 TOC，全尺寸生效。
-    // 本站为 MPA（无视图过渡），随整页加载执行一次即可。
-    // 事件数据带上 slug，便于在 umami 里按文章筛选，而不必从页面 URL 反推。
+    // 埋点：读到文末（视作读完）。在正文末尾插入零高哨兵，需同时满足：
+    // 1) 页面已完成 load（确保在 Umami 自动 PV 之后上报，避免产生无 PV 孤立会话）
+    // 2) 页面处于可见态累计停留 ≥ 5 秒（过滤开屏即抓即走的爬虫/脚本）
+    // 3) 文末哨兵进入视口
     const article = document.querySelector('[data-toc-body]');
     if (article) {
+      const MIN_READ_MS = 5000;
       const sentinel = document.createElement('div');
       sentinel.setAttribute('aria-hidden', 'true');
       article.appendChild(sentinel);
-      const observer = new IntersectionObserver((entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          window.umami?.track('post-read', { slug: article.getAttribute('data-slug') });
-          observer.disconnect();
-          sentinel.remove();
+
+      let sentinelVisible = false;
+      let pageLoaded = document.readyState === 'complete';
+      let dwellDone = false;
+      let tracked = false;
+      let visibleAccumulated = 0;
+      let visibleSince: number | null = document.visibilityState === 'visible' ? performance.now() : null;
+      let dwellTimer: number | undefined;
+
+      const tryTrackRead = () => {
+        if (tracked || !sentinelVisible || !pageLoaded || !dwellDone) return;
+        tracked = true;
+        window.umami?.track('post-read', { slug: article.getAttribute('data-slug') });
+        observer.disconnect();
+        sentinel.remove();
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        if (dwellTimer !== undefined) window.clearTimeout(dwellTimer);
+      };
+
+      const scheduleDwell = () => {
+        if (dwellDone || visibleSince === null) return;
+        const remaining = Math.max(0, MIN_READ_MS - visibleAccumulated);
+        if (dwellTimer !== undefined) window.clearTimeout(dwellTimer);
+        dwellTimer = window.setTimeout(() => {
+          dwellDone = true;
+          tryTrackRead();
+        }, remaining);
+      };
+
+      const onVisibilityChange = () => {
+        if (dwellDone) return;
+        if (document.visibilityState === 'visible') {
+          if (visibleSince === null) visibleSince = performance.now();
+          scheduleDwell();
+        } else if (visibleSince !== null) {
+          visibleAccumulated += performance.now() - visibleSince;
+          visibleSince = null;
+          if (dwellTimer !== undefined) {
+            window.clearTimeout(dwellTimer);
+            dwellTimer = undefined;
+          }
         }
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        sentinelVisible = entries.some((entry) => entry.isIntersecting);
+        if (sentinelVisible) tryTrackRead();
       });
       observer.observe(sentinel);
+      document.addEventListener('visibilitychange', onVisibilityChange);
+      scheduleDwell();
+
+      if (!pageLoaded) {
+        window.addEventListener('load', () => {
+          pageLoaded = true;
+          tryTrackRead();
+        }, { once: true });
+      }
     }
 
     // 埋点：TocRail 组件不绑定统计实现，仅派发 CustomEvent，由本站转接到 umami

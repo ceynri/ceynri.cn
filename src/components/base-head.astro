@@ -148,10 +148,41 @@ const pageImage = new URL(image || '/favicon.png', Astro.site);
 </script>
 
 <!-- Umami -->
+<script is:inline>
+  // 1) 过滤自动化脚本与 100% 无头爬虫（webdriver、1:1 方屏、已回测无真人交互的合成分辨率）
+  // 2) 统一统计口径为带末尾斜杠的规范路径（保留根路径 `/` 与带扩展名文件路径如 `.md`/`.xml`/`.html`）
+  window.umamiBeforeSend = function (type, payload) {
+    if (navigator.webdriver) return null;
+    var sw = window.screen ? window.screen.width : 0;
+    var sh = window.screen ? window.screen.height : 0;
+    if (sw > 0 && sw === sh) return null;
+    var sc = sw + 'x' + sh;
+    var lang = (navigator.language || '').toLowerCase();
+    if (sc === '1280x1200' || sc === '1800x1125') return null;
+    if (sc === '800x600' && lang.indexOf('zh') !== 0) return null;
+
+    if (payload && typeof payload.url === 'string') {
+      try {
+        var u = new URL(payload.url, window.location.origin);
+        var p = u.pathname;
+        var lastSeg = p.split('/').pop() || '';
+        if (p !== '/' && !p.endsWith('/') && lastSeg.indexOf('.') === -1) {
+          u.pathname = p + '/';
+          payload.url = payload.url.charAt(0) === '/' ? u.pathname + u.search + u.hash : u.toString();
+        }
+      } catch {}
+    }
+    return payload;
+  };
+</script>
 <script
   is:inline
   defer
   src="https://stats.ceynri.cn/script.js"
   data-website-id={UMAMI_WEBSITE_ID}
+  data-domains="ceynri.cn"
+  data-exclude-hash="true"
   data-performance="true"
+  data-errors="true"
+  data-before-send="umamiBeforeSend"
 ></script>
