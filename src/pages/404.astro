@@ -23,8 +23,11 @@ import { AsideLayout } from '~/layouts';
     </main>
   </a>
   <script is:inline>
-    window.umami?.track('404', {
-      url: window.location.href,
+    // umami 脚本使用 defer，需等 load 后再上报，避免脚本未就绪导致漏报
+    window.addEventListener('load', () => {
+      window.umami?.track('404', {
+        url: window.location.href,
+      });
     });
   </script>
 </AsideLayout>

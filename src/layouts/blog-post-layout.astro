@@ -58,7 +58,9 @@ const { headings } = await render(post);
   <FloatingImages />
 
   <script>
-    // 埋点：读到文末（视作读完）。在正文末尾插入零高哨兵，进入视口即一次性上报。
+    // 埋点：读到文末（视作读完）。在正文末尾插入零高哨兵，需同时满足：
+    // 1) 页面已完成 load（确保在 Umami 自动 PV 之后上报，避免产生无 PV 孤立会话）
+    // 2) 文末哨兵进入视口
     // 用 IntersectionObserver 而非滚动监听，开销低；且不依赖仅在宽屏接线的 TOC，全尺寸生效。
     // 本站为 MPA（无视图过渡），随整页加载执行一次即可。
     // 事件数据带上 slug，便于在 umami 里按文章筛选，而不必从页面 URL 反推。
@@ -67,14 +69,35 @@ const { headings } = await render(post);
       const sentinel = document.createElement('div');
       sentinel.setAttribute('aria-hidden', 'true');
       article.appendChild(sentinel);
+
+      let sentinelVisible = false;
+      let pageLoaded = document.readyState === 'complete';
+      let tracked = false;
+
+      const tryTrackRead = () => {
+        if (tracked || !sentinelVisible || !pageLoaded) return;
+        tracked = true;
+        window.umami?.track('post-read', { slug: article.getAttribute('data-slug') });
+        observer.disconnect();
+        sentinel.remove();
+      };
+
       const observer = new IntersectionObserver((entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          window.umami?.track('post-read', { slug: article.getAttribute('data-slug') });
-          observer.disconnect();
-          sentinel.remove();
-        }
+        sentinelVisible = entries.some((entry) => entry.isIntersecting);
+        if (sentinelVisible) tryTrackRead();
       });
       observer.observe(sentinel);
+
+      if (!pageLoaded) {
+        window.addEventListener(
+          'load',
+          () => {
+            pageLoaded = true;
+            tryTrackRead();
+          },
+          { once: true },
+        );
+      }
     }
 
     // 埋点：TocRail 组件不绑定统计实现，仅派发 CustomEvent，由本站转接到 umami
